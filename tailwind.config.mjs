@@ -5,6 +5,9 @@ export default {
   theme: {
     extend: {
       colors: { brand: "#ebcb00" },
+      backgroundImage: {
+        jerusalem: "url('title-image.png')",
+      },
     },
   },
   plugins: [typography],
