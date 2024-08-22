@@ -3,7 +3,7 @@ import PageLayout from "../layouts/page-layout.astro";
 ---
 
 <PageLayout>
-		<div class="hidden mx-auto w-3/4 md:grid grid-cols-2 justify-center content-center gap-5">
+		<div class="hidden mx-auto w-3/4 md:grid grid-cols-2 justify-center content-center gap-5 py-5">
 			<div class="self-center grid gap-6">
 				<div class="grid gap-2">
 					<h1 class="self-center text-4xl font-semibold">Medieval Reception of the Roman Conquest of Jerusalem </h1>
@@ -13,7 +13,7 @@ import PageLayout from "../layouts/page-layout.astro";
 			</div>
 			<figure class="grid gap-2">
 				<img class="object-contain w-full" src="./title-image.png" alt="(Venice) La distruzione del tempio di Gerusalemme -Francesco Hayez" width="700" height="500" loading="lazy">
-				<figcaption class="font-light">La distruzione del tempio di Gerusalemme by Francesco Hayez (Gallerie Accademia Venice; photograph by Didier Descouens - <a class="underline decoration-dotted" href="https://commons.wikimedia.org/w/index.php?curid=132796743">Public Domain</a></figcaption>
+				<figcaption class="font-light text-xs">La distruzione del tempio di Gerusalemme by Francesco Hayez (Gallerie Accademia Venice; photograph by Didier Descouens - <a class="underline decoration-dotted" href="https://commons.wikimedia.org/w/index.php?curid=132796743">Public Domain</a></figcaption>
 			</figure>
 		</div>
 		<div class="md:hidden min-h-full grid content-start mx-auto gap-3 p-5">
@@ -26,10 +26,8 @@ import PageLayout from "../layouts/page-layout.astro";
 			<a href="database.html">
 				<article class="grid items-start justify-items-center gap-3 rounded-md border-2 border-brand">
 					<img class="object-cover h-52" src="./database.svg" alt="" loading="lazy">
-					<h2>Search the database</h2>
+					<h2 class="text-lg font-semibold">Search the database</h2>
 				</article>
-			</a>	
-			
-
+			</a>
 		</div>
 </PageLayout>
