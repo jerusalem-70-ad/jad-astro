@@ -1,0 +1,46 @@
+{
+  "id": 9,
+  "order": "9.00000000000000000000",
+  "name": [
+    {
+      "id": 6,
+      "value": "Lam., MS 144"
+    }
+  ],
+  "jad_id": "jad_manuscript__9",
+  "library": [
+    {
+      "id": 6,
+      "order": "6.00000000000000000000",
+      "name": "Lambeth Palace Library",
+      "jad_id": "jad_library__6",
+      "gnd_url": "https://d-nb.info/gnd/16441-0",
+      "abbreviation": "Lam.",
+      "place": []
+    }
+  ],
+  "idno": "MS 144",
+  "catalog_url": "https://archives.lambethpalacelibrary.org.uk/CalmView/Record.aspx?src=CalmView.Catalog&id=MSS%2f144&pos=1",
+  "digi_url": "",
+  "not_before": "1187",
+  "not_after": "1210",
+  "written_date": "around 1200 (after 1187)",
+  "institutional_context": [
+    {
+      "id": 6,
+      "order": "6.00000000000000000000",
+      "name": "See of Canterbury",
+      "jad__id": "jad_institutional_context__6",
+      "part_of": []
+    }
+  ],
+  "prev": "jad_manuscript__8.html",
+  "next": "{'id': 10, 'order': '10.00000000000000000000', 'name': [{'id': 2, 'value': 'BNF, Latin 446'}], 'jad_id': 'jad_manuscript__10', 'library': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Bibliothèque Nationale de France', 'jad_id': 'jad_library__2', 'gnd_url': 'https://d-nb.info/gnd/5156217-0', 'abbreviation': 'BNF', 'place': [{'id': 1, 'order': '1.00000000000000000000', 'name': 'Paris', 'geonames_url': 'https://www.geonames.org/2988507/paris.html', 'jad_id': 'jad_places__1'}]}], 'idno': 'Latin 446', 'catalog_url': 'https://archivesetmanuscrits.bnf.fr/ark:/12148/cc618815', 'digi_url': 'https://gallica.bnf.fr/ark:/12148/btv1b10721053z/f213.item', 'not_before': '1190', 'not_after': '1210', 'written_date': 'around 1200', 'institutional_context': [], 'prev': 'jad_manuscript__9.html', 'next': 'jad_manuscript__11.html'}.html",
+  "view_label": "Lam., MS 144",
+  "related__passages": [
+    {
+      "jad_id": "jad_occurence__8",
+      "view_label": "Titus et Vespasianus"
+    }
+  ]
+}

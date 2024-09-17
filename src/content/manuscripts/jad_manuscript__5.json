@@ -1,0 +1,54 @@
+{
+  "id": 5,
+  "order": "5.00000000000000000000",
+  "name": [
+    {
+      "id": 4,
+      "value": "St.Gen., MS 1423"
+    }
+  ],
+  "jad_id": "jad_manuscript__5",
+  "library": [
+    {
+      "id": 4,
+      "order": "4.00000000000000000000",
+      "name": "Bibliothèque Sainte-Geneviève",
+      "jad_id": "jad_library__4",
+      "gnd_url": "https://d-nb.info/gnd/1022123-2",
+      "abbreviation": "St.Gen.",
+      "place": []
+    }
+  ],
+  "idno": "MS 1423",
+  "catalog_url": "https://calames.abes.fr/pub/bsg.aspx#details?id=BSGB10400",
+  "digi_url": "",
+  "not_before": null,
+  "not_after": null,
+  "written_date": null,
+  "institutional_context": [
+    {
+      "id": 1,
+      "order": "1.00000000000000000000",
+      "name": "University of Paris",
+      "jad__id": "jad_institutional_context__1",
+      "part_of": [
+        {
+          "id": 16,
+          "order": "16.00000000000000000000",
+          "name": "French schools",
+          "jad__id": "jad_institutional_context__16",
+          "part_of": []
+        }
+      ]
+    }
+  ],
+  "prev": "jad_manuscript__4.html",
+  "next": "jad_manuscript__6.html",
+  "view_label": "St.Gen., MS 1423",
+  "related__passages": [
+    {
+      "jad_id": "jad_occurence__2",
+      "view_label": "Ihesus Christus cum predixisset discipulis suis scicitantibus signa eversionis Ierusalem"
+    }
+  ]
+}

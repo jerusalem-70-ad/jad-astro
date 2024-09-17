@@ -1,0 +1,41 @@
+{
+  "id": 10,
+  "order": "10.00000000000000000000",
+  "name": [
+    {
+      "id": 2,
+      "value": "BNF, Latin 446"
+    }
+  ],
+  "jad_id": "jad_manuscript__10",
+  "library": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Bibliothèque Nationale de France",
+      "jad_id": "jad_library__2",
+      "gnd_url": "https://d-nb.info/gnd/5156217-0",
+      "abbreviation": "BNF",
+      "place": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "Paris",
+          "geonames_url": "https://www.geonames.org/2988507/paris.html",
+          "jad_id": "jad_places__1"
+        }
+      ]
+    }
+  ],
+  "idno": "Latin 446",
+  "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc618815",
+  "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b10721053z/f213.item",
+  "not_before": "1190",
+  "not_after": "1210",
+  "written_date": "around 1200",
+  "institutional_context": [],
+  "prev": "jad_manuscript__9.html",
+  "next": "jad_manuscript__11.html",
+  "view_label": "BNF, Latin 446",
+  "related__passages": []
+}

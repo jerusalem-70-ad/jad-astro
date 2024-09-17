@@ -1,0 +1,110 @@
+{
+  "id": 23,
+  "order": "23.00000000000000000000",
+  "name": [
+    {
+      "id": 5,
+      "value": "Maz., MS 178"
+    }
+  ],
+  "jad_id": "jad_manuscript__23",
+  "library": [
+    {
+      "id": 5,
+      "order": "5.00000000000000000000",
+      "name": "Bibliothèque Mazarine",
+      "jad_id": "jad_library__5",
+      "gnd_url": "https://d-nb.info/gnd/803245-2",
+      "abbreviation": "Maz.",
+      "place": []
+    }
+  ],
+  "idno": "MS 178",
+  "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA10336",
+  "digi_url": "",
+  "not_before": null,
+  "not_after": null,
+  "written_date": null,
+  "institutional_context": [
+    {
+      "id": 1,
+      "order": "1.00000000000000000000",
+      "name": "University of Paris",
+      "jad__id": "jad_institutional_context__1",
+      "part_of": [
+        {
+          "id": 16,
+          "order": "16.00000000000000000000",
+          "name": "French schools",
+          "jad__id": "jad_institutional_context__16",
+          "part_of": []
+        }
+      ]
+    }
+  ],
+  "prev": "jad_manuscript__22.html",
+  "next": "jad_manuscript__24.html",
+  "view_label": "Maz., MS 178",
+  "related__passages": [
+    {
+      "jad_id": "jad_occurence__89",
+      "view_label": "non penituistis terra est vestra erit designe, babiloniorum et post romanorum"
+    },
+    {
+      "jad_id": "jad_occurence__90",
+      "view_label": "et utraque capte, scilicet babilon et romanum"
+    },
+    {
+      "jad_id": "jad_occurence__91",
+      "view_label": "et post captivitatem romanos iudices habent"
+    },
+    {
+      "jad_id": "jad_occurence__92",
+      "view_label": "captio (?) romanorum, libanus Ierusalem et templum cadet"
+    },
+    {
+      "jad_id": "jad_occurence__93",
+      "view_label": "excecionem Iudeorum, que facta est Ierusalem a romanis"
+    },
+    {
+      "jad_id": "jad_occurence__94",
+      "view_label": "Christum sevierunt Iudei, dabit romanis"
+    },
+    {
+      "jad_id": "jad_occurence__95",
+      "view_label": "diem ultionis et damnationis que per romanos"
+    },
+    {
+      "jad_id": "jad_occurence__96",
+      "view_label": "populos Iudeos inebravi afflictione per romanos"
+    },
+    {
+      "jad_id": "jad_occurence__97",
+      "view_label": "captam conservata per romanos helium adam et titum et vespasianum"
+    },
+    {
+      "jad_id": "jad_occurence__98",
+      "view_label": "ursus babilonius vel romanus signat ut omnes ad me, que ad signum et metam ponitum mitterent"
+    },
+    {
+      "jad_id": "jad_occurence__99",
+      "view_label": "inimici romani"
+    },
+    {
+      "jad_id": "jad_occurence__100",
+      "view_label": "sub romanis factum est"
+    },
+    {
+      "jad_id": "jad_occurence__101",
+      "view_label": "obsidente tito et vaspasiano"
+    },
+    {
+      "jad_id": "jad_occurence__102",
+      "view_label": "bestia quatuor romanum"
+    },
+    {
+      "jad_id": "jad_occurence__103",
+      "view_label": "duce tito et vaspasiano vasti, destructio omnioda (?)"
+    }
+  ]
+}

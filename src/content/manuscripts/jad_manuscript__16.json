@@ -1,0 +1,38 @@
+{
+  "id": 16,
+  "order": "16.00000000000000000000",
+  "name": [
+    {
+      "id": 1,
+      "value": "ÖNB, Cod. 1014"
+    }
+  ],
+  "jad_id": "jad_manuscript__16",
+  "library": [
+    {
+      "id": 1,
+      "order": "1.00000000000000000000",
+      "name": "Österreichische Nationalbibliothek",
+      "jad_id": "jad_library__1",
+      "gnd_url": "https://d-nb.info/gnd/2020893-5",
+      "abbreviation": "ÖNB",
+      "place": []
+    }
+  ],
+  "idno": "Cod. 1014",
+  "catalog_url": "https://search.onb.ac.at/primo-explore/fulldisplay?docid=ONB_alma21302484910003338&context=L&vid=ONB&lang=de_DE&search_scope=ONB_gesamtbestand&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,cod.%201014&mode=basic",
+  "digi_url": "https://digital.onb.ac.at/RepViewer/viewer.faces?doc=DTL_8518292&order=1&view=SINGLE",
+  "not_before": null,
+  "not_after": null,
+  "written_date": null,
+  "institutional_context": [],
+  "prev": "jad_manuscript__15.html",
+  "next": "jad_manuscript__17.html",
+  "view_label": "ÖNB, Cod. 1014",
+  "related__passages": [
+    {
+      "jad_id": "jad_occurence__53",
+      "view_label": "Cum adpropinquasset Ihesus Hierusalem, uidens ciuitatem fleuit super illam. Pensare debemus, fratres karissimi, quid sit quod flente Domino, sicut nunc in presenti lectum est, hierosolime ciuitatis subuersio describebatur"
+    }
+  ]
+}

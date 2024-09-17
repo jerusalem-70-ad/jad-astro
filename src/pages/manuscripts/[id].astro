@@ -1,0 +1,28 @@
+---
+import PageLayout from "../../layouts/page-layout.astro";
+import { getCollection } from "astro:content";
+
+
+// make a function to read the collection; 'export' make the function available for Astro'S static site generation. 
+
+export async function getStaticPaths() {
+    // 1) Use getCollection to fetch the json file
+    const mss = await getCollection("manuscripts")
+    return mss.map(entry => {
+        return { params: {id: entry.id},
+                props: {data: entry.data}}
+   })
+}
+
+const { data } = Astro.props;
+---
+<PageLayout>
+    <div class="mx-auto">
+        <h1 class="text-2xl">{data.name[0].value}</h1>
+        <dl class="grid grid-cols-2 gap-x-4 gap-y-2">
+            <dt class="font-semibold">Full shelfmark: </dt>
+            <dd>{data.library[0].name}</dd>
+        </dl>
+    </div>
+
+</PageLayout>

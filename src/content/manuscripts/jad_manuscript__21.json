@@ -1,0 +1,50 @@
+{
+  "id": 21,
+  "order": "21.00000000000000000000",
+  "name": [
+    {
+      "id": 2,
+      "value": "BNF, Latin 3281"
+    }
+  ],
+  "jad_id": "jad_manuscript__21",
+  "library": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Bibliothèque Nationale de France",
+      "jad_id": "jad_library__2",
+      "gnd_url": "https://d-nb.info/gnd/5156217-0",
+      "abbreviation": "BNF",
+      "place": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "Paris",
+          "geonames_url": "https://www.geonames.org/2988507/paris.html",
+          "jad_id": "jad_places__1"
+        }
+      ]
+    }
+  ],
+  "idno": "Latin 3281",
+  "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc61156j",
+  "digi_url": "",
+  "not_before": null,
+  "not_after": null,
+  "written_date": null,
+  "institutional_context": [],
+  "prev": "jad_manuscript__20.html",
+  "next": "jad_manuscript__22.html",
+  "view_label": "BNF, Latin 3281",
+  "related__passages": [
+    {
+      "jad_id": "jad_occurence__11",
+      "view_label": "ad litteram loquitur de Ierusalem que in pace prosperaretur, flevit super illiam previdens excidium eius futurum, quod ipsam non previdebat"
+    },
+    {
+      "jad_id": "jad_occurence__12",
+      "view_label": "signa destructionis Ierusalem et templi cum dicit ibidem, cum videritis circumdari ab exercitu Ierusalem"
+    }
+  ]
+}

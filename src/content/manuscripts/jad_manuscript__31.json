@@ -1,0 +1,62 @@
+{
+  "id": 31,
+  "order": "31.00000000000000000000",
+  "name": [
+    {
+      "id": 2,
+      "value": "BNF, Latin 2950"
+    }
+  ],
+  "jad_id": "jad_manuscript__31",
+  "library": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Bibliothèque Nationale de France",
+      "jad_id": "jad_library__2",
+      "gnd_url": "https://d-nb.info/gnd/5156217-0",
+      "abbreviation": "BNF",
+      "place": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "Paris",
+          "geonames_url": "https://www.geonames.org/2988507/paris.html",
+          "jad_id": "jad_places__1"
+        }
+      ]
+    }
+  ],
+  "idno": "Latin 2950",
+  "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc60770d",
+  "digi_url": "",
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "institutional_context": [
+    {
+      "id": 1,
+      "order": "1.00000000000000000000",
+      "name": "University of Paris",
+      "jad__id": "jad_institutional_context__1",
+      "part_of": [
+        {
+          "id": 16,
+          "order": "16.00000000000000000000",
+          "name": "French schools",
+          "jad__id": "jad_institutional_context__16",
+          "part_of": []
+        }
+      ]
+    }
+  ],
+  "prev": "jad_manuscript__30.html",
+  "next": "jad_manuscript__32.html",
+  "view_label": "BNF, Latin 2950",
+  "related__passages": [
+    {
+      "jad_id": "jad_occurence__13",
+      "view_label": "Zacharias inter ipsa quasi renascentis templi cunabilia futurum ipsius excidium per Romanos predixit"
+    }
+  ]
+}

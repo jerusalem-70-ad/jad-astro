@@ -1,0 +1,49 @@
+{
+  "id": 34,
+  "order": "34.00000000000000000000",
+  "name": [
+    {
+      "id": 5,
+      "value": "Maz., MS 698"
+    }
+  ],
+  "jad_id": "jad_manuscript__34",
+  "library": [
+    {
+      "id": 5,
+      "order": "5.00000000000000000000",
+      "name": "Bibliothèque Mazarine",
+      "jad_id": "jad_library__5",
+      "gnd_url": "https://d-nb.info/gnd/803245-2",
+      "abbreviation": "Maz.",
+      "place": []
+    }
+  ],
+  "idno": "MS 698",
+  "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA12964",
+  "digi_url": "",
+  "not_before": "890",
+  "not_after": "910",
+  "written_date": "around 900",
+  "institutional_context": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Benedictines Auxerre",
+      "jad__id": "jad_institutional_context__2",
+      "part_of": [
+        {
+          "id": 3,
+          "order": "3.00000000000000000000",
+          "name": "Benedictines",
+          "jad__id": "jad_institutional_context__3",
+          "part_of": []
+        }
+      ]
+    }
+  ],
+  "prev": "jad_manuscript__33.html",
+  "next": "jad_manuscript__35.html",
+  "view_label": "Maz., MS 698",
+  "related__passages": []
+}

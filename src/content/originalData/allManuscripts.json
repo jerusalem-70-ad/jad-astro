@@ -1,0 +1,1702 @@
+{
+  "2": {
+    "id": 2,
+    "order": "2.00000000000000000000",
+    "name": [
+      {
+        "id": 2,
+        "value": "BNF, Latin 14426"
+      }
+    ],
+    "jad_id": "jad_manuscript__2",
+    "library": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Bibliothèque Nationale de France",
+        "jad_id": "jad_library__2",
+        "gnd_url": "https://d-nb.info/gnd/5156217-0",
+        "abbreviation": "BNF",
+        "place": [
+          {
+            "id": 1,
+            "order": "1.00000000000000000000",
+            "name": "Paris",
+            "geonames_url": "https://www.geonames.org/2988507/paris.html",
+            "jad_id": "jad_places__1"
+          }
+        ]
+      }
+    ],
+    "idno": "Latin 14426",
+    "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc75180c",
+    "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b9078089g",
+    "not_before": "1200",
+    "not_after": "1300",
+    "written_date": "13",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "prev": "jad_manuscript__19.html",
+    "next": "jad_manuscript__20.html",
+    "view_label": "BNF, Latin 14426",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__52",
+        "view_label": "sub romanis"
+      }
+    ]
+  },
+  "3": {
+    "id": 3,
+    "order": "3.00000000000000000000",
+    "name": [
+      {
+        "id": 3,
+        "value": "San Isidoro, MS 11"
+      }
+    ],
+    "jad_id": "jad_manuscript__3",
+    "library": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "San Isidoro (Kloster)",
+        "jad_id": "jad_library__3",
+        "gnd_url": "",
+        "abbreviation": "San Isidoro",
+        "place": [
+          {
+            "id": 2,
+            "order": "2.00000000000000000000",
+            "name": "León",
+            "geonames_url": "",
+            "jad_id": "jad_places__2"
+          }
+        ]
+      }
+    ],
+    "idno": "MS 11",
+    "catalog_url": "",
+    "digi_url": "",
+    "not_before": "1190",
+    "not_after": "1203",
+    "written_date": "1190-1203",
+    "institutional_context": [
+      {
+        "id": 7,
+        "order": "7.00000000000000000000",
+        "name": "Augustinian canons León",
+        "jad__id": "jad_institutional_context__7",
+        "part_of": [
+          {
+            "id": 8,
+            "order": "8.00000000000000000000",
+            "name": "Augustinian canons",
+            "jad__id": "jad_institutional_context__8",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "prev": "jad_manuscript__29.html",
+    "next": "jad_manuscript__30.html",
+    "view_label": "San Isidoro, MS 11",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__18",
+        "view_label": "plenius complentur in Christo, urbe subversa Romano gladio; adduces super eos latronem repente, Nabuchodonosor, vel exercitum Romanorum"
+      }
+    ]
+  },
+  "4": {
+    "id": 4,
+    "order": "4.00000000000000000000",
+    "name": [
+      {
+        "id": 2,
+        "value": "BNF, Latin 8865"
+      }
+    ],
+    "jad_id": "jad_manuscript__4",
+    "library": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Bibliothèque Nationale de France",
+        "jad_id": "jad_library__2",
+        "gnd_url": "https://d-nb.info/gnd/5156217-0",
+        "abbreviation": "BNF",
+        "place": [
+          {
+            "id": 1,
+            "order": "1.00000000000000000000",
+            "name": "Paris",
+            "geonames_url": "https://www.geonames.org/2988507/paris.html",
+            "jad_id": "jad_places__1"
+          }
+        ]
+      }
+    ],
+    "idno": "Latin 8865",
+    "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc623934",
+    "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b6000541b",
+    "not_before": null,
+    "not_after": null,
+    "written_date": null,
+    "institutional_context": [],
+    "prev": "jad_manuscript__36.html",
+    "next": "jad_manuscript__5.html",
+    "view_label": "BNF, Latin 8865",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__16",
+        "view_label": "Anno post passionem Domini quadragesimo secundo, Titus, quem pater Vespasianus romam reversus in obsidione Ierosolimorum iudeorum dilaniavit populum, in tantum ut Iosephus commemorat"
+      }
+    ]
+  },
+  "5": {
+    "id": 5,
+    "order": "5.00000000000000000000",
+    "name": [
+      {
+        "id": 4,
+        "value": "St.Gen., MS 1423"
+      }
+    ],
+    "jad_id": "jad_manuscript__5",
+    "library": [
+      {
+        "id": 4,
+        "order": "4.00000000000000000000",
+        "name": "Bibliothèque Sainte-Geneviève",
+        "jad_id": "jad_library__4",
+        "gnd_url": "https://d-nb.info/gnd/1022123-2",
+        "abbreviation": "St.Gen.",
+        "place": []
+      }
+    ],
+    "idno": "MS 1423",
+    "catalog_url": "https://calames.abes.fr/pub/bsg.aspx#details?id=BSGB10400",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": null,
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "prev": "jad_manuscript__4.html",
+    "next": "jad_manuscript__6.html",
+    "view_label": "St.Gen., MS 1423",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__2",
+        "view_label": "Ihesus Christus cum predixisset discipulis suis scicitantibus signa eversionis Ierusalem"
+      }
+    ]
+  },
+  "6": {
+    "id": 6,
+    "order": "6.00000000000000000000",
+    "name": [
+      {
+        "id": 2,
+        "value": "BNF, Latin 492"
+      }
+    ],
+    "jad_id": "jad_manuscript__6",
+    "library": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Bibliothèque Nationale de France",
+        "jad_id": "jad_library__2",
+        "gnd_url": "https://d-nb.info/gnd/5156217-0",
+        "abbreviation": "BNF",
+        "place": [
+          {
+            "id": 1,
+            "order": "1.00000000000000000000",
+            "name": "Paris",
+            "geonames_url": "https://www.geonames.org/2988507/paris.html",
+            "jad_id": "jad_places__1"
+          }
+        ]
+      }
+    ],
+    "idno": "Latin 492",
+    "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc619341",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": null,
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "prev": "jad_manuscript__5.html",
+    "next": "jad_manuscript__7.html",
+    "view_label": "BNF, Latin 492",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__5",
+        "view_label": "quatuor regna, scilicet assyriorum, babiloniorum, grecorum, et romanorum, qui destruxerunt Iudeos"
+      },
+      {
+        "jad_id": "jad_occurence__6",
+        "view_label": "romanis obsidentibus civitatem"
+      }
+    ]
+  },
+  "7": {
+    "id": 7,
+    "order": "7.00000000000000000000",
+    "name": [
+      {
+        "id": 5,
+        "value": "Maz., MS 177"
+      }
+    ],
+    "jad_id": "jad_manuscript__7",
+    "library": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Bibliothèque Mazarine",
+        "jad_id": "jad_library__5",
+        "gnd_url": "https://d-nb.info/gnd/803245-2",
+        "abbreviation": "Maz.",
+        "place": []
+      }
+    ],
+    "idno": "MS 177",
+    "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA10313",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": null,
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "prev": "jad_manuscript__6.html",
+    "next": "jad_manuscript__8.html",
+    "view_label": "Maz., MS 177",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__78",
+        "view_label": "duo ursi, per hos tytus et vespasianus qui destruxerunt Iudeos"
+      }
+    ]
+  },
+  "8": {
+    "id": 8,
+    "order": "8.00000000000000000000",
+    "name": [
+      {
+        "id": 4,
+        "value": "St.Gen., MS 1422"
+      }
+    ],
+    "jad_id": "jad_manuscript__8",
+    "library": [
+      {
+        "id": 4,
+        "order": "4.00000000000000000000",
+        "name": "Bibliothèque Sainte-Geneviève",
+        "jad_id": "jad_library__4",
+        "gnd_url": "https://d-nb.info/gnd/1022123-2",
+        "abbreviation": "St.Gen.",
+        "place": []
+      }
+    ],
+    "idno": "MS 1422",
+    "catalog_url": "https://calames.abes.fr/pub/bsg.aspx#details?id=BSGB10393",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": null,
+    "institutional_context": [],
+    "prev": "jad_manuscript__7.html",
+    "next": "jad_manuscript__9.html",
+    "view_label": "St.Gen., MS 1422",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__7",
+        "view_label": "predixit David destructionem urbis Ierusalem factam per romanos"
+      }
+    ]
+  },
+  "9": {
+    "id": 9,
+    "order": "9.00000000000000000000",
+    "name": [
+      {
+        "id": 6,
+        "value": "Lam., MS 144"
+      }
+    ],
+    "jad_id": "jad_manuscript__9",
+    "library": [
+      {
+        "id": 6,
+        "order": "6.00000000000000000000",
+        "name": "Lambeth Palace Library",
+        "jad_id": "jad_library__6",
+        "gnd_url": "https://d-nb.info/gnd/16441-0",
+        "abbreviation": "Lam.",
+        "place": []
+      }
+    ],
+    "idno": "MS 144",
+    "catalog_url": "https://archives.lambethpalacelibrary.org.uk/CalmView/Record.aspx?src=CalmView.Catalog&id=MSS%2f144&pos=1",
+    "digi_url": "",
+    "not_before": "1187",
+    "not_after": "1210",
+    "written_date": "around 1200 (after 1187)",
+    "institutional_context": [
+      {
+        "id": 6,
+        "order": "6.00000000000000000000",
+        "name": "See of Canterbury",
+        "jad__id": "jad_institutional_context__6",
+        "part_of": []
+      }
+    ],
+    "prev": "jad_manuscript__8.html",
+    "next": "{'id': 10, 'order': '10.00000000000000000000', 'name': [{'id': 2, 'value': 'BNF, Latin 446'}], 'jad_id': 'jad_manuscript__10', 'library': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Bibliothèque Nationale de France', 'jad_id': 'jad_library__2', 'gnd_url': 'https://d-nb.info/gnd/5156217-0', 'abbreviation': 'BNF', 'place': [{'id': 1, 'order': '1.00000000000000000000', 'name': 'Paris', 'geonames_url': 'https://www.geonames.org/2988507/paris.html', 'jad_id': 'jad_places__1'}]}], 'idno': 'Latin 446', 'catalog_url': 'https://archivesetmanuscrits.bnf.fr/ark:/12148/cc618815', 'digi_url': 'https://gallica.bnf.fr/ark:/12148/btv1b10721053z/f213.item', 'not_before': '1190', 'not_after': '1210', 'written_date': 'around 1200', 'institutional_context': [], 'prev': 'jad_manuscript__9.html', 'next': 'jad_manuscript__11.html'}.html",
+    "view_label": "Lam., MS 144",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__8",
+        "view_label": "Titus et Vespasianus"
+      }
+    ]
+  },
+  "10": {
+    "id": 10,
+    "order": "10.00000000000000000000",
+    "name": [
+      {
+        "id": 2,
+        "value": "BNF, Latin 446"
+      }
+    ],
+    "jad_id": "jad_manuscript__10",
+    "library": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Bibliothèque Nationale de France",
+        "jad_id": "jad_library__2",
+        "gnd_url": "https://d-nb.info/gnd/5156217-0",
+        "abbreviation": "BNF",
+        "place": [
+          {
+            "id": 1,
+            "order": "1.00000000000000000000",
+            "name": "Paris",
+            "geonames_url": "https://www.geonames.org/2988507/paris.html",
+            "jad_id": "jad_places__1"
+          }
+        ]
+      }
+    ],
+    "idno": "Latin 446",
+    "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc618815",
+    "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b10721053z/f213.item",
+    "not_before": "1190",
+    "not_after": "1210",
+    "written_date": "around 1200",
+    "institutional_context": [],
+    "prev": "jad_manuscript__9.html",
+    "next": "jad_manuscript__11.html",
+    "view_label": "BNF, Latin 446",
+    "related__passages": []
+  },
+  "11": {
+    "id": 11,
+    "order": "11.00000000000000000000",
+    "name": [
+      {
+        "id": 2,
+        "value": "BNF, Latin 3737"
+      }
+    ],
+    "jad_id": "jad_manuscript__11",
+    "library": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Bibliothèque Nationale de France",
+        "jad_id": "jad_library__2",
+        "gnd_url": "https://d-nb.info/gnd/5156217-0",
+        "abbreviation": "BNF",
+        "place": [
+          {
+            "id": 1,
+            "order": "1.00000000000000000000",
+            "name": "Paris",
+            "geonames_url": "https://www.geonames.org/2988507/paris.html",
+            "jad_id": "jad_places__1"
+          }
+        ]
+      }
+    ],
+    "idno": "Latin 3737",
+    "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc61689r",
+    "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b52502392s/f311.item",
+    "not_before": "1290",
+    "not_after": "1310",
+    "written_date": "around 1300",
+    "institutional_context": [],
+    "prev": "jad_manuscript__10.html",
+    "next": "jad_manuscript__12.html",
+    "view_label": "BNF, Latin 3737",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__9",
+        "view_label": "Legitur in istoria romana quod tyrus et vespasianus post xl annum post passione domini tempore pascali"
+      }
+    ]
+  },
+  "12": {
+    "id": 12,
+    "order": "12.00000000000000000000",
+    "name": [
+      {
+        "id": 4,
+        "value": "St.Gen., MS 2787"
+      }
+    ],
+    "jad_id": "jad_manuscript__12",
+    "library": [
+      {
+        "id": 4,
+        "order": "4.00000000000000000000",
+        "name": "Bibliothèque Sainte-Geneviève",
+        "jad_id": "jad_library__4",
+        "gnd_url": "https://d-nb.info/gnd/1022123-2",
+        "abbreviation": "St.Gen.",
+        "place": []
+      }
+    ],
+    "idno": "MS 2787",
+    "catalog_url": "https://calames.abes.fr/pub/bsg.aspx#details?id=BSGC10617",
+    "digi_url": "",
+    "not_before": "1200",
+    "not_after": "1225",
+    "written_date": "early 13",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "prev": "jad_manuscript__11.html",
+    "next": "jad_manuscript__13.html",
+    "view_label": "St.Gen., MS 2787",
+    "related__passages": []
+  },
+  "13": {
+    "id": 13,
+    "order": "13.00000000000000000000",
+    "name": [
+      {
+        "id": 7,
+        "value": "BL, Arundel 322"
+      }
+    ],
+    "jad_id": "jad_manuscript__13",
+    "library": [
+      {
+        "id": 7,
+        "order": "7.00000000000000000000",
+        "name": "British Library",
+        "jad_id": "jad_library__7",
+        "gnd_url": "https://d-nb.info/gnd/1023420-2",
+        "abbreviation": "BL",
+        "place": []
+      }
+    ],
+    "idno": "Arundel 322",
+    "catalog_url": "",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": null,
+    "institutional_context": [],
+    "prev": "jad_manuscript__12.html",
+    "next": "jad_manuscript__14.html",
+    "view_label": "BL, Arundel 322",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__17",
+        "view_label": "Si referamus tempora Nabuchodonosor, tempora Seva cherub, Titi quoque et Vespasiani, non dubitamus quia terrena Sion multoties capta et destructa et reaedificata est."
+      }
+    ]
+  },
+  "14": {
+    "id": 14,
+    "order": "14.00000000000000000000",
+    "name": [
+      {
+        "id": 7,
+        "value": "BL, Royal 8 F XVII"
+      }
+    ],
+    "jad_id": "jad_manuscript__14",
+    "library": [
+      {
+        "id": 7,
+        "order": "7.00000000000000000000",
+        "name": "British Library",
+        "jad_id": "jad_library__7",
+        "gnd_url": "https://d-nb.info/gnd/1023420-2",
+        "abbreviation": "BL",
+        "place": []
+      }
+    ],
+    "idno": "Royal 8 F XVII",
+    "catalog_url": "",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": null,
+    "institutional_context": [],
+    "prev": "jad_manuscript__13.html",
+    "next": "jad_manuscript__15.html",
+    "view_label": "BL, Royal 8 F XVII",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__17",
+        "view_label": "Si referamus tempora Nabuchodonosor, tempora Seva cherub, Titi quoque et Vespasiani, non dubitamus quia terrena Sion multoties capta et destructa et reaedificata est."
+      }
+    ]
+  },
+  "15": {
+    "id": 15,
+    "order": "15.00000000000000000000",
+    "name": [
+      {
+        "id": 2,
+        "value": "BNF, Latin 620"
+      }
+    ],
+    "jad_id": "jad_manuscript__15",
+    "library": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Bibliothèque Nationale de France",
+        "jad_id": "jad_library__2",
+        "gnd_url": "https://d-nb.info/gnd/5156217-0",
+        "abbreviation": "BNF",
+        "place": [
+          {
+            "id": 1,
+            "order": "1.00000000000000000000",
+            "name": "Paris",
+            "geonames_url": "https://www.geonames.org/2988507/paris.html",
+            "jad_id": "jad_places__1"
+          }
+        ]
+      }
+    ],
+    "idno": "Latin 620",
+    "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc62076x",
+    "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b10036602t",
+    "not_before": null,
+    "not_after": null,
+    "written_date": null,
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "prev": "jad_manuscript__14.html",
+    "next": "jad_manuscript__16.html",
+    "view_label": "BNF, Latin 620",
+    "related__passages": []
+  },
+  "16": {
+    "id": 16,
+    "order": "16.00000000000000000000",
+    "name": [
+      {
+        "id": 1,
+        "value": "ÖNB, Cod. 1014"
+      }
+    ],
+    "jad_id": "jad_manuscript__16",
+    "library": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "Österreichische Nationalbibliothek",
+        "jad_id": "jad_library__1",
+        "gnd_url": "https://d-nb.info/gnd/2020893-5",
+        "abbreviation": "ÖNB",
+        "place": []
+      }
+    ],
+    "idno": "Cod. 1014",
+    "catalog_url": "https://search.onb.ac.at/primo-explore/fulldisplay?docid=ONB_alma21302484910003338&context=L&vid=ONB&lang=de_DE&search_scope=ONB_gesamtbestand&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,cod.%201014&mode=basic",
+    "digi_url": "https://digital.onb.ac.at/RepViewer/viewer.faces?doc=DTL_8518292&order=1&view=SINGLE",
+    "not_before": null,
+    "not_after": null,
+    "written_date": null,
+    "institutional_context": [],
+    "prev": "jad_manuscript__15.html",
+    "next": "jad_manuscript__17.html",
+    "view_label": "ÖNB, Cod. 1014",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__53",
+        "view_label": "Cum adpropinquasset Ihesus Hierusalem, uidens ciuitatem fleuit super illam. Pensare debemus, fratres karissimi, quid sit quod flente Domino, sicut nunc in presenti lectum est, hierosolime ciuitatis subuersio describebatur"
+      }
+    ]
+  },
+  "17": {
+    "id": 17,
+    "order": "17.00000000000000000000",
+    "name": [
+      {
+        "id": 8,
+        "value": "Cambr. St.John's Coll., MS 127"
+      }
+    ],
+    "jad_id": "jad_manuscript__17",
+    "library": [
+      {
+        "id": 8,
+        "order": "8.00000000000000000000",
+        "name": "St John's College (Cambridge)",
+        "jad_id": "jad_library__8",
+        "gnd_url": "https://d-nb.info/gnd/18387-8",
+        "abbreviation": "Cambr. St.John's Coll.",
+        "place": []
+      }
+    ],
+    "idno": "MS 127",
+    "catalog_url": "",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": "14",
+    "institutional_context": [],
+    "prev": "jad_manuscript__16.html",
+    "next": "jad_manuscript__18.html",
+    "view_label": "Cambr. St.John's Coll., MS 127",
+    "related__passages": []
+  },
+  "18": {
+    "id": 18,
+    "order": "18.00000000000000000000",
+    "name": [
+      {
+        "id": 2,
+        "value": "BNF, Latin 3829"
+      }
+    ],
+    "jad_id": "jad_manuscript__18",
+    "library": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Bibliothèque Nationale de France",
+        "jad_id": "jad_library__2",
+        "gnd_url": "https://d-nb.info/gnd/5156217-0",
+        "abbreviation": "BNF",
+        "place": [
+          {
+            "id": 1,
+            "order": "1.00000000000000000000",
+            "name": "Paris",
+            "geonames_url": "https://www.geonames.org/2988507/paris.html",
+            "jad_id": "jad_places__1"
+          }
+        ]
+      }
+    ],
+    "idno": "Latin 3829",
+    "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc61794x",
+    "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b9068440b/f133.item",
+    "not_before": null,
+    "not_after": null,
+    "written_date": null,
+    "institutional_context": [],
+    "prev": "jad_manuscript__17.html",
+    "next": "jad_manuscript__19.html",
+    "view_label": "BNF, Latin 3829",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__10",
+        "view_label": "Impleta prophetia, quam olim Moyses predixerat, foris vastabit eos gladiis, dicit Iosephus, qui de eius exilio civitatis multa describsit"
+      }
+    ]
+  },
+  "19": {
+    "id": 19,
+    "order": "19.00000000000000000000",
+    "name": [
+      {
+        "id": 2,
+        "value": "BNF, Latin 3567"
+      }
+    ],
+    "jad_id": "jad_manuscript__19",
+    "library": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Bibliothèque Nationale de France",
+        "jad_id": "jad_library__2",
+        "gnd_url": "https://d-nb.info/gnd/5156217-0",
+        "abbreviation": "BNF",
+        "place": [
+          {
+            "id": 1,
+            "order": "1.00000000000000000000",
+            "name": "Paris",
+            "geonames_url": "https://www.geonames.org/2988507/paris.html",
+            "jad_id": "jad_places__1"
+          }
+        ]
+      }
+    ],
+    "idno": "Latin 3567",
+    "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc61499m",
+    "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b52521779w/f70.item",
+    "not_before": null,
+    "not_after": null,
+    "written_date": null,
+    "institutional_context": [],
+    "prev": "jad_manuscript__18.html",
+    "next": "jad_manuscript__2.html",
+    "view_label": "BNF, Latin 3567",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__54",
+        "view_label": "Cum appropinquaret Jesus Jerusalem, videns civitatem flevit. Quod flente Domino ille Jerosolymorum subversio describatur"
+      }
+    ]
+  },
+  "20": {
+    "id": 20,
+    "order": "20.00000000000000000000",
+    "name": [
+      {
+        "id": 2,
+        "value": "BNF, Latin 3570"
+      }
+    ],
+    "jad_id": "jad_manuscript__20",
+    "library": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Bibliothèque Nationale de France",
+        "jad_id": "jad_library__2",
+        "gnd_url": "https://d-nb.info/gnd/5156217-0",
+        "abbreviation": "BNF",
+        "place": [
+          {
+            "id": 1,
+            "order": "1.00000000000000000000",
+            "name": "Paris",
+            "geonames_url": "https://www.geonames.org/2988507/paris.html",
+            "jad_id": "jad_places__1"
+          }
+        ]
+      }
+    ],
+    "idno": "Latin 3570",
+    "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc61503g",
+    "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b10024830x/f171.item",
+    "not_before": null,
+    "not_after": null,
+    "written_date": "12",
+    "institutional_context": [
+      {
+        "id": 12,
+        "order": "12.00000000000000000000",
+        "name": "St. Victor Paris",
+        "jad__id": "jad_institutional_context__12",
+        "part_of": [
+          {
+            "id": 1,
+            "order": "1.00000000000000000000",
+            "name": "University of Paris",
+            "jad__id": "jad_institutional_context__1",
+            "part_of": [
+              {
+                "id": 16,
+                "value": "French schools"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "prev": "jad_manuscript__2.html",
+    "next": "jad_manuscript__21.html",
+    "view_label": "BNF, Latin 3570",
+    "related__passages": []
+  },
+  "21": {
+    "id": 21,
+    "order": "21.00000000000000000000",
+    "name": [
+      {
+        "id": 2,
+        "value": "BNF, Latin 3281"
+      }
+    ],
+    "jad_id": "jad_manuscript__21",
+    "library": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Bibliothèque Nationale de France",
+        "jad_id": "jad_library__2",
+        "gnd_url": "https://d-nb.info/gnd/5156217-0",
+        "abbreviation": "BNF",
+        "place": [
+          {
+            "id": 1,
+            "order": "1.00000000000000000000",
+            "name": "Paris",
+            "geonames_url": "https://www.geonames.org/2988507/paris.html",
+            "jad_id": "jad_places__1"
+          }
+        ]
+      }
+    ],
+    "idno": "Latin 3281",
+    "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc61156j",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": null,
+    "institutional_context": [],
+    "prev": "jad_manuscript__20.html",
+    "next": "jad_manuscript__22.html",
+    "view_label": "BNF, Latin 3281",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__11",
+        "view_label": "ad litteram loquitur de Ierusalem que in pace prosperaretur, flevit super illiam previdens excidium eius futurum, quod ipsam non previdebat"
+      },
+      {
+        "jad_id": "jad_occurence__12",
+        "view_label": "signa destructionis Ierusalem et templi cum dicit ibidem, cum videritis circumdari ab exercitu Ierusalem"
+      }
+    ]
+  },
+  "22": {
+    "id": 22,
+    "order": "22.00000000000000000000",
+    "name": [
+      {
+        "id": 9,
+        "value": "Troyes, MS 653"
+      }
+    ],
+    "jad_id": "jad_manuscript__22",
+    "library": [
+      {
+        "id": 9,
+        "order": "9.00000000000000000000",
+        "name": "Bibliothèque municipale (Troyes)",
+        "jad_id": "jad_library__9",
+        "gnd_url": "https://d-nb.info/gnd/1026092-4",
+        "abbreviation": "Troyes",
+        "place": []
+      }
+    ],
+    "idno": "MS 653",
+    "catalog_url": "",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": null,
+    "institutional_context": [],
+    "prev": "jad_manuscript__21.html",
+    "next": "jad_manuscript__23.html",
+    "view_label": "Troyes, MS 653",
+    "related__passages": []
+  },
+  "23": {
+    "id": 23,
+    "order": "23.00000000000000000000",
+    "name": [
+      {
+        "id": 5,
+        "value": "Maz., MS 178"
+      }
+    ],
+    "jad_id": "jad_manuscript__23",
+    "library": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Bibliothèque Mazarine",
+        "jad_id": "jad_library__5",
+        "gnd_url": "https://d-nb.info/gnd/803245-2",
+        "abbreviation": "Maz.",
+        "place": []
+      }
+    ],
+    "idno": "MS 178",
+    "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA10336",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": null,
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "prev": "jad_manuscript__22.html",
+    "next": "jad_manuscript__24.html",
+    "view_label": "Maz., MS 178",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__89",
+        "view_label": "non penituistis terra est vestra erit designe, babiloniorum et post romanorum"
+      },
+      {
+        "jad_id": "jad_occurence__90",
+        "view_label": "et utraque capte, scilicet babilon et romanum"
+      },
+      {
+        "jad_id": "jad_occurence__91",
+        "view_label": "et post captivitatem romanos iudices habent"
+      },
+      {
+        "jad_id": "jad_occurence__92",
+        "view_label": "captio (?) romanorum, libanus Ierusalem et templum cadet"
+      },
+      {
+        "jad_id": "jad_occurence__93",
+        "view_label": "excecionem Iudeorum, que facta est Ierusalem a romanis"
+      },
+      {
+        "jad_id": "jad_occurence__94",
+        "view_label": "Christum sevierunt Iudei, dabit romanis"
+      },
+      {
+        "jad_id": "jad_occurence__95",
+        "view_label": "diem ultionis et damnationis que per romanos"
+      },
+      {
+        "jad_id": "jad_occurence__96",
+        "view_label": "populos Iudeos inebravi afflictione per romanos"
+      },
+      {
+        "jad_id": "jad_occurence__97",
+        "view_label": "captam conservata per romanos helium adam et titum et vespasianum"
+      },
+      {
+        "jad_id": "jad_occurence__98",
+        "view_label": "ursus babilonius vel romanus signat ut omnes ad me, que ad signum et metam ponitum mitterent"
+      },
+      {
+        "jad_id": "jad_occurence__99",
+        "view_label": "inimici romani"
+      },
+      {
+        "jad_id": "jad_occurence__100",
+        "view_label": "sub romanis factum est"
+      },
+      {
+        "jad_id": "jad_occurence__101",
+        "view_label": "obsidente tito et vaspasiano"
+      },
+      {
+        "jad_id": "jad_occurence__102",
+        "view_label": "bestia quatuor romanum"
+      },
+      {
+        "jad_id": "jad_occurence__103",
+        "view_label": "duce tito et vaspasiano vasti, destructio omnioda (?)"
+      }
+    ]
+  },
+  "24": {
+    "id": 24,
+    "order": "24.00000000000000000000",
+    "name": [
+      {
+        "id": 5,
+        "value": "Maz., MS 999"
+      }
+    ],
+    "jad_id": "jad_manuscript__24",
+    "library": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Bibliothèque Mazarine",
+        "jad_id": "jad_library__5",
+        "gnd_url": "https://d-nb.info/gnd/803245-2",
+        "abbreviation": "Maz.",
+        "place": []
+      }
+    ],
+    "idno": "MS 999",
+    "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA14392",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": null,
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "prev": "jad_manuscript__23.html",
+    "next": "jad_manuscript__25.html",
+    "view_label": "Maz., MS 999",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__30",
+        "view_label": "hec destructio ab imperatoribus romanis a tyto et vaspasiano ob perfidiam Iudeorum"
+      },
+      {
+        "jad_id": "jad_occurence__31",
+        "view_label": "civitatem eorum succendit quia missis exercitibus romanis"
+      },
+      {
+        "jad_id": "jad_occurence__32",
+        "view_label": "herodes a romanis regnum Iudeorum acceperat"
+      },
+      {
+        "jad_id": "jad_occurence__33",
+        "view_label": "ad litteram evenerunt tempore titi et vespasiani"
+      }
+    ]
+  },
+  "25": {
+    "id": 25,
+    "order": "25.00000000000000000000",
+    "name": [
+      {
+        "id": 2,
+        "value": "BNF, Latin 3301C"
+      }
+    ],
+    "jad_id": "jad_manuscript__25",
+    "library": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Bibliothèque Nationale de France",
+        "jad_id": "jad_library__2",
+        "gnd_url": "https://d-nb.info/gnd/5156217-0",
+        "abbreviation": "BNF",
+        "place": [
+          {
+            "id": 1,
+            "order": "1.00000000000000000000",
+            "name": "Paris",
+            "geonames_url": "https://www.geonames.org/2988507/paris.html",
+            "jad_id": "jad_places__1"
+          }
+        ]
+      }
+    ],
+    "idno": "Latin 3301C",
+    "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc61183f",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": null,
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "prev": "jad_manuscript__24.html",
+    "next": "jad_manuscript__26.html",
+    "view_label": "BNF, Latin 3301C",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__13",
+        "view_label": "Zacharias inter ipsa quasi renascentis templi cunabilia futurum ipsius excidium per Romanos predixit"
+      },
+      {
+        "jad_id": "jad_occurence__14",
+        "view_label": "terrenam Ierusalem antonomasice significat, ubi ibi, videns dominus civitatem, flevit super illiam"
+      }
+    ]
+  },
+  "26": {
+    "id": 26,
+    "order": "26.00000000000000000000",
+    "name": [
+      {
+        "id": 2,
+        "value": "BNF, Latin 3733"
+      }
+    ],
+    "jad_id": "jad_manuscript__26",
+    "library": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Bibliothèque Nationale de France",
+        "jad_id": "jad_library__2",
+        "gnd_url": "https://d-nb.info/gnd/5156217-0",
+        "abbreviation": "BNF",
+        "place": [
+          {
+            "id": 1,
+            "order": "1.00000000000000000000",
+            "name": "Paris",
+            "geonames_url": "https://www.geonames.org/2988507/paris.html",
+            "jad_id": "jad_places__1"
+          }
+        ]
+      }
+    ],
+    "idno": "Latin 3733",
+    "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc61685s",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": null,
+    "institutional_context": [],
+    "prev": "jad_manuscript__25.html",
+    "next": "jad_manuscript__27.html",
+    "view_label": "BNF, Latin 3733",
+    "related__passages": []
+  },
+  "27": {
+    "id": 27,
+    "order": "27.00000000000000000000",
+    "name": [
+      {
+        "id": 5,
+        "value": "Maz., MS 774"
+      }
+    ],
+    "jad_id": "jad_manuscript__27",
+    "library": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Bibliothèque Mazarine",
+        "jad_id": "jad_library__5",
+        "gnd_url": "https://d-nb.info/gnd/803245-2",
+        "abbreviation": "Maz.",
+        "place": []
+      }
+    ],
+    "idno": "MS 774",
+    "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA13427",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": null,
+    "institutional_context": [],
+    "prev": "jad_manuscript__26.html",
+    "next": "jad_manuscript__28.html",
+    "view_label": "Maz., MS 774",
+    "related__passages": []
+  },
+  "28": {
+    "id": 28,
+    "order": "28.00000000000000000000",
+    "name": [
+      {
+        "id": 5,
+        "value": "Maz., Ms 1026"
+      }
+    ],
+    "jad_id": "jad_manuscript__28",
+    "library": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Bibliothèque Mazarine",
+        "jad_id": "jad_library__5",
+        "gnd_url": "https://d-nb.info/gnd/803245-2",
+        "abbreviation": "Maz.",
+        "place": []
+      }
+    ],
+    "idno": "Ms 1026",
+    "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA14477",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": null,
+    "institutional_context": [],
+    "prev": "jad_manuscript__27.html",
+    "next": "jad_manuscript__29.html",
+    "view_label": "Maz., Ms 1026",
+    "related__passages": []
+  },
+  "29": {
+    "id": 29,
+    "order": "29.00000000000000000000",
+    "name": [
+      {
+        "id": 2,
+        "value": "BNF, Latin 3728"
+      }
+    ],
+    "jad_id": "jad_manuscript__29",
+    "library": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Bibliothèque Nationale de France",
+        "jad_id": "jad_library__2",
+        "gnd_url": "https://d-nb.info/gnd/5156217-0",
+        "abbreviation": "BNF",
+        "place": [
+          {
+            "id": 1,
+            "order": "1.00000000000000000000",
+            "name": "Paris",
+            "geonames_url": "https://www.geonames.org/2988507/paris.html",
+            "jad_id": "jad_places__1"
+          }
+        ]
+      }
+    ],
+    "idno": "Latin 3728",
+    "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc61679j",
+    "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b53200095q",
+    "not_before": "1290",
+    "not_after": "1310",
+    "written_date": "around 1300",
+    "institutional_context": [],
+    "prev": "jad_manuscript__28.html",
+    "next": "jad_manuscript__3.html",
+    "view_label": "BNF, Latin 3728",
+    "related__passages": []
+  },
+  "30": {
+    "id": 30,
+    "order": "30.00000000000000000000",
+    "name": [
+      {
+        "id": 2,
+        "value": "BNF, Latin 14937"
+      }
+    ],
+    "jad_id": "jad_manuscript__30",
+    "library": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Bibliothèque Nationale de France",
+        "jad_id": "jad_library__2",
+        "gnd_url": "https://d-nb.info/gnd/5156217-0",
+        "abbreviation": "BNF",
+        "place": [
+          {
+            "id": 1,
+            "order": "1.00000000000000000000",
+            "name": "Paris",
+            "geonames_url": "https://www.geonames.org/2988507/paris.html",
+            "jad_id": "jad_places__1"
+          }
+        ]
+      }
+    ],
+    "idno": "Latin 14937",
+    "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc756668",
+    "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b52508765g",
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "prev": "jad_manuscript__3.html",
+    "next": "jad_manuscript__31.html",
+    "view_label": "BNF, Latin 14937",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__30",
+        "view_label": "hec destructio ab imperatoribus romanis a tyto et vaspasiano ob perfidiam Iudeorum"
+      }
+    ]
+  },
+  "31": {
+    "id": 31,
+    "order": "31.00000000000000000000",
+    "name": [
+      {
+        "id": 2,
+        "value": "BNF, Latin 2950"
+      }
+    ],
+    "jad_id": "jad_manuscript__31",
+    "library": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Bibliothèque Nationale de France",
+        "jad_id": "jad_library__2",
+        "gnd_url": "https://d-nb.info/gnd/5156217-0",
+        "abbreviation": "BNF",
+        "place": [
+          {
+            "id": 1,
+            "order": "1.00000000000000000000",
+            "name": "Paris",
+            "geonames_url": "https://www.geonames.org/2988507/paris.html",
+            "jad_id": "jad_places__1"
+          }
+        ]
+      }
+    ],
+    "idno": "Latin 2950",
+    "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc60770d",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "prev": "jad_manuscript__30.html",
+    "next": "jad_manuscript__32.html",
+    "view_label": "BNF, Latin 2950",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__13",
+        "view_label": "Zacharias inter ipsa quasi renascentis templi cunabilia futurum ipsius excidium per Romanos predixit"
+      }
+    ]
+  },
+  "32": {
+    "id": 32,
+    "order": "32.00000000000000000000",
+    "name": [
+      {
+        "id": 13,
+        "value": "Arsenal, MS 44"
+      }
+    ],
+    "jad_id": "jad_manuscript__32",
+    "library": [
+      {
+        "id": 13,
+        "order": "13.00000000000000000000",
+        "name": "Bibliothèque de l'Arsenal",
+        "jad_id": "jad_library__13",
+        "gnd_url": "https://d-nb.info/gnd/1056486-X",
+        "abbreviation": "Arsenal",
+        "place": []
+      }
+    ],
+    "idno": "MS 44",
+    "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc79628g",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "institutional_context": [],
+    "prev": "jad_manuscript__31.html",
+    "next": "jad_manuscript__33.html",
+    "view_label": "Arsenal, MS 44",
+    "related__passages": []
+  },
+  "33": {
+    "id": 33,
+    "order": "33.00000000000000000000",
+    "name": [
+      {
+        "id": 13,
+        "value": "Arsenal, MS 400"
+      }
+    ],
+    "jad_id": "jad_manuscript__33",
+    "library": [
+      {
+        "id": 13,
+        "order": "13.00000000000000000000",
+        "name": "Bibliothèque de l'Arsenal",
+        "jad_id": "jad_library__13",
+        "gnd_url": "https://d-nb.info/gnd/1056486-X",
+        "abbreviation": "Arsenal",
+        "place": []
+      }
+    ],
+    "idno": "MS 400",
+    "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc79585t",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "institutional_context": [],
+    "prev": "jad_manuscript__32.html",
+    "next": "jad_manuscript__34.html",
+    "view_label": "Arsenal, MS 400",
+    "related__passages": []
+  },
+  "34": {
+    "id": 34,
+    "order": "34.00000000000000000000",
+    "name": [
+      {
+        "id": 5,
+        "value": "Maz., MS 698"
+      }
+    ],
+    "jad_id": "jad_manuscript__34",
+    "library": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Bibliothèque Mazarine",
+        "jad_id": "jad_library__5",
+        "gnd_url": "https://d-nb.info/gnd/803245-2",
+        "abbreviation": "Maz.",
+        "place": []
+      }
+    ],
+    "idno": "MS 698",
+    "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA12964",
+    "digi_url": "",
+    "not_before": "890",
+    "not_after": "910",
+    "written_date": "around 900",
+    "institutional_context": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Benedictines Auxerre",
+        "jad__id": "jad_institutional_context__2",
+        "part_of": [
+          {
+            "id": 3,
+            "order": "3.00000000000000000000",
+            "name": "Benedictines",
+            "jad__id": "jad_institutional_context__3",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "prev": "jad_manuscript__33.html",
+    "next": "jad_manuscript__35.html",
+    "view_label": "Maz., MS 698",
+    "related__passages": []
+  },
+  "35": {
+    "id": 35,
+    "order": "35.00000000000000000000",
+    "name": [
+      {
+        "id": 5,
+        "value": "Maz., MS 1001"
+      }
+    ],
+    "jad_id": "jad_manuscript__35",
+    "library": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Bibliothèque Mazarine",
+        "jad_id": "jad_library__5",
+        "gnd_url": "https://d-nb.info/gnd/803245-2",
+        "abbreviation": "Maz.",
+        "place": []
+      }
+    ],
+    "idno": "MS 1001",
+    "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA14397",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "institutional_context": [],
+    "prev": "jad_manuscript__34.html",
+    "next": "jad_manuscript__36.html",
+    "view_label": "Maz., MS 1001",
+    "related__passages": []
+  },
+  "36": {
+    "id": 36,
+    "order": "36.00000000000000000000",
+    "name": [
+      {
+        "id": 15,
+        "value": "Valenciennes, MS 227"
+      }
+    ],
+    "jad_id": "jad_manuscript__36",
+    "library": [
+      {
+        "id": 15,
+        "order": "15.00000000000000000000",
+        "name": "Bibliothèque municipale (Valenciennes)",
+        "jad_id": "jad_library__15",
+        "gnd_url": "https://d-nb.info/gnd/1052474-5",
+        "abbreviation": "Valenciennes",
+        "place": []
+      }
+    ],
+    "idno": "MS 227",
+    "catalog_url": "",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "institutional_context": [],
+    "prev": "jad_manuscript__35.html",
+    "next": "jad_manuscript__4.html",
+    "view_label": "Valenciennes, MS 227",
+    "related__passages": []
+  }
+}

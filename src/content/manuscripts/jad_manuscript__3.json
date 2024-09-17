@@ -1,0 +1,62 @@
+{
+  "id": 3,
+  "order": "3.00000000000000000000",
+  "name": [
+    {
+      "id": 3,
+      "value": "San Isidoro, MS 11"
+    }
+  ],
+  "jad_id": "jad_manuscript__3",
+  "library": [
+    {
+      "id": 3,
+      "order": "3.00000000000000000000",
+      "name": "San Isidoro (Kloster)",
+      "jad_id": "jad_library__3",
+      "gnd_url": "",
+      "abbreviation": "San Isidoro",
+      "place": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "León",
+          "geonames_url": "",
+          "jad_id": "jad_places__2"
+        }
+      ]
+    }
+  ],
+  "idno": "MS 11",
+  "catalog_url": "",
+  "digi_url": "",
+  "not_before": "1190",
+  "not_after": "1203",
+  "written_date": "1190-1203",
+  "institutional_context": [
+    {
+      "id": 7,
+      "order": "7.00000000000000000000",
+      "name": "Augustinian canons León",
+      "jad__id": "jad_institutional_context__7",
+      "part_of": [
+        {
+          "id": 8,
+          "order": "8.00000000000000000000",
+          "name": "Augustinian canons",
+          "jad__id": "jad_institutional_context__8",
+          "part_of": []
+        }
+      ]
+    }
+  ],
+  "prev": "jad_manuscript__29.html",
+  "next": "jad_manuscript__30.html",
+  "view_label": "San Isidoro, MS 11",
+  "related__passages": [
+    {
+      "jad_id": "jad_occurence__18",
+      "view_label": "plenius complentur in Christo, urbe subversa Romano gladio; adduces super eos latronem repente, Nabuchodonosor, vel exercitum Romanorum"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+---
+import PageLayout from "../layouts/page-layout.astro";
+import { getCollection } from "astro:content"
+const collection = await getCollection("manuscripts")
+
+---
+
+<PageLayout>
+    <div class="mx-auto w-full max-w-screen-xl px-16 py-4">
+		<div class="prose max-w-screen-md">
+			<h1 class="text-2xl font-semibold">JAD manuscript descriptions</h1>
+           
+            <ul>
+                {collection.map((entry) => {
+                    return <li>
+                        {/* data comes from Astro - adds a new data layer during the processing. Still funny how entry.id works, without entry.data.id ?? */}
+                            {entry.data.name[0].value}                            
+                        </li>
+                })}
+            </ul>
+		</div>
+	</div>
+</PageLayout>

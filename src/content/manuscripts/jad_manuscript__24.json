@@ -1,0 +1,66 @@
+{
+  "id": 24,
+  "order": "24.00000000000000000000",
+  "name": [
+    {
+      "id": 5,
+      "value": "Maz., MS 999"
+    }
+  ],
+  "jad_id": "jad_manuscript__24",
+  "library": [
+    {
+      "id": 5,
+      "order": "5.00000000000000000000",
+      "name": "Bibliothèque Mazarine",
+      "jad_id": "jad_library__5",
+      "gnd_url": "https://d-nb.info/gnd/803245-2",
+      "abbreviation": "Maz.",
+      "place": []
+    }
+  ],
+  "idno": "MS 999",
+  "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA14392",
+  "digi_url": "",
+  "not_before": null,
+  "not_after": null,
+  "written_date": null,
+  "institutional_context": [
+    {
+      "id": 1,
+      "order": "1.00000000000000000000",
+      "name": "University of Paris",
+      "jad__id": "jad_institutional_context__1",
+      "part_of": [
+        {
+          "id": 16,
+          "order": "16.00000000000000000000",
+          "name": "French schools",
+          "jad__id": "jad_institutional_context__16",
+          "part_of": []
+        }
+      ]
+    }
+  ],
+  "prev": "jad_manuscript__23.html",
+  "next": "jad_manuscript__25.html",
+  "view_label": "Maz., MS 999",
+  "related__passages": [
+    {
+      "jad_id": "jad_occurence__30",
+      "view_label": "hec destructio ab imperatoribus romanis a tyto et vaspasiano ob perfidiam Iudeorum"
+    },
+    {
+      "jad_id": "jad_occurence__31",
+      "view_label": "civitatem eorum succendit quia missis exercitibus romanis"
+    },
+    {
+      "jad_id": "jad_occurence__32",
+      "view_label": "herodes a romanis regnum Iudeorum acceperat"
+    },
+    {
+      "jad_id": "jad_occurence__33",
+      "view_label": "ad litteram evenerunt tempore titi et vespasiani"
+    }
+  ]
+}

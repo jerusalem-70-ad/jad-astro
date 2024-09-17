@@ -1,0 +1,33 @@
+{
+  "id": 32,
+  "order": "32.00000000000000000000",
+  "name": [
+    {
+      "id": 13,
+      "value": "Arsenal, MS 44"
+    }
+  ],
+  "jad_id": "jad_manuscript__32",
+  "library": [
+    {
+      "id": 13,
+      "order": "13.00000000000000000000",
+      "name": "Bibliothèque de l'Arsenal",
+      "jad_id": "jad_library__13",
+      "gnd_url": "https://d-nb.info/gnd/1056486-X",
+      "abbreviation": "Arsenal",
+      "place": []
+    }
+  ],
+  "idno": "MS 44",
+  "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc79628g",
+  "digi_url": "",
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "institutional_context": [],
+  "prev": "jad_manuscript__31.html",
+  "next": "jad_manuscript__33.html",
+  "view_label": "Arsenal, MS 44",
+  "related__passages": []
+}

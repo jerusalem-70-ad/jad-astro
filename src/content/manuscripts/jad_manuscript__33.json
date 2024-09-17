@@ -1,0 +1,33 @@
+{
+  "id": 33,
+  "order": "33.00000000000000000000",
+  "name": [
+    {
+      "id": 13,
+      "value": "Arsenal, MS 400"
+    }
+  ],
+  "jad_id": "jad_manuscript__33",
+  "library": [
+    {
+      "id": 13,
+      "order": "13.00000000000000000000",
+      "name": "Bibliothèque de l'Arsenal",
+      "jad_id": "jad_library__13",
+      "gnd_url": "https://d-nb.info/gnd/1056486-X",
+      "abbreviation": "Arsenal",
+      "place": []
+    }
+  ],
+  "idno": "MS 400",
+  "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc79585t",
+  "digi_url": "",
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "institutional_context": [],
+  "prev": "jad_manuscript__32.html",
+  "next": "jad_manuscript__34.html",
+  "view_label": "Arsenal, MS 400",
+  "related__passages": []
+}

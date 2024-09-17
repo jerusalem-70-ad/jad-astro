@@ -1,0 +1,33 @@
+{
+  "id": 28,
+  "order": "28.00000000000000000000",
+  "name": [
+    {
+      "id": 5,
+      "value": "Maz., Ms 1026"
+    }
+  ],
+  "jad_id": "jad_manuscript__28",
+  "library": [
+    {
+      "id": 5,
+      "order": "5.00000000000000000000",
+      "name": "Bibliothèque Mazarine",
+      "jad_id": "jad_library__5",
+      "gnd_url": "https://d-nb.info/gnd/803245-2",
+      "abbreviation": "Maz.",
+      "place": []
+    }
+  ],
+  "idno": "Ms 1026",
+  "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA14477",
+  "digi_url": "",
+  "not_before": null,
+  "not_after": null,
+  "written_date": null,
+  "institutional_context": [],
+  "prev": "jad_manuscript__27.html",
+  "next": "jad_manuscript__29.html",
+  "view_label": "Maz., Ms 1026",
+  "related__passages": []
+}

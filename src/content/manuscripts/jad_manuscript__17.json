@@ -1,0 +1,33 @@
+{
+  "id": 17,
+  "order": "17.00000000000000000000",
+  "name": [
+    {
+      "id": 8,
+      "value": "Cambr. St.John's Coll., MS 127"
+    }
+  ],
+  "jad_id": "jad_manuscript__17",
+  "library": [
+    {
+      "id": 8,
+      "order": "8.00000000000000000000",
+      "name": "St John's College (Cambridge)",
+      "jad_id": "jad_library__8",
+      "gnd_url": "https://d-nb.info/gnd/18387-8",
+      "abbreviation": "Cambr. St.John's Coll.",
+      "place": []
+    }
+  ],
+  "idno": "MS 127",
+  "catalog_url": "",
+  "digi_url": "",
+  "not_before": null,
+  "not_after": null,
+  "written_date": "14",
+  "institutional_context": [],
+  "prev": "jad_manuscript__16.html",
+  "next": "jad_manuscript__18.html",
+  "view_label": "Cambr. St.John's Coll., MS 127",
+  "related__passages": []
+}
