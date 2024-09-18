@@ -1,0 +1,55 @@
+---
+const manuscript = Astro.props.manuscript.data;
+
+---
+<article class="border-2 rounded-md border-brand900 bg-brand100 w-[300px] grid grid-cols-1">
+    <h1 class="text-xl py-3 mx-auto">
+        <a href=`manuscripts/${manuscript.jad_id}` class="hover:text-brandBrown font-semibold">{manuscript.name[0].value}</a>
+    </h1>
+    <dl class="grid grid-cols-2 gap-2 text-xs md:text-sm px-5">
+        <dt>Settlement:</dt>
+        <dd>{manuscript.library[0].place[0]?.name}</dd>
+
+        <dt>Library / Collection:</dt>
+        <dd><a href={manuscript.library[0].gnd_url} target="_blank">{manuscript.library[0].name}</a></dd>
+        
+        <dt>Shelfmark:</dt>
+        <dd>{manuscript.idno}</dd>
+       
+        <dt>Insitutional context:</dt>
+        <dd>{manuscript.institutional_context[0]?.name ?? 'N/A'}</dd>
+        
+        
+        <dt>Passages:</dt>
+        <!-- this is an array - need to call .map to return an array of strings with the jad_id; outside the .map call .join() -->
+        <dd>#{manuscript.related__passages.map((passage => {
+            return passage.jad_id.substring(15)
+        })).join(', #')
+        }</dd>
+       
+       
+    </dl>
+    <div class="flex flex-col gap-2 py-2 text-xs md:text-sm px-5">
+        {manuscript.digi_url && (
+             <div class="flex">
+                <section>Digital facsimile</section> 
+                <a href={manuscript.digi_url} class="inline-flex">
+                    <img src="/external-link.svg" alt="" class="w-4 inline">
+                </a>
+            </div>
+           
+          )}
+          
+        {manuscript.catalog_url && (
+           <div class="flex">
+                <section>Catalog entry</section> 
+                <a href={manuscript.catalog_url} class="inline-flex">
+                    <img src="/external-link.svg" alt="" class="w-4 inline">
+                </a>
+            </div>
+
+            
+        )}
+    </div>
+
+</article>

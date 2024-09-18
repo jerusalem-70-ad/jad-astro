@@ -7,22 +7,67 @@ import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
     // 1) Use getCollection to fetch the json file
-    const mss = await getCollection("manuscripts")
-    return mss.map(entry => {
-        return { params: {id: entry.id},
-                props: {data: entry.data}}
+    const manuscripts = await getCollection("manuscripts")
+    return manuscripts.map(manuscript => {
+        return { params: {id: manuscript.id},
+                props: {data: manuscript.data}}
    })
 }
 
-const { data } = Astro.props;
+const { data: manuscript } = Astro.props;
 ---
 <PageLayout>
-    <div class="mx-auto">
-        <h1 class="text-2xl">{data.name[0].value}</h1>
-        <dl class="grid grid-cols-2 gap-x-4 gap-y-2">
-            <dt class="font-semibold">Full shelfmark: </dt>
-            <dd>{data.library[0].name}</dd>
-        </dl>
+    <div class="py-5">
+        <article class="border-2 rounded-md border-brand900 bg-brand100 w-[300px] grid grid-cols-1 mx-auto px-5">
+            <h1 class="text-xl py-3 mx-auto">{manuscript.name[0].value}</h1>
+            <dl class="grid grid-cols-2 gap-2 text-xs md:text-sm">
+                <dt>Settlement:</dt>
+                <dd>{manuscript.library[0].place[0]?.name}</dd>
+    
+                <dt>Library / Collection:</dt>
+                <dd><a href={manuscript.library[0].gnd_url} target="_blank">{manuscript.library[0].name}</a></dd>
+                
+                <dt>Shelfmark:</dt>
+                <dd>{manuscript.idno}</dd>
+               
+                <dt>Insitutional context:</dt>
+                <dd>{manuscript.institutional_context[0]?.name ?? 'N/A'}</dd>
+                
+                
+                <dt>Passages:</dt>
+                <!-- this is an array - need to call .map to return an array of strings with the jad_id; outside the .map call .join() -->
+                <dd>#{manuscript.related__passages.map((manuscript => {
+                    return manuscript.jad_id.substring(15)
+                })).join(', #')
+                }</dd>
+               
+               
+            </dl>
+            <div class="flex flex-col gap-2 py-2 text-xs md:text-sm">
+                {manuscript.digi_url && (
+                     <div class="flex">
+                        <section>Digital facsimile</section> 
+                        <a href={manuscript.digi_url} class="inline-flex">
+                            <img src="/external-link.svg" alt="" class="w-4 inline">
+                        </a>
+                    </div>
+                   
+                  )}
+                  
+                {manuscript.catalog_url && (
+                   <div class="flex">
+                        <section>Catalog entry</section> 
+                        <a href={manuscript.catalog_url} class="inline-flex">
+                            <img src="/external-link.svg" alt="" class="w-4 inline">
+                        </a>
+                    </div>
+
+                    
+                )}
+            </div>
+           
+    
+    </article>
     </div>
 
 </PageLayout>
