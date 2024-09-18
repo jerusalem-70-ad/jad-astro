@@ -7,53 +7,45 @@ import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
     // 1) Use getCollection to fetch the json file
-    const passages = await getCollection("manuscripts")
-    return passages.map(passage => {
-        return { params: {id: passage.id},
-                props: {data: passage.data}}
+    const passages = await getCollection("passages")
+    return passages.map(occurence => {
+        return { params: {id: occurence.id},
+                props: {data: occurence.data}}
    })
 }
 
 const { data: passage } = Astro.props;
 ---
 <PageLayout>
-    <article class="border-2 rounded-md border-brand900 bg-brand100 w-[300px] grid grid-cols-1">
-        <h1 class="text-xl py-3 mx-auto">{passage.name[0].value}</h1>
+   <div>
+    <article class="border-2 rounded-md border-brand900 bg-brand100 w-3/4 grid grid-cols-1 mx-auto p-5 my-3">
+        <h1 class="text-xl py-3 mx-auto">{passage.id}</h1>
         <dl class="grid grid-cols-2 gap-2 text-xs">
-            <dt>Settlement:</dt>
-            <dd>{passage.library[0].place[0]?.name}</dd>
-
-            <dt>Library / Collection:</dt>
-            <dd><a href={passage.library[0].gnd_url} target="_blank">{passage.library[0].name}</a></dd>
             
-            <dt>Shelfmark:</dt>
-            <dd>{passage.idno}</dd>
+            <dt>Passage:</dt>
+            <dd>{passage.passage}</dd>            
+            <dt>Author:</dt>
+            <dd>{passage.Author[0]?.value ?? 'N/A'}</dd>
            
-            <dt>Insitutional context:</dt>
-            <dd>{passage.institutional_context[0]?.name ?? 'N/A'}</dd>
+            <dt>Work:</dt>
+            <dd>{passage.work[0]?.name ?? 'N/A'}</dd>
             
             
-            <dt>Passages:</dt>
+            <dt>Manuscripts:</dt>
             <!-- this is an array - need to call .map to return an array of strings with the jad_id; outside the .map call .join() -->
-            <dd>#{passage.related__passages.map((passage => {
-                return passage.jad_id.substring(15)
-            })).join(', #')
+            <dd>{passage.manuscripts?.map((ms => {
+                return ms.name.value
+                })).join(', ')
+            }</dd>
+            <dd>{passage.biblical_references?.map((reference => {
+                return reference.value
+                })).join(', ')
             }</dd>
            
-           
         </dl>
-        <div>
-            {passage.digi_url && (
-                <button class="border-brand900 border-2 py-2 px-3 rounded-sm bg-brand100 text-brand950 hover:bg-brand900 hover:text-brand50 transition text-sm">
-                  <a href={passage.digi_url}>Digital facsimile</a>
-                </button>
-              )}
-              
-            {passage.catalog_url && (
-                <button class="border-brand900 border-2 py-1 px-2 rounded-sm bg-brand100 text-brand950 hover:bg-brand900 hover:text-brand50 transition text-sm"><a href={passage.catalog_url}>Catalog entry</a></button>
-            )}
-        </div>
+       
 
 </article>
 
+   </div>
 </PageLayout>

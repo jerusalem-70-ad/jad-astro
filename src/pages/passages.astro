@@ -1,0 +1,35 @@
+---
+import PageLayout from "../layouts/page-layout.astro";
+import { getCollection } from "astro:content"
+const collection = await getCollection("passages")
+
+// make a function to read the collection; 'export' make the function available for Astro'S static site generation. 
+
+export async function getStaticPaths() {
+    // 1) Use getCollection to fetch the json file
+    const passages = await getCollection("passages")
+    return passages.map(passage => {
+        return { params: {id: passage.id},
+                props: {data: passage.data}}
+   })
+}
+
+---
+
+<PageLayout>
+    <div class="mx-auto w-full max-w-screen-xl px-16 py-4">
+		<div>
+			<h1 class="text-2xl font-semibold text-brandBrown">Passages / Occurrences</h1>
+
+           <ul>
+              
+                {collection.map((passage) => {
+                    return (
+                        <li class="list-disc">                     
+                           <a href=`passages/${passage.data.jad_id}` class="hover:text-brandBrown font-semibold">{passage.data.jad_id}</a>                                                        
+                        </li>)
+                })}
+            </ul>           
+		</div>
+	</div>
+</PageLayout>
