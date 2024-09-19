@@ -35,11 +35,8 @@ const { data: passage } = Astro.props;
             <!-- this is an array - need to call .map to return an array of strings with the jad_id; outside the .map call .join() But first checek if it is empty-->
             <dd>
                 {passage.manuscript.length > 0
-                ?  passage.manuscript.map((manuscript: {
-name: any; value : any; jad_id : any;
-}) => {
-                    return <a href={manuscript.jad_id}>hansi</a>
-                }).join(', ') : 'N/A'}
+                ? passage.manuscript.map((ms: { jad_id: any; name : any; }) => <a href={`/manuscripts/${ms.jad_id}`} class="hover:text-brand600">{ms.name[0].value}</a> )
+                : 'N/A'}
             </dd>    
       
 

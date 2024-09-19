@@ -18,28 +18,39 @@ const { data: manuscript } = Astro.props;
 ---
 <PageLayout>
     <div class="py-5">
-        <article class="border-2 rounded-md border-brand900 bg-brand100 w-[300px] grid grid-cols-1 mx-auto px-5">
+        <article class="border-2 rounded-md border-brand900 bg-brand100 w-3/4 grid grid-cols-1 mx-auto px-5">
             <h1 class="text-xl py-3 mx-auto">{manuscript.name[0].value}</h1>
-            <dl class="grid grid-cols-2 gap-2 text-xs md:text-sm">
-                <dt>Settlement:</dt>
+            <dl class="grid grid-cols-[1fr_4fr] gap-2 text-xs md:text-sm">
+                <dt class="font-semibold">Settlement:</dt>
                 <dd>{manuscript.library[0].place[0]?.name}</dd>
     
-                <dt>Library / Collection:</dt>
+                <dt class="font-semibold">Library / Collection:</dt>
                 <dd><a href={manuscript.library[0].gnd_url} target="_blank">{manuscript.library[0].name}</a></dd>
                 
-                <dt>Shelfmark:</dt>
+                <dt class="font-semibold">Shelfmark:</dt>
                 <dd>{manuscript.idno}</dd>
                
-                <dt>Insitutional context:</dt>
+                <dt class="font-semibold">Insitutional context:</dt>
                 <dd>{manuscript.institutional_context[0]?.name ?? 'N/A'}</dd>
                 
                 
-                <dt>Passages:</dt>
-                <!-- this is an array - need to call .map to return an array of strings with the jad_id; outside the .map call .join() -->
-                <dd>#{manuscript.related__passages.map(((manuscript: { jad_id: string; }) => {
-                    return manuscript.jad_id.substring(15)
-                })).join(', #')
-                }</dd>
+                <dt class="font-semibold">Passages:</dt>
+                <dd>
+                    <!-- Array call .map with two parameters; index with type number - to count ; : wraped in fragment <> to return more than one elemen from the iteration-->
+                  {
+                    manuscript.related__passages.map((passage: { jad_id: string; }, index: number) => (
+                      <>
+                        <a href={`/passages/${passage.jad_id}`} class="hover:text-brand600">
+                          #{passage.jad_id.substring(15)}
+                        </a>
+                        {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
+                        {index < manuscript.related__passages.length - 1 && ', '}
+                      </>
+                    ))
+                  }
+                </dd>              
+
+               
                
                
             </dl>
