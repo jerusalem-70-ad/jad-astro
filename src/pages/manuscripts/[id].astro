@@ -36,7 +36,7 @@ const { data: manuscript } = Astro.props;
                 
                 <dt>Passages:</dt>
                 <!-- this is an array - need to call .map to return an array of strings with the jad_id; outside the .map call .join() -->
-                <dd>#{manuscript.related__passages.map((manuscript => {
+                <dd>#{manuscript.related__passages.map(((manuscript: { jad_id: string; }) => {
                     return manuscript.jad_id.substring(15)
                 })).join(', #')
                 }</dd>

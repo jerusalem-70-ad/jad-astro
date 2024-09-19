@@ -19,28 +19,54 @@ const { data: passage } = Astro.props;
 <PageLayout>
    <div>
     <article class="border-2 rounded-md border-brand900 bg-brand100 w-3/4 grid grid-cols-1 mx-auto p-5 my-3">
-        <h1 class="text-xl py-3 mx-auto">{passage.id}</h1>
-        <dl class="grid grid-cols-2 gap-2 text-xs">
-            
-            <dt>Passage:</dt>
-            <dd>{passage.passage}</dd>            
-            <dt>Author:</dt>
+        <h1 class="text-xl py-3 mx-auto">({passage.id}) {passage.passage}</h1>
+        <dl class="grid grid-cols-[1fr_5fr] gap-2 text-sm">
+                                 
+            <dt class="font-semibold">Author:</dt>
             <dd>{passage.Author[0]?.value ?? 'N/A'}</dd>
            
-            <dt>Work:</dt>
+            <dt class="font-semibold">Work:</dt>
             <dd>{passage.work[0]?.name ?? 'N/A'}</dd>
             
+            <dt class="font-semibold">Position in work</dt>
+            <dd>{passage?.position_in_work ?? 'N/A'}</dd>
             
-            <dt>Manuscripts:</dt>
-            <!-- this is an array - need to call .map to return an array of strings with the jad_id; outside the .map call .join() -->
-            <dd>{passage.manuscripts?.map((ms => {
-                return ms.name.value
-                })).join(', ')
-            }</dd>
-            <dd>{passage.biblical_references?.map((reference => {
+            <dt class="font-semibold">Manuscripts:</dt>
+            <!-- this is an array - need to call .map to return an array of strings with the jad_id; outside the .map call .join() But first checek if it is empty-->
+            <dd>
+                {passage.manuscript.length > 0
+                ?  passage.manuscript.map((manuscript: {
+name: any; value : any; jad_id : any;
+}) => {
+                    return <a href={manuscript.jad_id}>hansi</a>
+                }).join(', ') : 'N/A'}
+            </dd>    
+      
+
+            <dt class="font-semibold">Biblical references:</dt>
+            <dd>{passage.biblical_references?.map((reference: { value: any; }) => {
                 return reference.value
-                })).join(', ')
+                }).join(', ')
             }</dd>
+
+            <dt class="font-semibold">Liturgical references:</dt>
+            <dd>
+                {passage.liturgical_references.length > 0 
+                  ? passage.liturgical_references.map((reference: { value: any }) => reference.value).join(', ') 
+                  : 'N/A'}
+            </dd>              
+
+            <dt class="font-semibold">Full text:</dt>
+            <dd>{passage?.text_paragraph ?? 'N/A'}</dd>
+
+            <dt class="font-semibold">Passage found in:</dt>
+            <dd>
+                {passage.occurrence_found_in.length > 0
+                ? passage.occurrence_found_in.map((find : { value : any; }) => {
+                    return find.value
+                }).join(', ') : 'N/A'}
+            </dd>
+           
            
         </dl>
        
