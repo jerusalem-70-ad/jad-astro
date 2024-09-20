@@ -1,0 +1,235 @@
+{
+  "id": 13,
+  "order": "13.00000000000000000000",
+  "passage": "Zacharias inter ipsa quasi renascentis templi cunabilia futurum ipsius excidium per Romanos predixit",
+  "jad_id": "jad_occurence__13",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [
+    {
+      "id": 25,
+      "order": "25.00000000000000000000",
+      "name": [
+        {
+          "id": 2,
+          "value": "BNF, Latin 3301C"
+        }
+      ],
+      "jad_id": "jad_manuscript__25",
+      "library": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Bibliothèque Nationale de France",
+          "jad_id": "jad_library__2",
+          "gnd_url": "https://d-nb.info/gnd/5156217-0",
+          "abbreviation": "BNF",
+          "place": [
+            {
+              "id": 1,
+              "order": "1.00000000000000000000",
+              "name": "Paris",
+              "geonames_url": "https://www.geonames.org/2988507/paris.html",
+              "jad_id": "jad_places__1"
+            }
+          ]
+        }
+      ],
+      "idno": "Latin 3301C",
+      "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc61183f",
+      "digi_url": "",
+      "not_before": null,
+      "not_after": null,
+      "written_date": null,
+      "institutional_context": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "University of Paris",
+          "jad__id": "jad_institutional_context__1",
+          "part_of": [
+            {
+              "id": 16,
+              "order": "16.00000000000000000000",
+              "name": "French schools",
+              "jad__id": "jad_institutional_context__16",
+              "part_of": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "order": "31.00000000000000000000",
+      "name": [
+        {
+          "id": 2,
+          "value": "BNF, Latin 2950"
+        }
+      ],
+      "jad_id": "jad_manuscript__31",
+      "library": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Bibliothèque Nationale de France",
+          "jad_id": "jad_library__2",
+          "gnd_url": "https://d-nb.info/gnd/5156217-0",
+          "abbreviation": "BNF",
+          "place": [
+            {
+              "id": 1,
+              "order": "1.00000000000000000000",
+              "name": "Paris",
+              "geonames_url": "https://www.geonames.org/2988507/paris.html",
+              "jad_id": "jad_places__1"
+            }
+          ]
+        }
+      ],
+      "idno": "Latin 2950",
+      "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc60770d",
+      "digi_url": "",
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "institutional_context": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "University of Paris",
+          "jad__id": "jad_institutional_context__1",
+          "part_of": [
+            {
+              "id": 16,
+              "order": "16.00000000000000000000",
+              "name": "French schools",
+              "jad__id": "jad_institutional_context__16",
+              "part_of": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "position_in_work": "",
+  "position_in_work_url": "",
+  "text_paragraph": "",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [
+    {
+      "id": 27,
+      "value": "Zach. 11,1"
+    }
+  ],
+  "Author": [
+    {
+      "id": 9,
+      "value": "Petrus, Comestor"
+    }
+  ],
+  "work": [
+    {
+      "id": 9,
+      "order": "9.00000000000000000000",
+      "name": "Sermones ",
+      "jad_id": "jad_work__9",
+      "author": [
+        {
+          "id": 9,
+          "order": "9.00000000000000000000",
+          "name": "Petrus, Comestor",
+          "jad_id": "jad_author__9",
+          "gnd_url": "https://d-nb.info/gnd/118828851",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [
+        {
+          "id": 5,
+          "value": "St.Gen., MS 1423"
+        },
+        {
+          "id": 25,
+          "value": "BNF, Latin 3301C"
+        }
+      ],
+      "title": "Sermones",
+      "genre": {
+        "id": 14726,
+        "value": "Sermons",
+        "color": "darker-pink"
+      },
+      "not_before": "1140",
+      "not_after": "1160",
+      "written_date": "mid 12",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "University of Paris",
+          "jad__id": "jad_institutional_context__1",
+          "part_of": [
+            {
+              "id": 16,
+              "order": "16.00000000000000000000",
+              "name": "French schools",
+              "jad__id": "jad_institutional_context__16",
+              "part_of": []
+            }
+          ]
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "102v; 166v",
+  "sources_used": [
+    {
+      "id": 26,
+      "value": "Josephus, Flavius"
+    }
+  ],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [
+    {
+      "id": 6,
+      "value": "Pentecost"
+    }
+  ],
+  "occurrence_found_in": [
+    {
+      "id": 5,
+      "value": "In Principio"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 9,
+        "database_table_3499": 9
+      },
+      "value": "Petrus, Comestor"
+    }
+  ],
+  "prev": "jad_occurence__129.html",
+  "next": "jad_occurence__130.html",
+  "view_label": "Zacharias inter ipsa quasi renascentis templi cunabilia futurum ipsius excidium per Romanos predixit"
+}

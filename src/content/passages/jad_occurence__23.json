@@ -1,0 +1,109 @@
+{
+  "id": 23,
+  "order": "23.00000000000000000000",
+  "passage": "sicut Josephus narrat, advenientibus Romanis",
+  "jad_id": "jad_occurence__23",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "",
+  "position_in_work_url": "",
+  "text_paragraph": "Quapropter hoc loco non simpliciter illud mare accipiendum est, quod adjacet terrae repromissionis: sed etiam omnia flumina vicina, per quae Judaei soliti erant navigare, et negotia exercere. Et translative per naves intelliguntur hi, qui in navibus residentes, negotiationis causa pelagus et flumina navigabant. Super quos p. 0735A | dies vindictae Domini venit: quando sicut Josephus narrat, advenientibus Romanis, illi comprehensi sunt, qui in portibus commorabantur, navesque eorum succensae. Quodque sequitur, et super omne quod pulchrum est visu, intelligendum est super templum et sanctuarium, ubi erat maxima pulchritudo, et super omnes virgines et juvenes: super omne quodque quod delectabile erat ad videndum, diem ultionis venisse: quando simul omnia bona illius populi destructa et evacuata sunt.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [],
+  "Author": [
+    {
+      "id": 25,
+      "value": "Haimo, von Auxerre"
+    }
+  ],
+  "work": [
+    {
+      "id": 26,
+      "order": "26.00000000000000000000",
+      "name": "Commentary Isaiah ",
+      "jad_id": "jad_work__26",
+      "author": [
+        {
+          "id": 25,
+          "order": "25.00000000000000000000",
+          "name": "Haimo, von Auxerre",
+          "jad_id": "jad_author__25",
+          "gnd_url": "https://d-nb.info/gnd/100945260",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Commentary Isaiah",
+      "genre": {
+        "id": 14727,
+        "value": "Commentary",
+        "color": "darker-green"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Benedictines Auxerre",
+          "jad__id": "jad_institutional_context__2",
+          "part_of": [
+            {
+              "id": 3,
+              "order": "3.00000000000000000000",
+              "name": "Benedictines",
+              "jad__id": "jad_institutional_context__3",
+              "part_of": []
+            }
+          ]
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [
+    {
+      "id": 26,
+      "value": "Josephus, Flavius"
+    }
+  ],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 25,
+        "database_table_3499": 26
+      },
+      "value": "Haimo, von Auxerre"
+    }
+  ],
+  "prev": "jad_occurence__22.html",
+  "next": "jad_occurence__24.html",
+  "view_label": "sicut Josephus narrat, advenientibus Romanis"
+}

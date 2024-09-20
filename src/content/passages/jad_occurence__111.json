@@ -1,0 +1,97 @@
+{
+  "id": 111,
+  "order": "111.00000000000000000000",
+  "passage": "a Tito et Vespasiano Jerusalem circumdata est, et advenit desolatio ejus, et impletum est",
+  "jad_id": "jad_occurence__111",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "B5, Ch7",
+  "position_in_work_url": "",
+  "text_paragraph": "Possumus autem et de extrema captivitate dicere, quod post interfectionem Christi, quando venit eis finis et evigilavit adversum eos peccatum, impletum est illud quod scriptum est: « Nunc pervenit in eos ira p. 0611B | Dei in finem. » Quando a Tito et Vespasiano Jerusalem circumdata est, et advenit desolatio ejus, et impletum est: « Ecce relinquetur vobis domus vestra deserta (Matth. XXIII). » Tunc judicati sunt juxta vias suas et blasphemias quibus Dominum negaverunt, et senserunt furorem Dei, et omnis indignatio ejus super illos effusa est, receperuntque scelera sua ut permaneat desolatio templi usque ad consummationem.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [
+    {
+      "id": 29,
+      "value": "Mt. 23,38"
+    },
+    {
+      "id": 86,
+      "value": "1 Thes. 2,16"
+    }
+  ],
+  "Author": [
+    {
+      "id": 5,
+      "value": "Hrabanus, Maurus"
+    }
+  ],
+  "work": [
+    {
+      "id": 61,
+      "order": "60.00000000000000000000",
+      "name": "Commentary Ezekiel ",
+      "jad_id": "jad_work__61",
+      "author": [
+        {
+          "id": 5,
+          "order": "5.00000000000000000000",
+          "name": "Hrabanus, Maurus",
+          "jad_id": "jad_author__5",
+          "gnd_url": "https://d-nb.info/gnd/118553909",
+          "notes": null
+        }
+      ],
+      "manuscripts": [],
+      "title": "Commentary Ezekiel",
+      "genre": {
+        "id": 14727,
+        "value": "Commentary",
+        "color": "darker-green"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 5,
+        "database_table_3499": 61
+      },
+      "value": "Hrabanus, Maurus"
+    }
+  ],
+  "prev": "jad_occurence__110.html",
+  "next": "jad_occurence__112.html",
+  "view_label": "a Tito et Vespasiano Jerusalem circumdata est, et advenit desolatio ejus, et impletum est"
+}

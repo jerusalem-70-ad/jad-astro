@@ -1,0 +1,102 @@
+{
+  "id": 60,
+  "order": "60.00000000000000000000",
+  "passage": "Vespasianus et filius Titus hoc vindicaverunt; Vespasianus et Titus duces Romanorum, cum magno exercitu Judaeam intrans",
+  "jad_id": "jad_occurence__60",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "Sermo 10",
+  "position_in_work_url": "",
+  "text_paragraph": "Postquam enim prophetas sapientes et scribas ad eos missos a se repulerunt, insuper quosdam flagellaverunt, quosdam lapidaverunt, quosdam diversis poenis interfecerunt, alios de finibus suis propulerunt, Deus ultionum, Dominus sanguinem eorum requirere est recordatus, venitque super (fº 296) eos sanguis Christi omnium p. 1051B | justorum quem a sanguine Abel effuderunt usque apostolos Christi occiderunt (Luc. XIX). Et quia Patrem et Filium offenderunt pater Vespasianus et filius Titus hoc vindicaverunt, ac vineam summi Patrisfamilias, quam in vineam Sodomorum converterant, de qua vinum Gomorrhae biberant, exterminavit aper de silva et singularis ferus depastus est eam (Psal. LXXIX). Silva erat gentilitas de qua aper Vespasianus exercitum ducitavit ( sic ) et vineam, scilicet Judaeam, ferro et igne examinavit. Singularis ferus erat Titus, qui longa obsidione Hierosolymam est depastus; sed antequam civitas everteretur, toto illo anno stella instar gladii super eam pendere videbatur. Vitula enim sacrificiis admota agnum est enixa; et continuis XL noctibus p. 1051C | igneae acies in aere cernuntur; templi januae media nocte ultro aperiuntur, maxima luce intus coruscante. Voces hujusmodi audiuntur: « Transeamus de sedibus istis: » Igitur transactis post passionem Domini XL duobus annis Vespasianus et Titus duces Romanorum, cum magno exercitu Judaeam intrans ( sic ), universam regionem incendio devastavit ( sic ). Populus autem ex cunctis urbibus ob paschalem festivitatem in Hierosolymam confluxerat; quem exercitus in paschali tempore obsederat, sicut ipse Dominum in paschali die crucifixerat.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [
+    {
+      "id": 50,
+      "value": "Ps. 79,14"
+    },
+    {
+      "id": 62,
+      "value": "Mt. 23,35"
+    }
+  ],
+  "Author": [
+    {
+      "id": 37,
+      "value": "Honorius, Augustodunensis"
+    }
+  ],
+  "work": [
+    {
+      "id": 43,
+      "order": "43.00000000000000000000",
+      "name": "Speculum Ecclesiae ",
+      "jad_id": "jad_work__43",
+      "author": [
+        {
+          "id": 37,
+          "order": "37.00000000000000000000",
+          "name": "Honorius, Augustodunensis",
+          "jad_id": "jad_author__37",
+          "gnd_url": "https://d-nb.info/gnd/119066548",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Speculum Ecclesiae",
+      "genre": {
+        "id": 14726,
+        "value": "Sermons",
+        "color": "darker-pink"
+      },
+      "not_before": "1100",
+      "not_after": "1125",
+      "written_date": "early 12",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [
+    {
+      "id": 1,
+      "value": "First Crusade"
+    }
+  ],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 37,
+        "database_table_3499": 43
+      },
+      "value": "Honorius, Augustodunensis"
+    }
+  ],
+  "prev": "jad_occurence__6.html",
+  "next": "jad_occurence__61.html",
+  "view_label": "Vespasianus et filius Titus hoc vindicaverunt; Vespasianus et Titus duces Romanorum, cum magno exercitu Judaeam intrans"
+}

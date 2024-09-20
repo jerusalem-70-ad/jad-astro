@@ -1,0 +1,106 @@
+{
+  "id": 61,
+  "order": "61.00000000000000000000",
+  "passage": "Romani et locum et gentem illorum tulerunt",
+  "jad_id": "jad_occurence__61",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "Sermo 10",
+  "position_in_work_url": "",
+  "text_paragraph": "In hac itaque obsidione legitur quo undecies centena milia fame perierint totidemque gladio perempti sint, ejusdem numeri in captivitatem distracti, trecenti in ultionem Dominicae necis crucifixi sunt. Traditur etiam quod XXX pro denario venditi sunt, sicut ipsi Dominum pro XXX denariis tradiderunt. Sic, karissimi, reddidit Dominus septuplum in sinu eorum qui p. 1052B | effuderunt sanguinem sanctorum (Psal. LXXVIII). Sic relicta est domus deserta (Luc. XIII) quam ipsi speluncam latronum fecerunt (Matth. XXI); sicque Romani et locum et gentem illorum tulerunt (Joan. XI).",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [
+    {
+      "id": 36,
+      "value": "Joh. 11,48"
+    },
+    {
+      "id": 63,
+      "value": "Mt. 21,13"
+    },
+    {
+      "id": 64,
+      "value": "Ps. 78,3"
+    }
+  ],
+  "Author": [
+    {
+      "id": 37,
+      "value": "Honorius, Augustodunensis"
+    }
+  ],
+  "work": [
+    {
+      "id": 43,
+      "order": "43.00000000000000000000",
+      "name": "Speculum Ecclesiae ",
+      "jad_id": "jad_work__43",
+      "author": [
+        {
+          "id": 37,
+          "order": "37.00000000000000000000",
+          "name": "Honorius, Augustodunensis",
+          "jad_id": "jad_author__37",
+          "gnd_url": "https://d-nb.info/gnd/119066548",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Speculum Ecclesiae",
+      "genre": {
+        "id": 14726,
+        "value": "Sermons",
+        "color": "darker-pink"
+      },
+      "not_before": "1100",
+      "not_after": "1125",
+      "written_date": "early 12",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [
+    {
+      "id": 1,
+      "value": "First Crusade"
+    }
+  ],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 37,
+        "database_table_3499": 43
+      },
+      "value": "Honorius, Augustodunensis"
+    }
+  ],
+  "prev": "jad_occurence__60.html",
+  "next": "jad_occurence__62.html",
+  "view_label": "Romani et locum et gentem illorum tulerunt"
+}

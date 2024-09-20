@@ -1,0 +1,194 @@
+{
+  "id": 73,
+  "order": "73.00000000000000000000",
+  "passage": "Jerusalem ruit, et Judas concidit, ac Romanus eam populus a fundamentis vastavit",
+  "jad_id": "jad_occurence__73",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [
+    {
+      "id": 3,
+      "order": "3.00000000000000000000",
+      "name": [
+        {
+          "id": 3,
+          "value": "San Isidoro, MS 11"
+        }
+      ],
+      "jad_id": "jad_manuscript__3",
+      "library": [
+        {
+          "id": 3,
+          "order": "3.00000000000000000000",
+          "name": "San Isidoro (Kloster)",
+          "jad_id": "jad_library__3",
+          "gnd_url": "",
+          "abbreviation": "San Isidoro",
+          "place": [
+            {
+              "id": 2,
+              "order": "2.00000000000000000000",
+              "name": "León",
+              "geonames_url": "",
+              "jad_id": "jad_places__2"
+            }
+          ]
+        }
+      ],
+      "idno": "MS 11",
+      "catalog_url": "",
+      "digi_url": "",
+      "not_before": "1190",
+      "not_after": "1203",
+      "written_date": "1190-1203",
+      "institutional_context": [
+        {
+          "id": 7,
+          "order": "7.00000000000000000000",
+          "name": "Augustinian canons León",
+          "jad__id": "jad_institutional_context__7",
+          "part_of": [
+            {
+              "id": 8,
+              "order": "8.00000000000000000000",
+              "name": "Augustinian canons",
+              "jad__id": "jad_institutional_context__8",
+              "part_of": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "position_in_work": "Sermo 23",
+  "position_in_work_url": "",
+  "text_paragraph": "Quia Judaei clamaverunt Pilato, ut Dei et hominis Filius crucifigeretur, hoc jam per Jeremiam idem dominus de Synagoga praedixerat, dicens: Reliqui domum meam; facta est mihi haereditas mea quasi leo in silva. Dedit vocem suam contra me (Jer. XII), blasphemans utique et dicens: Crucifige, crucifige eum (Luc. XXIII). Et alibi ipse ait: Super quem p. 0876D | aperuistis os vestrum, et adversus quem laxastis linguas vestras? (Isai. LVII) Et Isaias. Ruit, inquit, Jerusalem, et Judas concidit, quia linguae eorum contra Dominum (Isai III). Contra Dominum utique eorum linguae fuerunt, quando Pilato: Non habemus regem, nisi Caesarem, clamaverunt (Joan. XIX). Et iterum: Tolle hunc, et dimitte nobis Barabbam (Luc. XXIII). Quia ergo Judaeorum linguae contra Dominum fuerunt, idcirco Jerusalem ruit, et Judas concidit, ac Romanus eam populus a fundamentis vastavit. De eadem impiissima gente per eumdem prophetam iterum Dominus conqueritur, dicens: p. 0877A | Exspectavi ut faceret judicium, et ecce iniquitas; et justitiam, et ecce clamor (Isai. V). Quod Judaei Christum crucifigentes, progeniem suam damnaverunt, dicentes: Sanguis ejus super nos, et super filios nostros (Matth. XXVII); olim cum objurgatione Isaias praedixerat ita: Semen pessimum, praeparate filios vestros occisioni iniquitate patrum suorum (Isai. XIV). Venientibus enim Romanis Jerosolymam, in iniquitatibus patrum trucidati sunt filii.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [
+    {
+      "id": 8,
+      "value": "Is. 3,8"
+    },
+    {
+      "id": 32,
+      "value": "Mt. 27,25"
+    },
+    {
+      "id": 35,
+      "value": "Lk. 23,21"
+    },
+    {
+      "id": 66,
+      "value": "Is. 5,7"
+    },
+    {
+      "id": 67,
+      "value": "Lk. 23,18"
+    }
+  ],
+  "Author": [
+    {
+      "id": 2,
+      "value": "Martin, von León"
+    }
+  ],
+  "work": [
+    {
+      "id": 1,
+      "order": "1.00000000000000000000",
+      "name": "Liber Sermonum ",
+      "jad_id": "jad_work__1",
+      "author": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Martin, von León",
+          "jad_id": "jad_author__2",
+          "gnd_url": "https://d-nb.info/gnd/100953212",
+          "notes": null
+        }
+      ],
+      "manuscripts": [
+        {
+          "id": 3,
+          "value": "San Isidoro, MS 11"
+        }
+      ],
+      "title": "Liber Sermonum",
+      "genre": {
+        "id": 14726,
+        "value": "Sermons",
+        "color": "darker-pink"
+      },
+      "not_before": "1175",
+      "not_after": "1200",
+      "written_date": "late 12",
+      "notes": null,
+      "notes__author": null,
+      "institutional_context": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "University of Paris",
+          "jad__id": "jad_institutional_context__1",
+          "part_of": [
+            {
+              "id": 16,
+              "order": "16.00000000000000000000",
+              "name": "French schools",
+              "jad__id": "jad_institutional_context__16",
+              "part_of": []
+            }
+          ]
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [
+    {
+      "id": 2,
+      "value": "Third Crusade"
+    }
+  ],
+  "authority_discourse": 0,
+  "liturgical_references": [
+    {
+      "id": 4,
+      "value": "Maundy Thursday"
+    }
+  ],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 2,
+        "database_table_3499": 1
+      },
+      "value": "Martin, von León"
+    }
+  ],
+  "prev": "jad_occurence__72.html",
+  "next": "jad_occurence__74.html",
+  "view_label": "Jerusalem ruit, et Judas concidit, ac Romanus eam populus a fundamentis vastavit"
+}

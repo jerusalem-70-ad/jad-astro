@@ -1,0 +1,93 @@
+{
+  "id": 106,
+  "order": "106.00000000000000000000",
+  "passage": "unam vastationis quae facta est a Vespasiano duce cum Tito filio ejus",
+  "jad_id": "jad_occurence__106",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "",
+  "position_in_work_url": "",
+  "text_paragraph": "Beatus Hieronymus labore ingenioque magno per supputationes annorum regum Babyloniae, septuaginta hebdomadas usque ad nostri Redemptoris nativitatem, annis quadringentis nonaginta perduxit, sejungens septem in restaurationem templi hebdomadas quinquaginta septem usque ad Domini nativitatem et passionem ipsius, et unam vastationis quae facta est a Vespasiano duce cum Tito 123.0050D | filio ejus.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [],
+  "Author": [
+    {
+      "id": 47,
+      "value": "Ado, von Vienne"
+    }
+  ],
+  "work": [
+    {
+      "id": 58,
+      "order": "57.00000000000000000000",
+      "name": "Chronicon ",
+      "jad_id": "jad_work__58",
+      "author": [
+        {
+          "id": 47,
+          "order": "47.00000000000000000000",
+          "name": "Ado, von Vienne",
+          "jad_id": "jad_author__47",
+          "gnd_url": "https://d-nb.info/gnd/119536390",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Chronicon",
+      "genre": {
+        "id": 14731,
+        "value": "Chronicle",
+        "color": "red"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [
+    {
+      "id": 27,
+      "value": "Hieronymus, Sophronius Eusebius"
+    }
+  ],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 47,
+        "database_table_3499": 58
+      },
+      "value": "Ado, von Vienne"
+    }
+  ],
+  "prev": "jad_occurence__105.html",
+  "next": "jad_occurence__107.html",
+  "view_label": "unam vastationis quae facta est a Vespasiano duce cum Tito filio ejus"
+}

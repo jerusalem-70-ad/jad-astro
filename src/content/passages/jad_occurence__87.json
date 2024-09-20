@@ -1,0 +1,109 @@
+{
+  "id": 87,
+  "order": "87.00000000000000000000",
+  "passage": "Preterea Ierusalem a Romanis subuersa et tota regione uastata multa Iudeorum milia a uictoribus in Egipto sunt uendita",
+  "jad_id": "jad_occurence__87",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "",
+  "position_in_work_url": "",
+  "text_paragraph": "ET ERIT. Hoc scilicet quod in sequentibus dicitur eueniet: In die illa adiciet Dominus secundo manum suam etc. Cum sub |63v| Messia florebunt tempora, Dominus, qui potentiam suam exeruit quando populum suum de manu Pharaonis eripuit, adiciet iterum potentiam suam ad possidendas populi sui reliquias que relicte erunt ab his qui subiciuntur: ab Assyriis et ab Egipto et a Phretos etc. Ab Assyriis scimus X tribus non semel uastatas esse, et sub Osee totas simul abductas et in ciuitatibus Medorum collocatas. Sesac rex Egipti sub Roboam cepit Ierusalem et si quos uoluit se cum abduxit. Pharao Nechao Iosiam regem Iuda interfecit, et filium eius Ioachaz cum iam tribus mensibus regnasset et quos placuit cum illo asportauit. Preterea Ierusalem a Romanis subuersa et tota regione uastata multa Iudeorum milia a uictoribus in Egipto sunt uendita, unde et in alias que supponuntur nationes per distractionem deuenire poterant. Forsitan et a uictoribus ipsis predictarum regionum et ciuitatum negotiatoribus uenditi sunt. A quibus populis et nationibus multi Iudeorum relinquentur, qui ut putant in diebus sui messie a Domino possidebuntur.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [],
+  "Author": [
+    {
+      "id": 45,
+      "value": "Andreas, von Sankt Viktor"
+    }
+  ],
+  "work": [
+    {
+      "id": 54,
+      "order": "53.00000000000000000000",
+      "name": "Commentary Isaiah ",
+      "jad_id": "jad_work__54",
+      "author": [
+        {
+          "id": 45,
+          "order": "45.00000000000000000000",
+          "name": "Andreas, von Sankt Viktor",
+          "jad_id": "jad_author__45",
+          "gnd_url": "https://d-nb.info/gnd/119105098",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Commentary Isaiah",
+      "genre": {
+        "id": 14727,
+        "value": "Commentary",
+        "color": "darker-green"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [
+        {
+          "id": 12,
+          "order": "12.00000000000000000000",
+          "name": "St. Victor Paris",
+          "jad__id": "jad_institutional_context__12",
+          "part_of": [
+            {
+              "id": 1,
+              "order": "1.00000000000000000000",
+              "name": "University of Paris",
+              "jad__id": "jad_institutional_context__1",
+              "part_of": [
+                {
+                  "id": 16,
+                  "value": "French schools"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 7,
+          "order": "6.00000000000000000000",
+          "name": "Corpus Christianorum",
+          "jad_id": "jad_sources_occurrences__7",
+          "digi_url": ""
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 4,
+      "value": "Library of Latin Texts"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 45,
+        "database_table_3499": 54
+      },
+      "value": "Andreas, von Sankt Viktor"
+    }
+  ],
+  "prev": "jad_occurence__86.html",
+  "next": "jad_occurence__88.html",
+  "view_label": "Preterea Ierusalem a Romanis subuersa et tota regione uastata multa Iudeorum milia a uictoribus in Egipto sunt uendita"
+}

@@ -1,0 +1,109 @@
+{
+  "id": 88,
+  "order": "88.00000000000000000000",
+  "passage": "et uinitores et agrorum cultores de nobis habituri sint, et quod Romanos qui ceperant illos sue dicioni subicient",
+  "jad_id": "jad_occurence__88",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "",
+  "position_in_work_url": "",
+  "text_paragraph": "ET ADDVCENT EOS IN LOCVM SVVM. In carrucis et lecticis etc. ET POSSIDEBIT EOS DOMVS. Hoc sibi promittunt Iudei quod possessuri sunt gentes in seruos et ancillas, et uinitores et agrorum cultores de nobis habituri sint, et quod Romanos qui ceperant illos sue dicioni subicient. Filii quoque peregrinorum, gentes scilicet quelibet ut putant, muros illorum edificabunt, et illis omni opere seruili uacantibus tanquam sacerdotibus et Domini ministris in omnibus ministrabunt. EXACTORES. Vt supra. ET ERIT. Quod dicturus sum eueniet. IN DIE ILLA CVM REQVIEM etc. In die quo munere Domini cessaueris a labore, quo in Babilone seruiebas. ET A CONCUSSIONE TUA. A uexatione tua qua instar tritici in cribro undique uexabaris. ET A SERVITVTE. Effexegesis. SVMES PARABOLAM. Id est sumes similitudinarium istum sermonem. BACVLVM IMPIORVM VIRGAM. Baculum et uirgam uocat regem Babilonis, quia tanquam baculo et uirga ad quoscumque flagellare uolebat Dominus illo utebatur.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [],
+  "Author": [
+    {
+      "id": 45,
+      "value": "Andreas, von Sankt Viktor"
+    }
+  ],
+  "work": [
+    {
+      "id": 54,
+      "order": "53.00000000000000000000",
+      "name": "Commentary Isaiah ",
+      "jad_id": "jad_work__54",
+      "author": [
+        {
+          "id": 45,
+          "order": "45.00000000000000000000",
+          "name": "Andreas, von Sankt Viktor",
+          "jad_id": "jad_author__45",
+          "gnd_url": "https://d-nb.info/gnd/119105098",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Commentary Isaiah",
+      "genre": {
+        "id": 14727,
+        "value": "Commentary",
+        "color": "darker-green"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [
+        {
+          "id": 12,
+          "order": "12.00000000000000000000",
+          "name": "St. Victor Paris",
+          "jad__id": "jad_institutional_context__12",
+          "part_of": [
+            {
+              "id": 1,
+              "order": "1.00000000000000000000",
+              "name": "University of Paris",
+              "jad__id": "jad_institutional_context__1",
+              "part_of": [
+                {
+                  "id": 16,
+                  "value": "French schools"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 7,
+          "order": "6.00000000000000000000",
+          "name": "Corpus Christianorum",
+          "jad_id": "jad_sources_occurrences__7",
+          "digi_url": ""
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 4,
+      "value": "Library of Latin Texts"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 45,
+        "database_table_3499": 54
+      },
+      "value": "Andreas, von Sankt Viktor"
+    }
+  ],
+  "prev": "jad_occurence__87.html",
+  "next": "jad_occurence__89.html",
+  "view_label": "et uinitores et agrorum cultores de nobis habituri sint, et quod Romanos qui ceperant illos sue dicioni subicient"
+}

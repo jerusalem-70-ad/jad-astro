@@ -1,0 +1,207 @@
+{
+  "id": 18,
+  "order": "18.00000000000000000000",
+  "passage": "plenius complentur in Christo, urbe subversa Romano gladio; adduces super eos latronem repente, Nabuchodonosor, vel exercitum Romanorum",
+  "jad_id": "jad_occurence__18",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [
+    {
+      "id": 3,
+      "order": "3.00000000000000000000",
+      "name": [
+        {
+          "id": 3,
+          "value": "San Isidoro, MS 11"
+        }
+      ],
+      "jad_id": "jad_manuscript__3",
+      "library": [
+        {
+          "id": 3,
+          "order": "3.00000000000000000000",
+          "name": "San Isidoro (Kloster)",
+          "jad_id": "jad_library__3",
+          "gnd_url": "",
+          "abbreviation": "San Isidoro",
+          "place": [
+            {
+              "id": 2,
+              "order": "2.00000000000000000000",
+              "name": "León",
+              "geonames_url": "",
+              "jad_id": "jad_places__2"
+            }
+          ]
+        }
+      ],
+      "idno": "MS 11",
+      "catalog_url": "",
+      "digi_url": "",
+      "not_before": "1190",
+      "not_after": "1203",
+      "written_date": "1190-1203",
+      "institutional_context": [
+        {
+          "id": 7,
+          "order": "7.00000000000000000000",
+          "name": "Augustinian canons León",
+          "jad__id": "jad_institutional_context__7",
+          "part_of": [
+            {
+              "id": 8,
+              "order": "8.00000000000000000000",
+              "name": "Augustinian canons",
+              "jad__id": "jad_institutional_context__8",
+              "part_of": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "position_in_work": "Sermo 22",
+  "position_in_work_url": "",
+  "text_paragraph": "Sed adamas, qui ex eo quod indomitus sit et infrangibilis, hoc nomen accepit, tantum nitorem habet et levitatem, ut absque ullo impedimento scribi possit in eo stylo ferreo, ut dura ferri materies scribat in duriori tabula, et scriptura in aeternum maneat, secundum illud: Sanguis ejus super nos et super filios nostros (Matth. XXVII). Alibi etiam hic propheta in persona Christi ait: Attende, Domine, ad me, et audi voces adversariorum p. 0843C | meorum (Jer. XVIII). Judaeorum scilicet dicentium: Crucifige, crucifige eum (Luc. XXIII). In typo Salvatoris Jeremias a Judaeis universa perpessus est, qui postea, Babylonio rege veniente, vastantur; sed plenius complentur in Christo, urbe subversa Romano gladio. Nec etiam per idololatriam, quae tunc nulla erat; sed quia Dei Filio mortem inclamaverunt dicentes: Tolle, tolle. Talem non habemus regem, nisi Caesarem (Joan. XIX). Et imprecatio eorum in aeternum completur. Sanguis ejus videlicet super nos, et super filios nostros. Iterum dicit: Nunquid redditur pro bono malum, quia foderunt foveam, id est deceptionem, animae meae tollendae? Recordare quod steterim in conspectu tuo, ut loquerer pro eis bonum etc. (Jer. XVIII), Ac p. 0843D | si Christus Deo Patri loqueretur, dicens: Pater, ignosce eis; non enim sciunt quid faciunt (Luc. XXIII). Propterea da filios in famem et deduc eos in manus gladii: fiant uxores eorum absque liberis, et viduae et viri earum interficiantur morte (Jer. XVIII). p. 0844A | Manifesta transcurrimus, ut in obscuris immoremur. Non deliramenta quorumdam coelestis Jerusalem captivitatem interpretantes, sed perspicuam historiam et manifestissimam prophetiam omni verborum et sensuum confidentia prosequentes. Audiatur, inquit, clamor de domibus eorum, flentium videlicet et ullulantium; adduces super eos latronem repente, Nabuchodonosor, vel exercitum Romanorum: merito, quia foderunt foveam, ut caperent me, et laqueos absconderunt pedibus meis.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [
+    {
+      "id": 32,
+      "value": "Mt. 27,25"
+    },
+    {
+      "id": 35,
+      "value": "Lk. 23,21"
+    },
+    {
+      "id": 37,
+      "value": "Joh. 19,15"
+    },
+    {
+      "id": 44,
+      "value": "Jer. 18,21"
+    },
+    {
+      "id": 45,
+      "value": "Jer. 18,22"
+    },
+    {
+      "id": 46,
+      "value": "Lk. 23,34"
+    }
+  ],
+  "Author": [
+    {
+      "id": 2,
+      "value": "Martin, von León"
+    }
+  ],
+  "work": [
+    {
+      "id": 1,
+      "order": "1.00000000000000000000",
+      "name": "Liber Sermonum ",
+      "jad_id": "jad_work__1",
+      "author": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Martin, von León",
+          "jad_id": "jad_author__2",
+          "gnd_url": "https://d-nb.info/gnd/100953212",
+          "notes": null
+        }
+      ],
+      "manuscripts": [
+        {
+          "id": 3,
+          "value": "San Isidoro, MS 11"
+        }
+      ],
+      "title": "Liber Sermonum",
+      "genre": {
+        "id": 14726,
+        "value": "Sermons",
+        "color": "darker-pink"
+      },
+      "not_before": "1175",
+      "not_after": "1200",
+      "written_date": "late 12",
+      "notes": null,
+      "notes__author": null,
+      "institutional_context": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "University of Paris",
+          "jad__id": "jad_institutional_context__1",
+          "part_of": [
+            {
+              "id": 16,
+              "order": "16.00000000000000000000",
+              "name": "French schools",
+              "jad__id": "jad_institutional_context__16",
+              "part_of": []
+            }
+          ]
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [
+    {
+      "id": 27,
+      "value": "Hieronymus, Sophronius Eusebius"
+    },
+    {
+      "id": 46,
+      "value": "Glossa Ordinaria"
+    }
+  ],
+  "keywords": [],
+  "part_of_cluster": [
+    {
+      "id": 2,
+      "value": "Third Crusade"
+    }
+  ],
+  "authority_discourse": 0,
+  "liturgical_references": [
+    {
+      "id": 4,
+      "value": "Maundy Thursday"
+    }
+  ],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 2,
+        "database_table_3499": 1
+      },
+      "value": "Martin, von León"
+    }
+  ],
+  "prev": "jad_occurence__17.html",
+  "next": "jad_occurence__19.html",
+  "view_label": "plenius complentur in Christo, urbe subversa Romano gladio; adduces super eos latronem repente, Nabuchodonosor, vel exercitum Romanorum"
+}

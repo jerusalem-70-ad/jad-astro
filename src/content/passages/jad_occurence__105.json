@@ -1,0 +1,102 @@
+{
+  "id": 105,
+  "order": "105.00000000000000000000",
+  "passage": "Haec sub Tito filio Vespasiani accidisse populo Judaeorum",
+  "jad_id": "jad_occurence__105",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "",
+  "position_in_work_url": "",
+  "text_paragraph": "(Vers. 5.) Et corruet populus vir ad virum, unusquisque ad proximum suum: tumultuabitur puer contra senem, et ignobilis contra nobilem. Quando juvenes fuerint principes, et illusores Domini, quales propheticus sermo describit, tunc nec dignitatis, p. 0064B | nec aetatis, nec scientiae ullus ordo servabitur; sed rebellabunt pueri senibus, et ignobiles nobilibus, et mutuo corruent. Et implebitur illud Apostolicum: Mordentes invicem, consumpti estis ab invicem (Galat. V, 15). Haec sub Tito filio Vespasiani accidisse populo Judaeorum, scribit Josephus (Lib. V de Bello Jud.): et quod, cum expugnarentur a Romanis, fuerit Jerusalem in tres partes divisa seditio: et alii arcem et Templum, alii inferiorem, alii superiorem partem urbis tenuerint.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [
+    {
+      "id": 80,
+      "value": "Is. 3,5"
+    },
+    {
+      "id": 81,
+      "value": "Gal. 5,15"
+    }
+  ],
+  "Author": [
+    {
+      "id": 27,
+      "value": "Hieronymus, Sophronius Eusebius"
+    }
+  ],
+  "work": [
+    {
+      "id": 57,
+      "order": "56.00000000000000000000",
+      "name": "Commentary Isaiah ",
+      "jad_id": "jad_work__57",
+      "author": [
+        {
+          "id": 27,
+          "order": "27.00000000000000000000",
+          "name": "Hieronymus, Sophronius Eusebius",
+          "jad_id": "jad_author__27",
+          "gnd_url": "https://d-nb.info/gnd/118550853",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Commentary Isaiah",
+      "genre": {
+        "id": 14727,
+        "value": "Commentary",
+        "color": "darker-green"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "around 400",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [
+    {
+      "id": 26,
+      "value": "Josephus, Flavius"
+    }
+  ],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 27,
+        "database_table_3499": 57
+      },
+      "value": "Hieronymus, Sophronius Eusebius"
+    }
+  ],
+  "prev": "jad_occurence__104.html",
+  "next": "jad_occurence__106.html",
+  "view_label": "Haec sub Tito filio Vespasiani accidisse populo Judaeorum"
+}

@@ -1,0 +1,118 @@
+{
+  "id": 20,
+  "order": "20.00000000000000000000",
+  "passage": "tradens eos Romanis",
+  "jad_id": "jad_occurence__20",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "B3, Ch63",
+  "position_in_work_url": "",
+  "text_paragraph": "Non est putandum quod Deus omnipotens (qui incommutabilis est), furorem possit habere aut iram, sed more nostro loquitur Scriptura: quia illis videtur furere et iratus esse, quibus vindictam reddit. Sicut quilibet rex, licet tranquillo animo sit, iratus videtur illis quos jubet decollari vel occidi. Et hoc distat inter furorem 116.1054A | et iram, quia furor est subita animi turbatio, ira autem diu manet. Sed in Deo nihil horum habetur. Dicit ergo Dominus: Licet calcatus ab eis essem, tamen calcavi et superavi eos, id est daemones vel Judaeos in furore et vindicta mea. Et superavi eos in ira mea, auferens a daemonibus potestatem et dominium, quod exercebant in hoc mundo; et a Judaeis locum, regnum, gentem, sacerdotem, templum, omnemque dignitatem, tradens eos Romanis. « Et aspersus est sanguis eorum super vestimenta mea, et omnia indumenta mea inquinavi. » Non est nobis intelligendum quod daemones, qui spiritus sunt, habeant sanguinem: sed sanguis Christi, quem ipsi fuderunt suadendo Judaeis ut eum interficerent, sanguis eorum appellatur: quia vindictam exinde perceperunt. 116.1054B | Legimus enim in Evangelio, quod « diabolus misit Judae in cor, ut traderet eum (Joan. XIII).",
+  "note": "Buc",
+  "explicit_contemp_ref": "",
+  "biblical_references": [
+    {
+      "id": 57,
+      "value": "Is. 63"
+    },
+    {
+      "id": 59,
+      "value": "Joh. 13,2"
+    }
+  ],
+  "Author": [
+    {
+      "id": 25,
+      "value": "Haimo, von Auxerre"
+    }
+  ],
+  "work": [
+    {
+      "id": 26,
+      "order": "26.00000000000000000000",
+      "name": "Commentary Isaiah ",
+      "jad_id": "jad_work__26",
+      "author": [
+        {
+          "id": 25,
+          "order": "25.00000000000000000000",
+          "name": "Haimo, von Auxerre",
+          "jad_id": "jad_author__25",
+          "gnd_url": "https://d-nb.info/gnd/100945260",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Commentary Isaiah",
+      "genre": {
+        "id": 14727,
+        "value": "Commentary",
+        "color": "darker-green"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Benedictines Auxerre",
+          "jad__id": "jad_institutional_context__2",
+          "part_of": [
+            {
+              "id": 3,
+              "order": "3.00000000000000000000",
+              "name": "Benedictines",
+              "jad__id": "jad_institutional_context__3",
+              "part_of": []
+            }
+          ]
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [
+    {
+      "id": 26,
+      "value": "Josephus, Flavius"
+    }
+  ],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 10,
+      "value": "Secondary literature"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 25,
+        "database_table_3499": 26
+      },
+      "value": "Haimo, von Auxerre"
+    }
+  ],
+  "prev": "jad_occurence__2.html",
+  "next": "jad_occurence__21.html",
+  "view_label": "tradens eos Romanis"
+}

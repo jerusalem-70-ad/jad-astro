@@ -1,0 +1,167 @@
+{
+  "id": 6,
+  "order": "6.00000000000000000000",
+  "passage": "romanis obsidentibus civitatem",
+  "jad_id": "jad_occurence__6",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [
+    {
+      "id": 6,
+      "order": "6.00000000000000000000",
+      "name": [
+        {
+          "id": 2,
+          "value": "BNF, Latin 492"
+        }
+      ],
+      "jad_id": "jad_manuscript__6",
+      "library": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Bibliothèque Nationale de France",
+          "jad_id": "jad_library__2",
+          "gnd_url": "https://d-nb.info/gnd/5156217-0",
+          "abbreviation": "BNF",
+          "place": [
+            {
+              "id": 1,
+              "order": "1.00000000000000000000",
+              "name": "Paris",
+              "geonames_url": "https://www.geonames.org/2988507/paris.html",
+              "jad_id": "jad_places__1"
+            }
+          ]
+        }
+      ],
+      "idno": "Latin 492",
+      "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc619341",
+      "digi_url": "",
+      "not_before": null,
+      "not_after": null,
+      "written_date": null,
+      "institutional_context": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "University of Paris",
+          "jad__id": "jad_institutional_context__1",
+          "part_of": [
+            {
+              "id": 16,
+              "order": "16.00000000000000000000",
+              "name": "French schools",
+              "jad__id": "jad_institutional_context__16",
+              "part_of": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "position_in_work": "",
+  "position_in_work_url": "",
+  "text_paragraph": "",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [],
+  "Author": [
+    {
+      "id": 10,
+      "value": "Langton, Stephen"
+    }
+  ],
+  "work": [
+    {
+      "id": 11,
+      "order": "11.00000000000000000000",
+      "name": "Commentary Isaiah ",
+      "jad_id": "jad_work__11",
+      "author": [
+        {
+          "id": 10,
+          "order": "10.00000000000000000000",
+          "name": "Langton, Stephen",
+          "jad_id": "jad_author__10",
+          "gnd_url": "https://d-nb.info/gnd/118778714",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [
+        {
+          "id": 6,
+          "value": "BNF, Latin 492"
+        },
+        {
+          "id": 7,
+          "value": "Maz., MS 177"
+        }
+      ],
+      "title": "Commentary Isaiah",
+      "genre": {
+        "id": 14727,
+        "value": "Commentary",
+        "color": "darker-green"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "University of Paris",
+          "jad__id": "jad_institutional_context__1",
+          "part_of": [
+            {
+              "id": 16,
+              "order": "16.00000000000000000000",
+              "name": "French schools",
+              "jad__id": "jad_institutional_context__16",
+              "part_of": []
+            }
+          ]
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "None",
+          "jad_id": "jad_sources_occurrences__1",
+          "digi_url": ""
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "115r",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 9,
+      "value": "Manuscript"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 10,
+        "database_table_3499": 11
+      },
+      "value": "Langton, Stephen"
+    }
+  ],
+  "prev": "jad_occurence__59.html",
+  "next": "jad_occurence__60.html",
+  "view_label": "romanis obsidentibus civitatem"
+}

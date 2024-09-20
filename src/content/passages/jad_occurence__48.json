@@ -1,0 +1,88 @@
+{
+  "id": 48,
+  "order": "48.00000000000000000000",
+  "passage": "destructionem a Tito et Vespasiano factam",
+  "jad_id": "jad_occurence__48",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "Ch55",
+  "position_in_work_url": "",
+  "text_paragraph": "Primo enim vocata est Iebus, postea Salem, ex quibus duobus vocabulis nomen tertium habet Hierusalem. Dicitur etiam Solyma ex Hierosolyma, Luza et Bethel. Ad ultimum dicta est Helya ab Helio, questore romano, qui eam in loco in quo modo est post destructionem a Tito et Vespasiano factam reedificavit. Primus eius episcopus fuit apostolus Iacobus qui | pertica fullonis in Hierusalem percussus martyrio transivit ad Dominum. Post hunc usque ad tempora Iustiniani imperatoris non nisi simplices habuit episcopos, nulla maioris dignitatis prerogativa preeminentes.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [],
+  "Author": [
+    {
+      "id": 35,
+      "value": "Jakob, von Vitry"
+    }
+  ],
+  "work": [
+    {
+      "id": 38,
+      "order": "38.00000000000000000000",
+      "name": "Historia Orientalis ",
+      "jad_id": "jad_work__38",
+      "author": [
+        {
+          "id": 35,
+          "order": "35.00000000000000000000",
+          "name": "Jakob, von Vitry",
+          "jad_id": "jad_author__35",
+          "gnd_url": "https://d-nb.info/gnd/118711563",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Historia Orientalis",
+      "genre": {
+        "id": 14731,
+        "value": "Chronicle",
+        "color": "red"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "early 13",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [],
+      "published_edition": [
+        {
+          "id": 7,
+          "order": "6.00000000000000000000",
+          "name": "Corpus Christianorum",
+          "jad_id": "jad_sources_occurrences__7",
+          "digi_url": ""
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 4,
+      "value": "Library of Latin Texts"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 35,
+        "database_table_3499": 38
+      },
+      "value": "Jakob, von Vitry"
+    }
+  ],
+  "prev": "jad_occurence__47.html",
+  "next": "jad_occurence__49.html",
+  "view_label": "destructionem a Tito et Vespasiano factam"
+}

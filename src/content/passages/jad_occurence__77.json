@@ -1,0 +1,178 @@
+{
+  "id": 77,
+  "order": "77.00000000000000000000",
+  "passage": "Et dabit impios Judaeos scilicet Romanis, pro sepultura",
+  "jad_id": "jad_occurence__77",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [
+    {
+      "id": 3,
+      "order": "3.00000000000000000000",
+      "name": [
+        {
+          "id": 3,
+          "value": "San Isidoro, MS 11"
+        }
+      ],
+      "jad_id": "jad_manuscript__3",
+      "library": [
+        {
+          "id": 3,
+          "order": "3.00000000000000000000",
+          "name": "San Isidoro (Kloster)",
+          "jad_id": "jad_library__3",
+          "gnd_url": "",
+          "abbreviation": "San Isidoro",
+          "place": [
+            {
+              "id": 2,
+              "order": "2.00000000000000000000",
+              "name": "León",
+              "geonames_url": "",
+              "jad_id": "jad_places__2"
+            }
+          ]
+        }
+      ],
+      "idno": "MS 11",
+      "catalog_url": "",
+      "digi_url": "",
+      "not_before": "1190",
+      "not_after": "1203",
+      "written_date": "1190-1203",
+      "institutional_context": [
+        {
+          "id": 7,
+          "order": "7.00000000000000000000",
+          "name": "Augustinian canons León",
+          "jad__id": "jad_institutional_context__7",
+          "part_of": [
+            {
+              "id": 8,
+              "order": "8.00000000000000000000",
+              "name": "Augustinian canons",
+              "jad__id": "jad_institutional_context__8",
+              "part_of": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "position_in_work": "Sermo 23",
+  "position_in_work_url": "",
+  "text_paragraph": "Sequitur: Et dabit impios Judaeos scilicet Romanis, pro sepultura: et quia usque ad mortem persecuti sunt eum, et munierunt sepulcrum ejus signantes lapidem cum custodibus (Matth. XXVII); et divites dabit pro morte sua, Scribas videlicet et Pharisaeos doctrinae legis divitiis gloriantes, quia morti tradiderunt eum. Aliter: Dabit impios pro morte sua, gentes scilicet, quae sine pietate Deo Patri, quia mortuus et sepultus eas acquisivit; et divites, Judaeos videlicet divitiis legis et prophetarum p. 0905A | gloriantes.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [
+    {
+      "id": 72,
+      "value": "Mt. 27,66"
+    }
+  ],
+  "Author": [
+    {
+      "id": 2,
+      "value": "Martin, von León"
+    }
+  ],
+  "work": [
+    {
+      "id": 1,
+      "order": "1.00000000000000000000",
+      "name": "Liber Sermonum ",
+      "jad_id": "jad_work__1",
+      "author": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Martin, von León",
+          "jad_id": "jad_author__2",
+          "gnd_url": "https://d-nb.info/gnd/100953212",
+          "notes": null
+        }
+      ],
+      "manuscripts": [
+        {
+          "id": 3,
+          "value": "San Isidoro, MS 11"
+        }
+      ],
+      "title": "Liber Sermonum",
+      "genre": {
+        "id": 14726,
+        "value": "Sermons",
+        "color": "darker-pink"
+      },
+      "not_before": "1175",
+      "not_after": "1200",
+      "written_date": "late 12",
+      "notes": null,
+      "notes__author": null,
+      "institutional_context": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "University of Paris",
+          "jad__id": "jad_institutional_context__1",
+          "part_of": [
+            {
+              "id": 16,
+              "order": "16.00000000000000000000",
+              "name": "French schools",
+              "jad__id": "jad_institutional_context__16",
+              "part_of": []
+            }
+          ]
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [
+    {
+      "id": 2,
+      "value": "Third Crusade"
+    }
+  ],
+  "authority_discourse": 0,
+  "liturgical_references": [
+    {
+      "id": 4,
+      "value": "Maundy Thursday"
+    }
+  ],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 2,
+        "database_table_3499": 1
+      },
+      "value": "Martin, von León"
+    }
+  ],
+  "prev": "jad_occurence__76.html",
+  "next": "jad_occurence__78.html",
+  "view_label": "Et dabit impios Judaeos scilicet Romanis, pro sepultura"
+}

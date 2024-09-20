@@ -1,7 +1,12 @@
 ---
 import PageLayout from "../../layouts/page-layout.astro";
 import { getCollection } from "astro:content";
+const collection = await getCollection("passages")
 
+let sortedPassages = collection.sort((a, b) => {
+  // Convert the substring to a number and compare
+  return parseInt(a.data.jad_id.substring(15)) - parseInt(b.data.jad_id.substring(15));
+});
 
 // make a function to read the collection; 'export' make the function available for Astro'S static site generation. 
 
@@ -17,58 +22,76 @@ export async function getStaticPaths() {
 const { data: passage } = Astro.props;
 ---
 <PageLayout>
-   <div>
-    <article class="border-2 rounded-md border-brand900 bg-brand100 w-3/4 grid grid-cols-1 mx-auto p-5 my-3">
-        <h1 class="text-xl py-3 mx-auto">({passage.id}) {passage.passage}</h1>
-        <dl class="grid grid-cols-[1fr_5fr] gap-2 text-sm">
-                                 
-            <dt class="font-semibold">Author:</dt>
-            <dd>{passage.Author[0]?.value ?? 'N/A'}</dd>
-           
-            <dt class="font-semibold">Work:</dt>
-            <dd>{passage.work[0]?.name ?? 'N/A'}</dd>
-            
-            <dt class="font-semibold">Position in work</dt>
-            <dd>{passage?.position_in_work ?? 'N/A'}</dd>
-            
-            <dt class="font-semibold">Manuscripts:</dt>
-            <!-- this is an array - need to call .map to return an array of strings with the jad_id; outside the .map call .join() But first checek if it is empty-->
-            <dd>
-                {passage.manuscript.length > 0
-                ? passage.manuscript.map((ms: { jad_id: any; name : any; }) => <a href={`/manuscripts/${ms.jad_id}`} class="hover:text-brand600">{ms.name[0].value}</a> )
-                : 'N/A'}
-            </dd>    
-      
-
-            <dt class="font-semibold">Biblical references:</dt>
-            <dd>{passage.biblical_references?.map((reference: { value: any; }) => {
-                return reference.value
-                }).join(', ')
-            }</dd>
-
-            <dt class="font-semibold">Liturgical references:</dt>
-            <dd>
-                {passage.liturgical_references.length > 0 
-                  ? passage.liturgical_references.map((reference: { value: any }) => reference.value).join(', ') 
-                  : 'N/A'}
-            </dd>              
-
-            <dt class="font-semibold">Full text:</dt>
-            <dd>{passage?.text_paragraph ?? 'N/A'}</dd>
-
-            <dt class="font-semibold">Passage found in:</dt>
-            <dd>
-                {passage.occurrence_found_in.length > 0
-                ? passage.occurrence_found_in.map((find : { value : any; }) => {
-                    return find.value
-                }).join(', ') : 'N/A'}
-            </dd>
-           
-           
-        </dl>
-       
-
-</article>
+   <div class="grid grid-cols-[1fr_4fr] gap-2">
+    <aside class="border-2 border-r-brand900 bg-brand100 w-full py-5 px-6 max-h-screen overflow-scroll">
+        <ul>
+              
+            {sortedPassages.map((passage) => {
+                return (
+                    <li class="list-disc overflow-hidden whitespace-nowrap text-ellipsis max-w-xs hover:text-wrap">                     
+                       <a href={passage.data.jad_id} class="hover:text-brand">({passage.data.jad_id.substring(15)}) <span class="italic">{passage.data.passage}</span></a>                                                        
+                    </li>)
+            })}
+        </ul>      
+    </aside>
+    <div>
+        <div class="border-2 rounded-sm border-brand900 bg-brand100 m-5 grid p-5">
+            <h1 class="text-xl py-3 mx-auto font-medium">({passage.id}) <span class="italic">{passage.passage}</span></h1>
+            <dl class="grid grid-cols-[1fr_5fr] gap-2 text-sm">
+        
+                <dt class="font-semibold">Author:</dt>
+                <dd>{passage.Author[0]?.value ?? 'N/A'}</dd>
+        
+                <dt class="font-semibold">Work:</dt>
+                <dd>{passage.work[0]?.name ?? 'N/A'}</dd>
+        
+                <dt class="font-semibold">Position in work</dt>
+                <dd>{passage?.position_in_work ?? 'N/A'}</dd>
+        
+                <dt class="font-semibold">Manuscripts:</dt>
+                <!-- this is an array - need to call .map to return an array of strings with the jad_id; outside the .map call .join() But first checek if it is empty-->
+               
+                <dd>
+                    {
+                        passage.manuscript.map((ms: { jad_id: string; name: any;}, index: number) => (
+                          <>
+                            <a href={`/manuscripts/${ms.jad_id}`} class="hover:text-brand600">
+                              {ms.name[0].value}
+                            </a>
+                            {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
+                            {index < passage.manuscript.length - 1 && ', '}
+                          </>
+                        ))
+                      }
+                </dd>
+        
+                <dt class="font-semibold">Biblical references:</dt>
+                <dd>
+                    {passage.biblical_references.length > 0
+                    ? passage.biblical_references.map((reference: { value : any; }) => reference.value).join(', ')
+                    : 'N/A'}
+                </dd>
+                <dt class="font-semibold">Liturgical references:</dt>
+                <dd>
+                    {passage.liturgical_references.length > 0
+                      ? passage.liturgical_references.map((reference: { value: any }) => reference.value).join(', ')
+                      : 'N/A'}
+                </dd>
+                <dt class="font-semibold">Full text:</dt>
+                <dd>{passage?.text_paragraph ?? 'N/A'}</dd>
+                <dt class="font-semibold">Passage found in:</dt>
+                <dd>
+                    {passage.occurrence_found_in.length > 0
+                    ? passage.occurrence_found_in.map((find : { value : any; }) => {
+                        return find.value
+                    }).join(', ') : 'N/A'}
+                </dd>
+        
+        
+            </dl>
+        
+        </div>
+    </div>
 
    </div>
 </PageLayout>

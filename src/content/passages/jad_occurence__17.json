@@ -1,0 +1,250 @@
+{
+  "id": 17,
+  "order": "17.00000000000000000000",
+  "passage": "Si referamus tempora Nabuchodonosor, tempora Seva cherub, Titi quoque et Vespasiani, non dubitamus quia terrena Sion multoties capta et destructa et reaedificata est.",
+  "jad_id": "jad_occurence__17",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [
+    {
+      "id": 13,
+      "order": "13.00000000000000000000",
+      "name": [
+        {
+          "id": 7,
+          "value": "BL, Arundel 322"
+        }
+      ],
+      "jad_id": "jad_manuscript__13",
+      "library": [
+        {
+          "id": 7,
+          "order": "7.00000000000000000000",
+          "name": "British Library",
+          "jad_id": "jad_library__7",
+          "gnd_url": "https://d-nb.info/gnd/1023420-2",
+          "abbreviation": "BL",
+          "place": []
+        }
+      ],
+      "idno": "Arundel 322",
+      "catalog_url": "",
+      "digi_url": "",
+      "not_before": null,
+      "not_after": null,
+      "written_date": null,
+      "institutional_context": []
+    },
+    {
+      "id": 14,
+      "order": "14.00000000000000000000",
+      "name": [
+        {
+          "id": 7,
+          "value": "BL, Royal 8 F XVII"
+        }
+      ],
+      "jad_id": "jad_manuscript__14",
+      "library": [
+        {
+          "id": 7,
+          "order": "7.00000000000000000000",
+          "name": "British Library",
+          "jad_id": "jad_library__7",
+          "gnd_url": "https://d-nb.info/gnd/1023420-2",
+          "abbreviation": "BL",
+          "place": []
+        }
+      ],
+      "idno": "Royal 8 F XVII",
+      "catalog_url": "",
+      "digi_url": "",
+      "not_before": null,
+      "not_after": null,
+      "written_date": null,
+      "institutional_context": []
+    }
+  ],
+  "position_in_work": "Sermo 39",
+  "position_in_work_url": "",
+  "text_paragraph": "Benigne fac, Domine, in bona voluntate tua Sion, ut aedificentur muri Jerusalem. Si referamus tempora Nabuchodonosor, tempora Seva cherub, Titi quoque et Vespasiani, non dubitamus quia terrena Sion multoties capta et destructa et reaedificata est. Et ne ad veteres historias nos ire oporteat, in promptu est destructio illius civitatis facta tempore papae Urbani secundi, regnante rege Francorum Philippo. Sed nunc, culpis nostris exigentibus, haec novissima captio et destructio facta est sub Urbano papa tertio, et sub alio Philippo rege Francorum. Sed est alia Jerusalem superna, et coelestis illa, quae est mater nostra, cujus muri in ruina, et lapsu Luciferi atque complicum p. 0677D | ejus, ex parte non modica corruerunt.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [
+    {
+      "id": 41,
+      "value": "Gal. 4,26"
+    },
+    {
+      "id": 42,
+      "value": "Ps. 51,20"
+    }
+  ],
+  "Author": [
+    {
+      "id": 1,
+      "value": "Petrus, von Blois"
+    }
+  ],
+  "work": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Sermones ",
+      "jad_id": "jad_work__2",
+      "author": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "Petrus, von Blois",
+          "jad_id": "jad_author__1",
+          "gnd_url": "https://d-nb.info/gnd/118923927",
+          "notes": null
+        }
+      ],
+      "manuscripts": [
+        {
+          "id": 12,
+          "value": "St.Gen., MS 2787"
+        },
+        {
+          "id": 13,
+          "value": "BL, Arundel 322"
+        },
+        {
+          "id": 14,
+          "value": "BL, Royal 8 F XVII"
+        }
+      ],
+      "title": "Sermones",
+      "genre": {
+        "id": 14726,
+        "value": "Sermons",
+        "color": "darker-pink"
+      },
+      "not_before": "1175",
+      "not_after": "1200",
+      "written_date": "late 12",
+      "notes": null,
+      "notes__author": null,
+      "institutional_context": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "University of Paris",
+          "jad__id": "jad_institutional_context__1",
+          "part_of": [
+            {
+              "id": 16,
+              "order": "16.00000000000000000000",
+              "name": "French schools",
+              "jad__id": "jad_institutional_context__16",
+              "part_of": []
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "order": "6.00000000000000000000",
+          "name": "See of Canterbury",
+          "jad__id": "jad_institutional_context__6",
+          "part_of": []
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [
+    {
+      "id": 29,
+      "value": "non detectable"
+    }
+  ],
+  "keywords": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Third Crusade",
+      "short_description": "",
+      "jad_id": "jad_keyword__2",
+      "part_of": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "Crusades",
+          "short_description": "An occurrence appearing either in a crusade-specific source, or in a text by an author of whom we know that he was active in the crusades, or a text that we can otherwise relate to this phenomenon.",
+          "jad_id": "jad_keyword__1",
+          "part_of": []
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "order": "5.00000000000000000000",
+      "name": "Preaching",
+      "short_description": "",
+      "jad_id": "jad_keyword__5",
+      "part_of": []
+    },
+    {
+      "id": 9,
+      "order": "9.00000000000000000000",
+      "name": "First Crusade",
+      "short_description": "",
+      "jad_id": "jad_keyword__9",
+      "part_of": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "Crusades",
+          "short_description": "An occurrence appearing either in a crusade-specific source, or in a text by an author of whom we know that he was active in the crusades, or a text that we can otherwise relate to this phenomenon.",
+          "jad_id": "jad_keyword__1",
+          "part_of": []
+        }
+      ]
+    }
+  ],
+  "part_of_cluster": [
+    {
+      "id": 2,
+      "value": "Third Crusade"
+    }
+  ],
+  "authority_discourse": 0,
+  "liturgical_references": [
+    {
+      "id": 7,
+      "value": "Feast of Archangel Michael"
+    }
+  ],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 1,
+        "database_table_3499": 2
+      },
+      "value": "Petrus, von Blois"
+    }
+  ],
+  "prev": "jad_occurence__16.html",
+  "next": "jad_occurence__18.html",
+  "view_label": "Si referamus tempora Nabuchodonosor, tempora Seva cherub, Titi quoque et Vespasiani, non dubitamus quia terrena Sion multoties capta et destructa et reaedificata est."
+}

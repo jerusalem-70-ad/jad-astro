@@ -1,0 +1,93 @@
+{
+  "id": 114,
+  "order": "114.00000000000000000000",
+  "passage": "Titus Vespasiani filius, Jerosolymis subversis",
+  "jad_id": "jad_occurence__114",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "",
+  "position_in_work_url": "",
+  "text_paragraph": "Omnes, id est, tam paganos quam Judaeos, quoniam omnia temporalia communiter concessit. Maxime autem, id est, qui unius sunt religionis, devotionis et fidei nobiscum, et tuam familiam, et unumquemque in suo ordine. Haec enim doctrina apostolica non est parvipendenda, sed summopere appetenda. Debet enim unusquisque sollicitus esse laborare, ne tempus indultum atque a Deo concessum perdat, vacans otio. Nam adeo studiosi fuerunt quidam paganorum, ut doluissent se unum perdidisse diem. Fertur enim Titus Vespasiani filius, Jerosolymis subversis, victor Romam revertens, quadam nocte dixisse suis in coena: O amici, perdidi diem. Si ille qui paganus erat, non habens legem neque prophetas, dolebat 134.0544D | se perdidisse diem in quo non aliquid pro stabilitate regni aut gente laborasset, qua fronte tu, qui Christianus es?",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [],
+  "Author": [
+    {
+      "id": 50,
+      "value": "Atto, von Vercelli"
+    }
+  ],
+  "work": [
+    {
+      "id": 62,
+      "order": "61.00000000000000000000",
+      "name": "Expositio epistolarum S. Pauli ",
+      "jad_id": "jad_work__62",
+      "author": [
+        {
+          "id": 50,
+          "order": "50.00000000000000000000",
+          "name": "Atto, von Vercelli",
+          "jad_id": "jad_author__50",
+          "gnd_url": "https://d-nb.info/gnd/100936989",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Expositio epistolarum S. Pauli",
+      "genre": {
+        "id": 14727,
+        "value": "Commentary",
+        "color": "darker-green"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [
+    {
+      "id": 27,
+      "value": "Hieronymus, Sophronius Eusebius"
+    }
+  ],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 50,
+        "database_table_3499": 62
+      },
+      "value": "Atto, von Vercelli"
+    }
+  ],
+  "prev": "jad_occurence__113.html",
+  "next": "jad_occurence__115.html",
+  "view_label": "Titus Vespasiani filius, Jerosolymis subversis"
+}

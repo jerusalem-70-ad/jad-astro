@@ -1,0 +1,123 @@
+{
+  "id": 16,
+  "order": "16.00000000000000000000",
+  "passage": "Anno post passionem Domini quadragesimo secundo, Titus, quem pater Vespasianus romam reversus in obsidione Ierosolimorum iudeorum dilaniavit populum, in tantum ut Iosephus commemorat",
+  "jad_id": "jad_occurence__16",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [
+    {
+      "id": 4,
+      "order": "4.00000000000000000000",
+      "name": [
+        {
+          "id": 2,
+          "value": "BNF, Latin 8865"
+        }
+      ],
+      "jad_id": "jad_manuscript__4",
+      "library": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Bibliothèque Nationale de France",
+          "jad_id": "jad_library__2",
+          "gnd_url": "https://d-nb.info/gnd/5156217-0",
+          "abbreviation": "BNF",
+          "place": [
+            {
+              "id": 1,
+              "order": "1.00000000000000000000",
+              "name": "Paris",
+              "geonames_url": "https://www.geonames.org/2988507/paris.html",
+              "jad_id": "jad_places__1"
+            }
+          ]
+        }
+      ],
+      "idno": "Latin 8865",
+      "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc623934",
+      "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b6000541b",
+      "not_before": null,
+      "not_after": null,
+      "written_date": null,
+      "institutional_context": []
+    }
+  ],
+  "position_in_work": "",
+  "position_in_work_url": "",
+  "text_paragraph": "",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [],
+  "Author": [
+    {
+      "id": 7,
+      "value": "Lambertus, Sancti Bertini"
+    }
+  ],
+  "work": [
+    {
+      "id": 7,
+      "order": "7.00000000000000000000",
+      "name": "Liber Floridus ",
+      "jad_id": "jad_work__7",
+      "author": [
+        {
+          "id": 7,
+          "order": "7.00000000000000000000",
+          "name": "Lambertus, Sancti Bertini",
+          "jad_id": "jad_author__7",
+          "gnd_url": "https://d-nb.info/gnd/102511721",
+          "notes": "same as Lambertus de Sancto-Audomaro"
+        }
+      ],
+      "manuscripts": [
+        {
+          "id": 4,
+          "value": "BNF, Latin 8865"
+        }
+      ],
+      "title": "Liber Floridus",
+      "genre": {
+        "id": 14732,
+        "value": "Idiosyncratic work",
+        "color": "dark-red"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [],
+      "published_edition": []
+    }
+  ],
+  "position_in_ms": "86r",
+  "sources_used": [
+    {
+      "id": 26,
+      "value": "Josephus, Flavius"
+    }
+  ],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 7,
+        "database_table_3499": 7
+      },
+      "value": "Lambertus, Sancti Bertini"
+    }
+  ],
+  "prev": "jad_occurence__15.html",
+  "next": "jad_occurence__17.html",
+  "view_label": "Anno post passionem Domini quadragesimo secundo, Titus, quem pater Vespasianus romam reversus in obsidione Ierosolimorum iudeorum dilaniavit populum, in tantum ut Iosephus commemorat"
+}

@@ -1,0 +1,227 @@
+{
+  "id": 30,
+  "order": "30.00000000000000000000",
+  "passage": "hec destructio ab imperatoribus romanis a tyto et vaspasiano ob perfidiam Iudeorum",
+  "jad_id": "jad_occurence__30",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [
+    {
+      "id": 24,
+      "order": "24.00000000000000000000",
+      "name": [
+        {
+          "id": 5,
+          "value": "Maz., MS 999"
+        }
+      ],
+      "jad_id": "jad_manuscript__24",
+      "library": [
+        {
+          "id": 5,
+          "order": "5.00000000000000000000",
+          "name": "Bibliothèque Mazarine",
+          "jad_id": "jad_library__5",
+          "gnd_url": "https://d-nb.info/gnd/803245-2",
+          "abbreviation": "Maz.",
+          "place": []
+        }
+      ],
+      "idno": "MS 999",
+      "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA14392",
+      "digi_url": "",
+      "not_before": null,
+      "not_after": null,
+      "written_date": null,
+      "institutional_context": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "University of Paris",
+          "jad__id": "jad_institutional_context__1",
+          "part_of": [
+            {
+              "id": 16,
+              "order": "16.00000000000000000000",
+              "name": "French schools",
+              "jad__id": "jad_institutional_context__16",
+              "part_of": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 30,
+      "order": "30.00000000000000000000",
+      "name": [
+        {
+          "id": 2,
+          "value": "BNF, Latin 14937"
+        }
+      ],
+      "jad_id": "jad_manuscript__30",
+      "library": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Bibliothèque Nationale de France",
+          "jad_id": "jad_library__2",
+          "gnd_url": "https://d-nb.info/gnd/5156217-0",
+          "abbreviation": "BNF",
+          "place": [
+            {
+              "id": 1,
+              "order": "1.00000000000000000000",
+              "name": "Paris",
+              "geonames_url": "https://www.geonames.org/2988507/paris.html",
+              "jad_id": "jad_places__1"
+            }
+          ]
+        }
+      ],
+      "idno": "Latin 14937",
+      "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc756668",
+      "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b52508765g",
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "institutional_context": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "University of Paris",
+          "jad__id": "jad_institutional_context__1",
+          "part_of": [
+            {
+              "id": 16,
+              "order": "16.00000000000000000000",
+              "name": "French schools",
+              "jad__id": "jad_institutional_context__16",
+              "part_of": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "position_in_work": "",
+  "position_in_work_url": "",
+  "text_paragraph": "",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [
+    {
+      "id": 1,
+      "value": "Lk. 19,41"
+    }
+  ],
+  "Author": [
+    {
+      "id": 13,
+      "value": "Maurice, de Sully"
+    }
+  ],
+  "work": [
+    {
+      "id": 23,
+      "order": "23.00000000000000000000",
+      "name": "Sermones ",
+      "jad_id": "jad_work__23",
+      "author": [
+        {
+          "id": 13,
+          "order": "13.00000000000000000000",
+          "name": "Maurice, de Sully",
+          "jad_id": "jad_author__13",
+          "gnd_url": "https://d-nb.info/gnd/118924141",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [
+        {
+          "id": 24,
+          "value": "Maz., MS 999"
+        }
+      ],
+      "title": "Sermones",
+      "genre": {
+        "id": 14726,
+        "value": "Sermons",
+        "color": "darker-pink"
+      },
+      "not_before": "1160",
+      "not_after": "1170",
+      "written_date": "1160s",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "University of Paris",
+          "jad__id": "jad_institutional_context__1",
+          "part_of": [
+            {
+              "id": 16,
+              "order": "16.00000000000000000000",
+              "name": "French schools",
+              "jad__id": "jad_institutional_context__16",
+              "part_of": []
+            }
+          ]
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "None",
+          "jad_id": "jad_sources_occurrences__1",
+          "digi_url": ""
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "38v; 46v",
+  "sources_used": [],
+  "keywords": [
+    {
+      "id": 3,
+      "order": "3.00000000000000000000",
+      "name": "Anti-Judaism",
+      "short_description": "",
+      "jad_id": "jad_keyword__3",
+      "part_of": []
+    }
+  ],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [
+    {
+      "id": 1,
+      "value": "X Sunday after Holy Trinity"
+    }
+  ],
+  "occurrence_found_in": [
+    {
+      "id": 9,
+      "value": "Manuscript"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 13,
+        "database_table_3499": 23
+      },
+      "value": "Maurice, de Sully"
+    }
+  ],
+  "prev": "jad_occurence__3.html",
+  "next": "jad_occurence__31.html",
+  "view_label": "hec destructio ab imperatoribus romanis a tyto et vaspasiano ob perfidiam Iudeorum"
+}

@@ -1,0 +1,104 @@
+{
+  "id": 22,
+  "order": "22.00000000000000000000",
+  "passage": "contriti sunt advenientibus Romanis",
+  "jad_id": "jad_occurence__22",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "",
+  "position_in_work_url": "",
+  "text_paragraph": "« Ecce Dominus Deus auxiliator meus, quis est ex vobis qui condemnet me? » Nullus potest me condemnare. « Ecce omnes Judaei, qui mihi contradicunt, quasi vestimentum conterentur, tinea comedet eos, » id est propria conscientia. Sicut vestimentum duobus modis consumitur, vetustate temporis, et tinea: ita illi quia tempore quadraginta annorum p. 0974C | sibi dato ad poenitentiam noluerunt converti, contriti sunt advenientibus Romanis, et in ipsa tribulatione propria conscientia torquebantur eo quod non credidissent in Christo. Vel etiam modo positi in poenis inferni, recordatione propriae conscientiae torquentur.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [],
+  "Author": [
+    {
+      "id": 25,
+      "value": "Haimo, von Auxerre"
+    }
+  ],
+  "work": [
+    {
+      "id": 26,
+      "order": "26.00000000000000000000",
+      "name": "Commentary Isaiah ",
+      "jad_id": "jad_work__26",
+      "author": [
+        {
+          "id": 25,
+          "order": "25.00000000000000000000",
+          "name": "Haimo, von Auxerre",
+          "jad_id": "jad_author__25",
+          "gnd_url": "https://d-nb.info/gnd/100945260",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Commentary Isaiah",
+      "genre": {
+        "id": 14727,
+        "value": "Commentary",
+        "color": "darker-green"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Benedictines Auxerre",
+          "jad__id": "jad_institutional_context__2",
+          "part_of": [
+            {
+              "id": 3,
+              "order": "3.00000000000000000000",
+              "name": "Benedictines",
+              "jad__id": "jad_institutional_context__3",
+              "part_of": []
+            }
+          ]
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 25,
+        "database_table_3499": 26
+      },
+      "value": "Haimo, von Auxerre"
+    }
+  ],
+  "prev": "jad_occurence__21.html",
+  "next": "jad_occurence__23.html",
+  "view_label": "contriti sunt advenientibus Romanis"
+}

@@ -1,0 +1,93 @@
+{
+  "id": 132,
+  "order": "132.00000000000000000000",
+  "passage": "Colligitur autem omne tempus in secundum annum Vespasiani et subversionem Hierosolimorum novissimam",
+  "jad_id": "jad_occurence__132",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "Ch2",
+  "position_in_work_url": "",
+  "text_paragraph": "Anno Dominicae incarnationis 73. Hierusalem a Tito capitur, non sine multo suorum sanguine, subversaque civitate, 600 milia Judaeorum interfecit, ut Cornelius et Suetonius referunt. Josephus vero, qui et Josippus, unus ex Judaeis, qui ei tunc bello prefuit, scribit undecies centena milia fame perisse et gladio, et centum milia captivorum publice venundata. * Ut autem tanta multitudo p. 0677B | Hierosolimis reperiretur, causam azimorum fuisse refert, ob quae ex omni gente Judaeorum ad templum confluentes, urbe quasi carcere sunt inclusi. Oportuit enim ut hisdem diebus paschae interficerentur, in quibus Salvatorem interfecerunt. Colligitur autem omne tempus in secundum annum Vespasiani et subversionem Hierosolimorum novissimam a 15 anno Tyberii caesaris et ab exordio evangelicae predicationis anni 42, a captivitate autem quam ab Antiocho passi sunt Judaei anni ducenti, a secundo anno Darii, quo reaedificabatur templum, 590; a prima vero aedificatione sub Salomone anni 1102.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [],
+  "Author": [
+    {
+      "id": 48,
+      "value": "Ekkehart, von Aura"
+    }
+  ],
+  "work": [
+    {
+      "id": 59,
+      "order": "58.00000000000000000000",
+      "name": "Chronicon universale ",
+      "jad_id": "jad_work__59",
+      "author": [
+        {
+          "id": 48,
+          "order": "48.00000000000000000000",
+          "name": "Ekkehart, von Aura",
+          "jad_id": "jad_author__48",
+          "gnd_url": "https://d-nb.info/gnd/118688529",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Chronicon universale",
+      "genre": {
+        "id": 14731,
+        "value": "Chronicle",
+        "color": "red"
+      },
+      "not_before": "1100",
+      "not_after": "1125",
+      "written_date": "early 12",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [
+    {
+      "id": 1,
+      "value": "First Crusade"
+    }
+  ],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 48,
+        "database_table_3499": 59
+      },
+      "value": "Ekkehart, von Aura"
+    }
+  ],
+  "prev": "jad_occurence__131.html",
+  "next": "jad_occurence__133.html",
+  "view_label": "Colligitur autem omne tempus in secundum annum Vespasiani et subversionem Hierosolimorum novissimam"
+}

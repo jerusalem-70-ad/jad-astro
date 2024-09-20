@@ -1,0 +1,93 @@
+{
+  "id": 133,
+  "order": "133.00000000000000000000",
+  "passage": "Ipse Vespasianum cum filio suo Tito ad destruendam Hierosolimam misit.",
+  "jad_id": "jad_occurence__133",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "Ch10",
+  "position_in_work_url": "",
+  "text_paragraph": "Urbem Romam per sex dies et noctes incendit, ut quale esset incendium Trojae videret; ipseque p. 0673B | stans in altissima turri laetusque prospectans flammas, tragico indutus habitu, Illiadem tragediam canebat. In re militari nichil omnino ausus, Britanniam pene amisit. Auxit molem facinorum ejus temeritas impietatis in Deum. Primus enim persecutionem in Christianos movit per omne regnum suum, ipsumque nomen exstirpare cupiens, principes apostolorum Petrum et Paulum occidit. Ipse Vespasianum cum filio suo Tito ad destruendam Hierosolimam misit. Inter haec Galba Hyspaniae pretor et Gaius Julius imperium corripuere. Nero autem, omnibus execrabilis, hostis a senatu judicatus est; decretum est, ut, furca collo ejus inserta, nudus per publicum duceretur, et virgis usque ad mortem caesus, de saxo precipitaretur. Quod ille audiens simulque p. 0673C | adventum Galbae comperiens, fugit e palatio, noctisque medio Urbe egressus est. Secuti sunt autem eum Phaon et Epafroditus et Nefitus et spado Nesporo, quem quondam exsectum in mulierem formare temptaverat.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [],
+  "Author": [
+    {
+      "id": 48,
+      "value": "Ekkehart, von Aura"
+    }
+  ],
+  "work": [
+    {
+      "id": 59,
+      "order": "58.00000000000000000000",
+      "name": "Chronicon universale ",
+      "jad_id": "jad_work__59",
+      "author": [
+        {
+          "id": 48,
+          "order": "48.00000000000000000000",
+          "name": "Ekkehart, von Aura",
+          "jad_id": "jad_author__48",
+          "gnd_url": "https://d-nb.info/gnd/118688529",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Chronicon universale",
+      "genre": {
+        "id": 14731,
+        "value": "Chronicle",
+        "color": "red"
+      },
+      "not_before": "1100",
+      "not_after": "1125",
+      "written_date": "early 12",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [
+    {
+      "id": 1,
+      "value": "First Crusade"
+    }
+  ],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 48,
+        "database_table_3499": 59
+      },
+      "value": "Ekkehart, von Aura"
+    }
+  ],
+  "prev": "jad_occurence__132.html",
+  "next": "jad_occurence__134.html",
+  "view_label": "Ipse Vespasianum cum filio suo Tito ad destruendam Hierosolimam misit."
+}

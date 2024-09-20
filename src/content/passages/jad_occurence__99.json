@@ -1,0 +1,160 @@
+{
+  "id": 99,
+  "order": "99.00000000000000000000",
+  "passage": "inimici romani",
+  "jad_id": "jad_occurence__99",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [
+    {
+      "id": 23,
+      "order": "23.00000000000000000000",
+      "name": [
+        {
+          "id": 5,
+          "value": "Maz., MS 178"
+        }
+      ],
+      "jad_id": "jad_manuscript__23",
+      "library": [
+        {
+          "id": 5,
+          "order": "5.00000000000000000000",
+          "name": "Bibliothèque Mazarine",
+          "jad_id": "jad_library__5",
+          "gnd_url": "https://d-nb.info/gnd/803245-2",
+          "abbreviation": "Maz.",
+          "place": []
+        }
+      ],
+      "idno": "MS 178",
+      "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA10336",
+      "digi_url": "",
+      "not_before": null,
+      "not_after": null,
+      "written_date": null,
+      "institutional_context": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "University of Paris",
+          "jad__id": "jad_institutional_context__1",
+          "part_of": [
+            {
+              "id": 16,
+              "order": "16.00000000000000000000",
+              "name": "French schools",
+              "jad__id": "jad_institutional_context__16",
+              "part_of": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "position_in_work": "",
+  "position_in_work_url": "",
+  "text_paragraph": "",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [
+    {
+      "id": 18,
+      "value": "Ez. 7"
+    }
+  ],
+  "Author": [
+    {
+      "id": 4,
+      "value": "Petrus, Cantor"
+    }
+  ],
+  "work": [
+    {
+      "id": 21,
+      "order": "21.00000000000000000000",
+      "name": "Commentary Lamentationes ",
+      "jad_id": "jad_work__21",
+      "author": [
+        {
+          "id": 4,
+          "order": "4.00000000000000000000",
+          "name": "Petrus, Cantor",
+          "jad_id": "jad_author__4",
+          "gnd_url": "https://d-nb.info/gnd/118790625",
+          "notes": null
+        }
+      ],
+      "manuscripts": [
+        {
+          "id": 23,
+          "value": "Maz., MS 178"
+        }
+      ],
+      "title": "Commentary Lamentationes",
+      "genre": {
+        "id": 14727,
+        "value": "Commentary",
+        "color": "darker-green"
+      },
+      "not_before": null,
+      "not_after": "1197",
+      "written_date": "late 12",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "University of Paris",
+          "jad__id": "jad_institutional_context__1",
+          "part_of": [
+            {
+              "id": 16,
+              "order": "16.00000000000000000000",
+              "name": "French schools",
+              "jad__id": "jad_institutional_context__16",
+              "part_of": []
+            }
+          ]
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "None",
+          "jad_id": "jad_sources_occurrences__1",
+          "digi_url": ""
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "131r",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 9,
+      "value": "Manuscript"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 4,
+        "database_table_3499": 21
+      },
+      "value": "Petrus, Cantor"
+    }
+  ],
+  "prev": "jad_occurence__98.html",
+  "next": "{'id': 1, 'order': '1.00000000000000000000', 'passage': 'Jerosolymorum subversio describatur, quae a Vespasiano et Tito Romanis principibus facta est', 'jad_id': 'jad_occurence__1', 'language': {'id': 14729, 'value': 'Latin', 'color': 'dark-yellow'}, 'manuscript': [], 'position_in_work': 'B5, Ch19', 'position_in_work_url': '', 'text_paragraph': 'Quibus ipse ait: Dico vobis quia si hi tacuerint, lapides clamabunt. Crucifixo Domino stabant omnes noti ejus a longe, Deum confiteri timebant, quem fixum ligno videbant, sed, his tacentibus, lapides et saxa Regem qui venit in nomine Domini magno clamore canebant. Emisit enim spiritum, et ecce terra mota est, et petrae scissae sunt, et monumenta aperta sunt: quemque homines vel timore vel perfidia confiteri trepidant, hunc durissima etiam elementa Deum mundi ac Dominum aperto ore praedicant. Verum altiori mysterio gentium nationes incredulas aliquando ac duricordes lapidum nomine demonstrat, 92.0570C | quibus ablato corde lapideo dedit cor carneum (Ezech. XI), hoc est, sensibile et humanum, quo Deum Creatoremque suum credere, laudare, et cernere possent. Etsi ergo turbae tacuerint hominum, lapides clamabunt, quia caecitas ex parte contigit in Israel, donec plenitudo gentium intraret, et sic omnis Israel salvus fieret (Rom. III).', 'note': None, 'explicit_contemp_ref': None, 'biblical_references': [{'id': 1, 'value': 'Lk. 19,41'}, {'id': 38, 'value': 'Mt. 27,51'}, {'id': 39, 'value': 'Mt. 27,52'}, {'id': 40, 'value': 'Röm. 11,25'}], 'Author': [{'id': 6, 'value': 'Beda, Heiliger'}], 'work': [{'id': 6, 'order': '6.00000000000000000000', 'name': 'Commentary Luke ', 'jad_id': 'jad_work__6', 'author': [{'id': 6, 'order': '6.00000000000000000000', 'name': 'Beda, Heiliger', 'jad_id': 'jad_author__6', 'gnd_url': 'https://d-nb.info/gnd/118508237', 'notes': None}], 'manuscripts': [], 'title': 'Commentary Luke', 'genre': {'id': 14727, 'value': 'Commentary', 'color': 'darker-green'}, 'not_before': None, 'not_after': None, 'written_date': 'early 8', 'notes': None, 'notes__author': None, 'institutional_context': [], 'published_edition': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Patrologia Latina', 'jad_id': 'jad_sources_occurrences__2', 'digi_url': 'https://mlat.uzh.ch/browser?path=/38'}]}], 'position_in_ms': None, 'sources_used': [{'id': 28, 'value': 'Gregor, der Grosse'}], 'keywords': [], 'part_of_cluster': [], 'authority_discourse': 0, 'liturgical_references': [], 'occurrence_found_in': [{'id': 2, 'value': 'Patrologia Latina'}], 'author_lookup': [{'ids': {'database_table_3498': 6, 'database_table_3499': 6}, 'value': 'Beda, Heiliger'}], 'prev': 'jad_occurence__99.html', 'next': 'jad_occurence__10.html'}.html",
+  "view_label": "inimici romani"
+}

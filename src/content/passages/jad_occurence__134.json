@@ -1,0 +1,93 @@
+{
+  "id": 134,
+  "order": "134.00000000000000000000",
+  "passage": "Tito filio suo in Judaea ad obsidendam Hierosolimam",
+  "jad_id": "jad_occurence__134",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "Ch25",
+  "position_in_work_url": "",
+  "text_paragraph": "Anno Dominicae incarnationis 72, ab Urbe condita 822. Vespasianus in Judaeam a Nerone cum exercitu missus, comperta morte Neronis, ab exercitu imperator efficitur; dimissoque Tito filio suo in Judaea ad obsidendam Hierosolimam, ipse per Alexandriam profectus est Romam, ubi, accepto imperio, septimus ab Augusto, regnavit annis 9; obscure quidem natus ( H. m. et H. R. ), sed vir militari virtute precipuus et optimis comparandus, utpote qui a Claudio missus in Germaniam, deinde in Britanniam, tricies et bis cum hoste conflixit multumque Romano imperio adjecit. Hic in imperio moderate se gessit. Inter cetera namque bona hanc gratiam habuit, ut inimicicias in corde non retineret, in tantum ut filiam predicti Vitellii inimici sui, multis p. 0676D | dotatam divitiis, nobilissimo traderet marito.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [],
+  "Author": [
+    {
+      "id": 48,
+      "value": "Ekkehart, von Aura"
+    }
+  ],
+  "work": [
+    {
+      "id": 59,
+      "order": "58.00000000000000000000",
+      "name": "Chronicon universale ",
+      "jad_id": "jad_work__59",
+      "author": [
+        {
+          "id": 48,
+          "order": "48.00000000000000000000",
+          "name": "Ekkehart, von Aura",
+          "jad_id": "jad_author__48",
+          "gnd_url": "https://d-nb.info/gnd/118688529",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Chronicon universale",
+      "genre": {
+        "id": 14731,
+        "value": "Chronicle",
+        "color": "red"
+      },
+      "not_before": "1100",
+      "not_after": "1125",
+      "written_date": "early 12",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [
+    {
+      "id": 1,
+      "value": "First Crusade"
+    }
+  ],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 48,
+        "database_table_3499": 59
+      },
+      "value": "Ekkehart, von Aura"
+    }
+  ],
+  "prev": "jad_occurence__133.html",
+  "next": "jad_occurence__135.html",
+  "view_label": "Tito filio suo in Judaea ad obsidendam Hierosolimam"
+}

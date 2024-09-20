@@ -1,0 +1,93 @@
+{
+  "id": 108,
+  "order": "108.00000000000000000000",
+  "passage": "secundo anno Vespasiani, quando Hierusalem a Romanis capta, templumque subversum est",
+  "jad_id": "jad_occurence__108",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "Ch19",
+  "position_in_work_url": "",
+  "text_paragraph": "Qui dies juncti simul, fiunt quadragenti triginta, et pro totidem deputantur annis; dicente Domino ad eumdem prophetam: « Diem pro anno, diem, inquam, pro anno dedi tibi (Ezech. IV). » Scribit itaque praefatus doctor, et vanissimam spem eorum de absolutione captivitatis, in qua nunc detinentur, his verbis exponit, dicens (S. Hieron. in c. IV Ezech.): « Judaei a secundo anno Vespasiani, quando Hierusalem a Romanis capta, templumque subversum est, supputare volunt in tribulatione et angustia et captivitatis jugo populi constituti annos quadringintos triginta, et sic redire populum ad pristinum statum; ut quomodo filii Israel quadringentis triginta annis fuerunt in Aegypto, sic in eodem numero finiatur extrema captivitas: scriptumque esse 116.0153D | in Exodo (XL, 112): « Habitatio autem filiorum Israel quia habitaverunt in terra Aegypti, anni quadringenti triginta sunt.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [],
+  "Author": [
+    {
+      "id": 49,
+      "value": "Amulo, Lugdunensis"
+    }
+  ],
+  "work": [
+    {
+      "id": 60,
+      "order": "59.00000000000000000000",
+      "name": "Contra Judeaos ",
+      "jad_id": "jad_work__60",
+      "author": [
+        {
+          "id": 49,
+          "order": "49.00000000000000000000",
+          "name": "Amulo, Lugdunensis",
+          "jad_id": "jad_author__49",
+          "gnd_url": "https://d-nb.info/gnd/100729754",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Contra Judeaos",
+      "genre": {
+        "id": 14728,
+        "value": "Anti-Jewish treatise",
+        "color": "darker-purple"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [
+    {
+      "id": 27,
+      "value": "Hieronymus, Sophronius Eusebius"
+    }
+  ],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 49,
+        "database_table_3499": 60
+      },
+      "value": "Amulo, Lugdunensis"
+    }
+  ],
+  "prev": "jad_occurence__107.html",
+  "next": "jad_occurence__109.html",
+  "view_label": "secundo anno Vespasiani, quando Hierusalem a Romanis capta, templumque subversum est"
+}

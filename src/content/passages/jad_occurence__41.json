@@ -1,0 +1,102 @@
+{
+  "id": 41,
+  "order": "41.00000000000000000000",
+  "passage": "immisit duos ursos de silvis gentium, Vespasianum scilicet et Titum",
+  "jad_id": "jad_occurence__41",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "",
+  "position_in_work_url": "",
+  "text_paragraph": "",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [
+    {
+      "id": 6,
+      "value": "4 Reg. 2,23"
+    },
+    {
+      "id": 7,
+      "value": "4 Reg. 2,24"
+    }
+  ],
+  "Author": [
+    {
+      "id": 33,
+      "value": "Angelomus Luxovensis"
+    }
+  ],
+  "work": [
+    {
+      "id": 33,
+      "order": "33.00000000000000000000",
+      "name": "Commentary Kings ",
+      "jad_id": "jad_work__33",
+      "author": [
+        {
+          "id": 33,
+          "order": "33.00000000000000000000",
+          "name": "Angelomus Luxovensis",
+          "jad_id": "jad_author__33",
+          "gnd_url": "",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Commentary Kings",
+      "genre": {
+        "id": 14727,
+        "value": "Commentary",
+        "color": "darker-green"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [
+    {
+      "id": 18,
+      "value": "Isidorus, von Sevilla"
+    }
+  ],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 33,
+        "database_table_3499": 33
+      },
+      "value": "Angelomus Luxovensis"
+    }
+  ],
+  "prev": "jad_occurence__40.html",
+  "next": "jad_occurence__42.html",
+  "view_label": "immisit duos ursos de silvis gentium, Vespasianum scilicet et Titum"
+}

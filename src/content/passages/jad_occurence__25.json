@@ -1,0 +1,109 @@
+{
+  "id": 25,
+  "order": "25.00000000000000000000",
+  "passage": "ingressus est Titus cum Romano exercitu, alios gladio trucidavit",
+  "jad_id": "jad_occurence__25",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "Sermo 122",
+  "position_in_work_url": "",
+  "text_paragraph": "Factus est clamor magnus in civitate dolentium atque lugentium, et in ipso clamore apertis portis, ingressus est Titus cum Romano exercitu, alios gladio trucidavit, alios igne combussit, juvenes quoque in captivitatem destinavit. Ipsam vero urbem a fundamentis ita destruxit, ut juxta Domini vocem, non relinqueretur in ea lapis super lapidem. In cujus destructione impletum est quod Dominus olim figurate per Ezechielem prophetam praedixerat, dicens: « Et tu, fili hominis, sume tibi gladium acutum, radentem pilos, et duces eum per caput tuum et barbam, et tertiam partem igni combures, et tertiam p. 0656B | partem gladio concides, tertiam vero partem in ventum disperges, et evaginabo gladium meum post eos (Ezech. V). » Concordat autem hujus historiographi descriptio cum verbis Salvatoris, qui cum moenia civitatis vidisset, ait: Cum videritis civitatem hanc ab exercitu circumdari, scitote quia prope est desolatio ejus. « Tunc qui in Judaea sunt, fugiant in montes. Vae autem praegnantibus et nutrientibus in illis diebus (Luc. XXI). » Et alibi legimus, quia cum discipuli ostendissent ei aedificia civitatis, dixit: Videtis haec omnia? Amen dico vobis, « non relinquetur lapis super lapidem, qui non destruatur (Marc. XIII). » Ex qua autem causa ruina praedictae civitati contigerit, Dominus manifestat, cum adjungit: « Eo quod non cognoveris tempus visitationis p. 0656C | tuae. » Hanc quippe Dominus per incarnationis suae mysterium visitavit, quando excelsus Deus humilis homo inter homines apparens, multa signa et miracula ostendit.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [],
+  "Author": [
+    {
+      "id": 25,
+      "value": "Haimo, von Auxerre"
+    }
+  ],
+  "work": [
+    {
+      "id": 27,
+      "order": "27.00000000000000000000",
+      "name": "Sermones ",
+      "jad_id": "jad_work__27",
+      "author": [
+        {
+          "id": 25,
+          "order": "25.00000000000000000000",
+          "name": "Haimo, von Auxerre",
+          "jad_id": "jad_author__25",
+          "gnd_url": "https://d-nb.info/gnd/100945260",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Sermones",
+      "genre": {
+        "id": 14726,
+        "value": "Sermons",
+        "color": "darker-pink"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Benedictines Auxerre",
+          "jad__id": "jad_institutional_context__2",
+          "part_of": [
+            {
+              "id": 3,
+              "order": "3.00000000000000000000",
+              "name": "Benedictines",
+              "jad__id": "jad_institutional_context__3",
+              "part_of": []
+            }
+          ]
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [
+    {
+      "id": 1,
+      "value": "X Sunday after Holy Trinity"
+    }
+  ],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 25,
+        "database_table_3499": 27
+      },
+      "value": "Haimo, von Auxerre"
+    }
+  ],
+  "prev": "jad_occurence__24.html",
+  "next": "jad_occurence__26.html",
+  "view_label": "ingressus est Titus cum Romano exercitu, alios gladio trucidavit"
+}

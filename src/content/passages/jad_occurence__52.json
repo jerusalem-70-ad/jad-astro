@@ -1,0 +1,173 @@
+{
+  "id": 52,
+  "order": "52.00000000000000000000",
+  "passage": "sub romanis",
+  "jad_id": "jad_occurence__52",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": [
+        {
+          "id": 2,
+          "value": "BNF, Latin 14426"
+        }
+      ],
+      "jad_id": "jad_manuscript__2",
+      "library": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Bibliothèque Nationale de France",
+          "jad_id": "jad_library__2",
+          "gnd_url": "https://d-nb.info/gnd/5156217-0",
+          "abbreviation": "BNF",
+          "place": [
+            {
+              "id": 1,
+              "order": "1.00000000000000000000",
+              "name": "Paris",
+              "geonames_url": "https://www.geonames.org/2988507/paris.html",
+              "jad_id": "jad_places__1"
+            }
+          ]
+        }
+      ],
+      "idno": "Latin 14426",
+      "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc75180c",
+      "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b9078089g",
+      "not_before": "1200",
+      "not_after": "1300",
+      "written_date": "13",
+      "institutional_context": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "University of Paris",
+          "jad__id": "jad_institutional_context__1",
+          "part_of": [
+            {
+              "id": 16,
+              "order": "16.00000000000000000000",
+              "name": "French schools",
+              "jad__id": "jad_institutional_context__16",
+              "part_of": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "position_in_work": "",
+  "position_in_work_url": "",
+  "text_paragraph": "",
+  "note": "Bird",
+  "explicit_contemp_ref": "",
+  "biblical_references": [
+    {
+      "id": 56,
+      "value": "Ps. 78,1"
+    }
+  ],
+  "Author": [
+    {
+      "id": 4,
+      "value": "Petrus, Cantor"
+    }
+  ],
+  "work": [
+    {
+      "id": 4,
+      "order": "4.00000000000000000000",
+      "name": "Commentary Psalms ",
+      "jad_id": "jad_work__4",
+      "author": [
+        {
+          "id": 4,
+          "order": "4.00000000000000000000",
+          "name": "Petrus, Cantor",
+          "jad_id": "jad_author__4",
+          "gnd_url": "https://d-nb.info/gnd/118790625",
+          "notes": null
+        }
+      ],
+      "manuscripts": [
+        {
+          "id": 2,
+          "value": "BNF, Latin 14426"
+        }
+      ],
+      "title": "Commentary Psalms",
+      "genre": {
+        "id": 14727,
+        "value": "Commentary",
+        "color": "darker-green"
+      },
+      "not_before": "1187",
+      "not_after": "1197",
+      "written_date": "post 1187",
+      "notes": null,
+      "notes__author": null,
+      "institutional_context": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "University of Paris",
+          "jad__id": "jad_institutional_context__1",
+          "part_of": [
+            {
+              "id": 16,
+              "order": "16.00000000000000000000",
+              "name": "French schools",
+              "jad__id": "jad_institutional_context__16",
+              "part_of": []
+            }
+          ]
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "None",
+          "jad_id": "jad_sources_occurrences__1",
+          "digi_url": ""
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "62v",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [
+    {
+      "id": 2,
+      "value": "Third Crusade"
+    }
+  ],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 10,
+      "value": "Secondary literature"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 4,
+        "database_table_3499": 4
+      },
+      "value": "Petrus, Cantor"
+    }
+  ],
+  "prev": "jad_occurence__51.html",
+  "next": "jad_occurence__53.html",
+  "view_label": "sub romanis"
+}

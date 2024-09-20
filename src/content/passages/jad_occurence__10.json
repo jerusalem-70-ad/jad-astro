@@ -1,0 +1,128 @@
+{
+  "id": 10,
+  "order": "10.00000000000000000000",
+  "passage": "Impleta prophetia, quam olim Moyses predixerat, foris vastabit eos gladiis, dicit Iosephus, qui de eius exilio civitatis multa describsit",
+  "jad_id": "jad_occurence__10",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [
+    {
+      "id": 18,
+      "order": "18.00000000000000000000",
+      "name": [
+        {
+          "id": 2,
+          "value": "BNF, Latin 3829"
+        }
+      ],
+      "jad_id": "jad_manuscript__18",
+      "library": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Bibliothèque Nationale de France",
+          "jad_id": "jad_library__2",
+          "gnd_url": "https://d-nb.info/gnd/5156217-0",
+          "abbreviation": "BNF",
+          "place": [
+            {
+              "id": 1,
+              "order": "1.00000000000000000000",
+              "name": "Paris",
+              "geonames_url": "https://www.geonames.org/2988507/paris.html",
+              "jad_id": "jad_places__1"
+            }
+          ]
+        }
+      ],
+      "idno": "Latin 3829",
+      "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc61794x",
+      "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b9068440b/f133.item",
+      "not_before": null,
+      "not_after": null,
+      "written_date": null,
+      "institutional_context": []
+    }
+  ],
+  "position_in_work": "",
+  "position_in_work_url": "",
+  "text_paragraph": "",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [],
+  "Author": [
+    {
+      "id": 11,
+      "value": "Luculentius"
+    }
+  ],
+  "work": [
+    {
+      "id": 17,
+      "order": "17.00000000000000000000",
+      "name": "Homiliae super evangelia ",
+      "jad_id": "jad_work__17",
+      "author": [
+        {
+          "id": 11,
+          "order": "11.00000000000000000000",
+          "name": "Luculentius",
+          "jad_id": "jad_author__11",
+          "gnd_url": "https://d-nb.info/gnd/119383705",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [
+        {
+          "id": 18,
+          "value": "BNF, Latin 3829"
+        }
+      ],
+      "title": "Homiliae super evangelia",
+      "genre": {
+        "id": 14726,
+        "value": "Sermons",
+        "color": "darker-pink"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "around 900",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [],
+      "published_edition": []
+    }
+  ],
+  "position_in_ms": null,
+  "sources_used": [
+    {
+      "id": 26,
+      "value": "Josephus, Flavius"
+    }
+  ],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 9,
+      "value": "Manuscript"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 11,
+        "database_table_3499": 17
+      },
+      "value": "Luculentius"
+    }
+  ],
+  "prev": "jad_occurence__1.html",
+  "next": "jad_occurence__100.html",
+  "view_label": "Impleta prophetia, quam olim Moyses predixerat, foris vastabit eos gladiis, dicit Iosephus, qui de eius exilio civitatis multa describsit"
+}

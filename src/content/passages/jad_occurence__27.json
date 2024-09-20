@@ -1,0 +1,109 @@
+{
+  "id": 27,
+  "order": "27.00000000000000000000",
+  "passage": "suscitavit adversus eos Dominus duos Romanorum principes, Vespasianum scilicet et Titum",
+  "jad_id": "jad_occurence__27",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "Sermo 122",
+  "position_in_work_url": "",
+  "text_paragraph": "Post Domini enim ascensionem, post necem Jacobi, qui justus est appellatus, Judaeorum populo in malitia perseverante, suscitavit adversus eos Dominus duos Romanorum principes, Vespasianum scilicet et Titum, patrem et filium, justo Dei judicio agente, ut qui patrem et filium negaverant, a patre et filio necarentur. p. 0654C | Cumque Judaeorum regionem Romanus vastaret exercitus, imminente solemnitate paschali, cucurrit omnis populus in civitatem quasi vir unus; justo Dei judicio exigente, ut qui in paschali solemnitate Christum occiderant, in eadem solemnitate obsidionibus circumdarentur. Nam repente ab hostibus vallata est urbs, ita ut nullus ingredi aut egredi posset, et tandiu obsessa, quoadusque omnia quae secum ad edendum detulerant, consumpta viderentur.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [],
+  "Author": [
+    {
+      "id": 25,
+      "value": "Haimo, von Auxerre"
+    }
+  ],
+  "work": [
+    {
+      "id": 27,
+      "order": "27.00000000000000000000",
+      "name": "Sermones ",
+      "jad_id": "jad_work__27",
+      "author": [
+        {
+          "id": 25,
+          "order": "25.00000000000000000000",
+          "name": "Haimo, von Auxerre",
+          "jad_id": "jad_author__25",
+          "gnd_url": "https://d-nb.info/gnd/100945260",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Sermones",
+      "genre": {
+        "id": 14726,
+        "value": "Sermons",
+        "color": "darker-pink"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Benedictines Auxerre",
+          "jad__id": "jad_institutional_context__2",
+          "part_of": [
+            {
+              "id": 3,
+              "order": "3.00000000000000000000",
+              "name": "Benedictines",
+              "jad__id": "jad_institutional_context__3",
+              "part_of": []
+            }
+          ]
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [
+    {
+      "id": 1,
+      "value": "X Sunday after Holy Trinity"
+    }
+  ],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 25,
+        "database_table_3499": 27
+      },
+      "value": "Haimo, von Auxerre"
+    }
+  ],
+  "prev": "jad_occurence__26.html",
+  "next": "jad_occurence__28.html",
+  "view_label": "suscitavit adversus eos Dominus duos Romanorum principes, Vespasianum scilicet et Titum"
+}

@@ -1,0 +1,93 @@
+{
+  "id": 115,
+  "order": "115.00000000000000000000",
+  "passage": "postea sub Vespasiano, regnum hujus generis, imo imaginem imperii, penitus fuisse deletum.",
+  "jad_id": "jad_occurence__115",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "B9, Ch22",
+  "position_in_work_url": "",
+  "text_paragraph": "Sed in diebus Joacim non successit ei rex filius, quomodo patri ipse successerat, sed fuit in captivitate, et Salathiel et Zorobabel et usque ad Christum nullus regiam obtinuit potestatem. Hoc autem idcirco, quia in Hebraico scriptum est: « In diebus ejus et in tempore ipso, » quo ille fuit, « non erit vir qui sedeat super solium David. » Omnes enim fuere captivi, et de stirpe David nullus deinceps in terra Judaea tenuit principatum. Unde et Josephus refert de sacerdotali genere ac tribu Levi fuisse principes, p. 0979A | quibus successerit Herodes Antipatri proselyti filius, et postea sub Vespasiano, regnum hujus generis, imo imaginem imperii, penitus fuisse deletum.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [],
+  "Author": [
+    {
+      "id": 5,
+      "value": "Hrabanus, Maurus"
+    }
+  ],
+  "work": [
+    {
+      "id": 63,
+      "order": "62.00000000000000000000",
+      "name": "Commentary Jeremiah ",
+      "jad_id": "jad_work__63",
+      "author": [
+        {
+          "id": 5,
+          "order": "5.00000000000000000000",
+          "name": "Hrabanus, Maurus",
+          "jad_id": "jad_author__5",
+          "gnd_url": "https://d-nb.info/gnd/118553909",
+          "notes": null
+        }
+      ],
+      "manuscripts": [],
+      "title": "Commentary Jeremiah",
+      "genre": {
+        "id": 14727,
+        "value": "Commentary",
+        "color": "darker-green"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [
+    {
+      "id": 26,
+      "value": "Josephus, Flavius"
+    }
+  ],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 5,
+        "database_table_3499": 63
+      },
+      "value": "Hrabanus, Maurus"
+    }
+  ],
+  "prev": "jad_occurence__114.html",
+  "next": "jad_occurence__116.html",
+  "view_label": "postea sub Vespasiano, regnum hujus generis, imo imaginem imperii, penitus fuisse deletum."
+}

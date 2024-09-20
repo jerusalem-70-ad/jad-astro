@@ -1,0 +1,101 @@
+{
+  "id": 84,
+  "order": "84.00000000000000000000",
+  "passage": "Vespasiano et Tito totam illam terram vastantibus",
+  "jad_id": "jad_occurence__84",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "Ch3",
+  "position_in_work_url": "",
+  "text_paragraph": "Notum est et caeteros, qui non toti Judaeorum regno, sed certis partibus principati sunt, vix usque ad excidium Jerusalem, p. 0540D | et totius Hierosolymitani regni perdurasse, et tandem Vespasiano et Tito totam illam terram vastantibus, vario exitu interiisse. Sed forte, ut etiam novum risum de te toti mundo exhibeas, in illo nostri temporis asinino rege prophetiam hanc completam dices, qui in Africae partibus, contra novi nominis regem, videlicet de Merroch, insurrexit. Qui causa nefandae, hoc est Mahumeticae sectae, illius perditae gentis infinitam multitudinem sibi adjungens, cum ante plebeius esset, paulatim in majus pessimo profectu profecit, ac saepe cum jam dicto rege dimicans, frequenter superior in praeliis factus est.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [],
+  "Author": [
+    {
+      "id": 44,
+      "value": "Petrus, Venerabilis"
+    }
+  ],
+  "work": [
+    {
+      "id": 53,
+      "order": "52.00000000000000000000",
+      "name": "Adversus Iudaeos ",
+      "jad_id": "jad_work__53",
+      "author": [
+        {
+          "id": 44,
+          "order": "44.00000000000000000000",
+          "name": "Petrus, Venerabilis",
+          "jad_id": "jad_author__44",
+          "gnd_url": "https://d-nb.info/gnd/11880328X",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Adversus Iudaeos",
+      "genre": {
+        "id": 14728,
+        "value": "Anti-Jewish treatise",
+        "color": "darker-purple"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "mid 12",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [
+        {
+          "id": 11,
+          "order": "11.00000000000000000000",
+          "name": "Benedictines Cluny",
+          "jad__id": "jad_institutional_context__11",
+          "part_of": []
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [
+    {
+      "id": 26,
+      "value": "Josephus, Flavius"
+    }
+  ],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 44,
+        "database_table_3499": 53
+      },
+      "value": "Petrus, Venerabilis"
+    }
+  ],
+  "prev": "jad_occurence__83.html",
+  "next": "jad_occurence__85.html",
+  "view_label": "Vespasiano et Tito totam illam terram vastantibus"
+}

@@ -1,0 +1,104 @@
+{
+  "id": 21,
+  "order": "21.00000000000000000000",
+  "passage": "Quando autem Jerusalem destructa est a Romanis",
+  "jad_id": "jad_occurence__21",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "",
+  "position_in_work_url": "",
+  "text_paragraph": "« In siccitate messis illius conterentur mulieres, venientes et docentes eam. » Metaphorice loquitur Propheta, per messem vel vineam volens ostendere plebem Israeliticam. Mulieres appellat hic synagogas diversarum gentium Aegyptiorum, Philistinorum caeterarumque. Quando autem Jerusalem destructa est a Romanis, et omnis populus ejus praeda fuit gentibus synagogae diversarum gentium quae in circuitu ejus erant, convenerunt ad illam, et contritae sunt dolore et luctu, non de Domini passione, sed de subversione tantae civitatis. Vel etiam Judaeorum p. 0846B | mulierum sapientes quae dispersae erant per diversas regiones, quaeque solitae erant venire ante illam captivitatem, et docere eos qualiter se praepararent contra hostes",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [],
+  "Author": [
+    {
+      "id": 25,
+      "value": "Haimo, von Auxerre"
+    }
+  ],
+  "work": [
+    {
+      "id": 26,
+      "order": "26.00000000000000000000",
+      "name": "Commentary Isaiah ",
+      "jad_id": "jad_work__26",
+      "author": [
+        {
+          "id": 25,
+          "order": "25.00000000000000000000",
+          "name": "Haimo, von Auxerre",
+          "jad_id": "jad_author__25",
+          "gnd_url": "https://d-nb.info/gnd/100945260",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Commentary Isaiah",
+      "genre": {
+        "id": 14727,
+        "value": "Commentary",
+        "color": "darker-green"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Benedictines Auxerre",
+          "jad__id": "jad_institutional_context__2",
+          "part_of": [
+            {
+              "id": 3,
+              "order": "3.00000000000000000000",
+              "name": "Benedictines",
+              "jad__id": "jad_institutional_context__3",
+              "part_of": []
+            }
+          ]
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 25,
+        "database_table_3499": 26
+      },
+      "value": "Haimo, von Auxerre"
+    }
+  ],
+  "prev": "jad_occurence__20.html",
+  "next": "jad_occurence__22.html",
+  "view_label": "Quando autem Jerusalem destructa est a Romanis"
+}

@@ -1,0 +1,97 @@
+{
+  "id": 112,
+  "order": "112.00000000000000000000",
+  "passage": "sub Vespasiano et Tito, quando templum captum atque subversum est",
+  "jad_id": "jad_occurence__112",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "B5, Ch7",
+  "position_in_work_url": "",
+  "text_paragraph": "« Et avertam faciem meam ab eis, et violabunt p. 0617B | arcanum meum, et introibunt in illud emissarii, et contaminabunt illud. » Cum, inquit, propter superiores causas abominationum populi, avertero faciem meam ab eis, et nequaquam eos dignos meis oculis judicavero, tunc violabunt arcanum meum; quod significat sancta sanctorum. Pro quo Septuaginta posuere: Et irrumpent in ea impii et pestilentes terrae, quae exceptis sacerdotibus soloque pontifice, nullus alius audebat intrare, quod scimus et a Babyloniis et a rege Antiocho Cneoque Pompeio, et ad extremum factum esse sub Vespasiano et Tito, quando templum captum atque subversum est, et omnia perpetrata quae sequens prophetae sermo complectitur. Ad nostra quoque mala opera avertit Deus faciem suam. Et quia aversa est facies, ideo p. 0617C | Dei violatur arcanum, ut pro sacerdotibus et sanctis Dei pestilentes ingrediantur, et universa contaminent, ut qui locus esse debuit sanctitatis, fiat locus immunditiae, juxta illud evangelicum: « Domus Patris mei, domus orationis vocabitur, vos autem fecistis illam speluncam latronum. »",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [
+    {
+      "id": 63,
+      "value": "Mt. 21,13"
+    },
+    {
+      "id": 87,
+      "value": "Ez. 7,22"
+    }
+  ],
+  "Author": [
+    {
+      "id": 5,
+      "value": "Hrabanus, Maurus"
+    }
+  ],
+  "work": [
+    {
+      "id": 61,
+      "order": "60.00000000000000000000",
+      "name": "Commentary Ezekiel ",
+      "jad_id": "jad_work__61",
+      "author": [
+        {
+          "id": 5,
+          "order": "5.00000000000000000000",
+          "name": "Hrabanus, Maurus",
+          "jad_id": "jad_author__5",
+          "gnd_url": "https://d-nb.info/gnd/118553909",
+          "notes": null
+        }
+      ],
+      "manuscripts": [],
+      "title": "Commentary Ezekiel",
+      "genre": {
+        "id": 14727,
+        "value": "Commentary",
+        "color": "darker-green"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 5,
+        "database_table_3499": 61
+      },
+      "value": "Hrabanus, Maurus"
+    }
+  ],
+  "prev": "jad_occurence__111.html",
+  "next": "jad_occurence__113.html",
+  "view_label": "sub Vespasiano et Tito, quando templum captum atque subversum est"
+}

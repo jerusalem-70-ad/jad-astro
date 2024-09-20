@@ -1,0 +1,145 @@
+{
+  "id": 53,
+  "order": "53.00000000000000000000",
+  "passage": "Cum adpropinquasset Ihesus Hierusalem, uidens ciuitatem fleuit super illam. Pensare debemus, fratres karissimi, quid sit quod flente Domino, sicut nunc in presenti lectum est, hierosolime ciuitatis subuersio describebatur",
+  "jad_id": "jad_occurence__53",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [
+    {
+      "id": 16,
+      "order": "16.00000000000000000000",
+      "name": [
+        {
+          "id": 1,
+          "value": "ÖNB, Cod. 1014"
+        }
+      ],
+      "jad_id": "jad_manuscript__16",
+      "library": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "Österreichische Nationalbibliothek",
+          "jad_id": "jad_library__1",
+          "gnd_url": "https://d-nb.info/gnd/2020893-5",
+          "abbreviation": "ÖNB",
+          "place": []
+        }
+      ],
+      "idno": "Cod. 1014",
+      "catalog_url": "https://search.onb.ac.at/primo-explore/fulldisplay?docid=ONB_alma21302484910003338&context=L&vid=ONB&lang=de_DE&search_scope=ONB_gesamtbestand&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,cod.%201014&mode=basic",
+      "digi_url": "https://digital.onb.ac.at/RepViewer/viewer.faces?doc=DTL_8518292&order=1&view=SINGLE",
+      "not_before": null,
+      "not_after": null,
+      "written_date": null,
+      "institutional_context": []
+    }
+  ],
+  "position_in_work": "",
+  "position_in_work_url": "",
+  "text_paragraph": "",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [
+    {
+      "id": 1,
+      "value": "Lk. 19,41"
+    },
+    {
+      "id": 2,
+      "value": "Lk. 19,42"
+    },
+    {
+      "id": 3,
+      "value": "Lk. 19,43"
+    },
+    {
+      "id": 4,
+      "value": "Lk. 19,44"
+    }
+  ],
+  "Author": [
+    {
+      "id": 3,
+      "value": "anonymous"
+    }
+  ],
+  "work": [
+    {
+      "id": 40,
+      "order": "40.00000000000000000000",
+      "name": "Homiliarium Mondseense ",
+      "jad_id": "jad_work__40",
+      "author": [
+        {
+          "id": 3,
+          "order": "3.00000000000000000000",
+          "name": "anonymous",
+          "jad_id": "jad_author__3",
+          "gnd_url": "",
+          "notes": null
+        }
+      ],
+      "manuscripts": [
+        {
+          "id": 16,
+          "value": "ÖNB, Cod. 1014"
+        }
+      ],
+      "title": "Homiliarium Mondseense",
+      "genre": {
+        "id": 14726,
+        "value": "Sermons",
+        "color": "darker-pink"
+      },
+      "not_before": "800",
+      "not_after": "900",
+      "written_date": "9",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [],
+      "published_edition": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "None",
+          "jad_id": "jad_sources_occurrences__1",
+          "digi_url": ""
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "168v",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [
+    {
+      "id": 9,
+      "value": "V Sunday Post Natale"
+    }
+  ],
+  "occurrence_found_in": [
+    {
+      "id": 5,
+      "value": "In Principio"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 3,
+        "database_table_3499": 40
+      },
+      "value": "anonymous"
+    }
+  ],
+  "prev": "jad_occurence__52.html",
+  "next": "jad_occurence__54.html",
+  "view_label": "Cum adpropinquasset Ihesus Hierusalem, uidens ciuitatem fleuit super illam. Pensare debemus, fratres karissimi, quid sit quod flente Domino, sicut nunc in presenti lectum est, hierosolime ciuitatis subuersio describebatur"
+}

@@ -1,0 +1,173 @@
+{
+  "id": 131,
+  "order": "131.00000000000000000000",
+  "passage": "sumeret pacem, scilicet exteriorem, per Titum et Vespasianum, de terra, id est de Judaea",
+  "jad_id": "jad_occurence__131",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [
+    {
+      "id": 3,
+      "order": "3.00000000000000000000",
+      "name": [
+        {
+          "id": 3,
+          "value": "San Isidoro, MS 11"
+        }
+      ],
+      "jad_id": "jad_manuscript__3",
+      "library": [
+        {
+          "id": 3,
+          "order": "3.00000000000000000000",
+          "name": "San Isidoro (Kloster)",
+          "jad_id": "jad_library__3",
+          "gnd_url": "",
+          "abbreviation": "San Isidoro",
+          "place": [
+            {
+              "id": 2,
+              "order": "2.00000000000000000000",
+              "name": "León",
+              "geonames_url": "",
+              "jad_id": "jad_places__2"
+            }
+          ]
+        }
+      ],
+      "idno": "MS 11",
+      "catalog_url": "",
+      "digi_url": "",
+      "not_before": "1190",
+      "not_after": "1203",
+      "written_date": "1190-1203",
+      "institutional_context": [
+        {
+          "id": 7,
+          "order": "7.00000000000000000000",
+          "name": "Augustinian canons León",
+          "jad__id": "jad_institutional_context__7",
+          "part_of": [
+            {
+              "id": 8,
+              "order": "8.00000000000000000000",
+              "name": "Augustinian canons",
+              "jad__id": "jad_institutional_context__8",
+              "part_of": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "position_in_work": "Ch6.4",
+  "position_in_work_url": "",
+  "text_paragraph": "ERS. 4.-- Et exivit alius equus rufus: et qui sedebat super illum datum est ei, ut sumeret pacem de terra, et ut invicem se interficiant homines, et datus est ei gladius magnus. Ac si patenter dicat: Exivit, ab amicitia Dei, alius equus rufus, infidelis, superiori equo contrarius, scilicet aperti persecutores et sanguinolenti: et qui sedebat super illum, id est 209.0335C | diabolus, datum est ei, id est concessum, ut sumeret pacem, scilicet exteriorem, per Titum et Vespasianum, de terra, id est de Judaea; vel, concessum est illi a Deo, ut auferret omnem quietem animi ab his qui sunt terrenis dediti. Et ut invicem se interficiant gladio materiali vel spirituali, monendo ad malum opus, et dando pravum exemplar alter alteri. Et datus est illi gladius magnus, id est magna potestas interficiendi; quia non solum minores, sed etiam majores, ut Petrus et Paulus interfecti sunt. Videns diabolus Ecclesiam institui ad locum unde ipse ceciderat supplendum, et omnia nititur subvertere prius aperte, deinde occulte.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [
+    {
+      "id": 93,
+      "value": "Rev. 6,4"
+    }
+  ],
+  "Author": [
+    {
+      "id": 2,
+      "value": "Martin, von León"
+    }
+  ],
+  "work": [
+    {
+      "id": 68,
+      "order": "67.00000000000000000000",
+      "name": "Commentary Revelation ",
+      "jad_id": "jad_work__68",
+      "author": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Martin, von León",
+          "jad_id": "jad_author__2",
+          "gnd_url": "https://d-nb.info/gnd/100953212",
+          "notes": null
+        }
+      ],
+      "manuscripts": [
+        {
+          "id": 3,
+          "value": "San Isidoro, MS 11"
+        }
+      ],
+      "title": "Commentary Revelation",
+      "genre": {
+        "id": 14727,
+        "value": "Commentary",
+        "color": "darker-green"
+      },
+      "not_before": "1175",
+      "not_after": "1200",
+      "written_date": "late 12",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [
+        {
+          "id": 1,
+          "order": "1.00000000000000000000",
+          "name": "University of Paris",
+          "jad__id": "jad_institutional_context__1",
+          "part_of": [
+            {
+              "id": 16,
+              "order": "16.00000000000000000000",
+              "name": "French schools",
+              "jad__id": "jad_institutional_context__16",
+              "part_of": []
+            }
+          ]
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [
+    {
+      "id": 2,
+      "value": "Third Crusade"
+    }
+  ],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 2,
+        "database_table_3499": 68
+      },
+      "value": "Martin, von León"
+    }
+  ],
+  "prev": "jad_occurence__130.html",
+  "next": "jad_occurence__132.html",
+  "view_label": "sumeret pacem, scilicet exteriorem, per Titum et Vespasianum, de terra, id est de Judaea"
+}

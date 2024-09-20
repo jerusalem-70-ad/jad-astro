@@ -1,0 +1,116 @@
+{
+  "id": 34,
+  "order": "34.00000000000000000000",
+  "passage": "Romanum exercitum intelligimus, sub duce Vespasiano ac Tito, qui occisis in vindicta Dei Judaeae populis",
+  "jad_id": "jad_occurence__34",
+  "language": {
+    "id": 14729,
+    "value": "Latin",
+    "color": "dark-yellow"
+  },
+  "manuscript": [],
+  "position_in_work": "B10",
+  "position_in_work_url": "",
+  "text_paragraph": "Qui, missis exercitibus suis, perdidit homicidas illos, et civitatem illorum succendit igni. Habet enim innumeros exercitus suos, et ideo Dominus sabaoth, id est Dominus aut rex exercituum jure vocatur. Exercitus autem quos misit, seu ultores angelos accipimus, vel poenarum (de quibus in Psalmis dicitur) immissionem per angelos malos (Psal. 120.0745D | LXXVII, 49); seu Romanum exercitum intelligimus, sub duce Vespasiano ac Tito, qui occisis in vindicta Dei Judaeae populis, et distractis, praevaricatricem succendunt civitatem, et vastaverunt omnia. Sed antequam ista complerentur, lapidaverunt Stephanum, etiam et de morte Jacobi gavisi sunt; nec non et Jacobum Alphaei lapidarunt. Propter quae omnia misera Jerusalem destructa est a Romanis. Et notandum quod Romanus exercitus Dei esse dicitur, ejusque ultores; quia nunquam ad eam venisset, nisi Dominus vocasset, sicut et in prophetis quam saepe legimus.",
+  "note": "",
+  "explicit_contemp_ref": "",
+  "biblical_references": [
+    {
+      "id": 47,
+      "value": "Ps. 77,49"
+    }
+  ],
+  "Author": [
+    {
+      "id": 17,
+      "value": "Paschasius, Radbertus"
+    }
+  ],
+  "work": [
+    {
+      "id": 29,
+      "order": "29.00000000000000000000",
+      "name": "Commentary Matthew ",
+      "jad_id": "jad_work__29",
+      "author": [
+        {
+          "id": 17,
+          "order": "17.00000000000000000000",
+          "name": "Paschasius, Radbertus",
+          "jad_id": "jad_author__17",
+          "gnd_url": "https://d-nb.info/gnd/118739409",
+          "notes": ""
+        }
+      ],
+      "manuscripts": [],
+      "title": "Commentary Matthew",
+      "genre": {
+        "id": 14727,
+        "value": "Commentary",
+        "color": "darker-green"
+      },
+      "not_before": null,
+      "not_after": null,
+      "written_date": "",
+      "notes": "",
+      "notes__author": "",
+      "institutional_context": [
+        {
+          "id": 13,
+          "order": "13.00000000000000000000",
+          "name": "Benedictines Corbie",
+          "jad__id": "jad_institutional_context__13",
+          "part_of": [
+            {
+              "id": 3,
+              "order": "3.00000000000000000000",
+              "name": "Benedictines",
+              "jad__id": "jad_institutional_context__3",
+              "part_of": []
+            }
+          ]
+        }
+      ],
+      "published_edition": [
+        {
+          "id": 2,
+          "order": "2.00000000000000000000",
+          "name": "Patrologia Latina",
+          "jad_id": "jad_sources_occurrences__2",
+          "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+        },
+        {
+          "id": 7,
+          "order": "6.00000000000000000000",
+          "name": "Corpus Christianorum",
+          "jad_id": "jad_sources_occurrences__7",
+          "digi_url": ""
+        }
+      ]
+    }
+  ],
+  "position_in_ms": "",
+  "sources_used": [],
+  "keywords": [],
+  "part_of_cluster": [],
+  "authority_discourse": 0,
+  "liturgical_references": [],
+  "occurrence_found_in": [
+    {
+      "id": 2,
+      "value": "Patrologia Latina"
+    }
+  ],
+  "author_lookup": [
+    {
+      "ids": {
+        "database_table_3498": 17,
+        "database_table_3499": 29
+      },
+      "value": "Paschasius, Radbertus"
+    }
+  ],
+  "prev": "jad_occurence__33.html",
+  "next": "jad_occurence__35.html",
+  "view_label": "Romanum exercitum intelligimus, sub duce Vespasiano ac Tito, qui occisis in vindicta Dei Judaeae populis"
+}
