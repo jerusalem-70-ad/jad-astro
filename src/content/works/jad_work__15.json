@@ -1,0 +1,43 @@
+{
+  "id": 15,
+  "order": "15.00000000000000000000",
+  "name": "Sermones ",
+  "jad_id": "jad_work__15",
+  "author": [
+    {
+      "id": 3,
+      "order": "3.00000000000000000000",
+      "name": "anonymous",
+      "jad_id": "jad_author__3",
+      "gnd_url": "",
+      "notes": null
+    }
+  ],
+  "manuscripts": [
+    {
+      "id": 11,
+      "value": "BNF, Latin 3737"
+    }
+  ],
+  "title": "Sermones",
+  "genre": {
+    "id": 14726,
+    "value": "Sermons",
+    "color": "darker-pink"
+  },
+  "not_before": "1280",
+  "not_after": "1320",
+  "written_date": "around 1300",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": [
+    {
+      "id": 1,
+      "order": "1.00000000000000000000",
+      "name": "None",
+      "jad_id": "jad_sources_occurrences__1",
+      "digi_url": ""
+    }
+  ]
+}

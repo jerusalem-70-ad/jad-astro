@@ -1,0 +1,46 @@
+{
+  "id": 85,
+  "order": "84.00000000000000000000",
+  "name": "Commentary Revelation ",
+  "jad_id": "jad_work__85",
+  "author": [
+    {
+      "id": 15,
+      "order": "15.00000000000000000000",
+      "name": "Bruno, Segni",
+      "jad_id": "jad_author__15",
+      "gnd_url": "https://d-nb.info/gnd/100938310",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Commentary Revelation",
+  "genre": {
+    "id": 14727,
+    "value": "Commentary",
+    "color": "darker-green"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [
+    {
+      "id": 5,
+      "order": "5.00000000000000000000",
+      "name": "Papal Curia",
+      "jad__id": "jad_institutional_context__5",
+      "part_of": []
+    }
+  ],
+  "published_edition": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Patrologia Latina",
+      "jad_id": "jad_sources_occurrences__2",
+      "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+    }
+  ]
+}

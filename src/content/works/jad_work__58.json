@@ -1,0 +1,38 @@
+{
+  "id": 58,
+  "order": "57.00000000000000000000",
+  "name": "Chronicon ",
+  "jad_id": "jad_work__58",
+  "author": [
+    {
+      "id": 47,
+      "order": "47.00000000000000000000",
+      "name": "Ado, von Vienne",
+      "jad_id": "jad_author__47",
+      "gnd_url": "https://d-nb.info/gnd/119536390",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Chronicon",
+  "genre": {
+    "id": 14731,
+    "value": "Chronicle",
+    "color": "red"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Patrologia Latina",
+      "jad_id": "jad_sources_occurrences__2",
+      "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+    }
+  ]
+}

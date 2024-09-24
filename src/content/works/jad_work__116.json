@@ -1,0 +1,38 @@
+{
+  "id": 116,
+  "order": "115.00000000000000000000",
+  "name": "Commentary Matthew ",
+  "jad_id": "jad_work__116",
+  "author": [
+    {
+      "id": 6,
+      "order": "6.00000000000000000000",
+      "name": "Beda, Heiliger",
+      "jad_id": "jad_author__6",
+      "gnd_url": "https://d-nb.info/gnd/118508237",
+      "notes": null
+    }
+  ],
+  "manuscripts": [],
+  "title": "Commentary Matthew",
+  "genre": {
+    "id": 14727,
+    "value": "Commentary",
+    "color": "darker-green"
+  },
+  "not_before": null,
+  "not_after": "735",
+  "written_date": "early 8",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Patrologia Latina",
+      "jad_id": "jad_sources_occurrences__2",
+      "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+    }
+  ]
+}

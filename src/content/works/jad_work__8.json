@@ -1,0 +1,55 @@
+{
+  "id": 8,
+  "order": "8.00000000000000000000",
+  "name": "Sermones ",
+  "jad_id": "jad_work__8",
+  "author": [
+    {
+      "id": 8,
+      "order": "8.00000000000000000000",
+      "name": "Hugo, von Saint-Cher",
+      "jad_id": "jad_author__8",
+      "gnd_url": "https://d-nb.info/gnd/118707957",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [
+    {
+      "id": 28,
+      "value": "Maz., Ms 1026"
+    },
+    {
+      "id": 29,
+      "value": "BNF, Latin 3728"
+    }
+  ],
+  "title": "Sermones",
+  "genre": {
+    "id": 14726,
+    "value": "Sermons",
+    "color": "darker-pink"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "13",
+  "notes": "",
+  "notes__author": "autorschaft hugo fraglich?",
+  "institutional_context": [
+    {
+      "id": 1,
+      "order": "1.00000000000000000000",
+      "name": "University of Paris",
+      "jad__id": "jad_institutional_context__1",
+      "part_of": [
+        {
+          "id": 16,
+          "order": "16.00000000000000000000",
+          "name": "French schools",
+          "jad__id": "jad_institutional_context__16",
+          "part_of": []
+        }
+      ]
+    }
+  ],
+  "published_edition": []
+}

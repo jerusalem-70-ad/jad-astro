@@ -1,0 +1,30 @@
+{
+  "id": 119,
+  "order": "118.00000000000000000000",
+  "name": "Sermones ",
+  "jad_id": "jad_work__119",
+  "author": [
+    {
+      "id": 20,
+      "order": "20.00000000000000000000",
+      "name": "Balduin, von Canterbury",
+      "jad_id": "jad_author__20",
+      "gnd_url": "https://d-nb.info/gnd/119268531",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Sermones",
+  "genre": {
+    "id": 14726,
+    "value": "Sermons",
+    "color": "darker-pink"
+  },
+  "not_before": null,
+  "not_after": "1190",
+  "written_date": "",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": []
+}

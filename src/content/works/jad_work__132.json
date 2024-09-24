@@ -1,0 +1,30 @@
+{
+  "id": 132,
+  "order": "131.00000000000000000000",
+  "name": "Explanatio symboli S. Athanasii ",
+  "jad_id": "jad_work__132",
+  "author": [
+    {
+      "id": 66,
+      "order": "65.00000000000000000000",
+      "name": "Hildegard, von Bingen",
+      "jad_id": "jad_author__66",
+      "gnd_url": "https://d-nb.info/gnd/118550993",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Explanatio symboli S. Athanasii",
+  "genre": {
+    "id": 15028,
+    "value": "Hagiography",
+    "color": "darker-blue"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": []
+}

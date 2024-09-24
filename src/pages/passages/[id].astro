@@ -20,22 +20,23 @@ export async function getStaticPaths() {
 }
 
 const { data: passage } = Astro.props;
+
 ---
 <PageLayout>
    <div class="grid grid-cols-[1fr_4fr] gap-2">
-    <aside class="border-2 border-r-brand900 bg-brand100 w-full py-5 px-6 max-h-screen overflow-scroll">
+    <aside class="border-2 border-r-brandBrown bg-brandRose py-5 px-6 overflow-scroll max-h-[700px]">
         <ul>
               
             {sortedPassages.map((passage) => {
                 return (
-                    <li class="list-disc overflow-hidden whitespace-nowrap text-ellipsis max-w-xs hover:text-wrap">                     
-                       <a href={passage.data.jad_id} class="hover:text-brand">({passage.data.jad_id.substring(15)}) <span class="italic">{passage.data.passage}</span></a>                                                        
+                    <li id={`passage-${passage.data.jad_id}`} class="list-disc overflow-hidden whitespace-nowrap text-ellipsis max-w-xs hover:text-wrap">                     
+                       <a href={passage.data.jad_id} class="hover:text-brandRed">({passage.data.jad_id.substring(15)}) <span class="italic">{passage.data.passage}</span></a>                                                        
                     </li>)
             })}
         </ul>      
     </aside>
     <div>
-        <div class="border-2 rounded-sm border-brand900 bg-brand100 m-5 grid p-5">
+        <div class="border-2 rounded-sm border-brandBrown bg-brandRose m-5 grid p-5">
             <h1 class="text-xl py-3 mx-auto font-medium">({passage.id}) <span class="italic">{passage.passage}</span></h1>
             <dl class="grid grid-cols-[1fr_5fr] gap-2 text-sm">
         
@@ -52,16 +53,16 @@ const { data: passage } = Astro.props;
                 <!-- this is an array - need to call .map to return an array of strings with the jad_id; outside the .map call .join() But first checek if it is empty-->
                
                 <dd>
-                    {
-                        passage.manuscript.map((ms: { jad_id: string; name: any;}, index: number) => (
+                    { passage.manuscript.length > 0
+                       ? passage.manuscript.map((ms: { jad_id: string; name: any;}, index: number) => (
                           <>
-                            <a href={`/manuscripts/${ms.jad_id}`} class="hover:text-brand600">
+                            <a href={`/manuscripts/${ms.jad_id}`} class="hover:text-brandRed">
                               {ms.name[0].value}
                             </a>
                             {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
                             {index < passage.manuscript.length - 1 && ', '}
                           </>
-                        ))
+                        )) : 'N/A'
                       }
                 </dd>
         
@@ -95,3 +96,19 @@ const { data: passage } = Astro.props;
 
    </div>
 </PageLayout>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Get the current `jad_id` from the URL path
+      const pathParts = window.location.pathname.split('/');
+      const currentId = pathParts[pathParts.length - 1]; // Extract the last part of the path
+  
+      // Find the matching `li` in the aside by `jad_id`
+      const matchingElement = document.getElementById(`passage-${currentId}`);
+  
+      // Scroll the matching element into view if it exists
+      if (matchingElement) {
+        matchingElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  </script>
+  

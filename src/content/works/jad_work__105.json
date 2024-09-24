@@ -1,0 +1,59 @@
+{
+  "id": 105,
+  "order": "104.00000000000000000000",
+  "name": "Sermones ",
+  "jad_id": "jad_work__105",
+  "author": [
+    {
+      "id": 59,
+      "order": "58.00000000000000000000",
+      "name": "Heiric, of Auxerre",
+      "jad_id": "jad_author__59",
+      "gnd_url": "https://d-nb.info/gnd/119215888",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [
+    {
+      "id": 34,
+      "value": "Maz., MS 698"
+    }
+  ],
+  "title": "Sermones",
+  "genre": {
+    "id": 14726,
+    "value": "Sermons",
+    "color": "darker-pink"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Benedictines Auxerre",
+      "jad__id": "jad_institutional_context__2",
+      "part_of": [
+        {
+          "id": 3,
+          "order": "3.00000000000000000000",
+          "name": "Benedictines",
+          "jad__id": "jad_institutional_context__3",
+          "part_of": []
+        }
+      ]
+    }
+  ],
+  "published_edition": [
+    {
+      "id": 7,
+      "order": "6.00000000000000000000",
+      "name": "Corpus Christianorum",
+      "jad_id": "jad_sources_occurrences__7",
+      "digi_url": ""
+    }
+  ]
+}

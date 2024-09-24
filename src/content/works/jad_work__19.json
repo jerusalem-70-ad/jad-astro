@@ -1,0 +1,59 @@
+{
+  "id": 19,
+  "order": "19.00000000000000000000",
+  "name": "Commentary Isaiah ",
+  "jad_id": "jad_work__19",
+  "author": [
+    {
+      "id": 4,
+      "order": "4.00000000000000000000",
+      "name": "Petrus, Cantor",
+      "jad_id": "jad_author__4",
+      "gnd_url": "https://d-nb.info/gnd/118790625",
+      "notes": null
+    }
+  ],
+  "manuscripts": [
+    {
+      "id": 23,
+      "value": "Maz., MS 178"
+    }
+  ],
+  "title": "Commentary Isaiah",
+  "genre": {
+    "id": 14727,
+    "value": "Commentary",
+    "color": "darker-green"
+  },
+  "not_before": null,
+  "not_after": "1197",
+  "written_date": "late 12",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [
+    {
+      "id": 1,
+      "order": "1.00000000000000000000",
+      "name": "University of Paris",
+      "jad__id": "jad_institutional_context__1",
+      "part_of": [
+        {
+          "id": 16,
+          "order": "16.00000000000000000000",
+          "name": "French schools",
+          "jad__id": "jad_institutional_context__16",
+          "part_of": []
+        }
+      ]
+    }
+  ],
+  "published_edition": [
+    {
+      "id": 1,
+      "order": "1.00000000000000000000",
+      "name": "None",
+      "jad_id": "jad_sources_occurrences__1",
+      "digi_url": ""
+    }
+  ]
+}

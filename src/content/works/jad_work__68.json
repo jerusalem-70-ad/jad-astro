@@ -1,0 +1,59 @@
+{
+  "id": 68,
+  "order": "67.00000000000000000000",
+  "name": "Commentary Revelation ",
+  "jad_id": "jad_work__68",
+  "author": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Martin, von León",
+      "jad_id": "jad_author__2",
+      "gnd_url": "https://d-nb.info/gnd/100953212",
+      "notes": null
+    }
+  ],
+  "manuscripts": [
+    {
+      "id": 3,
+      "value": "San Isidoro, MS 11"
+    }
+  ],
+  "title": "Commentary Revelation",
+  "genre": {
+    "id": 14727,
+    "value": "Commentary",
+    "color": "darker-green"
+  },
+  "not_before": "1175",
+  "not_after": "1200",
+  "written_date": "late 12",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [
+    {
+      "id": 1,
+      "order": "1.00000000000000000000",
+      "name": "University of Paris",
+      "jad__id": "jad_institutional_context__1",
+      "part_of": [
+        {
+          "id": 16,
+          "order": "16.00000000000000000000",
+          "name": "French schools",
+          "jad__id": "jad_institutional_context__16",
+          "part_of": []
+        }
+      ]
+    }
+  ],
+  "published_edition": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Patrologia Latina",
+      "jad_id": "jad_sources_occurrences__2",
+      "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+    }
+  ]
+}

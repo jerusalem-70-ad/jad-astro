@@ -1,0 +1,35 @@
+{
+  "id": 134,
+  "order": "133.00000000000000000000",
+  "name": "De Tyto et Vespasiano ",
+  "jad_id": "jad_work__134",
+  "author": [
+    {
+      "id": 3,
+      "order": "3.00000000000000000000",
+      "name": "anonymous",
+      "jad_id": "jad_author__3",
+      "gnd_url": "",
+      "notes": null
+    }
+  ],
+  "manuscripts": [
+    {
+      "id": 17,
+      "value": "Cambr. St.John's Coll., MS 127"
+    }
+  ],
+  "title": "De Tyto et Vespasiano",
+  "genre": {
+    "id": 14732,
+    "value": "Idiosyncratic work",
+    "color": "dark-red"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": []
+}

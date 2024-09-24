@@ -1,0 +1,63 @@
+{
+  "id": 9,
+  "order": "9.00000000000000000000",
+  "name": "Sermones ",
+  "jad_id": "jad_work__9",
+  "author": [
+    {
+      "id": 9,
+      "order": "9.00000000000000000000",
+      "name": "Petrus, Comestor",
+      "jad_id": "jad_author__9",
+      "gnd_url": "https://d-nb.info/gnd/118828851",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [
+    {
+      "id": 5,
+      "value": "St.Gen., MS 1423"
+    },
+    {
+      "id": 25,
+      "value": "BNF, Latin 3301C"
+    }
+  ],
+  "title": "Sermones",
+  "genre": {
+    "id": 14726,
+    "value": "Sermons",
+    "color": "darker-pink"
+  },
+  "not_before": "1140",
+  "not_after": "1160",
+  "written_date": "mid 12",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [
+    {
+      "id": 1,
+      "order": "1.00000000000000000000",
+      "name": "University of Paris",
+      "jad__id": "jad_institutional_context__1",
+      "part_of": [
+        {
+          "id": 16,
+          "order": "16.00000000000000000000",
+          "name": "French schools",
+          "jad__id": "jad_institutional_context__16",
+          "part_of": []
+        }
+      ]
+    }
+  ],
+  "published_edition": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Patrologia Latina",
+      "jad_id": "jad_sources_occurrences__2",
+      "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+    }
+  ]
+}

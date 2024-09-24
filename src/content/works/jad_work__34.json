@@ -1,0 +1,53 @@
+{
+  "id": 34,
+  "order": "34.00000000000000000000",
+  "name": "Sermones ",
+  "jad_id": "jad_work__34",
+  "author": [
+    {
+      "id": 21,
+      "order": "21.00000000000000000000",
+      "name": "Aelred, von Rievaulx",
+      "jad_id": "jad_author__21",
+      "gnd_url": "https://d-nb.info/gnd/118643908",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Sermones",
+  "genre": {
+    "id": 14726,
+    "value": "Sermons",
+    "color": "darker-pink"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [
+    {
+      "id": 9,
+      "order": "9.00000000000000000000",
+      "name": "Cistercians",
+      "jad__id": "jad_institutional_context__9",
+      "part_of": []
+    }
+  ],
+  "published_edition": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Patrologia Latina",
+      "jad_id": "jad_sources_occurrences__2",
+      "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+    },
+    {
+      "id": 7,
+      "order": "6.00000000000000000000",
+      "name": "Corpus Christianorum",
+      "jad_id": "jad_sources_occurrences__7",
+      "digi_url": ""
+    }
+  ]
+}

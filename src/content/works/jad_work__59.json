@@ -1,0 +1,38 @@
+{
+  "id": 59,
+  "order": "58.00000000000000000000",
+  "name": "Chronicon universale ",
+  "jad_id": "jad_work__59",
+  "author": [
+    {
+      "id": 48,
+      "order": "48.00000000000000000000",
+      "name": "Ekkehart, von Aura",
+      "jad_id": "jad_author__48",
+      "gnd_url": "https://d-nb.info/gnd/118688529",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Chronicon universale",
+  "genre": {
+    "id": 14731,
+    "value": "Chronicle",
+    "color": "red"
+  },
+  "not_before": "1100",
+  "not_after": "1125",
+  "written_date": "early 12",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Patrologia Latina",
+      "jad_id": "jad_sources_occurrences__2",
+      "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+    }
+  ]
+}

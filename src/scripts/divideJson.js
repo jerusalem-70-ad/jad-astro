@@ -1,5 +1,5 @@
 import { writeFileSync, readFileSync } from "fs";
-const originalData = readFileSync("../content/originalData/allPassages.json", {
+const originalData = readFileSync("../content/originalData/works.json", {
   encoding: "utf-8",
 });
 // use JSON.parse to convert from JSON to one huge object
@@ -11,7 +11,7 @@ const passagesValues = Object.values(passageData);
 // iterate over it, write single files with the jad_id as path, use JSON.stringify to convert the object to json, use encoding utf8.
 passagesValues.forEach((entry) => {
   writeFileSync(
-    `../content/passages/${entry["jad_id"]}.json`,
+    `../content/works/${entry["jad_id"]}.json`,
     JSON.stringify(entry, null, 2),
     "utf8"
   );

@@ -1,0 +1,54 @@
+{
+  "id": 122,
+  "order": "121.00000000000000000000",
+  "name": "Homiliae ",
+  "jad_id": "jad_work__122",
+  "author": [
+    {
+      "id": 61,
+      "order": "60.00000000000000000000",
+      "name": "Radulfus, Ardens",
+      "jad_id": "jad_author__61",
+      "gnd_url": "https://d-nb.info/gnd/118597698",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Homiliae",
+  "genre": {
+    "id": 14726,
+    "value": "Sermons",
+    "color": "darker-pink"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "late 12",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [
+    {
+      "id": 1,
+      "order": "1.00000000000000000000",
+      "name": "University of Paris",
+      "jad__id": "jad_institutional_context__1",
+      "part_of": [
+        {
+          "id": 16,
+          "order": "16.00000000000000000000",
+          "name": "French schools",
+          "jad__id": "jad_institutional_context__16",
+          "part_of": []
+        }
+      ]
+    }
+  ],
+  "published_edition": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Patrologia Latina",
+      "jad_id": "jad_sources_occurrences__2",
+      "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+    }
+  ]
+}

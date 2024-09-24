@@ -1,0 +1,30 @@
+{
+  "id": 111,
+  "order": "110.00000000000000000000",
+  "name": "Historia Ecclesiastica ",
+  "jad_id": "jad_work__111",
+  "author": [
+    {
+      "id": 60,
+      "order": "59.00000000000000000000",
+      "name": "Eusebius, von Caesarea",
+      "jad_id": "jad_author__60",
+      "gnd_url": "https://d-nb.info/gnd/118531425",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Historia Ecclesiastica",
+  "genre": {
+    "id": 14731,
+    "value": "Chronicle",
+    "color": "red"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": []
+}

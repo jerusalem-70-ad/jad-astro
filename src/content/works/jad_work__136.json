@@ -1,0 +1,35 @@
+{
+  "id": 136,
+  "order": "135.00000000000000000000",
+  "name": "Sermones ",
+  "jad_id": "jad_work__136",
+  "author": [
+    {
+      "id": 3,
+      "order": "3.00000000000000000000",
+      "name": "anonymous",
+      "jad_id": "jad_author__3",
+      "gnd_url": "",
+      "notes": null
+    }
+  ],
+  "manuscripts": [
+    {
+      "id": 22,
+      "value": "Troyes, MS 653"
+    }
+  ],
+  "title": "Sermones",
+  "genre": {
+    "id": 14726,
+    "value": "Sermons",
+    "color": "darker-pink"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "12",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": []
+}

@@ -1,0 +1,38 @@
+{
+  "id": 56,
+  "order": "55.00000000000000000000",
+  "name": "Commentary Galater ",
+  "jad_id": "jad_work__56",
+  "author": [
+    {
+      "id": 27,
+      "order": "27.00000000000000000000",
+      "name": "Hieronymus, Sophronius Eusebius",
+      "jad_id": "jad_author__27",
+      "gnd_url": "https://d-nb.info/gnd/118550853",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Commentary Galater",
+  "genre": {
+    "id": 14727,
+    "value": "Commentary",
+    "color": "darker-green"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "around 400",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Patrologia Latina",
+      "jad_id": "jad_sources_occurrences__2",
+      "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+    }
+  ]
+}

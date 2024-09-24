@@ -1,0 +1,35 @@
+{
+  "id": 7,
+  "order": "7.00000000000000000000",
+  "name": "Liber Floridus ",
+  "jad_id": "jad_work__7",
+  "author": [
+    {
+      "id": 7,
+      "order": "7.00000000000000000000",
+      "name": "Lambertus, Sancti Bertini",
+      "jad_id": "jad_author__7",
+      "gnd_url": "https://d-nb.info/gnd/102511721",
+      "notes": "same as Lambertus de Sancto-Audomaro"
+    }
+  ],
+  "manuscripts": [
+    {
+      "id": 4,
+      "value": "BNF, Latin 8865"
+    }
+  ],
+  "title": "Liber Floridus",
+  "genre": {
+    "id": 14732,
+    "value": "Idiosyncratic work",
+    "color": "dark-red"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": []
+}

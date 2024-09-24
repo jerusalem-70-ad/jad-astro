@@ -1,0 +1,38 @@
+{
+  "id": 37,
+  "order": "37.00000000000000000000",
+  "name": "Sermones dominicales ",
+  "jad_id": "jad_work__37",
+  "author": [
+    {
+      "id": 34,
+      "order": "34.00000000000000000000",
+      "name": "Bonaventura",
+      "jad_id": "jad_author__34",
+      "gnd_url": "https://d-nb.info/gnd/118513176",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Sermones dominicales",
+  "genre": {
+    "id": 14726,
+    "value": "Sermons",
+    "color": "darker-pink"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": [
+    {
+      "id": 7,
+      "order": "6.00000000000000000000",
+      "name": "Corpus Christianorum",
+      "jad_id": "jad_sources_occurrences__7",
+      "digi_url": ""
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": 95,
+  "order": "94.00000000000000000000",
+  "name": "Commentary John ",
+  "jad_id": "jad_work__95",
+  "author": [
+    {
+      "id": 16,
+      "order": "16.00000000000000000000",
+      "name": "Rupert, von Deutz",
+      "jad_id": "jad_author__16",
+      "gnd_url": "https://d-nb.info/gnd/118604198",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Commentary John",
+  "genre": {
+    "id": 14727,
+    "value": "Commentary",
+    "color": "darker-green"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "early 12",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [
+    {
+      "id": 3,
+      "order": "3.00000000000000000000",
+      "name": "Benedictines",
+      "jad__id": "jad_institutional_context__3",
+      "part_of": []
+    }
+  ],
+  "published_edition": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Patrologia Latina",
+      "jad_id": "jad_sources_occurrences__2",
+      "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+    }
+  ]
+}

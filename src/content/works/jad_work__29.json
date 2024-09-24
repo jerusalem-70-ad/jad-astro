@@ -1,0 +1,61 @@
+{
+  "id": 29,
+  "order": "29.00000000000000000000",
+  "name": "Commentary Matthew ",
+  "jad_id": "jad_work__29",
+  "author": [
+    {
+      "id": 17,
+      "order": "17.00000000000000000000",
+      "name": "Paschasius, Radbertus",
+      "jad_id": "jad_author__17",
+      "gnd_url": "https://d-nb.info/gnd/118739409",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Commentary Matthew",
+  "genre": {
+    "id": 14727,
+    "value": "Commentary",
+    "color": "darker-green"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [
+    {
+      "id": 13,
+      "order": "13.00000000000000000000",
+      "name": "Benedictines Corbie",
+      "jad__id": "jad_institutional_context__13",
+      "part_of": [
+        {
+          "id": 3,
+          "order": "3.00000000000000000000",
+          "name": "Benedictines",
+          "jad__id": "jad_institutional_context__3",
+          "part_of": []
+        }
+      ]
+    }
+  ],
+  "published_edition": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Patrologia Latina",
+      "jad_id": "jad_sources_occurrences__2",
+      "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+    },
+    {
+      "id": 7,
+      "order": "6.00000000000000000000",
+      "name": "Corpus Christianorum",
+      "jad_id": "jad_sources_occurrences__7",
+      "digi_url": ""
+    }
+  ]
+}

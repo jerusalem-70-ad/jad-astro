@@ -1,0 +1,38 @@
+{
+  "id": 107,
+  "order": "106.00000000000000000000",
+  "name": "Chanson d'Antioche ",
+  "jad_id": "jad_work__107",
+  "author": [
+    {
+      "id": 3,
+      "order": "3.00000000000000000000",
+      "name": "anonymous",
+      "jad_id": "jad_author__3",
+      "gnd_url": "",
+      "notes": null
+    }
+  ],
+  "manuscripts": [],
+  "title": "Chanson d'Antioche",
+  "genre": {
+    "id": 15025,
+    "value": "Vernacular treatise",
+    "color": "darker-red"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "late 12",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": [
+    {
+      "id": 12,
+      "order": "11.00000000000000000000",
+      "name": "Other edition",
+      "jad_id": "jad_sources_occurrences__12",
+      "digi_url": ""
+    }
+  ]
+}

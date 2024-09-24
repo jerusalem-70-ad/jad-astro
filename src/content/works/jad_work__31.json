@@ -1,0 +1,46 @@
+{
+  "id": 31,
+  "order": "31.00000000000000000000",
+  "name": "Commentary Psalms ",
+  "jad_id": "jad_work__31",
+  "author": [
+    {
+      "id": 31,
+      "order": "31.00000000000000000000",
+      "name": "Gerhoch, von Reichersberg",
+      "jad_id": "jad_author__31",
+      "gnd_url": "https://d-nb.info/gnd/118690752",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Commentary Psalms",
+  "genre": {
+    "id": 14727,
+    "value": "Commentary",
+    "color": "darker-green"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [
+    {
+      "id": 8,
+      "order": "8.00000000000000000000",
+      "name": "Augustinian canons",
+      "jad__id": "jad_institutional_context__8",
+      "part_of": []
+    }
+  ],
+  "published_edition": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Patrologia Latina",
+      "jad_id": "jad_sources_occurrences__2",
+      "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+    }
+  ]
+}

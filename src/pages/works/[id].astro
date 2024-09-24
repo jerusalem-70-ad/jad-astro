@@ -1,0 +1,86 @@
+---
+import { any } from "astro/zod";
+import PageLayout from "../../layouts/page-layout.astro";
+import { getCollection } from "astro:content";
+const collection = await getCollection("works")
+
+
+// make a function to read the collection; 'export' make the function available for Astro'S static site generation. 
+
+export async function getStaticPaths() {
+    // 1) Use getCollection to fetch the json file
+    const works = await getCollection("works")
+    return works.map(work => {
+        return { params: {id: work.id},
+                props: {data: work.data}}
+   })
+}
+
+const { data: work } = Astro.props;
+
+---
+<PageLayout>  
+   
+    <div>
+        <div class="border-2 rounded-sm border-brandBrown bg-brandRose my-10 grid p-5 w-3/4 mx-auto">
+            <h1 class="text-xl py-3 mx-auto font-medium">({work.id}) <span class="italic">{work.title}</span></h1>
+            <dl class="grid grid-cols-[1fr_5fr] gap-2 text-sm leading-7">
+                <div class="col-start-1 border-r border-gray-300 pr-2"> <!-- First column -->
+                    <dt class="font-semibold">Author:</dt>
+
+                    <dt class="font-semibold">Manuscripts:</dt>                
+
+                    <dt class="font-semibold">Genre:</dt>                        
+                    
+                    <dt class="font-semibold">Edition:</dt>                        
+    
+                    <dt class="font-semibold">Institutional context:</dt>                        
+    
+                    <dt class="font-semibold">Date:</dt>
+                </div>
+                <div class="col-start-2 pl-2"> <!-- Second column -->
+                    
+                    <dd>{work.author[0].name}</dd>
+                   
+                    <dd>
+                        { work.manuscripts.length > 0
+                           ? work.manuscripts.map((ms: { id: string; value: any;}, index: number) => (
+                              <>
+                                <a href={`/manuscripts/jad_manuscript__${ms.id}`} class="hover:text-brandRed">
+                                  {ms.value}
+                                </a>
+                                {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
+                                {index < work.manuscripts.length - 1 && '| '}
+                              </>
+                            )) : 'N/A'
+                          }
+                    </dd>
+                    
+                    <dd>
+                        {work.genre.value}
+                    </dd>
+
+                    <dd>
+                        {work.published_edition.map((edition : {name : string}) => {
+                            return edition.name;
+                        }).join(', ')}
+                    </dd>
+
+                    <dd>
+                        {work.institutional_context.map((institution : {name : string}) => {
+                            return institution.name;
+                        }).join(', ')}
+                    </dd>
+
+                    <dd>
+                        {work.written_date}th c.
+                    </dd>
+
+                </div>  
+            </dl>
+        
+        </div>
+    </div>
+
+</PageLayout>
+  

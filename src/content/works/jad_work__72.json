@@ -1,0 +1,38 @@
+{
+  "id": 72,
+  "order": "71.00000000000000000000",
+  "name": "Collectiones in epistolas et evangelia ",
+  "jad_id": "jad_work__72",
+  "author": [
+    {
+      "id": 54,
+      "order": "53.00000000000000000000",
+      "name": "Smaragdus, Sancti Michaelis",
+      "jad_id": "jad_author__54",
+      "gnd_url": "https://d-nb.info/gnd/118614983",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Collectiones in epistolas et evangelia",
+  "genre": {
+    "id": 14726,
+    "value": "Sermons",
+    "color": "darker-pink"
+  },
+  "not_before": "800",
+  "not_after": "840",
+  "written_date": "early 9",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Patrologia Latina",
+      "jad_id": "jad_sources_occurrences__2",
+      "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+    }
+  ]
+}

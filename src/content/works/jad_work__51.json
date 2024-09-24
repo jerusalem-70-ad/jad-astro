@@ -1,0 +1,54 @@
+{
+  "id": 51,
+  "order": "50.00000000000000000000",
+  "name": "Commentary Psalms ",
+  "jad_id": "jad_work__51",
+  "author": [
+    {
+      "id": 41,
+      "order": "41.00000000000000000000",
+      "name": "Peter Lombard",
+      "jad_id": "jad_author__41",
+      "gnd_url": "https://d-nb.info/gnd/11859334X",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Commentary Psalms",
+  "genre": {
+    "id": 14727,
+    "value": "Commentary",
+    "color": "darker-green"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [
+    {
+      "id": 1,
+      "order": "1.00000000000000000000",
+      "name": "University of Paris",
+      "jad__id": "jad_institutional_context__1",
+      "part_of": [
+        {
+          "id": 16,
+          "order": "16.00000000000000000000",
+          "name": "French schools",
+          "jad__id": "jad_institutional_context__16",
+          "part_of": []
+        }
+      ]
+    }
+  ],
+  "published_edition": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Patrologia Latina",
+      "jad_id": "jad_sources_occurrences__2",
+      "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+    }
+  ]
+}

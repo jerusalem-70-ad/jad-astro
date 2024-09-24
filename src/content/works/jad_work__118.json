@@ -1,0 +1,30 @@
+{
+  "id": 118,
+  "order": "117.00000000000000000000",
+  "name": "Commentary Numeri ",
+  "jad_id": "jad_work__118",
+  "author": [
+    {
+      "id": 5,
+      "order": "5.00000000000000000000",
+      "name": "Hrabanus, Maurus",
+      "jad_id": "jad_author__5",
+      "gnd_url": "https://d-nb.info/gnd/118553909",
+      "notes": null
+    }
+  ],
+  "manuscripts": [],
+  "title": "Commentary Numeri",
+  "genre": {
+    "id": 14727,
+    "value": "Commentary",
+    "color": "darker-green"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": []
+}

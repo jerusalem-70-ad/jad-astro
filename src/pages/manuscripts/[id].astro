@@ -17,8 +17,8 @@ export async function getStaticPaths() {
 const { data: manuscript } = Astro.props;
 ---
 <PageLayout>
-    <div class="py-5">
-        <article class="border-2 rounded-md border-brand900 bg-brand100 w-3/4 grid grid-cols-1 mx-auto px-5">
+    <div>
+        <article class="border-2 rounded-sm border-brandBrown bg-brandRose w-3/4 grid grid-cols-1 mx-auto p-5 my-10">
             <h1 class="text-xl py-3 mx-auto">{manuscript.name[0].value}</h1>
             <dl class="grid grid-cols-[1fr_4fr] gap-2 text-xs md:text-sm">
                 <dt class="font-semibold">Settlement:</dt>
@@ -40,7 +40,7 @@ const { data: manuscript } = Astro.props;
                   {
                     manuscript.related__passages.map((passage: { jad_id: string; }, index: number) => (
                       <>
-                        <a href={`/passages/${passage.jad_id}`} class="hover:text-brand600">
+                        <a href={`/passages/${passage.jad_id}`} class="hover:text-brandRed">
                           #{passage.jad_id.substring(15)}
                         </a>
                         {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
@@ -57,8 +57,8 @@ const { data: manuscript } = Astro.props;
             <div class="flex flex-col gap-2 py-2 text-xs md:text-sm">
                 {manuscript.digi_url && (
                      <div class="flex">
-                        <section>Digital facsimile</section> 
-                        <a href={manuscript.digi_url} class="inline-flex">
+                        <a href={manuscript.digi_url} class="inline-flex hover:font-semibold">
+                            <section>Digital facsimile</section> 
                             <img src="/external-link.svg" alt="" class="w-4 inline">
                         </a>
                     </div>
@@ -66,14 +66,12 @@ const { data: manuscript } = Astro.props;
                   )}
                   
                 {manuscript.catalog_url && (
-                   <div class="flex">
-                        <section>Catalog entry</section> 
-                        <a href={manuscript.catalog_url} class="inline-flex">
+                   <div class="flex">                        
+                        <a href={manuscript.catalog_url} class="inline-flex hover:font-semibold">
+                            <section>Catalog entry</section> 
                             <img src="/external-link.svg" alt="" class="w-4 inline">
                         </a>
-                    </div>
-
-                    
+                    </div>                    
                 )}
             </div>
            

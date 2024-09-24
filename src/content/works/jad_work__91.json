@@ -1,0 +1,46 @@
+{
+  "id": 91,
+  "order": "90.00000000000000000000",
+  "name": "De incarnatione contra Judaeos ",
+  "jad_id": "jad_work__91",
+  "author": [
+    {
+      "id": 58,
+      "order": "57.00000000000000000000",
+      "name": "Guibert, von Nogent",
+      "jad_id": "jad_author__58",
+      "gnd_url": "https://d-nb.info/gnd/118699083",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "De incarnatione contra Judaeos",
+  "genre": {
+    "id": 14728,
+    "value": "Anti-Jewish treatise",
+    "color": "darker-purple"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "early 12",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [
+    {
+      "id": 3,
+      "order": "3.00000000000000000000",
+      "name": "Benedictines",
+      "jad__id": "jad_institutional_context__3",
+      "part_of": []
+    }
+  ],
+  "published_edition": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Patrologia Latina",
+      "jad_id": "jad_sources_occurrences__2",
+      "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+    }
+  ]
+}

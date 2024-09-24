@@ -1,0 +1,30 @@
+{
+  "id": 139,
+  "order": "138.00000000000000000000",
+  "name": "De ratione temporum ",
+  "jad_id": "jad_work__139",
+  "author": [
+    {
+      "id": 6,
+      "order": "6.00000000000000000000",
+      "name": "Beda, Heiliger",
+      "jad_id": "jad_author__6",
+      "gnd_url": "https://d-nb.info/gnd/118508237",
+      "notes": null
+    }
+  ],
+  "manuscripts": [],
+  "title": "De ratione temporum",
+  "genre": {
+    "id": 14732,
+    "value": "Idiosyncratic work",
+    "color": "dark-red"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": []
+}

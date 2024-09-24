@@ -1,0 +1,51 @@
+{
+  "id": 18,
+  "order": "18.00000000000000000000",
+  "name": "Sermones super evangelia ",
+  "jad_id": "jad_work__18",
+  "author": [
+    {
+      "id": 12,
+      "order": "12.00000000000000000000",
+      "name": "Philippus, Cancellarius",
+      "jad_id": "jad_author__12",
+      "gnd_url": "https://d-nb.info/gnd/11936154X",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [
+    {
+      "id": 21,
+      "value": "BNF, Latin 3281"
+    }
+  ],
+  "title": "Sermones super evangelia",
+  "genre": {
+    "id": 14726,
+    "value": "Sermons",
+    "color": "darker-pink"
+  },
+  "not_before": "1200",
+  "not_after": "1236",
+  "written_date": "early 13",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [
+    {
+      "id": 1,
+      "order": "1.00000000000000000000",
+      "name": "University of Paris",
+      "jad__id": "jad_institutional_context__1",
+      "part_of": [
+        {
+          "id": 16,
+          "order": "16.00000000000000000000",
+          "name": "French schools",
+          "jad__id": "jad_institutional_context__16",
+          "part_of": []
+        }
+      ]
+    }
+  ],
+  "published_edition": []
+}

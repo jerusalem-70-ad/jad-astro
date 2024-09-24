@@ -1,0 +1,30 @@
+{
+  "id": 126,
+  "order": "125.00000000000000000000",
+  "name": "Homiliae dominicales ",
+  "jad_id": "jad_work__126",
+  "author": [
+    {
+      "id": 64,
+      "order": "63.00000000000000000000",
+      "name": "Gottfried, von Admont",
+      "jad_id": "jad_author__64",
+      "gnd_url": "https://d-nb.info/gnd/100943098",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Homiliae dominicales",
+  "genre": {
+    "id": 14726,
+    "value": "Sermons",
+    "color": "darker-pink"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": []
+}

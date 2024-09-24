@@ -1,0 +1,6323 @@
+{
+  "1": {
+    "id": 1,
+    "order": "1.00000000000000000000",
+    "name": "Liber Sermonum ",
+    "jad_id": "jad_work__1",
+    "author": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Martin, von León",
+        "jad_id": "jad_author__2",
+        "gnd_url": "https://d-nb.info/gnd/100953212",
+        "notes": null
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 3,
+        "value": "San Isidoro, MS 11"
+      }
+    ],
+    "title": "Liber Sermonum",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": "1175",
+    "not_after": "1200",
+    "written_date": "late 12",
+    "notes": null,
+    "notes__author": null,
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "2": {
+    "id": 2,
+    "order": "2.00000000000000000000",
+    "name": "Sermones ",
+    "jad_id": "jad_work__2",
+    "author": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "Petrus, von Blois",
+        "jad_id": "jad_author__1",
+        "gnd_url": "https://d-nb.info/gnd/118923927",
+        "notes": null
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 12,
+        "value": "St.Gen., MS 2787"
+      },
+      {
+        "id": 13,
+        "value": "BL, Arundel 322"
+      },
+      {
+        "id": 14,
+        "value": "BL, Royal 8 F XVII"
+      }
+    ],
+    "title": "Sermones",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": "1175",
+    "not_after": "1200",
+    "written_date": "late 12",
+    "notes": null,
+    "notes__author": null,
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "order": "6.00000000000000000000",
+        "name": "See of Canterbury",
+        "jad__id": "jad_institutional_context__6",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "3": {
+    "id": 3,
+    "order": "3.00000000000000000000",
+    "name": "Certa relatio de situ Jerusalem ",
+    "jad_id": "jad_work__3",
+    "author": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "anonymous",
+        "jad_id": "jad_author__3",
+        "gnd_url": "",
+        "notes": null
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 9,
+        "value": "Lam., MS 144"
+      }
+    ],
+    "title": "Certa relatio de situ Jerusalem",
+    "genre": {
+      "id": 14732,
+      "value": "Idiosyncratic work",
+      "color": "dark-red"
+    },
+    "not_before": "1187",
+    "not_after": "1200",
+    "written_date": "post 1187",
+    "notes": null,
+    "notes__author": null,
+    "institutional_context": [
+      {
+        "id": 6,
+        "order": "6.00000000000000000000",
+        "name": "See of Canterbury",
+        "jad__id": "jad_institutional_context__6",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "None",
+        "jad_id": "jad_sources_occurrences__1",
+        "digi_url": ""
+      }
+    ]
+  },
+  "4": {
+    "id": 4,
+    "order": "4.00000000000000000000",
+    "name": "Commentary Psalms ",
+    "jad_id": "jad_work__4",
+    "author": [
+      {
+        "id": 4,
+        "order": "4.00000000000000000000",
+        "name": "Petrus, Cantor",
+        "jad_id": "jad_author__4",
+        "gnd_url": "https://d-nb.info/gnd/118790625",
+        "notes": null
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 2,
+        "value": "BNF, Latin 14426"
+      }
+    ],
+    "title": "Commentary Psalms",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": "1187",
+    "not_after": "1197",
+    "written_date": "post 1187",
+    "notes": null,
+    "notes__author": null,
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "None",
+        "jad_id": "jad_sources_occurrences__1",
+        "digi_url": ""
+      }
+    ]
+  },
+  "5": {
+    "id": 5,
+    "order": "5.00000000000000000000",
+    "name": "Sermones ",
+    "jad_id": "jad_work__5",
+    "author": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Hrabanus, Maurus",
+        "jad_id": "jad_author__5",
+        "gnd_url": "https://d-nb.info/gnd/118553909",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Sermones",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": null,
+    "notes__author": null,
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "6": {
+    "id": 6,
+    "order": "6.00000000000000000000",
+    "name": "Commentary Luke ",
+    "jad_id": "jad_work__6",
+    "author": [
+      {
+        "id": 6,
+        "order": "6.00000000000000000000",
+        "name": "Beda, Heiliger",
+        "jad_id": "jad_author__6",
+        "gnd_url": "https://d-nb.info/gnd/118508237",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Luke",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 8",
+    "notes": null,
+    "notes__author": null,
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "7": {
+    "id": 7,
+    "order": "7.00000000000000000000",
+    "name": "Liber Floridus ",
+    "jad_id": "jad_work__7",
+    "author": [
+      {
+        "id": 7,
+        "order": "7.00000000000000000000",
+        "name": "Lambertus, Sancti Bertini",
+        "jad_id": "jad_author__7",
+        "gnd_url": "https://d-nb.info/gnd/102511721",
+        "notes": "same as Lambertus de Sancto-Audomaro"
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 4,
+        "value": "BNF, Latin 8865"
+      }
+    ],
+    "title": "Liber Floridus",
+    "genre": {
+      "id": 14732,
+      "value": "Idiosyncratic work",
+      "color": "dark-red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "8": {
+    "id": 8,
+    "order": "8.00000000000000000000",
+    "name": "Sermones ",
+    "jad_id": "jad_work__8",
+    "author": [
+      {
+        "id": 8,
+        "order": "8.00000000000000000000",
+        "name": "Hugo, von Saint-Cher",
+        "jad_id": "jad_author__8",
+        "gnd_url": "https://d-nb.info/gnd/118707957",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 28,
+        "value": "Maz., Ms 1026"
+      },
+      {
+        "id": 29,
+        "value": "BNF, Latin 3728"
+      }
+    ],
+    "title": "Sermones",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "13",
+    "notes": "",
+    "notes__author": "autorschaft hugo fraglich?",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": []
+  },
+  "9": {
+    "id": 9,
+    "order": "9.00000000000000000000",
+    "name": "Sermones ",
+    "jad_id": "jad_work__9",
+    "author": [
+      {
+        "id": 9,
+        "order": "9.00000000000000000000",
+        "name": "Petrus, Comestor",
+        "jad_id": "jad_author__9",
+        "gnd_url": "https://d-nb.info/gnd/118828851",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 5,
+        "value": "St.Gen., MS 1423"
+      },
+      {
+        "id": 25,
+        "value": "BNF, Latin 3301C"
+      }
+    ],
+    "title": "Sermones",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": "1140",
+    "not_after": "1160",
+    "written_date": "mid 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "10": {
+    "id": 10,
+    "order": "10.00000000000000000000",
+    "name": "Commentary Maccabees ",
+    "jad_id": "jad_work__10",
+    "author": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Hrabanus, Maurus",
+        "jad_id": "jad_author__5",
+        "gnd_url": "https://d-nb.info/gnd/118553909",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Maccabees",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "11": {
+    "id": 11,
+    "order": "11.00000000000000000000",
+    "name": "Commentary Isaiah ",
+    "jad_id": "jad_work__11",
+    "author": [
+      {
+        "id": 10,
+        "order": "10.00000000000000000000",
+        "name": "Langton, Stephen",
+        "jad_id": "jad_author__10",
+        "gnd_url": "https://d-nb.info/gnd/118778714",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 6,
+        "value": "BNF, Latin 492"
+      },
+      {
+        "id": 7,
+        "value": "Maz., MS 177"
+      }
+    ],
+    "title": "Commentary Isaiah",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "None",
+        "jad_id": "jad_sources_occurrences__1",
+        "digi_url": ""
+      }
+    ]
+  },
+  "12": {
+    "id": 12,
+    "order": "12.00000000000000000000",
+    "name": "Sermones ",
+    "jad_id": "jad_work__12",
+    "author": [
+      {
+        "id": 10,
+        "order": "10.00000000000000000000",
+        "name": "Langton, Stephen",
+        "jad_id": "jad_author__10",
+        "gnd_url": "https://d-nb.info/gnd/118778714",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 8,
+        "value": "St.Gen., MS 1422"
+      }
+    ],
+    "title": "Sermones",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "None",
+        "jad_id": "jad_sources_occurrences__1",
+        "digi_url": ""
+      }
+    ]
+  },
+  "13": {
+    "id": 13,
+    "order": "13.00000000000000000000",
+    "name": "Commentary Ezekiel ",
+    "jad_id": "jad_work__13",
+    "author": [
+      {
+        "id": 10,
+        "order": "10.00000000000000000000",
+        "name": "Langton, Stephen",
+        "jad_id": "jad_author__10",
+        "gnd_url": "https://d-nb.info/gnd/118778714",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 7,
+        "value": "Maz., MS 177"
+      }
+    ],
+    "title": "Commentary Ezekiel",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "None",
+        "jad_id": "jad_sources_occurrences__1",
+        "digi_url": ""
+      }
+    ]
+  },
+  "14": {
+    "id": 14,
+    "order": "14.00000000000000000000",
+    "name": "De destructione templi ",
+    "jad_id": "jad_work__14",
+    "author": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "anonymous",
+        "jad_id": "jad_author__3",
+        "gnd_url": "",
+        "notes": null
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 10,
+        "value": "BNF, Latin 446"
+      }
+    ],
+    "title": "De destructione templi",
+    "genre": {
+      "id": 14732,
+      "value": "Idiosyncratic work",
+      "color": "dark-red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "15": {
+    "id": 15,
+    "order": "15.00000000000000000000",
+    "name": "Sermones ",
+    "jad_id": "jad_work__15",
+    "author": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "anonymous",
+        "jad_id": "jad_author__3",
+        "gnd_url": "",
+        "notes": null
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 11,
+        "value": "BNF, Latin 3737"
+      }
+    ],
+    "title": "Sermones",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": "1280",
+    "not_after": "1320",
+    "written_date": "around 1300",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "None",
+        "jad_id": "jad_sources_occurrences__1",
+        "digi_url": ""
+      }
+    ]
+  },
+  "16": {
+    "id": 16,
+    "order": "16.00000000000000000000",
+    "name": "Postillae in Evangelia ",
+    "jad_id": "jad_work__16",
+    "author": [
+      {
+        "id": 9,
+        "order": "9.00000000000000000000",
+        "name": "Petrus, Comestor",
+        "jad_id": "jad_author__9",
+        "gnd_url": "https://d-nb.info/gnd/118828851",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 15,
+        "value": "BNF, Latin 620"
+      }
+    ],
+    "title": "Postillae in Evangelia",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "mid 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "None",
+        "jad_id": "jad_sources_occurrences__1",
+        "digi_url": ""
+      }
+    ]
+  },
+  "17": {
+    "id": 17,
+    "order": "17.00000000000000000000",
+    "name": "Homiliae super evangelia ",
+    "jad_id": "jad_work__17",
+    "author": [
+      {
+        "id": 11,
+        "order": "11.00000000000000000000",
+        "name": "Luculentius",
+        "jad_id": "jad_author__11",
+        "gnd_url": "https://d-nb.info/gnd/119383705",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 18,
+        "value": "BNF, Latin 3829"
+      }
+    ],
+    "title": "Homiliae super evangelia",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "around 900",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "18": {
+    "id": 18,
+    "order": "18.00000000000000000000",
+    "name": "Sermones super evangelia ",
+    "jad_id": "jad_work__18",
+    "author": [
+      {
+        "id": 12,
+        "order": "12.00000000000000000000",
+        "name": "Philippus, Cancellarius",
+        "jad_id": "jad_author__12",
+        "gnd_url": "https://d-nb.info/gnd/11936154X",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 21,
+        "value": "BNF, Latin 3281"
+      }
+    ],
+    "title": "Sermones super evangelia",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": "1200",
+    "not_after": "1236",
+    "written_date": "early 13",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": []
+  },
+  "19": {
+    "id": 19,
+    "order": "19.00000000000000000000",
+    "name": "Commentary Isaiah ",
+    "jad_id": "jad_work__19",
+    "author": [
+      {
+        "id": 4,
+        "order": "4.00000000000000000000",
+        "name": "Petrus, Cantor",
+        "jad_id": "jad_author__4",
+        "gnd_url": "https://d-nb.info/gnd/118790625",
+        "notes": null
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 23,
+        "value": "Maz., MS 178"
+      }
+    ],
+    "title": "Commentary Isaiah",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": "1197",
+    "written_date": "late 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "None",
+        "jad_id": "jad_sources_occurrences__1",
+        "digi_url": ""
+      }
+    ]
+  },
+  "20": {
+    "id": 20,
+    "order": "20.00000000000000000000",
+    "name": "Commentary Ezekiel ",
+    "jad_id": "jad_work__20",
+    "author": [
+      {
+        "id": 4,
+        "order": "4.00000000000000000000",
+        "name": "Petrus, Cantor",
+        "jad_id": "jad_author__4",
+        "gnd_url": "https://d-nb.info/gnd/118790625",
+        "notes": null
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 23,
+        "value": "Maz., MS 178"
+      }
+    ],
+    "title": "Commentary Ezekiel",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": "1197",
+    "written_date": "late 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "None",
+        "jad_id": "jad_sources_occurrences__1",
+        "digi_url": ""
+      }
+    ]
+  },
+  "21": {
+    "id": 21,
+    "order": "21.00000000000000000000",
+    "name": "Commentary Lamentationes ",
+    "jad_id": "jad_work__21",
+    "author": [
+      {
+        "id": 4,
+        "order": "4.00000000000000000000",
+        "name": "Petrus, Cantor",
+        "jad_id": "jad_author__4",
+        "gnd_url": "https://d-nb.info/gnd/118790625",
+        "notes": null
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 23,
+        "value": "Maz., MS 178"
+      }
+    ],
+    "title": "Commentary Lamentationes",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": "1197",
+    "written_date": "late 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "None",
+        "jad_id": "jad_sources_occurrences__1",
+        "digi_url": ""
+      }
+    ]
+  },
+  "22": {
+    "id": 22,
+    "order": "22.00000000000000000000",
+    "name": "Commentary Daniel ",
+    "jad_id": "jad_work__22",
+    "author": [
+      {
+        "id": 4,
+        "order": "4.00000000000000000000",
+        "name": "Petrus, Cantor",
+        "jad_id": "jad_author__4",
+        "gnd_url": "https://d-nb.info/gnd/118790625",
+        "notes": null
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 23,
+        "value": "Maz., MS 178"
+      }
+    ],
+    "title": "Commentary Daniel",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": "1197",
+    "written_date": "late 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "None",
+        "jad_id": "jad_sources_occurrences__1",
+        "digi_url": ""
+      }
+    ]
+  },
+  "23": {
+    "id": 23,
+    "order": "23.00000000000000000000",
+    "name": "Sermones ",
+    "jad_id": "jad_work__23",
+    "author": [
+      {
+        "id": 13,
+        "order": "13.00000000000000000000",
+        "name": "Maurice, de Sully",
+        "jad_id": "jad_author__13",
+        "gnd_url": "https://d-nb.info/gnd/118924141",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 24,
+        "value": "Maz., MS 999"
+      }
+    ],
+    "title": "Sermones",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": "1160",
+    "not_after": "1170",
+    "written_date": "1160s",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "None",
+        "jad_id": "jad_sources_occurrences__1",
+        "digi_url": ""
+      }
+    ]
+  },
+  "24": {
+    "id": 24,
+    "order": "24.00000000000000000000",
+    "name": "Sermones ",
+    "jad_id": "jad_work__24",
+    "author": [
+      {
+        "id": 14,
+        "order": "14.00000000000000000000",
+        "name": "Hilduinus, Cancellarius Parisiensis",
+        "jad_id": "jad_author__14",
+        "gnd_url": "https://d-nb.info/gnd/102498377",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 26,
+        "value": "BNF, Latin 3733"
+      },
+      {
+        "id": 27,
+        "value": "Maz., MS 774"
+      }
+    ],
+    "title": "Sermones",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "late 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "None",
+        "jad_id": "jad_sources_occurrences__1",
+        "digi_url": ""
+      }
+    ]
+  },
+  "25": {
+    "id": 25,
+    "order": "25.00000000000000000000",
+    "name": "Historia Hierosolymitana ",
+    "jad_id": "jad_work__25",
+    "author": [
+      {
+        "id": 23,
+        "order": "23.00000000000000000000",
+        "name": "Fulcher, von Chartres",
+        "jad_id": "jad_author__23",
+        "gnd_url": "https://d-nb.info/gnd/118956043",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Historia Hierosolymitana",
+    "genre": {
+      "id": 14731,
+      "value": "Chronicle",
+      "color": "red"
+    },
+    "not_before": "1100",
+    "not_after": "1125",
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 4,
+        "order": "4.00000000000000000000",
+        "name": "Kingdom of Jerusalem",
+        "jad__id": "jad_institutional_context__4",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      },
+      {
+        "id": 12,
+        "order": "11.00000000000000000000",
+        "name": "Other edition",
+        "jad_id": "jad_sources_occurrences__12",
+        "digi_url": ""
+      }
+    ]
+  },
+  "26": {
+    "id": 26,
+    "order": "26.00000000000000000000",
+    "name": "Commentary Isaiah ",
+    "jad_id": "jad_work__26",
+    "author": [
+      {
+        "id": 25,
+        "order": "25.00000000000000000000",
+        "name": "Haimo, von Auxerre",
+        "jad_id": "jad_author__25",
+        "gnd_url": "https://d-nb.info/gnd/100945260",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Isaiah",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Benedictines Auxerre",
+        "jad__id": "jad_institutional_context__2",
+        "part_of": [
+          {
+            "id": 3,
+            "order": "3.00000000000000000000",
+            "name": "Benedictines",
+            "jad__id": "jad_institutional_context__3",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "27": {
+    "id": 27,
+    "order": "27.00000000000000000000",
+    "name": "Sermones ",
+    "jad_id": "jad_work__27",
+    "author": [
+      {
+        "id": 25,
+        "order": "25.00000000000000000000",
+        "name": "Haimo, von Auxerre",
+        "jad_id": "jad_author__25",
+        "gnd_url": "https://d-nb.info/gnd/100945260",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Sermones",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Benedictines Auxerre",
+        "jad__id": "jad_institutional_context__2",
+        "part_of": [
+          {
+            "id": 3,
+            "order": "3.00000000000000000000",
+            "name": "Benedictines",
+            "jad__id": "jad_institutional_context__3",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "28": {
+    "id": 28,
+    "order": "28.00000000000000000000",
+    "name": "Commentary Kings ",
+    "jad_id": "jad_work__28",
+    "author": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Hrabanus, Maurus",
+        "jad_id": "jad_author__5",
+        "gnd_url": "https://d-nb.info/gnd/118553909",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Kings",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "29": {
+    "id": 29,
+    "order": "29.00000000000000000000",
+    "name": "Commentary Matthew ",
+    "jad_id": "jad_work__29",
+    "author": [
+      {
+        "id": 17,
+        "order": "17.00000000000000000000",
+        "name": "Paschasius, Radbertus",
+        "jad_id": "jad_author__17",
+        "gnd_url": "https://d-nb.info/gnd/118739409",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Matthew",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 13,
+        "order": "13.00000000000000000000",
+        "name": "Benedictines Corbie",
+        "jad__id": "jad_institutional_context__13",
+        "part_of": [
+          {
+            "id": 3,
+            "order": "3.00000000000000000000",
+            "name": "Benedictines",
+            "jad__id": "jad_institutional_context__3",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      },
+      {
+        "id": 7,
+        "order": "6.00000000000000000000",
+        "name": "Corpus Christianorum",
+        "jad_id": "jad_sources_occurrences__7",
+        "digi_url": ""
+      }
+    ]
+  },
+  "30": {
+    "id": 30,
+    "order": "30.00000000000000000000",
+    "name": "Commentary Psalms ",
+    "jad_id": "jad_work__30",
+    "author": [
+      {
+        "id": 30,
+        "order": "30.00000000000000000000",
+        "name": "Remigius, von Auxerre",
+        "jad_id": "jad_author__30",
+        "gnd_url": "https://d-nb.info/gnd/118788302",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Psalms",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Benedictines Auxerre",
+        "jad__id": "jad_institutional_context__2",
+        "part_of": [
+          {
+            "id": 3,
+            "order": "3.00000000000000000000",
+            "name": "Benedictines",
+            "jad__id": "jad_institutional_context__3",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "31": {
+    "id": 31,
+    "order": "31.00000000000000000000",
+    "name": "Commentary Psalms ",
+    "jad_id": "jad_work__31",
+    "author": [
+      {
+        "id": 31,
+        "order": "31.00000000000000000000",
+        "name": "Gerhoch, von Reichersberg",
+        "jad_id": "jad_author__31",
+        "gnd_url": "https://d-nb.info/gnd/118690752",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Psalms",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 8,
+        "order": "8.00000000000000000000",
+        "name": "Augustinian canons",
+        "jad__id": "jad_institutional_context__8",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "32": {
+    "id": 32,
+    "order": "32.00000000000000000000",
+    "name": "Commentary Kings ",
+    "jad_id": "jad_work__32",
+    "author": [
+      {
+        "id": 32,
+        "order": "32.00000000000000000000",
+        "name": "Anselm, von Laon",
+        "jad_id": "jad_author__32",
+        "gnd_url": "https://d-nb.info/gnd/118649566",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Kings",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 16,
+        "order": "16.00000000000000000000",
+        "name": "French schools",
+        "jad__id": "jad_institutional_context__16",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "33": {
+    "id": 33,
+    "order": "33.00000000000000000000",
+    "name": "Commentary Kings ",
+    "jad_id": "jad_work__33",
+    "author": [
+      {
+        "id": 33,
+        "order": "33.00000000000000000000",
+        "name": "Angelomus Luxovensis",
+        "jad_id": "jad_author__33",
+        "gnd_url": "",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Kings",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "34": {
+    "id": 34,
+    "order": "34.00000000000000000000",
+    "name": "Sermones ",
+    "jad_id": "jad_work__34",
+    "author": [
+      {
+        "id": 21,
+        "order": "21.00000000000000000000",
+        "name": "Aelred, von Rievaulx",
+        "jad_id": "jad_author__21",
+        "gnd_url": "https://d-nb.info/gnd/118643908",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Sermones",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 9,
+        "order": "9.00000000000000000000",
+        "name": "Cistercians",
+        "jad__id": "jad_institutional_context__9",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      },
+      {
+        "id": 7,
+        "order": "6.00000000000000000000",
+        "name": "Corpus Christianorum",
+        "jad_id": "jad_sources_occurrences__7",
+        "digi_url": ""
+      }
+    ]
+  },
+  "35": {
+    "id": 35,
+    "order": "35.00000000000000000000",
+    "name": "Historia expeditionis Hierosolymitanae ",
+    "jad_id": "jad_work__35",
+    "author": [
+      {
+        "id": 24,
+        "order": "24.00000000000000000000",
+        "name": "Albert, von Aachen",
+        "jad_id": "jad_author__24",
+        "gnd_url": "https://d-nb.info/gnd/118647598",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Historia expeditionis Hierosolymitanae",
+    "genre": {
+      "id": 14731,
+      "value": "Chronicle",
+      "color": "red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      },
+      {
+        "id": 12,
+        "order": "11.00000000000000000000",
+        "name": "Other edition",
+        "jad_id": "jad_sources_occurrences__12",
+        "digi_url": ""
+      }
+    ]
+  },
+  "36": {
+    "id": 36,
+    "order": "36.00000000000000000000",
+    "name": "Homiliae in euangelia ",
+    "jad_id": "jad_work__36",
+    "author": [
+      {
+        "id": 28,
+        "order": "28.00000000000000000000",
+        "name": "Gregor, der Grosse",
+        "jad_id": "jad_author__28",
+        "gnd_url": "https://d-nb.info/gnd/118541838",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Homiliae in euangelia",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "around 600",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Papal Curia",
+        "jad__id": "jad_institutional_context__5",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 7,
+        "order": "6.00000000000000000000",
+        "name": "Corpus Christianorum",
+        "jad_id": "jad_sources_occurrences__7",
+        "digi_url": ""
+      }
+    ]
+  },
+  "37": {
+    "id": 37,
+    "order": "37.00000000000000000000",
+    "name": "Sermones dominicales ",
+    "jad_id": "jad_work__37",
+    "author": [
+      {
+        "id": 34,
+        "order": "34.00000000000000000000",
+        "name": "Bonaventura",
+        "jad_id": "jad_author__34",
+        "gnd_url": "https://d-nb.info/gnd/118513176",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Sermones dominicales",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 7,
+        "order": "6.00000000000000000000",
+        "name": "Corpus Christianorum",
+        "jad_id": "jad_sources_occurrences__7",
+        "digi_url": ""
+      }
+    ]
+  },
+  "38": {
+    "id": 38,
+    "order": "38.00000000000000000000",
+    "name": "Historia Orientalis ",
+    "jad_id": "jad_work__38",
+    "author": [
+      {
+        "id": 35,
+        "order": "35.00000000000000000000",
+        "name": "Jakob, von Vitry",
+        "jad_id": "jad_author__35",
+        "gnd_url": "https://d-nb.info/gnd/118711563",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Historia Orientalis",
+    "genre": {
+      "id": 14731,
+      "value": "Chronicle",
+      "color": "red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 13",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 7,
+        "order": "6.00000000000000000000",
+        "name": "Corpus Christianorum",
+        "jad_id": "jad_sources_occurrences__7",
+        "digi_url": ""
+      }
+    ]
+  },
+  "39": {
+    "id": 39,
+    "order": "39.00000000000000000000",
+    "name": "Chronicon Mundi ",
+    "jad_id": "jad_work__39",
+    "author": [
+      {
+        "id": 36,
+        "order": "36.00000000000000000000",
+        "name": "Lukas, von Tuy",
+        "jad_id": "jad_author__36",
+        "gnd_url": "https://d-nb.info/gnd/100194788",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Chronicon Mundi",
+    "genre": {
+      "id": 14731,
+      "value": "Chronicle",
+      "color": "red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 13",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 7,
+        "order": "6.00000000000000000000",
+        "name": "Corpus Christianorum",
+        "jad_id": "jad_sources_occurrences__7",
+        "digi_url": ""
+      }
+    ]
+  },
+  "40": {
+    "id": 40,
+    "order": "40.00000000000000000000",
+    "name": "Homiliarium Mondseense ",
+    "jad_id": "jad_work__40",
+    "author": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "anonymous",
+        "jad_id": "jad_author__3",
+        "gnd_url": "",
+        "notes": null
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 16,
+        "value": "ÖNB, Cod. 1014"
+      }
+    ],
+    "title": "Homiliarium Mondseense",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": "800",
+    "not_after": "900",
+    "written_date": "9",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "None",
+        "jad_id": "jad_sources_occurrences__1",
+        "digi_url": ""
+      }
+    ]
+  },
+  "41": {
+    "id": 41,
+    "order": "41.00000000000000000000",
+    "name": "Sermones de tempore ",
+    "jad_id": "jad_work__41",
+    "author": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "anonymous",
+        "jad_id": "jad_author__3",
+        "gnd_url": "",
+        "notes": null
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 19,
+        "value": "BNF, Latin 3567"
+      }
+    ],
+    "title": "Sermones de tempore",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "None",
+        "jad_id": "jad_sources_occurrences__1",
+        "digi_url": ""
+      }
+    ]
+  },
+  "42": {
+    "id": 42,
+    "order": "42.00000000000000000000",
+    "name": "Historia Scholastica ",
+    "jad_id": "jad_work__42",
+    "author": [
+      {
+        "id": 9,
+        "order": "9.00000000000000000000",
+        "name": "Petrus, Comestor",
+        "jad_id": "jad_author__9",
+        "gnd_url": "https://d-nb.info/gnd/118828851",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Historia Scholastica",
+    "genre": {
+      "id": 14731,
+      "value": "Chronicle",
+      "color": "red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "mid 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "43": {
+    "id": 43,
+    "order": "43.00000000000000000000",
+    "name": "Speculum Ecclesiae ",
+    "jad_id": "jad_work__43",
+    "author": [
+      {
+        "id": 37,
+        "order": "37.00000000000000000000",
+        "name": "Honorius, Augustodunensis",
+        "jad_id": "jad_author__37",
+        "gnd_url": "https://d-nb.info/gnd/119066548",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Speculum Ecclesiae",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": "1100",
+    "not_after": "1125",
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "44": {
+    "id": 44,
+    "order": "44.00000000000000000000",
+    "name": "Commentary Matthew ",
+    "jad_id": "jad_work__44",
+    "author": [
+      {
+        "id": 38,
+        "order": "38.00000000000000000000",
+        "name": "Christianus, Druthmar",
+        "jad_id": "jad_author__38",
+        "gnd_url": "https://d-nb.info/gnd/100939023",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Matthew",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "45": {
+    "id": 45,
+    "order": "45.00000000000000000000",
+    "name": "Libri deflorationum ",
+    "jad_id": "jad_work__45",
+    "author": [
+      {
+        "id": 39,
+        "order": "39.00000000000000000000",
+        "name": "Werner, von Sankt Blasien",
+        "jad_id": "jad_author__39",
+        "gnd_url": "https://d-nb.info/gnd/120951703",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Libri deflorationum",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "46": {
+    "id": 46,
+    "order": "46.00000000000000000000",
+    "name": "Commentary Kings ",
+    "jad_id": "jad_work__46",
+    "author": [
+      {
+        "id": 10,
+        "order": "10.00000000000000000000",
+        "name": "Langton, Stephen",
+        "jad_id": "jad_author__10",
+        "gnd_url": "https://d-nb.info/gnd/118778714",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 7,
+        "value": "Maz., MS 177"
+      }
+    ],
+    "title": "Commentary Kings",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": "1187",
+    "not_after": null,
+    "written_date": "late 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "None",
+        "jad_id": "jad_sources_occurrences__1",
+        "digi_url": ""
+      }
+    ]
+  },
+  "47": {
+    "id": 47,
+    "order": "47.00000000000000000000",
+    "name": "Sermones ",
+    "jad_id": "jad_work__47",
+    "author": [
+      {
+        "id": 19,
+        "order": "19.00000000000000000000",
+        "name": "Petrus, Damiani",
+        "jad_id": "jad_author__19",
+        "gnd_url": "https://d-nb.info/gnd/118593331",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Sermones",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "49": {
+    "id": 49,
+    "order": "48.00000000000000000000",
+    "name": "Fragmenta ex aurora ",
+    "jad_id": "jad_work__49",
+    "author": [
+      {
+        "id": 40,
+        "order": "40.00000000000000000000",
+        "name": "Petrus, de Riga",
+        "jad_id": "jad_author__40",
+        "gnd_url": "https://d-nb.info/gnd/10095815X",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Fragmenta ex aurora",
+    "genre": {
+      "id": 14732,
+      "value": "Idiosyncratic work",
+      "color": "dark-red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "50": {
+    "id": 50,
+    "order": "49.00000000000000000000",
+    "name": "Commentary Sirach ",
+    "jad_id": "jad_work__50",
+    "author": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Hrabanus, Maurus",
+        "jad_id": "jad_author__5",
+        "gnd_url": "https://d-nb.info/gnd/118553909",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Sirach",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "51": {
+    "id": 51,
+    "order": "50.00000000000000000000",
+    "name": "Commentary Psalms ",
+    "jad_id": "jad_work__51",
+    "author": [
+      {
+        "id": 41,
+        "order": "41.00000000000000000000",
+        "name": "Peter Lombard",
+        "jad_id": "jad_author__41",
+        "gnd_url": "https://d-nb.info/gnd/11859334X",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Psalms",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "52": {
+    "id": 52,
+    "order": "51.00000000000000000000",
+    "name": "Historia ",
+    "jad_id": "jad_work__52",
+    "author": [
+      {
+        "id": 42,
+        "order": "42.00000000000000000000",
+        "name": "Wilhelm, von Tyrus",
+        "jad_id": "jad_author__42",
+        "gnd_url": "https://d-nb.info/gnd/11863304X",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Historia",
+    "genre": {
+      "id": 14731,
+      "value": "Chronicle",
+      "color": "red"
+    },
+    "not_before": null,
+    "not_after": "1186",
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 4,
+        "order": "4.00000000000000000000",
+        "name": "Kingdom of Jerusalem",
+        "jad__id": "jad_institutional_context__4",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      },
+      {
+        "id": 7,
+        "order": "6.00000000000000000000",
+        "name": "Corpus Christianorum",
+        "jad_id": "jad_sources_occurrences__7",
+        "digi_url": ""
+      }
+    ]
+  },
+  "53": {
+    "id": 53,
+    "order": "52.00000000000000000000",
+    "name": "Adversus Iudaeos ",
+    "jad_id": "jad_work__53",
+    "author": [
+      {
+        "id": 44,
+        "order": "44.00000000000000000000",
+        "name": "Petrus, Venerabilis",
+        "jad_id": "jad_author__44",
+        "gnd_url": "https://d-nb.info/gnd/11880328X",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Adversus Iudaeos",
+    "genre": {
+      "id": 14728,
+      "value": "Anti-Jewish treatise",
+      "color": "darker-purple"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "mid 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 11,
+        "order": "11.00000000000000000000",
+        "name": "Benedictines Cluny",
+        "jad__id": "jad_institutional_context__11",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "54": {
+    "id": 54,
+    "order": "53.00000000000000000000",
+    "name": "Commentary Isaiah ",
+    "jad_id": "jad_work__54",
+    "author": [
+      {
+        "id": 45,
+        "order": "45.00000000000000000000",
+        "name": "Andreas, von Sankt Viktor",
+        "jad_id": "jad_author__45",
+        "gnd_url": "https://d-nb.info/gnd/119105098",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Isaiah",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 12,
+        "order": "12.00000000000000000000",
+        "name": "St. Victor Paris",
+        "jad__id": "jad_institutional_context__12",
+        "part_of": [
+          {
+            "id": 1,
+            "order": "1.00000000000000000000",
+            "name": "University of Paris",
+            "jad__id": "jad_institutional_context__1",
+            "part_of": [
+              {
+                "id": 16,
+                "value": "French schools"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 7,
+        "order": "6.00000000000000000000",
+        "name": "Corpus Christianorum",
+        "jad_id": "jad_sources_occurrences__7",
+        "digi_url": ""
+      }
+    ]
+  },
+  "55": {
+    "id": 55,
+    "order": "54.00000000000000000000",
+    "name": "Glossa Ordinaria ",
+    "jad_id": "jad_work__55",
+    "author": [
+      {
+        "id": 46,
+        "order": "46.00000000000000000000",
+        "name": "Glossa Ordinaria",
+        "jad_id": "jad_author__46",
+        "gnd_url": "",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Glossa Ordinaria",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 12,
+        "order": "11.00000000000000000000",
+        "name": "Other edition",
+        "jad_id": "jad_sources_occurrences__12",
+        "digi_url": ""
+      }
+    ]
+  },
+  "56": {
+    "id": 56,
+    "order": "55.00000000000000000000",
+    "name": "Commentary Galater ",
+    "jad_id": "jad_work__56",
+    "author": [
+      {
+        "id": 27,
+        "order": "27.00000000000000000000",
+        "name": "Hieronymus, Sophronius Eusebius",
+        "jad_id": "jad_author__27",
+        "gnd_url": "https://d-nb.info/gnd/118550853",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Galater",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "around 400",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "57": {
+    "id": 57,
+    "order": "56.00000000000000000000",
+    "name": "Commentary Isaiah ",
+    "jad_id": "jad_work__57",
+    "author": [
+      {
+        "id": 27,
+        "order": "27.00000000000000000000",
+        "name": "Hieronymus, Sophronius Eusebius",
+        "jad_id": "jad_author__27",
+        "gnd_url": "https://d-nb.info/gnd/118550853",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Isaiah",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "around 400",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "58": {
+    "id": 58,
+    "order": "57.00000000000000000000",
+    "name": "Chronicon ",
+    "jad_id": "jad_work__58",
+    "author": [
+      {
+        "id": 47,
+        "order": "47.00000000000000000000",
+        "name": "Ado, von Vienne",
+        "jad_id": "jad_author__47",
+        "gnd_url": "https://d-nb.info/gnd/119536390",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Chronicon",
+    "genre": {
+      "id": 14731,
+      "value": "Chronicle",
+      "color": "red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "59": {
+    "id": 59,
+    "order": "58.00000000000000000000",
+    "name": "Chronicon universale ",
+    "jad_id": "jad_work__59",
+    "author": [
+      {
+        "id": 48,
+        "order": "48.00000000000000000000",
+        "name": "Ekkehart, von Aura",
+        "jad_id": "jad_author__48",
+        "gnd_url": "https://d-nb.info/gnd/118688529",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Chronicon universale",
+    "genre": {
+      "id": 14731,
+      "value": "Chronicle",
+      "color": "red"
+    },
+    "not_before": "1100",
+    "not_after": "1125",
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "60": {
+    "id": 60,
+    "order": "59.00000000000000000000",
+    "name": "Contra Judeaos ",
+    "jad_id": "jad_work__60",
+    "author": [
+      {
+        "id": 49,
+        "order": "49.00000000000000000000",
+        "name": "Amulo, Lugdunensis",
+        "jad_id": "jad_author__49",
+        "gnd_url": "https://d-nb.info/gnd/100729754",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Contra Judeaos",
+    "genre": {
+      "id": 14728,
+      "value": "Anti-Jewish treatise",
+      "color": "darker-purple"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "61": {
+    "id": 61,
+    "order": "60.00000000000000000000",
+    "name": "Commentary Ezekiel ",
+    "jad_id": "jad_work__61",
+    "author": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Hrabanus, Maurus",
+        "jad_id": "jad_author__5",
+        "gnd_url": "https://d-nb.info/gnd/118553909",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Ezekiel",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "62": {
+    "id": 62,
+    "order": "61.00000000000000000000",
+    "name": "Expositio epistolarum S. Pauli ",
+    "jad_id": "jad_work__62",
+    "author": [
+      {
+        "id": 50,
+        "order": "50.00000000000000000000",
+        "name": "Atto, von Vercelli",
+        "jad_id": "jad_author__50",
+        "gnd_url": "https://d-nb.info/gnd/100936989",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Expositio epistolarum S. Pauli",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "63": {
+    "id": 63,
+    "order": "62.00000000000000000000",
+    "name": "Commentary Jeremiah ",
+    "jad_id": "jad_work__63",
+    "author": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Hrabanus, Maurus",
+        "jad_id": "jad_author__5",
+        "gnd_url": "https://d-nb.info/gnd/118553909",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Jeremiah",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "64": {
+    "id": 64,
+    "order": "63.00000000000000000000",
+    "name": "Commentary Judices ",
+    "jad_id": "jad_work__64",
+    "author": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Hrabanus, Maurus",
+        "jad_id": "jad_author__5",
+        "gnd_url": "https://d-nb.info/gnd/118553909",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Judices",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "65": {
+    "id": 65,
+    "order": "64.00000000000000000000",
+    "name": "Commentary Deuteronomium ",
+    "jad_id": "jad_work__65",
+    "author": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Hrabanus, Maurus",
+        "jad_id": "jad_author__5",
+        "gnd_url": "https://d-nb.info/gnd/118553909",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Deuteronomium",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "66": {
+    "id": 66,
+    "order": "65.00000000000000000000",
+    "name": "Commentary Matthew ",
+    "jad_id": "jad_work__66",
+    "author": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Hrabanus, Maurus",
+        "jad_id": "jad_author__5",
+        "gnd_url": "https://d-nb.info/gnd/118553909",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Matthew",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "67": {
+    "id": 67,
+    "order": "66.00000000000000000000",
+    "name": "De universo ",
+    "jad_id": "jad_work__67",
+    "author": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Hrabanus, Maurus",
+        "jad_id": "jad_author__5",
+        "gnd_url": "https://d-nb.info/gnd/118553909",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "De universo",
+    "genre": {
+      "id": 14732,
+      "value": "Idiosyncratic work",
+      "color": "dark-red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "68": {
+    "id": 68,
+    "order": "67.00000000000000000000",
+    "name": "Commentary Revelation ",
+    "jad_id": "jad_work__68",
+    "author": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Martin, von León",
+        "jad_id": "jad_author__2",
+        "gnd_url": "https://d-nb.info/gnd/100953212",
+        "notes": null
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 3,
+        "value": "San Isidoro, MS 11"
+      }
+    ],
+    "title": "Commentary Revelation",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": "1175",
+    "not_after": "1200",
+    "written_date": "late 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "69": {
+    "id": 69,
+    "order": "68.00000000000000000000",
+    "name": "Commentary Lamentationes ",
+    "jad_id": "jad_work__69",
+    "author": [
+      {
+        "id": 17,
+        "order": "17.00000000000000000000",
+        "name": "Paschasius, Radbertus",
+        "jad_id": "jad_author__17",
+        "gnd_url": "https://d-nb.info/gnd/118739409",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Lamentationes",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 13,
+        "order": "13.00000000000000000000",
+        "name": "Benedictines Corbie",
+        "jad__id": "jad_institutional_context__13",
+        "part_of": [
+          {
+            "id": 3,
+            "order": "3.00000000000000000000",
+            "name": "Benedictines",
+            "jad__id": "jad_institutional_context__3",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 7,
+        "order": "6.00000000000000000000",
+        "name": "Corpus Christianorum",
+        "jad_id": "jad_sources_occurrences__7",
+        "digi_url": ""
+      }
+    ]
+  },
+  "70": {
+    "id": 70,
+    "order": "69.00000000000000000000",
+    "name": "Commentary Psalms ",
+    "jad_id": "jad_work__70",
+    "author": [
+      {
+        "id": 17,
+        "order": "17.00000000000000000000",
+        "name": "Paschasius, Radbertus",
+        "jad_id": "jad_author__17",
+        "gnd_url": "https://d-nb.info/gnd/118739409",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Psalms",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 13,
+        "order": "13.00000000000000000000",
+        "name": "Benedictines Corbie",
+        "jad__id": "jad_institutional_context__13",
+        "part_of": [
+          {
+            "id": 3,
+            "order": "3.00000000000000000000",
+            "name": "Benedictines",
+            "jad__id": "jad_institutional_context__3",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 7,
+        "order": "6.00000000000000000000",
+        "name": "Corpus Christianorum",
+        "jad_id": "jad_sources_occurrences__7",
+        "digi_url": ""
+      }
+    ]
+  },
+  "71": {
+    "id": 71,
+    "order": "70.00000000000000000000",
+    "name": "Commentary Kings ",
+    "jad_id": "jad_work__71",
+    "author": [
+      {
+        "id": 18,
+        "order": "18.00000000000000000000",
+        "name": "Isidorus, von Sevilla",
+        "jad_id": "jad_author__18",
+        "gnd_url": "https://d-nb.info/gnd/118555995",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Kings",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "72": {
+    "id": 72,
+    "order": "71.00000000000000000000",
+    "name": "Collectiones in epistolas et evangelia ",
+    "jad_id": "jad_work__72",
+    "author": [
+      {
+        "id": 54,
+        "order": "53.00000000000000000000",
+        "name": "Smaragdus, Sancti Michaelis",
+        "jad_id": "jad_author__54",
+        "gnd_url": "https://d-nb.info/gnd/118614983",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Collectiones in epistolas et evangelia",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": "800",
+    "not_after": "840",
+    "written_date": "early 9",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "73": {
+    "id": 73,
+    "order": "72.00000000000000000000",
+    "name": "De comprobatione sextae aetatis ",
+    "jad_id": "jad_work__73",
+    "author": [
+      {
+        "id": 55,
+        "order": "54.00000000000000000000",
+        "name": "Iulianus, Toletanus",
+        "jad_id": "jad_author__55",
+        "gnd_url": "https://d-nb.info/gnd/119525577",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "De comprobatione sextae aetatis",
+    "genre": {
+      "id": 14732,
+      "value": "Idiosyncratic work",
+      "color": "dark-red"
+    },
+    "not_before": null,
+    "not_after": "690",
+    "written_date": "late 7",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 15,
+        "order": "15.00000000000000000000",
+        "name": "See of Toledo",
+        "jad__id": "jad_institutional_context__15",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "74": {
+    "id": 74,
+    "order": "73.00000000000000000000",
+    "name": "Commentarius in Nahum ",
+    "jad_id": "jad_work__74",
+    "author": [
+      {
+        "id": 55,
+        "order": "54.00000000000000000000",
+        "name": "Iulianus, Toletanus",
+        "jad_id": "jad_author__55",
+        "gnd_url": "https://d-nb.info/gnd/119525577",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentarius in Nahum",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": "690",
+    "written_date": "late 7",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 15,
+        "order": "15.00000000000000000000",
+        "name": "See of Toledo",
+        "jad__id": "jad_institutional_context__15",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "75": {
+    "id": 75,
+    "order": "74.00000000000000000000",
+    "name": "Chronicon ",
+    "jad_id": "jad_work__75",
+    "author": [
+      {
+        "id": 56,
+        "order": "55.00000000000000000000",
+        "name": "Hugo, Flaviniacensis",
+        "jad_id": "jad_author__56",
+        "gnd_url": "https://d-nb.info/gnd/100946577",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Chronicon",
+    "genre": {
+      "id": 14731,
+      "value": "Chronicle",
+      "color": "red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "around 1100",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "76": {
+    "id": 76,
+    "order": "75.00000000000000000000",
+    "name": "Collectanea in omnes B. Pauli epistolas ",
+    "jad_id": "jad_work__76",
+    "author": [
+      {
+        "id": 57,
+        "order": "56.00000000000000000000",
+        "name": "Sedulius, Scotus",
+        "jad_id": "jad_author__57",
+        "gnd_url": "https://d-nb.info/gnd/118760386",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Collectanea in omnes B. Pauli epistolas",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "9",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "77": {
+    "id": 77,
+    "order": "76.00000000000000000000",
+    "name": "Expositio in Cantica canticorum ",
+    "jad_id": "jad_work__77",
+    "author": [
+      {
+        "id": 37,
+        "order": "37.00000000000000000000",
+        "name": "Honorius, Augustodunensis",
+        "jad_id": "jad_author__37",
+        "gnd_url": "https://d-nb.info/gnd/119066548",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Expositio in Cantica canticorum",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "78": {
+    "id": 78,
+    "order": "77.00000000000000000000",
+    "name": "Commentary Psalms ",
+    "jad_id": "jad_work__78",
+    "author": [
+      {
+        "id": 37,
+        "order": "37.00000000000000000000",
+        "name": "Honorius, Augustodunensis",
+        "jad_id": "jad_author__37",
+        "gnd_url": "https://d-nb.info/gnd/119066548",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Psalms",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "79": {
+    "id": 79,
+    "order": "78.00000000000000000000",
+    "name": "De scriptoribus ecclesiasticis ",
+    "jad_id": "jad_work__79",
+    "author": [
+      {
+        "id": 37,
+        "order": "37.00000000000000000000",
+        "name": "Honorius, Augustodunensis",
+        "jad_id": "jad_author__37",
+        "gnd_url": "https://d-nb.info/gnd/119066548",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "De scriptoribus ecclesiasticis",
+    "genre": {
+      "id": 14732,
+      "value": "Idiosyncratic work",
+      "color": "dark-red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "80": {
+    "id": 80,
+    "order": "79.00000000000000000000",
+    "name": "Gemma animae ",
+    "jad_id": "jad_work__80",
+    "author": [
+      {
+        "id": 37,
+        "order": "37.00000000000000000000",
+        "name": "Honorius, Augustodunensis",
+        "jad_id": "jad_author__37",
+        "gnd_url": "https://d-nb.info/gnd/119066548",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Gemma animae",
+    "genre": {
+      "id": 14732,
+      "value": "Idiosyncratic work",
+      "color": "dark-red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "81": {
+    "id": 81,
+    "order": "80.00000000000000000000",
+    "name": "De imagine mundi ",
+    "jad_id": "jad_work__81",
+    "author": [
+      {
+        "id": 37,
+        "order": "37.00000000000000000000",
+        "name": "Honorius, Augustodunensis",
+        "jad_id": "jad_author__37",
+        "gnd_url": "https://d-nb.info/gnd/119066548",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "De imagine mundi",
+    "genre": {
+      "id": 14731,
+      "value": "Chronicle",
+      "color": "red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "82": {
+    "id": 82,
+    "order": "81.00000000000000000000",
+    "name": "Commentary Luke ",
+    "jad_id": "jad_work__82",
+    "author": [
+      {
+        "id": 15,
+        "order": "15.00000000000000000000",
+        "name": "Bruno, Segni",
+        "jad_id": "jad_author__15",
+        "gnd_url": "https://d-nb.info/gnd/100938310",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Luke",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Papal Curia",
+        "jad__id": "jad_institutional_context__5",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "83": {
+    "id": 83,
+    "order": "82.00000000000000000000",
+    "name": "Commentary Matthew ",
+    "jad_id": "jad_work__83",
+    "author": [
+      {
+        "id": 15,
+        "order": "15.00000000000000000000",
+        "name": "Bruno, Segni",
+        "jad_id": "jad_author__15",
+        "gnd_url": "https://d-nb.info/gnd/100938310",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Matthew",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Papal Curia",
+        "jad__id": "jad_institutional_context__5",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "84": {
+    "id": 84,
+    "order": "83.00000000000000000000",
+    "name": "Commentary Psalms ",
+    "jad_id": "jad_work__84",
+    "author": [
+      {
+        "id": 15,
+        "order": "15.00000000000000000000",
+        "name": "Bruno, Segni",
+        "jad_id": "jad_author__15",
+        "gnd_url": "https://d-nb.info/gnd/100938310",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Psalms",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Papal Curia",
+        "jad__id": "jad_institutional_context__5",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "85": {
+    "id": 85,
+    "order": "84.00000000000000000000",
+    "name": "Commentary Revelation ",
+    "jad_id": "jad_work__85",
+    "author": [
+      {
+        "id": 15,
+        "order": "15.00000000000000000000",
+        "name": "Bruno, Segni",
+        "jad_id": "jad_author__15",
+        "gnd_url": "https://d-nb.info/gnd/100938310",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Revelation",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Papal Curia",
+        "jad__id": "jad_institutional_context__5",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "86": {
+    "id": 86,
+    "order": "85.00000000000000000000",
+    "name": "Commentary Revelation ",
+    "jad_id": "jad_work__86",
+    "author": [
+      {
+        "id": 16,
+        "order": "16.00000000000000000000",
+        "name": "Rupert, von Deutz",
+        "jad_id": "jad_author__16",
+        "gnd_url": "https://d-nb.info/gnd/118604198",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Revelation",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "87": {
+    "id": 87,
+    "order": "86.00000000000000000000",
+    "name": "Commentary Ezekiel ",
+    "jad_id": "jad_work__87",
+    "author": [
+      {
+        "id": 16,
+        "order": "16.00000000000000000000",
+        "name": "Rupert, von Deutz",
+        "jad_id": "jad_author__16",
+        "gnd_url": "https://d-nb.info/gnd/118604198",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Ezekiel",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "88": {
+    "id": 88,
+    "order": "87.00000000000000000000",
+    "name": "Commentary Isaiah ",
+    "jad_id": "jad_work__88",
+    "author": [
+      {
+        "id": 16,
+        "order": "16.00000000000000000000",
+        "name": "Rupert, von Deutz",
+        "jad_id": "jad_author__16",
+        "gnd_url": "https://d-nb.info/gnd/118604198",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Isaiah",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "89": {
+    "id": 89,
+    "order": "88.00000000000000000000",
+    "name": "Commentary Matthew ",
+    "jad_id": "jad_work__89",
+    "author": [
+      {
+        "id": 16,
+        "order": "16.00000000000000000000",
+        "name": "Rupert, von Deutz",
+        "jad_id": "jad_author__16",
+        "gnd_url": "https://d-nb.info/gnd/118604198",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Matthew",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "90": {
+    "id": 90,
+    "order": "89.00000000000000000000",
+    "name": "De divinis officiis ",
+    "jad_id": "jad_work__90",
+    "author": [
+      {
+        "id": 16,
+        "order": "16.00000000000000000000",
+        "name": "Rupert, von Deutz",
+        "jad_id": "jad_author__16",
+        "gnd_url": "https://d-nb.info/gnd/118604198",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "De divinis officiis",
+    "genre": {
+      "id": 15021,
+      "value": "Liturgical text",
+      "color": "dark-yellow"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "91": {
+    "id": 91,
+    "order": "90.00000000000000000000",
+    "name": "De incarnatione contra Judaeos ",
+    "jad_id": "jad_work__91",
+    "author": [
+      {
+        "id": 58,
+        "order": "57.00000000000000000000",
+        "name": "Guibert, von Nogent",
+        "jad_id": "jad_author__58",
+        "gnd_url": "https://d-nb.info/gnd/118699083",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "De incarnatione contra Judaeos",
+    "genre": {
+      "id": 14728,
+      "value": "Anti-Jewish treatise",
+      "color": "darker-purple"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "92": {
+    "id": 92,
+    "order": "91.00000000000000000000",
+    "name": "Gesta Dei per Francos ",
+    "jad_id": "jad_work__92",
+    "author": [
+      {
+        "id": 58,
+        "order": "57.00000000000000000000",
+        "name": "Guibert, von Nogent",
+        "jad_id": "jad_author__58",
+        "gnd_url": "https://d-nb.info/gnd/118699083",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Gesta Dei per Francos",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": "1099",
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      },
+      {
+        "id": 7,
+        "order": "6.00000000000000000000",
+        "name": "Corpus Christianorum",
+        "jad_id": "jad_sources_occurrences__7",
+        "digi_url": ""
+      }
+    ]
+  },
+  "93": {
+    "id": 93,
+    "order": "92.00000000000000000000",
+    "name": "Expositio in Apocalypsim ",
+    "jad_id": "jad_work__93",
+    "author": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "anonymous",
+        "jad_id": "jad_author__3",
+        "gnd_url": "",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Expositio in Apocalypsim",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "94": {
+    "id": 94,
+    "order": "93.00000000000000000000",
+    "name": "Commentaria in duodecim prophetas minores ",
+    "jad_id": "jad_work__94",
+    "author": [
+      {
+        "id": 16,
+        "order": "16.00000000000000000000",
+        "name": "Rupert, von Deutz",
+        "jad_id": "jad_author__16",
+        "gnd_url": "https://d-nb.info/gnd/118604198",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentaria in duodecim prophetas minores",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "95": {
+    "id": 95,
+    "order": "94.00000000000000000000",
+    "name": "Commentary John ",
+    "jad_id": "jad_work__95",
+    "author": [
+      {
+        "id": 16,
+        "order": "16.00000000000000000000",
+        "name": "Rupert, von Deutz",
+        "jad_id": "jad_author__16",
+        "gnd_url": "https://d-nb.info/gnd/118604198",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary John",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "96": {
+    "id": 96,
+    "order": "95.00000000000000000000",
+    "name": "Commentary Job ",
+    "jad_id": "jad_work__96",
+    "author": [
+      {
+        "id": 16,
+        "order": "16.00000000000000000000",
+        "name": "Rupert, von Deutz",
+        "jad_id": "jad_author__16",
+        "gnd_url": "https://d-nb.info/gnd/118604198",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Job",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "97": {
+    "id": 97,
+    "order": "96.00000000000000000000",
+    "name": "Commentary Kohelet ",
+    "jad_id": "jad_work__97",
+    "author": [
+      {
+        "id": 16,
+        "order": "16.00000000000000000000",
+        "name": "Rupert, von Deutz",
+        "jad_id": "jad_author__16",
+        "gnd_url": "https://d-nb.info/gnd/118604198",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Kohelet",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "98": {
+    "id": 98,
+    "order": "97.00000000000000000000",
+    "name": "De glorificatione Trinitatis ",
+    "jad_id": "jad_work__98",
+    "author": [
+      {
+        "id": 16,
+        "order": "16.00000000000000000000",
+        "name": "Rupert, von Deutz",
+        "jad_id": "jad_author__16",
+        "gnd_url": "https://d-nb.info/gnd/118604198",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "De glorificatione Trinitatis",
+    "genre": {
+      "id": 15024,
+      "value": "Theological treatise",
+      "color": "dark-cyan"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "99": {
+    "id": 99,
+    "order": "98.00000000000000000000",
+    "name": "Commentary Genesis ",
+    "jad_id": "jad_work__99",
+    "author": [
+      {
+        "id": 16,
+        "order": "16.00000000000000000000",
+        "name": "Rupert, von Deutz",
+        "jad_id": "jad_author__16",
+        "gnd_url": "https://d-nb.info/gnd/118604198",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Genesis",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "100": {
+    "id": 100,
+    "order": "99.00000000000000000000",
+    "name": "Commentary Deutoronomy ",
+    "jad_id": "jad_work__100",
+    "author": [
+      {
+        "id": 16,
+        "order": "16.00000000000000000000",
+        "name": "Rupert, von Deutz",
+        "jad_id": "jad_author__16",
+        "gnd_url": "https://d-nb.info/gnd/118604198",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Deutoronomy",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "101": {
+    "id": 101,
+    "order": "100.00000000000000000000",
+    "name": "Commentary Kings ",
+    "jad_id": "jad_work__101",
+    "author": [
+      {
+        "id": 16,
+        "order": "16.00000000000000000000",
+        "name": "Rupert, von Deutz",
+        "jad_id": "jad_author__16",
+        "gnd_url": "https://d-nb.info/gnd/118604198",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Kings",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "102": {
+    "id": 102,
+    "order": "101.00000000000000000000",
+    "name": "Commentary Psalms ",
+    "jad_id": "jad_work__102",
+    "author": [
+      {
+        "id": 16,
+        "order": "16.00000000000000000000",
+        "name": "Rupert, von Deutz",
+        "jad_id": "jad_author__16",
+        "gnd_url": "https://d-nb.info/gnd/118604198",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Psalms",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "103": {
+    "id": 103,
+    "order": "102.00000000000000000000",
+    "name": "De victoria verbi Dei ",
+    "jad_id": "jad_work__103",
+    "author": [
+      {
+        "id": 16,
+        "order": "16.00000000000000000000",
+        "name": "Rupert, von Deutz",
+        "jad_id": "jad_author__16",
+        "gnd_url": "https://d-nb.info/gnd/118604198",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "De victoria verbi Dei",
+    "genre": {
+      "id": 14732,
+      "value": "Idiosyncratic work",
+      "color": "dark-red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "104": {
+    "id": 104,
+    "order": "103.00000000000000000000",
+    "name": "Dialogus inter Christianum et Judaeum ",
+    "jad_id": "jad_work__104",
+    "author": [
+      {
+        "id": 16,
+        "order": "16.00000000000000000000",
+        "name": "Rupert, von Deutz",
+        "jad_id": "jad_author__16",
+        "gnd_url": "https://d-nb.info/gnd/118604198",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Dialogus inter Christianum et Judaeum",
+    "genre": {
+      "id": 14728,
+      "value": "Anti-Jewish treatise",
+      "color": "darker-purple"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "early 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "Benedictines",
+        "jad__id": "jad_institutional_context__3",
+        "part_of": []
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "105": {
+    "id": 105,
+    "order": "104.00000000000000000000",
+    "name": "Sermones ",
+    "jad_id": "jad_work__105",
+    "author": [
+      {
+        "id": 59,
+        "order": "58.00000000000000000000",
+        "name": "Heiric, of Auxerre",
+        "jad_id": "jad_author__59",
+        "gnd_url": "https://d-nb.info/gnd/119215888",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 34,
+        "value": "Maz., MS 698"
+      }
+    ],
+    "title": "Sermones",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Benedictines Auxerre",
+        "jad__id": "jad_institutional_context__2",
+        "part_of": [
+          {
+            "id": 3,
+            "order": "3.00000000000000000000",
+            "name": "Benedictines",
+            "jad__id": "jad_institutional_context__3",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 7,
+        "order": "6.00000000000000000000",
+        "name": "Corpus Christianorum",
+        "jad_id": "jad_sources_occurrences__7",
+        "digi_url": ""
+      }
+    ]
+  },
+  "106": {
+    "id": 106,
+    "order": "105.00000000000000000000",
+    "name": "Commentary Matthew ",
+    "jad_id": "jad_work__106",
+    "author": [
+      {
+        "id": 27,
+        "order": "27.00000000000000000000",
+        "name": "Hieronymus, Sophronius Eusebius",
+        "jad_id": "jad_author__27",
+        "gnd_url": "https://d-nb.info/gnd/118550853",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Matthew",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "around 400",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "107": {
+    "id": 107,
+    "order": "106.00000000000000000000",
+    "name": "Chanson d'Antioche ",
+    "jad_id": "jad_work__107",
+    "author": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "anonymous",
+        "jad_id": "jad_author__3",
+        "gnd_url": "",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Chanson d'Antioche",
+    "genre": {
+      "id": 15025,
+      "value": "Vernacular treatise",
+      "color": "darker-red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "late 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 12,
+        "order": "11.00000000000000000000",
+        "name": "Other edition",
+        "jad_id": "jad_sources_occurrences__12",
+        "digi_url": ""
+      }
+    ]
+  },
+  "108": {
+    "id": 108,
+    "order": "107.00000000000000000000",
+    "name": "Commentary Jeremiah ",
+    "jad_id": "jad_work__108",
+    "author": [
+      {
+        "id": 27,
+        "order": "27.00000000000000000000",
+        "name": "Hieronymus, Sophronius Eusebius",
+        "jad_id": "jad_author__27",
+        "gnd_url": "https://d-nb.info/gnd/118550853",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Jeremiah",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "around 400",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "109": {
+    "id": 109,
+    "order": "108.00000000000000000000",
+    "name": "Expositio in Apocalypsin ",
+    "jad_id": "jad_work__109",
+    "author": [
+      {
+        "id": 25,
+        "order": "25.00000000000000000000",
+        "name": "Haimo, von Auxerre",
+        "jad_id": "jad_author__25",
+        "gnd_url": "https://d-nb.info/gnd/100945260",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Expositio in Apocalypsin",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "110": {
+    "id": 110,
+    "order": "109.00000000000000000000",
+    "name": "Commentary Genesis ",
+    "jad_id": "jad_work__110",
+    "author": [
+      {
+        "id": 33,
+        "order": "33.00000000000000000000",
+        "name": "Angelomus Luxovensis",
+        "jad_id": "jad_author__33",
+        "gnd_url": "",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Genesis",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "111": {
+    "id": 111,
+    "order": "110.00000000000000000000",
+    "name": "Historia Ecclesiastica ",
+    "jad_id": "jad_work__111",
+    "author": [
+      {
+        "id": 60,
+        "order": "59.00000000000000000000",
+        "name": "Eusebius, von Caesarea",
+        "jad_id": "jad_author__60",
+        "gnd_url": "https://d-nb.info/gnd/118531425",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Historia Ecclesiastica",
+    "genre": {
+      "id": 14731,
+      "value": "Chronicle",
+      "color": "red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "112": {
+    "id": 112,
+    "order": "111.00000000000000000000",
+    "name": "Commentary Psalms Continuatio ",
+    "jad_id": "jad_work__112",
+    "author": [
+      {
+        "id": 31,
+        "order": "31.00000000000000000000",
+        "name": "Gerhoch, von Reichersberg",
+        "jad_id": "jad_author__31",
+        "gnd_url": "https://d-nb.info/gnd/118690752",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Psalms Continuatio",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "113": {
+    "id": 113,
+    "order": "112.00000000000000000000",
+    "name": "Expositio in canticum Moysis ",
+    "jad_id": "jad_work__113",
+    "author": [
+      {
+        "id": 31,
+        "order": "31.00000000000000000000",
+        "name": "Gerhoch, von Reichersberg",
+        "jad_id": "jad_author__31",
+        "gnd_url": "https://d-nb.info/gnd/118690752",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Expositio in canticum Moysis",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "114": {
+    "id": 114,
+    "order": "113.00000000000000000000",
+    "name": "Libelli selecti ",
+    "jad_id": "jad_work__114",
+    "author": [
+      {
+        "id": 31,
+        "order": "31.00000000000000000000",
+        "name": "Gerhoch, von Reichersberg",
+        "jad_id": "jad_author__31",
+        "gnd_url": "https://d-nb.info/gnd/118690752",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Libelli selecti",
+    "genre": {
+      "id": 14732,
+      "value": "Idiosyncratic work",
+      "color": "dark-red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "115": {
+    "id": 115,
+    "order": "114.00000000000000000000",
+    "name": "Sermones ",
+    "jad_id": "jad_work__115",
+    "author": [
+      {
+        "id": 6,
+        "order": "6.00000000000000000000",
+        "name": "Beda, Heiliger",
+        "jad_id": "jad_author__6",
+        "gnd_url": "https://d-nb.info/gnd/118508237",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Sermones",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": "735",
+    "written_date": "early 8",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "116": {
+    "id": 116,
+    "order": "115.00000000000000000000",
+    "name": "Commentary Matthew ",
+    "jad_id": "jad_work__116",
+    "author": [
+      {
+        "id": 6,
+        "order": "6.00000000000000000000",
+        "name": "Beda, Heiliger",
+        "jad_id": "jad_author__6",
+        "gnd_url": "https://d-nb.info/gnd/118508237",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Matthew",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": "735",
+    "written_date": "early 8",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "117": {
+    "id": 117,
+    "order": "116.00000000000000000000",
+    "name": "Commentary Pentateuch ",
+    "jad_id": "jad_work__117",
+    "author": [
+      {
+        "id": 6,
+        "order": "6.00000000000000000000",
+        "name": "Beda, Heiliger",
+        "jad_id": "jad_author__6",
+        "gnd_url": "https://d-nb.info/gnd/118508237",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Pentateuch",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": "735",
+    "written_date": "early 8",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "118": {
+    "id": 118,
+    "order": "117.00000000000000000000",
+    "name": "Commentary Numeri ",
+    "jad_id": "jad_work__118",
+    "author": [
+      {
+        "id": 5,
+        "order": "5.00000000000000000000",
+        "name": "Hrabanus, Maurus",
+        "jad_id": "jad_author__5",
+        "gnd_url": "https://d-nb.info/gnd/118553909",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Numeri",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "119": {
+    "id": 119,
+    "order": "118.00000000000000000000",
+    "name": "Sermones ",
+    "jad_id": "jad_work__119",
+    "author": [
+      {
+        "id": 20,
+        "order": "20.00000000000000000000",
+        "name": "Balduin, von Canterbury",
+        "jad_id": "jad_author__20",
+        "gnd_url": "https://d-nb.info/gnd/119268531",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Sermones",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": "1190",
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "120": {
+    "id": 120,
+    "order": "119.00000000000000000000",
+    "name": "Commentary John ",
+    "jad_id": "jad_work__120",
+    "author": [
+      {
+        "id": 22,
+        "order": "22.00000000000000000000",
+        "name": "Alkuin",
+        "jad_id": "jad_author__22",
+        "gnd_url": "https://d-nb.info/gnd/118502026",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary John",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 14,
+        "order": "14.00000000000000000000",
+        "name": "Carolingian court",
+        "jad__id": "jad_institutional_context__14",
+        "part_of": []
+      }
+    ],
+    "published_edition": []
+  },
+  "121": {
+    "id": 121,
+    "order": "120.00000000000000000000",
+    "name": "Commentary Kohelet ",
+    "jad_id": "jad_work__121",
+    "author": [
+      {
+        "id": 22,
+        "order": "22.00000000000000000000",
+        "name": "Alkuin",
+        "jad_id": "jad_author__22",
+        "gnd_url": "https://d-nb.info/gnd/118502026",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Kohelet",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "122": {
+    "id": 122,
+    "order": "121.00000000000000000000",
+    "name": "Homiliae ",
+    "jad_id": "jad_work__122",
+    "author": [
+      {
+        "id": 61,
+        "order": "60.00000000000000000000",
+        "name": "Radulfus, Ardens",
+        "jad_id": "jad_author__61",
+        "gnd_url": "https://d-nb.info/gnd/118597698",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Homiliae",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "late 12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ]
+  },
+  "123": {
+    "id": 123,
+    "order": "122.00000000000000000000",
+    "name": "De nugis curialum ",
+    "jad_id": "jad_work__123",
+    "author": [
+      {
+        "id": 62,
+        "order": "61.00000000000000000000",
+        "name": "Walter, Map",
+        "jad_id": "jad_author__62",
+        "gnd_url": "https://d-nb.info/gnd/118781669",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "De nugis curialum",
+    "genre": {
+      "id": 14732,
+      "value": "Idiosyncratic work",
+      "color": "dark-red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 12,
+        "order": "11.00000000000000000000",
+        "name": "Other edition",
+        "jad_id": "jad_sources_occurrences__12",
+        "digi_url": ""
+      }
+    ]
+  },
+  "124": {
+    "id": 124,
+    "order": "123.00000000000000000000",
+    "name": "Liber adversus Graecos ",
+    "jad_id": "jad_work__124",
+    "author": [
+      {
+        "id": 63,
+        "order": "62.00000000000000000000",
+        "name": "Aeneas, Parisiensis",
+        "jad_id": "jad_author__63",
+        "gnd_url": "https://d-nb.info/gnd/100935486",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Liber adversus Graecos",
+    "genre": {
+      "id": 15026,
+      "value": "Polemics",
+      "color": "light-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "125": {
+    "id": 125,
+    "order": "124.00000000000000000000",
+    "name": "De commendatione fidei ",
+    "jad_id": "jad_work__125",
+    "author": [
+      {
+        "id": 20,
+        "order": "20.00000000000000000000",
+        "name": "Balduin, von Canterbury",
+        "jad_id": "jad_author__20",
+        "gnd_url": "https://d-nb.info/gnd/119268531",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "De commendatione fidei",
+    "genre": {
+      "id": 15024,
+      "value": "Theological treatise",
+      "color": "dark-cyan"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "126": {
+    "id": 126,
+    "order": "125.00000000000000000000",
+    "name": "Homiliae dominicales ",
+    "jad_id": "jad_work__126",
+    "author": [
+      {
+        "id": 64,
+        "order": "63.00000000000000000000",
+        "name": "Gottfried, von Admont",
+        "jad_id": "jad_author__64",
+        "gnd_url": "https://d-nb.info/gnd/100943098",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Homiliae dominicales",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "127": {
+    "id": 127,
+    "order": "126.00000000000000000000",
+    "name": "Commentary Isaiah ",
+    "jad_id": "jad_work__127",
+    "author": [
+      {
+        "id": 32,
+        "order": "32.00000000000000000000",
+        "name": "Anselm, von Laon",
+        "jad_id": "jad_author__32",
+        "gnd_url": "https://d-nb.info/gnd/118649566",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Isaiah",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "128": {
+    "id": 128,
+    "order": "127.00000000000000000000",
+    "name": "Commentary Jacob ",
+    "jad_id": "jad_work__128",
+    "author": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Martin, von León",
+        "jad_id": "jad_author__2",
+        "gnd_url": "https://d-nb.info/gnd/100953212",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Jacob",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "129": {
+    "id": 129,
+    "order": "128.00000000000000000000",
+    "name": "De fide catholica ",
+    "jad_id": "jad_work__129",
+    "author": [
+      {
+        "id": 18,
+        "order": "18.00000000000000000000",
+        "name": "Isidorus, von Sevilla",
+        "jad_id": "jad_author__18",
+        "gnd_url": "https://d-nb.info/gnd/118555995",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "De fide catholica",
+    "genre": {
+      "id": 15026,
+      "value": "Polemics",
+      "color": "light-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "130": {
+    "id": 130,
+    "order": "129.00000000000000000000",
+    "name": "Commentary 1 Thes. ",
+    "jad_id": "jad_work__130",
+    "author": [
+      {
+        "id": 25,
+        "order": "25.00000000000000000000",
+        "name": "Haimo, von Auxerre",
+        "jad_id": "jad_author__25",
+        "gnd_url": "https://d-nb.info/gnd/100945260",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary 1 Thes.",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "131": {
+    "id": 131,
+    "order": "130.00000000000000000000",
+    "name": "Chronica ",
+    "jad_id": "jad_work__131",
+    "author": [
+      {
+        "id": 65,
+        "order": "64.00000000000000000000",
+        "name": "Frechulf, von Lisieux",
+        "jad_id": "jad_author__65",
+        "gnd_url": "https://d-nb.info/gnd/118703005",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Chronica",
+    "genre": {
+      "id": 14731,
+      "value": "Chronicle",
+      "color": "red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "132": {
+    "id": 132,
+    "order": "131.00000000000000000000",
+    "name": "Explanatio symboli S. Athanasii ",
+    "jad_id": "jad_work__132",
+    "author": [
+      {
+        "id": 66,
+        "order": "65.00000000000000000000",
+        "name": "Hildegard, von Bingen",
+        "jad_id": "jad_author__66",
+        "gnd_url": "https://d-nb.info/gnd/118550993",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Explanatio symboli S. Athanasii",
+    "genre": {
+      "id": 15028,
+      "value": "Hagiography",
+      "color": "darker-blue"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "133": {
+    "id": 133,
+    "order": "132.00000000000000000000",
+    "name": "Sermones ",
+    "jad_id": "jad_work__133",
+    "author": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "anonymous",
+        "jad_id": "jad_author__3",
+        "gnd_url": "",
+        "notes": null
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 20,
+        "value": "BNF, Latin 3570"
+      }
+    ],
+    "title": "Sermones",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 12,
+        "order": "12.00000000000000000000",
+        "name": "St. Victor Paris",
+        "jad__id": "jad_institutional_context__12",
+        "part_of": [
+          {
+            "id": 1,
+            "order": "1.00000000000000000000",
+            "name": "University of Paris",
+            "jad__id": "jad_institutional_context__1",
+            "part_of": [
+              {
+                "id": 16,
+                "value": "French schools"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "None",
+        "jad_id": "jad_sources_occurrences__1",
+        "digi_url": ""
+      }
+    ]
+  },
+  "134": {
+    "id": 134,
+    "order": "133.00000000000000000000",
+    "name": "De Tyto et Vespasiano ",
+    "jad_id": "jad_work__134",
+    "author": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "anonymous",
+        "jad_id": "jad_author__3",
+        "gnd_url": "",
+        "notes": null
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 17,
+        "value": "Cambr. St.John's Coll., MS 127"
+      }
+    ],
+    "title": "De Tyto et Vespasiano",
+    "genre": {
+      "id": 14732,
+      "value": "Idiosyncratic work",
+      "color": "dark-red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "135": {
+    "id": 135,
+    "order": "134.00000000000000000000",
+    "name": "Sermones ",
+    "jad_id": "jad_work__135",
+    "author": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "anonymous",
+        "jad_id": "jad_author__3",
+        "gnd_url": "",
+        "notes": null
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 36,
+        "value": "Valenciennes, MS 227"
+      }
+    ],
+    "title": "Sermones",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "136": {
+    "id": 136,
+    "order": "135.00000000000000000000",
+    "name": "Sermones ",
+    "jad_id": "jad_work__136",
+    "author": [
+      {
+        "id": 3,
+        "order": "3.00000000000000000000",
+        "name": "anonymous",
+        "jad_id": "jad_author__3",
+        "gnd_url": "",
+        "notes": null
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 22,
+        "value": "Troyes, MS 653"
+      }
+    ],
+    "title": "Sermones",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "12",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "137": {
+    "id": 137,
+    "order": "136.00000000000000000000",
+    "name": "Commentary Lamentations ",
+    "jad_id": "jad_work__137",
+    "author": [
+      {
+        "id": 10,
+        "order": "10.00000000000000000000",
+        "name": "Langton, Stephen",
+        "jad_id": "jad_author__10",
+        "gnd_url": "https://d-nb.info/gnd/118778714",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [
+      {
+        "id": 7,
+        "value": "Maz., MS 177"
+      }
+    ],
+    "title": "Commentary Lamentations",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "University of Paris",
+        "jad__id": "jad_institutional_context__1",
+        "part_of": [
+          {
+            "id": 16,
+            "order": "16.00000000000000000000",
+            "name": "French schools",
+            "jad__id": "jad_institutional_context__16",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "None",
+        "jad_id": "jad_sources_occurrences__1",
+        "digi_url": ""
+      }
+    ]
+  },
+  "138": {
+    "id": 138,
+    "order": "137.00000000000000000000",
+    "name": "Allegorica expositio in Samuelem ",
+    "jad_id": "jad_work__138",
+    "author": [
+      {
+        "id": 6,
+        "order": "6.00000000000000000000",
+        "name": "Beda, Heiliger",
+        "jad_id": "jad_author__6",
+        "gnd_url": "https://d-nb.info/gnd/118508237",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Allegorica expositio in Samuelem",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "139": {
+    "id": 139,
+    "order": "138.00000000000000000000",
+    "name": "De ratione temporum ",
+    "jad_id": "jad_work__139",
+    "author": [
+      {
+        "id": 6,
+        "order": "6.00000000000000000000",
+        "name": "Beda, Heiliger",
+        "jad_id": "jad_author__6",
+        "gnd_url": "https://d-nb.info/gnd/118508237",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "De ratione temporum",
+    "genre": {
+      "id": 14732,
+      "value": "Idiosyncratic work",
+      "color": "dark-red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "140": {
+    "id": 140,
+    "order": "139.00000000000000000000",
+    "name": "De temporibus ",
+    "jad_id": "jad_work__140",
+    "author": [
+      {
+        "id": 6,
+        "order": "6.00000000000000000000",
+        "name": "Beda, Heiliger",
+        "jad_id": "jad_author__6",
+        "gnd_url": "https://d-nb.info/gnd/118508237",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "De temporibus",
+    "genre": {
+      "id": 14732,
+      "value": "Idiosyncratic work",
+      "color": "dark-red"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "141": {
+    "id": 141,
+    "order": "140.00000000000000000000",
+    "name": "Commentary Marc ",
+    "jad_id": "jad_work__141",
+    "author": [
+      {
+        "id": 6,
+        "order": "6.00000000000000000000",
+        "name": "Beda, Heiliger",
+        "jad_id": "jad_author__6",
+        "gnd_url": "https://d-nb.info/gnd/118508237",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Marc",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "142": {
+    "id": 142,
+    "order": "141.00000000000000000000",
+    "name": "Allegorica expositio in Parabolas Salomonis ",
+    "jad_id": "jad_work__142",
+    "author": [
+      {
+        "id": 6,
+        "order": "6.00000000000000000000",
+        "name": "Beda, Heiliger",
+        "jad_id": "jad_author__6",
+        "gnd_url": "https://d-nb.info/gnd/118508237",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Allegorica expositio in Parabolas Salomonis",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "143": {
+    "id": 143,
+    "order": "142.00000000000000000000",
+    "name": "Commentary Acts ",
+    "jad_id": "jad_work__143",
+    "author": [
+      {
+        "id": 6,
+        "order": "6.00000000000000000000",
+        "name": "Beda, Heiliger",
+        "jad_id": "jad_author__6",
+        "gnd_url": "https://d-nb.info/gnd/118508237",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Acts",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "144": {
+    "id": 144,
+    "order": "143.00000000000000000000",
+    "name": "Commentary Paul ",
+    "jad_id": "jad_work__144",
+    "author": [
+      {
+        "id": 6,
+        "order": "6.00000000000000000000",
+        "name": "Beda, Heiliger",
+        "jad_id": "jad_author__6",
+        "gnd_url": "https://d-nb.info/gnd/118508237",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Paul",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "145": {
+    "id": 145,
+    "order": "144.00000000000000000000",
+    "name": "Allegorica expositio in Canticum Habacuc ",
+    "jad_id": "jad_work__145",
+    "author": [
+      {
+        "id": 6,
+        "order": "6.00000000000000000000",
+        "name": "Beda, Heiliger",
+        "jad_id": "jad_author__6",
+        "gnd_url": "https://d-nb.info/gnd/118508237",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Allegorica expositio in Canticum Habacuc",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "146": {
+    "id": 146,
+    "order": "145.00000000000000000000",
+    "name": "Commentary John ",
+    "jad_id": "jad_work__146",
+    "author": [
+      {
+        "id": 6,
+        "order": "6.00000000000000000000",
+        "name": "Beda, Heiliger",
+        "jad_id": "jad_author__6",
+        "gnd_url": "https://d-nb.info/gnd/118508237",
+        "notes": null
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary John",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "147": {
+    "id": 147,
+    "order": "146.00000000000000000000",
+    "name": "Commentary Daniel ",
+    "jad_id": "jad_work__147",
+    "author": [
+      {
+        "id": 16,
+        "order": "16.00000000000000000000",
+        "name": "Rupert, von Deutz",
+        "jad_id": "jad_author__16",
+        "gnd_url": "https://d-nb.info/gnd/118604198",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Daniel",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "148": {
+    "id": 148,
+    "order": "147.00000000000000000000",
+    "name": "Commentary Jeremiah ",
+    "jad_id": "jad_work__148",
+    "author": [
+      {
+        "id": 16,
+        "order": "16.00000000000000000000",
+        "name": "Rupert, von Deutz",
+        "jad_id": "jad_author__16",
+        "gnd_url": "https://d-nb.info/gnd/118604198",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Jeremiah",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  },
+  "149": {
+    "id": 149,
+    "order": "148.00000000000000000000",
+    "name": " ",
+    "jad_id": "jad_work__149",
+    "author": [],
+    "manuscripts": [],
+    "title": "",
+    "genre": null,
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": []
+  }
+}

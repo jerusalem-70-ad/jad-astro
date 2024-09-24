@@ -1,0 +1,46 @@
+{
+  "id": 36,
+  "order": "36.00000000000000000000",
+  "name": "Homiliae in euangelia ",
+  "jad_id": "jad_work__36",
+  "author": [
+    {
+      "id": 28,
+      "order": "28.00000000000000000000",
+      "name": "Gregor, der Grosse",
+      "jad_id": "jad_author__28",
+      "gnd_url": "https://d-nb.info/gnd/118541838",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Homiliae in euangelia",
+  "genre": {
+    "id": 14726,
+    "value": "Sermons",
+    "color": "darker-pink"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "around 600",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [
+    {
+      "id": 5,
+      "order": "5.00000000000000000000",
+      "name": "Papal Curia",
+      "jad__id": "jad_institutional_context__5",
+      "part_of": []
+    }
+  ],
+  "published_edition": [
+    {
+      "id": 7,
+      "order": "6.00000000000000000000",
+      "name": "Corpus Christianorum",
+      "jad_id": "jad_sources_occurrences__7",
+      "digi_url": ""
+    }
+  ]
+}

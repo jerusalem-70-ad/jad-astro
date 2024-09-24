@@ -1,0 +1,38 @@
+{
+  "id": 44,
+  "order": "44.00000000000000000000",
+  "name": "Commentary Matthew ",
+  "jad_id": "jad_work__44",
+  "author": [
+    {
+      "id": 38,
+      "order": "38.00000000000000000000",
+      "name": "Christianus, Druthmar",
+      "jad_id": "jad_author__38",
+      "gnd_url": "https://d-nb.info/gnd/100939023",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Commentary Matthew",
+  "genre": {
+    "id": 14727,
+    "value": "Commentary",
+    "color": "darker-green"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": [
+    {
+      "id": 2,
+      "order": "2.00000000000000000000",
+      "name": "Patrologia Latina",
+      "jad_id": "jad_sources_occurrences__2",
+      "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+    }
+  ]
+}

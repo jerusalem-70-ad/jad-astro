@@ -1,0 +1,38 @@
+{
+  "id": 39,
+  "order": "39.00000000000000000000",
+  "name": "Chronicon Mundi ",
+  "jad_id": "jad_work__39",
+  "author": [
+    {
+      "id": 36,
+      "order": "36.00000000000000000000",
+      "name": "Lukas, von Tuy",
+      "jad_id": "jad_author__36",
+      "gnd_url": "https://d-nb.info/gnd/100194788",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Chronicon Mundi",
+  "genre": {
+    "id": 14731,
+    "value": "Chronicle",
+    "color": "red"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "early 13",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": [
+    {
+      "id": 7,
+      "order": "6.00000000000000000000",
+      "name": "Corpus Christianorum",
+      "jad_id": "jad_sources_occurrences__7",
+      "digi_url": ""
+    }
+  ]
+}

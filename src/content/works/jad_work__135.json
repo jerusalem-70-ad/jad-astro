@@ -1,0 +1,35 @@
+{
+  "id": 135,
+  "order": "134.00000000000000000000",
+  "name": "Sermones ",
+  "jad_id": "jad_work__135",
+  "author": [
+    {
+      "id": 3,
+      "order": "3.00000000000000000000",
+      "name": "anonymous",
+      "jad_id": "jad_author__3",
+      "gnd_url": "",
+      "notes": null
+    }
+  ],
+  "manuscripts": [
+    {
+      "id": 36,
+      "value": "Valenciennes, MS 227"
+    }
+  ],
+  "title": "Sermones",
+  "genre": {
+    "id": 14726,
+    "value": "Sermons",
+    "color": "darker-pink"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "12",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": []
+}

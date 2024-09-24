@@ -1,0 +1,30 @@
+{
+  "id": 109,
+  "order": "108.00000000000000000000",
+  "name": "Expositio in Apocalypsin ",
+  "jad_id": "jad_work__109",
+  "author": [
+    {
+      "id": 25,
+      "order": "25.00000000000000000000",
+      "name": "Haimo, von Auxerre",
+      "jad_id": "jad_author__25",
+      "gnd_url": "https://d-nb.info/gnd/100945260",
+      "notes": ""
+    }
+  ],
+  "manuscripts": [],
+  "title": "Expositio in Apocalypsin",
+  "genre": {
+    "id": 14727,
+    "value": "Commentary",
+    "color": "darker-green"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": []
+}

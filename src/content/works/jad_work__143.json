@@ -1,0 +1,30 @@
+{
+  "id": 143,
+  "order": "142.00000000000000000000",
+  "name": "Commentary Acts ",
+  "jad_id": "jad_work__143",
+  "author": [
+    {
+      "id": 6,
+      "order": "6.00000000000000000000",
+      "name": "Beda, Heiliger",
+      "jad_id": "jad_author__6",
+      "gnd_url": "https://d-nb.info/gnd/118508237",
+      "notes": null
+    }
+  ],
+  "manuscripts": [],
+  "title": "Commentary Acts",
+  "genre": {
+    "id": 14727,
+    "value": "Commentary",
+    "color": "darker-green"
+  },
+  "not_before": null,
+  "not_after": null,
+  "written_date": "",
+  "notes": "",
+  "notes__author": "",
+  "institutional_context": [],
+  "published_edition": []
+}
