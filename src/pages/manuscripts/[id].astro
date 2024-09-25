@@ -20,44 +20,47 @@ const { data: manuscript } = Astro.props;
     <div>
         <article class="border-2 rounded-sm border-brandBrown bg-brandRose w-3/4 grid grid-cols-1 mx-auto p-5 my-10">
             <h1 class="text-xl py-3 mx-auto">{manuscript.name[0].value}</h1>
-            <dl class="grid grid-cols-[1fr_4fr] gap-2 text-xs md:text-sm">
-                <dt class="font-semibold">Settlement:</dt>
-                <dd>{manuscript.library[0].place[0]?.name}</dd>
-    
-                <dt class="font-semibold">Library / Collection:</dt>
-                <dd><a href={manuscript.library[0].gnd_url} target="_blank">{manuscript.library[0].name}</a></dd>
-                
-                <dt class="font-semibold">Shelfmark:</dt>
-                <dd>{manuscript.idno}</dd>
-               
-                <dt class="font-semibold">Insitutional context:</dt>
-                <dd>{manuscript.institutional_context[0]?.name ?? 'N/A'}</dd>
-                
-                
-                <dt class="font-semibold">Passages:</dt>
-                <dd>
-                    <!-- Array call .map with two parameters; index with type number - to count ; : wraped in fragment <> to return more than one elemen from the iteration-->
-                  {
-                    manuscript.related__passages.map((passage: { jad_id: string; }, index: number) => (
-                      <>
-                        <a href={`/passages/${passage.jad_id}`} class="hover:text-brandRed">
-                          #{passage.jad_id.substring(15)}
-                        </a>
-                        {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
-                        {index < manuscript.related__passages.length - 1 && ', '}
-                      </>
-                    ))
-                  }
-                </dd>              
+            <dl class="grid grid-cols-[1fr_5fr] text-sm md:leading-7 md:text-base">
 
-               
+              <dt class="font-semibold border-r border-gray-300 pr-2">Settlement:</dt>
+              <dd class="pl-5">{manuscript.library[0].place[0]?.name}</dd>
+              
+              
+              <dt class="font-semibold border-r border-gray-300 pr-2">Library / Collection:</dt>
+              <dd class="pl-5"><a href={manuscript.library[0].gnd_url} target="_blank">{manuscript.library[0].name}</a></dd>
+              
+              
+              <dt class="font-semibold border-r border-gray-300 pr-2">Shelfmark:</dt>
+              <dd class="pl-5">{manuscript.idno}</dd>
+              
+              
+              <dt class="font-semibold border-r border-gray-300 pr-2">Insitutional context:</dt>
+              <dd class="pl-5">{manuscript.institutional_context[0]?.name ?? 'N/A'}</dd>
+              
+              
+              
+              <dt class="font-semibold border-r border-gray-300 pr-2">Passages:</dt>
+              <dd class="pl-5">
+                <!-- Array call .map with two parameters; index with type number - to count ; : wraped in fragment <> to return more than one elemen from the iteration-->
+                {
+                  manuscript.related__passages.map((passage: { jad_id: string; }, index: number) => (
+                    <>
+                      <a href={`/passages/${passage.jad_id}`} class="hover:text-brandRed">
+                        #{passage.jad_id.substring(15)}
+                      </a>
+                      {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
+                      {index < manuscript.related__passages.length - 1 && ', '}
+                    </>
+                  ))
+                }
+              </dd>  
                
                
             </dl>
-            <div class="flex flex-col gap-2 py-2 text-xs md:text-sm">
+            <div class="flex flex-col gap-2 py-2 text-sm md:text-base font-semibold">
                 {manuscript.digi_url && (
                      <div class="flex">
-                        <a href={manuscript.digi_url} class="inline-flex hover:font-semibold">
+                        <a href={manuscript.digi_url} class="inline-flex hover:text-brandRed">
                             <section>Digital facsimile</section> 
                             <img src="/external-link.svg" alt="" class="w-4 inline">
                         </a>
@@ -67,16 +70,29 @@ const { data: manuscript } = Astro.props;
                   
                 {manuscript.catalog_url && (
                    <div class="flex">                        
-                        <a href={manuscript.catalog_url} class="inline-flex hover:font-semibold">
+                        <a href={manuscript.catalog_url} class="inline-flex hover:text-brandRed">
                             <section>Catalog entry</section> 
                             <img src="/external-link.svg" alt="" class="w-4 inline">
                         </a>
                     </div>                    
                 )}
-            </div>
+                </div>
+            
            
     
     </article>
+    <div class="my-10 flex p-5 w-3/4 mx-auto justify-between">
+            {manuscript.id > 1
+            ? 
+            <a href=`/manuscripts/jad_manuscript__${parseInt(manuscript.jad_id.split('__')[1]) -1}`><img src="/previous.svg" class="h-20"></a>
+            : ''
+        }
+            
+            <a href=`/manuscripts/jad_manuscript__${parseInt(manuscript.jad_id.split('__')[1]) +1}`><img src="/next.svg" class="h-20"></a>
+           
+              
+        </div>   
+    
     </div>
 
 </PageLayout>

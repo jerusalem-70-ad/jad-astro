@@ -21,7 +21,7 @@ const collection = await getCollection("works")
 		<div>
 			<h1 class="text-2xl font-semibold text-brandBrown py-4">Works:</h1>
            
-            <ul>
+            <ul class="grid grid-cols-[repeat(auto-fill,minmax(270px,1fr))] gap-2">
                 
                 {collection.map((work) => {
                     return (

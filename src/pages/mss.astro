@@ -18,19 +18,18 @@ const collection = await getCollection("manuscripts")
 ---
 
 <PageLayout>
-    <div class="mx-auto w-full max-w-screen-xl px-16 py-4">
+    <div class="mx-auto w-full max-w-screen-xl p-4 md:px-16">
 		<div>
 			<h1 class="text-2xl font-semibold text-brandBrown py-4">Manuscripts</h1>
            
-            <ul class="m-auto grid grid-cols-[repeat(auto-fill,minmax(270px,1fr))] gap-8 px-5 py-3 sm:px-16 sm:py-10"
+            <ul class="m-auto grid grid-cols-[repeat(auto-fill,minmax(270px,1fr))] gap-2 md:gap-8 md:px-5 py-3"
 		>
                 {collection.map((manuscript) => {
                     return (
                         <li>
                             <MsCard manuscript={manuscript}/>
 
-                        {/* 'data' comes from Astro - adds a new data layer during the processing. Still funny how entry.id works, without entry.data.id ?? */}
-                            {/* {entry.data.name[0].value}                             */}
+                      
                         </li>)
                 })}
             </ul>            

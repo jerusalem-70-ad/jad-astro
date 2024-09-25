@@ -24,62 +24,93 @@ const { data: work } = Astro.props;
     <div>
         <div class="border-2 rounded-sm border-brandBrown bg-brandRose my-10 grid p-5 w-3/4 mx-auto">
             <h1 class="text-xl py-3 mx-auto font-medium">({work.id}) <span class="italic">{work.title}</span></h1>
-            <dl class="grid grid-cols-[1fr_5fr] gap-2 text-sm leading-7">
-                <div class="col-start-1 border-r border-gray-300 pr-2"> <!-- First column -->
-                    <dt class="font-semibold">Author:</dt>
-
-                    <dt class="font-semibold">Manuscripts:</dt>                
-
-                    <dt class="font-semibold">Genre:</dt>                        
-                    
-                    <dt class="font-semibold">Edition:</dt>                        
-    
-                    <dt class="font-semibold">Institutional context:</dt>                        
-    
-                    <dt class="font-semibold">Date:</dt>
-                </div>
-                <div class="col-start-2 pl-2"> <!-- Second column -->
-                    
-                    <dd>{work.author[0].name}</dd>
-                   
-                    <dd>
-                        { work.manuscripts.length > 0
-                           ? work.manuscripts.map((ms: { id: string; value: any;}, index: number) => (
-                              <>
+            <dl class="grid grid-cols-[1fr_5fr] text-sm md:leading-7 md:text-base">  
+                
+                <dt class="font-semibold border-r border-gray-300 pr-5">Author:</dt>
+                <dd class="pl-5">
+                    {work.author && work.author.length > 0
+                    ? work.author[0]?.name
+                    : 'N/A'}
+                </dd>
+                
+                <dt class="font-semibold border-r border-gray-300 pr-5">Manuscripts:</dt>                
+                <dd class="pl-5">
+                    { work.manuscripts.length > 0
+                            ? work.manuscripts.map((ms: { id: string; value: any;}, index: number) => (
+                                <>
                                 <a href={`/manuscripts/jad_manuscript__${ms.id}`} class="hover:text-brandRed">
-                                  {ms.value}
+                                    {ms.value}
                                 </a>
                                 {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
                                 {index < work.manuscripts.length - 1 && '| '}
-                              </>
+                                </>
                             )) : 'N/A'
-                          }
-                    </dd>
+                        }
+                </dd>
                     
-                    <dd>
-                        {work.genre.value}
-                    </dd>
-
-                    <dd>
-                        {work.published_edition.map((edition : {name : string}) => {
-                            return edition.name;
-                        }).join(', ')}
-                    </dd>
-
-                    <dd>
-                        {work.institutional_context.map((institution : {name : string}) => {
-                            return institution.name;
-                        }).join(', ')}
-                    </dd>
-
-                    <dd>
-                        {work.written_date}th c.
-                    </dd>
-
-                </div>  
-            </dl>
+                <dt class="font-semibold border-r border-gray-300 pr-5">Genre:</dt>                        
+                <dd class="pl-5">
+                    {work.genre && work.genre.lenght > 0
+                    ? work.genre?.value
+                    : 'N/A'}
+                </dd>
+                
+                <dt class="font-semibold border-r border-gray-300 pr-5">Edition:</dt>                        
+                <dd class="pl-5">
+                    { work.published_edition.length > 0
+                            ? work.published_edition.map((ed: { name: string; digi_url: any;}, index: number) => (
+                                <>
+                                {ed.digi_url.length > 0
+                                ? <a href={ed.digi_url} class="hover:text-brandRed">
+                                    {ed.name}
+                                </a>
+                                : ed.name
+                                }
+                               
+                                {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
+                                {index < work.published_edition.length - 1 && '| '}
+                                </>
+                            )) : 'N/A'
+                        }
+                </dd>
+                
+                <dt class="font-semibold border-r border-gray-300 pr-5">Institutional context:</dt>                        
+                <dd class="pl-5">
+                    {work.institutional_context.length > 0
+                    ? work.institutional_context.map((institution : { name : string;}, index: number) => (
+                        <>
+                         <a href="/" class="hover:text-brandRed">
+                                    {institution.name}
+                                </a>
+                        {index < work.institutional_context.lenght -1 && '| '}
+                        </>
+                    )) : 'N/A'
+                }
+                    
+                </dd>
+               
+                
+                <dt class="font-semibold border-r border-gray-300 pr-5">Date:</dt> 
+                <dd class="pl-5">
+                    { work.written_date.length > 0 
+                    ? work.written_date 
+                    : 'N/A' } 
+                </dd>
+            </dl> 
+                
+        </div>     
+        <div class="my-10 flex p-5 w-3/4 mx-auto justify-between">
+            {work.id > 1
+            ? 
+            <a href=`/works/jad_work__${parseInt(work.jad_id.split('__')[1]) -1}`><img src="/previous.svg" class="h-20"></a>
+            : ''
+        }
+            
+            <a href=`/works/jad_work__${parseInt(work.jad_id.split('__')[1]) +1}`><img src="/next.svg" class="h-20"></a>
+           
+              
+        </div>   
         
-        </div>
     </div>
 
 </PageLayout>

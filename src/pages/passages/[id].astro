@@ -23,13 +23,13 @@ const { data: passage } = Astro.props;
 
 ---
 <PageLayout>
-   <div class="grid grid-cols-[1fr_4fr] gap-2">
-    <aside class="border-2 border-r-brandBrown bg-brandRose py-5 px-6 overflow-scroll max-h-[700px]">
+   <div class="md:grid md:grid-cols-[1fr_4fr] md:gap-2">
+    <aside class="hidden md:grid border-2 border-r-brandBrown bg-brandRose py-5 px-6 overflow-scroll max-h-screen">
         <ul>
               
             {sortedPassages.map((passage) => {
                 return (
-                    <li id={`passage-${passage.data.jad_id}`} class="list-disc overflow-hidden whitespace-nowrap text-ellipsis max-w-xs hover:text-wrap">                     
+                    <li id={`passage-${passage.data.jad_id}`} class="list-disc overflow-hidden whitespace-nowrap text-ellipsis max-w-md hover:text-wrap">                     
                        <a href={passage.data.jad_id} class="hover:text-brandRed">({passage.data.jad_id.substring(15)}) <span class="italic">{passage.data.passage}</span></a>                                                        
                     </li>)
             })}
@@ -38,24 +38,44 @@ const { data: passage } = Astro.props;
     <div>
         <div class="border-2 rounded-sm border-brandBrown bg-brandRose m-5 grid p-5">
             <h1 class="text-xl py-3 mx-auto font-medium">({passage.id}) <span class="italic">{passage.passage}</span></h1>
-            <dl class="grid grid-cols-[1fr_5fr] gap-2 text-sm">
-        
-                <dt class="font-semibold">Author:</dt>
-                <dd>{passage.Author[0]?.value ?? 'N/A'}</dd>
-        
-                <dt class="font-semibold">Work:</dt>
-                <dd>{passage.work[0]?.name ?? 'N/A'}</dd>
-        
-                <dt class="font-semibold">Position in work</dt>
-                <dd>{passage?.position_in_work ?? 'N/A'}</dd>
-        
-                <dt class="font-semibold">Manuscripts:</dt>
-                <!-- this is an array - need to call .map to return an array of strings with the jad_id; outside the .map call .join() But first checek if it is empty-->
-               
-                <dd>
-                    { passage.manuscript.length > 0
+            
+            <dl class="grid grid-cols-[1fr_5fr] text-sm md:text-base md:leading-7"> 
+              
+              <dt class="font-semibold border-r border-gray-300 pr-2">Author:</dt>
+              <dd class="pl-5">{passage.Author[0]?.value ?? 'N/A'}</dd>        
+              
+              <dt class="font-semibold border-r border-gray-300 pr-2">Work:</dt>
+              <dd class="pl-5">
+                { passage.work.length > 0
+                       ? passage.work.map((werk: { jad_id: string; title: any;}, index: number) => (
+                         <>
+                            <a href={`/works/${werk.jad_id}`} class="hover:text-brandRed">
+                              {werk.title}
+                            </a>
+                            {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
+                            {index < passage.work.length - 1 && ', '}
+                          </>
+                        )) : 'N/A'
+                      }
+                </dd>        
+              
+              <dt class="font-semibold border-r border-gray-300 pr-2">Position in work</dt>
+              
+              <dd class="pl-5">
+                  { passage.position_in_work 
+                    ? (passage.position_in_work.length > 0 
+                        ? passage.position_in_work 
+                        : 'N/A')
+                    : 'N/A'}
+                </dd>
+              
+              <dt class="font-semibold border-r border-gray-300 pr-2">Manuscripts:</dt>
+              <!-- this is an array - need to call .map to return an array of strings with the jad_id; outside the .map call .join() But first checek if it is empty-->
+              
+              <dd class="pl-5">
+                { passage.manuscript.length > 0
                        ? passage.manuscript.map((ms: { jad_id: string; name: any;}, index: number) => (
-                          <>
+                         <>
                             <a href={`/manuscripts/${ms.jad_id}`} class="hover:text-brandRed">
                               {ms.name[0].value}
                             </a>
@@ -65,50 +85,48 @@ const { data: passage } = Astro.props;
                         )) : 'N/A'
                       }
                 </dd>
-        
-                <dt class="font-semibold">Biblical references:</dt>
-                <dd>
-                    {passage.biblical_references.length > 0
+                
+                
+                <dt class="font-semibold border-r border-gray-300 pr-2">Biblical references:</dt>
+                <dd class="pl-5">
+                  {passage.biblical_references.length > 0
                     ? passage.biblical_references.map((reference: { value : any; }) => reference.value).join(', ')
                     : 'N/A'}
                 </dd>
-                <dt class="font-semibold">Liturgical references:</dt>
-                <dd>
-                    {passage.liturgical_references.length > 0
+                
+                <dt class="font-semibold border-r border-gray-300 pr-2">Liturgical references:</dt>
+                <dd class="pl-5">
+                  {passage.liturgical_references.length > 0
                       ? passage.liturgical_references.map((reference: { value: any }) => reference.value).join(', ')
                       : 'N/A'}
                 </dd>
-                <dt class="font-semibold">Full text:</dt>
-                <dd>{passage?.text_paragraph ?? 'N/A'}</dd>
-                <dt class="font-semibold">Passage found in:</dt>
-                <dd>
+                
+                <dt class="font-semibold border-r border-gray-300 pr-2">Full text:</dt>
+                <dd class="pl-5">
+                  { passage.text_paragraph
+                  ? (passage.text_paragraph.length > 0
+                    ? passage.text_paragraph 
+                    : 'N/A')
+                  : 'N/A'}</dd>
+                
+                <dt class="font-semibold border-r border-gray-300 pr-2">Passage found in:</dt>
+                <dd class="pl-5">
                     {passage.occurrence_found_in.length > 0
                     ? passage.occurrence_found_in.map((find : { value : any; }) => {
                         return find.value
                     }).join(', ') : 'N/A'}
                 </dd>
-        
-        
             </dl>
         
         </div>
+        <div class="my-10 flex p-5 w-3/4 mx-auto justify-between">
+          <a href=`/passages/${passage.prev}`><img src="/previous.svg" class="h-20"></a>
+          <a href=`/passages/${passage.next}`><img src="/next.svg" class="h-20"></a>
+        </div>
+        
     </div>
 
    </div>
 </PageLayout>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Get the current `jad_id` from the URL path
-      const pathParts = window.location.pathname.split('/');
-      const currentId = pathParts[pathParts.length - 1]; // Extract the last part of the path
-  
-      // Find the matching `li` in the aside by `jad_id`
-      const matchingElement = document.getElementById(`passage-${currentId}`);
-  
-      // Scroll the matching element into view if it exists
-      if (matchingElement) {
-        matchingElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    });
-  </script>
+
   

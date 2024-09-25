@@ -2,46 +2,46 @@
 const manuscript = Astro.props.manuscript.data;
 
 ---
-<article class="border-2 rounded-md border-brandBrown bg-brandRose w-[300px] grid grid-cols-1">
+<article class="border-2 rounded-md border-brandBrown bg-brandRose w-full md:w-[300px] grid grid-cols-1">
     <h1 class="text-xl py-3 mx-auto">
         <a href=`manuscripts/${manuscript.jad_id}` class="hover:text-brandRed font-semibold">{manuscript.name[0].value}</a>
     </h1>
-    <dl class="grid grid-cols-2 gap-2 text-xs md:text-sm px-5">
-        <dt>Settlement:</dt>
-        <dd>{manuscript.library[0].place[0]?.name}</dd>
-
-        <dt>Library / Collection:</dt>
-        <dd><a href={manuscript.library[0].gnd_url} target="_blank">{manuscript.library[0].name}</a></dd>
-        
-        <dt>Shelfmark:</dt>
-        <dd>{manuscript.idno}</dd>
-       
-        <dt>Insitutional context:</dt>
-        <dd>{manuscript.institutional_context[0]?.name ?? 'N/A'}</dd>
-        
-        
-        <dt>Passages:</dt>
-        <!-- this is an array - need to call .map to return an array of strings with the jad_id; outside the .map call .join() -->
-        <dd>
-            {
-                manuscript.related__passages.map((passage: { jad_id: string; }, index: number) => (
-                  <>
-                    <a href={`/passages/${passage.jad_id}`} class="hover:text-brandRed">
-                      #{passage.jad_id.substring(15)}
-                    </a>
-                    {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
-                    {index < manuscript.related__passages.length - 1 && ', '}
-                  </>
-                ))
-              }
-        </dd>
+    <dl class="grid grid-cols-2 text-sm md:text-base px-5">
+      
+      <dt class="border-r pr-2">Settlement:</dt>
+      <dd class="pl-2">{manuscript.library[0].place[0]?.name}</dd>
+      <dt class="border-r pr-2">Library / Collection:</dt>
+      <dd class="pl-2"><a href={manuscript.library[0].gnd_url} target="_blank">{manuscript.library[0].name}</a></dd>
+      
+      <dt class="border-r pr-2">Shelfmark:</dt>
+      <dd class="pl-2">{manuscript.idno}</dd>
+      <dt class="border-r pr-2">Insitutional context:</dt>
+      <dd class="pl-2">{manuscript.institutional_context[0]?.name ?? 'N/A'}</dd>
+      
+      
+      <dt class="border-r pr-2">Passages:</dt>
+          <!-- this is an array - need to call .map to return an array of strings with the jad_id; outside the .map call .join() -->
+          <dd class="pl-2">
+              {
+                  manuscript.related__passages.map((passage: { jad_id: string; }, index: number) => (
+                    <>
+                      <a href={`/passages/${passage.jad_id}`} class="hover:text-brandRed">
+                        #{passage.jad_id.substring(15)}
+                      </a>
+                      {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
+                      {index < manuscript.related__passages.length - 1 && ', '}
+                    </>
+                  ))
+                }
+          </dd>
+        </div>
        
        
     </dl>
-    <div class="flex flex-col gap-2 py-2 text-xs md:text-sm px-5">
+    <div class="flex md:flex-col gap-2 py-2 px-5 text-sm md:text-base">
         {manuscript.digi_url && (
              <div class="flex">                
-                <a href={manuscript.digi_url} class="inline-flex hover:font-semibold">
+                <a href={manuscript.digi_url} class="inline-flex hover:text-brandRed">
                     <section>Digital facsimile</section> 
                     <img src="/external-link.svg" alt="" class="w-4 inline">
                 </a>
@@ -51,13 +51,11 @@ const manuscript = Astro.props.manuscript.data;
           
         {manuscript.catalog_url && (
            <div class="flex">
-                <a href={manuscript.catalog_url} class="inline-flex hover:font-semibold">
+                <a href={manuscript.catalog_url} class="inline-flex hover:text-brandRed">
                     <section>Catalog entry</section>                 
                     <img src="/external-link.svg" alt="" class="w-4 inline">
                 </a>
-            </div>
-
-            
+            </div>            
         )}
     </div>
 
