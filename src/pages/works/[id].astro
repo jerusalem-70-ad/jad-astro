@@ -11,7 +11,9 @@ export async function getStaticPaths() {
     // 1) Use getCollection to fetch the json file
     const works = await getCollection("works")
     return works.map(work => {
+        // for each entry in the collection we get params to generate the static pages - in this case the slug 'id' matches the value of 'work.id' 
         return { params: {id: work.id},
+        // props is Astro specific - we use the props for the page content below
                 props: {data: work.data}}
    })
 }
