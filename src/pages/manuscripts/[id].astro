@@ -3,17 +3,19 @@ import PageLayout from "../../layouts/page-layout.astro";
 import { getCollection } from "astro:content";
 
 
+// 1. Generate a new path for every collection entry
 // make a function to read the collection; 'export' make the function available for Astro'S static site generation. 
 
 export async function getStaticPaths() {
-    // 1) Use getCollection to fetch the json file
+    // Use getCollection to read the collection of json files
     const manuscripts = await getCollection("manuscripts")
     return manuscripts.map(manuscript => {
+      // params: { slug: entry.slug }, props: { entry }
         return { params: {id: manuscript.id},
                 props: {data: manuscript.data}}
    })
 }
-
+// 2. For your template, you can get the entry directly from the prop
 const { data: manuscript } = Astro.props;
 ---
 <PageLayout>

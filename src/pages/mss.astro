@@ -4,32 +4,19 @@ import { getCollection } from "astro:content"
 import MsCard from "@components/ms-card.astro";
 const collection = await getCollection("manuscripts")
 
-// make a function to read the collection; 'export' make the function available for Astro'S static site generation. 
-
-// export async function getStaticPaths() {
-//     // 1) Use getCollection to fetch the json file
-//     const mss = await getCollection("manuscripts")
-//     return mss.map(manuscript => {
-//         return { params: {id: manuscript.id},
-//                 props: {data: manuscript.data}}
-//    })
-// }
-
 ---
 
 <PageLayout>
     <div class="mx-auto w-full max-w-screen-xl p-4 md:px-16">
 		<div>
 			<h1 class="text-2xl font-semibold text-brandBrown py-4">Manuscripts</h1>
-           
+            
             <ul class="m-auto grid grid-cols-[repeat(auto-fill,minmax(270px,1fr))] gap-2 md:gap-8 md:px-5 py-3"
 		>
                 {collection.map((manuscript) => {
                     return (
                         <li>
-                            <MsCard manuscript={manuscript}/>
-
-                      
+                            <MsCard manuscript={manuscript}/>                      
                         </li>)
                 })}
             </ul>            

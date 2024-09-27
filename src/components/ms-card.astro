@@ -28,7 +28,7 @@ const manuscript = Astro.props.manuscript.data;
                       <a href={`/passages/${passage.jad_id}`} class="hover:text-brandRed">
                         #{passage.jad_id.substring(15)}
                       </a>
-                      {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
+                      {/* to get comma after each entry BUT the last one (Index starts at 0 and increments with each iteration, at the end it is equals to the length of the array -1) */}
                       {index < manuscript.related__passages.length - 1 && ', '}
                     </>
                   ))

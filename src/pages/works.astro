@@ -3,16 +3,6 @@ import PageLayout from "../layouts/page-layout.astro";
 import { getCollection } from "astro:content"
 const collection = await getCollection("works")
 
-// make a function to read the collection; 'export' make the function available for Astro'S static site generation. 
-
-// export async function getStaticPaths() {
-//     // 1) Use getCollection to fetch the json file
-//     const mss = await getCollection("manuscripts")
-//     return mss.map(manuscript => {
-//         return { params: {id: manuscript.id},
-//                 props: {data: manuscript.data}}
-//    })
-// }
 
 ---
 
