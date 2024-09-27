@@ -1,0 +1,153 @@
+{
+  "1": {
+    "id": 1,
+    "order": "1.00000000000000000000",
+    "name": "Österreichische Nationalbibliothek",
+    "jad_id": "jad_library__1",
+    "gnd_url": "https://d-nb.info/gnd/2020893-5",
+    "abbreviation": "ÖNB",
+    "place": []
+  },
+  "2": {
+    "id": 2,
+    "order": "2.00000000000000000000",
+    "name": "Bibliothèque Nationale de France",
+    "jad_id": "jad_library__2",
+    "gnd_url": "https://d-nb.info/gnd/5156217-0",
+    "abbreviation": "BNF",
+    "place": [
+      {
+        "id": 1,
+        "order": "1.00000000000000000000",
+        "name": "Paris",
+        "geonames_url": "https://www.geonames.org/2988507/paris.html",
+        "jad_id": "jad_places__1"
+      }
+    ]
+  },
+  "3": {
+    "id": 3,
+    "order": "3.00000000000000000000",
+    "name": "San Isidoro (Kloster)",
+    "jad_id": "jad_library__3",
+    "gnd_url": "",
+    "abbreviation": "San Isidoro",
+    "place": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "León",
+        "geonames_url": "",
+        "jad_id": "jad_places__2"
+      }
+    ]
+  },
+  "4": {
+    "id": 4,
+    "order": "4.00000000000000000000",
+    "name": "Bibliothèque Sainte-Geneviève",
+    "jad_id": "jad_library__4",
+    "gnd_url": "https://d-nb.info/gnd/1022123-2",
+    "abbreviation": "St.Gen.",
+    "place": []
+  },
+  "5": {
+    "id": 5,
+    "order": "5.00000000000000000000",
+    "name": "Bibliothèque Mazarine",
+    "jad_id": "jad_library__5",
+    "gnd_url": "https://d-nb.info/gnd/803245-2",
+    "abbreviation": "Maz.",
+    "place": []
+  },
+  "6": {
+    "id": 6,
+    "order": "6.00000000000000000000",
+    "name": "Lambeth Palace Library",
+    "jad_id": "jad_library__6",
+    "gnd_url": "https://d-nb.info/gnd/16441-0",
+    "abbreviation": "Lam.",
+    "place": []
+  },
+  "7": {
+    "id": 7,
+    "order": "7.00000000000000000000",
+    "name": "British Library",
+    "jad_id": "jad_library__7",
+    "gnd_url": "https://d-nb.info/gnd/1023420-2",
+    "abbreviation": "BL",
+    "place": []
+  },
+  "8": {
+    "id": 8,
+    "order": "8.00000000000000000000",
+    "name": "St John's College (Cambridge)",
+    "jad_id": "jad_library__8",
+    "gnd_url": "https://d-nb.info/gnd/18387-8",
+    "abbreviation": "Cambr. St.John's Coll.",
+    "place": []
+  },
+  "9": {
+    "id": 9,
+    "order": "9.00000000000000000000",
+    "name": "Bibliothèque municipale (Troyes)",
+    "jad_id": "jad_library__9",
+    "gnd_url": "https://d-nb.info/gnd/1026092-4",
+    "abbreviation": "Troyes",
+    "place": []
+  },
+  "10": {
+    "id": 10,
+    "order": "10.00000000000000000000",
+    "name": "Bodleian Library",
+    "jad_id": "jad_library__10",
+    "gnd_url": "https://d-nb.info/gnd/38352-1",
+    "abbreviation": "Bodl.",
+    "place": []
+  },
+  "11": {
+    "id": 11,
+    "order": "11.00000000000000000000",
+    "name": "Bibliothèque royale de Belgique",
+    "jad_id": "jad_library__11",
+    "gnd_url": "https://d-nb.info/gnd/1023393-3",
+    "abbreviation": "Bibl. Roy.",
+    "place": []
+  },
+  "12": {
+    "id": 12,
+    "order": "12.00000000000000000000",
+    "name": "Bayrische Staatsbibliothek",
+    "jad_id": "jad_library__12",
+    "gnd_url": "",
+    "abbreviation": "BSB",
+    "place": []
+  },
+  "13": {
+    "id": 13,
+    "order": "13.00000000000000000000",
+    "name": "Bibliothèque de l'Arsenal",
+    "jad_id": "jad_library__13",
+    "gnd_url": "https://d-nb.info/gnd/1056486-X",
+    "abbreviation": "Arsenal",
+    "place": []
+  },
+  "14": {
+    "id": 14,
+    "order": "14.00000000000000000000",
+    "name": "Magdalen College (Oxford)",
+    "jad_id": "jad_library__14",
+    "gnd_url": "",
+    "abbreviation": "Oxford Magd. Coll.",
+    "place": []
+  },
+  "15": {
+    "id": 15,
+    "order": "15.00000000000000000000",
+    "name": "Bibliothèque municipale (Valenciennes)",
+    "jad_id": "jad_library__15",
+    "gnd_url": "https://d-nb.info/gnd/1052474-5",
+    "abbreviation": "Valenciennes",
+    "place": []
+  }
+}
