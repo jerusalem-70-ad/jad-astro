@@ -1,29 +1,44 @@
 ---
 import PageLayout from "../layouts/page-layout.astro";
-import { getCollection } from "astro:content"
-const collection = await getCollection("works")
+import {readFileSync} from "fs";
 
-
+const works = readFileSync("src/content/data/works.json", {
+  encoding: "utf-8",
+});
+const worksParsed = JSON.parse(works);
+// console.log(worksParsed["2"]["jad_id"]);
+const worksValues = Object.values(worksParsed);
 ---
 
 <PageLayout>
     <div class="mx-auto w-full max-w-screen-xl px-16 py-4">
 		<div>
 			<h1 class="text-2xl font-semibold text-brandBrown py-4">Works:</h1>
-           
-            <ul class="md:columns-3 sm:columns-2 gap-8">
-                
-                {collection
-                    .sort((a, b) => a.data.name.localeCompare(b.data.name)) // sort alphabetically based on property 'name'
-                    .map((work) => {
-                        return (
-                            <li class="list-disc">                     
-                                <a href=`works/${work.data.jad_id}` class="hover:text-brandRed font-medium">
-                                    <span class="italic">{work.data.name}</span>
-                                </a>                                                        
-                            </li>)
-                })}
-            </ul>            
+            <table class="border border-red-600 w-3/4 text-left text-brandBrown dark:text-brandPaleWhite">
+                <thead class="text-xs text-brandBrown uppercase bg-brandPaleWhite dark:bg-brandBrown dark:text-brandPaleWhite">
+                    <tr>
+                        <th class="px-4 py-3">Title</th>
+                        <th>Author</th>
+                        <th>Text</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b dark:border-gray-700">
+                        <td>Text</td>
+                    </tr>
+                </tbody>
+             
+            </table>
+            
+            <ul>
+                    {Object.values(worksValues).map((work, index) => (
+                      <li key={index}>
+                        <a href=`/works/${work.jad_id}`>{work.name}</a>
+                        </li>
+                    ))}
+                  </ul>
+               
+                   
 		</div>
 	</div>
 </PageLayout> 

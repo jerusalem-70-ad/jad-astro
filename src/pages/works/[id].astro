@@ -1,20 +1,22 @@
 ---
 import PageLayout from "../../layouts/page-layout.astro";
-import { getCollection } from "astro:content";
-
-// make a function to read the collection; 'export' make the function available for Astro'S static site generation. 
+import {readFileSync} from "fs";
 
 export async function getStaticPaths() {
-    // 1) Use getCollection to fetch the json file
-    const works = await getCollection("works")
-    return works.map(work => {
-        // for each entry in the collection we get params to generate the static pages - in this case the slug 'id' matches the value of 'work.id' 
-        return { params: {id: work.id},
-        // props is Astro specific - we use the props for the page content below
-                props: {data: work.data}}
-   })
-}
+  // Read and parse the JSON file
+  const works = readFileSync("src/content/data/works.json", { encoding: "utf-8" });
+  const worksParsed = JSON.parse(works);
 
+  // Map over the values in the object and create an array of paths
+  const paths = Object.values(worksParsed).map((work) => ({
+    params: { id: work.jad_id.toString() },  // Make sure id is a string
+    props: { data: work }
+  }));
+
+  // Return the array of paths
+  return paths;
+}
+       
 const { data: work } = Astro.props;
 
 ---

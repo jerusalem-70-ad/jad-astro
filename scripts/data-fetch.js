@@ -17,13 +17,17 @@ const fileNames = [
 // async function to fetch the data from the url
 
 async function fetchAllData() {
-  // use fs writeFileSync to write the data in the initially empty json - give path, data to be written, encoding
-  const folderPath = join(process.cwd(), "src", "content", "originalData");
+  // make a folder to store the data - use process.cwd to get the root (node operates fro the root), concatinate src etc. - node knows to put / or \
+  const folderPath = join(process.cwd(), "src", "content", "data");
   mkdirSync(folderPath, { recursive: true });
 
+  // iterate over the fileNames, for each we call the function fetchData - which receives two parameters - fileName and folderPath
   const promises = fileNames.map(async (fileName) => {
     await fetchData(fileName, folderPath);
   });
+
+  // since we are awaiting  promises is an array of promises. Use the method promise.all():
+  // takes an iterable of promises as input and returns a single Promise. Returns an array of the fulfillment values.
 
   await Promise.all(promises);
 
@@ -47,7 +51,7 @@ async function fetchData(fileName, folderPath) {
     // reponse.body => fs.createWriteStream(filePath)
 
     const data = await response.json(); // need to parse the JSON
-    // console.log(data["36"]); // visualize the JSON data;
+
     // save them in content/manuscripts.json 1) convert the data object into a json string (parameter 2 for indentation - make it readable)
     const mss = JSON.stringify(data, null, 2);
     writeFileSync(join(folderPath, fileName), mss, { encoding: "utf-8" });

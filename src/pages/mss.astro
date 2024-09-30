@@ -1,8 +1,9 @@
 ---
 import PageLayout from "../layouts/page-layout.astro";
-import { getCollection } from "astro:content"
+import {readFileSync} from "fs";
 import MsCard from "@components/ms-card.astro";
-const collection = await getCollection("manuscripts")
+
+const mss = JSON.parse(readFileSync("src/content/data/manuscripts.json", {encoding: "utf-8"}))
 
 ---
 
@@ -13,12 +14,14 @@ const collection = await getCollection("manuscripts")
             
             <ul class="m-auto grid grid-cols-[repeat(auto-fill,minmax(270px,1fr))] gap-2 md:gap-8 md:px-5 py-3"
 		>
-                {collection.map((manuscript) => {
-                    return (
-                        <li>
-                            <MsCard manuscript={manuscript}/>                      
-                        </li>)
-                })}
+                {Object.values(mss).map((manuscript, index) => (
+                      <li key={index}>
+                        <MsCard manuscript={manuscript}/> 
+                        </li>
+                )
+                      
+                  
+                )}
             </ul>            
 		</div>
 	</div>

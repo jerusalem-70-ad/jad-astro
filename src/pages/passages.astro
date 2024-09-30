@@ -1,12 +1,10 @@
 ---
 import PageLayout from "../layouts/page-layout.astro";
-import { getCollection } from "astro:content"
-const collection = await getCollection("passages")
+import {readFileSync} from "fs";
 
-let sortedPassages = collection.sort((a, b) => {
-  // Convert the substring to a number and compare
-  return parseInt(a.data.jad_id.substring(15)) - parseInt(b.data.jad_id.substring(15));
-});
+const passages = readFileSync("src/content/data/passages.json", {encoding: "utf-8"});
+const passagesParsed = JSON.parse(passages);
+const passageValues = Object.values(passagesParsed);
 
 ---
 
@@ -14,16 +12,13 @@ let sortedPassages = collection.sort((a, b) => {
     <div class="mx-auto w-full max-w-screen-xl px-16 py-4">
 		<div>
 			<h1 class="text-2xl font-semibold text-brandBrown py-4">Passages / Occurrences</h1>
-
-           <ul>
-              
-                {sortedPassages.map((passage) => {
-                    return (
-                        <li class="list-disc">                     
-                           <a href=`passages/${passage.data.jad_id}` class="hover:text-brandRed font-medium">({passage.data.jad_id.substring(15)}) <span class="italic">{passage.data.passage}</span></a>                                                        
-                        </li>)
-                })}
-            </ul>           
+        <ul>
+          {Object.values(passageValues).map((passage, index) => (
+            <li key={index}>
+               <a href=`passages/${passage.jad_id}` class="hover:text-brandRed font-medium">({passage.jad_id.substring(15)}) <span class="italic">{passage.passage}</span></a>
+              </li>
+          ))}
+        </ul>          
 		</div>
         
 	</div>

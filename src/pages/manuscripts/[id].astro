@@ -1,21 +1,17 @@
 ---
 import PageLayout from "../../layouts/page-layout.astro";
-import { getCollection } from "astro:content";
-
-
-// 1. Generate a new path for every collection entry
-// make a function to read the collection; 'export' make the function available for Astro'S static site generation. 
+import {readFileSync} from "fs";
 
 export async function getStaticPaths() {
     // Use getCollection to read the collection of json files
-    const manuscripts = await getCollection("manuscripts")
-    return manuscripts.map(manuscript => {
-      // params: { slug: entry.slug }, props: { entry }
-        return { params: {id: manuscript.id},
-                props: {data: manuscript.data}}
-   })
+    const manuscripts = JSON.parse(readFileSync("src/content/data/manuscripts.json", {encoding: "utf-8"}))
+    const paths =  Object.values(manuscripts).map((manuscript) => ({
+        params: {id: manuscript.jad_id.toString()},
+        props: {data: manuscript}
+      }));
+      return paths;
 }
-// 2. For your template, you can get the entry directly from the prop
+
 const { data: manuscript } = Astro.props;
 ---
 <PageLayout>
@@ -41,10 +37,10 @@ const { data: manuscript } = Astro.props;
               
               
               
-              <dt class="font-semibold border-r border-gray-300 pr-2">Passages:</dt>
+              <!-- <dt class="font-semibold border-r border-gray-300 pr-2">Passages:</dt>
               <dd class="pl-5">
                 <!-- Array call .map with two parameters; index with type number - to count ; : wraped in fragment <> to return more than one elemen from the iteration-->
-                {
+                <!-- {
                   manuscript.related__passages.map((passage: { jad_id: string; }, index: number) => (
                     <>
                       <a href={`/passages/${passage.jad_id}`} class="hover:text-brandRed">
@@ -55,7 +51,7 @@ const { data: manuscript } = Astro.props;
                     </>
                   ))
                 }
-              </dd>  
+              </dd>   --> 
                
                
             </dl>
