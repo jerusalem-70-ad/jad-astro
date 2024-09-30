@@ -1,10 +1,9 @@
 ---
 import PageLayout from "../layouts/page-layout.astro";
-import {readFileSync} from "fs";
+import passages from "../content/data/passages.json";
 
-const passages = readFileSync("src/content/data/passages.json", {encoding: "utf-8"});
-const passagesParsed = JSON.parse(passages);
-const passageValues = Object.values(passagesParsed);
+
+const passageValues = Object.values(passages);
 
 ---
 
@@ -13,8 +12,8 @@ const passageValues = Object.values(passagesParsed);
 		<div>
 			<h1 class="text-2xl font-semibold text-brandBrown py-4">Passages / Occurrences</h1>
         <ul>
-          {Object.values(passageValues).map((passage, index) => (
-            <li key={index}>
+          {Object.values(passageValues).map((passage) => (
+            <li>
                <a href=`passages/${passage.jad_id}` class="hover:text-brandRed font-medium">({passage.jad_id.substring(15)}) <span class="italic">{passage.passage}</span></a>
               </li>
           ))}

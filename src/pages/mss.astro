@@ -1,9 +1,8 @@
 ---
 import PageLayout from "../layouts/page-layout.astro";
-import {readFileSync} from "fs";
+import mss from "../content/data/manuscripts.json";
 import MsCard from "@components/ms-card.astro";
 
-const mss = JSON.parse(readFileSync("src/content/data/manuscripts.json", {encoding: "utf-8"}))
 
 ---
 
@@ -14,8 +13,8 @@ const mss = JSON.parse(readFileSync("src/content/data/manuscripts.json", {encodi
             
             <ul class="m-auto grid grid-cols-[repeat(auto-fill,minmax(270px,1fr))] gap-2 md:gap-8 md:px-5 py-3"
 		>
-                {Object.values(mss).map((manuscript, index) => (
-                      <li key={index}>
+                {Object.values(mss).map((manuscript) => (
+                      <li>
                         <MsCard manuscript={manuscript}/> 
                         </li>
                 )
