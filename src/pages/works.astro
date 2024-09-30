@@ -3,35 +3,75 @@ import PageLayout from "../layouts/page-layout.astro";
 import works from "../content/data/works.json";
 
 const worksValues = Object.values(works);
+
 ---
 
 <PageLayout>
     <div class="mx-auto w-full max-w-screen-xl px-16 py-4">
 		<div>
 			<h1 class="text-2xl font-semibold text-brandBrown py-4">Works:</h1>
-            <table class="border border-red-600 w-3/4 text-left text-brandBrown dark:text-brandPaleWhite">
-                <thead class="text-xs text-brandBrown uppercase bg-brandPaleWhite dark:bg-brandBrown dark:text-brandPaleWhite">
+            <table id="works-table" class="border border-red-600 text-left text-brandBrown">
+                <thead class="text-xs bg-brandBrown uppercase text-brandPaleWhite">
                     <tr>
                         <th class="px-4 py-3">Title</th>
                         <th>Author</th>
-                        <th>Text</th>
+                        <th>Genre</th>
+                        <th>Manuscripts</th>
+                        <th>institutional context</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="border-b dark:border-gray-700">
-                        <td>Text</td>
+                    {Object.values(worksValues).map((work) => (
+                      <tr>
+                        <td>
+                            <a href=`/works/${work.jad_id}`>{work.name}</a>
+                        </td>
+                        <td>
+                            {work.author && work.author.length > 0 
+                                ? (work.author.map((author) => (
+                                    <span key={author.id}>{author.name}</span>
+                                ))) 
+                                : (<span>N/A</span>
+                             )}
+                           
+                        </td>
+                        <td>{work.genre?.value}</td>
+                        <td>
+                            { work.manuscripts.length > 0
+                            ? work.manuscripts.map((ms: { id: number; value: any;}, index: number) => (
+                                <>
+                                <a href={`/manuscripts/jad_manuscript__${ms.id}`} class="hover:text-brandRed">
+                                    {ms.value}
+                                </a>
+                                {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
+                                {index < work.manuscripts.length - 1 && '| '}
+                                </>
+                            )) : 'N/A'
+                        }
+                        </td>
+                        <td>
+                            {work.institutional_context.length > 0
+                                ? work.institutional_context.map((institution : { name : string;}, index: number) => (
+                                    <>
+                                    <a href="/" class="hover:text-brandRed">
+                                                {institution.name}
+                                            </a>
+                                    {index < work.institutional_context.length -1 && '| '}
+                                    </>
+                                    
+                            )) : 'N/A'
+                            }
+                    </td>
+                      </tr>
+                      ))}
+                    <tr class="border-b dark:border-gray-700">                    
                     </tr>
+                    
                 </tbody>
              
             </table>
             
-            <ul>
-                    {Object.values(worksValues).map((work) => (
-                      <li>
-                        <a href=`/works/${work.jad_id}`>{work.name}</a>
-                        </li>
-                    ))}
-                  </ul>
+           
                
                    
 		</div>
