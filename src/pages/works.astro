@@ -6,20 +6,48 @@ const worksValues = Object.values(works);
 
 ---
 
+
 <PageLayout>
-    <div class="mx-auto w-full max-w-screen-xl px-16 py-4">
+    <div class="mx-auto py-4 w-4/5">
 		<div>
-			<h1 class="text-2xl font-semibold text-brandBrown py-4">Works:</h1>
-            <table id="works-table" class="border border-red-600 text-left text-brandBrown">
-                <thead class="text-xs bg-brandBrown uppercase text-brandPaleWhite">
-                    <tr>
-                        <th class="px-4 py-3">Title</th>
-                        <th>Author</th>
-                        <th>Genre</th>
-                        <th>Manuscripts</th>
-                        <th>institutional context</th>
-                    </tr>
+			<h1 class="text-2xl font-semibold text-brandBrown py-4">Works:</h1>           
+            <table id="worksTable" class="text-left text-brandBrown w-full">
+                <thead>
+                  <tr>
+                    <th>
+                      <div class="flex flex-col items-start pr-2">
+                        <span>Title</span>
+                        <input type="text" id="nameSearch" placeholder="Search Name" class="mt-2 w-full p-2 border border-gray-300 rounded font-normal">
+                      </div>
+                    </th>
+                    <th>
+                      <div class="flex flex-col items-start pr-2">
+                        <span>Author</span>
+                        <input type="text" id="authorSearch" placeholder="Search Author" class="mt-2 w-full p-2 border border-gray-300 rounded font-normal">
+                      </div>
+                    </th>
+                    <th>
+                      <div class="flex flex-col items-start pr-2">
+                        <span>Genre</span>
+                        <input type="text" id="genreSearch" placeholder="Search Genre" class="mt-2 w-full p-2 border border-gray-300 rounded font-normal">
+                      </div>
+                    </th>
+                    <th>
+                      <div class="flex flex-col items-start pr-2">
+                        <span>Manuscript</span>
+                        <input type="text" id="manuscriptSearch" placeholder="Search MS" class="mt-2 w-full p-2 border border-gray-300 rounded font-normal">
+                      </div>
+                    </th>
+                    <th>
+                      <div class="flex flex-col items-start pr-2">
+                        <span>Context</span>
+                        <input type="text" id="contextSearch" placeholder="Search Context" class="mt-2 w-full p-2 border border-gray-300 rounded font-normal">
+                      </div>
+                    </th>
+                  </tr>
                 </thead>
+               
+              
                 <tbody>
                     {Object.values(worksValues).map((work) => (
                       <tr>
@@ -29,7 +57,7 @@ const worksValues = Object.values(works);
                         <td>
                             {work.author && work.author.length > 0 
                                 ? (work.author.map((author) => (
-                                    <span key={author.id}>{author.name}</span>
+                                    <span>{author.name}</span>
                                 ))) 
                                 : (<span>N/A</span>
                              )}
@@ -76,4 +104,5 @@ const worksValues = Object.values(works);
                    
 		</div>
 	</div>
+   <script src="../lib/table-search.js"></script>
 </PageLayout> 
