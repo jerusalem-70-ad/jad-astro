@@ -2,16 +2,15 @@ import { writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
 
 // fetch data from github ; variable with the URL
-const baseUrl =
-  "https://raw.githubusercontent.com/jerusalem-70-ad/jad-baserow-dump/refs/heads/main/data/";
+const baseUrl = "https://jerusalem-70-ad.github.io/jad-python-static/data/";
 
 const fileNames = [
   "manuscripts.json",
-  "keywords.json",
+  // "keywords.json",
   "passages.json",
   "works.json",
-  "institutional_context.json",
-  "libraries.json",
+  // "institutional_context.json",
+  // "libraries.json",
 ];
 
 // async function to fetch the data from the url
@@ -25,6 +24,7 @@ async function fetchAllData() {
   const promises = fileNames.map(async (fileName) => {
     await fetchData(fileName, folderPath);
   });
+  console.log(`All files have been fetched and stored in ${folderPath}`);
 
   // since we are awaiting  promises is an array of promises. Use the method promise.all():
   // takes an iterable of promises as input and returns a single Promise. Returns an array of the fulfillment values.

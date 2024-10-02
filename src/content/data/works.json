@@ -56,6 +56,63 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__99.html",
+    "next": "jad_work__10.html",
+    "view_label": "Liber Sermonum",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__18",
+        "view_label": "plenius complentur in Christo, urbe subversa Romano gladio; adduces super eos latronem repente, Nabuchodonosor, vel exercitum Romanorum"
+      },
+      {
+        "jad_id": "jad_occurence__19",
+        "view_label": "Christus, postquam ascendit coelos, quadragesimo secundo anno immisit duos ursos de silvis gentium, Vespasianum scilicet et Titum, qui Judaeos crudelissime dejecerunt"
+      },
+      {
+        "jad_id": "jad_occurence__67",
+        "view_label": "captivati sunt et interfecti a Tito et Vespasiano"
+      },
+      {
+        "jad_id": "jad_occurence__68",
+        "view_label": "In Nabuchodonosor, et in Vespasiano, et Tito"
+      },
+      {
+        "jad_id": "jad_occurence__69",
+        "view_label": "conculcavi eos in ira mea, auferens daemonibus mundi principatum, Judaeis locum p. 0815A | et gentem, sacerdotium, templum, et omnem dignitatem per Romanos"
+      },
+      {
+        "jad_id": "jad_occurence__70",
+        "view_label": "conculcavi populos, Judaeos scilicet, in furore meo, et inebriavi eos, id est replevi afflictione, et miseria per Romanos"
+      },
+      {
+        "jad_id": "jad_occurence__71",
+        "view_label": "sanctuarium destruet Romanus populus cum duce Vespasiano"
+      },
+      {
+        "jad_id": "jad_occurence__72",
+        "view_label": "reliquias ejus dabo in gladio (Jer. XV), quod factum est per Vespasianum et Titum"
+      },
+      {
+        "jad_id": "jad_occurence__73",
+        "view_label": "Jerusalem ruit, et Judas concidit, ac Romanus eam populus a fundamentis vastavit"
+      },
+      {
+        "jad_id": "jad_occurence__74",
+        "view_label": "per Romanorum principes regnum, sacerdotium, locum et gentem perdas"
+      },
+      {
+        "jad_id": "jad_occurence__75",
+        "view_label": "advenientibus Romanis festivitates et cantica eorum versa sunt in luctum"
+      },
+      {
+        "jad_id": "jad_occurence__76",
+        "view_label": "negligentes contriti, advenientibus Romanis, et malae conscientiae tinea devorati sunt."
+      },
+      {
+        "jad_id": "jad_occurence__77",
+        "view_label": "Et dabit impios Judaeos scilicet Romanis, pro sepultura"
+      }
     ]
   },
   "2": {
@@ -130,6 +187,15 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__19.html",
+    "next": "jad_work__20.html",
+    "view_label": "Sermones",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__17",
+        "view_label": "Si referamus tempora Nabuchodonosor, tempora Seva cherub, Titi quoque et Vespasiani, non dubitamus quia terrena Sion multoties capta et destructa et reaedificata est."
+      }
     ]
   },
   "3": {
@@ -180,6 +246,15 @@
         "name": "None",
         "jad_id": "jad_sources_occurrences__1",
         "digi_url": ""
+      }
+    ],
+    "prev": "jad_work__29.html",
+    "next": "jad_work__30.html",
+    "view_label": "Certa relatio de situ Jerusalem",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__8",
+        "view_label": "Titus et Vespasianus"
       }
     ]
   },
@@ -240,6 +315,15 @@
         "jad_id": "jad_sources_occurrences__1",
         "digi_url": ""
       }
+    ],
+    "prev": "jad_work__39.html",
+    "next": "jad_work__40.html",
+    "view_label": "Commentary Psalms",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__52",
+        "view_label": "sub romanis"
+      }
     ]
   },
   "5": {
@@ -278,7 +362,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__49.html",
+    "next": "jad_work__50.html",
+    "view_label": "Sermones",
+    "related__passages": []
   },
   "6": {
     "id": 6,
@@ -316,6 +404,15 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__59.html",
+    "next": "jad_work__60.html",
+    "view_label": "Commentary Luke",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__1",
+        "view_label": "Jerosolymorum subversio describatur, quae a Vespasiano et Tito Romanis principibus facta est"
+      }
     ]
   },
   "7": {
@@ -351,7 +448,16 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__69.html",
+    "next": "jad_work__70.html",
+    "view_label": "Liber Floridus",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__16",
+        "view_label": "Anno post passionem Domini quadragesimo secundo, Titus, quem pater Vespasianus romam reversus in obsidione Ierosolimorum iudeorum dilaniavit populum, in tantum ut Iosephus commemorat"
+      }
+    ]
   },
   "8": {
     "id": 8,
@@ -406,7 +512,11 @@
         ]
       }
     ],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__79.html",
+    "next": "jad_work__80.html",
+    "view_label": "Sermones",
+    "related__passages": []
   },
   "9": {
     "id": 9,
@@ -469,6 +579,27 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__89.html",
+    "next": "jad_work__90.html",
+    "view_label": "Sermones",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__2",
+        "view_label": "Ihesus Christus cum predixisset discipulis suis scicitantibus signa eversionis Ierusalem"
+      },
+      {
+        "jad_id": "jad_occurence__13",
+        "view_label": "Zacharias inter ipsa quasi renascentis templi cunabilia futurum ipsius excidium per Romanos predixit"
+      },
+      {
+        "jad_id": "jad_occurence__14",
+        "view_label": "terrenam Ierusalem antonomasice significat, ubi ibi, videns dominus civitatem, flevit super illiam"
+      },
+      {
+        "jad_id": "jad_occurence__57",
+        "view_label": "destructionem urbis Jerusalem factam per Romanos; supervenit Romanus exercitus"
+      }
     ]
   },
   "10": {
@@ -506,6 +637,19 @@
         "name": "Patrologia Latina",
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ],
+    "prev": "jad_work__1.html",
+    "next": "jad_work__100.html",
+    "view_label": "Commentary Maccabees",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__3",
+        "view_label": "Titus Judaea capta et Jerosolymis subversis; secundum annum Vespasiani, quando urbis excidium factum est; novissimam Jerosolymorum eversionem; aedificatione templi sub Salomone usque ad novissimam ejus ruinam, quae sub Vespasiano facta est"
+      },
+      {
+        "jad_id": "jad_occurence__4",
+        "view_label": "ultima eversione templi, quae sub Vespasiano et Tito accidit"
       }
     ]
   },
@@ -570,6 +714,19 @@
         "jad_id": "jad_sources_occurrences__1",
         "digi_url": ""
       }
+    ],
+    "prev": "jad_work__109.html",
+    "next": "jad_work__110.html",
+    "view_label": "Commentary Isaiah",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__5",
+        "view_label": "quatuor regna, scilicet assyriorum, babiloniorum, grecorum, et romanorum, qui destruxerunt Iudeos"
+      },
+      {
+        "jad_id": "jad_occurence__6",
+        "view_label": "romanis obsidentibus civitatem"
+      }
     ]
   },
   "12": {
@@ -628,6 +785,15 @@
         "name": "None",
         "jad_id": "jad_sources_occurrences__1",
         "digi_url": ""
+      }
+    ],
+    "prev": "jad_work__119.html",
+    "next": "jad_work__120.html",
+    "view_label": "Sermones",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__7",
+        "view_label": "predixit David destructionem urbis Ierusalem factam per romanos"
       }
     ]
   },
@@ -688,7 +854,11 @@
         "jad_id": "jad_sources_occurrences__1",
         "digi_url": ""
       }
-    ]
+    ],
+    "prev": "jad_work__129.html",
+    "next": "jad_work__130.html",
+    "view_label": "Commentary Ezekiel",
+    "related__passages": []
   },
   "14": {
     "id": 14,
@@ -723,7 +893,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__139.html",
+    "next": "jad_work__140.html",
+    "view_label": "De destructione templi",
+    "related__passages": []
   },
   "15": {
     "id": 15,
@@ -765,6 +939,15 @@
         "name": "None",
         "jad_id": "jad_sources_occurrences__1",
         "digi_url": ""
+      }
+    ],
+    "prev": "jad_work__149.html",
+    "next": "jad_work__16.html",
+    "view_label": "Sermones",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__9",
+        "view_label": "Legitur in istoria romana quod tyrus et vespasianus post xl annum post passione domini tempore pascali"
       }
     ]
   },
@@ -825,7 +1008,11 @@
         "jad_id": "jad_sources_occurrences__1",
         "digi_url": ""
       }
-    ]
+    ],
+    "prev": "jad_work__15.html",
+    "next": "jad_work__17.html",
+    "view_label": "Postillae in Evangelia",
+    "related__passages": []
   },
   "17": {
     "id": 17,
@@ -860,7 +1047,16 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__16.html",
+    "next": "jad_work__18.html",
+    "view_label": "Homiliae super evangelia",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__10",
+        "view_label": "Impleta prophetia, quam olim Moyses predixerat, foris vastabit eos gladiis, dicit Iosephus, qui de eius exilio civitatis multa describsit"
+      }
+    ]
   },
   "18": {
     "id": 18,
@@ -911,7 +1107,20 @@
         ]
       }
     ],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__17.html",
+    "next": "jad_work__19.html",
+    "view_label": "Sermones super evangelia",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__11",
+        "view_label": "ad litteram loquitur de Ierusalem que in pace prosperaretur, flevit super illiam previdens excidium eius futurum, quod ipsam non previdebat"
+      },
+      {
+        "jad_id": "jad_occurence__12",
+        "view_label": "signa destructionis Ierusalem et templi cum dicit ibidem, cum videritis circumdari ab exercitu Ierusalem"
+      }
+    ]
   },
   "19": {
     "id": 19,
@@ -969,6 +1178,43 @@
         "name": "None",
         "jad_id": "jad_sources_occurrences__1",
         "digi_url": ""
+      }
+    ],
+    "prev": "jad_work__18.html",
+    "next": "jad_work__2.html",
+    "view_label": "Commentary Isaiah",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__89",
+        "view_label": "non penituistis terra est vestra erit designe, babiloniorum et post romanorum"
+      },
+      {
+        "jad_id": "jad_occurence__90",
+        "view_label": "et utraque capte, scilicet babilon et romanum"
+      },
+      {
+        "jad_id": "jad_occurence__91",
+        "view_label": "et post captivitatem romanos iudices habent"
+      },
+      {
+        "jad_id": "jad_occurence__92",
+        "view_label": "captio (?) romanorum, libanus Ierusalem et templum cadet"
+      },
+      {
+        "jad_id": "jad_occurence__93",
+        "view_label": "excecionem Iudeorum, que facta est Ierusalem a romanis"
+      },
+      {
+        "jad_id": "jad_occurence__94",
+        "view_label": "Christum sevierunt Iudei, dabit romanis"
+      },
+      {
+        "jad_id": "jad_occurence__95",
+        "view_label": "diem ultionis et damnationis que per romanos"
+      },
+      {
+        "jad_id": "jad_occurence__96",
+        "view_label": "populos Iudeos inebravi afflictione per romanos"
       }
     ]
   },
@@ -1029,6 +1275,19 @@
         "jad_id": "jad_sources_occurrences__1",
         "digi_url": ""
       }
+    ],
+    "prev": "jad_work__2.html",
+    "next": "jad_work__21.html",
+    "view_label": "Commentary Ezekiel",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__100",
+        "view_label": "sub romanis factum est"
+      },
+      {
+        "jad_id": "jad_occurence__101",
+        "view_label": "obsidente tito et vaspasiano"
+      }
     ]
   },
   "21": {
@@ -1087,6 +1346,23 @@
         "name": "None",
         "jad_id": "jad_sources_occurrences__1",
         "digi_url": ""
+      }
+    ],
+    "prev": "jad_work__20.html",
+    "next": "jad_work__22.html",
+    "view_label": "Commentary Lamentationes",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__97",
+        "view_label": "captam conservata per romanos helium adam et titum et vespasianum"
+      },
+      {
+        "jad_id": "jad_occurence__98",
+        "view_label": "ursus babilonius vel romanus signat ut omnes ad me, que ad signum et metam ponitum mitterent"
+      },
+      {
+        "jad_id": "jad_occurence__99",
+        "view_label": "inimici romani"
       }
     ]
   },
@@ -1147,6 +1423,19 @@
         "jad_id": "jad_sources_occurrences__1",
         "digi_url": ""
       }
+    ],
+    "prev": "jad_work__21.html",
+    "next": "jad_work__23.html",
+    "view_label": "Commentary Daniel",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__102",
+        "view_label": "bestia quatuor romanum"
+      },
+      {
+        "jad_id": "jad_occurence__103",
+        "view_label": "duce tito et vaspasiano vasti, destructio omnioda (?)"
+      }
     ]
   },
   "23": {
@@ -1205,6 +1494,27 @@
         "name": "None",
         "jad_id": "jad_sources_occurrences__1",
         "digi_url": ""
+      }
+    ],
+    "prev": "jad_work__22.html",
+    "next": "jad_work__24.html",
+    "view_label": "Sermones",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__30",
+        "view_label": "hec destructio ab imperatoribus romanis a tyto et vaspasiano ob perfidiam Iudeorum"
+      },
+      {
+        "jad_id": "jad_occurence__31",
+        "view_label": "civitatem eorum succendit quia missis exercitibus romanis"
+      },
+      {
+        "jad_id": "jad_occurence__32",
+        "view_label": "herodes a romanis regnum Iudeorum acceperat"
+      },
+      {
+        "jad_id": "jad_occurence__33",
+        "view_label": "ad litteram evenerunt tempore titi et vespasiani"
       }
     ]
   },
@@ -1269,7 +1579,11 @@
         "jad_id": "jad_sources_occurrences__1",
         "digi_url": ""
       }
-    ]
+    ],
+    "prev": "jad_work__23.html",
+    "next": "jad_work__25.html",
+    "view_label": "Sermones",
+    "related__passages": []
   },
   "25": {
     "id": 25,
@@ -1321,6 +1635,15 @@
         "name": "Other edition",
         "jad_id": "jad_sources_occurrences__12",
         "digi_url": ""
+      }
+    ],
+    "prev": "jad_work__24.html",
+    "next": "jad_work__26.html",
+    "view_label": "Historia Hierosolymitana",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__15",
+        "view_label": "Vespasianus cum Tito filio suo venit, qui penitus eam destruxit"
       }
     ]
   },
@@ -1376,6 +1699,31 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__25.html",
+    "next": "jad_work__27.html",
+    "view_label": "Commentary Isaiah",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__20",
+        "view_label": "tradens eos Romanis"
+      },
+      {
+        "jad_id": "jad_occurence__21",
+        "view_label": "Quando autem Jerusalem destructa est a Romanis"
+      },
+      {
+        "jad_id": "jad_occurence__22",
+        "view_label": "contriti sunt advenientibus Romanis"
+      },
+      {
+        "jad_id": "jad_occurence__23",
+        "view_label": "sicut Josephus narrat, advenientibus Romanis"
+      },
+      {
+        "jad_id": "jad_occurence__24",
+        "view_label": "dies ultionis Judaeorum; diem ultionis sive damnationis Judaeorum, quae venit per Romanos"
+      }
     ]
   },
   "27": {
@@ -1430,6 +1778,27 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__26.html",
+    "next": "jad_work__28.html",
+    "view_label": "Sermones",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__25",
+        "view_label": "ingressus est Titus cum Romano exercitu, alios gladio trucidavit"
+      },
+      {
+        "jad_id": "jad_occurence__26",
+        "view_label": "egressi sunt duo ursi de saltu"
+      },
+      {
+        "jad_id": "jad_occurence__27",
+        "view_label": "suscitavit adversus eos Dominus duos Romanorum principes, Vespasianum scilicet et Titum"
+      },
+      {
+        "jad_id": "jad_occurence__28",
+        "view_label": "duos Romanorum principes cum exercitibus suis: Vespasianum scilicet et Titum"
+      }
     ]
   },
   "28": {
@@ -1467,6 +1836,15 @@
         "name": "Patrologia Latina",
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ],
+    "prev": "jad_work__27.html",
+    "next": "jad_work__29.html",
+    "view_label": "Commentary Kings",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__29",
+        "view_label": "duos ursos de silvis gentium, Vespasianum scilicet et Titum, qui eos crudeli strage dejecerunt"
       }
     ]
   },
@@ -1529,6 +1907,27 @@
         "jad_id": "jad_sources_occurrences__7",
         "digi_url": ""
       }
+    ],
+    "prev": "jad_work__28.html",
+    "next": "jad_work__3.html",
+    "view_label": "Commentary Matthew",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__34",
+        "view_label": "Romanum exercitum intelligimus, sub duce Vespasiano ac Tito, qui occisis in vindicta Dei Judaeae populis"
+      },
+      {
+        "jad_id": "jad_occurence__35",
+        "view_label": "expugnata est Jerusalem a Romanis"
+      },
+      {
+        "jad_id": "jad_occurence__36",
+        "view_label": "Vespasianus accipi potest, qui Hierusalem exercitu circumdedit ac vastavit"
+      },
+      {
+        "jad_id": "jad_occurence__37",
+        "view_label": "exercitus Romanorum sub Tito et Vespasiano"
+      }
     ]
   },
   "30": {
@@ -1583,6 +1982,15 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__3.html",
+    "next": "jad_work__31.html",
+    "view_label": "Commentary Psalms",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__38",
+        "view_label": "per duos ursos de silva exeuntes, Titum et Vespasianum"
+      }
     ]
   },
   "31": {
@@ -1628,6 +2036,15 @@
         "name": "Patrologia Latina",
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ],
+    "prev": "jad_work__30.html",
+    "next": "jad_work__32.html",
+    "view_label": "Commentary Psalms",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__39",
+        "view_label": "exire duos ursos, hoc est diabolum et angelos ejus, vel Vespasianum et Titum"
       }
     ]
   },
@@ -1675,6 +2092,15 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__31.html",
+    "next": "jad_work__33.html",
+    "view_label": "Commentary Kings",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__40",
+        "view_label": "immisit duos ursos de silvis gentium, Vespasianum scilicet et Titum"
+      }
     ]
   },
   "33": {
@@ -1688,7 +2114,7 @@
         "order": "33.00000000000000000000",
         "name": "Angelomus Luxovensis",
         "jad_id": "jad_author__33",
-        "gnd_url": "",
+        "gnd_url": "https://d-nb.info/gnd/100936474",
         "notes": ""
       }
     ],
@@ -1712,6 +2138,15 @@
         "name": "Patrologia Latina",
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ],
+    "prev": "jad_work__32.html",
+    "next": "jad_work__34.html",
+    "view_label": "Commentary Kings",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__41",
+        "view_label": "immisit duos ursos de silvis gentium, Vespasianum scilicet et Titum"
       }
     ]
   },
@@ -1766,6 +2201,19 @@
         "jad_id": "jad_sources_occurrences__7",
         "digi_url": ""
       }
+    ],
+    "prev": "jad_work__33.html",
+    "next": "jad_work__35.html",
+    "view_label": "Sermones",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__42",
+        "view_label": "venient Romani, et tollent nostrum locum et gentem"
+      },
+      {
+        "jad_id": "jad_occurence__43",
+        "view_label": "Vespasianum misit in Judaeam, qui cum filio suo Tito omnem potentiam, et superbiam, et gloriam Judaeorum absorbuit"
+      }
     ]
   },
   "35": {
@@ -1810,6 +2258,15 @@
         "name": "Other edition",
         "jad_id": "jad_sources_occurrences__12",
         "digi_url": ""
+      }
+    ],
+    "prev": "jad_work__34.html",
+    "next": "jad_work__36.html",
+    "view_label": "Historia expeditionis Hierosolymitanae",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__44",
+        "view_label": "a principibus Romanorum, Vespasiano et Tito, funditus cum suis habitatoribus sic Jerusalem deleta est"
       }
     ]
   },
@@ -1857,6 +2314,15 @@
         "jad_id": "jad_sources_occurrences__7",
         "digi_url": ""
       }
+    ],
+    "prev": "jad_work__35.html",
+    "next": "jad_work__37.html",
+    "view_label": "Homiliae in euangelia",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__45",
+        "view_label": "Quod flente Domino illa Ierosolymorum subuersio describatur, quae a Vespasiano et Tito romanis principibus facta est"
+      }
     ]
   },
   "37": {
@@ -1894,6 +2360,15 @@
         "name": "Corpus Christianorum",
         "jad_id": "jad_sources_occurrences__7",
         "digi_url": ""
+      }
+    ],
+    "prev": "jad_work__36.html",
+    "next": "jad_work__38.html",
+    "view_label": "Sermones dominicales",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__46",
+        "view_label": "Missis exercitibus suis scilicet Romanis sub Tito et Vespasiano imperatoribus perdidit homicidas illos scilicet Iudaeos."
       }
     ]
   },
@@ -1933,6 +2408,23 @@
         "jad_id": "jad_sources_occurrences__7",
         "digi_url": ""
       }
+    ],
+    "prev": "jad_work__37.html",
+    "next": "jad_work__39.html",
+    "view_label": "Historia Orientalis",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__47",
+        "view_label": "venerunt Romani, locum eorum tollentes sub Tito et Vespasiano"
+      },
+      {
+        "jad_id": "jad_occurence__48",
+        "view_label": "destructionem a Tito et Vespasiano factam"
+      },
+      {
+        "jad_id": "jad_occurence__49",
+        "view_label": "civitatem a Tito et Vespasiano destructam"
+      }
     ]
   },
   "39": {
@@ -1970,6 +2462,19 @@
         "name": "Corpus Christianorum",
         "jad_id": "jad_sources_occurrences__7",
         "digi_url": ""
+      }
+    ],
+    "prev": "jad_work__38.html",
+    "next": "jad_work__4.html",
+    "view_label": "Chronicon Mundi",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__50",
+        "view_label": "Vespasianus cum ipsa ciuitate, que dicebatur Onie, funditus euertit"
+      },
+      {
+        "jad_id": "jad_occurence__51",
+        "view_label": "Titus cum patre Vespasiano Hierosolimam cepit atque subuertit"
       }
     ]
   },
@@ -2014,6 +2519,15 @@
         "jad_id": "jad_sources_occurrences__1",
         "digi_url": ""
       }
+    ],
+    "prev": "jad_work__4.html",
+    "next": "jad_work__41.html",
+    "view_label": "Homiliarium Mondseense",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__53",
+        "view_label": "Cum adpropinquasset Ihesus Hierusalem, uidens ciuitatem fleuit super illam. Pensare debemus, fratres karissimi, quid sit quod flente Domino, sicut nunc in presenti lectum est, hierosolime ciuitatis subuersio describebatur"
+      }
     ]
   },
   "41": {
@@ -2056,6 +2570,15 @@
         "name": "None",
         "jad_id": "jad_sources_occurrences__1",
         "digi_url": ""
+      }
+    ],
+    "prev": "jad_work__40.html",
+    "next": "jad_work__42.html",
+    "view_label": "Sermones de tempore",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__54",
+        "view_label": "Cum appropinquaret Jesus Jerusalem, videns civitatem flevit. Quod flente Domino ille Jerosolymorum subversio describatur"
       }
     ]
   },
@@ -2111,6 +2634,19 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__41.html",
+    "next": "jad_work__43.html",
+    "view_label": "Historia Scholastica",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__55",
+        "view_label": "quando Jerusalem omnino subversa est"
+      },
+      {
+        "jad_id": "jad_occurence__56",
+        "view_label": "Fideles, qui erant in Judaea, advenientibus Romanis, fugisse in Pellam civitatem admonitione angeli"
+      }
     ]
   },
   "43": {
@@ -2149,6 +2685,27 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__42.html",
+    "next": "jad_work__44.html",
+    "view_label": "Speculum Ecclesiae",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__58",
+        "view_label": "ministri Dei Romani principes cum exercitibus Judaeam intraverunt"
+      },
+      {
+        "jad_id": "jad_occurence__59",
+        "view_label": "Romanorum gladio succidit"
+      },
+      {
+        "jad_id": "jad_occurence__60",
+        "view_label": "Vespasianus et filius Titus hoc vindicaverunt; Vespasianus et Titus duces Romanorum, cum magno exercitu Judaeam intrans"
+      },
+      {
+        "jad_id": "jad_occurence__61",
+        "view_label": "Romani et locum et gentem illorum tulerunt"
+      }
     ]
   },
   "44": {
@@ -2186,6 +2743,19 @@
         "name": "Patrologia Latina",
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ],
+    "prev": "jad_work__43.html",
+    "next": "jad_work__45.html",
+    "view_label": "Commentary Matthew",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__62",
+        "view_label": "civitatem illam succendit. Ad litteram de Judaeis factum est; vindictam Dei exercuit Vespasianus et Titus"
+      },
+      {
+        "jad_id": "jad_occurence__63",
+        "view_label": "in templo Hierosolymorum ante destructionem civitatis; appropinquare hostem Romanorum"
       }
     ]
   },
@@ -2232,6 +2802,23 @@
         "name": "Patrologia Latina",
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ],
+    "prev": "jad_work__44.html",
+    "next": "jad_work__46.html",
+    "view_label": "Libri deflorationum",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__64",
+        "view_label": "Romanis sub Vespasiano et Tito Judaeos interemit"
+      },
+      {
+        "jad_id": "jad_occurence__65",
+        "view_label": "nutu Dei Romani principes cum exercitibus Judaeam intraverunt"
+      },
+      {
+        "jad_id": "jad_occurence__66",
+        "view_label": "gladio Romanorum succidit"
       }
     ]
   },
@@ -2292,6 +2879,15 @@
         "jad_id": "jad_sources_occurrences__1",
         "digi_url": ""
       }
+    ],
+    "prev": "jad_work__45.html",
+    "next": "jad_work__47.html",
+    "view_label": "Commentary Kings",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__78",
+        "view_label": "duo ursi, per hos tytus et vespasianus qui destruxerunt Iudeos"
+      }
     ]
   },
   "47": {
@@ -2338,6 +2934,15 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__46.html",
+    "next": "jad_work__49.html",
+    "view_label": "Sermones",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__79",
+        "view_label": "Titus et Vespasianus, duo reges de silvis gentium, tanquam duo feroces ursi, de saltu ferarum dilaceraverunt pueros; quia venientes ad excidium Hierusalem, debellaverunt in furore Judaeos."
+      }
     ]
   },
   "49": {
@@ -2376,6 +2981,15 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__47.html",
+    "next": "jad_work__5.html",
+    "view_label": "Fragmenta ex aurora",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__80",
+        "view_label": "Ursi sunt illi duo: Titus, Vespasianus: Jerusalem cives hic secat, ille necat"
+      }
     ]
   },
   "50": {
@@ -2413,6 +3027,15 @@
         "name": "Patrologia Latina",
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ],
+    "prev": "jad_work__5.html",
+    "next": "jad_work__51.html",
+    "view_label": "Commentary Sirach",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__81",
+        "view_label": "duo ursi, hoc est Vespasianus et Titus, de saltu gentium egressi, illusores saevissime laniaverunt"
       }
     ]
   },
@@ -2468,6 +3091,15 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__50.html",
+    "next": "jad_work__52.html",
+    "view_label": "Commentary Psalms",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__82",
+        "view_label": "devorantur a duobus ursis, id est a diabolo et angelis ejus, vel a Tito et Vespasiano, quos Deus ad destructionem Judaeorum misit"
+      }
     ]
   },
   "52": {
@@ -2521,6 +3153,15 @@
         "jad_id": "jad_sources_occurrences__7",
         "digi_url": ""
       }
+    ],
+    "prev": "jad_work__51.html",
+    "next": "jad_work__53.html",
+    "view_label": "Historia",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__83",
+        "view_label": "Titus Vespasiani filius, Romanorum princeps magnificus, obsedit; obsessam expugnavit, et expugnatam dejecit funditus"
+      }
     ]
   },
   "53": {
@@ -2566,6 +3207,23 @@
         "name": "Patrologia Latina",
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ],
+    "prev": "jad_work__52.html",
+    "next": "jad_work__54.html",
+    "view_label": "Adversus Iudaeos",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__84",
+        "view_label": "Vespasiano et Tito totam illam terram vastantibus"
+      },
+      {
+        "jad_id": "jad_occurence__85",
+        "view_label": "Vespasianus, anno I imperii sui debellavit Judaeos"
+      },
+      {
+        "jad_id": "jad_occurence__86",
+        "view_label": "veniens Romanus populus cum duce Vespasiano, ejusque filio Tito, regnum Judaicum destruxit"
       }
     ]
   },
@@ -2626,6 +3284,19 @@
         "jad_id": "jad_sources_occurrences__7",
         "digi_url": ""
       }
+    ],
+    "prev": "jad_work__53.html",
+    "next": "jad_work__55.html",
+    "view_label": "Commentary Isaiah",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__87",
+        "view_label": "Preterea Ierusalem a Romanis subuersa et tota regione uastata multa Iudeorum milia a uictoribus in Egipto sunt uendita"
+      },
+      {
+        "jad_id": "jad_occurence__88",
+        "view_label": "et uinitores et agrorum cultores de nobis habituri sint, et quod Romanos qui ceperant illos sue dicioni subicient"
+      }
     ]
   },
   "55": {
@@ -2680,7 +3351,11 @@
         "jad_id": "jad_sources_occurrences__12",
         "digi_url": ""
       }
-    ]
+    ],
+    "prev": "jad_work__54.html",
+    "next": "jad_work__56.html",
+    "view_label": "Glossa Ordinaria",
+    "related__passages": []
   },
   "56": {
     "id": 56,
@@ -2717,6 +3392,15 @@
         "name": "Patrologia Latina",
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ],
+    "prev": "jad_work__55.html",
+    "next": "jad_work__57.html",
+    "view_label": "Commentary Galater",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__104",
+        "view_label": "Titus, filius Vespasiani, qui in ultionem Dominici sanguinis, subversis Jerosolymis"
       }
     ]
   },
@@ -2756,6 +3440,15 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__56.html",
+    "next": "jad_work__58.html",
+    "view_label": "Commentary Isaiah",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__105",
+        "view_label": "Haec sub Tito filio Vespasiani accidisse populo Judaeorum"
+      }
     ]
   },
   "58": {
@@ -2793,6 +3486,15 @@
         "name": "Patrologia Latina",
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ],
+    "prev": "jad_work__57.html",
+    "next": "jad_work__59.html",
+    "view_label": "Chronicon",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__106",
+        "view_label": "unam vastationis quae facta est a Vespasiano duce cum Tito filio ejus"
       }
     ]
   },
@@ -2832,6 +3534,35 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__58.html",
+    "next": "jad_work__6.html",
+    "view_label": "Chronicon universale",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__107",
+        "view_label": "Hierusalem obsideri cepta, secundo Vespasiani anno capitur"
+      },
+      {
+        "jad_id": "jad_occurence__132",
+        "view_label": "Colligitur autem omne tempus in secundum annum Vespasiani et subversionem Hierosolimorum novissimam"
+      },
+      {
+        "jad_id": "jad_occurence__133",
+        "view_label": "Ipse Vespasianum cum filio suo Tito ad destruendam Hierosolimam misit."
+      },
+      {
+        "jad_id": "jad_occurence__134",
+        "view_label": "Tito filio suo in Judaea ad obsidendam Hierosolimam"
+      },
+      {
+        "jad_id": "jad_occurence__135",
+        "view_label": "Interim Vespasianus Hierosolimam obsidens, audita Neronis morte, a militibus imperator creatus est."
+      },
+      {
+        "jad_id": "jad_occurence__136",
+        "view_label": "Vespasianus dux exercitus adversum Judaeos"
+      }
     ]
   },
   "60": {
@@ -2869,6 +3600,15 @@
         "name": "Patrologia Latina",
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ],
+    "prev": "jad_work__6.html",
+    "next": "jad_work__61.html",
+    "view_label": "Contra Judeaos",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__108",
+        "view_label": "secundo anno Vespasiani, quando Hierusalem a Romanis capta, templumque subversum est"
       }
     ]
   },
@@ -2908,6 +3648,31 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__60.html",
+    "next": "jad_work__62.html",
+    "view_label": "Commentary Ezekiel",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__109",
+        "view_label": "sub Tito et Vespasiano urbs capta"
+      },
+      {
+        "jad_id": "jad_occurence__110",
+        "view_label": "quando Jerusalem a Romanis capta, templumque subversum est"
+      },
+      {
+        "jad_id": "jad_occurence__111",
+        "view_label": "a Tito et Vespasiano Jerusalem circumdata est, et advenit desolatio ejus, et impletum est"
+      },
+      {
+        "jad_id": "jad_occurence__112",
+        "view_label": "sub Vespasiano et Tito, quando templum captum atque subversum est"
+      },
+      {
+        "jad_id": "jad_occurence__113",
+        "view_label": "circumdata est Jerusalem, et interfecti filii ejus, et obsidente Tito filio Vespasiani"
+      }
     ]
   },
   "62": {
@@ -2945,6 +3710,15 @@
         "name": "Patrologia Latina",
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ],
+    "prev": "jad_work__61.html",
+    "next": "jad_work__63.html",
+    "view_label": "Expositio epistolarum S. Pauli",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__114",
+        "view_label": "Titus Vespasiani filius, Jerosolymis subversis"
       }
     ]
   },
@@ -2984,6 +3758,35 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__62.html",
+    "next": "jad_work__64.html",
+    "view_label": "Commentary Jeremiah",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__115",
+        "view_label": "postea sub Vespasiano, regnum hujus generis, imo imaginem imperii, penitus fuisse deletum."
+      },
+      {
+        "jad_id": "jad_occurence__116",
+        "view_label": "capta Hierusalem sub Vespasiano"
+      },
+      {
+        "jad_id": "jad_occurence__117",
+        "view_label": "per Vespasianum et Titum Romanos principes in ultione Dominici sanguinis urbe succensa"
+      },
+      {
+        "jad_id": "jad_occurence__118",
+        "view_label": "captivitate ultima Romanorum, sub Tito et Vespasiano principibus"
+      },
+      {
+        "jad_id": "jad_occurence__119",
+        "view_label": "obsessi sunt a Vespasiano et Tito; Post captivitatem autem, quae sub Vespasiano et Tito"
+      },
+      {
+        "jad_id": "jad_occurence__120",
+        "view_label": "consideres tempora passionis Dominicae et ruinae Jerusalem, quando subversa est; post cujus passionem venit consummatio Jerusalem, et interfectio populi Judaeorum"
+      }
     ]
   },
   "64": {
@@ -3021,6 +3824,15 @@
         "name": "Patrologia Latina",
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ],
+    "prev": "jad_work__63.html",
+    "next": "jad_work__65.html",
+    "view_label": "Commentary Judices",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__121",
+        "view_label": "uando per Vespasianum et Titum, Romanos principes, urbe destructa"
       }
     ]
   },
@@ -3060,6 +3872,15 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__64.html",
+    "next": "jad_work__66.html",
+    "view_label": "Commentary Deuteronomium",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__125",
+        "view_label": "captivitatem, quando post Titum et Vespasianum"
+      }
     ]
   },
   "66": {
@@ -3098,6 +3919,23 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__65.html",
+    "next": "jad_work__67.html",
+    "view_label": "Commentary Matthew",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__122",
+        "view_label": "Romanos sub duce Vespasiano et Tito, qui occisis Judaeae populis praevaricatricem succenderent civitatem"
+      },
+      {
+        "jad_id": "jad_occurence__123",
+        "view_label": "cum Vespasiano et Tito ducibus Romanorum missis exercitibus"
+      },
+      {
+        "jad_id": "jad_occurence__124",
+        "view_label": "sub Vespasiano et Tito Romanorum principibus, ita funditus est ipsa civitas eversa cum templo suo magnificentissimo"
+      }
     ]
   },
   "67": {
@@ -3135,6 +3973,31 @@
         "name": "Patrologia Latina",
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ],
+    "prev": "jad_work__66.html",
+    "next": "jad_work__68.html",
+    "view_label": "De universo",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__126",
+        "view_label": "Aprum Vespasianum forsitan debemus accipere, qui illis existit fortis et saevus"
+      },
+      {
+        "jad_id": "jad_occurence__127",
+        "view_label": "principes Romanorum, Vespasianum videlicet et Titum, egressos de saltu gentium devorare Judaicos pueros"
+      },
+      {
+        "jad_id": "jad_occurence__128",
+        "view_label": "a Tito et Vespasiano capta est"
+      },
+      {
+        "jad_id": "jad_occurence__129",
+        "view_label": "civitatem incendit, Deus Pater est, qui suscitavit Vespasianum Caesarem Romanorum, qui et populum gladio vastavit"
+      },
+      {
+        "jad_id": "jad_occurence__130",
+        "view_label": "capti a duobus ursis, hoc est Tito et Vespasiano"
       }
     ]
   },
@@ -3195,6 +4058,15 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
+    ],
+    "prev": "jad_work__67.html",
+    "next": "jad_work__69.html",
+    "view_label": "Commentary Revelation",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__131",
+        "view_label": "sumeret pacem, scilicet exteriorem, per Titum et Vespasianum, de terra, id est de Judaea"
+      }
     ]
   },
   "69": {
@@ -3249,7 +4121,11 @@
         "jad_id": "jad_sources_occurrences__7",
         "digi_url": ""
       }
-    ]
+    ],
+    "prev": "jad_work__68.html",
+    "next": "jad_work__7.html",
+    "view_label": "Commentary Lamentationes",
+    "related__passages": []
   },
   "70": {
     "id": 70,
@@ -3303,7 +4179,11 @@
         "jad_id": "jad_sources_occurrences__7",
         "digi_url": ""
       }
-    ]
+    ],
+    "prev": "jad_work__7.html",
+    "next": "jad_work__71.html",
+    "view_label": "Commentary Psalms",
+    "related__passages": []
   },
   "71": {
     "id": 71,
@@ -3341,7 +4221,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__70.html",
+    "next": "jad_work__72.html",
+    "view_label": "Commentary Kings",
+    "related__passages": []
   },
   "72": {
     "id": 72,
@@ -3379,7 +4263,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__71.html",
+    "next": "jad_work__73.html",
+    "view_label": "Collectiones in epistolas et evangelia",
+    "related__passages": []
   },
   "73": {
     "id": 73,
@@ -3425,7 +4313,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__72.html",
+    "next": "jad_work__74.html",
+    "view_label": "De comprobatione sextae aetatis",
+    "related__passages": []
   },
   "74": {
     "id": 74,
@@ -3471,7 +4363,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__73.html",
+    "next": "jad_work__75.html",
+    "view_label": "Commentarius in Nahum",
+    "related__passages": []
   },
   "75": {
     "id": 75,
@@ -3509,7 +4405,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__74.html",
+    "next": "jad_work__76.html",
+    "view_label": "Chronicon",
+    "related__passages": []
   },
   "76": {
     "id": 76,
@@ -3547,7 +4447,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__75.html",
+    "next": "jad_work__77.html",
+    "view_label": "Collectanea in omnes B. Pauli epistolas",
+    "related__passages": []
   },
   "77": {
     "id": 77,
@@ -3585,7 +4489,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__76.html",
+    "next": "jad_work__78.html",
+    "view_label": "Expositio in Cantica canticorum",
+    "related__passages": []
   },
   "78": {
     "id": 78,
@@ -3623,7 +4531,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__77.html",
+    "next": "jad_work__79.html",
+    "view_label": "Commentary Psalms",
+    "related__passages": []
   },
   "79": {
     "id": 79,
@@ -3661,7 +4573,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__78.html",
+    "next": "jad_work__8.html",
+    "view_label": "De scriptoribus ecclesiasticis",
+    "related__passages": []
   },
   "80": {
     "id": 80,
@@ -3699,7 +4615,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__8.html",
+    "next": "jad_work__81.html",
+    "view_label": "Gemma animae",
+    "related__passages": []
   },
   "81": {
     "id": 81,
@@ -3737,7 +4657,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__80.html",
+    "next": "jad_work__82.html",
+    "view_label": "De imagine mundi",
+    "related__passages": []
   },
   "82": {
     "id": 82,
@@ -3783,7 +4707,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__81.html",
+    "next": "jad_work__83.html",
+    "view_label": "Commentary Luke",
+    "related__passages": []
   },
   "83": {
     "id": 83,
@@ -3829,7 +4757,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__82.html",
+    "next": "jad_work__84.html",
+    "view_label": "Commentary Matthew",
+    "related__passages": []
   },
   "84": {
     "id": 84,
@@ -3875,7 +4807,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__83.html",
+    "next": "jad_work__85.html",
+    "view_label": "Commentary Psalms",
+    "related__passages": []
   },
   "85": {
     "id": 85,
@@ -3921,7 +4857,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__84.html",
+    "next": "jad_work__86.html",
+    "view_label": "Commentary Revelation",
+    "related__passages": []
   },
   "86": {
     "id": 86,
@@ -3967,7 +4907,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__85.html",
+    "next": "jad_work__87.html",
+    "view_label": "Commentary Revelation",
+    "related__passages": []
   },
   "87": {
     "id": 87,
@@ -4013,7 +4957,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__86.html",
+    "next": "jad_work__88.html",
+    "view_label": "Commentary Ezekiel",
+    "related__passages": []
   },
   "88": {
     "id": 88,
@@ -4059,7 +5007,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__87.html",
+    "next": "jad_work__89.html",
+    "view_label": "Commentary Isaiah",
+    "related__passages": []
   },
   "89": {
     "id": 89,
@@ -4105,7 +5057,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__88.html",
+    "next": "jad_work__9.html",
+    "view_label": "Commentary Matthew",
+    "related__passages": []
   },
   "90": {
     "id": 90,
@@ -4151,7 +5107,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__9.html",
+    "next": "jad_work__91.html",
+    "view_label": "De divinis officiis",
+    "related__passages": []
   },
   "91": {
     "id": 91,
@@ -4197,7 +5157,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__90.html",
+    "next": "jad_work__92.html",
+    "view_label": "De incarnatione contra Judaeos",
+    "related__passages": []
   },
   "92": {
     "id": 92,
@@ -4250,7 +5214,11 @@
         "jad_id": "jad_sources_occurrences__7",
         "digi_url": ""
       }
-    ]
+    ],
+    "prev": "jad_work__91.html",
+    "next": "jad_work__93.html",
+    "view_label": "Gesta Dei per Francos",
+    "related__passages": []
   },
   "93": {
     "id": 93,
@@ -4288,7 +5256,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__92.html",
+    "next": "jad_work__94.html",
+    "view_label": "Expositio in Apocalypsim",
+    "related__passages": []
   },
   "94": {
     "id": 94,
@@ -4334,7 +5306,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__93.html",
+    "next": "jad_work__95.html",
+    "view_label": "Commentaria in duodecim prophetas minores",
+    "related__passages": []
   },
   "95": {
     "id": 95,
@@ -4380,7 +5356,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__94.html",
+    "next": "jad_work__96.html",
+    "view_label": "Commentary John",
+    "related__passages": []
   },
   "96": {
     "id": 96,
@@ -4426,7 +5406,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__95.html",
+    "next": "jad_work__97.html",
+    "view_label": "Commentary Job",
+    "related__passages": []
   },
   "97": {
     "id": 97,
@@ -4472,7 +5456,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__96.html",
+    "next": "jad_work__98.html",
+    "view_label": "Commentary Kohelet",
+    "related__passages": []
   },
   "98": {
     "id": 98,
@@ -4518,7 +5506,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__97.html",
+    "next": "jad_work__99.html",
+    "view_label": "De glorificatione Trinitatis",
+    "related__passages": []
   },
   "99": {
     "id": 99,
@@ -4564,7 +5556,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__98.html",
+    "next": "{'id': 1, 'order': '1.00000000000000000000', 'name': 'Liber Sermonum ', 'jad_id': 'jad_work__1', 'author': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Martin, von León', 'jad_id': 'jad_author__2', 'gnd_url': 'https://d-nb.info/gnd/100953212', 'notes': None}], 'manuscripts': [{'id': 3, 'value': 'San Isidoro, MS 11'}], 'title': 'Liber Sermonum', 'genre': {'id': 14726, 'value': 'Sermons', 'color': 'darker-pink'}, 'not_before': '1175', 'not_after': '1200', 'written_date': 'late 12', 'notes': None, 'notes__author': None, 'institutional_context': [{'id': 1, 'order': '1.00000000000000000000', 'name': 'University of Paris', 'jad__id': 'jad_institutional_context__1', 'part_of': [{'id': 16, 'order': '16.00000000000000000000', 'name': 'French schools', 'jad__id': 'jad_institutional_context__16', 'part_of': []}]}], 'published_edition': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Patrologia Latina', 'jad_id': 'jad_sources_occurrences__2', 'digi_url': 'https://mlat.uzh.ch/browser?path=/38'}], 'prev': 'jad_work__99.html', 'next': 'jad_work__10.html'}.html",
+    "view_label": "Commentary Genesis",
+    "related__passages": []
   },
   "100": {
     "id": 100,
@@ -4610,7 +5606,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__10.html",
+    "next": "jad_work__101.html",
+    "view_label": "Commentary Deutoronomy",
+    "related__passages": []
   },
   "101": {
     "id": 101,
@@ -4656,7 +5656,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__100.html",
+    "next": "jad_work__102.html",
+    "view_label": "Commentary Kings",
+    "related__passages": []
   },
   "102": {
     "id": 102,
@@ -4702,7 +5706,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__101.html",
+    "next": "jad_work__103.html",
+    "view_label": "Commentary Psalms",
+    "related__passages": []
   },
   "103": {
     "id": 103,
@@ -4748,7 +5756,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__102.html",
+    "next": "jad_work__104.html",
+    "view_label": "De victoria verbi Dei",
+    "related__passages": []
   },
   "104": {
     "id": 104,
@@ -4794,7 +5806,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__103.html",
+    "next": "jad_work__105.html",
+    "view_label": "Dialogus inter Christianum et Judaeum",
+    "related__passages": []
   },
   "105": {
     "id": 105,
@@ -4853,7 +5869,11 @@
         "jad_id": "jad_sources_occurrences__7",
         "digi_url": ""
       }
-    ]
+    ],
+    "prev": "jad_work__104.html",
+    "next": "jad_work__106.html",
+    "view_label": "Sermones",
+    "related__passages": []
   },
   "106": {
     "id": 106,
@@ -4883,7 +5903,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__105.html",
+    "next": "jad_work__107.html",
+    "view_label": "Commentary Matthew",
+    "related__passages": []
   },
   "107": {
     "id": 107,
@@ -4921,7 +5945,11 @@
         "jad_id": "jad_sources_occurrences__12",
         "digi_url": ""
       }
-    ]
+    ],
+    "prev": "jad_work__106.html",
+    "next": "jad_work__108.html",
+    "view_label": "Chanson d'Antioche",
+    "related__passages": []
   },
   "108": {
     "id": 108,
@@ -4959,7 +5987,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__107.html",
+    "next": "jad_work__109.html",
+    "view_label": "Commentary Jeremiah",
+    "related__passages": []
   },
   "109": {
     "id": 109,
@@ -4989,7 +6021,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__108.html",
+    "next": "jad_work__11.html",
+    "view_label": "Expositio in Apocalypsin",
+    "related__passages": []
   },
   "110": {
     "id": 110,
@@ -5002,7 +6038,7 @@
         "order": "33.00000000000000000000",
         "name": "Angelomus Luxovensis",
         "jad_id": "jad_author__33",
-        "gnd_url": "",
+        "gnd_url": "https://d-nb.info/gnd/100936474",
         "notes": ""
       }
     ],
@@ -5019,7 +6055,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__11.html",
+    "next": "jad_work__111.html",
+    "view_label": "Commentary Genesis",
+    "related__passages": []
   },
   "111": {
     "id": 111,
@@ -5049,7 +6089,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__110.html",
+    "next": "jad_work__112.html",
+    "view_label": "Historia Ecclesiastica",
+    "related__passages": []
   },
   "112": {
     "id": 112,
@@ -5079,7 +6123,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__111.html",
+    "next": "jad_work__113.html",
+    "view_label": "Commentary Psalms Continuatio",
+    "related__passages": []
   },
   "113": {
     "id": 113,
@@ -5109,7 +6157,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__112.html",
+    "next": "jad_work__114.html",
+    "view_label": "Expositio in canticum Moysis",
+    "related__passages": []
   },
   "114": {
     "id": 114,
@@ -5139,7 +6191,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__113.html",
+    "next": "jad_work__115.html",
+    "view_label": "Libelli selecti",
+    "related__passages": []
   },
   "115": {
     "id": 115,
@@ -5177,7 +6233,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__114.html",
+    "next": "jad_work__116.html",
+    "view_label": "Sermones",
+    "related__passages": []
   },
   "116": {
     "id": 116,
@@ -5215,7 +6275,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__115.html",
+    "next": "jad_work__117.html",
+    "view_label": "Commentary Matthew",
+    "related__passages": []
   },
   "117": {
     "id": 117,
@@ -5253,7 +6317,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__116.html",
+    "next": "jad_work__118.html",
+    "view_label": "Commentary Pentateuch",
+    "related__passages": []
   },
   "118": {
     "id": 118,
@@ -5283,7 +6351,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__117.html",
+    "next": "jad_work__119.html",
+    "view_label": "Commentary Numeri",
+    "related__passages": []
   },
   "119": {
     "id": 119,
@@ -5313,7 +6385,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__118.html",
+    "next": "jad_work__12.html",
+    "view_label": "Sermones",
+    "related__passages": []
   },
   "120": {
     "id": 120,
@@ -5351,7 +6427,11 @@
         "part_of": []
       }
     ],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__12.html",
+    "next": "jad_work__121.html",
+    "view_label": "Commentary John",
+    "related__passages": []
   },
   "121": {
     "id": 121,
@@ -5381,7 +6461,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__120.html",
+    "next": "jad_work__122.html",
+    "view_label": "Commentary Kohelet",
+    "related__passages": []
   },
   "122": {
     "id": 122,
@@ -5435,7 +6519,11 @@
         "jad_id": "jad_sources_occurrences__2",
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
-    ]
+    ],
+    "prev": "jad_work__121.html",
+    "next": "jad_work__123.html",
+    "view_label": "Homiliae",
+    "related__passages": []
   },
   "123": {
     "id": 123,
@@ -5473,7 +6561,11 @@
         "jad_id": "jad_sources_occurrences__12",
         "digi_url": ""
       }
-    ]
+    ],
+    "prev": "jad_work__122.html",
+    "next": "jad_work__124.html",
+    "view_label": "De nugis curialum",
+    "related__passages": []
   },
   "124": {
     "id": 124,
@@ -5503,7 +6595,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__123.html",
+    "next": "jad_work__125.html",
+    "view_label": "Liber adversus Graecos",
+    "related__passages": []
   },
   "125": {
     "id": 125,
@@ -5533,7 +6629,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__124.html",
+    "next": "jad_work__126.html",
+    "view_label": "De commendatione fidei",
+    "related__passages": []
   },
   "126": {
     "id": 126,
@@ -5563,7 +6663,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__125.html",
+    "next": "jad_work__127.html",
+    "view_label": "Homiliae dominicales",
+    "related__passages": []
   },
   "127": {
     "id": 127,
@@ -5593,7 +6697,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__126.html",
+    "next": "jad_work__128.html",
+    "view_label": "Commentary Isaiah",
+    "related__passages": []
   },
   "128": {
     "id": 128,
@@ -5623,7 +6731,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__127.html",
+    "next": "jad_work__129.html",
+    "view_label": "Commentary Jacob",
+    "related__passages": []
   },
   "129": {
     "id": 129,
@@ -5653,7 +6765,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__128.html",
+    "next": "jad_work__13.html",
+    "view_label": "De fide catholica",
+    "related__passages": []
   },
   "130": {
     "id": 130,
@@ -5683,7 +6799,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__13.html",
+    "next": "jad_work__131.html",
+    "view_label": "Commentary 1 Thes.",
+    "related__passages": []
   },
   "131": {
     "id": 131,
@@ -5713,7 +6833,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__130.html",
+    "next": "jad_work__132.html",
+    "view_label": "Chronica",
+    "related__passages": []
   },
   "132": {
     "id": 132,
@@ -5743,7 +6867,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__131.html",
+    "next": "jad_work__133.html",
+    "view_label": "Explanatio symboli S. Athanasii",
+    "related__passages": []
   },
   "133": {
     "id": 133,
@@ -5807,7 +6935,11 @@
         "jad_id": "jad_sources_occurrences__1",
         "digi_url": ""
       }
-    ]
+    ],
+    "prev": "jad_work__132.html",
+    "next": "jad_work__134.html",
+    "view_label": "Sermones",
+    "related__passages": []
   },
   "134": {
     "id": 134,
@@ -5842,7 +6974,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__133.html",
+    "next": "jad_work__135.html",
+    "view_label": "De Tyto et Vespasiano",
+    "related__passages": []
   },
   "135": {
     "id": 135,
@@ -5877,7 +7013,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__134.html",
+    "next": "jad_work__136.html",
+    "view_label": "Sermones",
+    "related__passages": []
   },
   "136": {
     "id": 136,
@@ -5912,7 +7052,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__135.html",
+    "next": "jad_work__137.html",
+    "view_label": "Sermones",
+    "related__passages": []
   },
   "137": {
     "id": 137,
@@ -5971,7 +7115,11 @@
         "jad_id": "jad_sources_occurrences__1",
         "digi_url": ""
       }
-    ]
+    ],
+    "prev": "jad_work__136.html",
+    "next": "jad_work__138.html",
+    "view_label": "Commentary Lamentations",
+    "related__passages": []
   },
   "138": {
     "id": 138,
@@ -6001,7 +7149,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__137.html",
+    "next": "jad_work__139.html",
+    "view_label": "Allegorica expositio in Samuelem",
+    "related__passages": []
   },
   "139": {
     "id": 139,
@@ -6031,7 +7183,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__138.html",
+    "next": "jad_work__14.html",
+    "view_label": "De ratione temporum",
+    "related__passages": []
   },
   "140": {
     "id": 140,
@@ -6061,7 +7217,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__14.html",
+    "next": "jad_work__141.html",
+    "view_label": "De temporibus",
+    "related__passages": []
   },
   "141": {
     "id": 141,
@@ -6091,7 +7251,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__140.html",
+    "next": "jad_work__142.html",
+    "view_label": "Commentary Marc",
+    "related__passages": []
   },
   "142": {
     "id": 142,
@@ -6121,7 +7285,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__141.html",
+    "next": "jad_work__143.html",
+    "view_label": "Allegorica expositio in Parabolas Salomonis",
+    "related__passages": []
   },
   "143": {
     "id": 143,
@@ -6151,7 +7319,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__142.html",
+    "next": "jad_work__144.html",
+    "view_label": "Commentary Acts",
+    "related__passages": []
   },
   "144": {
     "id": 144,
@@ -6181,7 +7353,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__143.html",
+    "next": "jad_work__145.html",
+    "view_label": "Commentary Paul",
+    "related__passages": []
   },
   "145": {
     "id": 145,
@@ -6211,7 +7387,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__144.html",
+    "next": "jad_work__146.html",
+    "view_label": "Allegorica expositio in Canticum Habacuc",
+    "related__passages": []
   },
   "146": {
     "id": 146,
@@ -6241,7 +7421,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__145.html",
+    "next": "jad_work__147.html",
+    "view_label": "Commentary John",
+    "related__passages": []
   },
   "147": {
     "id": 147,
@@ -6271,7 +7455,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__146.html",
+    "next": "jad_work__148.html",
+    "view_label": "Commentary Daniel",
+    "related__passages": []
   },
   "148": {
     "id": 148,
@@ -6301,7 +7489,11 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__147.html",
+    "next": "jad_work__149.html",
+    "view_label": "Commentary Jeremiah",
+    "related__passages": []
   },
   "149": {
     "id": 149,
@@ -6318,6 +7510,10 @@
     "notes": "",
     "notes__author": "",
     "institutional_context": [],
-    "published_edition": []
+    "published_edition": [],
+    "prev": "jad_work__148.html",
+    "next": "jad_work__15.html",
+    "view_label": "",
+    "related__passages": []
   }
 }

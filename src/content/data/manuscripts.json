@@ -50,6 +50,15 @@
           }
         ]
       }
+    ],
+    "prev": "jad_manuscript__19.html",
+    "next": "jad_manuscript__20.html",
+    "view_label": "BNF, Latin 14426",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__52",
+        "view_label": "sub romanis"
+      }
     ]
   },
   "3": {
@@ -103,6 +112,67 @@
           }
         ]
       }
+    ],
+    "prev": "jad_manuscript__29.html",
+    "next": "jad_manuscript__30.html",
+    "view_label": "San Isidoro, MS 11",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__18",
+        "view_label": "plenius complentur in Christo, urbe subversa Romano gladio; adduces super eos latronem repente, Nabuchodonosor, vel exercitum Romanorum"
+      },
+      {
+        "jad_id": "jad_occurence__19",
+        "view_label": "Christus, postquam ascendit coelos, quadragesimo secundo anno immisit duos ursos de silvis gentium, Vespasianum scilicet et Titum, qui Judaeos crudelissime dejecerunt"
+      },
+      {
+        "jad_id": "jad_occurence__67",
+        "view_label": "captivati sunt et interfecti a Tito et Vespasiano"
+      },
+      {
+        "jad_id": "jad_occurence__68",
+        "view_label": "In Nabuchodonosor, et in Vespasiano, et Tito"
+      },
+      {
+        "jad_id": "jad_occurence__69",
+        "view_label": "conculcavi eos in ira mea, auferens daemonibus mundi principatum, Judaeis locum p. 0815A | et gentem, sacerdotium, templum, et omnem dignitatem per Romanos"
+      },
+      {
+        "jad_id": "jad_occurence__70",
+        "view_label": "conculcavi populos, Judaeos scilicet, in furore meo, et inebriavi eos, id est replevi afflictione, et miseria per Romanos"
+      },
+      {
+        "jad_id": "jad_occurence__71",
+        "view_label": "sanctuarium destruet Romanus populus cum duce Vespasiano"
+      },
+      {
+        "jad_id": "jad_occurence__72",
+        "view_label": "reliquias ejus dabo in gladio (Jer. XV), quod factum est per Vespasianum et Titum"
+      },
+      {
+        "jad_id": "jad_occurence__73",
+        "view_label": "Jerusalem ruit, et Judas concidit, ac Romanus eam populus a fundamentis vastavit"
+      },
+      {
+        "jad_id": "jad_occurence__74",
+        "view_label": "per Romanorum principes regnum, sacerdotium, locum et gentem perdas"
+      },
+      {
+        "jad_id": "jad_occurence__75",
+        "view_label": "advenientibus Romanis festivitates et cantica eorum versa sunt in luctum"
+      },
+      {
+        "jad_id": "jad_occurence__76",
+        "view_label": "negligentes contriti, advenientibus Romanis, et malae conscientiae tinea devorati sunt."
+      },
+      {
+        "jad_id": "jad_occurence__77",
+        "view_label": "Et dabit impios Judaeos scilicet Romanis, pro sepultura"
+      },
+      {
+        "jad_id": "jad_occurence__131",
+        "view_label": "sumeret pacem, scilicet exteriorem, per Titum et Vespasianum, de terra, id est de Judaea"
+      }
     ]
   },
   "4": {
@@ -140,7 +210,16 @@
     "not_before": null,
     "not_after": null,
     "written_date": null,
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__36.html",
+    "next": "jad_manuscript__5.html",
+    "view_label": "BNF, Latin 8865",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__16",
+        "view_label": "Anno post passionem Domini quadragesimo secundo, Titus, quem pater Vespasianus romam reversus in obsidione Ierosolimorum iudeorum dilaniavit populum, in tantum ut Iosephus commemorat"
+      }
+    ]
   },
   "5": {
     "id": 5,
@@ -184,6 +263,15 @@
             "part_of": []
           }
         ]
+      }
+    ],
+    "prev": "jad_manuscript__4.html",
+    "next": "jad_manuscript__6.html",
+    "view_label": "St.Gen., MS 1423",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__2",
+        "view_label": "Ihesus Christus cum predixisset discipulis suis scicitantibus signa eversionis Ierusalem"
       }
     ]
   },
@@ -238,6 +326,19 @@
           }
         ]
       }
+    ],
+    "prev": "jad_manuscript__5.html",
+    "next": "jad_manuscript__7.html",
+    "view_label": "BNF, Latin 492",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__5",
+        "view_label": "quatuor regna, scilicet assyriorum, babiloniorum, grecorum, et romanorum, qui destruxerunt Iudeos"
+      },
+      {
+        "jad_id": "jad_occurence__6",
+        "view_label": "romanis obsidentibus civitatem"
+      }
     ]
   },
   "7": {
@@ -283,6 +384,15 @@
           }
         ]
       }
+    ],
+    "prev": "jad_manuscript__6.html",
+    "next": "jad_manuscript__8.html",
+    "view_label": "Maz., MS 177",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__78",
+        "view_label": "duo ursi, per hos tytus et vespasianus qui destruxerunt Iudeos"
+      }
     ]
   },
   "8": {
@@ -312,7 +422,16 @@
     "not_before": null,
     "not_after": null,
     "written_date": null,
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__7.html",
+    "next": "jad_manuscript__9.html",
+    "view_label": "St.Gen., MS 1422",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__7",
+        "view_label": "predixit David destructionem urbis Ierusalem factam per romanos"
+      }
+    ]
   },
   "9": {
     "id": 9,
@@ -348,6 +467,15 @@
         "name": "See of Canterbury",
         "jad__id": "jad_institutional_context__6",
         "part_of": []
+      }
+    ],
+    "prev": "jad_manuscript__8.html",
+    "next": "{'id': 10, 'order': '10.00000000000000000000', 'name': [{'id': 2, 'value': 'BNF, Latin 446'}], 'jad_id': 'jad_manuscript__10', 'library': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Bibliothèque Nationale de France', 'jad_id': 'jad_library__2', 'gnd_url': 'https://d-nb.info/gnd/5156217-0', 'abbreviation': 'BNF', 'place': [{'id': 1, 'order': '1.00000000000000000000', 'name': 'Paris', 'geonames_url': 'https://www.geonames.org/2988507/paris.html', 'jad_id': 'jad_places__1'}]}], 'idno': 'Latin 446', 'catalog_url': 'https://archivesetmanuscrits.bnf.fr/ark:/12148/cc618815', 'digi_url': 'https://gallica.bnf.fr/ark:/12148/btv1b10721053z/f213.item', 'not_before': '1190', 'not_after': '1210', 'written_date': 'around 1200', 'institutional_context': [], 'prev': 'jad_manuscript__9.html', 'next': 'jad_manuscript__11.html'}.html",
+    "view_label": "Lam., MS 144",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__8",
+        "view_label": "Titus et Vespasianus"
       }
     ]
   },
@@ -386,7 +514,11 @@
     "not_before": "1190",
     "not_after": "1210",
     "written_date": "around 1200",
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__9.html",
+    "next": "jad_manuscript__11.html",
+    "view_label": "BNF, Latin 446",
+    "related__passages": []
   },
   "11": {
     "id": 11,
@@ -423,7 +555,16 @@
     "not_before": "1290",
     "not_after": "1310",
     "written_date": "around 1300",
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__10.html",
+    "next": "jad_manuscript__12.html",
+    "view_label": "BNF, Latin 3737",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__9",
+        "view_label": "Legitur in istoria romana quod tyrus et vespasianus post xl annum post passione domini tempore pascali"
+      }
+    ]
   },
   "12": {
     "id": 12,
@@ -468,7 +609,11 @@
           }
         ]
       }
-    ]
+    ],
+    "prev": "jad_manuscript__11.html",
+    "next": "jad_manuscript__13.html",
+    "view_label": "St.Gen., MS 2787",
+    "related__passages": []
   },
   "13": {
     "id": 13,
@@ -497,7 +642,16 @@
     "not_before": null,
     "not_after": null,
     "written_date": null,
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__12.html",
+    "next": "jad_manuscript__14.html",
+    "view_label": "BL, Arundel 322",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__17",
+        "view_label": "Si referamus tempora Nabuchodonosor, tempora Seva cherub, Titi quoque et Vespasiani, non dubitamus quia terrena Sion multoties capta et destructa et reaedificata est."
+      }
+    ]
   },
   "14": {
     "id": 14,
@@ -526,7 +680,16 @@
     "not_before": null,
     "not_after": null,
     "written_date": null,
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__13.html",
+    "next": "jad_manuscript__15.html",
+    "view_label": "BL, Royal 8 F XVII",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__17",
+        "view_label": "Si referamus tempora Nabuchodonosor, tempora Seva cherub, Titi quoque et Vespasiani, non dubitamus quia terrena Sion multoties capta et destructa et reaedificata est."
+      }
+    ]
   },
   "15": {
     "id": 15,
@@ -579,7 +742,11 @@
           }
         ]
       }
-    ]
+    ],
+    "prev": "jad_manuscript__14.html",
+    "next": "jad_manuscript__16.html",
+    "view_label": "BNF, Latin 620",
+    "related__passages": []
   },
   "16": {
     "id": 16,
@@ -608,7 +775,16 @@
     "not_before": null,
     "not_after": null,
     "written_date": null,
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__15.html",
+    "next": "jad_manuscript__17.html",
+    "view_label": "ÖNB, Cod. 1014",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__53",
+        "view_label": "Cum adpropinquasset Ihesus Hierusalem, uidens ciuitatem fleuit super illam. Pensare debemus, fratres karissimi, quid sit quod flente Domino, sicut nunc in presenti lectum est, hierosolime ciuitatis subuersio describebatur"
+      }
+    ]
   },
   "17": {
     "id": 17,
@@ -637,7 +813,11 @@
     "not_before": null,
     "not_after": null,
     "written_date": "14",
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__16.html",
+    "next": "jad_manuscript__18.html",
+    "view_label": "Cambr. St.John's Coll., MS 127",
+    "related__passages": []
   },
   "18": {
     "id": 18,
@@ -674,7 +854,16 @@
     "not_before": null,
     "not_after": null,
     "written_date": null,
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__17.html",
+    "next": "jad_manuscript__19.html",
+    "view_label": "BNF, Latin 3829",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__10",
+        "view_label": "Impleta prophetia, quam olim Moyses predixerat, foris vastabit eos gladiis, dicit Iosephus, qui de eius exilio civitatis multa describsit"
+      }
+    ]
   },
   "19": {
     "id": 19,
@@ -711,7 +900,16 @@
     "not_before": null,
     "not_after": null,
     "written_date": null,
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__18.html",
+    "next": "jad_manuscript__2.html",
+    "view_label": "BNF, Latin 3567",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__54",
+        "view_label": "Cum appropinquaret Jesus Jerusalem, videns civitatem flevit. Quod flente Domino ille Jerosolymorum subversio describatur"
+      }
+    ]
   },
   "20": {
     "id": 20,
@@ -769,7 +967,11 @@
           }
         ]
       }
-    ]
+    ],
+    "prev": "jad_manuscript__2.html",
+    "next": "jad_manuscript__21.html",
+    "view_label": "BNF, Latin 3570",
+    "related__passages": []
   },
   "21": {
     "id": 21,
@@ -806,7 +1008,20 @@
     "not_before": null,
     "not_after": null,
     "written_date": null,
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__20.html",
+    "next": "jad_manuscript__22.html",
+    "view_label": "BNF, Latin 3281",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__11",
+        "view_label": "ad litteram loquitur de Ierusalem que in pace prosperaretur, flevit super illiam previdens excidium eius futurum, quod ipsam non previdebat"
+      },
+      {
+        "jad_id": "jad_occurence__12",
+        "view_label": "signa destructionis Ierusalem et templi cum dicit ibidem, cum videritis circumdari ab exercitu Ierusalem"
+      }
+    ]
   },
   "22": {
     "id": 22,
@@ -835,7 +1050,11 @@
     "not_before": null,
     "not_after": null,
     "written_date": null,
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__21.html",
+    "next": "jad_manuscript__23.html",
+    "view_label": "Troyes, MS 653",
+    "related__passages": []
   },
   "23": {
     "id": 23,
@@ -879,6 +1098,71 @@
             "part_of": []
           }
         ]
+      }
+    ],
+    "prev": "jad_manuscript__22.html",
+    "next": "jad_manuscript__24.html",
+    "view_label": "Maz., MS 178",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__89",
+        "view_label": "non penituistis terra est vestra erit designe, babiloniorum et post romanorum"
+      },
+      {
+        "jad_id": "jad_occurence__90",
+        "view_label": "et utraque capte, scilicet babilon et romanum"
+      },
+      {
+        "jad_id": "jad_occurence__91",
+        "view_label": "et post captivitatem romanos iudices habent"
+      },
+      {
+        "jad_id": "jad_occurence__92",
+        "view_label": "captio (?) romanorum, libanus Ierusalem et templum cadet"
+      },
+      {
+        "jad_id": "jad_occurence__93",
+        "view_label": "excecionem Iudeorum, que facta est Ierusalem a romanis"
+      },
+      {
+        "jad_id": "jad_occurence__94",
+        "view_label": "Christum sevierunt Iudei, dabit romanis"
+      },
+      {
+        "jad_id": "jad_occurence__95",
+        "view_label": "diem ultionis et damnationis que per romanos"
+      },
+      {
+        "jad_id": "jad_occurence__96",
+        "view_label": "populos Iudeos inebravi afflictione per romanos"
+      },
+      {
+        "jad_id": "jad_occurence__97",
+        "view_label": "captam conservata per romanos helium adam et titum et vespasianum"
+      },
+      {
+        "jad_id": "jad_occurence__98",
+        "view_label": "ursus babilonius vel romanus signat ut omnes ad me, que ad signum et metam ponitum mitterent"
+      },
+      {
+        "jad_id": "jad_occurence__99",
+        "view_label": "inimici romani"
+      },
+      {
+        "jad_id": "jad_occurence__100",
+        "view_label": "sub romanis factum est"
+      },
+      {
+        "jad_id": "jad_occurence__101",
+        "view_label": "obsidente tito et vaspasiano"
+      },
+      {
+        "jad_id": "jad_occurence__102",
+        "view_label": "bestia quatuor romanum"
+      },
+      {
+        "jad_id": "jad_occurence__103",
+        "view_label": "duce tito et vaspasiano vasti, destructio omnioda (?)"
       }
     ]
   },
@@ -924,6 +1208,27 @@
             "part_of": []
           }
         ]
+      }
+    ],
+    "prev": "jad_manuscript__23.html",
+    "next": "jad_manuscript__25.html",
+    "view_label": "Maz., MS 999",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__30",
+        "view_label": "hec destructio ab imperatoribus romanis a tyto et vaspasiano ob perfidiam Iudeorum"
+      },
+      {
+        "jad_id": "jad_occurence__31",
+        "view_label": "civitatem eorum succendit quia missis exercitibus romanis"
+      },
+      {
+        "jad_id": "jad_occurence__32",
+        "view_label": "herodes a romanis regnum Iudeorum acceperat"
+      },
+      {
+        "jad_id": "jad_occurence__33",
+        "view_label": "ad litteram evenerunt tempore titi et vespasiani"
       }
     ]
   },
@@ -978,6 +1283,19 @@
           }
         ]
       }
+    ],
+    "prev": "jad_manuscript__24.html",
+    "next": "jad_manuscript__26.html",
+    "view_label": "BNF, Latin 3301C",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__13",
+        "view_label": "Zacharias inter ipsa quasi renascentis templi cunabilia futurum ipsius excidium per Romanos predixit"
+      },
+      {
+        "jad_id": "jad_occurence__14",
+        "view_label": "terrenam Ierusalem antonomasice significat, ubi ibi, videns dominus civitatem, flevit super illiam"
+      }
     ]
   },
   "26": {
@@ -1015,7 +1333,11 @@
     "not_before": null,
     "not_after": null,
     "written_date": null,
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__25.html",
+    "next": "jad_manuscript__27.html",
+    "view_label": "BNF, Latin 3733",
+    "related__passages": []
   },
   "27": {
     "id": 27,
@@ -1044,7 +1366,11 @@
     "not_before": null,
     "not_after": null,
     "written_date": null,
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__26.html",
+    "next": "jad_manuscript__28.html",
+    "view_label": "Maz., MS 774",
+    "related__passages": []
   },
   "28": {
     "id": 28,
@@ -1073,7 +1399,11 @@
     "not_before": null,
     "not_after": null,
     "written_date": null,
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__27.html",
+    "next": "jad_manuscript__29.html",
+    "view_label": "Maz., Ms 1026",
+    "related__passages": []
   },
   "29": {
     "id": 29,
@@ -1110,7 +1440,11 @@
     "not_before": "1290",
     "not_after": "1310",
     "written_date": "around 1300",
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__28.html",
+    "next": "jad_manuscript__3.html",
+    "view_label": "BNF, Latin 3728",
+    "related__passages": []
   },
   "30": {
     "id": 30,
@@ -1162,6 +1496,15 @@
             "part_of": []
           }
         ]
+      }
+    ],
+    "prev": "jad_manuscript__3.html",
+    "next": "jad_manuscript__31.html",
+    "view_label": "BNF, Latin 14937",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__30",
+        "view_label": "hec destructio ab imperatoribus romanis a tyto et vaspasiano ob perfidiam Iudeorum"
       }
     ]
   },
@@ -1216,6 +1559,15 @@
           }
         ]
       }
+    ],
+    "prev": "jad_manuscript__30.html",
+    "next": "jad_manuscript__32.html",
+    "view_label": "BNF, Latin 2950",
+    "related__passages": [
+      {
+        "jad_id": "jad_occurence__13",
+        "view_label": "Zacharias inter ipsa quasi renascentis templi cunabilia futurum ipsius excidium per Romanos predixit"
+      }
     ]
   },
   "32": {
@@ -1245,7 +1597,11 @@
     "not_before": null,
     "not_after": null,
     "written_date": "",
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__31.html",
+    "next": "jad_manuscript__33.html",
+    "view_label": "Arsenal, MS 44",
+    "related__passages": []
   },
   "33": {
     "id": 33,
@@ -1274,7 +1630,11 @@
     "not_before": null,
     "not_after": null,
     "written_date": "",
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__32.html",
+    "next": "jad_manuscript__34.html",
+    "view_label": "Arsenal, MS 400",
+    "related__passages": []
   },
   "34": {
     "id": 34,
@@ -1319,7 +1679,11 @@
           }
         ]
       }
-    ]
+    ],
+    "prev": "jad_manuscript__33.html",
+    "next": "jad_manuscript__35.html",
+    "view_label": "Maz., MS 698",
+    "related__passages": []
   },
   "35": {
     "id": 35,
@@ -1348,7 +1712,11 @@
     "not_before": null,
     "not_after": null,
     "written_date": "",
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__34.html",
+    "next": "jad_manuscript__36.html",
+    "view_label": "Maz., MS 1001",
+    "related__passages": []
   },
   "36": {
     "id": 36,
@@ -1377,6 +1745,10 @@
     "not_before": null,
     "not_after": null,
     "written_date": "",
-    "institutional_context": []
+    "institutional_context": [],
+    "prev": "jad_manuscript__35.html",
+    "next": "jad_manuscript__4.html",
+    "view_label": "Valenciennes, MS 227",
+    "related__passages": []
   }
 }

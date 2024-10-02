@@ -8,7 +8,7 @@ export default {
         brandBrown: "#581908",
         brandRed: "#a92d03",
         brandPaleWhite: "#fef9f8",
-        brandRose: "#fdf0ee",
+        brandRose: "#f5e8e6",
         brandCaramel: "#d27e45",
       },
       backgroundImage: {
