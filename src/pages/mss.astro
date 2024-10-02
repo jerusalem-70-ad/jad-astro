@@ -1,7 +1,6 @@
 ---
 import PageLayout from "../layouts/page-layout.astro";
 import mss from "../content/data/manuscripts.json";
-import MsCard from "@components/ms-card.astro";
 
 
 ---
@@ -78,7 +77,7 @@ import MsCard from "@components/ms-card.astro";
             {Object.values(mss).map((ms) => (
               <tr tabindex="0">
                 <td class="px-3">
-                    <a href=`/manuscripts/${ms.jad_id}`>{ms.name[0].value}</a>
+                    <a href=`/manuscripts/${ms.jad_id}` class="hover:text-brandPaleWhite hover:font-semibold">{ms.name[0].value}</a>
                 </td>
                 <td class="px-3">
                     {ms.library[0].place[0]?.name}                    
@@ -90,7 +89,7 @@ import MsCard from "@components/ms-card.astro";
                   {/* this is an array - need to call .map to return an array of strings; if we return more than one thing need empty element <>  */}
                   {ms.related__passages.map((passage: { jad_id: string; }, index: number) => (
                     <>
-                      <a href={`/passages/${passage.jad_id}`} class="hover:text-brandRed">#{passage.jad_id.substring(15)}</a>                    
+                      <a href={`/passages/${passage.jad_id}`} class="hover:text-brandPaleWhite">#{passage.jad_id.substring(15)}</a>                    
                       {index < ms.related__passages.length - 1 && <span>|</span>}
                     </>
                   ))
@@ -102,7 +101,7 @@ import MsCard from "@components/ms-card.astro";
                 <td class="px-3">
                   {ms.digi_url && (
              <div class="flex">                
-                <a href={ms.digi_url} class="inline-flex hover:text-brandRed">
+                <a href={ms.digi_url} class="inline-flex hover:text-brandPaleWhite">
                     <section>Digital facsimile</section> 
                     <img src="/external-link.svg" alt="" class="w-4 inline">
                 </a>
@@ -113,7 +112,7 @@ import MsCard from "@components/ms-card.astro";
                 <td class="px-3">
                    {ms.catalog_url && (
            <div class="flex">
-                <a href={ms.catalog_url} class="inline-flex hover:text-brandRed">
+                <a href={ms.catalog_url} class="inline-flex hover:text-brandPaleWhite">
                     <section>Catalog entry</section>                 
                     <img src="/external-link.svg" alt="" class="w-4 inline">
                 </a>

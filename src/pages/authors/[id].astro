@@ -1,0 +1,67 @@
+---
+import PageLayout from "../../layouts/page-layout.astro";
+import authors from "../../content/data/authors.json";
+
+export async function getStaticPaths() {
+  
+  const paths = Object.values(authors).map((author) => ({
+    params: { id: author.jad_id },  
+    props: { data: author }
+  }));
+
+  // Return the array of paths
+  return paths;
+}
+       
+const { data: author } = Astro.props;
+
+---
+<PageLayout>  
+   
+    <div>
+        <div class="border-2 rounded-sm border-brandBrown bg-brandRose my-10 grid p-5 w-3/4 mx-auto">
+            <h1 class="text-xl py-3 mx-auto font-medium">{author.name}</h1>
+            <dl class="grid grid-cols-[1fr_7fr] text-sm md:leading-7 md:text-base">  
+                
+                <dt class="font-semibold border-r border-gray-300 pr-5">GND:</dt>
+                <dd class="pl-5">
+                    {
+                        author.gnd_url.length > 0
+                        ? <a href={author.gnd_url} class="hover:text-brandRed">{author.gnd_url.split('/').at(-1)}</a>
+                        : 'N/A'
+                    }
+                    
+                </dd>
+                
+                <dt class="font-semibold border-r border-gray-300 pr-5">Works:</dt>                
+                <dd class="pl-5">
+                    { author.related__works.length > 0
+                            ? author.related__works.map((work, index) => (
+                                <>
+                                <a href={`/works/${work.jad_id}`} class="hover:text-brandRed">
+                                    {work.view_label}
+                                </a>
+                                {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
+                                {index < author.related__works.length - 1 && '| '}
+                                </>
+                            )) : 'N/A'
+                        }
+                </dd>
+                    
+               
+            </dl> 
+                
+        </div>     
+        <div class="my-10 flex p-5 w-3/4 mx-auto justify-between">
+           
+            <a href=`/authors/${author.prev}`><img src="/previous.svg" class="h-20"></a>
+            
+            <a href=`/authors/${author.next}`><img src="/next.svg" class="h-20"></a>
+           
+              
+        </div>   
+        
+    </div>
+
+</PageLayout>
+  

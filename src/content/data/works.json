@@ -36,13 +36,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -160,13 +160,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -175,7 +175,7 @@
         "id": 6,
         "order": "6.00000000000000000000",
         "name": "See of Canterbury",
-        "jad__id": "jad_institutional_context__6",
+        "jad_id": "jad_institutional_context__6",
         "part_of": []
       }
     ],
@@ -235,7 +235,7 @@
         "id": 6,
         "order": "6.00000000000000000000",
         "name": "See of Canterbury",
-        "jad__id": "jad_institutional_context__6",
+        "jad_id": "jad_institutional_context__6",
         "part_of": []
       }
     ],
@@ -295,13 +295,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -500,13 +500,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -559,13 +559,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -694,13 +694,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -766,13 +766,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -834,13 +834,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -988,13 +988,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -1095,13 +1095,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -1159,13 +1159,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -1255,13 +1255,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -1327,13 +1327,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -1403,13 +1403,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -1475,13 +1475,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -1559,13 +1559,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -1617,7 +1617,7 @@
         "id": 4,
         "order": "4.00000000000000000000",
         "name": "Kingdom of Jerusalem",
-        "jad__id": "jad_institutional_context__4",
+        "jad_id": "jad_institutional_context__4",
         "part_of": []
       }
     ],
@@ -1679,13 +1679,13 @@
         "id": 2,
         "order": "2.00000000000000000000",
         "name": "Benedictines Auxerre",
-        "jad__id": "jad_institutional_context__2",
+        "jad_id": "jad_institutional_context__2",
         "part_of": [
           {
             "id": 3,
             "order": "3.00000000000000000000",
             "name": "Benedictines",
-            "jad__id": "jad_institutional_context__3",
+            "jad_id": "jad_institutional_context__3",
             "part_of": []
           }
         ]
@@ -1758,13 +1758,13 @@
         "id": 2,
         "order": "2.00000000000000000000",
         "name": "Benedictines Auxerre",
-        "jad__id": "jad_institutional_context__2",
+        "jad_id": "jad_institutional_context__2",
         "part_of": [
           {
             "id": 3,
             "order": "3.00000000000000000000",
             "name": "Benedictines",
-            "jad__id": "jad_institutional_context__3",
+            "jad_id": "jad_institutional_context__3",
             "part_of": []
           }
         ]
@@ -1880,13 +1880,13 @@
         "id": 13,
         "order": "13.00000000000000000000",
         "name": "Benedictines Corbie",
-        "jad__id": "jad_institutional_context__13",
+        "jad_id": "jad_institutional_context__13",
         "part_of": [
           {
             "id": 3,
             "order": "3.00000000000000000000",
             "name": "Benedictines",
-            "jad__id": "jad_institutional_context__3",
+            "jad_id": "jad_institutional_context__3",
             "part_of": []
           }
         ]
@@ -1962,13 +1962,13 @@
         "id": 2,
         "order": "2.00000000000000000000",
         "name": "Benedictines Auxerre",
-        "jad__id": "jad_institutional_context__2",
+        "jad_id": "jad_institutional_context__2",
         "part_of": [
           {
             "id": 3,
             "order": "3.00000000000000000000",
             "name": "Benedictines",
-            "jad__id": "jad_institutional_context__3",
+            "jad_id": "jad_institutional_context__3",
             "part_of": []
           }
         ]
@@ -2025,7 +2025,7 @@
         "id": 8,
         "order": "8.00000000000000000000",
         "name": "Augustinian canons",
-        "jad__id": "jad_institutional_context__8",
+        "jad_id": "jad_institutional_context__8",
         "part_of": []
       }
     ],
@@ -2080,7 +2080,7 @@
         "id": 16,
         "order": "16.00000000000000000000",
         "name": "French schools",
-        "jad__id": "jad_institutional_context__16",
+        "jad_id": "jad_institutional_context__16",
         "part_of": []
       }
     ],
@@ -2182,7 +2182,7 @@
         "id": 9,
         "order": "9.00000000000000000000",
         "name": "Cistercians",
-        "jad__id": "jad_institutional_context__9",
+        "jad_id": "jad_institutional_context__9",
         "part_of": []
       }
     ],
@@ -2302,7 +2302,7 @@
         "id": 5,
         "order": "5.00000000000000000000",
         "name": "Papal Curia",
-        "jad__id": "jad_institutional_context__5",
+        "jad_id": "jad_institutional_context__5",
         "part_of": []
       }
     ],
@@ -2614,13 +2614,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -2791,7 +2791,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -2859,13 +2859,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -2922,7 +2922,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -3071,13 +3071,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -3134,7 +3134,7 @@
         "id": 4,
         "order": "4.00000000000000000000",
         "name": "Kingdom of Jerusalem",
-        "jad__id": "jad_institutional_context__4",
+        "jad_id": "jad_institutional_context__4",
         "part_of": []
       }
     ],
@@ -3196,7 +3196,7 @@
         "id": 11,
         "order": "11.00000000000000000000",
         "name": "Benedictines Cluny",
-        "jad__id": "jad_institutional_context__11",
+        "jad_id": "jad_institutional_context__11",
         "part_of": []
       }
     ],
@@ -3259,13 +3259,13 @@
         "id": 12,
         "order": "12.00000000000000000000",
         "name": "St. Victor Paris",
-        "jad__id": "jad_institutional_context__12",
+        "jad_id": "jad_institutional_context__12",
         "part_of": [
           {
             "id": 1,
             "order": "1.00000000000000000000",
             "name": "University of Paris",
-            "jad__id": "jad_institutional_context__1",
+            "jad_id": "jad_institutional_context__1",
             "part_of": [
               {
                 "id": 16,
@@ -3331,13 +3331,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -4038,13 +4038,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -4101,13 +4101,13 @@
         "id": 13,
         "order": "13.00000000000000000000",
         "name": "Benedictines Corbie",
-        "jad__id": "jad_institutional_context__13",
+        "jad_id": "jad_institutional_context__13",
         "part_of": [
           {
             "id": 3,
             "order": "3.00000000000000000000",
             "name": "Benedictines",
-            "jad__id": "jad_institutional_context__3",
+            "jad_id": "jad_institutional_context__3",
             "part_of": []
           }
         ]
@@ -4159,13 +4159,13 @@
         "id": 13,
         "order": "13.00000000000000000000",
         "name": "Benedictines Corbie",
-        "jad__id": "jad_institutional_context__13",
+        "jad_id": "jad_institutional_context__13",
         "part_of": [
           {
             "id": 3,
             "order": "3.00000000000000000000",
             "name": "Benedictines",
-            "jad__id": "jad_institutional_context__3",
+            "jad_id": "jad_institutional_context__3",
             "part_of": []
           }
         ]
@@ -4301,7 +4301,7 @@
         "id": 15,
         "order": "15.00000000000000000000",
         "name": "See of Toledo",
-        "jad__id": "jad_institutional_context__15",
+        "jad_id": "jad_institutional_context__15",
         "part_of": []
       }
     ],
@@ -4351,7 +4351,7 @@
         "id": 15,
         "order": "15.00000000000000000000",
         "name": "See of Toledo",
-        "jad__id": "jad_institutional_context__15",
+        "jad_id": "jad_institutional_context__15",
         "part_of": []
       }
     ],
@@ -4695,7 +4695,7 @@
         "id": 5,
         "order": "5.00000000000000000000",
         "name": "Papal Curia",
-        "jad__id": "jad_institutional_context__5",
+        "jad_id": "jad_institutional_context__5",
         "part_of": []
       }
     ],
@@ -4745,7 +4745,7 @@
         "id": 5,
         "order": "5.00000000000000000000",
         "name": "Papal Curia",
-        "jad__id": "jad_institutional_context__5",
+        "jad_id": "jad_institutional_context__5",
         "part_of": []
       }
     ],
@@ -4795,7 +4795,7 @@
         "id": 5,
         "order": "5.00000000000000000000",
         "name": "Papal Curia",
-        "jad__id": "jad_institutional_context__5",
+        "jad_id": "jad_institutional_context__5",
         "part_of": []
       }
     ],
@@ -4845,7 +4845,7 @@
         "id": 5,
         "order": "5.00000000000000000000",
         "name": "Papal Curia",
-        "jad__id": "jad_institutional_context__5",
+        "jad_id": "jad_institutional_context__5",
         "part_of": []
       }
     ],
@@ -4895,7 +4895,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -4945,7 +4945,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -4995,7 +4995,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -5045,7 +5045,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -5095,7 +5095,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -5145,7 +5145,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -5195,7 +5195,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -5294,7 +5294,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -5344,7 +5344,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -5394,7 +5394,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -5444,7 +5444,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -5494,7 +5494,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -5544,7 +5544,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -5558,7 +5558,7 @@
       }
     ],
     "prev": "jad_work__98.html",
-    "next": "{'id': 1, 'order': '1.00000000000000000000', 'name': 'Liber Sermonum ', 'jad_id': 'jad_work__1', 'author': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Martin, von León', 'jad_id': 'jad_author__2', 'gnd_url': 'https://d-nb.info/gnd/100953212', 'notes': None}], 'manuscripts': [{'id': 3, 'value': 'San Isidoro, MS 11'}], 'title': 'Liber Sermonum', 'genre': {'id': 14726, 'value': 'Sermons', 'color': 'darker-pink'}, 'not_before': '1175', 'not_after': '1200', 'written_date': 'late 12', 'notes': None, 'notes__author': None, 'institutional_context': [{'id': 1, 'order': '1.00000000000000000000', 'name': 'University of Paris', 'jad__id': 'jad_institutional_context__1', 'part_of': [{'id': 16, 'order': '16.00000000000000000000', 'name': 'French schools', 'jad__id': 'jad_institutional_context__16', 'part_of': []}]}], 'published_edition': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Patrologia Latina', 'jad_id': 'jad_sources_occurrences__2', 'digi_url': 'https://mlat.uzh.ch/browser?path=/38'}], 'prev': 'jad_work__99.html', 'next': 'jad_work__10.html'}.html",
+    "next": "{'id': 1, 'order': '1.00000000000000000000', 'name': 'Liber Sermonum ', 'jad_id': 'jad_work__1', 'author': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Martin, von León', 'jad_id': 'jad_author__2', 'gnd_url': 'https://d-nb.info/gnd/100953212', 'notes': None}], 'manuscripts': [{'id': 3, 'value': 'San Isidoro, MS 11'}], 'title': 'Liber Sermonum', 'genre': {'id': 14726, 'value': 'Sermons', 'color': 'darker-pink'}, 'not_before': '1175', 'not_after': '1200', 'written_date': 'late 12', 'notes': None, 'notes__author': None, 'institutional_context': [{'id': 1, 'order': '1.00000000000000000000', 'name': 'University of Paris', 'jad_id': 'jad_institutional_context__1', 'part_of': [{'id': 16, 'order': '16.00000000000000000000', 'name': 'French schools', 'jad_id': 'jad_institutional_context__16', 'part_of': []}]}], 'published_edition': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Patrologia Latina', 'jad_id': 'jad_sources_occurrences__2', 'digi_url': 'https://mlat.uzh.ch/browser?path=/38'}], 'prev': 'jad_work__99.html', 'next': 'jad_work__10.html'}.html",
     "view_label": "Commentary Genesis",
     "related__passages": []
   },
@@ -5594,7 +5594,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -5644,7 +5644,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -5694,7 +5694,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -5744,7 +5744,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -5794,7 +5794,7 @@
         "id": 3,
         "order": "3.00000000000000000000",
         "name": "Benedictines",
-        "jad__id": "jad_institutional_context__3",
+        "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
     ],
@@ -5849,13 +5849,13 @@
         "id": 2,
         "order": "2.00000000000000000000",
         "name": "Benedictines Auxerre",
-        "jad__id": "jad_institutional_context__2",
+        "jad_id": "jad_institutional_context__2",
         "part_of": [
           {
             "id": 3,
             "order": "3.00000000000000000000",
             "name": "Benedictines",
-            "jad__id": "jad_institutional_context__3",
+            "jad_id": "jad_institutional_context__3",
             "part_of": []
           }
         ]
@@ -6423,7 +6423,7 @@
         "id": 14,
         "order": "14.00000000000000000000",
         "name": "Carolingian court",
-        "jad__id": "jad_institutional_context__14",
+        "jad_id": "jad_institutional_context__14",
         "part_of": []
       }
     ],
@@ -6499,13 +6499,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]
@@ -6910,13 +6910,13 @@
         "id": 12,
         "order": "12.00000000000000000000",
         "name": "St. Victor Paris",
-        "jad__id": "jad_institutional_context__12",
+        "jad_id": "jad_institutional_context__12",
         "part_of": [
           {
             "id": 1,
             "order": "1.00000000000000000000",
             "name": "University of Paris",
-            "jad__id": "jad_institutional_context__1",
+            "jad_id": "jad_institutional_context__1",
             "part_of": [
               {
                 "id": 16,
@@ -7095,13 +7095,13 @@
         "id": 1,
         "order": "1.00000000000000000000",
         "name": "University of Paris",
-        "jad__id": "jad_institutional_context__1",
+        "jad_id": "jad_institutional_context__1",
         "part_of": [
           {
             "id": 16,
             "order": "16.00000000000000000000",
             "name": "French schools",
-            "jad__id": "jad_institutional_context__16",
+            "jad_id": "jad_institutional_context__16",
             "part_of": []
           }
         ]

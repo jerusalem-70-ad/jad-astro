@@ -55,6 +55,12 @@ const worksValues = Object.values(works);
                     </th>
                     <th>
                       <div class="flex flex-col items-start p-2">
+                        <span class="font-bold">Passages</span>
+                        <input type="text" id="passageSearch" placeholder="Search Passage #" class="mt-2 w-full p-2 border border-gray-300 rounded font-normal">
+                      </div>
+                    </th>
+                    <th>
+                      <div class="flex flex-col items-start p-2">
                         <span class="font-bold">Context</span>
                         <input type="text" id="contextSearch" placeholder="Search Context" class="mt-2 w-full p-2 border border-gray-300 rounded font-normal">
                       </div>
@@ -72,7 +78,7 @@ const worksValues = Object.values(works);
                         <td class="px-2">
                             {work.author && work.author.length > 0 
                                 ? (work.author.map((author) => (
-                                    <span>{author.name}</span>
+                                    <a href=`authors/${author.jad_id}` class=" hover:text-brandPaleWhite">{author.name}</a>
                                 ))) 
                                 : (<span>N/A</span>
                              )}
@@ -83,7 +89,7 @@ const worksValues = Object.values(works);
                             { work.manuscripts.length > 0
                             ? work.manuscripts.map((ms: { id: number; value: any;}, index: number) => (
                                 <>
-                                <a href={`/manuscripts/jad_manuscript__${ms.id}`} class="hover:text-brandRed">
+                                <a href={`/manuscripts/jad_manuscript__${ms.id}`} class="hover:text-brandPaleWhite">
                                     {ms.value}
                                 </a>
                                 {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
@@ -93,10 +99,23 @@ const worksValues = Object.values(works);
                         }
                         </td>
                         <td class="px-2">
+                          { work.related__passages.length > 0
+                            ? work.related__passages.map((passage, index: number) => (
+                                <>
+                                <a href={`/passages/${passage.jad_id}`} class="hover:text-brandPaleWhite">
+                                    #{passage.jad_id.substring(15)}
+                                </a>
+                                {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
+                                {index < work.related__passages.length - 1 && '| '}
+                                </>
+                            )) : 'N/A'
+                        }
+                        </td>
+                        <td class="px-2">
                             {work.institutional_context.length > 0
                                 ? work.institutional_context.map((institution : { name : string;}, index: number) => (
                                     <>
-                                    <a href="/" class="hover:text-brandRed">
+                                    <a href="/" class="hover:text-brandPaleWhite">
                                                 {institution.name}
                                             </a>
                                     {index < work.institutional_context.length -1 && '| '}

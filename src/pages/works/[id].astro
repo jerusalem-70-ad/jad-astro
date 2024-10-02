@@ -95,6 +95,20 @@ const { data: work } = Astro.props;
                     ? work.written_date 
                     : 'N/A' } 
                 </dd>
+                <dt class="font-semibold border-r border-gray-300 pr-5">Passages:</dt>
+                <dd class="pl-5">
+                    { work.related__passages.length > 0
+                            ? work.related__passages.map((passage, index: number) => (
+                                <>
+                                <a href={`/passages/${passage.jad_id}`} class="hover:text-brandRed">
+                                    #{passage.jad_id.substring(15)}
+                                </a>
+                                {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
+                                {index < work.related__passages.length - 1 && '| '}
+                                </>
+                            )) : 'N/A'
+                        }
+                </dd>
             </dl> 
                 
         </div>     
