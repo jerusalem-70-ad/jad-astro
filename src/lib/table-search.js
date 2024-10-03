@@ -7,7 +7,7 @@ document.querySelectorAll("input").forEach((input, index) => {
 
 // Filter table based on input value -
 function searchTable(columnIndex, searchValue) {
-  const table = document.getElementById("worksTable");
+  const table = document.getElementById("data-table");
   const rows = table.querySelectorAll("tbody tr");
   rows.forEach((row) => {
     const cellValue = row.children[columnIndex].textContent.toLowerCase();
@@ -40,6 +40,7 @@ function reapplyRowStriping(rows) {
   });
 }
 
+// Function to add highlight when hovered with mouse
 const tableRows = document.querySelectorAll("tbody tr");
 tableRows.forEach((row) => {
   row.addEventListener("mouseenter", () => {
@@ -50,4 +51,41 @@ tableRows.forEach((row) => {
     row.style.backgroundColor = "";
     row.style.color = "";
   });
+});
+
+// Function for download button on table
+
+document.getElementById("download-btn").addEventListener("click", function () {
+  // Function to convert table to CSV
+  function tableToCSV() {
+    const rows = document.querySelectorAll(".data-table tr");
+    let csvContent = "";
+
+    rows.forEach((row) => {
+      const cols = row.querySelectorAll("td, th");
+      let rowContent = Array.from(cols)
+        .map((col) => col.innerText.replace(/,/g, "")) // Remove commas for CSV formatting
+        .join(",");
+      csvContent += rowContent + "\r\n"; // Add new line
+    });
+
+    return csvContent;
+  }
+
+  // Create a Blob with CSV content
+  const csvContent = tableToCSV();
+  const blob = new Blob([csvContent], { type: "text/csv" });
+  const url = URL.createObjectURL(blob);
+
+  // Create a temporary download link and trigger the download
+  const a = document.createElement("a");
+  // title of csv to match the id of the table
+  const tableElement = document.querySelector(".data-table");
+  const title = tableElement.getAttribute("id");
+  a.href = url;
+  a.download = title + ".csv";
+  a.click();
+
+  // Cleanup
+  URL.revokeObjectURL(url);
 });
