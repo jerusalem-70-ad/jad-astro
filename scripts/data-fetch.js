@@ -1,5 +1,6 @@
 import { writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
+import { getData } from "./api-client";
 
 // fetch data from github ; variable with the URL
 const baseUrl =
@@ -42,17 +43,7 @@ async function fetchAllData() {
 async function fetchData(fileName, folderPath) {
   // handle rejected awaits with try {...} catch {...}
   try {
-    const fullUrl = baseUrl + fileName;
-    const response = await fetch(fullUrl);
-    // check for API errors:
-    if (!response.ok) {
-      throw new Error("API issues " + response.statusText + "\n" + fullUrl);
-    }
-
-    // we could use streams
-    // reponse.body => fs.createWriteStream(filePath)
-
-    const data = await response.json(); // need to parse the JSON
+    const data = await getData(baseUrl, fileName);
 
     // save them in content/manuscripts.json 1) convert the data object into a json string (parameter 2 for indentation - make it readable)
     const mss = JSON.stringify(data, null, 2);
