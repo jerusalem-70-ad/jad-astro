@@ -28,7 +28,7 @@ const { data: work } = Astro.props;
                 <dt class="font-semibold border-r border-gray-300 pr-5">Author:</dt>
                 <dd class="pl-5">
                     {work.author && work.author.length > 0
-                    ? work.author[0]?.name
+                    ? <a href={`/authors/${work.author[0].jad_id}`}>{work.author[0]?.name}</a>
                     : 'N/A'}
                 </dd>
                 

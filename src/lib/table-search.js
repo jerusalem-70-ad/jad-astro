@@ -7,7 +7,7 @@ document.querySelectorAll("input").forEach((input, index) => {
 
 // Filter table based on input value -
 function searchTable(columnIndex, searchValue) {
-  const table = document.getElementById("data-table");
+  const table = document.querySelector(".data-table");
   const rows = table.querySelectorAll("tbody tr");
   rows.forEach((row) => {
     const cellValue = row.children[columnIndex].textContent.toLowerCase();

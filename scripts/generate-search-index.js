@@ -1,6 +1,5 @@
 import { Client } from "typesense";
 import { getData } from "./api-client.js";
-import { get } from "http";
 
 async function generate() {
   // instantiate typesense client

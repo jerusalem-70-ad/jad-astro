@@ -9,7 +9,7 @@ export default {
         brandRed: "#a92d03",
         brandPaleWhite: "#fef9f8",
         brandRose: "#f5e8e6",
-        brandCaramel: "#d27e45",
+        brandCaramel: "#e5894a",
       },
       backgroundImage: {
         jerusalem: "url('title-image.png')",
