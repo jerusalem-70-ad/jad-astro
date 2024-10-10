@@ -1,25 +1,18 @@
-import { Client } from "typesense";
+import { log } from "@acdh-oeaw/lib";
 import { getData } from "./api-client.js";
+import { createTypesenseAdminClient } from "../scripts/create-typesense-admin-client.js";
 
 async function generate() {
-  // instantiate typesense client
-
-  const client = new Client({
-    nodes: [
-      {
-        host: process.env.TYPESENSE_API_HOST,
-        port: process.env.TYPESENSE_API_PORT,
-        protocol: process.env.TYPESENSE_API_PROTOCOL,
-      },
-    ],
-    apiKey: process.env.TYPESENSE_ADMIN_API_KEY,
-    connectionTimeoutSeconds: 2,
-  });
-
-  // create collection
+  // instantiate typesense client using helpers function
+  const client = createTypesenseAdminClient();
 
   const collectionName = "JAD-temp";
 
+  // check if the collection exist if so delete and write anew
+  await client.collections(collectionName).delete();
+  log.success("Deleted the collection");
+
+  // create collection
   const schema = {
     name: collectionName,
     enable_nested_fields: true,
@@ -36,32 +29,39 @@ async function generate() {
   };
 
   await client.collections().create(schema);
-
+  log.success("Created new collection");
   // import data into typesense collection
 
-  // TODO:
-  // - get data from github
+  //  get data from github
   const data = await getData(
     "https://raw.githubusercontent.com/jerusalem-70-ad/jad-baserow-dump/refs/heads/main/data/",
     "passages.json"
   );
-  // - maybe transform data so it conforms to the typesense collection shape
+  // transform data so it conforms to the typesense collection shape
   const records = [];
   Object.values(data).forEach((value) => {
     const item = {
-      id: value["jad_id"],
-      rec_id: `${value[jad_id].html}`,
-      title: value["passage"],
-      full_text: `${value["passage"]} ${value["text_paragraph"]}`,
-      language: value["language"],
-      manuscript: value["manuscript"],
-      work: value["work"],
+      id: value.jad_id,
+      rec_id: `${value.jad_id}.html`,
+      title: value.passage,
+      full_text: `${value.passage} ${value.text_paragraph}`,
+      language: value.language,
+      manuscript: value.manuscript,
+      work: value.work,
     };
     records.push(item);
   });
   // - import data into typesense collection
 
-  client.collections(collectionName).documents().import(records);
+  await client.collections(collectionName).documents().import(records);
+  log.success("All imported");
 }
 
-generate();
+generate()
+  .then(() => {
+    log.success("All good.");
+  })
+  .catch((error) => {
+    log.error("Oh no!\n", String(error));
+    process.exitCode = 1;
+  });

@@ -1,18 +1,55 @@
 ---
 import PageLayout from "../layouts/page-layout.astro";
-import { getCollection } from "astro:content"
+
+import {createTypesenseClient} from "../lib/create-typesense-client";
+import Button from "../components/button.astro";
+
+const client = createTypesenseClient();
+
+const result = await client.collections('JAD-temp').documents().search({q: "", query_by:"title"}) 
+
 
 ---
 
 <PageLayout>
     <div class="mx-auto w-full max-w-screen-xl px-16 py-4">
-		<div class="prose max-w-screen-md">
-			<h1 class="text-2xl font-semibold">Information about the database</h1>
-           <ul>
-            <li><a href="mss">See all mss descriptions</a></li>
-            <li><a href="passages">See all passages</a></li>
-           </ul>
-            <p></p>
+		<div class="max-w-screen-md grid gap-4">
+			
+      <form role="search" data-search-form>
+        <label>
+          <div class="sr-only">Search</div>
+          <input type="search" name="q" placeholder="Search passages ..." class="textfield border py-2 px-4 rounded-sm focus:border-brandBrown">
+        </label>
+
+        <button type="submit">Search</button>
+      </form>
+
+      <section class="border">
+        <h2>Results:</h2>
+        <ul data-search-result id="results-list"></ul>
+      </section>
 		</div>
 	</div>
+
 </PageLayout>
+
+<script>
+  const searchForm = document.querySelector("form[data-search-form]");
+
+  searchForm?.addEventListener("submit", event => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget)
+    const q = formData.get("q")
+
+    console.log(q)
+    
+    // TODO:
+    // read the users' input
+    // pass this to typesense using the client
+    // get back the info - passages in the section ul
+
+  })
+
+  const results = document.querySelector("#results-list") // <ul>
+</script>

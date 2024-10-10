@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@acdh-oeaw/lib':
+        specifier: ^0.1.12
+        version: 0.1.12
       '@astrojs/check':
         specifier: ^0.9.3
         version: 0.9.3(typescript@5.6.2)
@@ -29,6 +32,9 @@ importers:
       typesense:
         specifier: ^1.8.2
         version: 1.8.2(@babel/runtime@7.25.7)
+      typesense-instantsearch-adapter:
+        specifier: ^2.8.0
+        version: 2.8.0(@babel/runtime@7.25.7)
     devDependencies:
       '@tailwindcss/typography':
         specifier: ^0.5.15
@@ -38,6 +44,10 @@ importers:
         version: 20.16.10
 
 packages:
+
+  '@acdh-oeaw/lib@0.1.12':
+    resolution: {integrity: sha512-yNAjUxcoqvEXX+YsqWqOqCOJeFg6oYL2Q+bVdhu6LEQU1MGpcMbo7haSTX12X8UYZjIU6oWpHrZfdKZZxRH23Q==}
+    engines: {node: '>=20', pnpm: '>=9'}
 
   '@alloc/quick-lru@5.2.0':
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
@@ -1976,6 +1986,12 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  typesense-instantsearch-adapter@2.8.0:
+    resolution: {integrity: sha512-2q4QVpHoUV0ncf1XOqIC0dufOTkFRxQ0mHzg//H3WK02ZYqdNNPCAacZODhQlltl1cNJdTI8Y4uuGVd6fJuGzw==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      '@babel/runtime': ^7.17.2
+
   typesense@1.8.2:
     resolution: {integrity: sha512-aBpePjA99Qvo+OP2pJwMpvga4Jrm1Y2oV5NsrWXBxlqUDNEUCPZBIksPv2Hq0jxQxHhLLyJVbjXjByXsvpCDVA==}
     engines: {node: '>=18'}
@@ -2271,6 +2287,8 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
 
 snapshots:
+
+  '@acdh-oeaw/lib@0.1.12': {}
 
   '@alloc/quick-lru@5.2.0': {}
 
@@ -4523,6 +4541,13 @@ snapshots:
       semver: 7.6.3
 
   typescript@5.6.2: {}
+
+  typesense-instantsearch-adapter@2.8.0(@babel/runtime@7.25.7):
+    dependencies:
+      '@babel/runtime': 7.25.7
+      typesense: 1.8.2(@babel/runtime@7.25.7)
+    transitivePeerDependencies:
+      - debug
 
   typesense@1.8.2(@babel/runtime@7.25.7):
     dependencies:
