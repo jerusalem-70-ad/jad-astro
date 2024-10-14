@@ -1,6 +1,7 @@
 ---
 import PageLayout from "../../layouts/page-layout.astro";
 import passages from "../../content/data/passages.json";
+import { Icon } from "astro-icon/components";
 
 
 export async function getStaticPaths() {
@@ -114,11 +115,15 @@ const { data: passage } = Astro.props;
         <div class="my-10 flex p-5 w-3/4 mx-auto justify-between">
           {passage.id > 1
           ? 
-          <a href=`/passages/jad_occurence__${parseInt(passage.jad_id.split('__')[1]) -1}`><img src="/previous.svg" class="h-20"></a>
+          <a href=`/passages/jad_occurence__${parseInt(passage.jad_id.split('__')[1]) -1}`>
+            <Icon name="lucide:circle-arrow-left" class="size-20"></Icon>
+            </a>
           : ''
       }
           
-          <a href=`/passages/jad_occurence__${parseInt(passage.jad_id.split('__')[1]) +1}`><img src="/next.svg" class="h-20"></a>
+          <a href=`/passages/jad_occurence__${parseInt(passage.jad_id.split('__')[1]) +1}`>
+            <Icon name="lucide:circle-arrow-right" class="size-20"></Icon>
+          </a>
          
             
       </div>

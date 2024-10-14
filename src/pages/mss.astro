@@ -1,7 +1,7 @@
 ---
 import PageLayout from "../layouts/page-layout.astro";
 import mss from "../content/data/manuscripts.json";
-
+import { Icon } from "astro-icon/components";
 
 ---
 
@@ -99,14 +99,14 @@ import mss from "../content/data/manuscripts.json";
                 } 
                 </td>
                 <td class="px-3">
-                  {ms.institutional_context[0]?.name ?? 'N/A'}
+                  <a href={`/institutions/${ms.institutional_context[0]?.jad_id}`}>{ms.institutional_context[0]?.name ?? 'N/A'}</a>
                 </td>
                 <td class="px-3">
                   {ms.digi_url && (
-             <div class="flex">                
-                <a href={ms.digi_url} class="inline-flex hover:text-brandPaleWhite">
-                    <section>Digital facsimile</section> 
-                    <img src="/external-link.svg" alt="" class="w-4 inline">
+             <div>                
+                <a href={ms.digi_url} class="flex hover:text-brandPaleWhite items-baseline gap-1">
+                    <span>Digital facsimile</span> 
+                    <Icon aria-hidden="true" name="lucide:external-link"></Icon>
                 </a>
             </div>
            
@@ -114,10 +114,10 @@ import mss from "../content/data/manuscripts.json";
                 </td>
                 <td class="px-3">
                    {ms.catalog_url && (
-           <div class="flex">
-                <a href={ms.catalog_url} class="inline-flex hover:text-brandPaleWhite">
-                    <section>Catalog entry</section>                 
-                    <img src="/external-link.svg" alt="" class="w-4 inline">
+           <div>
+                <a href={ms.catalog_url} class="flex hover:text-brandPaleWhite items-baseline gap-1">
+                    <span>Catalog entry</span>                 
+                    <Icon aria-hidden="true" name="lucide:external-link"></Icon>
                 </a>
             </div>            
         )}

@@ -2,6 +2,8 @@
 import PageLayout from "../../layouts/page-layout.astro";
 import manuscripts from "../../content/data/manuscripts.json";
 
+import { Icon } from 'astro-icon/components'
+
 export async function getStaticPaths() {
     // Use getCollection to read the collection of json files
     // const manuscripts = JSON.parse(readFileSync("src/content/data/manuscripts.json", {encoding: "utf-8"}))
@@ -25,7 +27,8 @@ const { data: manuscript } = Astro.props;
               
               
               <dt class="font-semibold border-r border-gray-300 pr-2">Library / Collection:</dt>
-              <dd class="pl-5"><a href={manuscript.library[0].gnd_url} target="_blank">{manuscript.library[0].name}</a></dd>
+              <dd class="pl-5"><a href={manuscript.library[0].gnd_url} target="_blank" class="hover:text-brandRed flex">{manuscript.library[0].name}<Icon name="lucide:external-link"></Icon>  
+              </a></dd>
               
               
               <dt class="font-semibold border-r border-gray-300 pr-2">Shelfmark:</dt>
@@ -33,7 +36,7 @@ const { data: manuscript } = Astro.props;
               
               
               <dt class="font-semibold border-r border-gray-300 pr-2">Insitutional context:</dt>
-              <dd class="pl-5">{manuscript.institutional_context[0]?.name ?? 'N/A'}</dd>
+              <dd class="pl-5"><a href={manuscript.institutional_context[0]?.jad_id} class="hover:text-brandRed">{manuscript.institutional_context[0]?.name ?? 'N/A'}</a></dd>
               
               
               
@@ -59,8 +62,8 @@ const { data: manuscript } = Astro.props;
                 {manuscript.digi_url && (
                      <div class="flex">
                         <a href={manuscript.digi_url} class="inline-flex hover:text-brandRed">
-                            <section>Digital facsimile</section> 
-                            <img src="/external-link.svg" alt="" class="w-4 inline">
+                            <span>Digital facsimile</span> 
+                            <Icon aria-hidden="true" name="lucide:external-link"></Icon>
                         </a>
                     </div>
                    
@@ -69,8 +72,8 @@ const { data: manuscript } = Astro.props;
                 {manuscript.catalog_url && (
                    <div class="flex">                        
                         <a href={manuscript.catalog_url} class="inline-flex hover:text-brandRed">
-                            <section>Catalog entry</section> 
-                            <img src="/external-link.svg" alt="" class="w-4 inline">
+                            <span>Catalog entry</span> 
+                            <Icon aria-hidden="true" name="lucide:external-link"></Icon>
                         </a>
                     </div>                    
                 )}
@@ -82,11 +85,15 @@ const { data: manuscript } = Astro.props;
     <div class="my-10 flex p-5 w-3/4 mx-auto justify-between">
             {manuscript.id > 1
             ? 
-            <a href=`/manuscripts/jad_manuscript__${parseInt(manuscript.jad_id.split('__')[1]) -1}`><img src="/previous.svg" class="h-20"></a>
+            <a href=`/manuscripts/jad_manuscript__${parseInt(manuscript.jad_id.split('__')[1]) -1}`>
+              <Icon class="size-20" name="lucide:circle-arrow-left"></Icon>
+              </a>
             : ''
         }
             
-            <a href=`/manuscripts/jad_manuscript__${parseInt(manuscript.jad_id.split('__')[1]) +1}`><img src="/next.svg" class="h-20"></a>
+            <a href=`/manuscripts/jad_manuscript__${parseInt(manuscript.jad_id.split('__')[1]) +1}`>
+             <Icon class="size-20" name="lucide:circle-arrow-right"></Icon>
+            </a>
            
               
         </div>   

@@ -1,5 +1,6 @@
 ---
 import PageLayout from "../../layouts/page-layout.astro";
+import { Icon } from "astro-icon/components";
 // Read and parse the JSON file using import
 import works from "../../content/data/works.json";
 
@@ -28,7 +29,7 @@ const { data: work } = Astro.props;
                 <dt class="font-semibold border-r border-gray-300 pr-5">Author:</dt>
                 <dd class="pl-5">
                     {work.author && work.author.length > 0
-                    ? <a href={`/authors/${work.author[0].jad_id}`}>{work.author[0]?.name}</a>
+                    ? <a href={`/authors/${work.author[0].jad_id}`} class="hover:text-brandRed">{work.author[0]?.name}</a>
                     : 'N/A'}
                 </dd>
                 
@@ -115,11 +116,15 @@ const { data: work } = Astro.props;
         <div class="my-10 flex p-5 w-3/4 mx-auto justify-between">
             {work.id > 1
             ? 
-            <a href=`/works/jad_work__${parseInt(work.jad_id.split('__')[1]) -1}`><img src="/previous.svg" class="h-20"></a>
+            <a href=`/works/jad_work__${parseInt(work.jad_id.split('__')[1]) -1}`>
+                <Icon name="lucide:circle-arrow-left" class="size-20"></Icon>
+                </a>
             : ''
         }
             
-            <a href=`/works/jad_work__${parseInt(work.jad_id.split('__')[1]) +1}`><img src="/next.svg" class="h-20"></a>
+            <a href=`/works/jad_work__${parseInt(work.jad_id.split('__')[1]) +1}`>
+                <Icon name="lucide:circle-arrow-right" class="size-20"></Icon>
+            </a>
            
               
         </div>   

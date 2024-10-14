@@ -1,6 +1,7 @@
 ---
 import PageLayout from "../../layouts/page-layout.astro";
 import authors from "../../content/data/institutions.json";
+import { Icon } from "astro-icon/components";
 
 export async function getStaticPaths() {
   
@@ -54,9 +55,13 @@ const { data: author } = Astro.props;
         </div>     
         <div class="my-10 flex p-5 w-3/4 mx-auto justify-between">
            
-            <a href=`/authors/${author.prev}`><img src="/previous.svg" class="h-20"></a>
+            <a href=`/authors/${author.prev}`>
+                <Icon class="size-20" name="lucide:circle-arrow-left"></Icon>
+            </a>
             
-            <a href=`/authors/${author.next}`><img src="/next.svg" class="h-20"></a>
+            <a href=`/authors/${author.next}`>
+                <Icon class="size-20" name="lucide:circle-arrow-right"></Icon>
+            </a>
            
               
         </div>   

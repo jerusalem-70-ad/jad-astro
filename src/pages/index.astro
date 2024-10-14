@@ -1,5 +1,6 @@
 ---
 import PageLayout from "../layouts/page-layout.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <PageLayout>
@@ -10,24 +11,26 @@ import PageLayout from "../layouts/page-layout.astro";
 					<h2 class="self-center text-2xl italic text-brandCaramel">The Roman conquest of Jerusalem in 70 AD: Reception, use, and interpretation in the Middle Ages (c.600-c.1200)</h2>
 				</div>
 				<p class="text-brandBrown">The project explores the medieval reception and interpretation of the Roman conquest of Jerusalem in 70 AD, examining its presence in chronicles, anti-Jewish treatises, sermon collections, and biblical commentaries.</p>
+				
 			</div>
 			<figure class="grid gap-2">
-				<img class="object-contain w-full" src="./title-image.png" alt="(Venice) La distruzione del tempio di Gerusalemme -Francesco Hayez" width="700" height="500" loading="lazy">
+				<img class="object-contain w-full" src="/assets/images/title-image.png" alt="(Venice) La distruzione del tempio di Gerusalemme -Francesco Hayez" width="700" height="500" loading="lazy">
 				<figcaption class="font-light text-xs">La distruzione del tempio di Gerusalemme by Francesco Hayez (Gallerie Accademia Venice; photograph by Didier Descouens - <a class="underline decoration-dotted" href="https://commons.wikimedia.org/w/index.php?curid=132796743">Public Domain</a></figcaption>
-			</figure>
+			</figure>			
 		</div>
 		<div class="md:hidden min-h-full grid content-start mx-auto gap-3 p-5">
 			<a href="about.html">
 				<article class="grid items-start justify-items-center gap-3 rounded-md border-2 border-brandRed">
-					<img class="object-cover h-52" src="./title-image.png" alt="(Venice) La distruzione del tempio di Gerusalemme -Francesco Hayez" width="700" height="500" loading="lazy">
+					<img class="object-cover h-52" src="/assets/images/title-image.png" alt="(Venice) La distruzione del tempio di Gerusalemme -Francesco Hayez" width="700" height="500" loading="lazy">
 					<h2 class="text-lg font-semibold">About the project</h2>
 				</article>
 			</a>
 			<a href="database.html">
 				<article class="grid items-start justify-items-center gap-3 rounded-md border-2 border-brandRed">
-					<img class="object-cover h-52" src="./database.svg" alt="" loading="lazy">
+					<Icon aria-hiddem="true" class="size-10" name="lucide:search"></Icon>
 					<h2 class="text-lg font-semibold">Search the database</h2>
 				</article>
 			</a>
+			
 		</div>
 </PageLayout>

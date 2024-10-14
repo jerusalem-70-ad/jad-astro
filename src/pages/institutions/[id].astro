@@ -1,6 +1,8 @@
 ---
 import PageLayout from "../../layouts/page-layout.astro";
 import institutions from "../../content/data/institutional_context.json";
+import { Icon } from 'astro-icon/components';
+import { LanguageServiceMode } from "typescript";
 
 export async function getStaticPaths() {
   
@@ -57,9 +59,12 @@ const { data: institution } = Astro.props;
         </div>     
         <div class="my-10 flex p-5 w-3/4 mx-auto justify-between">
            
-            <a href=`/institutions/${institution.prev}`><img src="/previous.svg" class="h-20"></a>
+            <a href=`/institutions/${institution.prev}`>
+                <Icon class="size-20" name="lucide:circle-arrow-left"></Icon>
+            </a>
             
-            <a href=`/institutions/${institution.next}`><img src="/next.svg" class="h-20"></a>
+            <a href=`/institutions/${institution.next}`>
+                <Icon class="size-20" name="lucide:circle-arrow-right"></Icon></a>
            
               
         </div>   
