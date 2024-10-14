@@ -4,14 +4,33 @@ import { Icon } from "astro-icon/components";
 ---
 
 <PageLayout>
-		<div class="hidden mx-auto w-3/4 md:grid grid-cols-2 justify-center content-center gap-5 py-5">
+		<div class="hidden mx-auto w-3/4 md:grid grid-cols-2 mt-10 gap-5 py-5">
 			<div class="self-center grid gap-6">
 				<div class="grid gap-2">
-					<h2 class="self-center text-4xl font-semibold text-brandBrown">Medieval Reception of the Roman Conquest of Jerusalem </h2>
-					<h2 class="self-center text-2xl italic text-brandCaramel">The Roman conquest of Jerusalem in 70 AD: Reception, use, and interpretation in the Middle Ages (c.600-c.1200)</h2>
+					<h2 class="text-4xl font-semibold text-brandBrown">Medieval Reception of the Roman Conquest of Jerusalem </h2>
+					<h2 class="text-2xl italic text-brandCaramel">The Roman conquest of Jerusalem in 70 AD: Reception, use, and interpretation in the Middle Ages (c.600-c.1200)</h2>
 				</div>
 				<p class="text-brandBrown">The project explores the medieval reception and interpretation of the Roman conquest of Jerusalem in 70 AD, examining its presence in chronicles, anti-Jewish treatises, sermon collections, and biblical commentaries.</p>
-				
+				<div class="grid gap-5">					
+					<div>
+						<a href="/database.html" class="py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md">
+							Search the database
+						</a>
+					</div>
+					<div>
+						<button data-dropdown class="py-2 px-4 mb-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md">
+							Browse the database
+						</button>
+						<div class="hidden gap-2" data-menu>
+							<a class="w-[150px] py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md" href="/passages.html">Passages</a>
+							<a class="w-[150px] py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md" href="/works.html">Works</a>
+							<a class="w-[150px] py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md" href="/mss.html">Manuscripts</a>
+							<a class="w-[150px] py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md" href="/institutions.html">Institutions</a>          
+							<a class="w-[150px] py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md" href="/authors.html">Authors</a>
+						</div>
+					</div>
+					
+				</div>
 			</div>
 			<figure class="grid gap-2">
 				<img class="object-contain w-full" src="/assets/images/title-image.png" alt="(Venice) La distruzione del tempio di Gerusalemme -Francesco Hayez" width="700" height="500" loading="lazy">
@@ -33,4 +52,11 @@ import { Icon } from "astro-icon/components";
 			</a>
 			
 		</div>
+		<script>
+			const button = document.querySelector("button[data-dropdown]");
+			const menu = document.querySelector("div[data-menu]");
+			button?.addEventListener("click", () => {
+				menu?.classList.toggle("hidden");
+			})
+		</script>
 </PageLayout>
