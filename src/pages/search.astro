@@ -2,10 +2,10 @@
 import PageLayout from "../layouts/page-layout.astro";
 
 import {createTypesenseClient} from "../lib/create-typesense-client";
-import Button from "../components/button.astro";
 
 const client = createTypesenseClient();
 
+// set search parameters
 const result = await client.collections('JAD-temp').documents().search({q: "", query_by:"title"}) 
 
 
@@ -18,7 +18,7 @@ const result = await client.collections('JAD-temp').documents().search({q: "", q
       <form role="search" data-search-form>
         <label>
           <div class="sr-only">Search</div>
-          <input type="search" name="q" placeholder="Search passages ..." class="textfield border py-2 px-4 rounded-sm focus:border-brandBrown">
+          <input data-search-input type="search" name="query" placeholder="Search passages ..." class="textfield border py-2 px-4 rounded-sm focus:border-brandBrown">
         </label>
 
         <button type="submit">Search</button>
@@ -34,19 +34,25 @@ const result = await client.collections('JAD-temp').documents().search({q: "", q
 </PageLayout>
 
 <script>
+import { Client } from "typesense";
+
   const searchForm = document.querySelector("form[data-search-form]");
 
   searchForm?.addEventListener("submit", event => {
     event.preventDefault();
-
-    const formData = new FormData(event.currentTarget)
-    const q = formData.get("q")
-
-    console.log(q)
     
+    const formData = new FormData(event.currentTarget)
+    const q = formData.get("query")
+    
+    /* //Ask Stefan WHY NOT USE THIS?
+    const query = document.querySelector("input[data-search-input]")
+    */
+   
     // TODO:
-    // read the users' input
+    // read the users' input 
+    console.log(q) 
     // pass this to typesense using the client
+    
     // get back the info - passages in the section ul
 
   })
