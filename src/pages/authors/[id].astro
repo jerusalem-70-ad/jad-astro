@@ -28,7 +28,7 @@ const { data: author } = Astro.props;
                 <dd class="pl-5">
                     {
                         author.gnd_url.length > 0
-                        ? <a href={author.gnd_url} class="hover:text-brandRed">{author.gnd_url.split('/').at(-1)}</a>
+                        ? <a href={author.gnd_url} class="hover:text-brandRed">{author.gnd_url.split('/').at(-1)}<Icon class="inline-flex align-top" aria-hidden="true" name="lucide:external-link"></Icon></a>
                         : 'N/A'
                     }
                     

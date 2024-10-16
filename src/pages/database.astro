@@ -26,7 +26,7 @@ const result = await client.collections('JAD-temp').documents().search({q: "", q
 
       <section class="border">
         <h2>Results:</h2>
-        <ul data-search-result id="results-list"></ul>
+        <ul data-search-result></ul>
       </section>
 		</div>
 	</div>
@@ -51,5 +51,5 @@ const result = await client.collections('JAD-temp').documents().search({q: "", q
 
   })
 
-  const results = document.querySelector("#results-list") // <ul>
+  const results = document.querySelector("ul[data-search-result]") // <ul>
 </script>
