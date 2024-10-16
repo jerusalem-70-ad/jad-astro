@@ -30,7 +30,7 @@ const passageValues = Object.values(passages);
       <table id="jad-passages-table" class="data-table text-brandBrown w-full table-fixed shadow-md border lg:leading-7 text-sm lg:text-base">
         <thead>
           <tr>
-            <th>
+            <th class="w-1/3">
               <div class="flex flex-col items-start p-2">
                 <span class="font-bold">Label</span>
                 <input type="text" id="nameSearch" placeholder="Search in text" class="mt-2 w-full p-2 border border-gray-300 rounded font-normal">
@@ -80,10 +80,10 @@ const passageValues = Object.values(passages);
             {passageValues.map((passage) => {
               return (
               <tr tabindex="0">
-                <td class="px-3 truncate">
-                    <a href=`/passages/${passage.jad_id}` class="hover:text-brandPaleWhite hover:font-semibold">{passage.view_label}</a>
+                <td class="px-3">
+                    <a href=`/passages/${passage.jad_id}`>{passage.view_label}</a>
                 </td>
-                <td class="px-3 align-top">
+                <td class="px-3">
                     {passage.work.map(itemWork => {
                       return itemWork.author.map(item => {
                       return <a href=`/authors/${item.jad_id}`>{item.name}</a>

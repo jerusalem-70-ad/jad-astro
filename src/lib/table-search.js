@@ -1,22 +1,34 @@
-// Put event listener on the input - cll function searchTable
+// Put event listener on each input
 document.querySelectorAll("input").forEach((input, index) => {
   input.addEventListener("input", () => {
-    searchTable(index, input.value);
+    searchTable();
   });
 });
 
-// Filter table based on input value -
-function searchTable(columnIndex, searchValue) {
+// Filter table based on input values from all columns
+function searchTable() {
   const table = document.querySelector(".data-table");
   const rows = table.querySelectorAll("tbody tr");
+  const inputs = document.querySelectorAll("input");
+
   rows.forEach((row) => {
-    const cellValue = row.children[columnIndex].textContent.toLowerCase();
-    if (cellValue.includes(searchValue.toLowerCase())) {
-      row.style.display = "";
-    } else {
-      row.style.display = "none";
-    }
+    let shouldShow = true;
+
+    // Loop through each input field and check if the cell matches
+    inputs.forEach((input, index) => {
+      const searchValue = input.value.trim().toLowerCase();
+      const cellValue = row.children[index].textContent.toLowerCase();
+
+      // If search value exists and doesn't match the cell, hide the row
+      if (searchValue && !cellValue.includes(searchValue)) {
+        shouldShow = false;
+      }
+    });
+
+    // Toggle row visibility based on whether all input criteria are met
+    row.style.display = shouldShow ? "" : "none";
   });
+
   // Reapply row striping to visible rows after search
   reapplyRowStriping(rows);
 }
