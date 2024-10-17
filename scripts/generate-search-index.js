@@ -1,12 +1,11 @@
 import { log } from "@acdh-oeaw/lib";
 import { getData } from "./api-client.js";
 import { createTypesenseAdminClient } from "../scripts/create-typesense-admin-client.js";
+import { collectionName } from "../config/search.config.js";
 
 async function generate() {
   // instantiate typesense client using helpers function
   const client = createTypesenseAdminClient();
-
-  const collectionName = "JAD-temp";
 
   // check if the collection exist if so delete and write anew
   await client.collections(collectionName).delete();

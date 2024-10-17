@@ -1,61 +1,91 @@
 ---
-import PageLayout from "../layouts/page-layout.astro";
-
-import {createTypesenseClient} from "../lib/create-typesense-client";
-
-const client = createTypesenseClient();
-
-// set search parameters
-const result = await client.collections('JAD-temp').documents().search({q: "", query_by:"title"}) 
-
-
+import Layout from "../layouts/page-layout.astro"
 ---
 
-<PageLayout>
-    <div class="mx-auto w-full max-w-screen-xl px-16 py-4">
-		<div class="max-w-screen-md grid gap-4">
-			
-      <form role="search" data-search-form>
-        <label>
-          <div class="sr-only">Search</div>
-          <input data-search-input type="search" name="query" placeholder="Search passages ..." class="textfield border py-2 px-4 rounded-sm focus:border-brandBrown">
-        </label>
+<Layout>
+    <main>
+        <h1>Form test</h1>
+        <form role="search">
+            <label>
+                <div>Search</div>
+                <input name="q" type="search" />
+            </label>
 
-        <button type="submit">Search</button>
-      </form>
-
-      <section class="border">
-        <h2>Results:</h2>
-        <ul data-search-result></ul>
-      </section>
-		</div>
-	</div>
-
-</PageLayout>
+            <button class="bg-black text-white rounded px-3 py-1 font-medium">Search</button>
+        </form>
+        <section data-search-results>
+        </section>
+    </main>
+</Layout>
 
 <script>
-import { Client } from "typesense";
+  import type { SearchResponse } from "typesense/lib/Typesense/Documents";
+  import { collectionName } from "../../config/search.config";
+  import { createTypesenseClient } from "../lib/create-typesense-client"; // import the function that creates a client with the proper User API
 
-  const searchForm = document.querySelector("form[data-search-form]");
+  const client = createTypesenseClient();
 
-  searchForm?.addEventListener("submit", event => {
+  async function getSearchResults(q = "") {
+    const response = await client
+      .collections(collectionName)
+      .documents()
+      .search({ q, query_by: "title" });
+
+    return response as SearchResponse<{title: string }>
+  }
+
+  function updateSearchResultsList(element: HTMLElement, response: SearchResponse<{title: string }>) {
+    const hits = response.hits ?? []
+    const html = hits.map(item => {
+      const { title } = item.document
+
+      return `<li>
+        <article>
+          <h2>${title}</h2>
+        </article>  
+      </li>`
+    }).join("\n")
+
+    element.innerHTML = `<ul>${html}</ul>`
+  }
+
+  // 1. listen to form submit events and get the value of the search input
+
+  const formElement = document.querySelector<HTMLFormElement>("form")!;
+  const searchResults = document.querySelector<HTMLElement>("section[data-search-results]")!
+  const searchInput = document.querySelector<HTMLInputElement>('input[name="q"]')!;
+
+  formElement.addEventListener("submit", async (event) => {
     event.preventDefault();
-    
-    const formData = new FormData(event.currentTarget)
-    const q = formData.get("query")
-    
-    /* //Ask Stefan WHY NOT USE THIS?
-    const query = document.querySelector("input[data-search-input]")
-    */
-   
-    // TODO:
-    // read the users' input 
-    console.log(q) 
-    // pass this to typesense using the client
-    
-    // get back the info - passages in the section ul
 
+    const formData = new FormData(event.currentTarget as HTMLFormElement)
+    const q = (formData.get("q") ?? "") as string
+    
+    // 2. send search query to typesense using the typesense client
+
+    const response = await getSearchResults(q)
+
+    // 3. display search results returned from typesense
+
+    updateSearchResultsList(searchResults, response)
+
+    // 4. update the url search params with the current value of `q`
+
+    window.location.search = new URLSearchParams(formData as any).toString()
   })
 
-  const results = document.querySelector("ul[data-search-result]") // <ul>
+  // 5. handle initial search params, e.g. when a user opens the page with `/search?q=apple`
+
+  const searchParams = new URLSearchParams(window.location.search)
+  const q = searchParams.get("q") ?? ""
+  console.log(searchParams.get('q'));
+  
+  // 6. send initial search request (without user triggering submit event)
+
+  const response = await getSearchResults(q)
+
+  updateSearchResultsList(searchResults, response)
+
+  // 7. populate search input with initial value for `q`
+searchInput.value = q;
 </script>

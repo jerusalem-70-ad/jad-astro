@@ -1,0 +1,44 @@
+---
+import { collectionName } from "../../config/search.config";
+import Layout from "../layouts/page-layout.astro"
+import { createTypesenseClient } from "../lib/create-typesense-client"; // import the function that creates a client with the proper User API
+
+export const prerender = false
+
+const client = createTypesenseClient();
+
+const q = new URL(Astro.request.url).searchParams.get("q") ?? ""
+
+const response = await client
+  .collections(collectionName)
+  .documents()
+  .search({ q, query_by: "title" });
+---
+
+<Layout>
+    <main>
+        <h1>Form test</h1>
+        <form role="search">
+            <label>
+                <div>Search</div>
+                <input value={q} name="q" type="search" />
+            </label>
+
+            <button class="bg-black text-white rounded px-3 py-1 font-medium">Search</button>
+        </form>
+        <section>
+            <pre>{JSON.stringify(response, null, 2)}</pre>
+            <ul>
+                {response.hits?.map(item => {
+                    const { title } = item.document
+
+                    return <li>
+                        <article>
+                            <h2>{title}</h2>
+                        </article>
+                    </li>
+                })}
+            </ul>
+        </section>
+    </main>
+</Layout>
