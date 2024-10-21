@@ -1,0 +1,38 @@
+---
+import Layout from "../layouts/page-layout.astro"
+import 'instantsearch.css/themes/satellite.css';
+---
+
+<Layout>
+    <main class="md:w-3/4 grid mx-auto py-4 gap-8">
+        <h2 class="text-2xl text-brandBrown">Advanced search</h2>
+        
+        <div>
+            <div class="" data-search-panel>
+                <div data-search-filters>
+                    <div data-clear-refinements></div>
+                    <div data-refinement-list></div>
+                </div>
+
+                <div data-search-results>
+                    <div id="searchbox"></div>
+                    <div class="">
+                        <div id="current-refinements">
+                            <div id="refinement-list-author"></div>
+                            <div id="refinement-list-work"></div>
+                            <div id="refinement-list-workdate"></div>
+                            <div id="refinement-list-manuscript"></div>
+                            <div id="refinement-list-language"></div>
+                        </div>
+                        <div id="pagination"></div>
+                        <div id="hits"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+     
+    </main>
+</Layout>
+<script src="../lib/advanced-search.js"></script>

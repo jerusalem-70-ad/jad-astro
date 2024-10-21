@@ -7,7 +7,12 @@ export const prerender = false
 
 const client = createTypesenseClient();
 
-const q = new URL(Astro.request.url).searchParams.get("q") ?? ""
+// const url = new URL("https://example.org")
+// url.searchParams
+// new URLSearchParams("?key=apple&other=kiwi")
+
+const searchParams = new URL(Astro.request.url).searchParams
+const q = searchParams.get("q") ?? ""
 
 const response = await client
   .collections(collectionName)

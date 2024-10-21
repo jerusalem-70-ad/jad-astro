@@ -1,40 +1,85 @@
-import { createTypesenseClient } from "../lib/create-typesense-client"; // import the function that creates a client with the proper User API
+import instantsearch from "instantsearch.js";
+import TypesenseInstantsearchAdapter from "typesense-instantsearch-adapter";
+import {
+  searchBox,
+  hits,
+  configure,
+  pagination,
+  panel,
+  refinementList,
+  poweredBy,
+  clearRefinements,
+  currentRefinements,
+} from "instantsearch.js/es/widgets";
 
-const client = createTypesenseClient();
-
-// set search parameters either separate in a variable or directly in the result function
-
-let searchParameters = {
-  q: "", // q stands for query, in this case empty - it should take the user's input
-  query_by: "title", // we set the index field where the query should be found
-  sort_by: "ratings_count:desc", // optional
-};
-
-const result = await client
-  .collections("JAD-temp")
-  .documents()
-  .search({ q: "", query_by: "title" });
-
-const searchForm = document.querySelector("form[data-search-form]");
-
-searchForm?.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const formData = new FormData(event.currentTarget);
-  const q = formData.get("query");
-
-  /* //Ask Stefan WHY NOT USE THIS?
-    const w = document.querySelector("input[data-search-input]").value
-    
-    */
-
-  // TODO:
-  // read the users' input
-  console.log(q);
-  // pass this to typesense using the client
-  result(q).map((item) => {
-    // get back the info - passages in the section ul
-    const results = document.querySelector("ul[data-search-result]"); // <ul>
-    return results.insertAdjacentElement("beforeend", li);
-  });
+const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
+  server: {
+    apiKey: "nxZkKN7Jphnp1mUFjataIhbKzdxEtd1Y",
+    nodes: [
+      {
+        host: "typesense.acdh-dev.oeaw.ac.at",
+        port: "443",
+        protocol: "https",
+      },
+    ],
+  },
+  additionalSearchParameters: {
+    query_by: "full_text",
+  },
 });
+// create searchClient
+const searchClient = typesenseInstantsearchAdapter.searchClient;
+//
+const search = instantsearch({
+  searchClient,
+  indexName: "JAD",
+});
+
+// add widgets
+search.addWidgets([
+  searchBox({
+    container: "#searchbox",
+    autofocus: true,
+    placeholder: "Search",
+  }),
+
+  hits({
+    container: "#hits",
+    templates: {
+      empty: "No results for <q>{{ query }}</q>",
+      item(hit, { html, components }) {
+        return html` <article>
+          <a href="/passages/${hit.rec_id}" class="underline text-sm">
+            <h3 class="font-semibold text-lg text-brandBrown ">
+              ${components.Highlight({
+                hit,
+                attribute: "title",
+              })}
+            </h3></a
+          >
+
+          <p class="italic">
+            ${hit._snippetResult.full_text.matchedWords.length > 0
+              ? components.Snippet({ hit, attribute: "full_text" })
+              : ""}
+          </p>
+          <a
+            href="/passages/${hit.rec_id}"
+            class="underline decoration-dotted text-sm"
+            >See passage</a
+          >
+        </article>`;
+      },
+    },
+  }),
+
+  pagination({
+    container: "#pagination",
+  }),
+
+  currentRefinements({
+    container: "#current-refinements",
+  }),
+]);
+
+search.start();
