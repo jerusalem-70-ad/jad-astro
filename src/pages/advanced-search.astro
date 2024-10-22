@@ -8,7 +8,7 @@ import 'instantsearch.css/themes/satellite.css';
         <h2 class="text-2xl text-brandBrown">Advanced search</h2>
         
         <div>
-            <div class="" data-search-panel>
+            <div data-search-panel>
                 <div data-search-filters>
                     <div data-clear-refinements></div>
                     <div data-refinement-list></div>
@@ -16,16 +16,22 @@ import 'instantsearch.css/themes/satellite.css';
 
                 <div data-search-results>
                     <div id="searchbox"></div>
-                    <div class="">
-                        <div id="current-refinements">
+                    <div id="stats-container"></div>
+                    <div id="current-refinements"></div>
+                    <div id="clear-refinements"></div>
+                    <div class="grid grid-cols-[1fr_3fr]">
+                        <div>
+                            
                             <div id="refinement-list-author"></div>
                             <div id="refinement-list-work"></div>
                             <div id="refinement-list-workdate"></div>
                             <div id="refinement-list-manuscript"></div>
                             <div id="refinement-list-language"></div>
                         </div>
-                        <div id="pagination"></div>
-                        <div id="hits"></div>
+                        <div>
+                            <div id="pagination"></div>
+                            <div id="hits"></div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -3,11 +3,10 @@ import TypesenseInstantsearchAdapter from "typesense-instantsearch-adapter";
 import {
   searchBox,
   hits,
-  configure,
+  stats,
   pagination,
   panel,
   refinementList,
-  poweredBy,
   clearRefinements,
   currentRefinements,
 } from "instantsearch.js/es/widgets";
@@ -34,6 +33,51 @@ const search = instantsearch({
   searchClient,
   indexName: "JAD",
 });
+
+const refinementListAuthor = panel({
+  collapsed: ({ state }) => {
+    return state.query.length === 0;
+  },
+  templates: {
+    header: "Authors",
+  },
+})(refinementList);
+
+const refinementListWork = panel({
+  collapsed: ({ state }) => {
+    return state.query.length === 0;
+  },
+  templates: {
+    header: "Works",
+  },
+})(refinementList);
+
+const refinementListManuscript = panel({
+  collapsed: ({ state }) => {
+    return state.query.length === 0;
+  },
+  templates: {
+    header: "Manuscripts",
+  },
+})(refinementList);
+
+const refinementListWorkDate = panel({
+  collapsed: ({ state }) => {
+    return state.query.length === 0;
+  },
+  templates: {
+    header: "Date of work",
+  },
+})(refinementList);
+
+const refinementListLanguage = panel({
+  collapsed: ({ state }) => {
+    return state.query.length === 0;
+  },
+  templates: {
+    header: "Language",
+  },
+})(refinementList);
 
 // add widgets
 search.addWidgets([
@@ -77,8 +121,63 @@ search.addWidgets([
     container: "#pagination",
   }),
 
+  stats({
+    container: "#stats-container",
+  }),
+
+  refinementListAuthor({
+    container: "#refinement-list-author",
+    attribute: "work.author.name",
+    searchable: true,
+    searchablePlaceholder: "Search for authors",
+  }),
+
+  refinementListWork({
+    container: "#refinement-list-work",
+    attribute: "work.title",
+    searchable: true,
+    showMore: true,
+    showMoreLimit: 50,
+    limit: 10,
+    searchablePlaceholder: "Search for works",
+  }),
+
+  refinementListWorkDate({
+    container: "#refinement-list-workdate",
+    attribute: "work.written_date",
+    searchable: true,
+    showMore: true,
+    showMoreLimit: 50,
+    limit: 10,
+    searchablePlaceholder: "Search for dates",
+  }),
+
+  refinementListManuscript({
+    container: "#refinement-list-manuscript",
+    attribute: "manuscript.name.value",
+    searchable: true,
+    showMore: true,
+    showMoreLimit: 50,
+    limit: 10,
+    searchablePlaceholder: "Search for manuscript",
+  }),
+
+  refinementListLanguage({
+    container: "#refinement-list-language",
+    attribute: "language.value",
+    searchable: true,
+    showMore: true,
+    showMoreLimit: 50,
+    limit: 10,
+    searchablePlaceholder: "Search for language",
+  }),
+
   currentRefinements({
     container: "#current-refinements",
+  }),
+
+  clearRefinements({
+    container: "#clear-refinements",
   }),
 ]);
 
