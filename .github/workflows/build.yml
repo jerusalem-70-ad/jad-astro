@@ -48,10 +48,10 @@ jobs:
             - name: Build
               run: pnpm run build
 
-            - name: upload artifact
+            - name: Upload static files as artifact
               uses: actions/upload-pages-artifact@v3
               with:
-                name: dist
+                path: dist
 
             - name: Deploy
               id: deployment
