@@ -1,0 +1,58 @@
+name: Fetch data, build website and deloy to github pages
+
+on: 
+  schedule:
+    - cron: '18 2 * * *'
+    
+  push:
+    branches:
+        - main
+  workflow_dispatch:
+    
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            pages: write
+            id-token: write
+        environment:
+            name: github-pages
+            url: ${{ steps.deployment.outputs.page_url }}
+        steps:
+            - name: Checkout your repository using git
+              uses: actions/checkout@v4
+
+            - name: set up node.js
+              uses: actions/setup-node@v4
+              with:
+                    node-version: 22
+
+            - name: set up pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                version: 9
+
+            - name: Install dependencies
+              run: pnpm install
+
+            - name: Fetch data
+              run: pnpm run get-data
+
+            - name: setup pages
+              id: pages
+              uses: actions/configure-pages@v5
+              with:
+               enablement: true
+
+            - name: Build
+              run: pnpm run build
+
+            - name: upload artifact
+              uses: actions/upload-pages-artifact@v3
+              with:
+                name: dist
+
+            - name: Deploy
+              id: deployment
+              uses: actions/deploy-pages@v4

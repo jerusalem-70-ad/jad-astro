@@ -1,7 +1,7 @@
 ---
 import PageLayout from "../layouts/page-layout.astro";
 import institutions from "../content/data/institutional_context.json";
-
+import NavLink from "@components/nav-link.astro";
 
 const institutionsValues = Object.values(institutions);
 
@@ -62,13 +62,13 @@ const institutionsValues = Object.values(institutions);
             {Object.values(institutionsValues).map((institution) => (
               <tr tabindex="0">
                 <td class="px-3">
-                    <a href=`institutions/${institution.jad_id}` class="hover:text-brandPaleWhite">{institution.name}</a>
+                    <NavLink href=`institutions/${institution.jad_id}` class="hover:text-brandPaleWhite">{institution.name}</NavLink>
                 </td>
                 <td class="px-3">
                     { institution.part_of.length > 0
                         ? institution.part_of.map((part, index) => (
                             <>
-                            <a href={`/institutions/${part.jad_id}`} class="hover:text-brandPaleWhite">{part.name}</a>
+                            <NavLink href={`/institutions/${part.jad_id}`} class="hover:text-brandPaleWhite">{part.name}</NavLink>
                             {index < institution.part_of.length -1 && '|'}
                             </>
                         ))
@@ -79,7 +79,7 @@ const institutionsValues = Object.values(institutions);
                  {institution.related__manuscripts.length > 0
                  ? institution.related__manuscripts.map((ms, index) => (
                     <>
-                    <a href=`manuscripts/${ms.jad_id}` class="hover:text-brandPaleWhite">{ms.view_label}</a>
+                    <NavLink href=`manuscripts/${ms.jad_id}` class="hover:text-brandPaleWhite">{ms.view_label}</NavLink>
                     {index < institution.related__manuscripts.length - 1 && <span>|</span>}
                     </>
                  ))

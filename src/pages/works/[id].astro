@@ -3,7 +3,7 @@ import PageLayout from "../../layouts/page-layout.astro";
 import { Icon } from "astro-icon/components";
 // Read and parse the JSON file using import
 import works from "../../content/data/works.json";
-
+import NavLink from "@components/nav-link.astro";
 export async function getStaticPaths() {
   
   // Map over the values in the object and create an array of paths
@@ -29,7 +29,7 @@ const { data: work } = Astro.props;
                 <dt class="font-semibold border-r border-gray-300 pr-5">Author:</dt>
                 <dd class="pl-5">
                     {work.author && work.author.length > 0
-                    ? <a href={`/authors/${work.author[0].jad_id}`} class="hover:text-brandRed">{work.author[0]?.name}</a>
+                    ? <NavLink href={`/authors/${work.author[0].jad_id}`} class="hover:text-brandRed">{work.author[0]?.name}</NavLink>
                     : 'N/A'}
                 </dd>
                 
@@ -38,9 +38,9 @@ const { data: work } = Astro.props;
                     { work.manuscripts.length > 0
                             ? work.manuscripts.map((ms: { id: number; value: any;}, index: number) => (
                                 <>
-                                <a href={`/manuscripts/jad_manuscript__${ms.id}`} class="hover:text-brandRed">
+                                <NavLink href={`/manuscripts/jad_manuscript__${ms.id}`} class="hover:text-brandRed">
                                     {ms.value}
-                                </a>
+                                </NavLink>
                                 {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
                                 {index < work.manuscripts.length - 1 && '| '}
                                 </>
@@ -61,9 +61,9 @@ const { data: work } = Astro.props;
                             ? work.published_edition.map((ed: { name: string; digi_url: any;}, index: number) => (
                                 <>
                                 {ed.digi_url.length > 0
-                                ? <a href={ed.digi_url} class="hover:text-brandRed">
+                                ? <NavLink href={ed.digi_url} class="hover:text-brandRed">
                                     {ed.name}
-                                </a>
+                                </NavLink>
                                 : ed.name
                                 }
                                
@@ -79,9 +79,9 @@ const { data: work } = Astro.props;
                     {work.institutional_context.length > 0
                     ? work.institutional_context.map((institution : { name : string;}, index: number) => (
                         <>
-                         <a href="/" class="hover:text-brandRed">
+                         <NavLink href="/" class="hover:text-brandRed">
                                     {institution.name}
-                                </a>
+                                </NavLink>
                         {index < work.institutional_context.length -1 && '| '}
                         </>
                     )) : 'N/A'
@@ -101,9 +101,9 @@ const { data: work } = Astro.props;
                     { work.related__passages.length > 0
                             ? work.related__passages.map((passage, index: number) => (
                                 <>
-                                <a href={`/passages/${passage.jad_id}`} class="hover:text-brandRed">
+                                <NavLink href={`/passages/${passage.jad_id}`} class="hover:text-brandRed">
                                     #{passage.jad_id.substring(15)}
-                                </a>
+                                </NavLink>
                                 {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
                                 {index < work.related__passages.length - 1 && '| '}
                                 </>
@@ -116,15 +116,15 @@ const { data: work } = Astro.props;
         <div class="my-10 flex p-5 w-3/4 mx-auto justify-between">
             {work.id > 1
             ? 
-            <a href=`/works/jad_work__${parseInt(work.jad_id.split('__')[1]) -1}`>
+            <NavLink href=`/works/jad_work__${parseInt(work.jad_id.split('__')[1]) -1}`>
                 <Icon name="lucide:circle-arrow-left" class="size-20"></Icon>
-                </a>
+                </NavLink>
             : ''
         }
             
-            <a href=`/works/jad_work__${parseInt(work.jad_id.split('__')[1]) +1}`>
+            <NavLink href=`/works/jad_work__${parseInt(work.jad_id.split('__')[1]) +1}`>
                 <Icon name="lucide:circle-arrow-right" class="size-20"></Icon>
-            </a>
+            </NavLink>
            
               
         </div>   

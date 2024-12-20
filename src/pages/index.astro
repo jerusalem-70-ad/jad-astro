@@ -1,62 +1,117 @@
 ---
 import PageLayout from "../layouts/page-layout.astro";
 import { Icon } from "astro-icon/components";
+import NavLink from "../components/nav-link.astro";
 ---
 
 <PageLayout>
-		<div class="hidden mx-auto w-3/4 md:grid grid-cols-2 mt-10 gap-5 py-5">
-			<div class="self-center grid gap-6">
-				<div class="grid gap-2">
-					<h2 class="text-4xl font-semibold text-brandBrown">Medieval Reception of the Roman Conquest of Jerusalem </h2>
-					<h2 class="text-2xl italic text-brandCaramel">The Roman conquest of Jerusalem in 70 AD: Reception, use, and interpretation in the Middle Ages (c.600-c.1200)</h2>
+	<div class="hidden mx-auto w-3/4 md:grid grid-cols-2 mt-10 gap-5 py-5">
+		<div class="self-center grid gap-6">
+			<div class="grid gap-2">
+				<h2 class="text-4xl font-semibold text-brandBrown">
+					Medieval Reception of the Roman Conquest of Jerusalem
+				</h2>
+				<h2 class="text-2xl italic text-brandCaramel">
+					The Roman conquest of Jerusalem in 70 AD: Reception, use,
+					and interpretation in the Middle Ages (c.600-c.1200)
+				</h2>
+			</div>
+			<p class="text-brandBrown">
+				The project explores the medieval reception and interpretation
+				of the Roman conquest of Jerusalem in 70 AD, examining its
+				presence in chronicles, anti-Jewish treatises, sermon
+				collections, and biblical commentaries.
+			</p>
+			<div class="grid gap-5">
+				<div>
+					<NavLink
+						href="/advanced-search.html"
+						class="py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md"
+					>
+						Search the database
+					</NavLink>
 				</div>
-				<p class="text-brandBrown">The project explores the medieval reception and interpretation of the Roman conquest of Jerusalem in 70 AD, examining its presence in chronicles, anti-Jewish treatises, sermon collections, and biblical commentaries.</p>
-				<div class="grid gap-5">					
-					<div>
-						<a href="/search.html" class="py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md">
-							Search the database
-						</a>
+				<div>
+					<button
+						data-dropdown
+						class="py-2 px-4 mb-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md"
+					>
+						Browse the database
+					</button>
+					<div class="hidden gap-2" data-menu>
+						<NavLink
+							class="w-[150px] py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md"
+							href="/passages.html">Passages</NavLink
+						>
+						<NavLink
+							class="w-[150px] py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md"
+							href="/works.html">Works</NavLink
+						>
+						<NavLink
+							class="w-[150px] py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md"
+							href="/mss.html">Manuscripts</NavLink
+						>
+						<NavLink
+							class="w-[150px] py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md"
+							href="/institutions.html">Institutions</NavLink
+						>
+						<NavLink
+							class="w-[150px] py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md"
+							href="/authors.html">Authors</NavLink
+						>
 					</div>
-					<div>
-						<button data-dropdown class="py-2 px-4 mb-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md">
-							Browse the database
-						</button>
-						<div class="hidden gap-2" data-menu>
-							<a class="w-[150px] py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md" href="/passages.html">Passages</a>
-							<a class="w-[150px] py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md" href="/works.html">Works</a>
-							<a class="w-[150px] py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md" href="/mss.html">Manuscripts</a>
-							<a class="w-[150px] py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md" href="/institutions.html">Institutions</a>          
-							<a class="w-[150px] py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md" href="/authors.html">Authors</a>
-						</div>
-					</div>
-					
 				</div>
 			</div>
-			<figure class="grid gap-2">
-				<img class="object-contain w-full" src="/assets/images/title-image.png" alt="(Venice) La distruzione del tempio di Gerusalemme -Francesco Hayez" width="700" height="500" loading="lazy">
-				<figcaption class="font-light text-xs">La distruzione del tempio di Gerusalemme by Francesco Hayez (Gallerie Accademia Venice; photograph by Didier Descouens - <a class="underline decoration-dotted" href="https://commons.wikimedia.org/w/index.php?curid=132796743">Public Domain</a></figcaption>
-			</figure>			
 		</div>
-		<div class="md:hidden min-h-full grid content-start mx-auto gap-3 p-5">
-			<a href="about.html">
-				<article class="grid items-start justify-items-center gap-3 rounded-md border-2 border-brandRed">
-					<img class="object-cover h-52" src="/assets/images/title-image.png" alt="(Venice) La distruzione del tempio di Gerusalemme -Francesco Hayez" width="700" height="500" loading="lazy">
-					<h2 class="text-lg font-semibold">About the project</h2>
-				</article>
-			</a>
-			<a href="search.html">
-				<article class="grid items-start justify-items-center gap-3 rounded-md border-2 border-brandRed">
-					<Icon aria-hiddem="true" class="size-10" name="lucide:search"></Icon>
-					<h2 class="text-lg font-semibold">Search the database</h2>
-				</article>
-			</a>
-			
-		</div>
-		<script>
-			const button = document.querySelector("button[data-dropdown]");
-			const menu = document.querySelector("div[data-menu]");
-			button?.addEventListener("click", () => {
-				menu?.classList.toggle("hidden");
-			})
-		</script>
+		<figure class="grid gap-2">
+			<img
+				class="object-contain w-full"
+				src="assets/images/title-image.png"
+				alt="(Venice) La distruzione del tempio di Gerusalemme -Francesco Hayez"
+				width="700"
+				height="500"
+				loading="lazy"
+			/>
+			<figcaption class="font-light text-xs">
+				La distruzione del tempio di Gerusalemme by Francesco Hayez
+				(Gallerie Accademia Venice; photograph by Didier Descouens - <NavLink
+					class="underline decoration-dotted"
+					href="https://commons.wikimedia.org/w/index.php?curid=132796743"
+					>Public Domain</NavLink
+				>
+			</figcaption>
+		</figure>
+	</div>
+	<div class="md:hidden min-h-full grid content-start mx-auto gap-3 p-5">
+		<NavLink href="about.html">
+			<article
+				class="grid items-start justify-items-center gap-3 rounded-md border-2 border-brandRed"
+			>
+				<img
+					class="object-cover h-52"
+					src="assets/images/title-image.png"
+					alt="(Venice) La distruzione del tempio di Gerusalemme -Francesco Hayez"
+					width="700"
+					height="500"
+					loading="lazy"
+				/>
+				<h2 class="text-lg font-semibold">About the project</h2>
+			</article>
+		</NavLink>
+		<NavLink href="search.html">
+			<article
+				class="grid items-start justify-items-center gap-3 rounded-md border-2 border-brandRed"
+			>
+				<Icon aria-hiddem="true" class="size-10" name="lucide:search" />
+				<h2 class="text-lg font-semibold">Search the database</h2>
+			</article>
+		</NavLink>
+	</div>
+	<script>
+		const button = document.querySelector("button[data-dropdown]");
+		const menu = document.querySelector("div[data-menu]");
+		button?.addEventListener("click", () => {
+			menu?.classList.toggle("hidden");
+		});
+	</script>
 </PageLayout>

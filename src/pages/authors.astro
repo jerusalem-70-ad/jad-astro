@@ -1,7 +1,7 @@
 ---
 import PageLayout from "../layouts/page-layout.astro";
 import authors from "../content/data/institutions.json";
-
+import NavLink from "@components/nav-link.astro";
 
 const authorsValues = Object.values(authors);
 
@@ -62,16 +62,16 @@ const authorsValues = Object.values(authors);
             {Object.values(authorsValues).map((author) => (
               <tr tabindex="0">
                 <td class="px-3">
-                    <a href=`authors/${author.jad_id}` class="hover:text-brandPaleWhite">{author.name}</a>
+                    <NavLink href=`authors/${author.jad_id}` class="hover:text-brandPaleWhite">{author.name}</NavLink>
                 </td>
                 <td class="px-3">
-                    <a href={author.gnd_url} class="hover:text-brandPaleWhite">{author.gnd_url.split('/').at(-1)}</a>            
+                    <NavLink href={author.gnd_url} class="hover:text-brandPaleWhite">{author.gnd_url.split('/').at(-1)}</NavLink>            
                 </td>
                 <td class="px-3">
                  {author.related__works.length > 0
                  ? author.related__works.map((work, index) => (
                     <>
-                    <a href=`works/${work.jad_id}` class="hover:text-brandPaleWhite">{work.view_label}</a>
+                    <NavLink href=`works/${work.jad_id}` class="hover:text-brandPaleWhite">{work.view_label}</NavLink>
                     {index < author.related__works.length - 1 && <span>|</span>}
                     </>
                  ))

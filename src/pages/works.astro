@@ -1,7 +1,7 @@
 ---
 import PageLayout from "../layouts/page-layout.astro";
 import works from "../content/data/works.json";
-
+import NavLink from "@components/nav-link.astro";
 const worksValues = Object.values(works);
 
 ---
@@ -77,12 +77,12 @@ const worksValues = Object.values(works);
                     {Object.values(worksValues).map((work) => (
                       <tr tabindex="0">
                         <td class="px-2">
-                            <a href=`/works/${work.jad_id}`>{work.name}</a>
+                            <NavLink href=`/works/${work.jad_id}`>{work.name}</NavLink>
                         </td>
                         <td class="px-2">
                             {work.author && work.author.length > 0 
                                 ? (work.author.map((author) => (
-                                    <a href=`authors/${author.jad_id}` class=" hover:text-brandPaleWhite">{author.name}</a>
+                                    <NavLink href=`authors/${author.jad_id}` class=" hover:text-brandPaleWhite">{author.name}</NavLink>
                                 ))) 
                                 : (<span>N/A</span>
                              )}
@@ -93,9 +93,9 @@ const worksValues = Object.values(works);
                             { work.manuscripts.length > 0
                             ? work.manuscripts.map((ms: { id: number; value: any;}, index: number) => (
                                 <>
-                                <a href={`/manuscripts/jad_manuscript__${ms.id}`} class="hover:text-brandPaleWhite">
+                                <NavLink href={`/manuscripts/jad_manuscript__${ms.id}`} class="hover:text-brandPaleWhite">
                                     {ms.value}
-                                </a>
+                                </NavLink>
                                 {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
                                 {index < work.manuscripts.length - 1 && '| '}
                                 </>
@@ -106,9 +106,9 @@ const worksValues = Object.values(works);
                           { work.related__passages.length > 0
                             ? work.related__passages.map((passage, index: number) => (
                                 <>
-                                <a href={`/passages/${passage.jad_id}`} class="hover:text-brandPaleWhite">
+                                <NavLink href={`/passages/${passage.jad_id}`} class="hover:text-brandPaleWhite">
                                     #{passage.jad_id.substring(15)}
-                                </a>
+                                </NavLink>
                                 {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
                                 {index < work.related__passages.length - 1 && '| '}
                                 </>
@@ -119,9 +119,9 @@ const worksValues = Object.values(works);
                             {work.institutional_context.length > 0
                                 ? work.institutional_context.map((institution : { name : string;}, index: number) => (
                                     <>
-                                    <a href="/" class="hover:text-brandPaleWhite">
+                                    <NavLink href="/" class="hover:text-brandPaleWhite">
                                                 {institution.name}
-                                            </a>
+                                            </NavLink>
                                     {index < work.institutional_context.length -1 && '| '}
                                     </>
                                     

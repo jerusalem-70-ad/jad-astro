@@ -1,7 +1,7 @@
 ---
 import PageLayout from "../layouts/page-layout.astro";
 import passages from "../content/data/passages.json";
-
+import NavLink from "@components/nav-link.astro";
 
 const passageValues = Object.values(passages);
 
@@ -81,19 +81,19 @@ const passageValues = Object.values(passages);
               return (
               <tr tabindex="0">
                 <td class="px-3">
-                    <a href=`/passages/${passage.jad_id}`>{passage.view_label}</a>
+                    <NavLink href=`/passages/${passage.jad_id}`>{passage.view_label}</NavLink>
                 </td>
                 <td class="px-3">
                     {passage.work.map(itemWork => {
                       return itemWork.author.map(item => {
-                      return <a href=`/authors/${item.jad_id}`>{item.name}</a>
+                      return <NavLink href=`/authors/${item.jad_id}`>{item.name}</NavLink>
                     })} )}                  
                 </td>
                 <td class="px-3">
-                  {passage.work.map(itemWork => <a href=`/works/${itemWork.jad_id}`>{itemWork.name}</a>)}
+                  {passage.work.map(itemWork => <NavLink href=`/works/${itemWork.jad_id}`>{itemWork.name}</NavLink>)}
                 </td>
                 <td class="px-3">
-                  {passage.manuscript.map(ms => <a href=`/manuscripts/${ms.jad_id}`>{ms.name[0].value}</a>)}
+                  {passage.manuscript.map(ms => <NavLink href=`/manuscripts/${ms.jad_id}`>{ms.name[0].value}</NavLink>)}
                   
                 </td>
                 <td class="px-3">
@@ -132,7 +132,7 @@ const passageValues = Object.values(passages);
         <!-- <ul>
           {Object.values(passageValues).map((passage) => (
             <li>
-               <a href=`passages/${passage.jad_id}` class="hover:text-brandRed font-medium">({passage.jad_id.substring(15)}) <span class="italic">{passage.passage}</span></a>
+               <NavLink href=`passages/${passage.jad_id}` class="hover:text-brandRed font-medium">({passage.jad_id.substring(15)}) <span class="italic">{passage.passage}</span></NavLink>
               </li>
           ))}
         </ul>     -->      

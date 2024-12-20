@@ -2,7 +2,7 @@
 import PageLayout from "../layouts/page-layout.astro";
 import mss from "../content/data/manuscripts.json";
 import { Icon } from "astro-icon/components";
-
+import NavLink from "@components/nav-link.astro";
 ---
 
 <PageLayout>
@@ -80,34 +80,34 @@ import { Icon } from "astro-icon/components";
             {Object.values(mss).map((ms) => (
               <tr tabindex="0">
                 <td class="px-3">
-                    <a href=`/manuscripts/${ms.jad_id}` class="hover:text-brandPaleWhite hover:font-semibold">{ms.name[0].value}</a>
+                    <NavLink href=`/manuscripts/${ms.jad_id}` class="hover:text-brandPaleWhite hover:font-semibold">{ms.name[0].value}</NavLink>
                 </td>
                 <td class="px-3">
                     {ms.library[0].place[0]?.name}                    
                 </td>
                 <td class="px-3">
-                  <a href={ms.library[0].gnd_url} target="_blank">{ms.library[0].name}</a>
+                  <NavLink href={ms.library[0].gnd_url} target="_blank">{ms.library[0].name}</NavLink>
                 </td>
                 <td class="px-3">
                   {/* this is an array - need to call .map to return an array of strings; if we return more than one thing need empty element <>  */}
                   {ms.related__passages.map((passage: { jad_id: string; }, index: number) => (
                     <>
-                      <a href={`/passages/${passage.jad_id}`} class="hover:text-brandPaleWhite">#{passage.jad_id.substring(15)}</a>                    
+                      <NavLink href={`/passages/${passage.jad_id}`} class="hover:text-brandPaleWhite">#{passage.jad_id.substring(15)}</NavLink>                    
                       {index < ms.related__passages.length - 1 && <span>|</span>}
                     </>
                   ))
                 } 
                 </td>
                 <td class="px-3">
-                  <a href={`/institutions/${ms.institutional_context[0]?.jad_id}`}>{ms.institutional_context[0]?.name ?? 'N/A'}</a>
+                  <NavLink href={`/institutions/${ms.institutional_context[0]?.jad_id}`}>{ms.institutional_context[0]?.name ?? 'N/A'}</NavLink>
                 </td>
                 <td class="px-3">
                   {ms.digi_url && (
              <div>                
-                <a href={ms.digi_url} class="flex hover:text-brandPaleWhite items-baseline gap-1">
+                <NavLink href={ms.digi_url} class="flex hover:text-brandPaleWhite items-baseline gap-1">
                     <span>Digital facsimile</span> 
                     <Icon aria-hidden="true" name="lucide:external-link"></Icon>
-                </a>
+                </NavLink>
             </div>
            
           )}
@@ -115,10 +115,10 @@ import { Icon } from "astro-icon/components";
                 <td class="px-3">
                    {ms.catalog_url && (
            <div>
-                <a href={ms.catalog_url} class="flex hover:text-brandPaleWhite items-baseline gap-1">
+                <NavLink href={ms.catalog_url} class="flex hover:text-brandPaleWhite items-baseline gap-1">
                     <span>Catalog entry</span>                 
                     <Icon aria-hidden="true" name="lucide:external-link"></Icon>
-                </a>
+                </NavLink>
             </div>            
         )}
                 </td>

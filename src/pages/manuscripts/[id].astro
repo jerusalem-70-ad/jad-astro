@@ -1,6 +1,7 @@
 ---
 import PageLayout from "../../layouts/page-layout.astro";
 import manuscripts from "../../content/data/manuscripts.json";
+import NavLink from "@components/nav-link.astro";
 
 import { Icon } from 'astro-icon/components'
 
@@ -27,8 +28,8 @@ const { data: manuscript } = Astro.props;
               
               
               <dt class="font-semibold border-r border-gray-300 pr-2">Library / Collection:</dt>
-              <dd class="pl-5"><a href={manuscript.library[0].gnd_url} target="_blank" class="hover:text-brandRed flex">{manuscript.library[0].name}<Icon name="lucide:external-link"></Icon>  
-              </a></dd>
+              <dd class="pl-5"><NavLink href={manuscript.library[0].gnd_url} target="_blank" class="hover:text-brandRed flex">{manuscript.library[0].name}<Icon name="lucide:external-link"></Icon>  
+              </NavLink></dd>
               
               
               <dt class="font-semibold border-r border-gray-300 pr-2">Shelfmark:</dt>
@@ -36,7 +37,7 @@ const { data: manuscript } = Astro.props;
               
               
               <dt class="font-semibold border-r border-gray-300 pr-2">Insitutional context:</dt>
-              <dd class="pl-5"><a href={manuscript.institutional_context[0]?.jad_id} class="hover:text-brandRed">{manuscript.institutional_context[0]?.name ?? 'N/A'}</a></dd>
+              <dd class="pl-5"><NavLink href={manuscript.institutional_context[0]?.jad_id} class="hover:text-brandRed">{manuscript.institutional_context[0]?.name ?? 'N/A'}</NavLink></dd>
               
               
               
@@ -46,9 +47,9 @@ const { data: manuscript } = Astro.props;
                 {
                   manuscript.related__passages.map((passage: { jad_id: string; }, index: number) => (
                     <>
-                      <a href={`/passages/${passage.jad_id}`} class="hover:text-brandRed">
+                      <NavLink href={`/passages/${passage.jad_id}`} class="hover:text-brandRed">
                         #{passage.jad_id.substring(15)}
-                      </a>
+                      </NavLink>
                       {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
                       {index < manuscript.related__passages.length - 1 && ', '}
                     </>
@@ -61,20 +62,20 @@ const { data: manuscript } = Astro.props;
             <div class="flex flex-col gap-2 py-2 text-sm md:text-base font-semibold">
                 {manuscript.digi_url && (
                      <div class="flex">
-                        <a href={manuscript.digi_url} class="inline-flex hover:text-brandRed">
+                        <NavLink href={manuscript.digi_url} class="inline-flex hover:text-brandRed">
                             <span>Digital facsimile</span> 
                             <Icon aria-hidden="true" name="lucide:external-link"></Icon>
-                        </a>
+                        </NavLink>
                     </div>
                    
                   )}
                   
                 {manuscript.catalog_url && (
                    <div class="flex">                        
-                        <a href={manuscript.catalog_url} class="inline-flex hover:text-brandRed">
+                        <NavLink href={manuscript.catalog_url} class="inline-flex hover:text-brandRed">
                             <span>Catalog entry</span> 
                             <Icon aria-hidden="true" name="lucide:external-link"></Icon>
-                        </a>
+                        </NavLink>
                     </div>                    
                 )}
                 </div>
@@ -85,15 +86,15 @@ const { data: manuscript } = Astro.props;
     <div class="my-10 flex p-5 w-3/4 mx-auto justify-between">
             {manuscript.id > 1
             ? 
-            <a href=`/manuscripts/jad_manuscript__${parseInt(manuscript.jad_id.split('__')[1]) -1}`>
+            <NavLink href=`/manuscripts/jad_manuscript__${parseInt(manuscript.jad_id.split('__')[1]) -1}`>
               <Icon class="size-20" name="lucide:circle-arrow-left"></Icon>
-              </a>
+              </NavLink>
             : ''
         }
             
-            <a href=`/manuscripts/jad_manuscript__${parseInt(manuscript.jad_id.split('__')[1]) +1}`>
+            <NavLink href=`/manuscripts/jad_manuscript__${parseInt(manuscript.jad_id.split('__')[1]) +1}`>
              <Icon class="size-20" name="lucide:circle-arrow-right"></Icon>
-            </a>
+            </NavLink>
            
               
         </div>   

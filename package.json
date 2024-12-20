@@ -5,7 +5,7 @@
   "scripts": {
     "build": "astro check && astro build",
     "dev": "astro dev",
-    "generate:data": "node ./scripts/data-fetch.js",
+    "get-data": "node ./scripts/data-fetch.js",
     "generate:search-index": "node --env-file .env ./scripts/generate-search-index.js",
     "start": "astro preview"
   },

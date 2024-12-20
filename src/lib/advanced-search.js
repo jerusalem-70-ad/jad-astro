@@ -10,10 +10,15 @@ import {
   clearRefinements,
   currentRefinements,
 } from "instantsearch.js/es/widgets";
+import { withBasePath } from "./withBasePath";
+
+const project_collection_name = "JAD";
+const main_search_field = "full_text";
+const search_api_key = "nxZkKN7Jphnp1mUFjataIhbKzdxEtd1Y";
 
 const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
   server: {
-    apiKey: "nxZkKN7Jphnp1mUFjataIhbKzdxEtd1Y",
+    apiKey: search_api_key,
     nodes: [
       {
         host: "typesense.acdh-dev.oeaw.ac.at",
@@ -23,7 +28,7 @@ const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
     ],
   },
   additionalSearchParameters: {
-    query_by: "full_text",
+    query_by: main_search_field,
   },
 });
 // create searchClient
@@ -31,7 +36,7 @@ const searchClient = typesenseInstantsearchAdapter.searchClient;
 //
 const search = instantsearch({
   searchClient,
-  indexName: "JAD",
+  indexName: project_collection_name,
 });
 
 const refinementListAuthor = panel({
@@ -92,15 +97,16 @@ search.addWidgets([
     templates: {
       empty: "No results for <q>{{ query }}</q>",
       item(hit, { html, components }) {
-        return html` <article>
-          <a href="/passages/${hit.rec_id}" class="underline text-sm">
+        const href = withBasePath(`/passages/${hit.rec_id}`);
+
+        return html` <article>          
             <h3 class="font-semibold text-lg text-brandBrown ">
+            <a href="${href}" class="underline">
               ${components.Highlight({
                 hit,
                 attribute: "title",
-              })}
-            </h3></a
-          >
+              })}</a>
+            </h3>
 
           <p class="italic">
             ${hit._snippetResult.full_text.matchedWords.length > 0
@@ -108,10 +114,9 @@ search.addWidgets([
               : ""}
           </p>
           <a
-            href="/passages/${hit.rec_id}"
+            href="${href}"
             class="underline decoration-dotted text-sm"
-            >See passage</a
-          >
+            >See passage</a>
         </article>`;
       },
     },

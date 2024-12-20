@@ -1,19 +1,15 @@
 ---
-import Layout from "../layouts/page-layout.astro"
-import 'instantsearch.css/themes/satellite.css';
+import Layout from "../layouts/page-layout.astro";
+import "instantsearch.css/themes/satellite.css";
+import NavLink from "@components/nav-link.astro";
 ---
 
 <Layout>
     <main class="md:w-3/4 grid mx-auto py-4 gap-8">
         <h2 class="text-2xl text-brandBrown">Advanced search</h2>
-        
+
         <div>
             <div data-search-panel>
-                <div data-search-filters>
-                    <div data-clear-refinements></div>
-                    <div data-refinement-list></div>
-                </div>
-
                 <div data-search-results>
                     <div id="searchbox"></div>
                     <div id="stats-container"></div>
@@ -21,7 +17,6 @@ import 'instantsearch.css/themes/satellite.css';
                     <div id="clear-refinements"></div>
                     <div class="grid grid-cols-[1fr_3fr]">
                         <div>
-                            
                             <div id="refinement-list-author"></div>
                             <div id="refinement-list-work"></div>
                             <div id="refinement-list-workdate"></div>
@@ -36,9 +31,6 @@ import 'instantsearch.css/themes/satellite.css';
                 </div>
             </div>
         </div>
-        
-        
-     
     </main>
 </Layout>
 <script src="../lib/advanced-search.js"></script>
