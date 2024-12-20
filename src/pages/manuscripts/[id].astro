@@ -51,7 +51,7 @@ const { data: manuscript } = Astro.props;
           Insitutional context:
         </dt>
         <dd class="pl-5">
-          <NavLink href={manuscript.institutional_context[0]?.jad_id}
+          <NavLink href={`/institutions/${manuscript.institutional_context[0]?.jad_id}`}
             class="hover:text-brandRed">
             {manuscript.institutional_context[0]?.name ?? "N/A"}
           </NavLink>

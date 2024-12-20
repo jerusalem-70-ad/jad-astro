@@ -77,9 +77,9 @@ const { data: work } = Astro.props;
                 <dt class="font-semibold border-r border-gray-300 pr-5">Institutional context:</dt>                        
                 <dd class="pl-5">
                     {work.institutional_context.length > 0
-                    ? work.institutional_context.map((institution : { name : string;}, index: number) => (
+                    ? work.institutional_context.map((institution : {jad_id : string; name : string;}, index: number) => (
                         <>
-                         <NavLink href="/" class="hover:text-brandRed">
+                         <NavLink href={`/institutions/${institution.jad_id}`} class="hover:text-brandRed">
                                     {institution.name}
                                 </NavLink>
                         {index < work.institutional_context.length -1 && '| '}
