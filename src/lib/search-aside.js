@@ -25,7 +25,7 @@ const doSearch = (query = "") => {
     );
     listItem.id = `passage-${passage.id}`;
     const link = document.createElement("a");
-    link.href = passage.jad_id;
+    link.href = `/passages/${passage.jad_id}`;
     link.classList.add("hover:text-brandRed");
     link.innerHTML = `(${passage.jad_id.substring(15)}) <span class="italic">${
       passage.passage

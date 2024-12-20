@@ -97,7 +97,7 @@ search.addWidgets([
     templates: {
       empty: "No results for <q>{{ query }}</q>",
       item(hit, { html, components }) {
-        const href = withBasePath(`/passages/${hit.rec_id}`);
+        const href = withBasePath(`/passages/${hit.id}`);
 
         return html` <article>          
             <h3 class="font-semibold text-lg text-brandBrown ">
