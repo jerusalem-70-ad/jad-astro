@@ -80,23 +80,23 @@ import NavLink from "@components/nav-link.astro";
             {Object.values(mss).map((ms) => (
               <tr tabindex="0">
                 <td class="px-3">
-                    <NavLink href=`/manuscripts/${ms.jad_id}` class="hover:text-brandPaleWhite hover:font-semibold">{ms.name[0].value}</NavLink>
+                    <NavLink href=`/manuscripts/${ms.jad_id}` class="hover:text-brandPaleWhite hover:font-semibold">{ms.name[0]?.value}</NavLink>
                 </td>
                 <td class="px-3">
-                    {ms.library[0].place[0]?.name}                    
+                    {ms.library[0]?.place[0]?.name}                    
                 </td>
                 <td class="px-3">
-                  <NavLink href={ms.library[0].gnd_url} target="_blank">{ms.library[0].name}</NavLink>
+                  {ms.library[0]?.name}
                 </td>
                 <td class="px-3">
-                  {/* this is an array - need to call .map to return an array of strings; if we return more than one thing need empty element <>  */}
-                  {ms.related__passages.map((passage: { jad_id: string; }, index: number) => (
-                    <>
-                      <NavLink href={`/passages/${passage.jad_id}`} class="hover:text-brandPaleWhite">#{passage.jad_id.substring(15)}</NavLink>                    
-                      {index < ms.related__passages.length - 1 && <span>|</span>}
-                    </>
-                  ))
-                } 
+                  {ms.related__passages.length > 0 &&
+                    ms.related__passages.map((passage: { jad_id: string; }, index: number) => (
+                      <>
+                        <NavLink href={`/passages/${passage.jad_id}`} class="hover:text-brandPaleWhite">#{passage.jad_id.substring(15)}</NavLink>                    
+                        {index < ms.related__passages.length - 1 && <span>|</span>}
+                      </>
+                    ))
+                  }
                 </td>
                 <td class="px-3">
                   <NavLink href={`/institutions/${ms.institutional_context[0]?.jad_id}`}>{ms.institutional_context[0]?.name ?? 'N/A'}</NavLink>

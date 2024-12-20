@@ -23,26 +23,28 @@ const { data: manuscript } = Astro.props;
     <article
       class="border-2 rounded-sm border-brandBrown bg-brandRose w-3/4 grid grid-cols-1 mx-auto p-5 my-10"
     >
-      <h1 class="text-xl py-3 mx-auto">{manuscript.name[0].value}</h1>
+      <h1 class="text-xl py-3 mx-auto">{manuscript.name[0]?.value}</h1>
       <dl class="grid grid-cols-[1fr_5fr] text-sm md:leading-7 md:text-base">
         <dt class="font-semibold border-r border-gray-300 pr-2">Settlement:</dt>
-        <dd class="pl-5">{manuscript.library[0].place[0]?.name}</dd>
+        <dd class="pl-5">{manuscript.library[0]?.place[0]?.name}</dd>
 
-        <dt class="font-semibold border-r border-gray-300 pr-2">
+       {manuscript.library.length > 0 && (
+         <dt class="font-semibold border-r border-gray-300 pr-2">
           Library / Collection:
         </dt>
         <dd class="pl-5">
           <NavLink
-            href={manuscript.library[0].gnd_url}
+            href={manuscript.library[0]?.gnd_url}
             target="_blank"
             class="hover:text-brandRed flex"
           >
-            {manuscript.library[0].name}<Icon name="lucide:external-link" />
+            {manuscript.library[0]?.name}<Icon name="lucide:external-link" />
           </NavLink>
         </dd>
+       )}
 
         <dt class="font-semibold border-r border-gray-300 pr-2">Shelfmark:</dt>
-        <dd class="pl-5">{manuscript.idno}</dd>
+        <dd class="pl-5">{manuscript?.idno}</dd>
 
        {manuscript.institutional_context.length > 0 && (
          <dt class="font-semibold border-r border-gray-300 pr-2">
@@ -56,11 +58,11 @@ const { data: manuscript } = Astro.props;
         </dd>
        )}
 
-        <dt class="font-semibold border-r border-gray-300 pr-2">Passages:</dt>
-        <dd class="pl-5">
-          <!-- Array call .map with two parameters; index with type number - to count ; : wraped in fragment <> to return more than one elemen from the iteration-->
-          {
-            manuscript.related__passages.map(
+        
+        {manuscript.related__passages.length > 0 && (
+          <dt class="font-semibold border-r border-gray-300 pr-2">Passages:</dt>
+        <dd class="pl-5"> 
+          {manuscript.related__passages.map(
               (passage: { jad_id: string }, index: number) => (
                 <>
                   <NavLink
@@ -76,6 +78,7 @@ const { data: manuscript } = Astro.props;
             )
           }
         </dd>
+        )}
       </dl>
       <div class="flex flex-col gap-2 py-2 text-sm md:text-base font-semibold">
         {

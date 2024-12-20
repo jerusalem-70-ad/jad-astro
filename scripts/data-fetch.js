@@ -1,6 +1,6 @@
 import { writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
-import { getData } from "./api-client";
+import { getData } from "./api-client.js";
 
 // fetch data from github ; variable with the URL
 const baseUrl =

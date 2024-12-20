@@ -1,0 +1,1447 @@
+{
+  "1": {
+    "id": 1,
+    "order": "1.00000000000000000000",
+    "name": "Petrus, von Blois",
+    "jad_id": "jad_author__1",
+    "gnd_url": "https://d-nb.info/gnd/118923927",
+    "notes": null,
+    "prev": "jad_author__9.html",
+    "next": "jad_author__10.html",
+    "view_label": "Petrus, von Blois",
+    "related__works": [
+      {
+        "jad_id": "jad_work__2",
+        "view_label": "Sermones"
+      }
+    ]
+  },
+  "2": {
+    "id": 2,
+    "order": "2.00000000000000000000",
+    "name": "Martin, von León",
+    "jad_id": "jad_author__2",
+    "gnd_url": "https://d-nb.info/gnd/100953212",
+    "notes": null,
+    "prev": "jad_author__19.html",
+    "next": "jad_author__20.html",
+    "view_label": "Martin, von León",
+    "related__works": [
+      {
+        "jad_id": "jad_work__1",
+        "view_label": "Liber Sermonum"
+      },
+      {
+        "jad_id": "jad_work__68",
+        "view_label": "Commentary Revelation"
+      },
+      {
+        "jad_id": "jad_work__128",
+        "view_label": "Commentary Jacob"
+      }
+    ]
+  },
+  "3": {
+    "id": 3,
+    "order": "3.00000000000000000000",
+    "name": "anonymous",
+    "jad_id": "jad_author__3",
+    "gnd_url": "",
+    "notes": null,
+    "prev": "jad_author__29.html",
+    "next": "jad_author__30.html",
+    "view_label": "anonymous",
+    "related__works": [
+      {
+        "jad_id": "jad_work__3",
+        "view_label": "Certa relatio de situ Jerusalem"
+      },
+      {
+        "jad_id": "jad_work__14",
+        "view_label": "De destructione templi"
+      },
+      {
+        "jad_id": "jad_work__15",
+        "view_label": "Sermones"
+      },
+      {
+        "jad_id": "jad_work__40",
+        "view_label": "Homiliarium Mondseense"
+      },
+      {
+        "jad_id": "jad_work__41",
+        "view_label": "Sermones de tempore"
+      },
+      {
+        "jad_id": "jad_work__93",
+        "view_label": "Expositio in Apocalypsim"
+      },
+      {
+        "jad_id": "jad_work__107",
+        "view_label": "Chanson d'Antioche"
+      },
+      {
+        "jad_id": "jad_work__133",
+        "view_label": "Sermones"
+      },
+      {
+        "jad_id": "jad_work__134",
+        "view_label": "De Tyto et Vespasiano"
+      },
+      {
+        "jad_id": "jad_work__135",
+        "view_label": "Sermones"
+      },
+      {
+        "jad_id": "jad_work__136",
+        "view_label": "Sermones"
+      }
+    ]
+  },
+  "4": {
+    "id": 4,
+    "order": "4.00000000000000000000",
+    "name": "Petrus, Cantor",
+    "jad_id": "jad_author__4",
+    "gnd_url": "https://d-nb.info/gnd/118790625",
+    "notes": null,
+    "prev": "jad_author__39.html",
+    "next": "jad_author__40.html",
+    "view_label": "Petrus, Cantor",
+    "related__works": [
+      {
+        "jad_id": "jad_work__4",
+        "view_label": "Commentary Psalms"
+      },
+      {
+        "jad_id": "jad_work__19",
+        "view_label": "Commentary Isaiah"
+      },
+      {
+        "jad_id": "jad_work__20",
+        "view_label": "Commentary Ezekiel"
+      },
+      {
+        "jad_id": "jad_work__21",
+        "view_label": "Commentary Lamentationes"
+      },
+      {
+        "jad_id": "jad_work__22",
+        "view_label": "Commentary Daniel"
+      }
+    ]
+  },
+  "5": {
+    "id": 5,
+    "order": "5.00000000000000000000",
+    "name": "Hrabanus, Maurus",
+    "jad_id": "jad_author__5",
+    "gnd_url": "https://d-nb.info/gnd/118553909",
+    "notes": null,
+    "prev": "jad_author__49.html",
+    "next": "jad_author__50.html",
+    "view_label": "Hrabanus, Maurus",
+    "related__works": [
+      {
+        "jad_id": "jad_work__5",
+        "view_label": "Sermones"
+      },
+      {
+        "jad_id": "jad_work__10",
+        "view_label": "Commentary Maccabees"
+      },
+      {
+        "jad_id": "jad_work__28",
+        "view_label": "Commentary Kings"
+      },
+      {
+        "jad_id": "jad_work__50",
+        "view_label": "Commentary Sirach"
+      },
+      {
+        "jad_id": "jad_work__61",
+        "view_label": "Commentary Ezekiel"
+      },
+      {
+        "jad_id": "jad_work__63",
+        "view_label": "Commentary Jeremiah"
+      },
+      {
+        "jad_id": "jad_work__64",
+        "view_label": "Commentary Judices"
+      },
+      {
+        "jad_id": "jad_work__65",
+        "view_label": "Commentary Deuteronomium"
+      },
+      {
+        "jad_id": "jad_work__66",
+        "view_label": "Commentary Matthew"
+      },
+      {
+        "jad_id": "jad_work__67",
+        "view_label": "De universo"
+      },
+      {
+        "jad_id": "jad_work__118",
+        "view_label": "Commentary Numeri"
+      }
+    ]
+  },
+  "6": {
+    "id": 6,
+    "order": "6.00000000000000000000",
+    "name": "Beda, Heiliger",
+    "jad_id": "jad_author__6",
+    "gnd_url": "https://d-nb.info/gnd/118508237",
+    "notes": null,
+    "prev": "jad_author__59.html",
+    "next": "jad_author__60.html",
+    "view_label": "Beda, Heiliger",
+    "related__works": [
+      {
+        "jad_id": "jad_work__6",
+        "view_label": "Commentary Luke"
+      },
+      {
+        "jad_id": "jad_work__115",
+        "view_label": "Sermones"
+      },
+      {
+        "jad_id": "jad_work__116",
+        "view_label": "Commentary Matthew"
+      },
+      {
+        "jad_id": "jad_work__117",
+        "view_label": "Commentary Pentateuch"
+      },
+      {
+        "jad_id": "jad_work__138",
+        "view_label": "Allegorica expositio in Samuelem"
+      },
+      {
+        "jad_id": "jad_work__139",
+        "view_label": "De ratione temporum"
+      },
+      {
+        "jad_id": "jad_work__140",
+        "view_label": "De temporibus"
+      },
+      {
+        "jad_id": "jad_work__141",
+        "view_label": "Commentary Marc"
+      },
+      {
+        "jad_id": "jad_work__142",
+        "view_label": "Allegorica expositio in Parabolas Salomonis"
+      },
+      {
+        "jad_id": "jad_work__143",
+        "view_label": "Commentary Acts"
+      },
+      {
+        "jad_id": "jad_work__144",
+        "view_label": "Commentary Paul"
+      },
+      {
+        "jad_id": "jad_work__145",
+        "view_label": "Allegorica expositio in Canticum Habacuc"
+      },
+      {
+        "jad_id": "jad_work__146",
+        "view_label": "Commentary John"
+      }
+    ]
+  },
+  "7": {
+    "id": 7,
+    "order": "7.00000000000000000000",
+    "name": "Lambertus, Sancti Bertini",
+    "jad_id": "jad_author__7",
+    "gnd_url": "https://d-nb.info/gnd/102511721",
+    "notes": "same as Lambertus de Sancto-Audomaro",
+    "prev": "jad_author__67.html",
+    "next": "jad_author__8.html",
+    "view_label": "Lambertus, Sancti Bertini",
+    "related__works": [
+      {
+        "jad_id": "jad_work__7",
+        "view_label": "Liber Floridus"
+      }
+    ]
+  },
+  "8": {
+    "id": 8,
+    "order": "8.00000000000000000000",
+    "name": "Hugo, von Saint-Cher",
+    "jad_id": "jad_author__8",
+    "gnd_url": "https://d-nb.info/gnd/118707957",
+    "notes": "",
+    "prev": "jad_author__7.html",
+    "next": "jad_author__9.html",
+    "view_label": "Hugo, von Saint-Cher",
+    "related__works": [
+      {
+        "jad_id": "jad_work__8",
+        "view_label": "Sermones"
+      }
+    ]
+  },
+  "9": {
+    "id": 9,
+    "order": "9.00000000000000000000",
+    "name": "Petrus, Comestor",
+    "jad_id": "jad_author__9",
+    "gnd_url": "https://d-nb.info/gnd/118828851",
+    "notes": "",
+    "prev": "jad_author__8.html",
+    "next": "{'id': 1, 'order': '1.00000000000000000000', 'name': 'Petrus, von Blois', 'jad_id': 'jad_author__1', 'gnd_url': 'https://d-nb.info/gnd/118923927', 'notes': None, 'prev': 'jad_author__9.html', 'next': 'jad_author__10.html'}.html",
+    "view_label": "Petrus, Comestor",
+    "related__works": [
+      {
+        "jad_id": "jad_work__9",
+        "view_label": "Sermones"
+      },
+      {
+        "jad_id": "jad_work__16",
+        "view_label": "Postillae in Evangelia"
+      },
+      {
+        "jad_id": "jad_work__42",
+        "view_label": "Historia Scholastica"
+      }
+    ]
+  },
+  "10": {
+    "id": 10,
+    "order": "10.00000000000000000000",
+    "name": "Langton, Stephen",
+    "jad_id": "jad_author__10",
+    "gnd_url": "https://d-nb.info/gnd/118778714",
+    "notes": "",
+    "prev": "jad_author__1.html",
+    "next": "jad_author__11.html",
+    "view_label": "Langton, Stephen",
+    "related__works": [
+      {
+        "jad_id": "jad_work__11",
+        "view_label": "Commentary Isaiah"
+      },
+      {
+        "jad_id": "jad_work__12",
+        "view_label": "Sermones"
+      },
+      {
+        "jad_id": "jad_work__13",
+        "view_label": "Commentary Ezekiel"
+      },
+      {
+        "jad_id": "jad_work__46",
+        "view_label": "Commentary Kings"
+      },
+      {
+        "jad_id": "jad_work__137",
+        "view_label": "Commentary Lamentations"
+      }
+    ]
+  },
+  "11": {
+    "id": 11,
+    "order": "11.00000000000000000000",
+    "name": "Luculentius",
+    "jad_id": "jad_author__11",
+    "gnd_url": "https://d-nb.info/gnd/119383705",
+    "notes": "",
+    "prev": "jad_author__10.html",
+    "next": "jad_author__12.html",
+    "view_label": "Luculentius",
+    "related__works": [
+      {
+        "jad_id": "jad_work__17",
+        "view_label": "Homiliae super evangelia"
+      }
+    ]
+  },
+  "12": {
+    "id": 12,
+    "order": "12.00000000000000000000",
+    "name": "Philippus, Cancellarius",
+    "jad_id": "jad_author__12",
+    "gnd_url": "https://d-nb.info/gnd/11936154X",
+    "notes": "",
+    "prev": "jad_author__11.html",
+    "next": "jad_author__13.html",
+    "view_label": "Philippus, Cancellarius",
+    "related__works": [
+      {
+        "jad_id": "jad_work__18",
+        "view_label": "Sermones super evangelia"
+      }
+    ]
+  },
+  "13": {
+    "id": 13,
+    "order": "13.00000000000000000000",
+    "name": "Maurice, de Sully",
+    "jad_id": "jad_author__13",
+    "gnd_url": "https://d-nb.info/gnd/118924141",
+    "notes": "",
+    "prev": "jad_author__12.html",
+    "next": "jad_author__14.html",
+    "view_label": "Maurice, de Sully",
+    "related__works": [
+      {
+        "jad_id": "jad_work__23",
+        "view_label": "Sermones"
+      }
+    ]
+  },
+  "14": {
+    "id": 14,
+    "order": "14.00000000000000000000",
+    "name": "Hilduinus, Cancellarius Parisiensis",
+    "jad_id": "jad_author__14",
+    "gnd_url": "https://d-nb.info/gnd/102498377",
+    "notes": "",
+    "prev": "jad_author__13.html",
+    "next": "jad_author__15.html",
+    "view_label": "Hilduinus, Cancellarius Parisiensis",
+    "related__works": [
+      {
+        "jad_id": "jad_work__24",
+        "view_label": "Sermones"
+      }
+    ]
+  },
+  "15": {
+    "id": 15,
+    "order": "15.00000000000000000000",
+    "name": "Bruno, Segni",
+    "jad_id": "jad_author__15",
+    "gnd_url": "https://d-nb.info/gnd/100938310",
+    "notes": "",
+    "prev": "jad_author__14.html",
+    "next": "jad_author__16.html",
+    "view_label": "Bruno, Segni",
+    "related__works": [
+      {
+        "jad_id": "jad_work__82",
+        "view_label": "Commentary Luke"
+      },
+      {
+        "jad_id": "jad_work__83",
+        "view_label": "Commentary Matthew"
+      },
+      {
+        "jad_id": "jad_work__84",
+        "view_label": "Commentary Psalms"
+      },
+      {
+        "jad_id": "jad_work__85",
+        "view_label": "Commentary Revelation"
+      }
+    ]
+  },
+  "16": {
+    "id": 16,
+    "order": "16.00000000000000000000",
+    "name": "Rupert, von Deutz",
+    "jad_id": "jad_author__16",
+    "gnd_url": "https://d-nb.info/gnd/118604198",
+    "notes": "",
+    "prev": "jad_author__15.html",
+    "next": "jad_author__17.html",
+    "view_label": "Rupert, von Deutz",
+    "related__works": [
+      {
+        "jad_id": "jad_work__86",
+        "view_label": "Commentary Revelation"
+      },
+      {
+        "jad_id": "jad_work__87",
+        "view_label": "Commentary Ezekiel"
+      },
+      {
+        "jad_id": "jad_work__88",
+        "view_label": "Commentary Isaiah"
+      },
+      {
+        "jad_id": "jad_work__89",
+        "view_label": "Commentary Matthew"
+      },
+      {
+        "jad_id": "jad_work__90",
+        "view_label": "De divinis officiis"
+      },
+      {
+        "jad_id": "jad_work__94",
+        "view_label": "Commentaria in duodecim prophetas minores"
+      },
+      {
+        "jad_id": "jad_work__95",
+        "view_label": "Commentary John"
+      },
+      {
+        "jad_id": "jad_work__96",
+        "view_label": "Commentary Job"
+      },
+      {
+        "jad_id": "jad_work__97",
+        "view_label": "Commentary Kohelet"
+      },
+      {
+        "jad_id": "jad_work__98",
+        "view_label": "De glorificatione Trinitatis"
+      },
+      {
+        "jad_id": "jad_work__99",
+        "view_label": "Commentary Genesis"
+      },
+      {
+        "jad_id": "jad_work__100",
+        "view_label": "Commentary Deutoronomy"
+      },
+      {
+        "jad_id": "jad_work__101",
+        "view_label": "Commentary Kings"
+      },
+      {
+        "jad_id": "jad_work__102",
+        "view_label": "Commentary Psalms"
+      },
+      {
+        "jad_id": "jad_work__103",
+        "view_label": "De victoria verbi Dei"
+      },
+      {
+        "jad_id": "jad_work__104",
+        "view_label": "Dialogus inter Christianum et Judaeum"
+      },
+      {
+        "jad_id": "jad_work__147",
+        "view_label": "Commentary Daniel"
+      },
+      {
+        "jad_id": "jad_work__148",
+        "view_label": "Commentary Jeremiah"
+      }
+    ]
+  },
+  "17": {
+    "id": 17,
+    "order": "17.00000000000000000000",
+    "name": "Paschasius, Radbertus",
+    "jad_id": "jad_author__17",
+    "gnd_url": "https://d-nb.info/gnd/118739409",
+    "notes": "",
+    "prev": "jad_author__16.html",
+    "next": "jad_author__18.html",
+    "view_label": "Paschasius, Radbertus",
+    "related__works": [
+      {
+        "jad_id": "jad_work__29",
+        "view_label": "Commentary Matthew"
+      },
+      {
+        "jad_id": "jad_work__69",
+        "view_label": "Commentary Lamentationes"
+      },
+      {
+        "jad_id": "jad_work__70",
+        "view_label": "Commentary Psalms"
+      }
+    ]
+  },
+  "18": {
+    "id": 18,
+    "order": "18.00000000000000000000",
+    "name": "Isidorus, von Sevilla",
+    "jad_id": "jad_author__18",
+    "gnd_url": "https://d-nb.info/gnd/118555995",
+    "notes": "",
+    "prev": "jad_author__17.html",
+    "next": "jad_author__19.html",
+    "view_label": "Isidorus, von Sevilla",
+    "related__works": [
+      {
+        "jad_id": "jad_work__71",
+        "view_label": "Commentary Kings"
+      },
+      {
+        "jad_id": "jad_work__129",
+        "view_label": "De fide catholica"
+      }
+    ]
+  },
+  "19": {
+    "id": 19,
+    "order": "19.00000000000000000000",
+    "name": "Petrus, Damiani",
+    "jad_id": "jad_author__19",
+    "gnd_url": "https://d-nb.info/gnd/118593331",
+    "notes": "",
+    "prev": "jad_author__18.html",
+    "next": "jad_author__2.html",
+    "view_label": "Petrus, Damiani",
+    "related__works": [
+      {
+        "jad_id": "jad_work__47",
+        "view_label": "Sermones"
+      }
+    ]
+  },
+  "20": {
+    "id": 20,
+    "order": "20.00000000000000000000",
+    "name": "Balduin, von Canterbury",
+    "jad_id": "jad_author__20",
+    "gnd_url": "https://d-nb.info/gnd/119268531",
+    "notes": "",
+    "prev": "jad_author__2.html",
+    "next": "jad_author__21.html",
+    "view_label": "Balduin, von Canterbury",
+    "related__works": [
+      {
+        "jad_id": "jad_work__119",
+        "view_label": "Sermones"
+      },
+      {
+        "jad_id": "jad_work__125",
+        "view_label": "De commendatione fidei"
+      }
+    ]
+  },
+  "21": {
+    "id": 21,
+    "order": "21.00000000000000000000",
+    "name": "Aelred, von Rievaulx",
+    "jad_id": "jad_author__21",
+    "gnd_url": "https://d-nb.info/gnd/118643908",
+    "notes": "",
+    "prev": "jad_author__20.html",
+    "next": "jad_author__22.html",
+    "view_label": "Aelred, von Rievaulx",
+    "related__works": [
+      {
+        "jad_id": "jad_work__34",
+        "view_label": "Sermones"
+      }
+    ]
+  },
+  "22": {
+    "id": 22,
+    "order": "22.00000000000000000000",
+    "name": "Alkuin",
+    "jad_id": "jad_author__22",
+    "gnd_url": "https://d-nb.info/gnd/118502026",
+    "notes": "",
+    "prev": "jad_author__21.html",
+    "next": "jad_author__23.html",
+    "view_label": "Alkuin",
+    "related__works": [
+      {
+        "jad_id": "jad_work__120",
+        "view_label": "Commentary John"
+      },
+      {
+        "jad_id": "jad_work__121",
+        "view_label": "Commentary Kohelet"
+      }
+    ]
+  },
+  "23": {
+    "id": 23,
+    "order": "23.00000000000000000000",
+    "name": "Fulcher, von Chartres",
+    "jad_id": "jad_author__23",
+    "gnd_url": "https://d-nb.info/gnd/118956043",
+    "notes": "",
+    "prev": "jad_author__22.html",
+    "next": "jad_author__24.html",
+    "view_label": "Fulcher, von Chartres",
+    "related__works": [
+      {
+        "jad_id": "jad_work__25",
+        "view_label": "Historia Hierosolymitana"
+      }
+    ]
+  },
+  "24": {
+    "id": 24,
+    "order": "24.00000000000000000000",
+    "name": "Albert, von Aachen",
+    "jad_id": "jad_author__24",
+    "gnd_url": "https://d-nb.info/gnd/118647598",
+    "notes": "",
+    "prev": "jad_author__23.html",
+    "next": "jad_author__25.html",
+    "view_label": "Albert, von Aachen",
+    "related__works": [
+      {
+        "jad_id": "jad_work__35",
+        "view_label": "Historia expeditionis Hierosolymitanae"
+      }
+    ]
+  },
+  "25": {
+    "id": 25,
+    "order": "25.00000000000000000000",
+    "name": "Haimo, von Auxerre",
+    "jad_id": "jad_author__25",
+    "gnd_url": "https://d-nb.info/gnd/100945260",
+    "notes": "",
+    "prev": "jad_author__24.html",
+    "next": "jad_author__26.html",
+    "view_label": "Haimo, von Auxerre",
+    "related__works": [
+      {
+        "jad_id": "jad_work__26",
+        "view_label": "Commentary Isaiah"
+      },
+      {
+        "jad_id": "jad_work__27",
+        "view_label": "Sermones"
+      },
+      {
+        "jad_id": "jad_work__109",
+        "view_label": "Expositio in Apocalypsin"
+      },
+      {
+        "jad_id": "jad_work__130",
+        "view_label": "Commentary 1 Thes."
+      }
+    ]
+  },
+  "26": {
+    "id": 26,
+    "order": "26.00000000000000000000",
+    "name": "Josephus, Flavius",
+    "jad_id": "jad_author__26",
+    "gnd_url": "https://d-nb.info/gnd/118640003",
+    "notes": "",
+    "prev": "jad_author__25.html",
+    "next": "jad_author__27.html",
+    "view_label": "Josephus, Flavius",
+    "related__works": []
+  },
+  "27": {
+    "id": 27,
+    "order": "27.00000000000000000000",
+    "name": "Hieronymus, Sophronius Eusebius",
+    "jad_id": "jad_author__27",
+    "gnd_url": "https://d-nb.info/gnd/118550853",
+    "notes": "",
+    "prev": "jad_author__26.html",
+    "next": "jad_author__28.html",
+    "view_label": "Hieronymus, Sophronius Eusebius",
+    "related__works": [
+      {
+        "jad_id": "jad_work__56",
+        "view_label": "Commentary Galater"
+      },
+      {
+        "jad_id": "jad_work__57",
+        "view_label": "Commentary Isaiah"
+      },
+      {
+        "jad_id": "jad_work__106",
+        "view_label": "Commentary Matthew"
+      },
+      {
+        "jad_id": "jad_work__108",
+        "view_label": "Commentary Jeremiah"
+      }
+    ]
+  },
+  "28": {
+    "id": 28,
+    "order": "28.00000000000000000000",
+    "name": "Gregor, der Grosse",
+    "jad_id": "jad_author__28",
+    "gnd_url": "https://d-nb.info/gnd/118541838",
+    "notes": "",
+    "prev": "jad_author__27.html",
+    "next": "jad_author__29.html",
+    "view_label": "Gregor, der Grosse",
+    "related__works": [
+      {
+        "jad_id": "jad_work__36",
+        "view_label": "Homiliae in euangelia"
+      }
+    ]
+  },
+  "29": {
+    "id": 29,
+    "order": "29.00000000000000000000",
+    "name": "non detectable",
+    "jad_id": "jad_author__29",
+    "gnd_url": "",
+    "notes": "",
+    "prev": "jad_author__28.html",
+    "next": "jad_author__3.html",
+    "view_label": "non detectable",
+    "related__works": []
+  },
+  "30": {
+    "id": 30,
+    "order": "30.00000000000000000000",
+    "name": "Remigius, von Auxerre",
+    "jad_id": "jad_author__30",
+    "gnd_url": "https://d-nb.info/gnd/118788302",
+    "notes": "",
+    "prev": "jad_author__3.html",
+    "next": "jad_author__31.html",
+    "view_label": "Remigius, von Auxerre",
+    "related__works": [
+      {
+        "jad_id": "jad_work__30",
+        "view_label": "Commentary Psalms"
+      }
+    ]
+  },
+  "31": {
+    "id": 31,
+    "order": "31.00000000000000000000",
+    "name": "Gerhoch, von Reichersberg",
+    "jad_id": "jad_author__31",
+    "gnd_url": "https://d-nb.info/gnd/118690752",
+    "notes": "",
+    "prev": "jad_author__30.html",
+    "next": "jad_author__32.html",
+    "view_label": "Gerhoch, von Reichersberg",
+    "related__works": [
+      {
+        "jad_id": "jad_work__31",
+        "view_label": "Commentary Psalms"
+      },
+      {
+        "jad_id": "jad_work__112",
+        "view_label": "Commentary Psalms Continuatio"
+      },
+      {
+        "jad_id": "jad_work__113",
+        "view_label": "Expositio in canticum Moysis"
+      },
+      {
+        "jad_id": "jad_work__114",
+        "view_label": "Libelli selecti"
+      }
+    ]
+  },
+  "32": {
+    "id": 32,
+    "order": "32.00000000000000000000",
+    "name": "Anselm, von Laon",
+    "jad_id": "jad_author__32",
+    "gnd_url": "https://d-nb.info/gnd/118649566",
+    "notes": "",
+    "prev": "jad_author__31.html",
+    "next": "jad_author__33.html",
+    "view_label": "Anselm, von Laon",
+    "related__works": [
+      {
+        "jad_id": "jad_work__32",
+        "view_label": "Commentary Kings"
+      },
+      {
+        "jad_id": "jad_work__127",
+        "view_label": "Commentary Isaiah"
+      }
+    ]
+  },
+  "33": {
+    "id": 33,
+    "order": "33.00000000000000000000",
+    "name": "Angelomus Luxovensis",
+    "jad_id": "jad_author__33",
+    "gnd_url": "https://d-nb.info/gnd/100936474",
+    "notes": "",
+    "prev": "jad_author__32.html",
+    "next": "jad_author__34.html",
+    "view_label": "Angelomus Luxovensis",
+    "related__works": [
+      {
+        "jad_id": "jad_work__33",
+        "view_label": "Commentary Kings"
+      },
+      {
+        "jad_id": "jad_work__110",
+        "view_label": "Commentary Genesis"
+      }
+    ]
+  },
+  "34": {
+    "id": 34,
+    "order": "34.00000000000000000000",
+    "name": "Bonaventura",
+    "jad_id": "jad_author__34",
+    "gnd_url": "https://d-nb.info/gnd/118513176",
+    "notes": "",
+    "prev": "jad_author__33.html",
+    "next": "jad_author__35.html",
+    "view_label": "Bonaventura",
+    "related__works": [
+      {
+        "jad_id": "jad_work__37",
+        "view_label": "Sermones dominicales"
+      }
+    ]
+  },
+  "35": {
+    "id": 35,
+    "order": "35.00000000000000000000",
+    "name": "Jakob, von Vitry",
+    "jad_id": "jad_author__35",
+    "gnd_url": "https://d-nb.info/gnd/118711563",
+    "notes": "",
+    "prev": "jad_author__34.html",
+    "next": "jad_author__36.html",
+    "view_label": "Jakob, von Vitry",
+    "related__works": [
+      {
+        "jad_id": "jad_work__38",
+        "view_label": "Historia Orientalis"
+      }
+    ]
+  },
+  "36": {
+    "id": 36,
+    "order": "36.00000000000000000000",
+    "name": "Lukas, von Tuy",
+    "jad_id": "jad_author__36",
+    "gnd_url": "https://d-nb.info/gnd/100194788",
+    "notes": "",
+    "prev": "jad_author__35.html",
+    "next": "jad_author__37.html",
+    "view_label": "Lukas, von Tuy",
+    "related__works": [
+      {
+        "jad_id": "jad_work__39",
+        "view_label": "Chronicon Mundi"
+      }
+    ]
+  },
+  "37": {
+    "id": 37,
+    "order": "37.00000000000000000000",
+    "name": "Honorius, Augustodunensis",
+    "jad_id": "jad_author__37",
+    "gnd_url": "https://d-nb.info/gnd/119066548",
+    "notes": "",
+    "prev": "jad_author__36.html",
+    "next": "jad_author__38.html",
+    "view_label": "Honorius, Augustodunensis",
+    "related__works": [
+      {
+        "jad_id": "jad_work__43",
+        "view_label": "Speculum Ecclesiae"
+      },
+      {
+        "jad_id": "jad_work__77",
+        "view_label": "Expositio in Cantica canticorum"
+      },
+      {
+        "jad_id": "jad_work__78",
+        "view_label": "Commentary Psalms"
+      },
+      {
+        "jad_id": "jad_work__79",
+        "view_label": "De scriptoribus ecclesiasticis"
+      },
+      {
+        "jad_id": "jad_work__80",
+        "view_label": "Gemma animae"
+      },
+      {
+        "jad_id": "jad_work__81",
+        "view_label": "De imagine mundi"
+      }
+    ]
+  },
+  "38": {
+    "id": 38,
+    "order": "38.00000000000000000000",
+    "name": "Christianus, Druthmar",
+    "jad_id": "jad_author__38",
+    "gnd_url": "https://d-nb.info/gnd/100939023",
+    "notes": "",
+    "prev": "jad_author__37.html",
+    "next": "jad_author__39.html",
+    "view_label": "Christianus, Druthmar",
+    "related__works": [
+      {
+        "jad_id": "jad_work__44",
+        "view_label": "Commentary Matthew"
+      }
+    ]
+  },
+  "39": {
+    "id": 39,
+    "order": "39.00000000000000000000",
+    "name": "Werner, von Sankt Blasien",
+    "jad_id": "jad_author__39",
+    "gnd_url": "https://d-nb.info/gnd/120951703",
+    "notes": "",
+    "prev": "jad_author__38.html",
+    "next": "jad_author__4.html",
+    "view_label": "Werner, von Sankt Blasien",
+    "related__works": [
+      {
+        "jad_id": "jad_work__45",
+        "view_label": "Libri deflorationum"
+      }
+    ]
+  },
+  "40": {
+    "id": 40,
+    "order": "40.00000000000000000000",
+    "name": "Petrus, de Riga",
+    "jad_id": "jad_author__40",
+    "gnd_url": "https://d-nb.info/gnd/10095815X",
+    "notes": "",
+    "prev": "jad_author__4.html",
+    "next": "jad_author__41.html",
+    "view_label": "Petrus, de Riga",
+    "related__works": [
+      {
+        "jad_id": "jad_work__49",
+        "view_label": "Fragmenta ex aurora"
+      }
+    ]
+  },
+  "41": {
+    "id": 41,
+    "order": "41.00000000000000000000",
+    "name": "Peter Lombard",
+    "jad_id": "jad_author__41",
+    "gnd_url": "https://d-nb.info/gnd/11859334X",
+    "notes": "",
+    "prev": "jad_author__40.html",
+    "next": "jad_author__42.html",
+    "view_label": "Peter Lombard",
+    "related__works": [
+      {
+        "jad_id": "jad_work__51",
+        "view_label": "Commentary Psalms"
+      }
+    ]
+  },
+  "42": {
+    "id": 42,
+    "order": "42.00000000000000000000",
+    "name": "Wilhelm, von Tyrus",
+    "jad_id": "jad_author__42",
+    "gnd_url": "https://d-nb.info/gnd/11863304X",
+    "notes": "",
+    "prev": "jad_author__41.html",
+    "next": "jad_author__43.html",
+    "view_label": "Wilhelm, von Tyrus",
+    "related__works": [
+      {
+        "jad_id": "jad_work__52",
+        "view_label": "Historia"
+      }
+    ]
+  },
+  "43": {
+    "id": 43,
+    "order": "43.00000000000000000000",
+    "name": "Pseudo-Hegesippus",
+    "jad_id": "jad_author__43",
+    "gnd_url": "https://d-nb.info/gnd/1128672316",
+    "notes": "",
+    "prev": "jad_author__42.html",
+    "next": "jad_author__44.html",
+    "view_label": "Pseudo-Hegesippus",
+    "related__works": []
+  },
+  "44": {
+    "id": 44,
+    "order": "44.00000000000000000000",
+    "name": "Petrus, Venerabilis",
+    "jad_id": "jad_author__44",
+    "gnd_url": "https://d-nb.info/gnd/11880328X",
+    "notes": "",
+    "prev": "jad_author__43.html",
+    "next": "jad_author__45.html",
+    "view_label": "Petrus, Venerabilis",
+    "related__works": [
+      {
+        "jad_id": "jad_work__53",
+        "view_label": "Adversus Iudaeos"
+      }
+    ]
+  },
+  "45": {
+    "id": 45,
+    "order": "45.00000000000000000000",
+    "name": "Andreas, von Sankt Viktor",
+    "jad_id": "jad_author__45",
+    "gnd_url": "https://d-nb.info/gnd/119105098",
+    "notes": "",
+    "prev": "jad_author__44.html",
+    "next": "jad_author__46.html",
+    "view_label": "Andreas, von Sankt Viktor",
+    "related__works": [
+      {
+        "jad_id": "jad_work__54",
+        "view_label": "Commentary Isaiah"
+      }
+    ]
+  },
+  "46": {
+    "id": 46,
+    "order": "46.00000000000000000000",
+    "name": "Glossa Ordinaria",
+    "jad_id": "jad_author__46",
+    "gnd_url": "",
+    "notes": "",
+    "prev": "jad_author__45.html",
+    "next": "jad_author__47.html",
+    "view_label": "Glossa Ordinaria",
+    "related__works": [
+      {
+        "jad_id": "jad_work__55",
+        "view_label": "Glossa Ordinaria"
+      }
+    ]
+  },
+  "47": {
+    "id": 47,
+    "order": "47.00000000000000000000",
+    "name": "Ado, von Vienne",
+    "jad_id": "jad_author__47",
+    "gnd_url": "https://d-nb.info/gnd/119536390",
+    "notes": "",
+    "prev": "jad_author__46.html",
+    "next": "jad_author__48.html",
+    "view_label": "Ado, von Vienne",
+    "related__works": [
+      {
+        "jad_id": "jad_work__58",
+        "view_label": "Chronicon"
+      }
+    ]
+  },
+  "48": {
+    "id": 48,
+    "order": "48.00000000000000000000",
+    "name": "Ekkehart, von Aura",
+    "jad_id": "jad_author__48",
+    "gnd_url": "https://d-nb.info/gnd/118688529",
+    "notes": "",
+    "prev": "jad_author__47.html",
+    "next": "jad_author__49.html",
+    "view_label": "Ekkehart, von Aura",
+    "related__works": [
+      {
+        "jad_id": "jad_work__59",
+        "view_label": "Chronicon universale"
+      }
+    ]
+  },
+  "49": {
+    "id": 49,
+    "order": "49.00000000000000000000",
+    "name": "Amulo, Lugdunensis",
+    "jad_id": "jad_author__49",
+    "gnd_url": "https://d-nb.info/gnd/100729754",
+    "notes": "",
+    "prev": "jad_author__48.html",
+    "next": "jad_author__5.html",
+    "view_label": "Amulo, Lugdunensis",
+    "related__works": [
+      {
+        "jad_id": "jad_work__60",
+        "view_label": "Contra Judeaos"
+      }
+    ]
+  },
+  "50": {
+    "id": 50,
+    "order": "50.00000000000000000000",
+    "name": "Atto, von Vercelli",
+    "jad_id": "jad_author__50",
+    "gnd_url": "https://d-nb.info/gnd/100936989",
+    "notes": "",
+    "prev": "jad_author__5.html",
+    "next": "jad_author__51.html",
+    "view_label": "Atto, von Vercelli",
+    "related__works": [
+      {
+        "jad_id": "jad_work__62",
+        "view_label": "Expositio epistolarum S. Pauli"
+      }
+    ]
+  },
+  "51": {
+    "id": 51,
+    "order": "51.00000000000000000000",
+    "name": "Johannes, Chrysostomus",
+    "jad_id": "jad_author__51",
+    "gnd_url": "https://d-nb.info/gnd/118557831",
+    "notes": "",
+    "prev": "jad_author__50.html",
+    "next": "jad_author__52.html",
+    "view_label": "Johannes, Chrysostomus",
+    "related__works": []
+  },
+  "52": {
+    "id": 52,
+    "order": "52.00000000000000000000",
+    "name": "uncertain",
+    "jad_id": "jad_author__52",
+    "gnd_url": "",
+    "notes": "",
+    "prev": "jad_author__51.html",
+    "next": "jad_author__54.html",
+    "view_label": "uncertain",
+    "related__works": []
+  },
+  "54": {
+    "id": 54,
+    "order": "53.00000000000000000000",
+    "name": "Smaragdus, Sancti Michaelis",
+    "jad_id": "jad_author__54",
+    "gnd_url": "https://d-nb.info/gnd/118614983",
+    "notes": "",
+    "prev": "jad_author__52.html",
+    "next": "jad_author__55.html",
+    "view_label": "Smaragdus, Sancti Michaelis",
+    "related__works": [
+      {
+        "jad_id": "jad_work__72",
+        "view_label": "Collectiones in epistolas et evangelia"
+      }
+    ]
+  },
+  "55": {
+    "id": 55,
+    "order": "54.00000000000000000000",
+    "name": "Iulianus, Toletanus",
+    "jad_id": "jad_author__55",
+    "gnd_url": "https://d-nb.info/gnd/119525577",
+    "notes": "",
+    "prev": "jad_author__54.html",
+    "next": "jad_author__56.html",
+    "view_label": "Iulianus, Toletanus",
+    "related__works": [
+      {
+        "jad_id": "jad_work__73",
+        "view_label": "De comprobatione sextae aetatis"
+      },
+      {
+        "jad_id": "jad_work__74",
+        "view_label": "Commentarius in Nahum"
+      }
+    ]
+  },
+  "56": {
+    "id": 56,
+    "order": "55.00000000000000000000",
+    "name": "Hugo, Flaviniacensis",
+    "jad_id": "jad_author__56",
+    "gnd_url": "https://d-nb.info/gnd/100946577",
+    "notes": "",
+    "prev": "jad_author__55.html",
+    "next": "jad_author__57.html",
+    "view_label": "Hugo, Flaviniacensis",
+    "related__works": [
+      {
+        "jad_id": "jad_work__75",
+        "view_label": "Chronicon"
+      }
+    ]
+  },
+  "57": {
+    "id": 57,
+    "order": "56.00000000000000000000",
+    "name": "Sedulius, Scotus",
+    "jad_id": "jad_author__57",
+    "gnd_url": "https://d-nb.info/gnd/118760386",
+    "notes": "",
+    "prev": "jad_author__56.html",
+    "next": "jad_author__58.html",
+    "view_label": "Sedulius, Scotus",
+    "related__works": [
+      {
+        "jad_id": "jad_work__76",
+        "view_label": "Collectanea in omnes B. Pauli epistolas"
+      }
+    ]
+  },
+  "58": {
+    "id": 58,
+    "order": "57.00000000000000000000",
+    "name": "Guibert, von Nogent",
+    "jad_id": "jad_author__58",
+    "gnd_url": "https://d-nb.info/gnd/118699083",
+    "notes": "",
+    "prev": "jad_author__57.html",
+    "next": "jad_author__59.html",
+    "view_label": "Guibert, von Nogent",
+    "related__works": [
+      {
+        "jad_id": "jad_work__91",
+        "view_label": "De incarnatione contra Judaeos"
+      },
+      {
+        "jad_id": "jad_work__92",
+        "view_label": "Gesta Dei per Francos"
+      }
+    ]
+  },
+  "59": {
+    "id": 59,
+    "order": "58.00000000000000000000",
+    "name": "Heiric, of Auxerre",
+    "jad_id": "jad_author__59",
+    "gnd_url": "https://d-nb.info/gnd/119215888",
+    "notes": "",
+    "prev": "jad_author__58.html",
+    "next": "jad_author__6.html",
+    "view_label": "Heiric, of Auxerre",
+    "related__works": [
+      {
+        "jad_id": "jad_work__105",
+        "view_label": "Sermones"
+      }
+    ]
+  },
+  "60": {
+    "id": 60,
+    "order": "59.00000000000000000000",
+    "name": "Eusebius, von Caesarea",
+    "jad_id": "jad_author__60",
+    "gnd_url": "https://d-nb.info/gnd/118531425",
+    "notes": "",
+    "prev": "jad_author__6.html",
+    "next": "jad_author__61.html",
+    "view_label": "Eusebius, von Caesarea",
+    "related__works": [
+      {
+        "jad_id": "jad_work__111",
+        "view_label": "Historia Ecclesiastica"
+      }
+    ]
+  },
+  "61": {
+    "id": 61,
+    "order": "60.00000000000000000000",
+    "name": "Radulfus, Ardens",
+    "jad_id": "jad_author__61",
+    "gnd_url": "https://d-nb.info/gnd/118597698",
+    "notes": "",
+    "prev": "jad_author__60.html",
+    "next": "jad_author__62.html",
+    "view_label": "Radulfus, Ardens",
+    "related__works": [
+      {
+        "jad_id": "jad_work__122",
+        "view_label": "Homiliae"
+      }
+    ]
+  },
+  "62": {
+    "id": 62,
+    "order": "61.00000000000000000000",
+    "name": "Walter, Map",
+    "jad_id": "jad_author__62",
+    "gnd_url": "https://d-nb.info/gnd/118781669",
+    "notes": "",
+    "prev": "jad_author__61.html",
+    "next": "jad_author__63.html",
+    "view_label": "Walter, Map",
+    "related__works": [
+      {
+        "jad_id": "jad_work__123",
+        "view_label": "De nugis curialum"
+      }
+    ]
+  },
+  "63": {
+    "id": 63,
+    "order": "62.00000000000000000000",
+    "name": "Aeneas, Parisiensis",
+    "jad_id": "jad_author__63",
+    "gnd_url": "https://d-nb.info/gnd/100935486",
+    "notes": "",
+    "prev": "jad_author__62.html",
+    "next": "jad_author__64.html",
+    "view_label": "Aeneas, Parisiensis",
+    "related__works": [
+      {
+        "jad_id": "jad_work__124",
+        "view_label": "Liber adversus Graecos"
+      }
+    ]
+  },
+  "64": {
+    "id": 64,
+    "order": "63.00000000000000000000",
+    "name": "Gottfried, von Admont",
+    "jad_id": "jad_author__64",
+    "gnd_url": "https://d-nb.info/gnd/100943098",
+    "notes": "",
+    "prev": "jad_author__63.html",
+    "next": "jad_author__65.html",
+    "view_label": "Gottfried, von Admont",
+    "related__works": [
+      {
+        "jad_id": "jad_work__126",
+        "view_label": "Homiliae dominicales"
+      }
+    ]
+  },
+  "65": {
+    "id": 65,
+    "order": "64.00000000000000000000",
+    "name": "Frechulf, von Lisieux",
+    "jad_id": "jad_author__65",
+    "gnd_url": "https://d-nb.info/gnd/118703005",
+    "notes": "",
+    "prev": "jad_author__64.html",
+    "next": "jad_author__66.html",
+    "view_label": "Frechulf, von Lisieux",
+    "related__works": [
+      {
+        "jad_id": "jad_work__131",
+        "view_label": "Chronica"
+      }
+    ]
+  },
+  "66": {
+    "id": 66,
+    "order": "65.00000000000000000000",
+    "name": "Hildegard, von Bingen",
+    "jad_id": "jad_author__66",
+    "gnd_url": "https://d-nb.info/gnd/118550993",
+    "notes": "",
+    "prev": "jad_author__65.html",
+    "next": "jad_author__67.html",
+    "view_label": "Hildegard, von Bingen",
+    "related__works": [
+      {
+        "jad_id": "jad_work__132",
+        "view_label": "Explanatio symboli S. Athanasii"
+      }
+    ]
+  },
+  "67": {
+    "id": 67,
+    "order": "66.00000000000000000000",
+    "name": "Paulus, Diaconus",
+    "jad_id": "jad_author__67",
+    "gnd_url": "https://d-nb.info/gnd/118789961",
+    "notes": "",
+    "prev": "jad_author__66.html",
+    "next": "jad_author__7.html",
+    "view_label": "Paulus, Diaconus",
+    "related__works": [
+      {
+        "jad_id": "jad_work__149",
+        "view_label": "Homiliae de tempore"
+      }
+    ]
+  }
+}

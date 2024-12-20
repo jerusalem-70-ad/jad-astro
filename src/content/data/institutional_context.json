@@ -226,7 +226,8 @@
         "part_of": [
           {
             "id": 16,
-            "value": "French schools"
+            "value": "French schools",
+            "order": "16.00000000000000000000"
           }
         ]
       }

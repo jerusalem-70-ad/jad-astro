@@ -17,7 +17,8 @@
     "manuscripts": [
       {
         "id": 3,
-        "value": "San Isidoro, MS 11"
+        "value": "San Isidoro, MS 11",
+        "order": "3.00000000000000000000"
       }
     ],
     "title": "Liber Sermonum",
@@ -133,15 +134,18 @@
     "manuscripts": [
       {
         "id": 12,
-        "value": "St.Gen., MS 2787"
+        "value": "St.Gen., MS 2787",
+        "order": "12.00000000000000000000"
       },
       {
         "id": 13,
-        "value": "BL, Arundel 322"
+        "value": "BL, Arundel 322",
+        "order": "13.00000000000000000000"
       },
       {
         "id": 14,
-        "value": "BL, Royal 8 F XVII"
+        "value": "BL, Royal 8 F XVII",
+        "order": "14.00000000000000000000"
       }
     ],
     "title": "Sermones",
@@ -216,7 +220,8 @@
     "manuscripts": [
       {
         "id": 9,
-        "value": "Lam., MS 144"
+        "value": "Lam., MS 144",
+        "order": "9.00000000000000000000"
       }
     ],
     "title": "Certa relatio de situ Jerusalem",
@@ -276,7 +281,8 @@
     "manuscripts": [
       {
         "id": 2,
-        "value": "BNF, Latin 14426"
+        "value": "BNF, Latin 14426",
+        "order": "2.00000000000000000000"
       }
     ],
     "title": "Commentary Psalms",
@@ -433,7 +439,8 @@
     "manuscripts": [
       {
         "id": 4,
-        "value": "BNF, Latin 8865"
+        "value": "BNF, Latin 8865",
+        "order": "4.00000000000000000000"
       }
     ],
     "title": "Liber Floridus",
@@ -477,11 +484,13 @@
     "manuscripts": [
       {
         "id": 28,
-        "value": "Maz., Ms 1026"
+        "value": "Maz., Ms 1026",
+        "order": "28.00000000000000000000"
       },
       {
         "id": 29,
-        "value": "BNF, Latin 3728"
+        "value": "BNF, Latin 3728",
+        "order": "29.00000000000000000000"
       }
     ],
     "title": "Sermones",
@@ -536,11 +545,13 @@
     "manuscripts": [
       {
         "id": 5,
-        "value": "St.Gen., MS 1423"
+        "value": "St.Gen., MS 1423",
+        "order": "5.00000000000000000000"
       },
       {
         "id": 25,
-        "value": "BNF, Latin 3301C"
+        "value": "BNF, Latin 3301C",
+        "order": "25.00000000000000000000"
       }
     ],
     "title": "Sermones",
@@ -671,11 +682,13 @@
     "manuscripts": [
       {
         "id": 6,
-        "value": "BNF, Latin 492"
+        "value": "BNF, Latin 492",
+        "order": "6.00000000000000000000"
       },
       {
         "id": 7,
-        "value": "Maz., MS 177"
+        "value": "Maz., MS 177",
+        "order": "7.00000000000000000000"
       }
     ],
     "title": "Commentary Isaiah",
@@ -747,7 +760,8 @@
     "manuscripts": [
       {
         "id": 8,
-        "value": "St.Gen., MS 1422"
+        "value": "St.Gen., MS 1422",
+        "order": "8.00000000000000000000"
       }
     ],
     "title": "Sermones",
@@ -815,7 +829,8 @@
     "manuscripts": [
       {
         "id": 7,
-        "value": "Maz., MS 177"
+        "value": "Maz., MS 177",
+        "order": "7.00000000000000000000"
       }
     ],
     "title": "Commentary Ezekiel",
@@ -878,7 +893,8 @@
     "manuscripts": [
       {
         "id": 10,
-        "value": "BNF, Latin 446"
+        "value": "BNF, Latin 446",
+        "order": "10.00000000000000000000"
       }
     ],
     "title": "De destructione templi",
@@ -917,7 +933,8 @@
     "manuscripts": [
       {
         "id": 11,
-        "value": "BNF, Latin 3737"
+        "value": "BNF, Latin 3737",
+        "order": "11.00000000000000000000"
       }
     ],
     "title": "Sermones",
@@ -942,7 +959,7 @@
       }
     ],
     "prev": "jad_work__149.html",
-    "next": "jad_work__16.html",
+    "next": "jad_work__150.html",
     "view_label": "Sermones",
     "related__passages": [
       {
@@ -969,7 +986,8 @@
     "manuscripts": [
       {
         "id": 15,
-        "value": "BNF, Latin 620"
+        "value": "BNF, Latin 620",
+        "order": "15.00000000000000000000"
       }
     ],
     "title": "Postillae in Evangelia",
@@ -1009,7 +1027,7 @@
         "digi_url": ""
       }
     ],
-    "prev": "jad_work__15.html",
+    "prev": "jad_work__150.html",
     "next": "jad_work__17.html",
     "view_label": "Postillae in Evangelia",
     "related__passages": []
@@ -1032,7 +1050,8 @@
     "manuscripts": [
       {
         "id": 18,
-        "value": "BNF, Latin 3829"
+        "value": "BNF, Latin 3829",
+        "order": "18.00000000000000000000"
       }
     ],
     "title": "Homiliae super evangelia",
@@ -1076,7 +1095,8 @@
     "manuscripts": [
       {
         "id": 21,
-        "value": "BNF, Latin 3281"
+        "value": "BNF, Latin 3281",
+        "order": "21.00000000000000000000"
       }
     ],
     "title": "Sermones super evangelia",
@@ -1140,7 +1160,8 @@
     "manuscripts": [
       {
         "id": 23,
-        "value": "Maz., MS 178"
+        "value": "Maz., MS 178",
+        "order": "23.00000000000000000000"
       }
     ],
     "title": "Commentary Isaiah",
@@ -1236,7 +1257,8 @@
     "manuscripts": [
       {
         "id": 23,
-        "value": "Maz., MS 178"
+        "value": "Maz., MS 178",
+        "order": "23.00000000000000000000"
       }
     ],
     "title": "Commentary Ezekiel",
@@ -1308,7 +1330,8 @@
     "manuscripts": [
       {
         "id": 23,
-        "value": "Maz., MS 178"
+        "value": "Maz., MS 178",
+        "order": "23.00000000000000000000"
       }
     ],
     "title": "Commentary Lamentationes",
@@ -1384,7 +1407,8 @@
     "manuscripts": [
       {
         "id": 23,
-        "value": "Maz., MS 178"
+        "value": "Maz., MS 178",
+        "order": "23.00000000000000000000"
       }
     ],
     "title": "Commentary Daniel",
@@ -1456,7 +1480,8 @@
     "manuscripts": [
       {
         "id": 24,
-        "value": "Maz., MS 999"
+        "value": "Maz., MS 999",
+        "order": "24.00000000000000000000"
       }
     ],
     "title": "Sermones",
@@ -1536,11 +1561,13 @@
     "manuscripts": [
       {
         "id": 26,
-        "value": "BNF, Latin 3733"
+        "value": "BNF, Latin 3733",
+        "order": "26.00000000000000000000"
       },
       {
         "id": 27,
-        "value": "Maz., MS 774"
+        "value": "Maz., MS 774",
+        "order": "27.00000000000000000000"
       }
     ],
     "title": "Sermones",
@@ -2496,7 +2523,8 @@
     "manuscripts": [
       {
         "id": 16,
-        "value": "ÖNB, Cod. 1014"
+        "value": "ÖNB, Cod. 1014",
+        "order": "16.00000000000000000000"
       }
     ],
     "title": "Homiliarium Mondseense",
@@ -2548,7 +2576,8 @@
     "manuscripts": [
       {
         "id": 19,
-        "value": "BNF, Latin 3567"
+        "value": "BNF, Latin 3567",
+        "order": "19.00000000000000000000"
       }
     ],
     "title": "Sermones de tempore",
@@ -2840,7 +2869,8 @@
     "manuscripts": [
       {
         "id": 7,
-        "value": "Maz., MS 177"
+        "value": "Maz., MS 177",
+        "order": "7.00000000000000000000"
       }
     ],
     "title": "Commentary Kings",
@@ -3269,7 +3299,8 @@
             "part_of": [
               {
                 "id": 16,
-                "value": "French schools"
+                "value": "French schools",
+                "order": "16.00000000000000000000"
               }
             ]
           }
@@ -4019,7 +4050,8 @@
     "manuscripts": [
       {
         "id": 3,
-        "value": "San Isidoro, MS 11"
+        "value": "San Isidoro, MS 11",
+        "order": "3.00000000000000000000"
       }
     ],
     "title": "Commentary Revelation",
@@ -5558,7 +5590,7 @@
       }
     ],
     "prev": "jad_work__98.html",
-    "next": "{'id': 1, 'order': '1.00000000000000000000', 'name': 'Liber Sermonum ', 'jad_id': 'jad_work__1', 'author': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Martin, von León', 'jad_id': 'jad_author__2', 'gnd_url': 'https://d-nb.info/gnd/100953212', 'notes': None}], 'manuscripts': [{'id': 3, 'value': 'San Isidoro, MS 11'}], 'title': 'Liber Sermonum', 'genre': {'id': 14726, 'value': 'Sermons', 'color': 'darker-pink'}, 'not_before': '1175', 'not_after': '1200', 'written_date': 'late 12', 'notes': None, 'notes__author': None, 'institutional_context': [{'id': 1, 'order': '1.00000000000000000000', 'name': 'University of Paris', 'jad_id': 'jad_institutional_context__1', 'part_of': [{'id': 16, 'order': '16.00000000000000000000', 'name': 'French schools', 'jad_id': 'jad_institutional_context__16', 'part_of': []}]}], 'published_edition': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Patrologia Latina', 'jad_id': 'jad_sources_occurrences__2', 'digi_url': 'https://mlat.uzh.ch/browser?path=/38'}], 'prev': 'jad_work__99.html', 'next': 'jad_work__10.html'}.html",
+    "next": "{'id': 1, 'order': '1.00000000000000000000', 'name': 'Liber Sermonum ', 'jad_id': 'jad_work__1', 'author': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Martin, von León', 'jad_id': 'jad_author__2', 'gnd_url': 'https://d-nb.info/gnd/100953212', 'notes': None}], 'manuscripts': [{'id': 3, 'value': 'San Isidoro, MS 11', 'order': '3.00000000000000000000'}], 'title': 'Liber Sermonum', 'genre': {'id': 14726, 'value': 'Sermons', 'color': 'darker-pink'}, 'not_before': '1175', 'not_after': '1200', 'written_date': 'late 12', 'notes': None, 'notes__author': None, 'institutional_context': [{'id': 1, 'order': '1.00000000000000000000', 'name': 'University of Paris', 'jad_id': 'jad_institutional_context__1', 'part_of': [{'id': 16, 'order': '16.00000000000000000000', 'name': 'French schools', 'jad_id': 'jad_institutional_context__16', 'part_of': []}]}], 'published_edition': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Patrologia Latina', 'jad_id': 'jad_sources_occurrences__2', 'digi_url': 'https://mlat.uzh.ch/browser?path=/38'}], 'prev': 'jad_work__99.html', 'next': 'jad_work__10.html'}.html",
     "view_label": "Commentary Genesis",
     "related__passages": []
   },
@@ -5830,7 +5862,8 @@
     "manuscripts": [
       {
         "id": 34,
-        "value": "Maz., MS 698"
+        "value": "Maz., MS 698",
+        "order": "34.00000000000000000000"
       }
     ],
     "title": "Sermones",
@@ -6891,7 +6924,8 @@
     "manuscripts": [
       {
         "id": 20,
-        "value": "BNF, Latin 3570"
+        "value": "BNF, Latin 3570",
+        "order": "20.00000000000000000000"
       }
     ],
     "title": "Sermones",
@@ -6920,7 +6954,8 @@
             "part_of": [
               {
                 "id": 16,
-                "value": "French schools"
+                "value": "French schools",
+                "order": "16.00000000000000000000"
               }
             ]
           }
@@ -6959,7 +6994,8 @@
     "manuscripts": [
       {
         "id": 17,
-        "value": "Cambr. St.John's Coll., MS 127"
+        "value": "Cambr. St.John's Coll., MS 127",
+        "order": "17.00000000000000000000"
       }
     ],
     "title": "De Tyto et Vespasiano",
@@ -6998,7 +7034,8 @@
     "manuscripts": [
       {
         "id": 36,
-        "value": "Valenciennes, MS 227"
+        "value": "Valenciennes, MS 227",
+        "order": "36.00000000000000000000"
       }
     ],
     "title": "Sermones",
@@ -7037,7 +7074,8 @@
     "manuscripts": [
       {
         "id": 22,
-        "value": "Troyes, MS 653"
+        "value": "Troyes, MS 653",
+        "order": "22.00000000000000000000"
       }
     ],
     "title": "Sermones",
@@ -7076,7 +7114,8 @@
     "manuscripts": [
       {
         "id": 7,
-        "value": "Maz., MS 177"
+        "value": "Maz., MS 177",
+        "order": "7.00000000000000000000"
       }
     ],
     "title": "Commentary Lamentations",
@@ -7498,8 +7537,42 @@
   "149": {
     "id": 149,
     "order": "148.00000000000000000000",
-    "name": " ",
+    "name": "Homiliae de tempore ",
     "jad_id": "jad_work__149",
+    "author": [
+      {
+        "id": 67,
+        "order": "66.00000000000000000000",
+        "name": "Paulus, Diaconus",
+        "jad_id": "jad_author__67",
+        "gnd_url": "https://d-nb.info/gnd/118789961",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Homiliae de tempore",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [],
+    "prev": "jad_work__148.html",
+    "next": "jad_work__15.html",
+    "view_label": "Homiliae de tempore",
+    "related__passages": []
+  },
+  "150": {
+    "id": 150,
+    "order": "149.00000000000000000000",
+    "name": " ",
+    "jad_id": "jad_work__150",
     "author": [],
     "manuscripts": [],
     "title": "",
@@ -7511,8 +7584,8 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
-    "prev": "jad_work__148.html",
-    "next": "jad_work__15.html",
+    "prev": "jad_work__15.html",
+    "next": "jad_work__16.html",
     "view_label": "",
     "related__passages": []
   }

@@ -211,7 +211,7 @@
     "not_after": null,
     "written_date": null,
     "institutional_context": [],
-    "prev": "jad_manuscript__36.html",
+    "prev": "jad_manuscript__37.html",
     "next": "jad_manuscript__5.html",
     "view_label": "BNF, Latin 8865",
     "related__passages": [
@@ -961,7 +961,8 @@
             "part_of": [
               {
                 "id": 16,
-                "value": "French schools"
+                "value": "French schools",
+                "order": "16.00000000000000000000"
               }
             ]
           }
@@ -1747,8 +1748,25 @@
     "written_date": "",
     "institutional_context": [],
     "prev": "jad_manuscript__35.html",
-    "next": "jad_manuscript__4.html",
+    "next": "jad_manuscript__37.html",
     "view_label": "Valenciennes, MS 227",
+    "related__passages": []
+  },
+  "37": {
+    "id": 37,
+    "order": "37.00000000000000000000",
+    "name": [],
+    "jad_id": "jad_manuscript__37",
+    "library": [],
+    "idno": "",
+    "catalog_url": "",
+    "digi_url": "",
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "institutional_context": [],
+    "prev": "jad_manuscript__36.html",
+    "next": "jad_manuscript__4.html",
     "related__passages": []
   }
 }

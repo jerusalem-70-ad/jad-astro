@@ -132,7 +132,8 @@
         "part_of": [
           {
             "id": 1,
-            "value": "Crusades"
+            "value": "Crusades",
+            "order": "1.00000000000000000000"
           }
         ]
       },

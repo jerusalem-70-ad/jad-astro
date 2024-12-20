@@ -197,11 +197,13 @@
         "manuscripts": [
           {
             "id": 5,
-            "value": "St.Gen., MS 1423"
+            "value": "St.Gen., MS 1423",
+            "order": "5.00000000000000000000"
           },
           {
             "id": 25,
-            "value": "BNF, Latin 3301C"
+            "value": "BNF, Latin 3301C",
+            "order": "25.00000000000000000000"
           }
         ],
         "title": "Sermones",
@@ -545,11 +547,13 @@
         "manuscripts": [
           {
             "id": 6,
-            "value": "BNF, Latin 492"
+            "value": "BNF, Latin 492",
+            "order": "6.00000000000000000000"
           },
           {
             "id": 7,
-            "value": "Maz., MS 177"
+            "value": "Maz., MS 177",
+            "order": "7.00000000000000000000"
           }
         ],
         "title": "Commentary Isaiah",
@@ -712,11 +716,13 @@
         "manuscripts": [
           {
             "id": 6,
-            "value": "BNF, Latin 492"
+            "value": "BNF, Latin 492",
+            "order": "6.00000000000000000000"
           },
           {
             "id": 7,
-            "value": "Maz., MS 177"
+            "value": "Maz., MS 177",
+            "order": "7.00000000000000000000"
           }
         ],
         "title": "Commentary Isaiah",
@@ -855,7 +861,8 @@
         "manuscripts": [
           {
             "id": 8,
-            "value": "St.Gen., MS 1422"
+            "value": "St.Gen., MS 1422",
+            "order": "8.00000000000000000000"
           }
         ],
         "title": "Sermones",
@@ -1007,7 +1014,8 @@
         "manuscripts": [
           {
             "id": 9,
-            "value": "Lam., MS 144"
+            "value": "Lam., MS 144",
+            "order": "9.00000000000000000000"
           }
         ],
         "title": "Certa relatio de situ Jerusalem",
@@ -1146,7 +1154,8 @@
         "manuscripts": [
           {
             "id": 11,
-            "value": "BNF, Latin 3737"
+            "value": "BNF, Latin 3737",
+            "order": "11.00000000000000000000"
           }
         ],
         "title": "Sermones",
@@ -1272,7 +1281,8 @@
         "manuscripts": [
           {
             "id": 18,
-            "value": "BNF, Latin 3829"
+            "value": "BNF, Latin 3829",
+            "order": "18.00000000000000000000"
           }
         ],
         "title": "Homiliae super evangelia",
@@ -1400,7 +1410,8 @@
         "manuscripts": [
           {
             "id": 21,
-            "value": "BNF, Latin 3281"
+            "value": "BNF, Latin 3281",
+            "order": "21.00000000000000000000"
           }
         ],
         "title": "Sermones super evangelia",
@@ -1539,7 +1550,8 @@
         "manuscripts": [
           {
             "id": 21,
-            "value": "BNF, Latin 3281"
+            "value": "BNF, Latin 3281",
+            "order": "21.00000000000000000000"
           }
         ],
         "title": "Sermones super evangelia",
@@ -1752,11 +1764,13 @@
         "manuscripts": [
           {
             "id": 5,
-            "value": "St.Gen., MS 1423"
+            "value": "St.Gen., MS 1423",
+            "order": "5.00000000000000000000"
           },
           {
             "id": 25,
-            "value": "BNF, Latin 3301C"
+            "value": "BNF, Latin 3301C",
+            "order": "25.00000000000000000000"
           }
         ],
         "title": "Sermones",
@@ -1934,11 +1948,13 @@
         "manuscripts": [
           {
             "id": 5,
-            "value": "St.Gen., MS 1423"
+            "value": "St.Gen., MS 1423",
+            "order": "5.00000000000000000000"
           },
           {
             "id": 25,
-            "value": "BNF, Latin 3301C"
+            "value": "BNF, Latin 3301C",
+            "order": "25.00000000000000000000"
           }
         ],
         "title": "Sermones",
@@ -2193,7 +2209,8 @@
         "manuscripts": [
           {
             "id": 4,
-            "value": "BNF, Latin 8865"
+            "value": "BNF, Latin 8865",
+            "order": "4.00000000000000000000"
           }
         ],
         "title": "Liber Floridus",
@@ -2346,15 +2363,18 @@
         "manuscripts": [
           {
             "id": 12,
-            "value": "St.Gen., MS 2787"
+            "value": "St.Gen., MS 2787",
+            "order": "12.00000000000000000000"
           },
           {
             "id": 13,
-            "value": "BL, Arundel 322"
+            "value": "BL, Arundel 322",
+            "order": "13.00000000000000000000"
           },
           {
             "id": 14,
-            "value": "BL, Royal 8 F XVII"
+            "value": "BL, Royal 8 F XVII",
+            "order": "14.00000000000000000000"
           }
         ],
         "title": "Sermones",
@@ -2607,7 +2627,8 @@
         "manuscripts": [
           {
             "id": 3,
-            "value": "San Isidoro, MS 11"
+            "value": "San Isidoro, MS 11",
+            "order": "3.00000000000000000000"
           }
         ],
         "title": "Liber Sermonum",
@@ -2806,7 +2827,8 @@
         "manuscripts": [
           {
             "id": 3,
-            "value": "San Isidoro, MS 11"
+            "value": "San Isidoro, MS 11",
+            "order": "3.00000000000000000000"
           }
         ],
         "title": "Liber Sermonum",
@@ -4120,7 +4142,8 @@
         "manuscripts": [
           {
             "id": 24,
-            "value": "Maz., MS 999"
+            "value": "Maz., MS 999",
+            "order": "24.00000000000000000000"
           }
         ],
         "title": "Sermones",
@@ -4294,7 +4317,8 @@
         "manuscripts": [
           {
             "id": 24,
-            "value": "Maz., MS 999"
+            "value": "Maz., MS 999",
+            "order": "24.00000000000000000000"
           }
         ],
         "title": "Sermones",
@@ -4454,7 +4478,8 @@
         "manuscripts": [
           {
             "id": 24,
-            "value": "Maz., MS 999"
+            "value": "Maz., MS 999",
+            "order": "24.00000000000000000000"
           }
         ],
         "title": "Sermones",
@@ -4619,7 +4644,8 @@
         "manuscripts": [
           {
             "id": 24,
-            "value": "Maz., MS 999"
+            "value": "Maz., MS 999",
+            "order": "24.00000000000000000000"
           }
         ],
         "title": "Sermones",
@@ -6674,7 +6700,8 @@
         "manuscripts": [
           {
             "id": 2,
-            "value": "BNF, Latin 14426"
+            "value": "BNF, Latin 14426",
+            "order": "2.00000000000000000000"
           }
         ],
         "title": "Commentary Psalms",
@@ -6835,7 +6862,8 @@
         "manuscripts": [
           {
             "id": 16,
-            "value": "ÖNB, Cod. 1014"
+            "value": "ÖNB, Cod. 1014",
+            "order": "16.00000000000000000000"
           }
         ],
         "title": "Homiliarium Mondseense",
@@ -6976,7 +7004,8 @@
         "manuscripts": [
           {
             "id": 19,
-            "value": "BNF, Latin 3567"
+            "value": "BNF, Latin 3567",
+            "order": "19.00000000000000000000"
           }
         ],
         "title": "Sermones de tempore",
@@ -7296,11 +7325,13 @@
         "manuscripts": [
           {
             "id": 5,
-            "value": "St.Gen., MS 1423"
+            "value": "St.Gen., MS 1423",
+            "order": "5.00000000000000000000"
           },
           {
             "id": 25,
-            "value": "BNF, Latin 3301C"
+            "value": "BNF, Latin 3301C",
+            "order": "25.00000000000000000000"
           }
         ],
         "title": "Sermones",
@@ -8356,7 +8387,8 @@
         "manuscripts": [
           {
             "id": 3,
-            "value": "San Isidoro, MS 11"
+            "value": "San Isidoro, MS 11",
+            "order": "3.00000000000000000000"
           }
         ],
         "title": "Liber Sermonum",
@@ -8546,7 +8578,8 @@
         "manuscripts": [
           {
             "id": 3,
-            "value": "San Isidoro, MS 11"
+            "value": "San Isidoro, MS 11",
+            "order": "3.00000000000000000000"
           }
         ],
         "title": "Liber Sermonum",
@@ -8724,7 +8757,8 @@
         "manuscripts": [
           {
             "id": 3,
-            "value": "San Isidoro, MS 11"
+            "value": "San Isidoro, MS 11",
+            "order": "3.00000000000000000000"
           }
         ],
         "title": "Liber Sermonum",
@@ -8897,7 +8931,8 @@
         "manuscripts": [
           {
             "id": 3,
-            "value": "San Isidoro, MS 11"
+            "value": "San Isidoro, MS 11",
+            "order": "3.00000000000000000000"
           }
         ],
         "title": "Liber Sermonum",
@@ -9070,7 +9105,8 @@
         "manuscripts": [
           {
             "id": 3,
-            "value": "San Isidoro, MS 11"
+            "value": "San Isidoro, MS 11",
+            "order": "3.00000000000000000000"
           }
         ],
         "title": "Liber Sermonum",
@@ -9252,7 +9288,8 @@
         "manuscripts": [
           {
             "id": 3,
-            "value": "San Isidoro, MS 11"
+            "value": "San Isidoro, MS 11",
+            "order": "3.00000000000000000000"
           }
         ],
         "title": "Liber Sermonum",
@@ -9446,7 +9483,8 @@
         "manuscripts": [
           {
             "id": 3,
-            "value": "San Isidoro, MS 11"
+            "value": "San Isidoro, MS 11",
+            "order": "3.00000000000000000000"
           }
         ],
         "title": "Liber Sermonum",
@@ -9628,7 +9666,8 @@
         "manuscripts": [
           {
             "id": 3,
-            "value": "San Isidoro, MS 11"
+            "value": "San Isidoro, MS 11",
+            "order": "3.00000000000000000000"
           }
         ],
         "title": "Liber Sermonum",
@@ -9806,7 +9845,8 @@
         "manuscripts": [
           {
             "id": 3,
-            "value": "San Isidoro, MS 11"
+            "value": "San Isidoro, MS 11",
+            "order": "3.00000000000000000000"
           }
         ],
         "title": "Liber Sermonum",
@@ -9988,7 +10028,8 @@
         "manuscripts": [
           {
             "id": 3,
-            "value": "San Isidoro, MS 11"
+            "value": "San Isidoro, MS 11",
+            "order": "3.00000000000000000000"
           }
         ],
         "title": "Liber Sermonum",
@@ -10166,7 +10207,8 @@
         "manuscripts": [
           {
             "id": 3,
-            "value": "San Isidoro, MS 11"
+            "value": "San Isidoro, MS 11",
+            "order": "3.00000000000000000000"
           }
         ],
         "title": "Liber Sermonum",
@@ -10340,7 +10382,8 @@
         "manuscripts": [
           {
             "id": 7,
-            "value": "Maz., MS 177"
+            "value": "Maz., MS 177",
+            "order": "7.00000000000000000000"
           }
         ],
         "title": "Commentary Kings",
@@ -11290,7 +11333,8 @@
                 "part_of": [
                   {
                     "id": 16,
-                    "value": "French schools"
+                    "value": "French schools",
+                    "order": "16.00000000000000000000"
                   }
                 ]
               }
@@ -11399,7 +11443,8 @@
                 "part_of": [
                   {
                     "id": 16,
-                    "value": "French schools"
+                    "value": "French schools",
+                    "order": "16.00000000000000000000"
                   }
                 ]
               }
@@ -11530,7 +11575,8 @@
         "manuscripts": [
           {
             "id": 23,
-            "value": "Maz., MS 178"
+            "value": "Maz., MS 178",
+            "order": "23.00000000000000000000"
           }
         ],
         "title": "Commentary Isaiah",
@@ -11690,7 +11736,8 @@
         "manuscripts": [
           {
             "id": 23,
-            "value": "Maz., MS 178"
+            "value": "Maz., MS 178",
+            "order": "23.00000000000000000000"
           }
         ],
         "title": "Commentary Isaiah",
@@ -11858,7 +11905,8 @@
         "manuscripts": [
           {
             "id": 23,
-            "value": "Maz., MS 178"
+            "value": "Maz., MS 178",
+            "order": "23.00000000000000000000"
           }
         ],
         "title": "Commentary Isaiah",
@@ -12013,7 +12061,8 @@
         "manuscripts": [
           {
             "id": 23,
-            "value": "Maz., MS 178"
+            "value": "Maz., MS 178",
+            "order": "23.00000000000000000000"
           }
         ],
         "title": "Commentary Isaiah",
@@ -12173,7 +12222,8 @@
         "manuscripts": [
           {
             "id": 23,
-            "value": "Maz., MS 178"
+            "value": "Maz., MS 178",
+            "order": "23.00000000000000000000"
           }
         ],
         "title": "Commentary Isaiah",
@@ -12333,7 +12383,8 @@
         "manuscripts": [
           {
             "id": 23,
-            "value": "Maz., MS 178"
+            "value": "Maz., MS 178",
+            "order": "23.00000000000000000000"
           }
         ],
         "title": "Commentary Isaiah",
@@ -12488,7 +12539,8 @@
         "manuscripts": [
           {
             "id": 23,
-            "value": "Maz., MS 178"
+            "value": "Maz., MS 178",
+            "order": "23.00000000000000000000"
           }
         ],
         "title": "Commentary Isaiah",
@@ -12643,7 +12695,8 @@
         "manuscripts": [
           {
             "id": 23,
-            "value": "Maz., MS 178"
+            "value": "Maz., MS 178",
+            "order": "23.00000000000000000000"
           }
         ],
         "title": "Commentary Isaiah",
@@ -12811,7 +12864,8 @@
         "manuscripts": [
           {
             "id": 23,
-            "value": "Maz., MS 178"
+            "value": "Maz., MS 178",
+            "order": "23.00000000000000000000"
           }
         ],
         "title": "Commentary Lamentationes",
@@ -12966,7 +13020,8 @@
         "manuscripts": [
           {
             "id": 23,
-            "value": "Maz., MS 178"
+            "value": "Maz., MS 178",
+            "order": "23.00000000000000000000"
           }
         ],
         "title": "Commentary Lamentationes",
@@ -13126,7 +13181,8 @@
         "manuscripts": [
           {
             "id": 23,
-            "value": "Maz., MS 178"
+            "value": "Maz., MS 178",
+            "order": "23.00000000000000000000"
           }
         ],
         "title": "Commentary Lamentationes",
@@ -13286,7 +13342,8 @@
         "manuscripts": [
           {
             "id": 23,
-            "value": "Maz., MS 178"
+            "value": "Maz., MS 178",
+            "order": "23.00000000000000000000"
           }
         ],
         "title": "Commentary Ezekiel",
@@ -13441,7 +13498,8 @@
         "manuscripts": [
           {
             "id": 23,
-            "value": "Maz., MS 178"
+            "value": "Maz., MS 178",
+            "order": "23.00000000000000000000"
           }
         ],
         "title": "Commentary Ezekiel",
@@ -13601,7 +13659,8 @@
         "manuscripts": [
           {
             "id": 23,
-            "value": "Maz., MS 178"
+            "value": "Maz., MS 178",
+            "order": "23.00000000000000000000"
           }
         ],
         "title": "Commentary Daniel",
@@ -13761,7 +13820,8 @@
         "manuscripts": [
           {
             "id": 23,
-            "value": "Maz., MS 178"
+            "value": "Maz., MS 178",
+            "order": "23.00000000000000000000"
           }
         ],
         "title": "Commentary Daniel",
@@ -16456,7 +16516,8 @@
         "manuscripts": [
           {
             "id": 3,
-            "value": "San Isidoro, MS 11"
+            "value": "San Isidoro, MS 11",
+            "order": "3.00000000000000000000"
           }
         ],
         "title": "Commentary Revelation",

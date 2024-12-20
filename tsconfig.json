@@ -6,5 +6,7 @@
       "@components/*": ["src/components/*"],
       "@pages/*": ["src/pages/*"]
     }
-  }
+  },
+    "include": [".astro/types.d.ts", "**/*"],
+    "exclude": ["dist"]
 }
