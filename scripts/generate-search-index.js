@@ -41,7 +41,7 @@ async function generate() {
   Object.values(data).forEach((value) => {
     const item = {
       id: value.jad_id,
-      rec_id: `${value.jad_id}.html`,
+      rec_id: `${value.jad_id}`,
       title: value.passage,
       full_text: `${value.passage} ${value.text_paragraph}`,
       language: value.language,
