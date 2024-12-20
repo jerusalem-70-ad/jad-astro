@@ -3,7 +3,7 @@ import { collectionName } from "../../config/search.config";
 import Layout from "../layouts/page-layout.astro";
 import { createTypesenseClient } from "../lib/create-typesense-client"; // import the function that creates a client with the proper User API
 
-export const prerender = false;
+/* export const prerender = false;
 
 const client = createTypesenseClient();
 
@@ -17,12 +17,12 @@ const q = searchParams.get("q") ?? "";
 const response = await client
     .collections(collectionName)
     .documents()
-    .search({ q, query_by: "title" });
+    .search({ q, query_by: "title" }); */
 ---
 
 <Layout>
     <main>
-        <h1>Form test</h1>
+        <!--  <h1>Form test</h1>
         <form role="search">
             <label>
                 <div>Search</div>
@@ -32,7 +32,7 @@ const response = await client
             <button class="bg-black text-white rounded px-3 py-1 font-medium"
                 >Search</button
             >
-        </form>
+        </form> -->
         <!--    <section>
             <pre>{JSON.stringify(response, null, 2)}</pre>
             <ul>
