@@ -38,6 +38,9 @@ importers:
       tabulator:
         specifier: ^0.2.40
         version: 0.2.40
+      tabulator-tables:
+        specifier: ^6.3.0
+        version: 6.3.0
       tailwindcss:
         specifier: ^3.4.13
         version: 3.4.13
@@ -2455,6 +2458,9 @@ packages:
     resolution: {integrity: sha512-OoohrmuUlBs8B8o6MB2Aevn+pRIH9zDALSR+6hhqVfa6fRwG/Qw9VUMSMW9VNg2CFc/MTIfabtdOVl9ODIJjpw==}
     engines: {node: '>=14.0.0'}
     hasBin: true
+
+  tabulator-tables@6.3.0:
+    resolution: {integrity: sha512-gFiivoa03+NCDJ28Na3UU45nJT7sFXBsFCBtMqXz5OpsNTWrmL5ZJYA4oZtDFaVfarPqUHNgwm2PhL6DR7CQxg==}
 
   tabulator@0.2.40:
     resolution: {integrity: sha512-62i/Vgnf55xPRaNd9xnGajMvul0GtZK1khud4Vv6f4EllkKYIvN3CDB5+jquyVMIqi0aBlThjgYZ6zm4BnRvIA==}
@@ -5706,6 +5712,8 @@ snapshots:
       css-what: 6.1.0
       csso: 5.0.5
       picocolors: 1.1.0
+
+  tabulator-tables@6.3.0: {}
 
   tabulator@0.2.40:
     dependencies:
