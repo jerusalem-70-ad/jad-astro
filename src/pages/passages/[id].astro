@@ -31,7 +31,7 @@ const { data: passage } = Astro.props;
             {Object.values(passages).map((passage) => {
                 return (
                     <li id={`passage-${passage.jad_id}`} class="list-disc overflow-hidden whitespace-nowrap text-ellipsis max-w-md hover:text-wrap">                     
-                       <NavLink href={passage.jad_id} class="hover:text-brandRed">({passage.jad_id.substring(15)}) <span class="italic">{passage.passage}</span></NavLink>                                                        
+                       <NavLink href=`/passages/${passage.jad_id}` class="hover:text-brandRed">({passage.jad_id.substring(15)}) <span class="italic">{passage.passage}</span></NavLink>                                                        
                     </li>)
             })}
         </ul>      
