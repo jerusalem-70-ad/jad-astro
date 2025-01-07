@@ -49,13 +49,74 @@ import TableHead from "../components/table-head.astro";
           resizable: true,
           field: "passage",
           minWidth: 200,
-          mutator: jsonpathLookup,
           headerFilter: "input",
         },
         {
           title: "Author",
           resizable: true,
-          field: "author",
+          field: "Author",
+          minWidth: 200,
+          mutator: jsonpathLookup,
+          mutatorParams: {
+            path: "$[*].value",
+            separator: "; ",
+          },
+          headerFilter: "input",
+        },
+        {
+          title: "Work",
+          resizable: true,
+          field: "work",
+          minWidth: 200,
+          mutator: jsonpathLookup,
+          mutatorParams: {
+            path: "$[*].name",
+            separator: "; ",
+          },
+          headerFilter: "input",
+        },
+
+        {
+          title: "Manuscript",
+          resizable: true,
+          field: "manuscript",
+          minWidth: 200,
+          mutator: jsonpathLookup,
+          mutatorParams: {
+            path: "$[*].name[*].value",
+            separator: "; ",
+          },
+          headerFilter: "input",
+        },
+
+        {
+          title: "Biblical Reference",
+          resizable: true,
+          field: "biblical_references",
+          minWidth: 200,
+          mutator: jsonpathLookup,
+          mutatorParams: {
+            path: "$[*].value",
+            separator: "; ",
+          },
+          headerFilter: "input",
+        },
+        {
+          title: "Liturgical Reference",
+          resizable: true,
+          field: "liturgical_references",
+          minWidth: 200,
+          mutator: jsonpathLookup,
+          mutatorParams: {
+            path: "$[*].value",
+            separator: "; ",
+          },
+          headerFilter: "input",
+        },
+        {
+          title: "Source",
+          resizable: true,
+          field: "sources_used",
           minWidth: 200,
           mutator: jsonpathLookup,
           mutatorParams: {
@@ -89,10 +150,10 @@ import TableHead from "../components/table-head.astro";
       });
 
     // event listeners set:
-    // href to the work detail view page
+    // href to the entry detail view page
     table.on("rowClick", function (e, row) {
       var data = row.getData();
-      var url = withBasePath(`/hands/${data["hit_id"]}`);
+      var url = withBasePath(`/passages/${data["jad_id"]}`);
       window.open(url, "_self");
     });
     table.on("dataLoaded", function (data) {

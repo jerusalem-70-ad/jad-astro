@@ -11,13 +11,15 @@ const { title, definition } = Astro.props;
 
 <div class="mx-auto md:w-4/5 w-5/6">
 	<div class="flex justify-between align-middle mb-2">
-		<h1 class="text-2xl font-semibold text-brandRed py-2 flex items-center gap-1">
+		<h1
+			class="text-2xl font-semibold text-brandRed py-2 flex items-center gap-1"
+		>
 			{title}
 			{
 				definition && (
 					<span class="group flex gap-2 items-start">
 						<Icon name="lucide:info" aria-hidden="true" />
-						<span class="sr-only">Definition des Begriffes</span>
+						<span class="sr-only">Term definition</span>
 						<span class="invisible group-hover:visible border border-brandRed rounded-md px-2 py-1 text-sm md:text-base font-medium bg-brandRed text-brandRose">
 							{definition}
 						</span>
@@ -28,9 +30,9 @@ const { title, definition } = Astro.props;
 		<DownloadButtons />
 	</div>
 	<div class="text-brandRed text-xl">
-		Es werden
-		<span id="counter1"></span> von
-		<span id="counter2"></span> Einträgen angezeigt
+		Showing
+		<span id="counter1"></span> from a total of
+		<span id="counter2"></span> entries
 	</div>
 	<div class="text-sm md:text-base">
 		<table id="tabulator-table"></table>
