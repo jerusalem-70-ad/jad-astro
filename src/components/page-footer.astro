@@ -1,5 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import imafoLogo from "../../public/assets/images/imafo_logo_kurz.png";
+import fwfLogo from "../../public/assets/images/fwf-logo.png";
+import acdhLogo from "../../public/assets/images/acdh-ch-logo-light.svg";
 import NavLink from "./nav-link.astro";
 ---
 
@@ -18,46 +22,33 @@ import NavLink from "./nav-link.astro";
             <span class="text-sm font-medium">Contact:</span>
         </div>
 
-        <div
-            class="grid grid-cols-[auto_1fr] items-start gap-x-8 gap-y-6 md:grid-cols-[auto_1fr_auto_1fr]"
-        >
-            <div>
-                <a
-                    class="inline-flex py-1"
-                    href="https://www.oeaw.ac.at/en/imafo/home"
-                >
-                    <!--  <img
-                        alt=""
-                        class="w-16 h-auto"
-                        loading="lazy"
-                        src="assets/images/imafo_logo_kurz.png"
-                    /> -->
-                    <span class="sr-only">Institute for Medieval Research</span>
-                </a>
-            </div>
-            <div class="grid gap-y-2">
-                <div class="font-medium">
-                    Medieval Reception of the Roman Conquest of Jerusalem (<a
-                        href="https://www.fwf.ac.at/forschungsradar/10.55776/ESP678"
-                        class="underline decoration-dotted underline-offset-4 hover:no-underline"
-                        >ESP 678</a
-                    >)
-                </div>
-                <div>Dr. Alexander Marx</div>
-                <div>
-                    Institute for Medieval Research
-                    <br />
-                    Austrian Academy of Sciences
-                </div>
-                <div>
-                    <div>
-                        Dominikanerbastei 16 (Entrance Wiesingerstraße 4)
+        <div class="mx-auto grid md:flex gap-4">
+            <section>
+                <span class="font-semibold">Research institution:</span>
+                <div class="md:grid grid-cols-[2fr_3fr] gap-4 m-2">
+                    <a
+                        class="hidden md:inline-flex py-1"
+                        href="https://www.oeaw.ac.at/en/imafo/home"
+                    >
+                        <Image
+                            src={imafoLogo}
+                            alt=""
+                            class="h-auto w-60 m-auto"
+                        />
+                        <span class="sr-only"
+                            >Institute for Mediaeval Research (IMAFO)</span
+                        >
+                    </a>
+                    <p>
+                        <NavLink
+                            class="font-semibold"
+                            href="https://www.oeaw.ac.at/en/imafo/home"
+                            >Institute for Mediaeval Research (IMAFO)</NavLink
+                        >
+                        <br /> Austrian Academy of Sciences
+
+                        <br /> Dominikanerbastei 16, 1010 Vienna
                         <br />
-                        1010 Vienna
-                    </div>
-                </div>
-                <div>
-                    <div>
                         E:
                         <a
                             class="underline decoration-dotted underline-offset-4 hover:no-underline"
@@ -65,89 +56,68 @@ import NavLink from "./nav-link.astro";
                         >
                             imafo@oeaw.ac.at
                         </a>
-                    </div>
+                    </p>
                 </div>
-            </div>
+            </section>
 
-            <div></div>
-            <!--  <div class="grid gap-y-8">
-                <img
-                    alt=""
-                    class="h-16 w-auto"
-                    loading="lazy"
-                    src="assets/images/oeaw-logo.png"
-                />
-                <img
-                    alt=""
-                    class="h-10 w-auto"
-                    loading="lazy"
-                    src="assets/images/fwf-logo.png"
-                />
-            </div> -->
-        </div>
-
-        <div
-            class="grid grid-cols-[auto_1fr] items-start gap-x-8 gap-y-6 md:grid-cols-[auto_1fr_auto_1fr]"
-        >
-            <div>
-                <a class="inline-flex py-1" href="https://www.oeaw.ac.at/acdh/">
-                    <!--  <img
-                        alt=""
-                        class="size-16"
-                        loading="lazy"
-                        src="assets/images/acdh-ch-logo-light.svg"
-                    /> -->
-                    <span class="sr-only">ACDH-CH</span>
-                </a>
-            </div>
-            <div class="grid gap-y-2">
-                <div class="font-medium">Technical implementation: ACDH-CH</div>
-                <div>
-                    Austrian Centre for Digital Humanities and Cultural Heritage
-                    <br />
-                    Austrian Academy of Sciences
-                </div>
-                <div>
-                    <div>Bäckerstraße 13, 1010 Wien</div>
-                </div>
-                <div>
-                    <div>
-                        T:
-                        <a
-                            class="underline decoration-dotted underline-offset-4 hover:no-underline"
-                            href="tel:+43 1 51581-2200"
-                        >
-                            +43 1 51581-2200
-                        </a>
-                    </div>
-                    <div>
-                        E:
-                        <a
-                            class="underline decoration-dotted underline-offset-4 hover:no-underline"
-                            href="mailto:acdh-ch@oeaw.ac.at"
-                            >acdh-ch@oeaw.ac.at</a
-                        >
-                    </div>
-                </div>
-            </div>
-
-            <div></div>
-            <div class="grid gap-y-2">
-                <div class="font-medium">Helpdesk</div>
-                <div>
-                    ACDH-CH runs a helpdesk offering advice for questions
-                    related to various digital humanities topics.
-                </div>
-                <div>
+            <section>
+                <span class="font-semibold">Technical implementation:</span>
+                <div class="flex gap-4 items-start">
                     <a
-                        class="underline decoration-dotted underline-offset-4 hover:no-underline"
-                        href="mailto:acdh-ch-helpdesk@oeaw.ac.at">Contact</a
+                        class="hidden md:inline-flex mt-4"
+                        href="https://www.oeaw.ac.at/acdh/"
                     >
+                        <Image src={acdhLogo} alt="" />
+                        <span class="sr-only">
+                            Austrian Centre for Digital Humanities and Cultural
+                            Heritage
+                        </span>
+                    </a>
+                    <div class="grid gap-2 m-2">
+                        <p>
+                            <NavLink
+                                class="font-semibold"
+                                href="https://www.oeaw.ac.at/acdh/"
+                                >ACDH-CH Austrian Centre for Digital Humanities
+                                and Cultural Heritage</NavLink
+                            >
+                            <br />
+                            Austrian Academy of Sciences
+                            <br />
+                            Bäckerstraße 13, 1010 Vienna
+                            <br />
+                            T:
+                            <a
+                                class="underline decoration-dotted underline-offset-4 hover:no-underline"
+                                href="tel:+43 1 51581-2200"
+                            >
+                                +43 1 51581-2200
+                            </a>
+                            <br />
+                            E:
+                            <a
+                                class="underline decoration-dotted underline-offset-4 hover:no-underline"
+                                href="mailto:acdh-ch@oeaw.ac.at"
+                                >acdh-ch@oeaw.ac.at</a
+                            >
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </section>
+
+            <section>
+                <span class="font-semibold">Funding:</span>
+
+                <a href="https://www.fwf.ac.at/forschungsradar/10.55776/ESP678">
+                    <Image
+                        src={fwfLogo}
+                        alt="Österreichischer Wissenschaftsfonds"
+                        class="h-auto w-60 m-auto py-10"
+                    />
+                </a>
+            </section>
         </div>
     </div>
-
     <div class="flex justify-center p-3 bg-brandBrown text-brandPaleWhite">
         <p>
             © Copyright OEAW | <a

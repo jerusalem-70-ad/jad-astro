@@ -2,6 +2,8 @@
 import PageLayout from "../layouts/page-layout.astro";
 import { Icon } from "astro-icon/components";
 import NavLink from "../components/nav-link.astro";
+import { Image } from "astro:assets";
+import titleImage from "../../public/assets/images/title-image.png";
 ---
 
 <PageLayout>
@@ -63,10 +65,9 @@ import NavLink from "../components/nav-link.astro";
 				</div>
 			</div>
 		</div>
-		<figure class="grid gap-2">
-			<img
-				class="object-contain w-full"
-				src="assets/images/title-image.png"
+		<figure class="md:grid gap-2 content-start hidden">
+			<Image
+				src={titleImage}
 				alt="(Venice) La distruzione del tempio di Gerusalemme -Francesco Hayez"
 				width="700"
 				height="500"
