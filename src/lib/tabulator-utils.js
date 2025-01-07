@@ -86,6 +86,8 @@ export function jsonpathsDistinctRanges(value, data, type, params, component) {
   // Return distinct year ranges joined by the separator
   return [...new Set(yearRanges)].join(separator);
 }
+
+
 // for original nested date range with not_before, not_after 
 export function jsonpathsDateRangles(value, data, type, params, component) {
   const separator = params.separator || ", ";

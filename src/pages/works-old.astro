@@ -1,0 +1,198 @@
+---
+import PageLayout from "../layouts/page-layout.astro";
+import works from "../content/data/works.json";
+import NavLink from "@components/nav-link.astro";
+const worksValues = Object.values(works);
+---
+
+<PageLayout>
+  <style>
+    /* To make the table rows striped */
+    tr:nth-child(even) {
+      background-color: #fef9f8;
+    }
+    tr:nth-child(odd) {
+      background-color: #f5e8e6;
+    }
+    /* To highlight a row on click */
+    tr:focus {
+      outline: none; /* Remove the default outline on focus */
+      background-color: #ca9f91;
+    }
+  </style>
+
+  <div class="mx-auto p-4 lg:w-4/5">
+    <div>
+      <div>
+        <div class="flex justify-between align-middle mb-2">
+          <h2 class="text-2xl font-semibold text-brandBrown py-2">Works</h2>
+          <button
+            id="download-btn"
+            class="border rounded-md shadow-sm bg-brandBrown text-brandPaleWhite px-4 font-semibold hover:bg-brandPaleWhite hover:border-brandBrown hover:text-brandBrown transition"
+            >Download CSV</button
+          >
+        </div>
+        <table
+          id="jad-works"
+          class="data-table text-brandBrown w-full table-fixed shadow-md border lg:leading-7 text-sm lg:text-base"
+        >
+          <thead>
+            <tr>
+              <th>
+                <div class="flex flex-col items-start p-2">
+                  <span class="font-bold">Title</span>
+                  <input
+                    type="text"
+                    id="nameSearch"
+                    placeholder="Search Name"
+                    class="mt-2 w-full p-2 border border-gray-300 rounded font-normal"
+                  />
+                </div>
+              </th>
+              <th>
+                <div class="flex flex-col items-start p-2">
+                  <span class="font-bold">Author</span>
+                  <input
+                    type="text"
+                    id="authorSearch"
+                    placeholder="Search Author"
+                    class="mt-2 w-full p-2 border border-gray-300 rounded font-normal"
+                  />
+                </div>
+              </th>
+              <th>
+                <div class="flex flex-col items-start p-2">
+                  <span class="font-bold">Genre</span>
+                  <input
+                    type="text"
+                    id="genreSearch"
+                    placeholder="Search Genre"
+                    class="mt-2 w-full p-2 border border-gray-300 rounded font-normal"
+                  />
+                </div>
+              </th>
+              <th>
+                <div class="flex flex-col items-start p-2">
+                  <span class="font-bold">Manuscript</span>
+                  <input
+                    type="text"
+                    id="manuscriptSearch"
+                    placeholder="Search MS"
+                    class="mt-2 w-full p-2 border border-gray-300 rounded font-normal"
+                  />
+                </div>
+              </th>
+              <th>
+                <div class="flex flex-col items-start p-2">
+                  <span class="font-bold">Passages</span>
+                  <input
+                    type="text"
+                    id="passageSearch"
+                    placeholder="Search Passage #"
+                    class="mt-2 w-full p-2 border border-gray-300 rounded font-normal"
+                  />
+                </div>
+              </th>
+              <th>
+                <div class="flex flex-col items-start p-2">
+                  <span class="font-bold">Context</span>
+                  <input
+                    type="text"
+                    id="contextSearch"
+                    placeholder="Search Context"
+                    class="mt-2 w-full p-2 border border-gray-300 rounded font-normal"
+                  />
+                </div>
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {
+              Object.values(worksValues).map((work) => (
+                <tr tabindex="0">
+                  <td class="px-2">
+                    <NavLink href={`/works/${work.jad_id}`}>
+                      {work.name}
+                    </NavLink>
+                  </td>
+                  <td class="px-2">
+                    {work.author && work.author.length > 0 ? (
+                      work.author.map((author) => (
+                        <NavLink
+                          href={`/authors/${author.jad_id}`}
+                          class=" hover:text-brandPaleWhite"
+                        >
+                          {author.name}
+                        </NavLink>
+                      ))
+                    ) : (
+                      <span>N/A</span>
+                    )}
+                  </td>
+                  <td class="px-2">{work.genre?.value}</td>
+                  <td class="px-2">
+                    {work.manuscripts.length > 0
+                      ? work.manuscripts.map(
+                          (ms: { id: number; value: any }, index: number) => (
+                            <>
+                              <NavLink
+                                href={`/manuscripts/jad_manuscript__${ms.id}`}
+                                class="hover:text-brandPaleWhite"
+                              >
+                                {ms.value}
+                              </NavLink>
+                              {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
+                              {index < work.manuscripts.length - 1 && "| "}
+                            </>
+                          ),
+                        )
+                      : "N/A"}
+                  </td>
+                  <td class="px-2">
+                    {work.related__passages.length > 0
+                      ? work.related__passages.map((passage, index: number) => (
+                          <>
+                            <NavLink
+                              href={`/passages/${passage.jad_id}`}
+                              class="hover:text-brandPaleWhite"
+                            >
+                              #{passage.jad_id.substring(15)}
+                            </NavLink>
+                            {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
+                            {index < work.related__passages.length - 1 && "| "}
+                          </>
+                        ))
+                      : "N/A"}
+                  </td>
+                  <td class="px-2">
+                    {work.institutional_context.length > 0
+                      ? work.institutional_context.map(
+                          (
+                            institution: { name: string; jad_id: string },
+                            index: number,
+                          ) => (
+                            <>
+                              <NavLink
+                                href={`/institutions/${institution.jad_id}`}
+                                class="hover:text-brandPaleWhite"
+                              >
+                                {institution.name}
+                              </NavLink>
+                              {index < work.institutional_context.length - 1 &&
+                                "| "}
+                            </>
+                          ),
+                        )
+                      : "N/A"}
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script src="../lib/table-search.js"></script>
+  </div>
+</PageLayout>
