@@ -40,8 +40,22 @@ const { data: passage } = Astro.props;
    
     <div>
         <div class="border-2 rounded-sm border-brandBrown bg-brandRose mt-5 mx-5 grid p-5">
-            <h1 class="text-xl py-3 mx-auto font-medium">({passage.id}) <span class="italic">{passage.passage}</span></h1>
-            
+          <div class="flex p-5 w-3/4 mx-auto justify-between">
+            {passage.id > 1
+              ? 
+              <NavLink href={`/passages/jad_occurence__${parseInt(passage.jad_id.split('__')[1]) -1}`}>
+                <Icon name="lucide:circle-arrow-left" class="size-20"></Icon>
+                </NavLink>
+                : ''
+              }
+              <h1 class="text-xl py-3 mx-auto font-medium">({passage.id}) <span class="italic">{passage.passage}</span></h1>
+              
+              <NavLink href={`/passages/jad_occurence__${parseInt(passage.jad_id.split('__')[1]) +1}`}>
+                <Icon name="lucide:circle-arrow-right" class="size-20"></Icon>
+              </NavLink>
+             
+                
+          </div>
             <dl class="grid grid-cols-[1fr_5fr] text-sm md:text-base md:leading-7"> 
               
               <dt class="font-semibold border-r border-gray-300 pr-2">Author:</dt>
@@ -103,6 +117,20 @@ const { data: passage } = Astro.props;
                       ? passage.liturgical_references.map((reference: { value: any }) => reference.value).join(', ')
                       : 'N/A'}
                 </dd>
+
+                <dt class="font-semibold border-r border-gray-300 pr-2">Sources:</dt>
+                <dd class="pl-5">
+                  {passage.sources_used.length > 0
+                      ? passage.sources_used.map((reference: { value: any }) => reference.value).join('; ')
+                      : 'N/A'}
+                </dd>
+
+                <dt class="font-semibold border-r border-gray-300 pr-2">Keywords:</dt>
+                <dd class="pl-5">
+                  {passage.keywords.length > 0
+                      ? passage.keywords.map((reference: { value: any }) => reference.value).join('; ')
+                      : 'N/A'}
+                </dd>
                 
                 <dt class="font-semibold border-r border-gray-300 pr-2">Full text:</dt>
                 <dd class="pl-5">
@@ -122,21 +150,7 @@ const { data: passage } = Astro.props;
             </dl>
         
         </div>
-        <div class="my-10 flex p-5 w-3/4 mx-auto justify-between">
-          {passage.id > 1
-          ? 
-          <NavLink href=`/passages/jad_occurence__${parseInt(passage.jad_id.split('__')[1]) -1}`>
-            <Icon name="lucide:circle-arrow-left" class="size-20"></Icon>
-            </NavLink>
-          : ''
-      }
-          
-          <NavLink href=`/passages/jad_occurence__${parseInt(passage.jad_id.split('__')[1]) +1}`>
-            <Icon name="lucide:circle-arrow-right" class="size-20"></Icon>
-          </NavLink>
-         
-            
-      </div>
+      
         
     </div>
 
