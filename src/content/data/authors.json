@@ -260,7 +260,7 @@
     "jad_id": "jad_author__7",
     "gnd_url": "https://d-nb.info/gnd/102511721",
     "notes": "same as Lambertus de Sancto-Audomaro",
-    "prev": "jad_author__67.html",
+    "prev": "jad_author__68.html",
     "next": "jad_author__8.html",
     "view_label": "Lambertus, Sancti Bertini",
     "related__works": [
@@ -796,6 +796,10 @@
       {
         "jad_id": "jad_work__30",
         "view_label": "Commentary Psalms"
+      },
+      {
+        "jad_id": "jad_work__153",
+        "view_label": "Sermones"
       }
     ]
   },
@@ -884,6 +888,18 @@
       {
         "jad_id": "jad_work__37",
         "view_label": "Sermones dominicales"
+      },
+      {
+        "jad_id": "jad_work__154",
+        "view_label": "Commentary Luke"
+      },
+      {
+        "jad_id": "jad_work__155",
+        "view_label": "Commentary John"
+      },
+      {
+        "jad_id": "jad_work__156",
+        "view_label": "Collationes in Hexaemeron"
       }
     ]
   },
@@ -1267,6 +1283,10 @@
       {
         "jad_id": "jad_work__76",
         "view_label": "Collectanea in omnes B. Pauli epistolas"
+      },
+      {
+        "jad_id": "jad_work__152",
+        "view_label": "In euangelium Matthaei"
       }
     ]
   },
@@ -1435,7 +1455,7 @@
     "gnd_url": "https://d-nb.info/gnd/118789961",
     "notes": "",
     "prev": "jad_author__66.html",
-    "next": "jad_author__7.html",
+    "next": "jad_author__68.html",
     "view_label": "Paulus, Diaconus",
     "related__works": [
       {
@@ -1443,5 +1463,17 @@
         "view_label": "Homiliae de tempore"
       }
     ]
+  },
+  "68": {
+    "id": 68,
+    "order": "67.00000000000000000000",
+    "name": "Thomas, von Aquin,",
+    "jad_id": "jad_author__68",
+    "gnd_url": "https://d-nb.info/gnd/118622110",
+    "notes": "",
+    "prev": "jad_author__67.html",
+    "next": "jad_author__7.html",
+    "view_label": "Thomas, von Aquin,",
+    "related__works": []
   }
 }

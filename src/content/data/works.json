@@ -58,6 +58,15 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": true,
+    "date": [
+      {
+        "id": 5,
+        "value": "late 12th cen.",
+        "order": "5.00000000000000000000"
+      }
+    ],
+    "corpus_corporum": "",
     "prev": "jad_work__99.html",
     "next": "jad_work__10.html",
     "view_label": "Liber Sermonum",
@@ -192,6 +201,15 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": true,
+    "date": [
+      {
+        "id": 5,
+        "value": "late 12th cen.",
+        "order": "5.00000000000000000000"
+      }
+    ],
+    "corpus_corporum": "",
     "prev": "jad_work__19.html",
     "next": "jad_work__20.html",
     "view_label": "Sermones",
@@ -253,6 +271,15 @@
         "digi_url": ""
       }
     ],
+    "certainty": true,
+    "date": [
+      {
+        "id": 11,
+        "value": "post 1187",
+        "order": "11.00000000000000000000"
+      }
+    ],
+    "corpus_corporum": "",
     "prev": "jad_work__29.html",
     "next": "jad_work__30.html",
     "view_label": "Certa relatio de situ Jerusalem",
@@ -322,6 +349,15 @@
         "digi_url": ""
       }
     ],
+    "certainty": true,
+    "date": [
+      {
+        "id": 11,
+        "value": "post 1187",
+        "order": "11.00000000000000000000"
+      }
+    ],
+    "corpus_corporum": "",
     "prev": "jad_work__39.html",
     "next": "jad_work__40.html",
     "view_label": "Commentary Psalms",
@@ -369,6 +405,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__49.html",
     "next": "jad_work__50.html",
     "view_label": "Sermones",
@@ -411,6 +450,15 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": true,
+    "date": [
+      {
+        "id": 12,
+        "value": "early 8th cen.",
+        "order": "12.00000000000000000000"
+      }
+    ],
+    "corpus_corporum": "",
     "prev": "jad_work__59.html",
     "next": "jad_work__60.html",
     "view_label": "Commentary Luke",
@@ -456,6 +504,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__69.html",
     "next": "jad_work__70.html",
     "view_label": "Liber Floridus",
@@ -522,6 +573,9 @@
       }
     ],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__79.html",
     "next": "jad_work__80.html",
     "view_label": "Sermones",
@@ -591,6 +645,15 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": true,
+    "date": [
+      {
+        "id": 4,
+        "value": "mid 12th cen.",
+        "order": "4.00000000000000000000"
+      }
+    ],
+    "corpus_corporum": "",
     "prev": "jad_work__89.html",
     "next": "jad_work__90.html",
     "view_label": "Sermones",
@@ -650,6 +713,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__1.html",
     "next": "jad_work__100.html",
     "view_label": "Commentary Maccabees",
@@ -728,6 +794,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__109.html",
     "next": "jad_work__110.html",
     "view_label": "Commentary Isaiah",
@@ -801,6 +870,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__119.html",
     "next": "jad_work__120.html",
     "view_label": "Sermones",
@@ -870,6 +942,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__129.html",
     "next": "jad_work__130.html",
     "view_label": "Commentary Ezekiel",
@@ -910,6 +985,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__139.html",
     "next": "jad_work__140.html",
     "view_label": "De destructione templi",
@@ -958,6 +1036,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__149.html",
     "next": "jad_work__150.html",
     "view_label": "Sermones",
@@ -1027,7 +1108,10 @@
         "digi_url": ""
       }
     ],
-    "prev": "jad_work__150.html",
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
+    "prev": "jad_work__156.html",
     "next": "jad_work__17.html",
     "view_label": "Postillae in Evangelia",
     "related__passages": []
@@ -1067,6 +1151,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__16.html",
     "next": "jad_work__18.html",
     "view_label": "Homiliae super evangelia",
@@ -1128,6 +1215,9 @@
       }
     ],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__17.html",
     "next": "jad_work__19.html",
     "view_label": "Sermones super evangelia",
@@ -1201,6 +1291,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__18.html",
     "next": "jad_work__2.html",
     "view_label": "Commentary Isaiah",
@@ -1298,6 +1391,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__2.html",
     "next": "jad_work__21.html",
     "view_label": "Commentary Ezekiel",
@@ -1371,6 +1467,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__20.html",
     "next": "jad_work__22.html",
     "view_label": "Commentary Lamentationes",
@@ -1448,6 +1547,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__21.html",
     "next": "jad_work__23.html",
     "view_label": "Commentary Daniel",
@@ -1521,6 +1623,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__22.html",
     "next": "jad_work__24.html",
     "view_label": "Sermones",
@@ -1607,6 +1712,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__23.html",
     "next": "jad_work__25.html",
     "view_label": "Sermones",
@@ -1664,6 +1772,15 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [
+      {
+        "id": 3,
+        "value": "early 12th cen.",
+        "order": "3.00000000000000000000"
+      }
+    ],
+    "corpus_corporum": "",
     "prev": "jad_work__24.html",
     "next": "jad_work__26.html",
     "view_label": "Historia Hierosolymitana",
@@ -1727,6 +1844,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__25.html",
     "next": "jad_work__27.html",
     "view_label": "Commentary Isaiah",
@@ -1806,6 +1926,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__26.html",
     "next": "jad_work__28.html",
     "view_label": "Sermones",
@@ -1865,6 +1988,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__27.html",
     "next": "jad_work__29.html",
     "view_label": "Commentary Kings",
@@ -1935,6 +2061,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__28.html",
     "next": "jad_work__3.html",
     "view_label": "Commentary Matthew",
@@ -2010,6 +2139,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__3.html",
     "next": "jad_work__31.html",
     "view_label": "Commentary Psalms",
@@ -2065,6 +2197,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__30.html",
     "next": "jad_work__32.html",
     "view_label": "Commentary Psalms",
@@ -2120,6 +2255,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__31.html",
     "next": "jad_work__33.html",
     "view_label": "Commentary Kings",
@@ -2167,6 +2305,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__32.html",
     "next": "jad_work__34.html",
     "view_label": "Commentary Kings",
@@ -2229,6 +2370,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__33.html",
     "next": "jad_work__35.html",
     "view_label": "Sermones",
@@ -2287,6 +2431,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__34.html",
     "next": "jad_work__36.html",
     "view_label": "Historia expeditionis Hierosolymitanae",
@@ -2342,6 +2489,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__35.html",
     "next": "jad_work__37.html",
     "view_label": "Homiliae in euangelia",
@@ -2389,6 +2539,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__36.html",
     "next": "jad_work__38.html",
     "view_label": "Sermones dominicales",
@@ -2436,6 +2589,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__37.html",
     "next": "jad_work__39.html",
     "view_label": "Historia Orientalis",
@@ -2491,6 +2647,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__38.html",
     "next": "jad_work__4.html",
     "view_label": "Chronicon Mundi",
@@ -2548,6 +2707,15 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [
+      {
+        "id": 1,
+        "value": "9th cen.",
+        "order": "1.00000000000000000000"
+      }
+    ],
+    "corpus_corporum": "",
     "prev": "jad_work__4.html",
     "next": "jad_work__41.html",
     "view_label": "Homiliarium Mondseense",
@@ -2601,6 +2769,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__40.html",
     "next": "jad_work__42.html",
     "view_label": "Sermones de tempore",
@@ -2664,6 +2835,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__41.html",
     "next": "jad_work__43.html",
     "view_label": "Historia Scholastica",
@@ -2715,6 +2889,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__42.html",
     "next": "jad_work__44.html",
     "view_label": "Speculum Ecclesiae",
@@ -2774,6 +2951,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__43.html",
     "next": "jad_work__45.html",
     "view_label": "Commentary Matthew",
@@ -2833,6 +3013,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__44.html",
     "next": "jad_work__46.html",
     "view_label": "Libri deflorationum",
@@ -2910,6 +3093,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__45.html",
     "next": "jad_work__47.html",
     "view_label": "Commentary Kings",
@@ -2965,6 +3151,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__46.html",
     "next": "jad_work__49.html",
     "view_label": "Sermones",
@@ -3012,6 +3201,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__47.html",
     "next": "jad_work__5.html",
     "view_label": "Fragmenta ex aurora",
@@ -3059,6 +3251,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__5.html",
     "next": "jad_work__51.html",
     "view_label": "Commentary Sirach",
@@ -3122,6 +3317,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__50.html",
     "next": "jad_work__52.html",
     "view_label": "Commentary Psalms",
@@ -3184,6 +3382,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__51.html",
     "next": "jad_work__53.html",
     "view_label": "Historia",
@@ -3239,6 +3440,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__52.html",
     "next": "jad_work__54.html",
     "view_label": "Adversus Iudaeos",
@@ -3316,6 +3520,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__53.html",
     "next": "jad_work__55.html",
     "view_label": "Commentary Isaiah",
@@ -3383,6 +3590,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__54.html",
     "next": "jad_work__56.html",
     "view_label": "Glossa Ordinaria",
@@ -3425,6 +3635,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__55.html",
     "next": "jad_work__57.html",
     "view_label": "Commentary Galater",
@@ -3472,6 +3685,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__56.html",
     "next": "jad_work__58.html",
     "view_label": "Commentary Isaiah",
@@ -3519,6 +3735,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__57.html",
     "next": "jad_work__59.html",
     "view_label": "Chronicon",
@@ -3566,6 +3785,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__58.html",
     "next": "jad_work__6.html",
     "view_label": "Chronicon universale",
@@ -3633,6 +3855,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__6.html",
     "next": "jad_work__61.html",
     "view_label": "Contra Judeaos",
@@ -3680,6 +3905,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__60.html",
     "next": "jad_work__62.html",
     "view_label": "Commentary Ezekiel",
@@ -3743,6 +3971,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__61.html",
     "next": "jad_work__63.html",
     "view_label": "Expositio epistolarum S. Pauli",
@@ -3790,6 +4021,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__62.html",
     "next": "jad_work__64.html",
     "view_label": "Commentary Jeremiah",
@@ -3857,6 +4091,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__63.html",
     "next": "jad_work__65.html",
     "view_label": "Commentary Judices",
@@ -3904,6 +4141,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__64.html",
     "next": "jad_work__66.html",
     "view_label": "Commentary Deuteronomium",
@@ -3951,6 +4191,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__65.html",
     "next": "jad_work__67.html",
     "view_label": "Commentary Matthew",
@@ -4006,6 +4249,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__66.html",
     "next": "jad_work__68.html",
     "view_label": "De universo",
@@ -4091,6 +4337,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__67.html",
     "next": "jad_work__69.html",
     "view_label": "Commentary Revelation",
@@ -4154,6 +4403,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__68.html",
     "next": "jad_work__7.html",
     "view_label": "Commentary Lamentationes",
@@ -4212,6 +4464,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__7.html",
     "next": "jad_work__71.html",
     "view_label": "Commentary Psalms",
@@ -4254,6 +4509,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__70.html",
     "next": "jad_work__72.html",
     "view_label": "Commentary Kings",
@@ -4296,6 +4554,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__71.html",
     "next": "jad_work__73.html",
     "view_label": "Collectiones in epistolas et evangelia",
@@ -4346,6 +4607,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__72.html",
     "next": "jad_work__74.html",
     "view_label": "De comprobatione sextae aetatis",
@@ -4396,6 +4660,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__73.html",
     "next": "jad_work__75.html",
     "view_label": "Commentarius in Nahum",
@@ -4438,6 +4705,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__74.html",
     "next": "jad_work__76.html",
     "view_label": "Chronicon",
@@ -4480,6 +4750,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__75.html",
     "next": "jad_work__77.html",
     "view_label": "Collectanea in omnes B. Pauli epistolas",
@@ -4522,6 +4795,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__76.html",
     "next": "jad_work__78.html",
     "view_label": "Expositio in Cantica canticorum",
@@ -4564,6 +4840,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__77.html",
     "next": "jad_work__79.html",
     "view_label": "Commentary Psalms",
@@ -4606,6 +4885,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__78.html",
     "next": "jad_work__8.html",
     "view_label": "De scriptoribus ecclesiasticis",
@@ -4648,6 +4930,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__8.html",
     "next": "jad_work__81.html",
     "view_label": "Gemma animae",
@@ -4690,6 +4975,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__80.html",
     "next": "jad_work__82.html",
     "view_label": "De imagine mundi",
@@ -4740,6 +5028,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__81.html",
     "next": "jad_work__83.html",
     "view_label": "Commentary Luke",
@@ -4790,6 +5081,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__82.html",
     "next": "jad_work__84.html",
     "view_label": "Commentary Matthew",
@@ -4840,6 +5134,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__83.html",
     "next": "jad_work__85.html",
     "view_label": "Commentary Psalms",
@@ -4890,6 +5187,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__84.html",
     "next": "jad_work__86.html",
     "view_label": "Commentary Revelation",
@@ -4940,6 +5240,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__85.html",
     "next": "jad_work__87.html",
     "view_label": "Commentary Revelation",
@@ -4990,6 +5293,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__86.html",
     "next": "jad_work__88.html",
     "view_label": "Commentary Ezekiel",
@@ -5040,6 +5346,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__87.html",
     "next": "jad_work__89.html",
     "view_label": "Commentary Isaiah",
@@ -5090,6 +5399,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__88.html",
     "next": "jad_work__9.html",
     "view_label": "Commentary Matthew",
@@ -5140,6 +5452,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__9.html",
     "next": "jad_work__91.html",
     "view_label": "De divinis officiis",
@@ -5190,6 +5505,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__90.html",
     "next": "jad_work__92.html",
     "view_label": "De incarnatione contra Judaeos",
@@ -5247,6 +5565,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__91.html",
     "next": "jad_work__93.html",
     "view_label": "Gesta Dei per Francos",
@@ -5289,6 +5610,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__92.html",
     "next": "jad_work__94.html",
     "view_label": "Expositio in Apocalypsim",
@@ -5339,6 +5663,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__93.html",
     "next": "jad_work__95.html",
     "view_label": "Commentaria in duodecim prophetas minores",
@@ -5389,6 +5716,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__94.html",
     "next": "jad_work__96.html",
     "view_label": "Commentary John",
@@ -5439,6 +5769,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__95.html",
     "next": "jad_work__97.html",
     "view_label": "Commentary Job",
@@ -5489,6 +5822,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__96.html",
     "next": "jad_work__98.html",
     "view_label": "Commentary Kohelet",
@@ -5539,6 +5875,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__97.html",
     "next": "jad_work__99.html",
     "view_label": "De glorificatione Trinitatis",
@@ -5589,8 +5928,11 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__98.html",
-    "next": "{'id': 1, 'order': '1.00000000000000000000', 'name': 'Liber Sermonum ', 'jad_id': 'jad_work__1', 'author': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Martin, von León', 'jad_id': 'jad_author__2', 'gnd_url': 'https://d-nb.info/gnd/100953212', 'notes': None}], 'manuscripts': [{'id': 3, 'value': 'San Isidoro, MS 11', 'order': '3.00000000000000000000'}], 'title': 'Liber Sermonum', 'genre': {'id': 14726, 'value': 'Sermons', 'color': 'darker-pink'}, 'not_before': '1175', 'not_after': '1200', 'written_date': 'late 12', 'notes': None, 'notes__author': None, 'institutional_context': [{'id': 1, 'order': '1.00000000000000000000', 'name': 'University of Paris', 'jad_id': 'jad_institutional_context__1', 'part_of': [{'id': 16, 'order': '16.00000000000000000000', 'name': 'French schools', 'jad_id': 'jad_institutional_context__16', 'part_of': []}]}], 'published_edition': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Patrologia Latina', 'jad_id': 'jad_sources_occurrences__2', 'digi_url': 'https://mlat.uzh.ch/browser?path=/38'}], 'prev': 'jad_work__99.html', 'next': 'jad_work__10.html'}.html",
+    "next": "{'id': 1, 'order': '1.00000000000000000000', 'name': 'Liber Sermonum ', 'jad_id': 'jad_work__1', 'author': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Martin, von León', 'jad_id': 'jad_author__2', 'gnd_url': 'https://d-nb.info/gnd/100953212', 'notes': None}], 'manuscripts': [{'id': 3, 'value': 'San Isidoro, MS 11', 'order': '3.00000000000000000000'}], 'title': 'Liber Sermonum', 'genre': {'id': 14726, 'value': 'Sermons', 'color': 'darker-pink'}, 'not_before': '1175', 'not_after': '1200', 'written_date': 'late 12', 'notes': None, 'notes__author': None, 'institutional_context': [{'id': 1, 'order': '1.00000000000000000000', 'name': 'University of Paris', 'jad_id': 'jad_institutional_context__1', 'part_of': [{'id': 16, 'order': '16.00000000000000000000', 'name': 'French schools', 'jad_id': 'jad_institutional_context__16', 'part_of': []}]}], 'published_edition': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Patrologia Latina', 'jad_id': 'jad_sources_occurrences__2', 'digi_url': 'https://mlat.uzh.ch/browser?path=/38'}], 'certainty': True, 'date': [{'id': 5, 'value': 'late 12th cen.', 'order': '5.00000000000000000000'}], 'corpus_corporum': '', 'prev': 'jad_work__99.html', 'next': 'jad_work__10.html'}.html",
     "view_label": "Commentary Genesis",
     "related__passages": []
   },
@@ -5639,6 +5981,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__10.html",
     "next": "jad_work__101.html",
     "view_label": "Commentary Deutoronomy",
@@ -5689,6 +6034,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__100.html",
     "next": "jad_work__102.html",
     "view_label": "Commentary Kings",
@@ -5739,6 +6087,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__101.html",
     "next": "jad_work__103.html",
     "view_label": "Commentary Psalms",
@@ -5789,6 +6140,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__102.html",
     "next": "jad_work__104.html",
     "view_label": "De victoria verbi Dei",
@@ -5839,6 +6193,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__103.html",
     "next": "jad_work__105.html",
     "view_label": "Dialogus inter Christianum et Judaeum",
@@ -5903,6 +6260,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__104.html",
     "next": "jad_work__106.html",
     "view_label": "Sermones",
@@ -5937,6 +6297,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__105.html",
     "next": "jad_work__107.html",
     "view_label": "Commentary Matthew",
@@ -5979,6 +6342,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__106.html",
     "next": "jad_work__108.html",
     "view_label": "Chanson d'Antioche",
@@ -6021,6 +6387,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__107.html",
     "next": "jad_work__109.html",
     "view_label": "Commentary Jeremiah",
@@ -6055,6 +6424,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__108.html",
     "next": "jad_work__11.html",
     "view_label": "Expositio in Apocalypsin",
@@ -6089,6 +6461,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__11.html",
     "next": "jad_work__111.html",
     "view_label": "Commentary Genesis",
@@ -6123,6 +6498,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__110.html",
     "next": "jad_work__112.html",
     "view_label": "Historia Ecclesiastica",
@@ -6157,6 +6535,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__111.html",
     "next": "jad_work__113.html",
     "view_label": "Commentary Psalms Continuatio",
@@ -6191,6 +6572,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__112.html",
     "next": "jad_work__114.html",
     "view_label": "Expositio in canticum Moysis",
@@ -6225,6 +6609,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__113.html",
     "next": "jad_work__115.html",
     "view_label": "Libelli selecti",
@@ -6267,6 +6654,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__114.html",
     "next": "jad_work__116.html",
     "view_label": "Sermones",
@@ -6309,6 +6699,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__115.html",
     "next": "jad_work__117.html",
     "view_label": "Commentary Matthew",
@@ -6351,6 +6744,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__116.html",
     "next": "jad_work__118.html",
     "view_label": "Commentary Pentateuch",
@@ -6385,6 +6781,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__117.html",
     "next": "jad_work__119.html",
     "view_label": "Commentary Numeri",
@@ -6419,6 +6818,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__118.html",
     "next": "jad_work__12.html",
     "view_label": "Sermones",
@@ -6461,6 +6863,9 @@
       }
     ],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__12.html",
     "next": "jad_work__121.html",
     "view_label": "Commentary John",
@@ -6495,6 +6900,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__120.html",
     "next": "jad_work__122.html",
     "view_label": "Commentary Kohelet",
@@ -6553,6 +6961,9 @@
         "digi_url": "https://mlat.uzh.ch/browser?path=/38"
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__121.html",
     "next": "jad_work__123.html",
     "view_label": "Homiliae",
@@ -6595,6 +7006,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__122.html",
     "next": "jad_work__124.html",
     "view_label": "De nugis curialum",
@@ -6629,6 +7043,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__123.html",
     "next": "jad_work__125.html",
     "view_label": "Liber adversus Graecos",
@@ -6663,6 +7080,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__124.html",
     "next": "jad_work__126.html",
     "view_label": "De commendatione fidei",
@@ -6697,6 +7117,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__125.html",
     "next": "jad_work__127.html",
     "view_label": "Homiliae dominicales",
@@ -6731,6 +7154,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__126.html",
     "next": "jad_work__128.html",
     "view_label": "Commentary Isaiah",
@@ -6765,6 +7191,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__127.html",
     "next": "jad_work__129.html",
     "view_label": "Commentary Jacob",
@@ -6799,6 +7228,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__128.html",
     "next": "jad_work__13.html",
     "view_label": "De fide catholica",
@@ -6833,6 +7265,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__13.html",
     "next": "jad_work__131.html",
     "view_label": "Commentary 1 Thes.",
@@ -6867,6 +7302,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__130.html",
     "next": "jad_work__132.html",
     "view_label": "Chronica",
@@ -6901,6 +7339,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__131.html",
     "next": "jad_work__133.html",
     "view_label": "Explanatio symboli S. Athanasii",
@@ -6971,6 +7412,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__132.html",
     "next": "jad_work__134.html",
     "view_label": "Sermones",
@@ -7011,6 +7455,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__133.html",
     "next": "jad_work__135.html",
     "view_label": "De Tyto et Vespasiano",
@@ -7051,6 +7498,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__134.html",
     "next": "jad_work__136.html",
     "view_label": "Sermones",
@@ -7091,6 +7541,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__135.html",
     "next": "jad_work__137.html",
     "view_label": "Sermones",
@@ -7155,6 +7608,9 @@
         "digi_url": ""
       }
     ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__136.html",
     "next": "jad_work__138.html",
     "view_label": "Commentary Lamentations",
@@ -7189,6 +7645,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__137.html",
     "next": "jad_work__139.html",
     "view_label": "Allegorica expositio in Samuelem",
@@ -7223,6 +7682,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__138.html",
     "next": "jad_work__14.html",
     "view_label": "De ratione temporum",
@@ -7257,6 +7719,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__14.html",
     "next": "jad_work__141.html",
     "view_label": "De temporibus",
@@ -7291,6 +7756,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__140.html",
     "next": "jad_work__142.html",
     "view_label": "Commentary Marc",
@@ -7325,6 +7793,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__141.html",
     "next": "jad_work__143.html",
     "view_label": "Allegorica expositio in Parabolas Salomonis",
@@ -7359,6 +7830,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__142.html",
     "next": "jad_work__144.html",
     "view_label": "Commentary Acts",
@@ -7393,6 +7867,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__143.html",
     "next": "jad_work__145.html",
     "view_label": "Commentary Paul",
@@ -7427,6 +7904,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__144.html",
     "next": "jad_work__146.html",
     "view_label": "Allegorica expositio in Canticum Habacuc",
@@ -7461,6 +7941,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__145.html",
     "next": "jad_work__147.html",
     "view_label": "Commentary John",
@@ -7495,6 +7978,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__146.html",
     "next": "jad_work__148.html",
     "view_label": "Commentary Daniel",
@@ -7529,6 +8015,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__147.html",
     "next": "jad_work__149.html",
     "view_label": "Commentary Jeremiah",
@@ -7563,6 +8052,9 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__148.html",
     "next": "jad_work__15.html",
     "view_label": "Homiliae de tempore",
@@ -7584,9 +8076,253 @@
     "notes__author": "",
     "institutional_context": [],
     "published_edition": [],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
     "prev": "jad_work__15.html",
-    "next": "jad_work__16.html",
+    "next": "jad_work__152.html",
     "view_label": "",
+    "related__passages": []
+  },
+  "152": {
+    "id": 152,
+    "order": "150.00000000000000000000",
+    "name": "In euangelium Matthaei ",
+    "jad_id": "jad_work__152",
+    "author": [
+      {
+        "id": 57,
+        "order": "56.00000000000000000000",
+        "name": "Sedulius, Scotus",
+        "jad_id": "jad_author__57",
+        "gnd_url": "https://d-nb.info/gnd/118760386",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "In euangelium Matthaei",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 4,
+        "order": "3.00000000000000000000",
+        "name": "Library of Latin Texts (Brepols)",
+        "jad_id": "jad_sources_occurrences__4",
+        "digi_url": ""
+      }
+    ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
+    "prev": "jad_work__150.html",
+    "next": "jad_work__153.html",
+    "view_label": "In euangelium Matthaei",
+    "related__passages": []
+  },
+  "153": {
+    "id": 153,
+    "order": "151.00000000000000000000",
+    "name": "Sermones ",
+    "jad_id": "jad_work__153",
+    "author": [
+      {
+        "id": 30,
+        "order": "30.00000000000000000000",
+        "name": "Remigius, von Auxerre",
+        "jad_id": "jad_author__30",
+        "gnd_url": "https://d-nb.info/gnd/118788302",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Sermones",
+    "genre": {
+      "id": 14726,
+      "value": "Sermons",
+      "color": "darker-pink"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Benedictines Auxerre",
+        "jad_id": "jad_institutional_context__2",
+        "part_of": [
+          {
+            "id": 3,
+            "order": "3.00000000000000000000",
+            "name": "Benedictines",
+            "jad_id": "jad_institutional_context__3",
+            "part_of": []
+          }
+        ]
+      }
+    ],
+    "published_edition": [
+      {
+        "id": 2,
+        "order": "2.00000000000000000000",
+        "name": "Patrologia Latina",
+        "jad_id": "jad_sources_occurrences__2",
+        "digi_url": "https://mlat.uzh.ch/browser?path=/38"
+      }
+    ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
+    "prev": "jad_work__152.html",
+    "next": "jad_work__154.html",
+    "view_label": "Sermones",
+    "related__passages": []
+  },
+  "154": {
+    "id": 154,
+    "order": "152.00000000000000000000",
+    "name": "Commentary Luke ",
+    "jad_id": "jad_work__154",
+    "author": [
+      {
+        "id": 34,
+        "order": "34.00000000000000000000",
+        "name": "Bonaventura",
+        "jad_id": "jad_author__34",
+        "gnd_url": "https://d-nb.info/gnd/118513176",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary Luke",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 7,
+        "order": "6.00000000000000000000",
+        "name": "Corpus Christianorum",
+        "jad_id": "jad_sources_occurrences__7",
+        "digi_url": ""
+      }
+    ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
+    "prev": "jad_work__153.html",
+    "next": "jad_work__155.html",
+    "view_label": "Commentary Luke",
+    "related__passages": []
+  },
+  "155": {
+    "id": 155,
+    "order": "153.00000000000000000000",
+    "name": "Commentary John ",
+    "jad_id": "jad_work__155",
+    "author": [
+      {
+        "id": 34,
+        "order": "34.00000000000000000000",
+        "name": "Bonaventura",
+        "jad_id": "jad_author__34",
+        "gnd_url": "https://d-nb.info/gnd/118513176",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Commentary John",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 7,
+        "order": "6.00000000000000000000",
+        "name": "Corpus Christianorum",
+        "jad_id": "jad_sources_occurrences__7",
+        "digi_url": ""
+      }
+    ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
+    "prev": "jad_work__154.html",
+    "next": "jad_work__156.html",
+    "view_label": "Commentary John",
+    "related__passages": []
+  },
+  "156": {
+    "id": 156,
+    "order": "154.00000000000000000000",
+    "name": "Collationes in Hexaemeron ",
+    "jad_id": "jad_work__156",
+    "author": [
+      {
+        "id": 34,
+        "order": "34.00000000000000000000",
+        "name": "Bonaventura",
+        "jad_id": "jad_author__34",
+        "gnd_url": "https://d-nb.info/gnd/118513176",
+        "notes": ""
+      }
+    ],
+    "manuscripts": [],
+    "title": "Collationes in Hexaemeron",
+    "genre": {
+      "id": 14727,
+      "value": "Commentary",
+      "color": "darker-green"
+    },
+    "not_before": null,
+    "not_after": null,
+    "written_date": "",
+    "notes": "",
+    "notes__author": "",
+    "institutional_context": [],
+    "published_edition": [
+      {
+        "id": 7,
+        "order": "6.00000000000000000000",
+        "name": "Corpus Christianorum",
+        "jad_id": "jad_sources_occurrences__7",
+        "digi_url": ""
+      }
+    ],
+    "certainty": false,
+    "date": [],
+    "corpus_corporum": "",
+    "prev": "jad_work__155.html",
+    "next": "jad_work__16.html",
+    "view_label": "Collationes in Hexaemeron",
     "related__passages": []
   }
 }

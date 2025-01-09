@@ -51,6 +51,7 @@
         ]
       }
     ],
+    "date_written": [],
     "prev": "jad_manuscript__19.html",
     "next": "jad_manuscript__20.html",
     "view_label": "BNF, Latin 14426",
@@ -113,6 +114,7 @@
         ]
       }
     ],
+    "date_written": [],
     "prev": "jad_manuscript__29.html",
     "next": "jad_manuscript__30.html",
     "view_label": "San Isidoro, MS 11",
@@ -211,6 +213,7 @@
     "not_after": null,
     "written_date": null,
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__37.html",
     "next": "jad_manuscript__5.html",
     "view_label": "BNF, Latin 8865",
@@ -265,6 +268,7 @@
         ]
       }
     ],
+    "date_written": [],
     "prev": "jad_manuscript__4.html",
     "next": "jad_manuscript__6.html",
     "view_label": "St.Gen., MS 1423",
@@ -327,6 +331,7 @@
         ]
       }
     ],
+    "date_written": [],
     "prev": "jad_manuscript__5.html",
     "next": "jad_manuscript__7.html",
     "view_label": "BNF, Latin 492",
@@ -385,6 +390,7 @@
         ]
       }
     ],
+    "date_written": [],
     "prev": "jad_manuscript__6.html",
     "next": "jad_manuscript__8.html",
     "view_label": "Maz., MS 177",
@@ -423,6 +429,7 @@
     "not_after": null,
     "written_date": null,
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__7.html",
     "next": "jad_manuscript__9.html",
     "view_label": "St.Gen., MS 1422",
@@ -469,8 +476,9 @@
         "part_of": []
       }
     ],
+    "date_written": [],
     "prev": "jad_manuscript__8.html",
-    "next": "{'id': 10, 'order': '10.00000000000000000000', 'name': [{'id': 2, 'value': 'BNF, Latin 446'}], 'jad_id': 'jad_manuscript__10', 'library': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Bibliothèque Nationale de France', 'jad_id': 'jad_library__2', 'gnd_url': 'https://d-nb.info/gnd/5156217-0', 'abbreviation': 'BNF', 'place': [{'id': 1, 'order': '1.00000000000000000000', 'name': 'Paris', 'geonames_url': 'https://www.geonames.org/2988507/paris.html', 'jad_id': 'jad_places__1'}]}], 'idno': 'Latin 446', 'catalog_url': 'https://archivesetmanuscrits.bnf.fr/ark:/12148/cc618815', 'digi_url': 'https://gallica.bnf.fr/ark:/12148/btv1b10721053z/f213.item', 'not_before': '1190', 'not_after': '1210', 'written_date': 'around 1200', 'institutional_context': [], 'prev': 'jad_manuscript__9.html', 'next': 'jad_manuscript__11.html'}.html",
+    "next": "{'id': 10, 'order': '10.00000000000000000000', 'name': [{'id': 2, 'value': 'BNF, Latin 446'}], 'jad_id': 'jad_manuscript__10', 'library': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Bibliothèque Nationale de France', 'jad_id': 'jad_library__2', 'gnd_url': 'https://d-nb.info/gnd/5156217-0', 'abbreviation': 'BNF', 'place': [{'id': 1, 'order': '1.00000000000000000000', 'name': 'Paris', 'geonames_url': 'https://www.geonames.org/2988507/paris.html', 'jad_id': 'jad_places__1'}]}], 'idno': 'Latin 446', 'catalog_url': 'https://archivesetmanuscrits.bnf.fr/ark:/12148/cc618815', 'digi_url': 'https://gallica.bnf.fr/ark:/12148/btv1b10721053z/f213.item', 'not_before': '1190', 'not_after': '1210', 'written_date': 'around 1200', 'institutional_context': [], 'date_written': [], 'prev': 'jad_manuscript__9.html', 'next': 'jad_manuscript__11.html'}.html",
     "view_label": "Lam., MS 144",
     "related__passages": [
       {
@@ -515,6 +523,7 @@
     "not_after": "1210",
     "written_date": "around 1200",
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__9.html",
     "next": "jad_manuscript__11.html",
     "view_label": "BNF, Latin 446",
@@ -556,6 +565,7 @@
     "not_after": "1310",
     "written_date": "around 1300",
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__10.html",
     "next": "jad_manuscript__12.html",
     "view_label": "BNF, Latin 3737",
@@ -610,6 +620,7 @@
         ]
       }
     ],
+    "date_written": [],
     "prev": "jad_manuscript__11.html",
     "next": "jad_manuscript__13.html",
     "view_label": "St.Gen., MS 2787",
@@ -643,6 +654,7 @@
     "not_after": null,
     "written_date": null,
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__12.html",
     "next": "jad_manuscript__14.html",
     "view_label": "BL, Arundel 322",
@@ -681,6 +693,7 @@
     "not_after": null,
     "written_date": null,
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__13.html",
     "next": "jad_manuscript__15.html",
     "view_label": "BL, Royal 8 F XVII",
@@ -743,6 +756,7 @@
         ]
       }
     ],
+    "date_written": [],
     "prev": "jad_manuscript__14.html",
     "next": "jad_manuscript__16.html",
     "view_label": "BNF, Latin 620",
@@ -776,6 +790,7 @@
     "not_after": null,
     "written_date": null,
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__15.html",
     "next": "jad_manuscript__17.html",
     "view_label": "ÖNB, Cod. 1014",
@@ -814,6 +829,7 @@
     "not_after": null,
     "written_date": "14",
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__16.html",
     "next": "jad_manuscript__18.html",
     "view_label": "Cambr. St.John's Coll., MS 127",
@@ -855,6 +871,7 @@
     "not_after": null,
     "written_date": null,
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__17.html",
     "next": "jad_manuscript__19.html",
     "view_label": "BNF, Latin 3829",
@@ -901,6 +918,7 @@
     "not_after": null,
     "written_date": null,
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__18.html",
     "next": "jad_manuscript__2.html",
     "view_label": "BNF, Latin 3567",
@@ -969,6 +987,7 @@
         ]
       }
     ],
+    "date_written": [],
     "prev": "jad_manuscript__2.html",
     "next": "jad_manuscript__21.html",
     "view_label": "BNF, Latin 3570",
@@ -1010,6 +1029,7 @@
     "not_after": null,
     "written_date": null,
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__20.html",
     "next": "jad_manuscript__22.html",
     "view_label": "BNF, Latin 3281",
@@ -1046,12 +1066,13 @@
       }
     ],
     "idno": "MS 653",
-    "catalog_url": "",
-    "digi_url": "",
+    "catalog_url": "https://arca.irht.cnrs.fr/ark:/63955/md82k643c86h",
+    "digi_url": "https://arca.irht.cnrs.fr/ark:/63955/md82k643c86h",
     "not_before": null,
     "not_after": null,
     "written_date": null,
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__21.html",
     "next": "jad_manuscript__23.html",
     "view_label": "Troyes, MS 653",
@@ -1101,6 +1122,7 @@
         ]
       }
     ],
+    "date_written": [],
     "prev": "jad_manuscript__22.html",
     "next": "jad_manuscript__24.html",
     "view_label": "Maz., MS 178",
@@ -1211,6 +1233,7 @@
         ]
       }
     ],
+    "date_written": [],
     "prev": "jad_manuscript__23.html",
     "next": "jad_manuscript__25.html",
     "view_label": "Maz., MS 999",
@@ -1285,6 +1308,7 @@
         ]
       }
     ],
+    "date_written": [],
     "prev": "jad_manuscript__24.html",
     "next": "jad_manuscript__26.html",
     "view_label": "BNF, Latin 3301C",
@@ -1335,6 +1359,7 @@
     "not_after": null,
     "written_date": null,
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__25.html",
     "next": "jad_manuscript__27.html",
     "view_label": "BNF, Latin 3733",
@@ -1368,6 +1393,7 @@
     "not_after": null,
     "written_date": null,
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__26.html",
     "next": "jad_manuscript__28.html",
     "view_label": "Maz., MS 774",
@@ -1401,6 +1427,7 @@
     "not_after": null,
     "written_date": null,
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__27.html",
     "next": "jad_manuscript__29.html",
     "view_label": "Maz., Ms 1026",
@@ -1442,6 +1469,7 @@
     "not_after": "1310",
     "written_date": "around 1300",
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__28.html",
     "next": "jad_manuscript__3.html",
     "view_label": "BNF, Latin 3728",
@@ -1499,6 +1527,7 @@
         ]
       }
     ],
+    "date_written": [],
     "prev": "jad_manuscript__3.html",
     "next": "jad_manuscript__31.html",
     "view_label": "BNF, Latin 14937",
@@ -1561,6 +1590,7 @@
         ]
       }
     ],
+    "date_written": [],
     "prev": "jad_manuscript__30.html",
     "next": "jad_manuscript__32.html",
     "view_label": "BNF, Latin 2950",
@@ -1599,6 +1629,7 @@
     "not_after": null,
     "written_date": "",
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__31.html",
     "next": "jad_manuscript__33.html",
     "view_label": "Arsenal, MS 44",
@@ -1632,6 +1663,7 @@
     "not_after": null,
     "written_date": "",
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__32.html",
     "next": "jad_manuscript__34.html",
     "view_label": "Arsenal, MS 400",
@@ -1681,6 +1713,7 @@
         ]
       }
     ],
+    "date_written": [],
     "prev": "jad_manuscript__33.html",
     "next": "jad_manuscript__35.html",
     "view_label": "Maz., MS 698",
@@ -1714,6 +1747,7 @@
     "not_after": null,
     "written_date": "",
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__34.html",
     "next": "jad_manuscript__36.html",
     "view_label": "Maz., MS 1001",
@@ -1747,6 +1781,7 @@
     "not_after": null,
     "written_date": "",
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__35.html",
     "next": "jad_manuscript__37.html",
     "view_label": "Valenciennes, MS 227",
@@ -1765,6 +1800,7 @@
     "not_after": null,
     "written_date": "",
     "institutional_context": [],
+    "date_written": [],
     "prev": "jad_manuscript__36.html",
     "next": "jad_manuscript__4.html",
     "related__passages": []

@@ -76,7 +76,16 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 12,
+            "value": "early 8th cen.",
+            "order": "12.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": null,
@@ -163,7 +172,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": null,
@@ -242,7 +252,16 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 4,
+            "value": "mid 12th cen.",
+            "order": "4.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "183v",
@@ -335,7 +354,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": null,
@@ -423,7 +445,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": null,
@@ -513,7 +538,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "Prefatio",
@@ -592,7 +618,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "2r",
@@ -682,7 +711,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -761,7 +791,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "115r",
@@ -827,7 +860,8 @@
         "not_before": null,
         "not_after": null,
         "written_date": null,
-        "institutional_context": []
+        "institutional_context": [],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -901,7 +935,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "137v",
@@ -975,7 +1012,8 @@
             "jad_id": "jad_institutional_context__6",
             "part_of": []
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -1046,7 +1084,16 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 11,
+            "value": "post 1187",
+            "order": "11.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "117r",
@@ -1120,7 +1167,8 @@
         "not_before": "1290",
         "not_after": "1310",
         "written_date": "around 1300",
-        "institutional_context": []
+        "institutional_context": [],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -1178,7 +1226,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "152r",
@@ -1247,7 +1298,8 @@
         "not_before": null,
         "not_after": null,
         "written_date": null,
-        "institutional_context": []
+        "institutional_context": [],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -1297,7 +1349,10 @@
         "notes": "",
         "notes__author": "",
         "institutional_context": [],
-        "published_edition": []
+        "published_edition": [],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": null,
@@ -1376,7 +1431,8 @@
         "not_before": null,
         "not_after": null,
         "written_date": null,
-        "institutional_context": []
+        "institutional_context": [],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -1442,7 +1498,10 @@
             ]
           }
         ],
-        "published_edition": []
+        "published_edition": [],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "259v-260r",
@@ -1516,7 +1575,8 @@
         "not_before": null,
         "not_after": null,
         "written_date": null,
-        "institutional_context": []
+        "institutional_context": [],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -1582,7 +1642,10 @@
             ]
           }
         ],
-        "published_edition": []
+        "published_edition": [],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "14r",
@@ -1672,7 +1735,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       },
       {
         "id": 31,
@@ -1725,7 +1789,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -1809,7 +1874,16 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 4,
+            "value": "mid 12th cen.",
+            "order": "4.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "102v; 166v",
@@ -1909,7 +1983,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -1993,7 +2068,16 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 4,
+            "value": "mid 12th cen.",
+            "order": "4.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "95r",
@@ -2096,7 +2180,16 @@
             "jad_id": "jad_sources_occurrences__12",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [
+          {
+            "id": 3,
+            "value": "early 12th cen.",
+            "order": "3.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -2175,7 +2268,8 @@
         "not_before": null,
         "not_after": null,
         "written_date": null,
-        "institutional_context": []
+        "institutional_context": [],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -2225,7 +2319,10 @@
         "notes": "",
         "notes__author": "",
         "institutional_context": [],
-        "published_edition": []
+        "published_edition": [],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "86r",
@@ -2291,7 +2388,8 @@
         "not_before": null,
         "not_after": null,
         "written_date": null,
-        "institutional_context": []
+        "institutional_context": [],
+        "date_written": []
       },
       {
         "id": 14,
@@ -2320,7 +2418,8 @@
         "not_before": null,
         "not_after": null,
         "written_date": null,
-        "institutional_context": []
+        "institutional_context": [],
+        "date_written": []
       }
     ],
     "position_in_work": "Sermo 39",
@@ -2420,7 +2519,16 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 5,
+            "value": "late 12th cen.",
+            "order": "5.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -2568,7 +2676,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "Sermo 22",
@@ -2667,7 +2776,16 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 5,
+            "value": "late 12th cen.",
+            "order": "5.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -2776,7 +2894,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "Sermo 22",
@@ -2867,7 +2986,16 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 5,
+            "value": "late 12th cen.",
+            "order": "5.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -2995,7 +3123,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -3104,7 +3235,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -3208,7 +3342,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -3312,7 +3449,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -3421,7 +3561,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -3525,7 +3668,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -3634,7 +3780,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -3748,7 +3897,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -3857,7 +4009,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -3963,7 +4118,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -4050,7 +4208,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       },
       {
         "id": 30,
@@ -4103,7 +4262,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -4182,7 +4342,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "38v; 46v",
@@ -4278,7 +4441,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -4357,7 +4521,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "45v",
@@ -4444,7 +4611,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -4518,7 +4686,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "47r",
@@ -4605,7 +4776,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -4684,7 +4856,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "88v",
@@ -4805,7 +4980,10 @@
             "jad_id": "jad_sources_occurrences__7",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -4925,7 +5103,10 @@
             "jad_id": "jad_sources_occurrences__7",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -5041,7 +5222,10 @@
             "jad_id": "jad_sources_occurrences__7",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -5161,7 +5345,10 @@
             "jad_id": "jad_sources_occurrences__7",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -5278,7 +5465,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -5392,7 +5582,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -5498,7 +5691,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -5600,7 +5796,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -5721,7 +5920,10 @@
             "jad_id": "jad_sources_occurrences__7",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -5824,7 +6026,10 @@
             "jad_id": "jad_sources_occurrences__7",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -5919,7 +6124,10 @@
             "jad_id": "jad_sources_occurrences__12",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -6038,7 +6246,10 @@
             "jad_id": "jad_sources_occurrences__7",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -6126,7 +6337,10 @@
             "jad_id": "jad_sources_occurrences__7",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -6219,7 +6433,10 @@
             "jad_id": "jad_sources_occurrences__7",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -6307,7 +6524,10 @@
             "jad_id": "jad_sources_occurrences__7",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -6395,7 +6615,10 @@
             "jad_id": "jad_sources_occurrences__7",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -6483,7 +6706,10 @@
             "jad_id": "jad_sources_occurrences__7",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -6571,7 +6797,10 @@
             "jad_id": "jad_sources_occurrences__7",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -6661,7 +6890,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -6740,7 +6970,16 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 11,
+            "value": "post 1187",
+            "order": "11.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "62v",
@@ -6811,7 +7050,8 @@
         "not_before": null,
         "not_after": null,
         "written_date": null,
-        "institutional_context": []
+        "institutional_context": [],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -6886,7 +7126,16 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [
+          {
+            "id": 1,
+            "value": "9th cen.",
+            "order": "1.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "168v",
@@ -6965,7 +7214,8 @@
         "not_before": null,
         "not_after": null,
         "written_date": null,
-        "institutional_context": []
+        "institutional_context": [],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -7028,7 +7278,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -7132,7 +7385,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -7246,7 +7502,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -7370,7 +7629,16 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 4,
+            "value": "mid 12th cen.",
+            "order": "4.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -7468,7 +7736,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -7566,7 +7837,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -7668,7 +7942,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -7774,7 +8051,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -7872,7 +8152,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -7965,7 +8248,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -8066,7 +8352,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -8167,7 +8456,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -8263,7 +8555,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -8353,7 +8648,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "Sermo 26",
@@ -8427,7 +8723,16 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 5,
+            "value": "late 12th cen.",
+            "order": "5.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -8527,7 +8832,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "Sermo 18",
@@ -8618,7 +8924,16 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 5,
+            "value": "late 12th cen.",
+            "order": "5.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -8718,7 +9033,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "Sermo 18",
@@ -8797,7 +9113,16 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 5,
+            "value": "late 12th cen.",
+            "order": "5.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -8897,7 +9222,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "Sermo 18",
@@ -8971,7 +9297,16 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 5,
+            "value": "late 12th cen.",
+            "order": "5.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -9071,7 +9406,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "Sermo 23",
@@ -9145,7 +9481,16 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 5,
+            "value": "late 12th cen.",
+            "order": "5.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -9245,7 +9590,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "Sermo 23",
@@ -9328,7 +9674,16 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 5,
+            "value": "late 12th cen.",
+            "order": "5.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -9428,7 +9783,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "Sermo 23",
@@ -9523,7 +9879,16 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 5,
+            "value": "late 12th cen.",
+            "order": "5.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -9623,7 +9988,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "Sermo 23",
@@ -9706,7 +10072,16 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 5,
+            "value": "late 12th cen.",
+            "order": "5.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -9806,7 +10181,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "Sermo 23",
@@ -9885,7 +10261,16 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 5,
+            "value": "late 12th cen.",
+            "order": "5.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -9985,7 +10370,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "Sermo 23",
@@ -10068,7 +10454,16 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 5,
+            "value": "late 12th cen.",
+            "order": "5.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -10168,7 +10563,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "Sermo 23",
@@ -10247,7 +10643,16 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": true,
+        "date": [
+          {
+            "id": 5,
+            "value": "late 12th cen.",
+            "order": "5.00000000000000000000"
+          }
+        ],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -10339,7 +10744,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -10422,7 +10828,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "62v",
@@ -10531,7 +10940,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -10619,7 +11031,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -10712,7 +11127,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -10829,7 +11247,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -10937,7 +11358,10 @@
             "jad_id": "jad_sources_occurrences__7",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -11042,7 +11466,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -11143,7 +11570,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -11239,7 +11669,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -11349,7 +11782,10 @@
             "jad_id": "jad_sources_occurrences__7",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -11459,7 +11895,10 @@
             "jad_id": "jad_sources_occurrences__7",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -11541,7 +11980,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -11615,7 +12055,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "52r",
@@ -11697,7 +12140,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -11776,7 +12220,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "54r",
@@ -11858,7 +12305,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -11945,7 +12393,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "54v",
@@ -12027,7 +12478,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -12101,7 +12553,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "62v",
@@ -12183,7 +12638,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -12262,7 +12718,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "68v",
@@ -12344,7 +12803,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -12423,7 +12883,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "92v",
@@ -12505,7 +12968,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -12579,7 +13043,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "97r",
@@ -12661,7 +13128,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -12735,7 +13203,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "98r",
@@ -12817,7 +13288,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -12904,7 +13376,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "126v",
@@ -12986,7 +13461,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -13060,7 +13536,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "130r",
@@ -13142,7 +13621,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -13221,7 +13701,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "131r",
@@ -13246,7 +13729,7 @@
       }
     ],
     "prev": "jad_occurence__98.html",
-    "next": "{'id': 1, 'order': '1.00000000000000000000', 'passage': 'Jerosolymorum subversio describatur, quae a Vespasiano et Tito Romanis principibus facta est', 'jad_id': 'jad_occurence__1', 'language': {'id': 14729, 'value': 'Latin', 'color': 'dark-yellow'}, 'manuscript': [], 'position_in_work': 'B5, Ch19', 'position_in_work_url': '', 'text_paragraph': 'Quibus ipse ait: Dico vobis quia si hi tacuerint, lapides clamabunt. Crucifixo Domino stabant omnes noti ejus a longe, Deum confiteri timebant, quem fixum ligno videbant, sed, his tacentibus, lapides et saxa Regem qui venit in nomine Domini magno clamore canebant. Emisit enim spiritum, et ecce terra mota est, et petrae scissae sunt, et monumenta aperta sunt: quemque homines vel timore vel perfidia confiteri trepidant, hunc durissima etiam elementa Deum mundi ac Dominum aperto ore praedicant. Verum altiori mysterio gentium nationes incredulas aliquando ac duricordes lapidum nomine demonstrat, 92.0570C | quibus ablato corde lapideo dedit cor carneum (Ezech. XI), hoc est, sensibile et humanum, quo Deum Creatoremque suum credere, laudare, et cernere possent. Etsi ergo turbae tacuerint hominum, lapides clamabunt, quia caecitas ex parte contigit in Israel, donec plenitudo gentium intraret, et sic omnis Israel salvus fieret (Rom. III).', 'note': None, 'explicit_contemp_ref': None, 'biblical_references': [{'id': 1, 'value': 'Lk. 19,41'}, {'id': 38, 'value': 'Mt. 27,51'}, {'id': 39, 'value': 'Mt. 27,52'}, {'id': 40, 'value': 'Röm. 11,25'}], 'Author': [{'id': 6, 'value': 'Beda, Heiliger'}], 'work': [{'id': 6, 'order': '6.00000000000000000000', 'name': 'Commentary Luke ', 'jad_id': 'jad_work__6', 'author': [{'id': 6, 'order': '6.00000000000000000000', 'name': 'Beda, Heiliger', 'jad_id': 'jad_author__6', 'gnd_url': 'https://d-nb.info/gnd/118508237', 'notes': None}], 'manuscripts': [], 'title': 'Commentary Luke', 'genre': {'id': 14727, 'value': 'Commentary', 'color': 'darker-green'}, 'not_before': None, 'not_after': None, 'written_date': 'early 8', 'notes': None, 'notes__author': None, 'institutional_context': [], 'published_edition': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Patrologia Latina', 'jad_id': 'jad_sources_occurrences__2', 'digi_url': 'https://mlat.uzh.ch/browser?path=/38'}]}], 'position_in_ms': None, 'sources_used': [{'id': 28, 'value': 'Gregor, der Grosse'}], 'keywords': [], 'part_of_cluster': [], 'authority_discourse': 0, 'liturgical_references': [], 'occurrence_found_in': [{'id': 2, 'value': 'Patrologia Latina'}], 'author_lookup': [{'ids': {'database_table_3498': 6, 'database_table_3499': 6}, 'value': 'Beda, Heiliger'}], 'prev': 'jad_occurence__99.html', 'next': 'jad_occurence__10.html'}.html",
+    "next": "{'id': 1, 'order': '1.00000000000000000000', 'passage': 'Jerosolymorum subversio describatur, quae a Vespasiano et Tito Romanis principibus facta est', 'jad_id': 'jad_occurence__1', 'language': {'id': 14729, 'value': 'Latin', 'color': 'dark-yellow'}, 'manuscript': [], 'position_in_work': 'B5, Ch19', 'position_in_work_url': '', 'text_paragraph': 'Quibus ipse ait: Dico vobis quia si hi tacuerint, lapides clamabunt. Crucifixo Domino stabant omnes noti ejus a longe, Deum confiteri timebant, quem fixum ligno videbant, sed, his tacentibus, lapides et saxa Regem qui venit in nomine Domini magno clamore canebant. Emisit enim spiritum, et ecce terra mota est, et petrae scissae sunt, et monumenta aperta sunt: quemque homines vel timore vel perfidia confiteri trepidant, hunc durissima etiam elementa Deum mundi ac Dominum aperto ore praedicant. Verum altiori mysterio gentium nationes incredulas aliquando ac duricordes lapidum nomine demonstrat, 92.0570C | quibus ablato corde lapideo dedit cor carneum (Ezech. XI), hoc est, sensibile et humanum, quo Deum Creatoremque suum credere, laudare, et cernere possent. Etsi ergo turbae tacuerint hominum, lapides clamabunt, quia caecitas ex parte contigit in Israel, donec plenitudo gentium intraret, et sic omnis Israel salvus fieret (Rom. III).', 'note': None, 'explicit_contemp_ref': None, 'biblical_references': [{'id': 1, 'value': 'Lk. 19,41'}, {'id': 38, 'value': 'Mt. 27,51'}, {'id': 39, 'value': 'Mt. 27,52'}, {'id': 40, 'value': 'Röm. 11,25'}], 'Author': [{'id': 6, 'value': 'Beda, Heiliger'}], 'work': [{'id': 6, 'order': '6.00000000000000000000', 'name': 'Commentary Luke ', 'jad_id': 'jad_work__6', 'author': [{'id': 6, 'order': '6.00000000000000000000', 'name': 'Beda, Heiliger', 'jad_id': 'jad_author__6', 'gnd_url': 'https://d-nb.info/gnd/118508237', 'notes': None}], 'manuscripts': [], 'title': 'Commentary Luke', 'genre': {'id': 14727, 'value': 'Commentary', 'color': 'darker-green'}, 'not_before': None, 'not_after': None, 'written_date': 'early 8', 'notes': None, 'notes__author': None, 'institutional_context': [], 'published_edition': [{'id': 2, 'order': '2.00000000000000000000', 'name': 'Patrologia Latina', 'jad_id': 'jad_sources_occurrences__2', 'digi_url': 'https://mlat.uzh.ch/browser?path=/38'}], 'certainty': True, 'date': [{'id': 12, 'value': 'early 8th cen.', 'order': '12.00000000000000000000'}], 'corpus_corporum': ''}], 'position_in_ms': None, 'sources_used': [{'id': 28, 'value': 'Gregor, der Grosse'}], 'keywords': [], 'part_of_cluster': [], 'authority_discourse': 0, 'liturgical_references': [], 'occurrence_found_in': [{'id': 2, 'value': 'Patrologia Latina'}], 'author_lookup': [{'ids': {'database_table_3498': 6, 'database_table_3499': 6}, 'value': 'Beda, Heiliger'}], 'prev': 'jad_occurence__99.html', 'next': 'jad_occurence__10.html'}.html",
     "view_label": "inimici romani"
   },
   "100": {
@@ -13303,7 +13786,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -13382,7 +13866,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "143v",
@@ -13464,7 +13951,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -13538,7 +14026,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "155r",
@@ -13620,7 +14111,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -13699,7 +14191,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "178r-v",
@@ -13781,7 +14276,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "",
@@ -13860,7 +14356,10 @@
             "jad_id": "jad_sources_occurrences__1",
             "digi_url": ""
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "f.179v",
@@ -13953,7 +14452,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -14050,7 +14552,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -14143,7 +14648,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -14236,7 +14744,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -14334,7 +14845,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -14444,7 +14958,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -14542,7 +15059,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -14639,7 +15159,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -14736,7 +15259,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -14829,7 +15355,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -14917,7 +15446,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -15010,7 +15542,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -15103,7 +15638,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -15196,7 +15734,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -15284,7 +15825,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -15372,7 +15916,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -15460,7 +16007,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -15557,7 +16107,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -15645,7 +16198,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -15742,7 +16298,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -15830,7 +16389,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -15923,7 +16485,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -16016,7 +16581,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -16113,7 +16681,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -16206,7 +16777,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -16294,7 +16868,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -16387,7 +16964,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -16477,7 +17057,8 @@
               }
             ]
           }
-        ]
+        ],
+        "date_written": []
       }
     ],
     "position_in_work": "Ch6.4",
@@ -16556,7 +17137,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -16649,7 +17233,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -16742,7 +17329,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -16835,7 +17425,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -16928,7 +17521,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
@@ -17021,7 +17617,10 @@
             "jad_id": "jad_sources_occurrences__2",
             "digi_url": "https://mlat.uzh.ch/browser?path=/38"
           }
-        ]
+        ],
+        "certainty": false,
+        "date": [],
+        "corpus_corporum": ""
       }
     ],
     "position_in_ms": "",
