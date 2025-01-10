@@ -12,55 +12,6 @@
         "jad_id": "jad_institutional_context__16",
         "part_of": []
       }
-    ],
-    "prev": "jad_institutional_context__9.html",
-    "next": "jad_institutional_context__10.html",
-    "view_label": "University of Paris",
-    "related__manuscripts": [
-      {
-        "jad_id": "jad_manuscript__2",
-        "view_label": "BNF, Latin 14426"
-      },
-      {
-        "jad_id": "jad_manuscript__5",
-        "view_label": "St.Gen., MS 1423"
-      },
-      {
-        "jad_id": "jad_manuscript__6",
-        "view_label": "BNF, Latin 492"
-      },
-      {
-        "jad_id": "jad_manuscript__7",
-        "view_label": "Maz., MS 177"
-      },
-      {
-        "jad_id": "jad_manuscript__12",
-        "view_label": "St.Gen., MS 2787"
-      },
-      {
-        "jad_id": "jad_manuscript__15",
-        "view_label": "BNF, Latin 620"
-      },
-      {
-        "jad_id": "jad_manuscript__23",
-        "view_label": "Maz., MS 178"
-      },
-      {
-        "jad_id": "jad_manuscript__24",
-        "view_label": "Maz., MS 999"
-      },
-      {
-        "jad_id": "jad_manuscript__25",
-        "view_label": "BNF, Latin 3301C"
-      },
-      {
-        "jad_id": "jad_manuscript__30",
-        "view_label": "BNF, Latin 14937"
-      },
-      {
-        "jad_id": "jad_manuscript__31",
-        "view_label": "BNF, Latin 2950"
-      }
     ]
   },
   "2": {
@@ -76,15 +27,6 @@
         "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
-    ],
-    "prev": "jad_institutional_context__16.html",
-    "next": "jad_institutional_context__3.html",
-    "view_label": "Benedictines Auxerre",
-    "related__manuscripts": [
-      {
-        "jad_id": "jad_manuscript__34",
-        "view_label": "Maz., MS 698"
-      }
     ]
   },
   "3": {
@@ -92,49 +34,28 @@
     "order": "3.00000000000000000000",
     "name": "Benedictines",
     "jad_id": "jad_institutional_context__3",
-    "part_of": [],
-    "prev": "jad_institutional_context__2.html",
-    "next": "jad_institutional_context__4.html",
-    "view_label": "Benedictines",
-    "related__manuscripts": []
+    "part_of": []
   },
   "4": {
     "id": 4,
     "order": "4.00000000000000000000",
     "name": "Kingdom of Jerusalem",
     "jad_id": "jad_institutional_context__4",
-    "part_of": [],
-    "prev": "jad_institutional_context__3.html",
-    "next": "jad_institutional_context__5.html",
-    "view_label": "Kingdom of Jerusalem",
-    "related__manuscripts": []
+    "part_of": []
   },
   "5": {
     "id": 5,
     "order": "5.00000000000000000000",
     "name": "Papal Curia",
     "jad_id": "jad_institutional_context__5",
-    "part_of": [],
-    "prev": "jad_institutional_context__4.html",
-    "next": "jad_institutional_context__6.html",
-    "view_label": "Papal Curia",
-    "related__manuscripts": []
+    "part_of": []
   },
   "6": {
     "id": 6,
     "order": "6.00000000000000000000",
     "name": "See of Canterbury",
     "jad_id": "jad_institutional_context__6",
-    "part_of": [],
-    "prev": "jad_institutional_context__5.html",
-    "next": "jad_institutional_context__7.html",
-    "view_label": "See of Canterbury",
-    "related__manuscripts": [
-      {
-        "jad_id": "jad_manuscript__9",
-        "view_label": "Lam., MS 144"
-      }
-    ]
+    "part_of": []
   },
   "7": {
     "id": 7,
@@ -149,15 +70,6 @@
         "jad_id": "jad_institutional_context__8",
         "part_of": []
       }
-    ],
-    "prev": "jad_institutional_context__6.html",
-    "next": "jad_institutional_context__8.html",
-    "view_label": "Augustinian canons León",
-    "related__manuscripts": [
-      {
-        "jad_id": "jad_manuscript__3",
-        "view_label": "San Isidoro, MS 11"
-      }
     ]
   },
   "8": {
@@ -165,22 +77,14 @@
     "order": "8.00000000000000000000",
     "name": "Augustinian canons",
     "jad_id": "jad_institutional_context__8",
-    "part_of": [],
-    "prev": "jad_institutional_context__7.html",
-    "next": "jad_institutional_context__9.html",
-    "view_label": "Augustinian canons",
-    "related__manuscripts": []
+    "part_of": []
   },
   "9": {
     "id": 9,
     "order": "9.00000000000000000000",
     "name": "Cistercians",
     "jad_id": "jad_institutional_context__9",
-    "part_of": [],
-    "prev": "jad_institutional_context__8.html",
-    "next": "{'id': 1, 'order': '1.00000000000000000000', 'name': 'University of Paris', 'jad_id': 'jad_institutional_context__1', 'part_of': [{'id': 16, 'order': '16.00000000000000000000', 'name': 'French schools', 'jad_id': 'jad_institutional_context__16', 'part_of': []}], 'prev': 'jad_institutional_context__9.html', 'next': 'jad_institutional_context__10.html'}.html",
-    "view_label": "Cistercians",
-    "related__manuscripts": []
+    "part_of": []
   },
   "10": {
     "id": 10,
@@ -195,22 +99,14 @@
         "jad_id": "jad_institutional_context__9",
         "part_of": []
       }
-    ],
-    "prev": "jad_institutional_context__1.html",
-    "next": "jad_institutional_context__11.html",
-    "view_label": "Cistercians Clairvaux",
-    "related__manuscripts": []
+    ]
   },
   "11": {
     "id": 11,
     "order": "11.00000000000000000000",
     "name": "Benedictines Cluny",
     "jad_id": "jad_institutional_context__11",
-    "part_of": [],
-    "prev": "jad_institutional_context__10.html",
-    "next": "jad_institutional_context__12.html",
-    "view_label": "Benedictines Cluny",
-    "related__manuscripts": []
+    "part_of": []
   },
   "12": {
     "id": 12,
@@ -231,15 +127,6 @@
           }
         ]
       }
-    ],
-    "prev": "jad_institutional_context__11.html",
-    "next": "jad_institutional_context__13.html",
-    "view_label": "St. Victor Paris",
-    "related__manuscripts": [
-      {
-        "jad_id": "jad_manuscript__20",
-        "view_label": "BNF, Latin 3570"
-      }
     ]
   },
   "13": {
@@ -255,43 +142,27 @@
         "jad_id": "jad_institutional_context__3",
         "part_of": []
       }
-    ],
-    "prev": "jad_institutional_context__12.html",
-    "next": "jad_institutional_context__14.html",
-    "view_label": "Benedictines Corbie",
-    "related__manuscripts": []
+    ]
   },
   "14": {
     "id": 14,
     "order": "14.00000000000000000000",
     "name": "Carolingian court",
     "jad_id": "jad_institutional_context__14",
-    "part_of": [],
-    "prev": "jad_institutional_context__13.html",
-    "next": "jad_institutional_context__15.html",
-    "view_label": "Carolingian court",
-    "related__manuscripts": []
+    "part_of": []
   },
   "15": {
     "id": 15,
     "order": "15.00000000000000000000",
     "name": "See of Toledo",
     "jad_id": "jad_institutional_context__15",
-    "part_of": [],
-    "prev": "jad_institutional_context__14.html",
-    "next": "jad_institutional_context__16.html",
-    "view_label": "See of Toledo",
-    "related__manuscripts": []
+    "part_of": []
   },
   "16": {
     "id": 16,
     "order": "16.00000000000000000000",
     "name": "French schools",
     "jad_id": "jad_institutional_context__16",
-    "part_of": [],
-    "prev": "jad_institutional_context__15.html",
-    "next": "jad_institutional_context__2.html",
-    "view_label": "French schools",
-    "related__manuscripts": []
+    "part_of": []
   }
 }

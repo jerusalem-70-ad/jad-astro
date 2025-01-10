@@ -13,6 +13,8 @@ export async function getStaticPaths() {
 }
 
 const { data: passage } = Astro.props;
+const prev = parseInt(passage.jad_id.substring(15)) - 1;
+const next = parseInt(passage.jad_id.substring(15)) + 1;
 ---
 
 <PageLayout>
@@ -68,25 +70,23 @@ const { data: passage } = Astro.props;
       >
         <div class="flex p-5 w-3/4 mx-auto justify-between">
           {
-            passage.id > 1 ? (
-              <NavLink href={`/passages/${passage.prev.replace(".html", "")}`}>
+            passage.id > 1 && (
+              <NavLink href={`/passages/${prev}`}>
                 <Icon name="lucide:circle-arrow-left" class="size-20" />
               </NavLink>
-            ) : (
-              ""
             )
           }
           <h1 class="text-xl py-3 mx-auto font-medium">
             ({passage.id}) <span class="italic">{passage.passage}</span>
           </h1>
 
-          <NavLink href={`/passages/${passage.next.replace(".html", "")}`}>
+          <NavLink href={`/passages/${next}`}>
             <Icon name="lucide:circle-arrow-right" class="size-20" />
           </NavLink>
         </div>
         <dl class="grid grid-cols-[1fr_5fr] text-sm md:text-base md:leading-7">
           <dt class="font-semibold border-r border-gray-300 pr-2">Author:</dt>
-          <dd class="pl-5">{passage.Author[0]?.value ?? "N/A"}</dd>
+          <dd class="pl-5">{passage.author_lookup[0].value ?? "N/A"}</dd>
 
           <dt class="font-semibold border-r border-gray-300 pr-2">Work:</dt>
           <dd class="pl-5">
@@ -125,14 +125,14 @@ const { data: passage } = Astro.props;
           </dt>
           <dd class="pl-5">
             {
-              passage.manuscript.length > 0
-                ? passage.manuscript.map(
-                    (ms: { jad_id: string; name: any }, index: number) => (
+              passage.manuscripts.length > 0
+                ? passage.manuscripts.map(
+                    (ms: { id: number; value: string }, index: number) => (
                       <>
-                        <NavLink href={`/manuscripts/${ms.jad_id}`}>
-                          {ms.name[0].value}
+                        <NavLink href={`/manuscripts/jad_manuscript__${ms.id}`}>
+                          {ms.value}
                         </NavLink>
-                        {index < passage.manuscript.length - 1 && ", "}
+                        {index < passage.manuscripts.length - 1 && ", "}
                       </>
                     ),
                   )
@@ -195,9 +195,9 @@ const { data: passage } = Astro.props;
             {
               passage.keywords.length > 0
                 ? passage.keywords
-                    .map((reference: { name: string; jad_id: string }) => (
-                      <NavLink href={`/keywords/${reference.jad_id}`}>
-                        {reference.name}
+                    .map((keyword: { value: string; id: number }) => (
+                      <NavLink href={`/keywords/jad_keyword__${keyword.id}`}>
+                        {keyword.value}
                       </NavLink>
                     ))
                     .reduce((prev, curr) => [prev, ", ", curr])

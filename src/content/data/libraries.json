@@ -1,25 +1,62 @@
 {
   "1": {
     "id": 1,
-    "order": "1.00000000000000000000",
     "name": "Österreichische Nationalbibliothek",
     "jad_id": "jad_library__1",
     "gnd_url": "https://d-nb.info/gnd/2020893-5",
     "abbreviation": "ÖNB",
     "place": [],
-    "prev": "jad_library__9.html",
-    "next": "jad_library__10.html",
     "view_label": "Österreichische Nationalbibliothek",
+    "prev": {
+      "id": "jad_library__9",
+      "label": "Bibliothèque municipale (Troyes)"
+    },
+    "next": {
+      "id": "jad_library__10",
+      "label": "Bodleian Library"
+    },
     "related__manuscripts": [
       {
+        "id": 16,
+        "name": [
+          {
+            "id": 1,
+            "value": "ÖNB, Cod. 1014"
+          }
+        ],
         "jad_id": "jad_manuscript__16",
-        "view_label": "ÖNB, Cod. 1014"
+        "library": [
+          {
+            "id": 1,
+            "name": "Österreichische Nationalbibliothek",
+            "jad_id": "jad_library__1",
+            "gnd_url": "https://d-nb.info/gnd/2020893-5",
+            "abbreviation": "ÖNB",
+            "place": []
+          }
+        ],
+        "idno": "Cod. 1014",
+        "catalog_url": "https://search.onb.ac.at/primo-explore/fulldisplay?docid=ONB_alma21302484910003338&context=L&vid=ONB&lang=de_DE&search_scope=ONB_gesamtbestand&adaptor=Local%20Search%20Engine&tab=default_tab&query=any,contains,cod.%201014&mode=basic",
+        "digi_url": "https://digital.onb.ac.at/RepViewer/viewer.faces?doc=DTL_8518292&order=1&view=SINGLE",
+        "not_before": null,
+        "not_after": null,
+        "written_date": null,
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "ÖNB, Cod. 1014",
+        "prev": {
+          "id": "jad_manuscript__15",
+          "label": "BNF, Latin 620"
+        },
+        "next": {
+          "id": "jad_manuscript__17",
+          "label": "Cambr. St.John's Coll., MS 127"
+        }
       }
     ]
   },
   "2": {
     "id": 2,
-    "order": "2.00000000000000000000",
     "name": "Bibliothèque Nationale de France",
     "jad_id": "jad_library__2",
     "gnd_url": "https://d-nb.info/gnd/5156217-0",
@@ -27,81 +64,788 @@
     "place": [
       {
         "id": 1,
-        "order": "1.00000000000000000000",
         "name": "Paris",
         "geonames_url": "https://www.geonames.org/2988507/paris.html",
         "jad_id": "jad_places__1"
       }
     ],
-    "prev": "jad_library__15.html",
-    "next": "jad_library__3.html",
     "view_label": "Bibliothèque Nationale de France",
+    "prev": {
+      "id": "jad_library__17",
+      "label": "Universitätsbibliothek Erlangen-Nürnberg"
+    },
+    "next": {
+      "id": "jad_library__3",
+      "label": "San Isidoro (Kloster)"
+    },
     "related__manuscripts": [
       {
+        "id": 2,
+        "name": [
+          {
+            "id": 2,
+            "value": "BNF, Latin 14426"
+          }
+        ],
         "jad_id": "jad_manuscript__2",
-        "view_label": "BNF, Latin 14426"
+        "library": [
+          {
+            "id": 2,
+            "name": "Bibliothèque Nationale de France",
+            "jad_id": "jad_library__2",
+            "gnd_url": "https://d-nb.info/gnd/5156217-0",
+            "abbreviation": "BNF",
+            "place": [
+              {
+                "id": 1,
+                "name": "Paris",
+                "geonames_url": "https://www.geonames.org/2988507/paris.html",
+                "jad_id": "jad_places__1"
+              }
+            ]
+          }
+        ],
+        "idno": "Latin 14426",
+        "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc75180c",
+        "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b9078089g",
+        "not_before": "1200",
+        "not_after": "1300",
+        "written_date": "13",
+        "institutional_context": [
+          {
+            "id": 1,
+            "name": "University of Paris",
+            "jad_id": "jad_institutional_context__1",
+            "part_of": [
+              {
+                "id": 16,
+                "name": "French schools",
+                "jad_id": "jad_institutional_context__16",
+                "part_of": []
+              }
+            ]
+          }
+        ],
+        "date_written": [],
+        "view_label": "BNF, Latin 14426",
+        "prev": {
+          "id": "jad_manuscript__19",
+          "label": "BNF, Latin 3567"
+        },
+        "next": {
+          "id": "jad_manuscript__20",
+          "label": "BNF, Latin 3570"
+        }
       },
       {
+        "id": 4,
+        "name": [
+          {
+            "id": 2,
+            "value": "BNF, Latin 8865"
+          }
+        ],
         "jad_id": "jad_manuscript__4",
-        "view_label": "BNF, Latin 8865"
+        "library": [
+          {
+            "id": 2,
+            "name": "Bibliothèque Nationale de France",
+            "jad_id": "jad_library__2",
+            "gnd_url": "https://d-nb.info/gnd/5156217-0",
+            "abbreviation": "BNF",
+            "place": [
+              {
+                "id": 1,
+                "name": "Paris",
+                "geonames_url": "https://www.geonames.org/2988507/paris.html",
+                "jad_id": "jad_places__1"
+              }
+            ]
+          }
+        ],
+        "idno": "Latin 8865",
+        "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc623934",
+        "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b6000541b",
+        "not_before": null,
+        "not_after": null,
+        "written_date": null,
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "BNF, Latin 8865",
+        "prev": {
+          "id": "jad_manuscript__39",
+          "label": "Erlangen, UB, 63/1"
+        },
+        "next": {
+          "id": "jad_manuscript__40",
+          "label": "Erlangen, UB, 63/2"
+        }
       },
       {
+        "id": 6,
+        "name": [
+          {
+            "id": 2,
+            "value": "BNF, Latin 492"
+          }
+        ],
         "jad_id": "jad_manuscript__6",
-        "view_label": "BNF, Latin 492"
+        "library": [
+          {
+            "id": 2,
+            "name": "Bibliothèque Nationale de France",
+            "jad_id": "jad_library__2",
+            "gnd_url": "https://d-nb.info/gnd/5156217-0",
+            "abbreviation": "BNF",
+            "place": [
+              {
+                "id": 1,
+                "name": "Paris",
+                "geonames_url": "https://www.geonames.org/2988507/paris.html",
+                "jad_id": "jad_places__1"
+              }
+            ]
+          }
+        ],
+        "idno": "Latin 492",
+        "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc619341",
+        "digi_url": "",
+        "not_before": null,
+        "not_after": null,
+        "written_date": null,
+        "institutional_context": [
+          {
+            "id": 1,
+            "name": "University of Paris",
+            "jad_id": "jad_institutional_context__1",
+            "part_of": [
+              {
+                "id": 16,
+                "name": "French schools",
+                "jad_id": "jad_institutional_context__16",
+                "part_of": []
+              }
+            ]
+          }
+        ],
+        "date_written": [],
+        "view_label": "BNF, Latin 492",
+        "prev": {
+          "id": "jad_manuscript__5",
+          "label": "St.Gen., MS 1423"
+        },
+        "next": {
+          "id": "jad_manuscript__7",
+          "label": "Maz., MS 177"
+        }
       },
       {
+        "id": 10,
+        "name": [
+          {
+            "id": 2,
+            "value": "BNF, Latin 446"
+          }
+        ],
         "jad_id": "jad_manuscript__10",
-        "view_label": "BNF, Latin 446"
+        "library": [
+          {
+            "id": 2,
+            "name": "Bibliothèque Nationale de France",
+            "jad_id": "jad_library__2",
+            "gnd_url": "https://d-nb.info/gnd/5156217-0",
+            "abbreviation": "BNF",
+            "place": [
+              {
+                "id": 1,
+                "name": "Paris",
+                "geonames_url": "https://www.geonames.org/2988507/paris.html",
+                "jad_id": "jad_places__1"
+              }
+            ]
+          }
+        ],
+        "idno": "Latin 446",
+        "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc618815",
+        "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b10721053z/f213.item",
+        "not_before": "1190",
+        "not_after": "1210",
+        "written_date": "around 1200",
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "BNF, Latin 446",
+        "prev": {
+          "id": "jad_manuscript__9",
+          "label": "Lam., MS 144"
+        },
+        "next": {
+          "id": "jad_manuscript__11",
+          "label": "BNF, Latin 3737"
+        }
       },
       {
+        "id": 11,
+        "name": [
+          {
+            "id": 2,
+            "value": "BNF, Latin 3737"
+          }
+        ],
         "jad_id": "jad_manuscript__11",
-        "view_label": "BNF, Latin 3737"
+        "library": [
+          {
+            "id": 2,
+            "name": "Bibliothèque Nationale de France",
+            "jad_id": "jad_library__2",
+            "gnd_url": "https://d-nb.info/gnd/5156217-0",
+            "abbreviation": "BNF",
+            "place": [
+              {
+                "id": 1,
+                "name": "Paris",
+                "geonames_url": "https://www.geonames.org/2988507/paris.html",
+                "jad_id": "jad_places__1"
+              }
+            ]
+          }
+        ],
+        "idno": "Latin 3737",
+        "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc61689r",
+        "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b52502392s/",
+        "not_before": "1290",
+        "not_after": "1310",
+        "written_date": "around 1300",
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "BNF, Latin 3737",
+        "prev": {
+          "id": "jad_manuscript__10",
+          "label": "BNF, Latin 446"
+        },
+        "next": {
+          "id": "jad_manuscript__12",
+          "label": "St.Gen., MS 2787"
+        }
       },
       {
+        "id": 15,
+        "name": [
+          {
+            "id": 2,
+            "value": "BNF, Latin 620"
+          }
+        ],
         "jad_id": "jad_manuscript__15",
-        "view_label": "BNF, Latin 620"
+        "library": [
+          {
+            "id": 2,
+            "name": "Bibliothèque Nationale de France",
+            "jad_id": "jad_library__2",
+            "gnd_url": "https://d-nb.info/gnd/5156217-0",
+            "abbreviation": "BNF",
+            "place": [
+              {
+                "id": 1,
+                "name": "Paris",
+                "geonames_url": "https://www.geonames.org/2988507/paris.html",
+                "jad_id": "jad_places__1"
+              }
+            ]
+          }
+        ],
+        "idno": "Latin 620",
+        "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc62076x",
+        "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b10036602t",
+        "not_before": null,
+        "not_after": null,
+        "written_date": null,
+        "institutional_context": [
+          {
+            "id": 1,
+            "name": "University of Paris",
+            "jad_id": "jad_institutional_context__1",
+            "part_of": [
+              {
+                "id": 16,
+                "name": "French schools",
+                "jad_id": "jad_institutional_context__16",
+                "part_of": []
+              }
+            ]
+          }
+        ],
+        "date_written": [],
+        "view_label": "BNF, Latin 620",
+        "prev": {
+          "id": "jad_manuscript__14",
+          "label": "BL, Royal 8 F XVII"
+        },
+        "next": {
+          "id": "jad_manuscript__16",
+          "label": "ÖNB, Cod. 1014"
+        }
       },
       {
+        "id": 18,
+        "name": [
+          {
+            "id": 2,
+            "value": "BNF, Latin 3829"
+          }
+        ],
         "jad_id": "jad_manuscript__18",
-        "view_label": "BNF, Latin 3829"
+        "library": [
+          {
+            "id": 2,
+            "name": "Bibliothèque Nationale de France",
+            "jad_id": "jad_library__2",
+            "gnd_url": "https://d-nb.info/gnd/5156217-0",
+            "abbreviation": "BNF",
+            "place": [
+              {
+                "id": 1,
+                "name": "Paris",
+                "geonames_url": "https://www.geonames.org/2988507/paris.html",
+                "jad_id": "jad_places__1"
+              }
+            ]
+          }
+        ],
+        "idno": "Latin 3829",
+        "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc61794x",
+        "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b9068440b/f133.item",
+        "not_before": null,
+        "not_after": null,
+        "written_date": null,
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "BNF, Latin 3829",
+        "prev": {
+          "id": "jad_manuscript__17",
+          "label": "Cambr. St.John's Coll., MS 127"
+        },
+        "next": {
+          "id": "jad_manuscript__19",
+          "label": "BNF, Latin 3567"
+        }
       },
       {
+        "id": 19,
+        "name": [
+          {
+            "id": 2,
+            "value": "BNF, Latin 3567"
+          }
+        ],
         "jad_id": "jad_manuscript__19",
-        "view_label": "BNF, Latin 3567"
+        "library": [
+          {
+            "id": 2,
+            "name": "Bibliothèque Nationale de France",
+            "jad_id": "jad_library__2",
+            "gnd_url": "https://d-nb.info/gnd/5156217-0",
+            "abbreviation": "BNF",
+            "place": [
+              {
+                "id": 1,
+                "name": "Paris",
+                "geonames_url": "https://www.geonames.org/2988507/paris.html",
+                "jad_id": "jad_places__1"
+              }
+            ]
+          }
+        ],
+        "idno": "Latin 3567",
+        "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc61499m",
+        "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b52521779w/f70.item",
+        "not_before": null,
+        "not_after": null,
+        "written_date": null,
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "BNF, Latin 3567",
+        "prev": {
+          "id": "jad_manuscript__18",
+          "label": "BNF, Latin 3829"
+        },
+        "next": {
+          "id": "jad_manuscript__2",
+          "label": "BNF, Latin 14426"
+        }
       },
       {
+        "id": 20,
+        "name": [
+          {
+            "id": 2,
+            "value": "BNF, Latin 3570"
+          }
+        ],
         "jad_id": "jad_manuscript__20",
-        "view_label": "BNF, Latin 3570"
+        "library": [
+          {
+            "id": 2,
+            "name": "Bibliothèque Nationale de France",
+            "jad_id": "jad_library__2",
+            "gnd_url": "https://d-nb.info/gnd/5156217-0",
+            "abbreviation": "BNF",
+            "place": [
+              {
+                "id": 1,
+                "name": "Paris",
+                "geonames_url": "https://www.geonames.org/2988507/paris.html",
+                "jad_id": "jad_places__1"
+              }
+            ]
+          }
+        ],
+        "idno": "Latin 3570",
+        "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc61503g",
+        "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b10024830x/f171.item",
+        "not_before": null,
+        "not_after": null,
+        "written_date": "12",
+        "institutional_context": [
+          {
+            "id": 12,
+            "name": "St. Victor Paris",
+            "jad_id": "jad_institutional_context__12",
+            "part_of": [
+              {
+                "id": 1,
+                "name": "University of Paris",
+                "jad_id": "jad_institutional_context__1",
+                "part_of": [
+                  {
+                    "id": 16,
+                    "value": "French schools"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "date_written": [],
+        "view_label": "BNF, Latin 3570",
+        "prev": {
+          "id": "jad_manuscript__2",
+          "label": "BNF, Latin 14426"
+        },
+        "next": {
+          "id": "jad_manuscript__21",
+          "label": "BNF, Latin 3281"
+        }
       },
       {
+        "id": 21,
+        "name": [
+          {
+            "id": 2,
+            "value": "BNF, Latin 3281"
+          }
+        ],
         "jad_id": "jad_manuscript__21",
-        "view_label": "BNF, Latin 3281"
+        "library": [
+          {
+            "id": 2,
+            "name": "Bibliothèque Nationale de France",
+            "jad_id": "jad_library__2",
+            "gnd_url": "https://d-nb.info/gnd/5156217-0",
+            "abbreviation": "BNF",
+            "place": [
+              {
+                "id": 1,
+                "name": "Paris",
+                "geonames_url": "https://www.geonames.org/2988507/paris.html",
+                "jad_id": "jad_places__1"
+              }
+            ]
+          }
+        ],
+        "idno": "Latin 3281",
+        "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc61156j",
+        "digi_url": "",
+        "not_before": null,
+        "not_after": null,
+        "written_date": null,
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "BNF, Latin 3281",
+        "prev": {
+          "id": "jad_manuscript__20",
+          "label": "BNF, Latin 3570"
+        },
+        "next": {
+          "id": "jad_manuscript__22",
+          "label": "Troyes, MS 653"
+        }
       },
       {
+        "id": 25,
+        "name": [
+          {
+            "id": 2,
+            "value": "BNF, Latin 3301C"
+          }
+        ],
         "jad_id": "jad_manuscript__25",
-        "view_label": "BNF, Latin 3301C"
+        "library": [
+          {
+            "id": 2,
+            "name": "Bibliothèque Nationale de France",
+            "jad_id": "jad_library__2",
+            "gnd_url": "https://d-nb.info/gnd/5156217-0",
+            "abbreviation": "BNF",
+            "place": [
+              {
+                "id": 1,
+                "name": "Paris",
+                "geonames_url": "https://www.geonames.org/2988507/paris.html",
+                "jad_id": "jad_places__1"
+              }
+            ]
+          }
+        ],
+        "idno": "Latin 3301C",
+        "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc61183f",
+        "digi_url": "",
+        "not_before": null,
+        "not_after": null,
+        "written_date": null,
+        "institutional_context": [
+          {
+            "id": 1,
+            "name": "University of Paris",
+            "jad_id": "jad_institutional_context__1",
+            "part_of": [
+              {
+                "id": 16,
+                "name": "French schools",
+                "jad_id": "jad_institutional_context__16",
+                "part_of": []
+              }
+            ]
+          }
+        ],
+        "date_written": [],
+        "view_label": "BNF, Latin 3301C",
+        "prev": {
+          "id": "jad_manuscript__24",
+          "label": "Maz., MS 999"
+        },
+        "next": {
+          "id": "jad_manuscript__26",
+          "label": "BNF, Latin 3733"
+        }
       },
       {
+        "id": 26,
+        "name": [
+          {
+            "id": 2,
+            "value": "BNF, Latin 3733"
+          }
+        ],
         "jad_id": "jad_manuscript__26",
-        "view_label": "BNF, Latin 3733"
+        "library": [
+          {
+            "id": 2,
+            "name": "Bibliothèque Nationale de France",
+            "jad_id": "jad_library__2",
+            "gnd_url": "https://d-nb.info/gnd/5156217-0",
+            "abbreviation": "BNF",
+            "place": [
+              {
+                "id": 1,
+                "name": "Paris",
+                "geonames_url": "https://www.geonames.org/2988507/paris.html",
+                "jad_id": "jad_places__1"
+              }
+            ]
+          }
+        ],
+        "idno": "Latin 3733",
+        "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc61685s",
+        "digi_url": "",
+        "not_before": null,
+        "not_after": null,
+        "written_date": null,
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "BNF, Latin 3733",
+        "prev": {
+          "id": "jad_manuscript__25",
+          "label": "BNF, Latin 3301C"
+        },
+        "next": {
+          "id": "jad_manuscript__27",
+          "label": "Maz., MS 774"
+        }
       },
       {
+        "id": 29,
+        "name": [
+          {
+            "id": 2,
+            "value": "BNF, Latin 3728"
+          }
+        ],
         "jad_id": "jad_manuscript__29",
-        "view_label": "BNF, Latin 3728"
+        "library": [
+          {
+            "id": 2,
+            "name": "Bibliothèque Nationale de France",
+            "jad_id": "jad_library__2",
+            "gnd_url": "https://d-nb.info/gnd/5156217-0",
+            "abbreviation": "BNF",
+            "place": [
+              {
+                "id": 1,
+                "name": "Paris",
+                "geonames_url": "https://www.geonames.org/2988507/paris.html",
+                "jad_id": "jad_places__1"
+              }
+            ]
+          }
+        ],
+        "idno": "Latin 3728",
+        "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc61679j",
+        "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b53200095q",
+        "not_before": "1290",
+        "not_after": "1310",
+        "written_date": "around 1300",
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "BNF, Latin 3728",
+        "prev": {
+          "id": "jad_manuscript__28",
+          "label": "Maz., Ms 1026"
+        },
+        "next": {
+          "id": "jad_manuscript__3",
+          "label": "San Isidoro, MS 11"
+        }
       },
       {
+        "id": 30,
+        "name": [
+          {
+            "id": 2,
+            "value": "BNF, Latin 14937"
+          }
+        ],
         "jad_id": "jad_manuscript__30",
-        "view_label": "BNF, Latin 14937"
+        "library": [
+          {
+            "id": 2,
+            "name": "Bibliothèque Nationale de France",
+            "jad_id": "jad_library__2",
+            "gnd_url": "https://d-nb.info/gnd/5156217-0",
+            "abbreviation": "BNF",
+            "place": [
+              {
+                "id": 1,
+                "name": "Paris",
+                "geonames_url": "https://www.geonames.org/2988507/paris.html",
+                "jad_id": "jad_places__1"
+              }
+            ]
+          }
+        ],
+        "idno": "Latin 14937",
+        "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc756668",
+        "digi_url": "https://gallica.bnf.fr/ark:/12148/btv1b52508765g",
+        "not_before": null,
+        "not_after": null,
+        "written_date": "",
+        "institutional_context": [
+          {
+            "id": 1,
+            "name": "University of Paris",
+            "jad_id": "jad_institutional_context__1",
+            "part_of": [
+              {
+                "id": 16,
+                "name": "French schools",
+                "jad_id": "jad_institutional_context__16",
+                "part_of": []
+              }
+            ]
+          }
+        ],
+        "date_written": [],
+        "view_label": "BNF, Latin 14937",
+        "prev": {
+          "id": "jad_manuscript__3",
+          "label": "San Isidoro, MS 11"
+        },
+        "next": {
+          "id": "jad_manuscript__31",
+          "label": "BNF, Latin 2950"
+        }
       },
       {
+        "id": 31,
+        "name": [
+          {
+            "id": 2,
+            "value": "BNF, Latin 2950"
+          }
+        ],
         "jad_id": "jad_manuscript__31",
-        "view_label": "BNF, Latin 2950"
+        "library": [
+          {
+            "id": 2,
+            "name": "Bibliothèque Nationale de France",
+            "jad_id": "jad_library__2",
+            "gnd_url": "https://d-nb.info/gnd/5156217-0",
+            "abbreviation": "BNF",
+            "place": [
+              {
+                "id": 1,
+                "name": "Paris",
+                "geonames_url": "https://www.geonames.org/2988507/paris.html",
+                "jad_id": "jad_places__1"
+              }
+            ]
+          }
+        ],
+        "idno": "Latin 2950",
+        "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc60770d",
+        "digi_url": "",
+        "not_before": null,
+        "not_after": null,
+        "written_date": "",
+        "institutional_context": [
+          {
+            "id": 1,
+            "name": "University of Paris",
+            "jad_id": "jad_institutional_context__1",
+            "part_of": [
+              {
+                "id": 16,
+                "name": "French schools",
+                "jad_id": "jad_institutional_context__16",
+                "part_of": []
+              }
+            ]
+          }
+        ],
+        "date_written": [],
+        "view_label": "BNF, Latin 2950",
+        "prev": {
+          "id": "jad_manuscript__30",
+          "label": "BNF, Latin 14937"
+        },
+        "next": {
+          "id": "jad_manuscript__32",
+          "label": "Arsenal, MS 44"
+        }
       }
     ]
   },
   "3": {
     "id": 3,
-    "order": "3.00000000000000000000",
     "name": "San Isidoro (Kloster)",
     "jad_id": "jad_library__3",
     "gnd_url": "",
@@ -109,255 +853,1246 @@
     "place": [
       {
         "id": 2,
-        "order": "2.00000000000000000000",
         "name": "León",
         "geonames_url": "",
         "jad_id": "jad_places__2"
       }
     ],
-    "prev": "jad_library__2.html",
-    "next": "jad_library__4.html",
     "view_label": "San Isidoro (Kloster)",
+    "prev": {
+      "id": "jad_library__2",
+      "label": "Bibliothèque Nationale de France"
+    },
+    "next": {
+      "id": "jad_library__4",
+      "label": "Bibliothèque Sainte-Geneviève"
+    },
     "related__manuscripts": [
       {
+        "id": 3,
+        "name": [
+          {
+            "id": 3,
+            "value": "San Isidoro, MS 11"
+          }
+        ],
         "jad_id": "jad_manuscript__3",
-        "view_label": "San Isidoro, MS 11"
+        "library": [
+          {
+            "id": 3,
+            "name": "San Isidoro (Kloster)",
+            "jad_id": "jad_library__3",
+            "gnd_url": "",
+            "abbreviation": "San Isidoro",
+            "place": [
+              {
+                "id": 2,
+                "name": "León",
+                "geonames_url": "",
+                "jad_id": "jad_places__2"
+              }
+            ]
+          }
+        ],
+        "idno": "MS 11",
+        "catalog_url": "",
+        "digi_url": "",
+        "not_before": "1190",
+        "not_after": "1203",
+        "written_date": "1190-1203",
+        "institutional_context": [
+          {
+            "id": 7,
+            "name": "Augustinian canons León",
+            "jad_id": "jad_institutional_context__7",
+            "part_of": [
+              {
+                "id": 8,
+                "name": "Augustinian canons",
+                "jad_id": "jad_institutional_context__8",
+                "part_of": []
+              }
+            ]
+          }
+        ],
+        "date_written": [],
+        "view_label": "San Isidoro, MS 11",
+        "prev": {
+          "id": "jad_manuscript__29",
+          "label": "BNF, Latin 3728"
+        },
+        "next": {
+          "id": "jad_manuscript__30",
+          "label": "BNF, Latin 14937"
+        }
       }
     ]
   },
   "4": {
     "id": 4,
-    "order": "4.00000000000000000000",
     "name": "Bibliothèque Sainte-Geneviève",
     "jad_id": "jad_library__4",
     "gnd_url": "https://d-nb.info/gnd/1022123-2",
     "abbreviation": "St.Gen.",
     "place": [],
-    "prev": "jad_library__3.html",
-    "next": "jad_library__5.html",
     "view_label": "Bibliothèque Sainte-Geneviève",
+    "prev": {
+      "id": "jad_library__3",
+      "label": "San Isidoro (Kloster)"
+    },
+    "next": {
+      "id": "jad_library__5",
+      "label": "Bibliothèque Mazarine"
+    },
     "related__manuscripts": [
       {
+        "id": 5,
+        "name": [
+          {
+            "id": 4,
+            "value": "St.Gen., MS 1423"
+          }
+        ],
         "jad_id": "jad_manuscript__5",
-        "view_label": "St.Gen., MS 1423"
+        "library": [
+          {
+            "id": 4,
+            "name": "Bibliothèque Sainte-Geneviève",
+            "jad_id": "jad_library__4",
+            "gnd_url": "https://d-nb.info/gnd/1022123-2",
+            "abbreviation": "St.Gen.",
+            "place": []
+          }
+        ],
+        "idno": "MS 1423",
+        "catalog_url": "https://calames.abes.fr/pub/bsg.aspx#details?id=BSGB10400",
+        "digi_url": "",
+        "not_before": null,
+        "not_after": null,
+        "written_date": null,
+        "institutional_context": [
+          {
+            "id": 1,
+            "name": "University of Paris",
+            "jad_id": "jad_institutional_context__1",
+            "part_of": [
+              {
+                "id": 16,
+                "name": "French schools",
+                "jad_id": "jad_institutional_context__16",
+                "part_of": []
+              }
+            ]
+          }
+        ],
+        "date_written": [],
+        "view_label": "St.Gen., MS 1423",
+        "prev": {
+          "id": "jad_manuscript__41",
+          "label": "NO MATCH FOR $..name[0].value"
+        },
+        "next": {
+          "id": "jad_manuscript__6",
+          "label": "BNF, Latin 492"
+        }
       },
       {
+        "id": 8,
+        "name": [
+          {
+            "id": 4,
+            "value": "St.Gen., MS 1422"
+          }
+        ],
         "jad_id": "jad_manuscript__8",
-        "view_label": "St.Gen., MS 1422"
+        "library": [
+          {
+            "id": 4,
+            "name": "Bibliothèque Sainte-Geneviève",
+            "jad_id": "jad_library__4",
+            "gnd_url": "https://d-nb.info/gnd/1022123-2",
+            "abbreviation": "St.Gen.",
+            "place": []
+          }
+        ],
+        "idno": "MS 1422",
+        "catalog_url": "https://calames.abes.fr/pub/bsg.aspx#details?id=BSGB10393",
+        "digi_url": "",
+        "not_before": null,
+        "not_after": null,
+        "written_date": null,
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "St.Gen., MS 1422",
+        "prev": {
+          "id": "jad_manuscript__7",
+          "label": "Maz., MS 177"
+        },
+        "next": {
+          "id": "jad_manuscript__9",
+          "label": "Lam., MS 144"
+        }
       },
       {
+        "id": 12,
+        "name": [
+          {
+            "id": 4,
+            "value": "St.Gen., MS 2787"
+          }
+        ],
         "jad_id": "jad_manuscript__12",
-        "view_label": "St.Gen., MS 2787"
+        "library": [
+          {
+            "id": 4,
+            "name": "Bibliothèque Sainte-Geneviève",
+            "jad_id": "jad_library__4",
+            "gnd_url": "https://d-nb.info/gnd/1022123-2",
+            "abbreviation": "St.Gen.",
+            "place": []
+          }
+        ],
+        "idno": "MS 2787",
+        "catalog_url": "https://calames.abes.fr/pub/bsg.aspx#details?id=BSGC10617",
+        "digi_url": "",
+        "not_before": "1200",
+        "not_after": "1225",
+        "written_date": "early 13",
+        "institutional_context": [
+          {
+            "id": 1,
+            "name": "University of Paris",
+            "jad_id": "jad_institutional_context__1",
+            "part_of": [
+              {
+                "id": 16,
+                "name": "French schools",
+                "jad_id": "jad_institutional_context__16",
+                "part_of": []
+              }
+            ]
+          }
+        ],
+        "date_written": [],
+        "view_label": "St.Gen., MS 2787",
+        "prev": {
+          "id": "jad_manuscript__11",
+          "label": "BNF, Latin 3737"
+        },
+        "next": {
+          "id": "jad_manuscript__13",
+          "label": "BL, Arundel 322"
+        }
       }
     ]
   },
   "5": {
     "id": 5,
-    "order": "5.00000000000000000000",
     "name": "Bibliothèque Mazarine",
     "jad_id": "jad_library__5",
     "gnd_url": "https://d-nb.info/gnd/803245-2",
     "abbreviation": "Maz.",
     "place": [],
-    "prev": "jad_library__4.html",
-    "next": "jad_library__6.html",
     "view_label": "Bibliothèque Mazarine",
+    "prev": {
+      "id": "jad_library__4",
+      "label": "Bibliothèque Sainte-Geneviève"
+    },
+    "next": {
+      "id": "jad_library__6",
+      "label": "Lambeth Palace Library"
+    },
     "related__manuscripts": [
       {
+        "id": 7,
+        "name": [
+          {
+            "id": 5,
+            "value": "Maz., MS 177"
+          }
+        ],
         "jad_id": "jad_manuscript__7",
-        "view_label": "Maz., MS 177"
+        "library": [
+          {
+            "id": 5,
+            "name": "Bibliothèque Mazarine",
+            "jad_id": "jad_library__5",
+            "gnd_url": "https://d-nb.info/gnd/803245-2",
+            "abbreviation": "Maz.",
+            "place": []
+          }
+        ],
+        "idno": "MS 177",
+        "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA10313",
+        "digi_url": "",
+        "not_before": null,
+        "not_after": null,
+        "written_date": null,
+        "institutional_context": [
+          {
+            "id": 1,
+            "name": "University of Paris",
+            "jad_id": "jad_institutional_context__1",
+            "part_of": [
+              {
+                "id": 16,
+                "name": "French schools",
+                "jad_id": "jad_institutional_context__16",
+                "part_of": []
+              }
+            ]
+          }
+        ],
+        "date_written": [],
+        "view_label": "Maz., MS 177",
+        "prev": {
+          "id": "jad_manuscript__6",
+          "label": "BNF, Latin 492"
+        },
+        "next": {
+          "id": "jad_manuscript__8",
+          "label": "St.Gen., MS 1422"
+        }
       },
       {
+        "id": 23,
+        "name": [
+          {
+            "id": 5,
+            "value": "Maz., MS 178"
+          }
+        ],
         "jad_id": "jad_manuscript__23",
-        "view_label": "Maz., MS 178"
+        "library": [
+          {
+            "id": 5,
+            "name": "Bibliothèque Mazarine",
+            "jad_id": "jad_library__5",
+            "gnd_url": "https://d-nb.info/gnd/803245-2",
+            "abbreviation": "Maz.",
+            "place": []
+          }
+        ],
+        "idno": "MS 178",
+        "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA10336",
+        "digi_url": "",
+        "not_before": null,
+        "not_after": null,
+        "written_date": null,
+        "institutional_context": [
+          {
+            "id": 1,
+            "name": "University of Paris",
+            "jad_id": "jad_institutional_context__1",
+            "part_of": [
+              {
+                "id": 16,
+                "name": "French schools",
+                "jad_id": "jad_institutional_context__16",
+                "part_of": []
+              }
+            ]
+          }
+        ],
+        "date_written": [],
+        "view_label": "Maz., MS 178",
+        "prev": {
+          "id": "jad_manuscript__22",
+          "label": "Troyes, MS 653"
+        },
+        "next": {
+          "id": "jad_manuscript__24",
+          "label": "Maz., MS 999"
+        }
       },
       {
+        "id": 24,
+        "name": [
+          {
+            "id": 5,
+            "value": "Maz., MS 999"
+          }
+        ],
         "jad_id": "jad_manuscript__24",
-        "view_label": "Maz., MS 999"
+        "library": [
+          {
+            "id": 5,
+            "name": "Bibliothèque Mazarine",
+            "jad_id": "jad_library__5",
+            "gnd_url": "https://d-nb.info/gnd/803245-2",
+            "abbreviation": "Maz.",
+            "place": []
+          }
+        ],
+        "idno": "MS 999",
+        "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA14392",
+        "digi_url": "",
+        "not_before": null,
+        "not_after": null,
+        "written_date": null,
+        "institutional_context": [
+          {
+            "id": 1,
+            "name": "University of Paris",
+            "jad_id": "jad_institutional_context__1",
+            "part_of": [
+              {
+                "id": 16,
+                "name": "French schools",
+                "jad_id": "jad_institutional_context__16",
+                "part_of": []
+              }
+            ]
+          }
+        ],
+        "date_written": [],
+        "view_label": "Maz., MS 999",
+        "prev": {
+          "id": "jad_manuscript__23",
+          "label": "Maz., MS 178"
+        },
+        "next": {
+          "id": "jad_manuscript__25",
+          "label": "BNF, Latin 3301C"
+        }
       },
       {
+        "id": 27,
+        "name": [
+          {
+            "id": 5,
+            "value": "Maz., MS 774"
+          }
+        ],
         "jad_id": "jad_manuscript__27",
-        "view_label": "Maz., MS 774"
+        "library": [
+          {
+            "id": 5,
+            "name": "Bibliothèque Mazarine",
+            "jad_id": "jad_library__5",
+            "gnd_url": "https://d-nb.info/gnd/803245-2",
+            "abbreviation": "Maz.",
+            "place": []
+          }
+        ],
+        "idno": "MS 774",
+        "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA13427",
+        "digi_url": "",
+        "not_before": null,
+        "not_after": null,
+        "written_date": null,
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "Maz., MS 774",
+        "prev": {
+          "id": "jad_manuscript__26",
+          "label": "BNF, Latin 3733"
+        },
+        "next": {
+          "id": "jad_manuscript__28",
+          "label": "Maz., Ms 1026"
+        }
       },
       {
+        "id": 28,
+        "name": [
+          {
+            "id": 5,
+            "value": "Maz., Ms 1026"
+          }
+        ],
         "jad_id": "jad_manuscript__28",
-        "view_label": "Maz., Ms 1026"
+        "library": [
+          {
+            "id": 5,
+            "name": "Bibliothèque Mazarine",
+            "jad_id": "jad_library__5",
+            "gnd_url": "https://d-nb.info/gnd/803245-2",
+            "abbreviation": "Maz.",
+            "place": []
+          }
+        ],
+        "idno": "Ms 1026",
+        "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA14477",
+        "digi_url": "",
+        "not_before": null,
+        "not_after": null,
+        "written_date": null,
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "Maz., Ms 1026",
+        "prev": {
+          "id": "jad_manuscript__27",
+          "label": "Maz., MS 774"
+        },
+        "next": {
+          "id": "jad_manuscript__29",
+          "label": "BNF, Latin 3728"
+        }
       },
       {
+        "id": 34,
+        "name": [
+          {
+            "id": 5,
+            "value": "Maz., MS 698"
+          }
+        ],
         "jad_id": "jad_manuscript__34",
-        "view_label": "Maz., MS 698"
+        "library": [
+          {
+            "id": 5,
+            "name": "Bibliothèque Mazarine",
+            "jad_id": "jad_library__5",
+            "gnd_url": "https://d-nb.info/gnd/803245-2",
+            "abbreviation": "Maz.",
+            "place": []
+          }
+        ],
+        "idno": "MS 698",
+        "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA12964",
+        "digi_url": "",
+        "not_before": "890",
+        "not_after": "910",
+        "written_date": "around 900",
+        "institutional_context": [
+          {
+            "id": 2,
+            "name": "Benedictines Auxerre",
+            "jad_id": "jad_institutional_context__2",
+            "part_of": [
+              {
+                "id": 3,
+                "name": "Benedictines",
+                "jad_id": "jad_institutional_context__3",
+                "part_of": []
+              }
+            ]
+          }
+        ],
+        "date_written": [],
+        "view_label": "Maz., MS 698",
+        "prev": {
+          "id": "jad_manuscript__33",
+          "label": "Arsenal, MS 400"
+        },
+        "next": {
+          "id": "jad_manuscript__35",
+          "label": "Maz., MS 1001"
+        }
       },
       {
+        "id": 35,
+        "name": [
+          {
+            "id": 5,
+            "value": "Maz., MS 1001"
+          }
+        ],
         "jad_id": "jad_manuscript__35",
-        "view_label": "Maz., MS 1001"
+        "library": [
+          {
+            "id": 5,
+            "name": "Bibliothèque Mazarine",
+            "jad_id": "jad_library__5",
+            "gnd_url": "https://d-nb.info/gnd/803245-2",
+            "abbreviation": "Maz.",
+            "place": []
+          }
+        ],
+        "idno": "MS 1001",
+        "catalog_url": "https://calames.abes.fr/pub/mazarine.aspx#details?id=MAZA14397",
+        "digi_url": "",
+        "not_before": null,
+        "not_after": null,
+        "written_date": "",
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "Maz., MS 1001",
+        "prev": {
+          "id": "jad_manuscript__34",
+          "label": "Maz., MS 698"
+        },
+        "next": {
+          "id": "jad_manuscript__36",
+          "label": "Valenciennes, MS 227"
+        }
       }
     ]
   },
   "6": {
     "id": 6,
-    "order": "6.00000000000000000000",
     "name": "Lambeth Palace Library",
     "jad_id": "jad_library__6",
     "gnd_url": "https://d-nb.info/gnd/16441-0",
     "abbreviation": "Lam.",
     "place": [],
-    "prev": "jad_library__5.html",
-    "next": "jad_library__7.html",
     "view_label": "Lambeth Palace Library",
+    "prev": {
+      "id": "jad_library__5",
+      "label": "Bibliothèque Mazarine"
+    },
+    "next": {
+      "id": "jad_library__7",
+      "label": "British Library"
+    },
     "related__manuscripts": [
       {
+        "id": 9,
+        "name": [
+          {
+            "id": 6,
+            "value": "Lam., MS 144"
+          }
+        ],
         "jad_id": "jad_manuscript__9",
-        "view_label": "Lam., MS 144"
+        "library": [
+          {
+            "id": 6,
+            "name": "Lambeth Palace Library",
+            "jad_id": "jad_library__6",
+            "gnd_url": "https://d-nb.info/gnd/16441-0",
+            "abbreviation": "Lam.",
+            "place": []
+          }
+        ],
+        "idno": "MS 144",
+        "catalog_url": "https://archives.lambethpalacelibrary.org.uk/CalmView/Record.aspx?src=CalmView.Catalog&id=MSS%2f144&pos=1",
+        "digi_url": "",
+        "not_before": "1187",
+        "not_after": "1210",
+        "written_date": "around 1200 (after 1187)",
+        "institutional_context": [
+          {
+            "id": 6,
+            "name": "See of Canterbury",
+            "jad_id": "jad_institutional_context__6",
+            "part_of": []
+          }
+        ],
+        "date_written": [],
+        "view_label": "Lam., MS 144",
+        "prev": {
+          "id": "jad_manuscript__8",
+          "label": "St.Gen., MS 1422"
+        },
+        "next": {
+          "id": "jad_manuscript__10",
+          "label": "BNF, Latin 446"
+        }
       }
     ]
   },
   "7": {
     "id": 7,
-    "order": "7.00000000000000000000",
     "name": "British Library",
     "jad_id": "jad_library__7",
     "gnd_url": "https://d-nb.info/gnd/1023420-2",
     "abbreviation": "BL",
     "place": [],
-    "prev": "jad_library__6.html",
-    "next": "jad_library__8.html",
     "view_label": "British Library",
+    "prev": {
+      "id": "jad_library__6",
+      "label": "Lambeth Palace Library"
+    },
+    "next": {
+      "id": "jad_library__8",
+      "label": "St John's College (Cambridge)"
+    },
     "related__manuscripts": [
       {
+        "id": 13,
+        "name": [
+          {
+            "id": 7,
+            "value": "BL, Arundel 322"
+          }
+        ],
         "jad_id": "jad_manuscript__13",
-        "view_label": "BL, Arundel 322"
+        "library": [
+          {
+            "id": 7,
+            "name": "British Library",
+            "jad_id": "jad_library__7",
+            "gnd_url": "https://d-nb.info/gnd/1023420-2",
+            "abbreviation": "BL",
+            "place": []
+          }
+        ],
+        "idno": "Arundel 322",
+        "catalog_url": "",
+        "digi_url": "",
+        "not_before": null,
+        "not_after": null,
+        "written_date": null,
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "BL, Arundel 322",
+        "prev": {
+          "id": "jad_manuscript__12",
+          "label": "St.Gen., MS 2787"
+        },
+        "next": {
+          "id": "jad_manuscript__14",
+          "label": "BL, Royal 8 F XVII"
+        }
       },
       {
+        "id": 14,
+        "name": [
+          {
+            "id": 7,
+            "value": "BL, Royal 8 F XVII"
+          }
+        ],
         "jad_id": "jad_manuscript__14",
-        "view_label": "BL, Royal 8 F XVII"
+        "library": [
+          {
+            "id": 7,
+            "name": "British Library",
+            "jad_id": "jad_library__7",
+            "gnd_url": "https://d-nb.info/gnd/1023420-2",
+            "abbreviation": "BL",
+            "place": []
+          }
+        ],
+        "idno": "Royal 8 F XVII",
+        "catalog_url": "",
+        "digi_url": "",
+        "not_before": null,
+        "not_after": null,
+        "written_date": null,
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "BL, Royal 8 F XVII",
+        "prev": {
+          "id": "jad_manuscript__13",
+          "label": "BL, Arundel 322"
+        },
+        "next": {
+          "id": "jad_manuscript__15",
+          "label": "BNF, Latin 620"
+        }
       }
     ]
   },
   "8": {
     "id": 8,
-    "order": "8.00000000000000000000",
     "name": "St John's College (Cambridge)",
     "jad_id": "jad_library__8",
     "gnd_url": "https://d-nb.info/gnd/18387-8",
     "abbreviation": "Cambr. St.John's Coll.",
     "place": [],
-    "prev": "jad_library__7.html",
-    "next": "jad_library__9.html",
     "view_label": "St John's College (Cambridge)",
+    "prev": {
+      "id": "jad_library__7",
+      "label": "British Library"
+    },
+    "next": {
+      "id": "jad_library__9",
+      "label": "Bibliothèque municipale (Troyes)"
+    },
     "related__manuscripts": [
       {
+        "id": 17,
+        "name": [
+          {
+            "id": 8,
+            "value": "Cambr. St.John's Coll., MS 127"
+          }
+        ],
         "jad_id": "jad_manuscript__17",
-        "view_label": "Cambr. St.John's Coll., MS 127"
+        "library": [
+          {
+            "id": 8,
+            "name": "St John's College (Cambridge)",
+            "jad_id": "jad_library__8",
+            "gnd_url": "https://d-nb.info/gnd/18387-8",
+            "abbreviation": "Cambr. St.John's Coll.",
+            "place": []
+          }
+        ],
+        "idno": "MS 127",
+        "catalog_url": "",
+        "digi_url": "",
+        "not_before": null,
+        "not_after": null,
+        "written_date": "14",
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "Cambr. St.John's Coll., MS 127",
+        "prev": {
+          "id": "jad_manuscript__16",
+          "label": "ÖNB, Cod. 1014"
+        },
+        "next": {
+          "id": "jad_manuscript__18",
+          "label": "BNF, Latin 3829"
+        }
       }
     ]
   },
   "9": {
     "id": 9,
-    "order": "9.00000000000000000000",
     "name": "Bibliothèque municipale (Troyes)",
     "jad_id": "jad_library__9",
     "gnd_url": "https://d-nb.info/gnd/1026092-4",
     "abbreviation": "Troyes",
     "place": [],
-    "prev": "jad_library__8.html",
-    "next": "{'id': 1, 'order': '1.00000000000000000000', 'name': 'Österreichische Nationalbibliothek', 'jad_id': 'jad_library__1', 'gnd_url': 'https://d-nb.info/gnd/2020893-5', 'abbreviation': 'ÖNB', 'place': [], 'prev': 'jad_library__9.html', 'next': 'jad_library__10.html'}.html",
     "view_label": "Bibliothèque municipale (Troyes)",
+    "prev": {
+      "id": "jad_library__8",
+      "label": "St John's College (Cambridge)"
+    },
+    "next": {
+      "id": "jad_library__1",
+      "label": "Österreichische Nationalbibliothek"
+    },
     "related__manuscripts": [
       {
+        "id": 22,
+        "name": [
+          {
+            "id": 9,
+            "value": "Troyes, MS 653"
+          }
+        ],
         "jad_id": "jad_manuscript__22",
-        "view_label": "Troyes, MS 653"
+        "library": [
+          {
+            "id": 9,
+            "name": "Bibliothèque municipale (Troyes)",
+            "jad_id": "jad_library__9",
+            "gnd_url": "https://d-nb.info/gnd/1026092-4",
+            "abbreviation": "Troyes",
+            "place": []
+          }
+        ],
+        "idno": "MS 653",
+        "catalog_url": "https://arca.irht.cnrs.fr/ark:/63955/md82k643c86h",
+        "digi_url": "https://arca.irht.cnrs.fr/ark:/63955/md82k643c86h",
+        "not_before": null,
+        "not_after": null,
+        "written_date": null,
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "Troyes, MS 653",
+        "prev": {
+          "id": "jad_manuscript__21",
+          "label": "BNF, Latin 3281"
+        },
+        "next": {
+          "id": "jad_manuscript__23",
+          "label": "Maz., MS 178"
+        }
       }
     ]
   },
   "10": {
     "id": 10,
-    "order": "10.00000000000000000000",
     "name": "Bodleian Library",
     "jad_id": "jad_library__10",
     "gnd_url": "https://d-nb.info/gnd/38352-1",
     "abbreviation": "Bodl.",
     "place": [],
-    "prev": "jad_library__1.html",
-    "next": "jad_library__11.html",
     "view_label": "Bodleian Library",
+    "prev": {
+      "id": "jad_library__1",
+      "label": "Österreichische Nationalbibliothek"
+    },
+    "next": {
+      "id": "jad_library__11",
+      "label": "Bibliothèque royale de Belgique"
+    },
     "related__manuscripts": []
   },
   "11": {
     "id": 11,
-    "order": "11.00000000000000000000",
     "name": "Bibliothèque royale de Belgique",
     "jad_id": "jad_library__11",
     "gnd_url": "https://d-nb.info/gnd/1023393-3",
     "abbreviation": "Bibl. Roy.",
     "place": [],
-    "prev": "jad_library__10.html",
-    "next": "jad_library__12.html",
     "view_label": "Bibliothèque royale de Belgique",
+    "prev": {
+      "id": "jad_library__10",
+      "label": "Bodleian Library"
+    },
+    "next": {
+      "id": "jad_library__12",
+      "label": "Bayrische Staatsbibliothek"
+    },
     "related__manuscripts": []
   },
   "12": {
     "id": 12,
-    "order": "12.00000000000000000000",
     "name": "Bayrische Staatsbibliothek",
     "jad_id": "jad_library__12",
     "gnd_url": "",
     "abbreviation": "BSB",
     "place": [],
-    "prev": "jad_library__11.html",
-    "next": "jad_library__13.html",
     "view_label": "Bayrische Staatsbibliothek",
-    "related__manuscripts": []
+    "prev": {
+      "id": "jad_library__11",
+      "label": "Bibliothèque royale de Belgique"
+    },
+    "next": {
+      "id": "jad_library__13",
+      "label": "Bibliothèque de l'Arsenal"
+    },
+    "related__manuscripts": [
+      {
+        "id": 37,
+        "name": [
+          {
+            "id": 12,
+            "value": "BSB, Clm 3721"
+          }
+        ],
+        "jad_id": "jad_manuscript__37",
+        "library": [
+          {
+            "id": 12,
+            "name": "Bayrische Staatsbibliothek",
+            "jad_id": "jad_library__12",
+            "gnd_url": "",
+            "abbreviation": "BSB",
+            "place": []
+          }
+        ],
+        "idno": "Clm 3721",
+        "catalog_url": "https://opacplus.bsb-muenchen.de/discovery/fulldisplay?docid=alma991037622269707356&context=L&vid=49BVB_BSB:VU1&lang=de&search_scope=MyInstitution&adaptor=Local%20Search%20Engine&tab=LibraryCatalog&query=any,contains,clm%203721&offset=0",
+        "digi_url": "https://www.digitale-sammlungen.de/de/view/bsb00114266?page=,1",
+        "not_before": null,
+        "not_after": null,
+        "written_date": "",
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "BSB, Clm 3721",
+        "prev": {
+          "id": "jad_manuscript__36",
+          "label": "Valenciennes, MS 227"
+        },
+        "next": {
+          "id": "jad_manuscript__38",
+          "label": "Jena, UB, El. f. 32"
+        }
+      }
+    ]
   },
   "13": {
     "id": 13,
-    "order": "13.00000000000000000000",
     "name": "Bibliothèque de l'Arsenal",
     "jad_id": "jad_library__13",
     "gnd_url": "https://d-nb.info/gnd/1056486-X",
     "abbreviation": "Arsenal",
     "place": [],
-    "prev": "jad_library__12.html",
-    "next": "jad_library__14.html",
     "view_label": "Bibliothèque de l'Arsenal",
+    "prev": {
+      "id": "jad_library__12",
+      "label": "Bayrische Staatsbibliothek"
+    },
+    "next": {
+      "id": "jad_library__14",
+      "label": "Magdalen College (Oxford)"
+    },
     "related__manuscripts": [
       {
+        "id": 32,
+        "name": [
+          {
+            "id": 13,
+            "value": "Arsenal, MS 44"
+          }
+        ],
         "jad_id": "jad_manuscript__32",
-        "view_label": "Arsenal, MS 44"
+        "library": [
+          {
+            "id": 13,
+            "name": "Bibliothèque de l'Arsenal",
+            "jad_id": "jad_library__13",
+            "gnd_url": "https://d-nb.info/gnd/1056486-X",
+            "abbreviation": "Arsenal",
+            "place": []
+          }
+        ],
+        "idno": "MS 44",
+        "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc79628g",
+        "digi_url": "",
+        "not_before": null,
+        "not_after": null,
+        "written_date": "",
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "Arsenal, MS 44",
+        "prev": {
+          "id": "jad_manuscript__31",
+          "label": "BNF, Latin 2950"
+        },
+        "next": {
+          "id": "jad_manuscript__33",
+          "label": "Arsenal, MS 400"
+        }
       },
       {
+        "id": 33,
+        "name": [
+          {
+            "id": 13,
+            "value": "Arsenal, MS 400"
+          }
+        ],
         "jad_id": "jad_manuscript__33",
-        "view_label": "Arsenal, MS 400"
+        "library": [
+          {
+            "id": 13,
+            "name": "Bibliothèque de l'Arsenal",
+            "jad_id": "jad_library__13",
+            "gnd_url": "https://d-nb.info/gnd/1056486-X",
+            "abbreviation": "Arsenal",
+            "place": []
+          }
+        ],
+        "idno": "MS 400",
+        "catalog_url": "https://archivesetmanuscrits.bnf.fr/ark:/12148/cc79585t",
+        "digi_url": "",
+        "not_before": null,
+        "not_after": null,
+        "written_date": "",
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "Arsenal, MS 400",
+        "prev": {
+          "id": "jad_manuscript__32",
+          "label": "Arsenal, MS 44"
+        },
+        "next": {
+          "id": "jad_manuscript__34",
+          "label": "Maz., MS 698"
+        }
       }
     ]
   },
   "14": {
     "id": 14,
-    "order": "14.00000000000000000000",
     "name": "Magdalen College (Oxford)",
     "jad_id": "jad_library__14",
     "gnd_url": "",
     "abbreviation": "Oxford Magd. Coll.",
     "place": [],
-    "prev": "jad_library__13.html",
-    "next": "jad_library__15.html",
     "view_label": "Magdalen College (Oxford)",
+    "prev": {
+      "id": "jad_library__13",
+      "label": "Bibliothèque de l'Arsenal"
+    },
+    "next": {
+      "id": "jad_library__15",
+      "label": "Bibliothèque municipale (Valenciennes)"
+    },
     "related__manuscripts": []
   },
   "15": {
     "id": 15,
-    "order": "15.00000000000000000000",
     "name": "Bibliothèque municipale (Valenciennes)",
     "jad_id": "jad_library__15",
     "gnd_url": "https://d-nb.info/gnd/1052474-5",
     "abbreviation": "Valenciennes",
     "place": [],
-    "prev": "jad_library__14.html",
-    "next": "jad_library__2.html",
     "view_label": "Bibliothèque municipale (Valenciennes)",
+    "prev": {
+      "id": "jad_library__14",
+      "label": "Magdalen College (Oxford)"
+    },
+    "next": {
+      "id": "jad_library__16",
+      "label": "Thüringer Universitäts- und Landesbibliothek Jena"
+    },
     "related__manuscripts": [
       {
+        "id": 36,
+        "name": [
+          {
+            "id": 15,
+            "value": "Valenciennes, MS 227"
+          }
+        ],
         "jad_id": "jad_manuscript__36",
-        "view_label": "Valenciennes, MS 227"
+        "library": [
+          {
+            "id": 15,
+            "name": "Bibliothèque municipale (Valenciennes)",
+            "jad_id": "jad_library__15",
+            "gnd_url": "https://d-nb.info/gnd/1052474-5",
+            "abbreviation": "Valenciennes",
+            "place": []
+          }
+        ],
+        "idno": "MS 227",
+        "catalog_url": "",
+        "digi_url": "",
+        "not_before": null,
+        "not_after": null,
+        "written_date": "",
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "Valenciennes, MS 227",
+        "prev": {
+          "id": "jad_manuscript__35",
+          "label": "Maz., MS 1001"
+        },
+        "next": {
+          "id": "jad_manuscript__37",
+          "label": "BSB, Clm 3721"
+        }
+      }
+    ]
+  },
+  "16": {
+    "id": 16,
+    "name": "Thüringer Universitäts- und Landesbibliothek Jena",
+    "jad_id": "jad_library__16",
+    "gnd_url": "",
+    "abbreviation": "Jena, UB",
+    "place": [],
+    "view_label": "Thüringer Universitäts- und Landesbibliothek Jena",
+    "prev": {
+      "id": "jad_library__15",
+      "label": "Bibliothèque municipale (Valenciennes)"
+    },
+    "next": {
+      "id": "jad_library__17",
+      "label": "Universitätsbibliothek Erlangen-Nürnberg"
+    },
+    "related__manuscripts": [
+      {
+        "id": 38,
+        "name": [
+          {
+            "id": 16,
+            "value": "Jena, UB, El. f. 32"
+          }
+        ],
+        "jad_id": "jad_manuscript__38",
+        "library": [
+          {
+            "id": 16,
+            "name": "Thüringer Universitäts- und Landesbibliothek Jena",
+            "jad_id": "jad_library__16",
+            "gnd_url": "",
+            "abbreviation": "Jena, UB",
+            "place": []
+          }
+        ],
+        "idno": "El. f. 32",
+        "catalog_url": "https://handschriftenportal.de/search?q=settlement-search%3D%3D%27jena%27%3BFIELD-GROUP-ALL%3D%3D%2732%27&hl=true&isExtended=true",
+        "digi_url": "https://handschriftenportal.de/search?q=settlement-search%3D%3D%27jena%27%3BFIELD-GROUP-ALL%3D%3D%2732%27&hl=true&isExtended=true",
+        "not_before": null,
+        "not_after": null,
+        "written_date": "",
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "Jena, UB, El. f. 32",
+        "prev": {
+          "id": "jad_manuscript__37",
+          "label": "BSB, Clm 3721"
+        },
+        "next": {
+          "id": "jad_manuscript__39",
+          "label": "Erlangen, UB, 63/1"
+        }
+      }
+    ]
+  },
+  "17": {
+    "id": 17,
+    "name": "Universitätsbibliothek Erlangen-Nürnberg",
+    "jad_id": "jad_library__17",
+    "gnd_url": "",
+    "abbreviation": "Erlangen, UB",
+    "place": [],
+    "view_label": "Universitätsbibliothek Erlangen-Nürnberg",
+    "prev": {
+      "id": "jad_library__16",
+      "label": "Thüringer Universitäts- und Landesbibliothek Jena"
+    },
+    "next": {
+      "id": "jad_library__2",
+      "label": "Bibliothèque Nationale de France"
+    },
+    "related__manuscripts": [
+      {
+        "id": 39,
+        "name": [
+          {
+            "id": 17,
+            "value": "Erlangen, UB, 63/1"
+          }
+        ],
+        "jad_id": "jad_manuscript__39",
+        "library": [
+          {
+            "id": 17,
+            "name": "Universitätsbibliothek Erlangen-Nürnberg",
+            "jad_id": "jad_library__17",
+            "gnd_url": "",
+            "abbreviation": "Erlangen, UB",
+            "place": []
+          }
+        ],
+        "idno": "63/1",
+        "catalog_url": "https://bvbat01.bib-bvb.de/TP61/start.do?Query=1035%3D%22BV045480740%22+IN+%5B1%5D&Language=De",
+        "digi_url": "http://digital.bib-bvb.de/view/bvb_mets/viewer.0.6.5.jsp?folder_id=0&dvs=1736437021266~348&pid=17109356&locale=de&usePid1=true&usePid2=true",
+        "not_before": null,
+        "not_after": null,
+        "written_date": "",
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "Erlangen, UB, 63/1",
+        "prev": {
+          "id": "jad_manuscript__38",
+          "label": "Jena, UB, El. f. 32"
+        },
+        "next": {
+          "id": "jad_manuscript__4",
+          "label": "BNF, Latin 8865"
+        }
+      },
+      {
+        "id": 40,
+        "name": [
+          {
+            "id": 17,
+            "value": "Erlangen, UB, 63/2"
+          }
+        ],
+        "jad_id": "jad_manuscript__40",
+        "library": [
+          {
+            "id": 17,
+            "name": "Universitätsbibliothek Erlangen-Nürnberg",
+            "jad_id": "jad_library__17",
+            "gnd_url": "",
+            "abbreviation": "Erlangen, UB",
+            "place": []
+          }
+        ],
+        "idno": "63/2",
+        "catalog_url": "https://bvbat01.bib-bvb.de/TP61/start.do?Query=1035%3D%22BV045480740%22+IN+%5B1%5D&Language=De",
+        "digi_url": "http://digital.bib-bvb.de/view/bvb_mets/viewer.0.6.5.jsp?folder_id=0&dvs=1736437030858~486&pid=17110225&locale=de&usePid1=true&usePid2=true",
+        "not_before": null,
+        "not_after": null,
+        "written_date": "",
+        "institutional_context": [],
+        "date_written": [],
+        "view_label": "Erlangen, UB, 63/2",
+        "prev": {
+          "id": "jad_manuscript__4",
+          "label": "BNF, Latin 8865"
+        },
+        "next": {
+          "id": "jad_manuscript__41",
+          "label": "NO MATCH FOR $..name[0].value"
+        }
       }
     ]
   }

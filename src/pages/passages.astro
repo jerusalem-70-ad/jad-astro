@@ -49,7 +49,7 @@ import TableHead from "../components/table-head.astro";
         {
           title: "Author",
           resizable: true,
-          field: "Author",
+          field: "author_lookup",
           minWidth: 200,
           mutator: jsonpathLookup,
           mutatorParams: {
@@ -74,11 +74,11 @@ import TableHead from "../components/table-head.astro";
         {
           title: "Manuscript",
           resizable: true,
-          field: "manuscript",
+          field: "manuscripts",
           minWidth: 200,
           mutator: jsonpathLookup,
           mutatorParams: {
-            path: "$[*].name[*].value",
+            path: "$[*].value",
             separator: "; ",
           },
           headerFilter: "input",
