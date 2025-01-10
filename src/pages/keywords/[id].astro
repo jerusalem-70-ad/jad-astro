@@ -21,20 +21,20 @@ const { data: keyword } = Astro.props;
       class="border-2 rounded-sm border-brandBrown bg-brandRose my-10 grid p-5 w-3/4 mx-auto"
     >
       <div class="flex p-5 w-3/4 mx-auto justify-between">
-        <!--   <NavLink href={`/keywords/${keyword.prev.replace(".html", "")}`}>
+        <NavLink href={`/keywords/${keyword.prev.id}`}>
           <Icon
             name="lucide:circle-arrow-left"
             class="size-20 text-brandBrown"
           />
-        </NavLink> -->
+        </NavLink>
         <h1 class="text-xl py-3 mx-auto font-medium">{keyword.name}</h1>
 
-        <!--  <NavLink href={`/keywords/${keyword.next.replace(".html", "")}`}>
+        <NavLink href={`/keywords/${keyword.next.id}`}>
           <Icon
             name="lucide:circle-arrow-right"
             class="size-20 text-brandBrown"
           />
-        </NavLink> -->
+        </NavLink>
       </div>
 
       <dl class="grid grid-cols-[1fr_12fr] text-sm md:text-base md:leading-7">
@@ -43,23 +43,25 @@ const { data: keyword } = Astro.props;
 
         <dt class="font-semibold border-r border-gray-300 pr-2">Passages:</dt>
         <dd class="pl-5">
-          <!--  {
+          {
             keyword.related__passages.length > 0 ? (
               <ul>
-                {keyword.related__passages.map(
-                  (passage: { jad_id: string; view_label: string }) => (
-                    <li class="list-disc">
-                      <NavLink href={`/passages/${passage.jad_id}`}>
-                        {passage.view_label}
-                      </NavLink>
-                    </li>
-                  ),
-                )}
+                {keyword.related__passages.map((passage) => (
+                  <li class="list-disc">
+                    {passage.work[0]?.author[0]?.name}: {passage.work[0]?.name}
+                    <NavLink href={`/passages/${passage.jad_id}`}>
+                      ({passage.id})
+                      <span class="italic">
+                        {passage.view_label.slice(0, 50)} ...
+                      </span>
+                    </NavLink>
+                  </li>
+                ))}
               </ul>
             ) : (
               "N/A"
             )
-          } -->
+          }
         </dd>
         <dt class="font-semibold border-r border-gray-300 pr-2">Related:</dt>
         <dd class="pl-5">

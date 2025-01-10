@@ -97,7 +97,7 @@ const msLocus = Object.values(msOccurences).filter(
         </div>
         <dl class="grid grid-cols-[1fr_5fr] text-sm md:text-base md:leading-7">
           <dt class="font-semibold border-r border-gray-300 pr-2">Author:</dt>
-          <dd class="pl-5">{passage.author_lookup[0].value ?? "N/A"}</dd>
+          <dd class="pl-5">{passage.author_lookup[0]?.value ?? "N/A"}</dd>
 
           <dt class="font-semibold border-r border-gray-300 pr-2">Work:</dt>
           <dd class="pl-5">
