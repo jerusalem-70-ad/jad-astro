@@ -11,9 +11,15 @@ const fileNames = [
   "keywords.json",
   "passages.json",
   "works.json",
-  "institutional_context.json",
+  "institutional_contexts.json",
   "libraries.json",
   "authors.json",
+  "biblical_references.json",
+  "clusters.json",
+  "dates.json",
+  "liturgical_references.json",
+  "ms_occurrences.json",
+  "sources_occurrences.json",
 ];
 
 // async function to fetch the data from the url

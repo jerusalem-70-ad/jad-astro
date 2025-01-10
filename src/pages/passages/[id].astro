@@ -1,8 +1,9 @@
 ---
 import PageLayout from "../../layouts/page-layout.astro";
-import passages from "../../content/data/passages.json";
+import passages from "@data/passages.json";
 import { Icon } from "astro-icon/components";
 import NavLink from "@components/nav-link.astro";
+import msOccurences from "@data/ms_occurrences.json";
 
 export async function getStaticPaths() {
   const paths = Object.values(passages).map((passage) => ({
@@ -13,8 +14,18 @@ export async function getStaticPaths() {
 }
 
 const { data: passage } = Astro.props;
-const prev = parseInt(passage.jad_id.substring(15)) - 1;
-const next = parseInt(passage.jad_id.substring(15)) + 1;
+
+const source = Object.values(passages).filter(
+  (item) => item.id === passage.source_passage[0]?.id,
+);
+
+const usedBy = Object.values(passages).filter((item) =>
+  item.source_passage.some((source) => source.id === passage.id),
+);
+
+const msLocus = Object.values(msOccurences).filter(
+  (item) => item.occurrence[0]?.id === passage.id,
+);
 ---
 
 <PageLayout>
@@ -71,7 +82,7 @@ const next = parseInt(passage.jad_id.substring(15)) + 1;
         <div class="flex p-5 w-3/4 mx-auto justify-between">
           {
             passage.id > 1 && (
-              <NavLink href={`/passages/${prev}`}>
+              <NavLink href={`/passages/${passage.prev.id}`}>
                 <Icon name="lucide:circle-arrow-left" class="size-20" />
               </NavLink>
             )
@@ -80,7 +91,7 @@ const next = parseInt(passage.jad_id.substring(15)) + 1;
             ({passage.id}) <span class="italic">{passage.passage}</span>
           </h1>
 
-          <NavLink href={`/passages/${next}`}>
+          <NavLink href={`/passages/${passage.next.id}`}>
             <Icon name="lucide:circle-arrow-right" class="size-20" />
           </NavLink>
         </div>
@@ -138,6 +149,24 @@ const next = parseInt(passage.jad_id.substring(15)) + 1;
                   )
                 : "N/A"
             }
+            {
+              msLocus.length > 0
+                ? msLocus.map((ms) => (
+                    <span>
+                      ({ms.position_in_ms})
+                      {ms.facsimile_position && (
+                        <NavLink href={ms.facsimile_position}>
+                          Facsimile{" "}
+                          <Icon
+                            name="lucide:external-link"
+                            class="size-4 inline-flex"
+                          />
+                        </NavLink>
+                      )}
+                    </span>
+                  ))
+                : "N/A"
+            }
           </dd>
 
           <dt class="font-semibold border-r border-gray-300 pr-2">
@@ -169,10 +198,31 @@ const next = parseInt(passage.jad_id.substring(15)) + 1;
           <dt class="font-semibold border-r border-gray-300 pr-2">Sources:</dt>
           <dd class="pl-5">
             {
-              passage.sources_used.length > 0
-                ? passage.sources_used
-                    .map((reference: { value: any }) => reference.value)
-                    .join("; ")
+              passage.source_passage.length > 0
+                ? source.map((source) => (
+                    <Fragment>
+                      {source.work[0].author[0].name} - {source.work[0].name}:
+                      <NavLink href={`/passages/${source.jad_id}`}>
+                        ({source.id}) {source.passage}
+                      </NavLink>
+                    </Fragment>
+                  ))
+                : "N/A"
+            }
+          </dd>
+
+          <dt class="font-semibold border-r border-gray-300 pr-2">Used by:</dt>
+          <dd class="pl-5">
+            {
+              usedBy.length > 0
+                ? usedBy.map((passage) => (
+                    <Fragment>
+                      {passage.work[0].author[0].name} - {passage.work[0].name}:
+                      <NavLink href={`/passages/${passage.jad_id}`}>
+                        ({passage.id}) {passage.passage}
+                      </NavLink>
+                    </Fragment>
+                  ))
                 : "N/A"
             }
           </dd>
@@ -195,9 +245,9 @@ const next = parseInt(passage.jad_id.substring(15)) + 1;
             {
               passage.keywords.length > 0
                 ? passage.keywords
-                    .map((keyword: { value: string; id: number }) => (
+                    .map((keyword: { name: string; id: number }) => (
                       <NavLink href={`/keywords/jad_keyword__${keyword.id}`}>
-                        {keyword.value}
+                        {keyword.name}
                       </NavLink>
                     ))
                     .reduce((prev, curr) => [prev, ", ", curr])
