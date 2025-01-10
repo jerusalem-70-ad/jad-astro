@@ -1,15 +1,11 @@
 ---
 import PageLayout from "../layouts/page-layout.astro";
-import passages from "../content/data/passages.json";
-import NavLink from "@components/nav-link.astro";
-
-const passageValues = Object.values(passages);
 
 import TableHead from "../components/table-head.astro";
 ---
 
-<PageLayout title="Passages">
-  <TableHead title="Passages" />
+<PageLayout title="Keywords">
+  <TableHead title="Keywods" />
 
   <script>
     import { TabulatorFull as Tabulator } from "tabulator-tables";
@@ -18,7 +14,7 @@ import TableHead from "../components/table-head.astro";
     import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
     // import "tabulator-tables/dist/css/tabulator_bulma.min.css";
     // import "tabulator-tables/dist/css/tabulator_materialize.min.css";
-    import data from "../content/data/passages.json";
+    import data from "../content/data/keywords.json";
     import { jsonpathLookup } from "../lib/tabulator-utils.js";
     import { withBasePath } from "../lib/withBasePath";
 
@@ -40,85 +36,32 @@ import TableHead from "../components/table-head.astro";
       },
       columns: [
         {
-          title: "Passage",
+          title: "Name",
           resizable: true,
-          field: "passage",
+          field: "name",
           minWidth: 200,
           headerFilter: "input",
         },
         {
-          title: "Author",
+          title: "info",
           resizable: true,
-          field: "author_lookup",
+          field: "short_description",
           minWidth: 200,
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].value",
-            separator: "; ",
-          },
           headerFilter: "input",
+          formatter: "textarea",
         },
         {
-          title: "Work",
+          title: "passages",
           resizable: true,
-          field: "work",
+          field: "related__passages",
           minWidth: 200,
           mutator: jsonpathLookup,
           mutatorParams: {
-            path: "$[*].name",
-            separator: "; ",
+            path: "$[*].view_label",
+            separator: "\n -",
           },
           headerFilter: "input",
-        },
-
-        {
-          title: "Manuscript",
-          resizable: true,
-          field: "manuscripts",
-          minWidth: 200,
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].value",
-            separator: "; ",
-          },
-          headerFilter: "input",
-        },
-
-        {
-          title: "Biblical Reference",
-          resizable: true,
-          field: "biblical_references",
-          minWidth: 200,
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].value",
-            separator: "; ",
-          },
-          headerFilter: "input",
-        },
-        {
-          title: "Liturgical Reference",
-          resizable: true,
-          field: "liturgical_references",
-          minWidth: 200,
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].value",
-            separator: "; ",
-          },
-          headerFilter: "input",
-        },
-        {
-          title: "Source",
-          resizable: true,
-          field: "sources_used",
-          minWidth: 200,
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].value",
-            separator: "; ",
-          },
-          headerFilter: "input",
+          formatter: "textarea",
         },
       ],
     });
@@ -148,7 +91,7 @@ import TableHead from "../components/table-head.astro";
     // href to the entry detail view page
     table.on("rowClick", function (e, row) {
       var data = row.getData();
-      var url = withBasePath(`/passages/${data["jad_id"]}`);
+      var url = withBasePath(`/keywords/${data["jad_id"]}`);
       window.open(url, "_self");
     });
     table.on("dataLoaded", function (data) {

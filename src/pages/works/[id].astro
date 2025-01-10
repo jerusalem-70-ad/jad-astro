@@ -29,7 +29,7 @@ const { data: work } = Astro.props;
                 <dt class="font-semibold border-r border-gray-300 pr-5">Author:</dt>
                 <dd class="pl-5">
                     {work.author && work.author.length > 0
-                    ? <NavLink href={`/authors/${work.author[0].jad_id}`} class="hover:text-brandRed">{work.author[0]?.name}</NavLink>
+                    ? <NavLink href={`/authors/${work.author[0].jad_id}`}>{work.author[0]?.name}</NavLink>
                     : 'N/A'}
                 </dd>
                 
@@ -38,7 +38,7 @@ const { data: work } = Astro.props;
                     { work.manuscripts.length > 0
                             ? work.manuscripts.map((ms: { id: number; value: any;}, index: number) => (
                                 <>
-                                <NavLink href={`/manuscripts/jad_manuscript__${ms.id}`} class="hover:text-brandRed">
+                                <NavLink href={`/manuscripts/jad_manuscript__${ms.id}`}>
                                     {ms.value}
                                 </NavLink>
                                 {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
@@ -61,7 +61,7 @@ const { data: work } = Astro.props;
                             ? work.published_edition.map((ed: { name: string; digi_url: any;}, index: number) => (
                                 <>
                                 {ed.digi_url.length > 0
-                                ? <NavLink href={ed.digi_url} class="hover:text-brandRed">
+                                ? <NavLink href={ed.digi_url}>
                                     {ed.name}
                                 </NavLink>
                                 : ed.name
@@ -79,7 +79,7 @@ const { data: work } = Astro.props;
                     {work.institutional_context.length > 0
                     ? work.institutional_context.map((institution : {jad_id : string; name : string;}, index: number) => (
                         <>
-                         <NavLink href={`/institutions/${institution.jad_id}`} class="hover:text-brandRed">
+                         <NavLink href={`/institutions/${institution.jad_id}`}>
                                     {institution.name}
                                 </NavLink>
                         {index < work.institutional_context.length -1 && '| '}
@@ -92,8 +92,8 @@ const { data: work } = Astro.props;
                 
                 <dt class="font-semibold border-r border-gray-300 pr-5">Date:</dt> 
                 <dd class="pl-5">
-                    { work.written_date.length > 0 
-                    ? work.written_date 
+                    { work.date.length > 0 
+                    ? work.date.map(singleDate => singleDate.value) 
                     : 'N/A' } 
                 </dd>
                 <dt class="font-semibold border-r border-gray-300 pr-5">Passages:</dt>
@@ -101,7 +101,7 @@ const { data: work } = Astro.props;
                     { work.related__passages.length > 0
                             ? work.related__passages.map((passage, index: number) => (
                                 <>
-                                <NavLink href={`/passages/${passage.jad_id}`} class="hover:text-brandRed">
+                                <NavLink href={`/passages/${passage.jad_id}`}>
                                     #{passage.jad_id.substring(15)}
                                 </NavLink>
                                 {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}

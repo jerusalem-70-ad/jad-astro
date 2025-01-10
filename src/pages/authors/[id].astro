@@ -1,6 +1,6 @@
 ---
 import PageLayout from "../../layouts/page-layout.astro";
-import authors from "../../content/data/institutions.json";
+import authors from "@data/authors.json";
 import { Icon } from "astro-icon/components";
 import NavLink from "@components/nav-link.astro";
 export async function getStaticPaths() {
@@ -31,10 +31,7 @@ const { data: author } = Astro.props;
                 <dd class="pl-5">
                     {
                         author.gnd_url.length > 0 ? (
-                            <NavLink
-                                href={author.gnd_url}
-                                class="hover:text-brandRed"
-                            >
+                            <NavLink href={author.gnd_url}>
                                 {author.gnd_url.split("/").at(-1)}
                                 <Icon
                                     class="inline-flex align-top"
@@ -56,10 +53,7 @@ const { data: author } = Astro.props;
                         author.related__works.length > 0
                             ? author.related__works.map((work, index) => (
                                   <>
-                                      <NavLink
-                                          href={`/works/${work.jad_id}`}
-                                          class="hover:text-brandRed"
-                                      >
+                                      <NavLink href={`/works/${work.jad_id}`}>
                                           {work.view_label}
                                       </NavLink>
                                       {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
@@ -74,11 +68,11 @@ const { data: author } = Astro.props;
             </dl>
         </div>
         <div class="my-10 flex p-5 w-3/4 mx-auto justify-between">
-            <NavLink href=`/authors/${author.prev}`>
+            <NavLink href=`/authors/${author.prev.id}`>
                 <Icon class="size-20" name="lucide:circle-arrow-left" />
             </NavLink>
 
-            <NavLink href=`/authors/${author.next}`>
+            <NavLink href=`/authors/${author.next.id}`>
                 <Icon class="size-20" name="lucide:circle-arrow-right" />
             </NavLink>
         </div>

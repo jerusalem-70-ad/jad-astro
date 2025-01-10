@@ -1,6 +1,6 @@
 ---
 import PageLayout from "../../layouts/page-layout.astro";
-import institutions from "../../content/data/institutional_context.json";
+import institutions from "@data/institutional_contexts.json";
 import { Icon } from "astro-icon/components";
 import NavLink from "@components/nav-link.astro";
 
@@ -36,7 +36,6 @@ const { data: institution } = Astro.props;
                                   <>
                                       <NavLink
                                           href={`/institutions/${part.jad_id}`}
-                                          class="hover:text-brandRed"
                                       >
                                           {part.name}
                                       </NavLink>
@@ -59,7 +58,6 @@ const { data: institution } = Astro.props;
                                       <>
                                           <NavLink
                                               href={`/manuscripts/${ms.jad_id}`}
-                                              class="hover:text-brandRed"
                                           >
                                               {ms.view_label}
                                           </NavLink>
