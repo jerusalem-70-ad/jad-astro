@@ -1,135 +1,239 @@
 ---
-import PageLayout from "../../layouts/page-layout.astro";
+import PageLayout from "@layouts/page-layout.astro";
 import { Icon } from "astro-icon/components";
 // Read and parse the JSON file using import
-import works from "../../content/data/works.json";
+import works from "@data/works.json";
 import NavLink from "@components/nav-link.astro";
 export async function getStaticPaths() {
-  
-  // Map over the values in the object and create an array of paths
-  const paths = Object.values(works).map((work) => ({
-    params: { id: work.jad_id.toString() },  // Make sure id is a string
-    props: { data: work }
-  }));
+    // Map over the values in the object and create an array of paths
+    const paths = Object.values(works).map((work) => ({
+        params: { id: work.jad_id.toString() }, // Make sure id is a string
+        props: { data: work },
+    }));
 
-  // Return the array of paths
-  return paths;
+    // Return the array of paths
+    return paths;
 }
-       
 const { data: work } = Astro.props;
 
+type Passage = {
+    id: number;
+    passage: string;
+    jad_id: string;
+    language: {
+        id: number;
+        value: string;
+        color: string;
+    } | null;
+    position_in_work: string;
+    position_in_work_url: string;
+    text_paragraph: string;
+    note: string;
+    // other properties...
+    next: {
+        id: number;
+        passage: string;
+        // other properties...
+    };
+};
+const grouped = work.related__passages.reduce<{ [key: string]: Passage[] }>(
+    (grouped, passage) => {
+        const key = passage.position_in_work || "Unknown Position";
+        if (!grouped[key]) grouped[key] = [];
+        grouped[key].push(passage as any);
+        return grouped;
+    },
+    {} as { [key: string]: Passage[] },
+);
 ---
-<PageLayout>  
-   
-    <div>
-        <div class="border-2 rounded-sm border-brandBrown bg-brandRose my-10 grid p-5 w-3/4 mx-auto">
-            <h1 class="text-xl py-3 mx-auto font-medium">({work.id}) <span class="italic">{work.title}</span></h1>
-            <dl class="grid grid-cols-[1fr_5fr] text-sm md:leading-7 md:text-base">  
-                
-                <dt class="font-semibold border-r border-gray-300 pr-5">Author:</dt>
-                <dd class="pl-5">
-                    {work.author && work.author.length > 0
-                    ? <NavLink href={`/authors/${work.author[0].jad_id}`}>{work.author[0]?.name}</NavLink>
-                    : 'N/A'}
-                </dd>
-                
-                <dt class="font-semibold border-r border-gray-300 pr-5">Manuscripts:</dt>                
-                <dd class="pl-5">
-                    { work.manuscripts.length > 0
-                            ? work.manuscripts.map((ms: { id: number; value: any;}, index: number) => (
-                                <>
-                                <NavLink href={`/manuscripts/jad_manuscript__${ms.id}`}>
-                                    {ms.value}
-                                </NavLink>
-                                {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
-                                {index < work.manuscripts.length - 1 && '| '}
-                                </>
-                            )) : 'N/A'
-                        }
-                </dd>
-                    
-                <dt class="font-semibold border-r border-gray-300 pr-5">Genre:</dt>                        
-                <dd class="pl-5">
-                    {work.genre && work.genre.value.length > 0
-                    ? work.genre?.value
-                    : 'N/A'}
-                </dd>
-                
-                <dt class="font-semibold border-r border-gray-300 pr-5">Edition:</dt>                        
-                <dd class="pl-5">
-                    { work.published_edition.length > 0
-                            ? work.published_edition.map((ed: { name: string; digi_url: any;}, index: number) => (
-                                <>
-                                {ed.digi_url.length > 0
-                                ? <NavLink href={ed.digi_url}>
-                                    {ed.name}
-                                </NavLink>
-                                : ed.name
-                                }
-                               
-                                {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
-                                {index < work.published_edition.length - 1 && '| '}
-                                </>
-                            )) : 'N/A'
-                        }
-                </dd>
-                
-                <dt class="font-semibold border-r border-gray-300 pr-5">Institutional context:</dt>                        
-                <dd class="pl-5">
-                    {work.institutional_context.length > 0
-                    ? work.institutional_context.map((institution : {jad_id : string; name : string;}, index: number) => (
-                        <>
-                         <NavLink href={`/institutions/${institution.jad_id}`}>
-                                    {institution.name}
-                                </NavLink>
-                        {index < work.institutional_context.length -1 && '| '}
-                        </>
-                    )) : 'N/A'
-                }
-                    
-                </dd>
-               
-                
-                <dt class="font-semibold border-r border-gray-300 pr-5">Date:</dt> 
-                <dd class="pl-5">
-                    { work.date.length > 0 
-                    ? work.date.map(singleDate => singleDate.value) 
-                    : 'N/A' } 
-                </dd>
-                <dt class="font-semibold border-r border-gray-300 pr-5">Passages:</dt>
-                <dd class="pl-5">
-                    { work.related__passages.length > 0
-                            ? work.related__passages.map((passage, index: number) => (
-                                <>
-                                <NavLink href={`/passages/${passage.jad_id}`}>
-                                    #{passage.jad_id.substring(15)}
-                                </NavLink>
-                                {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
-                                {index < work.related__passages.length - 1 && '| '}
-                                </>
-                            )) : 'N/A'
-                        }
-                </dd>
-            </dl> 
-                
-        </div>     
-        <div class="my-10 flex p-5 w-3/4 mx-auto justify-between">
-            {work.id > 1
-            ? 
-            <NavLink href=`/works/jad_work__${parseInt(work.jad_id.split('__')[1]) -1}`>
-                <Icon name="lucide:circle-arrow-left" class="size-20"></Icon>
-                </NavLink>
-            : ''
-        }
-            
-            <NavLink href=`/works/jad_work__${parseInt(work.jad_id.split('__')[1]) +1}`>
-                <Icon name="lucide:circle-arrow-right" class="size-20"></Icon>
-            </NavLink>
-           
-              
-        </div>   
-        
-    </div>
 
+<PageLayout>
+    <div>
+        <div
+            class="border-2 rounded-sm border-brandBrown bg-brandRose my-10 grid p-5 w-3/4 mx-auto"
+        >
+            <div class="my-10 flex p-5 w-3/4 mx-auto justify-between">
+                <NavLink href={`/works/${work.prev.id}`}>
+                    <Icon name="lucide:circle-arrow-left" class="size-20" />
+                </NavLink>
+                <h1 class="text-xl py-3 mx-auto font-medium">
+                    ({work.id})
+                    {
+                        work.author.length > 0 && (
+                            <span>
+                                {work.author
+                                    .map((author) => author.name)
+                                    .join(", ")}
+                                :
+                            </span>
+                        )
+                    }
+                    <span class="italic">{work.title}</span>
+                </h1>
+                <NavLink href=`/works/${work.next.id}`>
+                    <Icon name="lucide:circle-arrow-right" class="size-20" />
+                </NavLink>
+            </div>
+
+            <dl
+                class="grid grid-cols-[1fr_5fr] text-sm md:leading-7 md:text-base"
+            >
+                <dt class="font-semibold border-r border-gray-300 pr-5">
+                    Author:
+                </dt>
+                <dd class="pl-5">
+                    {
+                        work.author && work.author.length > 0 ? (
+                            <NavLink href={`/authors/${work.author[0].jad_id}`}>
+                                {work.author[0]?.name}
+                            </NavLink>
+                        ) : (
+                            "N/A"
+                        )
+                    }
+                </dd>
+
+                <dt class="font-semibold border-r border-gray-300 pr-5">
+                    Manuscripts:
+                </dt>
+                <dd class="pl-5">
+                    {
+                        work.manuscripts.length > 0
+                            ? work.manuscripts.map(
+                                  (
+                                      ms: { id: number; value: any },
+                                      index: number,
+                                  ) => (
+                                      <>
+                                          <NavLink
+                                              href={`/manuscripts/jad_manuscript__${ms.id}`}
+                                          >
+                                              {ms.value}
+                                          </NavLink>
+                                          {index <
+                                              work.manuscripts.length - 1 &&
+                                              "| "}
+                                      </>
+                                  ),
+                              )
+                            : "N/A"
+                    }
+                </dd>
+
+                <dt class="font-semibold border-r border-gray-300 pr-5">
+                    Genre:
+                </dt>
+                <dd class="pl-5">
+                    {work.genre !== null ? work.genre.value : "N/A"}
+                </dd>
+
+                <dt class="font-semibold border-r border-gray-300 pr-5">
+                    Edition:
+                </dt>
+                <dd class="pl-5">
+                    {
+                        work.published_edition.length > 0
+                            ? work.published_edition.map((ed, index) => (
+                                  <>
+                                      {ed.digi_url !== null ? (
+                                          <NavLink href={ed.digi_url}>
+                                              {ed.name}
+                                          </NavLink>
+                                      ) : (
+                                          ed.name
+                                      )}
+                                      {index <
+                                          work.published_edition.length - 1 &&
+                                          "| "}
+                                  </>
+                              ))
+                            : "N/A"
+                    }
+                </dd>
+
+                <dt class="font-semibold border-r border-gray-300 pr-5">
+                    Institutional context:
+                </dt>
+                <dd class="pl-5">
+                    {
+                        work.institutional_context.length > 0
+                            ? work.institutional_context.map(
+                                  (
+                                      institution: {
+                                          jad_id: string;
+                                          name: string;
+                                      },
+                                      index: number,
+                                  ) => (
+                                      <>
+                                          <NavLink
+                                              href={`/institutions/${institution.jad_id}`}
+                                          >
+                                              {institution.name}
+                                          </NavLink>
+                                          {index <
+                                              work.institutional_context
+                                                  .length -
+                                                  1 && "| "}
+                                      </>
+                                  ),
+                              )
+                            : "N/A"
+                    }
+                </dd>
+
+                <dt class="font-semibold border-r border-gray-300 pr-5">
+                    Date:
+                </dt>
+                <dd class="pl-5">
+                    {
+                        work.date.length > 0
+                            ? work.date.map((singleDate) => singleDate.value)
+                            : "N/A"
+                    }
+                </dd>
+                <dt class="font-semibold border-r border-gray-300 pr-5">
+                    Passages:
+                </dt>
+                <dd class="pl-5">
+                    {
+                        Object.entries(grouped)
+                            .sort(([keyA], [keyB]) => {
+                                const numA = parseInt(
+                                    keyA.match(/\d+/)?.[0] || "0",
+                                    10,
+                                );
+                                const numB = parseInt(
+                                    keyB.match(/\d+/)?.[0] || "0",
+                                    10,
+                                );
+                                return numA - numB;
+                            })
+                            .map(([position, passages]) => (
+                                <li class="mb-4">
+                                    <strong>{position}</strong>
+                                    <ul class="ml-5 list-disc">
+                                        {passages.map((passage) => (
+                                            <li>
+                                                <NavLink
+                                                    href={`/passages/${passage.jad_id}`}
+                                                >
+                                                    #
+                                                    {passage.jad_id.substring(
+                                                        15,
+                                                    )}{" "}
+                                                    <span class="italic">
+                                                        {passage.passage}
+                                                    </span>
+                                                </NavLink>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </li>
+                            ))
+                    }
+                </dd>
+            </dl>
+        </div>
+    </div>
 </PageLayout>
-  
