@@ -1,10 +1,5 @@
 ---
 import PageLayout from "../layouts/page-layout.astro";
-import passages from "../content/data/passages.json";
-import NavLink from "@components/nav-link.astro";
-
-const passageValues = Object.values(passages);
-
 import TableHead from "../components/table-head.astro";
 ---
 
@@ -13,16 +8,31 @@ import TableHead from "../components/table-head.astro";
 
   <script>
     import { TabulatorFull as Tabulator } from "tabulator-tables";
-    // import "tabulator-tables/dist/css/tabulator_bootstrap5.min.css";
-    // import "tabulator-tables/dist/css/tabulator_simple.min.css";
     import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
-    // import "tabulator-tables/dist/css/tabulator_bulma.min.css";
-    // import "tabulator-tables/dist/css/tabulator_materialize.min.css";
-    import data from "../content/data/passages.json";
     import { jsonpathLookup } from "../lib/tabulator-utils.js";
     import { withBasePath } from "../lib/withBasePath";
+    import data from "../content/data/passages.json";
 
-    var tabledata = [...Object.values(data)];
+    const dataSet = Object.values(data).map((passage) => {
+      return {
+        ...passage,
+        // get date from nested work object to be used in a separate column
+        work_date: passage.work
+          .map((work) => work.date.map((datum) => datum.value).join(", "))
+          .join("; "),
+        // combine work.title with position in work to read in one column
+        work_position: passage.work
+          .map((work) =>
+            passage.position_in_work
+              ? `${work.title}: ${passage.position_in_work}`
+              : work.title,
+          )
+          .join("; "),
+      };
+    });
+    console.log(dataSet);
+
+    var tabledata = dataSet;
 
     var table = new Tabulator("#tabulator-table", {
       headerFilterLiveFilterDelay: 600,
@@ -61,13 +71,9 @@ import TableHead from "../components/table-head.astro";
         {
           title: "Work",
           resizable: true,
-          field: "work",
+          field: "work_position",
           minWidth: 200,
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].name",
-            separator: "; ",
-          },
+
           headerFilter: "input",
         },
 
@@ -109,15 +115,10 @@ import TableHead from "../components/table-head.astro";
           headerFilter: "input",
         },
         {
-          title: "Source",
+          title: "Date",
           resizable: true,
-          field: "sources_used",
+          field: "work_date",
           minWidth: 200,
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].value",
-            separator: "; ",
-          },
           headerFilter: "input",
         },
       ],
