@@ -4,6 +4,7 @@ import passages from "@data/passages.json";
 import { Icon } from "astro-icon/components";
 import NavLink from "@components/nav-link.astro";
 import msOccurences from "@data/ms_occurrences.json";
+import mss from "@data/manuscripts.json";
 
 export async function getStaticPaths() {
   const paths = Object.values(passages).map((passage) => ({
@@ -25,6 +26,10 @@ const usedBy = Object.values(passages).filter((item) =>
 
 const msLocus = Object.values(msOccurences).filter(
   (item) => item.occurrence[0]?.id === passage.id,
+);
+
+const mssSource = Object.values(mss).filter((ms) =>
+  passage.manuscripts.some((man) => man.id === ms.name[0]?.id),
 );
 ---
 
@@ -136,36 +141,42 @@ const msLocus = Object.values(msOccurences).filter(
           </dt>
           <dd class="pl-5">
             {
-              passage.manuscripts.length > 0
-                ? passage.manuscripts.map(
-                    (ms: { id: number; value: string }, index: number) => (
-                      <>
-                        <NavLink href={`/manuscripts/jad_manuscript__${ms.id}`}>
-                          {ms.value}
+              passage.manuscripts.length > 0 ? (
+                <ul>
+                  {mssSource.map(
+                    (ms: {
+                      id: number;
+                      name: { id: number; value: string }[];
+                      jad_id: string;
+                    }) => (
+                      <li>
+                        <NavLink href={`/manuscripts/${ms.jad_id}`}>
+                          {ms.name[0].value}
                         </NavLink>
-                        {index < passage.manuscripts.length - 1 && ", "}
-                      </>
+                        {/* add exact position preprocessed json ms_occurences as msLocus */}
+                        {msLocus.length > 0
+                          ? msLocus.map((locus) => (
+                              <span>
+                                ({locus.position_in_ms})
+                                {locus.facsimile_position && (
+                                  <NavLink href={locus.facsimile_position}>
+                                    Facsimile{" "}
+                                    <Icon
+                                      name="lucide:external-link"
+                                      class="size-4 inline-flex"
+                                    />
+                                  </NavLink>
+                                )}
+                              </span>
+                            ))
+                          : "N/A"}
+                      </li>
                     ),
-                  )
-                : "N/A"
-            }
-            {
-              msLocus.length > 0
-                ? msLocus.map((ms) => (
-                    <span>
-                      ({ms.position_in_ms})
-                      {ms.facsimile_position && (
-                        <NavLink href={ms.facsimile_position}>
-                          Facsimile{" "}
-                          <Icon
-                            name="lucide:external-link"
-                            class="size-4 inline-flex"
-                          />
-                        </NavLink>
-                      )}
-                    </span>
-                  ))
-                : "N/A"
+                  )}
+                </ul>
+              ) : (
+                "N/A"
+              )
             }
           </dd>
 
