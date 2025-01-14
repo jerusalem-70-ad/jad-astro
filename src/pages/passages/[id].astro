@@ -16,21 +16,37 @@ export async function getStaticPaths() {
 
 const { data: passage } = Astro.props;
 
+// extract the sources for the current passage
 const source = Object.values(passages).filter(
   (item) => item.id === passage.source_passage[0]?.id,
 );
 
+// passage as source (look where one passage is used as source for another)
 const usedBy = Object.values(passages).filter((item) =>
   item.source_passage.some((source) => source.id === passage.id),
 );
 
+// use ms_occurences.json to look for the manuscripts and their loci
 const msLocus = Object.values(msOccurences).filter(
   (item) => item.occurrence[0]?.id === passage.id,
 );
 
+// filter the manuscripts that are used in the current passage
+// to get information about the manuscripts (jad_id)
 const mssSource = Object.values(mss).filter((ms) =>
-  passage.manuscripts.some((man) => man.id === ms.name[0]?.id),
+  passage.manuscripts.some((man) => man.value === ms.name[0]?.value),
 );
+
+// combine the locus information to the manuscript
+const mssSourceLocus = mssSource.map((msSource) => {
+  const locus = msLocus.filter(
+    (locus) => locus.manuscript[0]?.value === msSource.name[0].value,
+  );
+  return {
+    ...msSource,
+    locus, // Add a new property 'locus' containing the matching locus array
+  };
+});
 ---
 
 <PageLayout>
@@ -143,19 +159,25 @@ const mssSource = Object.values(mss).filter((ms) =>
             {
               passage.manuscripts.length > 0 ? (
                 <ul>
-                  {mssSource.map(
+                  {mssSourceLocus.map(
                     (ms: {
                       id: number;
-                      name: { id: number; value: string }[];
+                      view_label: string;
                       jad_id: string;
+                      locus: {
+                        position_in_ms: string;
+                        facsimile_position: string;
+                      }[];
                     }) => (
                       <li>
                         <NavLink href={`/manuscripts/${ms.jad_id}`}>
-                          {ms.name[0].value}
+                          {ms.view_label}
                         </NavLink>
-                        {/* add exact position preprocessed json ms_occurences as msLocus */}
-                        {msLocus.length > 0
-                          ? msLocus.map((locus) => (
+                        {/* add exact position preprocessed from json ms_occurences */}
+                        {ms.locus.length > 0 &&
+                          ms.locus
+                            .filter((locus) => locus.position_in_ms)
+                            .map((locus) => (
                               <span>
                                 ({locus.position_in_ms})
                                 {locus.facsimile_position && (
@@ -168,8 +190,7 @@ const mssSource = Object.values(mss).filter((ms) =>
                                   </NavLink>
                                 )}
                               </span>
-                            ))
-                          : "N/A"}
+                            ))}
                       </li>
                     ),
                   )}
