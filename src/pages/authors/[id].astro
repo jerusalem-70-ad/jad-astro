@@ -50,19 +50,19 @@ const { data: author } = Astro.props;
                 </dt>
                 <dd class="pl-5">
                     {
-                        author.related__works.length > 0
-                            ? author.related__works.map((work, index) => (
-                                  <>
-                                      <NavLink href={`/works/${work.jad_id}`}>
-                                          {work.view_label}
-                                      </NavLink>
-                                      {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
-                                      {index <
-                                          author.related__works.length - 1 &&
-                                          "| "}
-                                  </>
-                              ))
-                            : "N/A"
+                        author.related__works.length > 0 ? (
+                            <ul>
+                                {author.related__works.map((work) => (
+                                    <li>
+                                        <NavLink href={`/works/${work.jad_id}`}>
+                                            {work.view_label}
+                                        </NavLink>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            "N/A"
+                        )
                     }
                 </dd>
             </dl>

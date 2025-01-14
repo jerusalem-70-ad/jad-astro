@@ -4,6 +4,7 @@ import passages from "@data/passages.json";
 import { Icon } from "astro-icon/components";
 import NavLink from "@components/nav-link.astro";
 import msOccurences from "@data/ms_occurrences.json";
+import mss from "@data/manuscripts.json";
 
 export async function getStaticPaths() {
   const paths = Object.values(passages).map((passage) => ({
@@ -15,17 +16,37 @@ export async function getStaticPaths() {
 
 const { data: passage } = Astro.props;
 
+// extract the sources for the current passage
 const source = Object.values(passages).filter(
   (item) => item.id === passage.source_passage[0]?.id,
 );
 
+// passage as source (look where one passage is used as source for another)
 const usedBy = Object.values(passages).filter((item) =>
   item.source_passage.some((source) => source.id === passage.id),
 );
 
+// use ms_occurences.json to look for the manuscripts and their loci
 const msLocus = Object.values(msOccurences).filter(
   (item) => item.occurrence[0]?.id === passage.id,
 );
+
+// filter the manuscripts that are used in the current passage
+// to get information about the manuscripts (jad_id)
+const mssSource = Object.values(mss).filter((ms) =>
+  passage.manuscripts.some((man) => man.value === ms.name[0]?.value),
+);
+
+// combine the locus information to the manuscript
+const mssSourceLocus = mssSource.map((msSource) => {
+  const locus = msLocus.filter(
+    (locus) => locus.manuscript[0]?.value === msSource.name[0].value,
+  );
+  return {
+    ...msSource,
+    locus, // Add a new property 'locus' containing the matching locus array
+  };
+});
 ---
 
 <PageLayout>
@@ -136,36 +157,47 @@ const msLocus = Object.values(msOccurences).filter(
           </dt>
           <dd class="pl-5">
             {
-              passage.manuscripts.length > 0
-                ? passage.manuscripts.map(
-                    (ms: { id: number; value: string }, index: number) => (
-                      <>
-                        <NavLink href={`/manuscripts/jad_manuscript__${ms.id}`}>
-                          {ms.value}
+              passage.manuscripts.length > 0 ? (
+                <ul>
+                  {mssSourceLocus.map(
+                    (ms: {
+                      id: number;
+                      view_label: string;
+                      jad_id: string;
+                      locus: {
+                        position_in_ms: string;
+                        facsimile_position: string;
+                      }[];
+                    }) => (
+                      <li>
+                        <NavLink href={`/manuscripts/${ms.jad_id}`}>
+                          {ms.view_label}
                         </NavLink>
-                        {index < passage.manuscripts.length - 1 && ", "}
-                      </>
+                        {/* add exact position preprocessed from json ms_occurences */}
+                        {ms.locus.length > 0 &&
+                          ms.locus
+                            .filter((locus) => locus.position_in_ms)
+                            .map((locus) => (
+                              <span>
+                                ({locus.position_in_ms})
+                                {locus.facsimile_position && (
+                                  <NavLink href={locus.facsimile_position}>
+                                    Facsimile{" "}
+                                    <Icon
+                                      name="lucide:external-link"
+                                      class="size-4 inline-flex"
+                                    />
+                                  </NavLink>
+                                )}
+                              </span>
+                            ))}
+                      </li>
                     ),
-                  )
-                : "N/A"
-            }
-            {
-              msLocus.length > 0
-                ? msLocus.map((ms) => (
-                    <span>
-                      ({ms.position_in_ms})
-                      {ms.facsimile_position && (
-                        <NavLink href={ms.facsimile_position}>
-                          Facsimile{" "}
-                          <Icon
-                            name="lucide:external-link"
-                            class="size-4 inline-flex"
-                          />
-                        </NavLink>
-                      )}
-                    </span>
-                  ))
-                : "N/A"
+                  )}
+                </ul>
+              ) : (
+                "N/A"
+              )
             }
           </dd>
 
