@@ -14,7 +14,7 @@ import { withBasePath } from "./withBasePath";
 
 const project_collection_name = "JAD-temp";
 const main_search_field = "full_text";
-const search_api_key = import.meta.env.PUBLIC_TYPESENSE_SEARCH_API_KEY;
+const search_api_key = "IA6BWzRrMo7yX3eFqgcFelJzhWkIl64W";
 // const search_api_key = "nxZkKN7Jphnp1mUFjataIhbKzdxEtd1Y";
 
 const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
@@ -311,7 +311,15 @@ search.addWidgets([
     limit: 10,
     searchablePlaceholder: "Search for keywords",
   }),
-
+  refinementListliturgical({
+    container: "#refinement-list-liturgical",
+    attribute: "liturgical_references.value",
+    searchable: true,
+    showMore: true,
+    showMoreLimit: 50,
+    limit: 10,
+    searchablePlaceholder: "Search for liturgical references"
+  }),
  
   currentRefinements({
     container: "#current-refinements",
