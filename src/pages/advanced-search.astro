@@ -4,32 +4,45 @@ import "instantsearch.css/themes/satellite.css";
 ---
 
 <Layout>
-    <main class="md:w-3/4 grid mx-auto py-4 gap-8">
-        <h2 class="text-2xl text-brandBrown">Advanced search</h2>
+    <main class="md:w-3/4 mx-auto py-6">
+        <h2 class="text-3xl font-bold text-brandBrown mb-6">Advanced Search</h2>
 
-        <div>
-            <div data-search-panel>
-                <div data-search-results>
-                    <div id="searchbox"></div>
-                    <div id="stats-container"></div>
-                    <div id="current-refinements"></div>
-                    <div id="clear-refinements"></div>
-                    <div class="grid grid-cols-[1fr_3fr]">
-                        <div>
-                            <div id="refinement-list-author"></div>
-                            <div id="refinement-list-work"></div>
-                            <div id="refinement-list-workdate"></div>
-                            <div id="refinement-list-manuscript"></div>
-                            <div id="refinement-list-language"></div>
-                        </div>
-                        <div>
-                            <div id="pagination"></div>
-                            <div id="hits"></div>
-                        </div>
+        <div class="space-y-6">
+            <!-- Search Input and Stats -->
+            <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
+                <div id="searchbox" class="mb-4"></div>
+                <div class="flex items-center justify-between">
+                    <div id="stats-container" class="text-sm text-gray-600">
                     </div>
+                    <div id="current-refinements" class="text-sm text-gray-600">
+                    </div>
+                    <div id="clear-refinements"></div>
                 </div>
+            </div>
+
+            <!-- Refinements and Results -->
+            <div class="grid md:grid-cols-[1fr_3fr] gap-6">
+                <!-- Refinements Section -->
+                <aside class="bg-gray-50 p-4 rounded-lg shadow-sm space-y-6">
+                    <div id="refinement-list-author" class="space-y-2"></div>
+                    <div id="refinement-list-work" class="space-y-2"></div>
+                    <div id="refinement-list-workdate" class="space-y-2"></div>
+                    <div id="refinement-list-manuscript" class="space-y-2">
+                    </div>
+                    <div id="refinement-list-context" class="space-y-2"></div>
+                    <div id="refinement-list-clusters" class="space-y-2"></div>
+                    <div id="refinement-list-keywords" class="space-y-2"></div>
+                </aside>
+
+                <!-- Results Section -->
+                <section>
+                    <div id="hits" class="bg-white p-4 rounded-lg shadow-sm">
+                    </div>
+                    <div id="pagination" class="mt-4 flex justify-center"></div>
+                </section>
             </div>
         </div>
     </main>
 </Layout>
+
 <script src="../lib/advanced-search.js"></script>

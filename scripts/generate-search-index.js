@@ -20,9 +20,12 @@ async function generate() {
       { name: "rec_id", type: "string", sort: true },
       { name: "title", type: "string", sort: true },
       { name: "full_text", type: "string", sort: true },
-      { name: "language", type: "object", facet: true, optional: true },
-      { name: "manuscript", type: "object[]", facet: true, optional: true },
+      { name: "manuscripts", type: "object[]", facet: true, optional: true },
       { name: "work", type: "object[]", facet: true, optional: true },
+      { name: "liturgical_references", type: "object[]", facet: true, optional: true },
+      { name: "biblical_references", type: "object[]", facet: true, optional: true },
+      { name: "cluster", type: "object[]", facet: true, optional: true },
+      { name: "keywords", type: "object[]", facet: true, optional: true },
     ],
     default_sorting_field: "title",
   };
@@ -41,12 +44,14 @@ async function generate() {
   Object.values(data).forEach((value) => {
     const item = {
       id: value.jad_id,
-      rec_id: `${value.jad_id}`,
+      rec_id: value.jad_id,
       title: value.passage,
       full_text: `${value.passage} ${value.text_paragraph}`,
-      language: value.language,
-      manuscript: value.manuscript,
-      work: value.work,
+      manuscripts: value.manuscripts || [],
+      work: value.work || [],
+      cluster: value.part_of_cluster || [],
+      liturgical_references: value.liturgical_references || [],
+      keywords: value.keywords || [],
     };
     records.push(item);
   });

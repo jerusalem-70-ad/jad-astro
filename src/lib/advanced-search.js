@@ -12,9 +12,10 @@ import {
 } from "instantsearch.js/es/widgets";
 import { withBasePath } from "./withBasePath";
 
-const project_collection_name = "JAD";
+const project_collection_name = "JAD-temp";
 const main_search_field = "full_text";
-const search_api_key = "nxZkKN7Jphnp1mUFjataIhbKzdxEtd1Y";
+const search_api_key = import.meta.env.PUBLIC_TYPESENSE_SEARCH_API_KEY;
+// const search_api_key = "nxZkKN7Jphnp1mUFjataIhbKzdxEtd1Y";
 
 const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
   server: {
@@ -75,14 +76,43 @@ const refinementListWorkDate = panel({
   },
 })(refinementList);
 
-const refinementListLanguage = panel({
+const refinementListKeywords = panel({
   collapsed: ({ state }) => {
     return state.query.length === 0;
   },
   templates: {
-    header: "Language",
+    header: "Keywords",
   },
 })(refinementList);
+
+const refinementListClusters = panel({
+  collapsed: ({ state }) => {
+    return state.query.length === 0;
+  },
+  templates: {
+    header: "Clusters",
+  },
+})(refinementList);
+
+const refinementListliturgical = panel({
+  collapsed: ({ state }) => {
+    return state.query.length === 0;
+  },
+  templates: {
+    header: "Liturgical references",
+  },
+})(refinementList);
+
+const refinementListContext = panel({
+  collapsed: ({ state }) => {
+    return state.query.length === 0;
+  },
+  templates: {
+    header: "Institutional context",
+  },
+})(refinementList);
+
+
 
 // add widgets
 search.addWidgets([
@@ -91,36 +121,121 @@ search.addWidgets([
     autofocus: true,
     placeholder: "Search",
   }),
-
   hits({
+    container: "#hits",
+    transformItems(items) {
+      return items.map((item) => {
+        // Transform `work` array for easier rendering
+        const transformedWorks = (item.work || []).map((work) => ({
+          title: work.name || "Unknown Title",
+          authors: (work.author || []).map((author) => author.name || "Unknown Author"),
+          date: (work.date.map((date) => date.value) || []).join(", "),
+        }));
+  
+        return {
+          ...item,
+          transformedWorks,
+        };
+      });
+    },
+    templates: {
+      empty: "No results for <q>{{ query }}</q>",
+      item(hit) {
+        // Generate HTML for each transformed work
+        const renderWorks = (works) => {
+          if (!works || works.length === 0) return "<p>No works available</p>";
+  
+          return works
+            .map(
+              (work) => `
+                <div class="work-item">
+                  <p><strong>Title:</strong> ${work.title}</p>
+                  <p><strong>Authors:</strong> ${work.authors.join(", ")}</p>
+                  <p><strong>Date:</strong> ${work.date}</p>
+                </div>
+              `
+            )
+            .join("");
+        };
+  
+        // Generate the main HTML for the hit
+        return `
+          <article>
+            <h3 class="font-semibold text-lg text-brandBrown">
+              <a href="${withBasePath(`/passages/${hit.id}`)}" class="underline">
+                ${hit.title || "Untitled"}
+              </a>
+            </h3>            
+          
+            <p class="italic line-clamp-2">
+              ${hit._snippetResult?.full_text?.value || ""}
+            </p>
+            <div class="work-details">
+              ${renderWorks(hit.transformedWorks)}
+            </div>            
+          </article>
+        `;
+      },
+    },
+  }),
+  
+  
+  /* hits({
+    
     container: "#hits",
     templates: {
       empty: "No results for <q>{{ query }}</q>",
       item(hit, { html, components }) {
         const href = withBasePath(`/passages/${hit.id}`);
+     // Helper function to render the list of works and their authors
+     const renderWorks = (works) => {
+      if (!works || works.length === 0) return "<p>No works available</p>";
 
-        return html` <article>          
-            <h3 class="font-semibold text-lg text-brandBrown ">
+      return works
+        .map(
+          (work) => `
+            <div class="work-item">
+              <p><strong>Title:</strong> ${work.name || "Unknown Title"}</p>
+              <p><strong>Authors:</strong> ${
+                work.author && work.author.length > 0
+                  ? work.author.map((author) => author.name).join(", ")
+                  : "Unknown Authors"
+              }</p>
+            </div>
+          `
+        )
+        .join("");
+    };
+        return html` <article>
+          <h3 class="font-semibold text-lg text-brandBrown">
             <a href="${href}" class="underline">
               ${components.Highlight({
                 hit,
                 attribute: "title",
-              })}</a>
-            </h3>
-
+              })}
+            </a>
+          </h3>
+  
           <p class="italic">
             ${hit._snippetResult.full_text.matchedWords.length > 0
               ? components.Snippet({ hit, attribute: "full_text" })
               : ""}
           </p>
-          <a
-            href="${href}"
-            class="underline decoration-dotted text-sm"
-            >See passage</a>
+  
+          <!-- Work title and author -->
+           <div class="work-details">
+            ${renderWorks(hit.work)}
+          </div>
+
+  
+          <a href="${href}" class="underline decoration-dotted text-sm">
+            See passage
+          </a>
         </article>`;
       },
     },
-  }),
+  }), */
+  
 
   pagination({
     container: "#pagination",
@@ -149,7 +264,7 @@ search.addWidgets([
 
   refinementListWorkDate({
     container: "#refinement-list-workdate",
-    attribute: "work.written_date",
+    attribute: "work.date.value",
     searchable: true,
     showMore: true,
     showMoreLimit: 50,
@@ -159,7 +274,7 @@ search.addWidgets([
 
   refinementListManuscript({
     container: "#refinement-list-manuscript",
-    attribute: "manuscript.name.value",
+    attribute: "manuscripts.value",
     searchable: true,
     showMore: true,
     showMoreLimit: 50,
@@ -167,16 +282,37 @@ search.addWidgets([
     searchablePlaceholder: "Search for manuscript",
   }),
 
-  refinementListLanguage({
-    container: "#refinement-list-language",
-    attribute: "language.value",
+  refinementListClusters({
+    container: "#refinement-list-clusters",
+    attribute: "cluster.value",
     searchable: true,
     showMore: true,
     showMoreLimit: 50,
     limit: 10,
-    searchablePlaceholder: "Search for language",
+    searchablePlaceholder: "Search for clusters",
   }),
 
+  refinementListContext({
+    container: "#refinement-list-context",
+    attribute: "work.institutional_context.name",
+    searchable: true,
+    showMore: true,
+    showMoreLimit: 50,
+    limit: 10,
+    searchablePlaceholder: "Search for context",
+  }),
+
+  refinementListKeywords({
+    container: "#refinement-list-keywords",
+    attribute: "keywords.name",
+    searchable: true,
+    showMore: true,
+    showMoreLimit: 50,
+    limit: 10,
+    searchablePlaceholder: "Search for keywords",
+  }),
+
+ 
   currentRefinements({
     container: "#current-refinements",
   }),
