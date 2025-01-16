@@ -1,21 +1,40 @@
 ---
 import PageLayout from "../../layouts/page-layout.astro";
-import manuscripts from "../../content/data/manuscripts.json";
+import { Icon } from "astro-icon/components";
 import NavLink from "@components/nav-link.astro";
 
-import { Icon } from "astro-icon/components";
+import mss from "@data/manuscripts.json";
+import pass from "@data/passages.json";
+
+const passages = Object.values(pass);
+
 
 export async function getStaticPaths() {
-  // Use getCollection to read the collection of json files
-  // const manuscripts = JSON.parse(readFileSync("src/content/data/manuscripts.json", {encoding: "utf-8"}))
-  const paths = Object.values(manuscripts).map((manuscript) => ({
-    params: { id: manuscript.jad_id.toString() },
+  
+  const paths = Object.values(mss).map((manuscript) => ({
+    params: { id: manuscript.jad_id },
     props: { data: manuscript },
   }));
   return paths;
 }
 
 const { data: manuscript } = Astro.props;
+
+// get related passages to each manuscript
+
+  const related_passages = passages
+    .filter((passage) =>
+      passage.manuscripts.some(
+        (m) => m.value === manuscript.name[0]?.value,
+      ),
+    )
+    .map((passage) => ({
+      id: passage.jad_id,
+      passage: passage.passage,
+      work: passage.work[0]?.title,
+      author: passage.work[0].author[0]?.name,
+      place: passage.position_in_work,
+    }));
 ---
 
 <PageLayout>
@@ -59,26 +78,35 @@ const { data: manuscript } = Astro.props;
        )}
 
         
-      <!--   {manuscript.related__passages.length > 0 && (
+        {related_passages.length > 0 && (
           <dt class="font-semibold border-r border-gray-300 pr-2">Passages:</dt>
-        <dd class="pl-5"> 
-          {manuscript.related__passages.map(
-              (passage: { jad_id: string }, index: number) => (
-                <>
-                  <NavLink
-                    href={`/passages/${passage.jad_id}`}
-                    class="hover:text-brandRed"
-                  >
-                    #{passage.jad_id.substring(15)}
-                  </NavLink>
-                  {/* to get comma after each entry BUT the last one (Index increments with each iteration, at the end it is equals to the length of the array -1) */}
-                  {index < manuscript.related__passages.length - 1 && ", "}
-                </>
-              ),
-            )
-          }
-        </dd>
-        )} -->
+          <dd class="pl-5"> 
+            <ul>
+              {related_passages.map(
+                  (passage) => (
+                    <li class="py-1 list-disc">
+                      <NavLink
+                        href={`/passages/${passage.id}`}
+                        class="hover:text-brandRed"
+                      >
+                        #{passage.id.substring(15)}: {passage.passage}
+                        {passage.work && (
+                          <span>
+                            ({passage.author}: {passage.work}
+                            {passage.place && (
+                              <span>, {passage.place}</span>
+                            )})
+                          </span>                            
+                        )}
+                      
+                      </NavLink>
+                    </li>
+                  ),
+                )
+              }
+            </ul>
+          </dd>
+        )}
       </dl>
       <div class="flex flex-col gap-2 py-2 text-sm md:text-base font-semibold">
         {

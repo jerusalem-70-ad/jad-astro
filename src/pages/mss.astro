@@ -1,6 +1,5 @@
 ---
 import PageLayout from "../layouts/page-layout.astro";
-import NavLink from "@components/nav-link.astro";
 import TableHead from "../components/table-head.astro";
 ---
 
@@ -9,21 +8,41 @@ import TableHead from "../components/table-head.astro";
 
   <script>
     import { TabulatorFull as Tabulator } from "tabulator-tables";
-    // import "tabulator-tables/dist/css/tabulator_bootstrap5.min.css";
-    // import "tabulator-tables/dist/css/tabulator_simple.min.css";
     import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
-    // import "tabulator-tables/dist/css/tabulator_bulma.min.css";
-    // import "tabulator-tables/dist/css/tabulator_materialize.min.css";
-    import data from "../content/data/manuscripts.json";
     import {
       jsonpathLookup,
       jsonpathsDateRanges,
       jsonpathDistinctLookup,
       dateRangeFilter,
     } from "../lib/tabulator-utils.js";
+    import { JSONPath } from "jsonpath-plus";
     import { withBasePath } from "../lib/withBasePath";
 
-    var tabledata = [...Object.values(data)];
+    import pass from "@data/passages.json";
+    import mss from "@data/manuscripts.json";
+    const manuscripts = Object.values(mss);
+    const passages = Object.values(pass);
+
+    // Add related passages to each manuscript
+    const data = manuscripts.map((manuscript) => {
+      const related_passages = passages
+        .filter((passage) =>
+          passage.manuscripts.some(
+            (m) => m.value === manuscript.name[0]?.value,
+          ),
+        )
+        .map((passage) => ({
+          id: passage.id,
+          passage: passage.passage,
+        }));
+      return {
+        ...manuscript,
+        related_passages, // Attach related_passages array
+      };
+    });
+    console.log(data);
+
+    var tabledata = [...data];
 
     var table = new Tabulator("#tabulator-table", {
       headerFilterLiveFilterDelay: 600,
@@ -44,7 +63,7 @@ import TableHead from "../components/table-head.astro";
           title: "Settlement",
           resizable: true,
           field: "library",
-          minWidth: 200,
+          width: 150,
           mutator: jsonpathLookup,
           mutatorParams: {
             path: "$[*].place[*].name",
@@ -66,25 +85,22 @@ import TableHead from "../components/table-head.astro";
         },
         {
           title: "Passages",
-          resizable: true,
-          field: "related__passages",
-          minWidth: 200,
-          mutator: function (value) {
-            if (!value || !Array.isArray(value)) {
-              return ""; // Handle cases where the field is empty or not an array
-            }
+          field: "related_passages",
+          minWidth: 300,
+          mutator: (value) => {
+            // Apply JSONPath to extract passages
+            const passages = JSONPath({ path: "$[*].passage", json: value });
 
-            // Extract just the number from each 'jad_id' and join it with a separator
-            return value
-              .map((item) => {
-                const match = item.jad_id.match(/__([0-9]+)$/); // Match the number after "__"
-                return match ? match[1] : ""; // Return the matched number or an empty string
+            // Truncate each passage to 100 characters
+            return passages
+              .map((p: any) => {
+                const truncated = p.substring(0, 50); // Truncate to 100 characters
+                return " - " + truncated + (p.length > 50 ? "..." : "");
               })
-              .filter((id) => id) // Remove empty values
-              .join(", "); // Join the extracted IDs with a comma
+              .join("\n");
           },
-          headerFilter: "input",
           formatter: "textarea",
+          headerFilter: "input",
         },
 
         {
@@ -97,6 +113,13 @@ import TableHead from "../components/table-head.astro";
             path: "$[*].name",
             separator: "; ",
           },
+          headerFilter: "input",
+        },
+        {
+          title: "Date",
+          resizable: true,
+          field: "date_written",
+          minWidth: 200,
           headerFilter: "input",
         },
       ],
