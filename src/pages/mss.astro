@@ -96,7 +96,7 @@ import TableHead from "../components/table-head.astro";
 
             // Flatten and format the extracted data
             return passages
-              .flatMap((p) => {
+              .flatMap((p: any) => {
                 const passage = p.passage ? p.passage.substring(0, 50) : ""; // Truncate passage
                 const id = p.id || ""; // Get ID
                 const formattedPassage =

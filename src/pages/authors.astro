@@ -9,11 +9,7 @@ import TableHead from "../components/table-head.astro";
 
   <script>
     import { TabulatorFull as Tabulator } from "tabulator-tables";
-    // import "tabulator-tables/dist/css/tabulator_bootstrap5.min.css";
-    // import "tabulator-tables/dist/css/tabulator_simple.min.css";
     import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
-    // import "tabulator-tables/dist/css/tabulator_bulma.min.css";
-    // import "tabulator-tables/dist/css/tabulator_materialize.min.css";
     import data from "../content/data/authors.json";
     import { jsonpathLookup } from "../lib/tabulator-utils.js";
     import { withBasePath } from "../lib/withBasePath";
@@ -58,7 +54,7 @@ import TableHead from "../components/table-head.astro";
           mutator: jsonpathLookup,
           mutatorParams: {
             path: "$[*].view_label",
-            separator: "; ",
+            separator: "\n",
           },
           headerFilter: "input",
           formatter: "textarea",
