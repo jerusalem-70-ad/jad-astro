@@ -45,16 +45,28 @@ const { data: keyword } = Astro.props;
         <dd class="pl-5">
           {
             keyword.related__passages.length > 0 ? (
-              <ul>
+              <ul class="space-y-2">
                 {keyword.related__passages.map((passage) => (
-                  <li class="list-disc">
-                    {passage.work[0]?.author[0]?.name}: {passage.work[0]?.name}
+                  <li class="list-disc list-inside">
                     <NavLink href={`/passages/${passage.jad_id}`}>
-                      ({passage.id})
+                      <span>({passage.id})</span>
                       <span class="italic">
-                        {passage.view_label.slice(0, 50)} ...
+                        {passage.view_label.slice(0, 150)} ...
                       </span>
                     </NavLink>
+                    <div class="mt-1 pl-4 text-sm">
+                      <span>
+                        <span class="font-semibold">Author:</span>{" "}
+                        {passage.work[0]?.author[0]?.name || "Unknown"}
+                      </span>
+                      <br />
+                      <span>
+                        <span class="font-semibold">Work:</span>{" "}
+                        <span class="italic">
+                          {passage.work[0]?.name || "Unknown"}
+                        </span>
+                      </span>
+                    </div>
                   </li>
                 ))}
               </ul>

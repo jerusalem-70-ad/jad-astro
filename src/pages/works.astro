@@ -15,12 +15,7 @@ import TableHead from "../components/table-head.astro";
     // import "tabulator-tables/dist/css/tabulator_bulma.min.css";
     // import "tabulator-tables/dist/css/tabulator_materialize.min.css";
     import data from "../content/data/works.json";
-    import {
-      jsonpathLookup,
-      jsonpathsDateRanges,
-      jsonpathDistinctLookup,
-      dateRangeFilter,
-    } from "../lib/tabulator-utils.js";
+    import { jsonpathLookup } from "../lib/tabulator-utils.js";
     import { withBasePath } from "../lib/withBasePath";
 
     var tabledata = [...Object.values(data)];
@@ -116,7 +111,12 @@ import TableHead from "../components/table-head.astro";
         {
           title: "Date",
           resizable: true,
-          field: "written_date",
+          field: "date",
+          mutator: jsonpathLookup,
+          mutatorParams: {
+            path: "$[*].value",
+            separator: "; ",
+          },
           minWidth: 200,
           headerFilter: "input",
         },

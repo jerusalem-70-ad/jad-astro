@@ -29,7 +29,8 @@ const { data: manuscript } = Astro.props;
       ),
     )
     .map((passage) => ({
-      id: passage.jad_id,
+      id: passage.id,
+      jad_id: passage.jad_id,
       passage: passage.passage,
       work: passage.work[0]?.title,
       author: passage.work[0].author[0]?.name,
@@ -52,13 +53,7 @@ const { data: manuscript } = Astro.props;
           Library / Collection:
         </dt>
         <dd class="pl-5">
-          <NavLink
-            href={manuscript.library[0]?.gnd_url}
-            target="_blank"
-            class="hover:text-brandRed flex"
-          >
-            {manuscript.library[0]?.name}<Icon name="lucide:external-link" />
-          </NavLink>
+         {manuscript.library[0]?.name}
         </dd>
        )}
 
@@ -70,8 +65,7 @@ const { data: manuscript } = Astro.props;
           Insitutional context:
         </dt>
         <dd class="pl-5">
-          <NavLink href={`/institutions/${manuscript.institutional_context[0]?.jad_id}`}
-            class="hover:text-brandRed">
+          <NavLink href={`/institutions/${manuscript.institutional_context[0]?.jad_id}`}>
             {manuscript.institutional_context[0]?.name ?? "N/A"}
           </NavLink>
         </dd>
@@ -81,30 +75,36 @@ const { data: manuscript } = Astro.props;
         {related_passages.length > 0 && (
           <dt class="font-semibold border-r border-gray-300 pr-2">Passages:</dt>
           <dd class="pl-5"> 
-            <ul>
-              {related_passages.map(
-                  (passage) => (
-                    <li class="py-1 list-disc">
-                      <NavLink
-                        href={`/passages/${passage.id}`}
-                        class="hover:text-brandRed"
-                      >
-                        #{passage.id.substring(15)}: {passage.passage}
-                        {passage.work && (
-                          <span>
-                            ({passage.author}: {passage.work}
-                            {passage.place && (
-                              <span>, {passage.place}</span>
-                            )})
-                          </span>                            
-                        )}
-                      
-                      </NavLink>
-                    </li>
-                  ),
-                )
-              }
-            </ul>
+           {related_passages.length > 0 ?  
+           <ul>
+              {
+           related_passages.map((passage) => (
+                  <li class="list-disc list-inside">
+                    <NavLink href={`/passages/${passage.jad_id}`}>
+                      <span>({passage.id})</span>
+                      <span class="italic">
+                        {passage.passage.slice(0, 150)} ...
+                      </span>
+                    </NavLink>
+                    <div class="mt-1 pl-4 text-sm">
+                      <span>
+                        <span class="font-semibold">Author:</span>{" "}
+                        {passage.author || "Unknown"}
+                      </span>
+                      <br />
+                      <span>
+                        <span class="font-semibold">Work:</span>{" "}
+                        <span class="italic">
+                          {passage.work || "Unknown"}
+                        </span>
+                      </span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+              : "N/A"} 
+            
+        
           </dd>
         )}
       </dl>
