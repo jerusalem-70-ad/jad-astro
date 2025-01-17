@@ -52,23 +52,27 @@ const { data: institution } = Astro.props;
                 </dt>
                 <dd class="pl-5">
                     {
-                        institution.related__manuscripts.length > 0
-                            ? institution.related__manuscripts.map(
-                                  (ms, index) => (
-                                      <>
-                                          <NavLink
-                                              href={`/manuscripts/${ms.jad_id}`}
-                                          >
-                                              {ms.view_label}
-                                          </NavLink>
-                                          {index <
-                                              institution.related__manuscripts
-                                                  .length -
-                                                  1 && "| "}
-                                      </>
-                                  ),
-                              )
-                            : "N/A"
+                        institution.related__manuscripts.length > 0 ? (
+                            <ul>
+                                {institution.related__manuscripts
+                                    .sort((a, b) =>
+                                        a.view_label.localeCompare(
+                                            b.view_label,
+                                        ),
+                                    )
+                                    .map((ms) => (
+                                        <li class="py-1 list-disc list-inside">
+                                            <NavLink
+                                                href={`/manuscripts/${ms.jad_id}`}
+                                            >
+                                                {ms.view_label}
+                                            </NavLink>
+                                        </li>
+                                    ))}
+                            </ul>
+                        ) : (
+                            "N/A"
+                        )
                     }
                 </dd>
             </dl>

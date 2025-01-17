@@ -88,14 +88,23 @@ import TableHead from "../components/table-head.astro";
           field: "related_passages",
           minWidth: 300,
           mutator: (value) => {
-            // Apply JSONPath to extract passages
-            const passages = JSONPath({ path: "$[*].passage", json: value });
+            // Apply JSONPath to extract 'passage' and 'id' fields
+            const passages = JSONPath({
+              path: "$[*]",
+              json: value,
+            });
 
-            // Truncate each passage to 100 characters
+            // Flatten and format the extracted data
             return passages
-              .map((p: any) => {
-                const truncated = p.substring(0, 50); // Truncate to 100 characters
-                return " - " + truncated + (p.length > 50 ? "..." : "");
+              .flatMap((p) => {
+                const passage = p.passage ? p.passage.substring(0, 50) : ""; // Truncate passage
+                const id = p.id || ""; // Get ID
+                const formattedPassage =
+                  (id ? ` (${id}) ` : "") +
+                  (passage
+                    ? `${passage}${p.passage.length > 50 ? "..." : ""}`
+                    : ""); // Combine passage and ID
+                return formattedPassage;
               })
               .join("\n");
           },
@@ -120,6 +129,11 @@ import TableHead from "../components/table-head.astro";
           resizable: true,
           field: "date_written",
           minWidth: 200,
+          mutator: jsonpathLookup,
+          mutatorParams: {
+            path: "$[*].value",
+            separator: "; ",
+          },
           headerFilter: "input",
         },
       ],

@@ -179,7 +179,7 @@ const mssSourceLocus = mssSource.map((msSource) => {
                             .filter((locus) => locus.position_in_ms)
                             .map((locus) => (
                               <span>
-                                ({locus.position_in_ms})
+                                (f. {locus.position_in_ms})
                                 {locus.facsimile_position && (
                                   <NavLink href={locus.facsimile_position}>
                                     Facsimile{" "}

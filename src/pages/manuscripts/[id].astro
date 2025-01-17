@@ -52,13 +52,7 @@ const { data: manuscript } = Astro.props;
           Library / Collection:
         </dt>
         <dd class="pl-5">
-          <NavLink
-            href={manuscript.library[0]?.gnd_url}
-            target="_blank"
-            class="hover:text-brandRed flex"
-          >
-            {manuscript.library[0]?.name}<Icon name="lucide:external-link" />
-          </NavLink>
+         {manuscript.library[0]?.name}
         </dd>
        )}
 
@@ -70,8 +64,7 @@ const { data: manuscript } = Astro.props;
           Insitutional context:
         </dt>
         <dd class="pl-5">
-          <NavLink href={`/institutions/${manuscript.institutional_context[0]?.jad_id}`}
-            class="hover:text-brandRed">
+          <NavLink href={`/institutions/${manuscript.institutional_context[0]?.jad_id}`}>
             {manuscript.institutional_context[0]?.name ?? "N/A"}
           </NavLink>
         </dd>
@@ -84,11 +77,8 @@ const { data: manuscript } = Astro.props;
             <ul>
               {related_passages.map(
                   (passage) => (
-                    <li class="py-1 list-disc">
-                      <NavLink
-                        href={`/passages/${passage.id}`}
-                        class="hover:text-brandRed"
-                      >
+                    <li class="py-1 list-disc list-inside">
+                      <NavLink href={`/passages/${passage.id}`} >
                         #{passage.id.substring(15)}: {passage.passage}
                         {passage.work && (
                           <span>

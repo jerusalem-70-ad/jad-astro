@@ -11,7 +11,7 @@ import TableHead from "../components/table-head.astro";
     import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
     import { jsonpathLookup } from "../lib/tabulator-utils.js";
     import { withBasePath } from "../lib/withBasePath";
-    import data from "../content/data/passages.json";
+    import data from "@data/passages.json";
 
     const dataSet = Object.values(data).map((passage) => {
       return {
@@ -50,6 +50,13 @@ import TableHead from "../components/table-head.astro";
       },
       columns: [
         {
+          title: "ID",
+          resizable: true,
+          field: "id",
+          width: 80,
+          headerFilter: "input",
+        },
+        {
           title: "Passage",
           resizable: true,
           field: "passage",
@@ -85,9 +92,10 @@ import TableHead from "../components/table-head.astro";
           mutator: jsonpathLookup,
           mutatorParams: {
             path: "$[*].value",
-            separator: "; ",
+            separator: "\n",
           },
           headerFilter: "input",
+          formatter: "textarea",
         },
 
         {

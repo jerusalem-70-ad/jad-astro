@@ -9,13 +9,9 @@ import TableHead from "../components/table-head.astro";
 
   <script>
     import { TabulatorFull as Tabulator } from "tabulator-tables";
-    // import "tabulator-tables/dist/css/tabulator_bootstrap5.min.css";
-    // import "tabulator-tables/dist/css/tabulator_simple.min.css";
     import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
-    // import "tabulator-tables/dist/css/tabulator_bulma.min.css";
-    // import "tabulator-tables/dist/css/tabulator_materialize.min.css";
     import data from "../content/data/keywords.json";
-    import { jsonpathLookup } from "../lib/tabulator-utils.js";
+    import { JSONPath } from "jsonpath-plus";
     import { withBasePath } from "../lib/withBasePath";
 
     var tabledata = [...Object.values(data)];
@@ -39,7 +35,7 @@ import TableHead from "../components/table-head.astro";
           title: "Name",
           resizable: true,
           field: "name",
-          minWidth: 200,
+          maxWidth: 300,
           headerFilter: "input",
         },
         {
@@ -47,21 +43,37 @@ import TableHead from "../components/table-head.astro";
           resizable: true,
           field: "short_description",
           minWidth: 200,
+          maxWidth: 500,
           headerFilter: "input",
           formatter: "textarea",
         },
         {
-          title: "passages",
-          resizable: true,
+          title: "Passages",
           field: "related__passages",
-          minWidth: 200,
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].view_label",
-            separator: "\n -",
+          minWidth: 300,
+          mutator: (value) => {
+            // Apply JSONPath to extract 'passage' and 'id' fields
+            const passages = JSONPath({
+              path: "$[*]",
+              json: value,
+            });
+
+            // Flatten and format the extracted data
+            return passages
+              .flatMap((p: any) => {
+                const passage = p.passage ? p.passage.substring(0, 100) : ""; // Truncate passage
+                const id = p.id || ""; // Get ID
+                const formattedPassage =
+                  (id ? ` (${id}) ` : "") +
+                  (passage
+                    ? `${passage}${p.passage.length > 100 ? "..." : ""}`
+                    : ""); // Combine passage and ID
+                return formattedPassage;
+              })
+              .join("\n");
           },
-          headerFilter: "input",
           formatter: "textarea",
+          headerFilter: "input",
         },
       ],
     });
