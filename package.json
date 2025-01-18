@@ -3,10 +3,10 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "build": "astro check && astro build",
+    "build": "node ./scripts/data-fetch.js && node ./scripts/generate-search-index.js && astro check && astro build",
     "dev": "astro dev",
     "get-data": "node ./scripts/data-fetch.js",
-    "generate:search-index": "node --env-file .env ./scripts/generate-search-index.js",
+    "generate:search-index": "node ./scripts/generate-search-index.js",
     "start": "astro preview"
   },
   "dependencies": {
