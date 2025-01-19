@@ -1,7 +1,7 @@
 ---
-import PageLayout from "../layouts/page-layout.astro";
+import PageLayout from "@/layouts/page-layout.astro";
 import { Icon } from "astro-icon/components";
-import NavLink from "../components/nav-link.astro";
+import NavLink from "@/components/nav-link.astro";
 import { Image } from "astro:assets";
 import titleImage from "../../public/assets/images/title-image.png";
 ---
@@ -60,6 +60,10 @@ import titleImage from "../../public/assets/images/title-image.png";
 						<NavLink
 							class="w-[150px] py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md"
 							href="/authors">Authors</NavLink
+						>
+						<NavLink
+							class="w-[150px] py-2 px-4 border border-brandBrown text-brandBrown bg-brandRose transition hover:bg-brandBrown hover:text-brandRose rounded-md"
+							href="/keywords">Keywords</NavLink
 						>
 					</div>
 				</div>

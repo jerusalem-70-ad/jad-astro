@@ -42,7 +42,7 @@ jobs:
               with:
                enablement: true
 
-            - name: Build
+            - name: fetch data, generate typesence index, and build
               env:
                 TYPESENSE_ADMIN_API_KEY: ${{ secrets.TYPESENSE_ADMIN_API_KEY }}
                 PUBLIC_TYPESENSE_API_HOST: ${{ secrets.PUBLIC_TYPESENSE_API_HOST }}

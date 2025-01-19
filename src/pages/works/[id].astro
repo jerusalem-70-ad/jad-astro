@@ -1,9 +1,10 @@
 ---
-import PageLayout from "@layouts/page-layout.astro";
+import PageLayout from "@/layouts/page-layout.astro";
 import { Icon } from "astro-icon/components";
+import Article from "@/components/article.astro";
 // Read and parse the JSON file using import
-import works from "@data/works.json";
-import NavLink from "@components/nav-link.astro";
+import works from "@/content/data/works.json";
+import NavLink from "@/components/nav-link.astro";
 export async function getStaticPaths() {
     // Map over the values in the object and create an array of paths
     const paths = Object.values(works).map((work) => ({
@@ -48,192 +49,159 @@ const grouped = work.related__passages.reduce<{ [key: string]: Passage[] }>(
 ---
 
 <PageLayout>
-    <div>
-        <div
-            class="border-2 rounded-sm border-brandBrown bg-brandRose my-10 grid p-5 w-3/4 mx-auto"
-        >
-            <div class="my-10 flex p-5 w-3/4 mx-auto justify-between">
-                <NavLink href={`/works/${work.prev.id}`}>
-                    <Icon name="lucide:circle-arrow-left" class="size-20" />
-                </NavLink>
-                <h1 class="text-xl py-3 mx-auto font-medium">
-                    ({work.id})
-                    {
-                        work.author.length > 0 && (
-                            <span>
-                                {work.author
-                                    .map((author) => author.name)
-                                    .join(", ")}
-                                :
-                            </span>
-                        )
-                    }
-                    <span class="italic">{work.title}</span>
-                </h1>
-                <NavLink href=`/works/${work.next.id}`>
-                    <Icon name="lucide:circle-arrow-right" class="size-20" />
-                </NavLink>
-            </div>
+    <Article
+        prevLink={`/works/${work.prev.id}`}
+        nextLink={`/works/${work.next.id}`}
+        mainTitle={work.author.length > 0
+            ? work.author.map((item) => item.name).join(", ") +
+              ": " +
+              work.title
+            : work?.title}
+    >
+        <dl class="grid grid-cols-[1fr_5fr] text-sm md:leading-7 md:text-base">
+            <dt class="font-semibold border-r border-gray-300 pr-5">Author:</dt>
+            <dd class="pl-5">
+                {
+                    work.author && work.author.length > 0 ? (
+                        <NavLink href={`/authors/${work.author[0].jad_id}`}>
+                            {work.author[0]?.name}
+                        </NavLink>
+                    ) : (
+                        "N/A"
+                    )
+                }
+            </dd>
 
-            <dl
-                class="grid grid-cols-[1fr_5fr] text-sm md:leading-7 md:text-base"
-            >
-                <dt class="font-semibold border-r border-gray-300 pr-5">
-                    Author:
-                </dt>
-                <dd class="pl-5">
-                    {
-                        work.author && work.author.length > 0 ? (
-                            <NavLink href={`/authors/${work.author[0].jad_id}`}>
-                                {work.author[0]?.name}
-                            </NavLink>
-                        ) : (
-                            "N/A"
-                        )
-                    }
-                </dd>
-
-                <dt class="font-semibold border-r border-gray-300 pr-5">
-                    Manuscripts:
-                </dt>
-                <dd class="pl-5">
-                    {
-                        work.manuscripts.length > 0
-                            ? work.manuscripts.map(
-                                  (
-                                      ms: { id: number; value: any },
-                                      index: number,
-                                  ) => (
-                                      <>
-                                          <NavLink
-                                              href={`/manuscripts/jad_manuscript__${ms.id}`}
-                                          >
-                                              {ms.value}
-                                          </NavLink>
-                                          {index <
-                                              work.manuscripts.length - 1 &&
-                                              "| "}
-                                      </>
-                                  ),
-                              )
-                            : "N/A"
-                    }
-                </dd>
-
-                <dt class="font-semibold border-r border-gray-300 pr-5">
-                    Genre:
-                </dt>
-                <dd class="pl-5">
-                    {work.genre !== null ? work.genre.value : "N/A"}
-                </dd>
-
-                <dt class="font-semibold border-r border-gray-300 pr-5">
-                    Edition:
-                </dt>
-                <dd class="pl-5">
-                    {
-                        work.published_edition.length > 0
-                            ? work.published_edition.map((ed, index) => (
+            <dt class="font-semibold border-r border-gray-300 pr-5">
+                Manuscripts:
+            </dt>
+            <dd class="pl-5">
+                {
+                    work.manuscripts.length > 0
+                        ? work.manuscripts.map(
+                              (
+                                  ms: { id: number; value: any },
+                                  index: number,
+                              ) => (
                                   <>
-                                      {ed.digi_url !== null ? (
-                                          <NavLink href={ed.digi_url}>
-                                              {ed.name}
-                                          </NavLink>
-                                      ) : (
-                                          ed.name
-                                      )}
-                                      {index <
-                                          work.published_edition.length - 1 &&
+                                      <NavLink
+                                          href={`/manuscripts/jad_manuscript__${ms.id}`}
+                                      >
+                                          {ms.value}
+                                      </NavLink>
+                                      {index < work.manuscripts.length - 1 &&
                                           "| "}
                                   </>
-                              ))
-                            : "N/A"
-                    }
-                </dd>
+                              ),
+                          )
+                        : "N/A"
+                }
+            </dd>
 
-                <dt class="font-semibold border-r border-gray-300 pr-5">
-                    Institutional context:
-                </dt>
-                <dd class="pl-5">
-                    {
-                        work.institutional_context.length > 0
-                            ? work.institutional_context.map(
-                                  (
-                                      institution: {
-                                          jad_id: string;
-                                          name: string;
-                                      },
-                                      index: number,
-                                  ) => (
-                                      <>
-                                          <NavLink
-                                              href={`/institutions/${institution.jad_id}`}
-                                          >
-                                              {institution.name}
-                                          </NavLink>
-                                          {index <
-                                              work.institutional_context
-                                                  .length -
-                                                  1 && "| "}
-                                      </>
-                                  ),
-                              )
-                            : "N/A"
-                    }
-                </dd>
+            <dt class="font-semibold border-r border-gray-300 pr-5">Genre:</dt>
+            <dd class="pl-5">
+                {work.genre !== null ? work.genre.value : "N/A"}
+            </dd>
 
-                <dt class="font-semibold border-r border-gray-300 pr-5">
-                    Date:
-                </dt>
-                <dd class="pl-5">
-                    {
-                        work.date.length > 0
-                            ? work.date.map((singleDate) => singleDate.value)
-                            : "N/A"
-                    }
-                </dd>
-                <dt class="font-semibold border-r border-gray-300 pr-5">
-                    Passages:
-                </dt>
-                <dd class="pl-5">
-                    {
-                        Object.entries(grouped)
-                            .sort(([keyA], [keyB]) => {
-                                const numA = parseInt(
-                                    keyA.match(/\d+/)?.[0] || "0",
-                                    10,
-                                );
-                                const numB = parseInt(
-                                    keyB.match(/\d+/)?.[0] || "0",
-                                    10,
-                                );
-                                return numA - numB;
-                            })
-                            .map(([position, passages]) => (
-                                <li class="mb-4">
-                                    <strong>{position}</strong>
-                                    <ul class="ml-5 list-disc">
-                                        {passages.map((passage) => (
-                                            <li>
-                                                <NavLink
-                                                    href={`/passages/${passage.jad_id}`}
-                                                >
-                                                    #
-                                                    {passage.jad_id.substring(
-                                                        15,
-                                                    )}{" "}
-                                                    <span class="italic">
-                                                        {passage.passage}
-                                                    </span>
-                                                </NavLink>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </li>
-                            ))
-                    }
-                </dd>
-            </dl>
-        </div>
-    </div>
+            <dt class="font-semibold border-r border-gray-300 pr-5">
+                Edition:
+            </dt>
+            <dd class="pl-5">
+                {
+                    work.published_edition.length > 0
+                        ? work.published_edition.map((ed, index) => (
+                              <>
+                                  {ed.digi_url !== null ? (
+                                      <NavLink href={ed.digi_url}>
+                                          {ed.name}
+                                      </NavLink>
+                                  ) : (
+                                      ed.name
+                                  )}
+                                  {index < work.published_edition.length - 1 &&
+                                      "| "}
+                              </>
+                          ))
+                        : "N/A"
+                }
+            </dd>
+
+            <dt class="font-semibold border-r border-gray-300 pr-5">
+                Institutional context:
+            </dt>
+            <dd class="pl-5">
+                {
+                    work.institutional_context.length > 0
+                        ? work.institutional_context.map(
+                              (
+                                  institution: {
+                                      jad_id: string;
+                                      name: string;
+                                  },
+                                  index: number,
+                              ) => (
+                                  <>
+                                      <NavLink
+                                          href={`/institutions/${institution.jad_id}`}
+                                      >
+                                          {institution.name}
+                                      </NavLink>
+                                      {index <
+                                          work.institutional_context.length -
+                                              1 && "| "}
+                                  </>
+                              ),
+                          )
+                        : "N/A"
+                }
+            </dd>
+
+            <dt class="font-semibold border-r border-gray-300 pr-5">Date:</dt>
+            <dd class="pl-5">
+                {
+                    work.date.length > 0
+                        ? work.date.map((singleDate) => singleDate.value)
+                        : "N/A"
+                }
+            </dd>
+            <dt class="font-semibold border-r border-gray-300 pr-5">
+                Passages:
+            </dt>
+            <dd class="pl-5">
+                {
+                    Object.entries(grouped)
+                        .sort(([keyA], [keyB]) => {
+                            const numA = parseInt(
+                                keyA.match(/\d+/)?.[0] || "0",
+                                10,
+                            );
+                            const numB = parseInt(
+                                keyB.match(/\d+/)?.[0] || "0",
+                                10,
+                            );
+                            return numA - numB;
+                        })
+                        .map(([position, passages]) => (
+                            <li class="mb-4">
+                                <strong>{position}</strong>
+                                <ul class="ml-5 list-disc">
+                                    {passages.map((passage) => (
+                                        <li>
+                                            <NavLink
+                                                href={`/passages/${passage.jad_id}`}
+                                            >
+                                                #{passage.jad_id.substring(15)}{" "}
+                                                <span class="italic">
+                                                    {passage.passage}
+                                                </span>
+                                            </NavLink>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </li>
+                        ))
+                }
+            </dd>
+        </dl>
+    </Article>
 </PageLayout>

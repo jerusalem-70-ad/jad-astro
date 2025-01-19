@@ -1,4 +1,4 @@
-import passages from "@data/passages.json";
+import passages from "@/content/data/passages.json";
 import { withBasePath } from "./withBasePath";
 
 const searchForm = document.querySelector("form[data-search-form]");

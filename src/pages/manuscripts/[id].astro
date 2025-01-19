@@ -1,10 +1,10 @@
 ---
-import PageLayout from "../../layouts/page-layout.astro";
+import PageLayout from "@/layouts/page-layout.astro";
 import { Icon } from "astro-icon/components";
-import NavLink from "@components/nav-link.astro";
-
-import mss from "@data/manuscripts.json";
-import pass from "@data/passages.json";
+import NavLink from "@/components/nav-link.astro";
+import Article from "@/components/article.astro";
+import mss from "@/content/data/manuscripts.json";
+import pass from "@/content/data/passages.json";
 
 const passages = Object.values(pass);
 
@@ -39,11 +39,12 @@ const { data: manuscript } = Astro.props;
 ---
 
 <PageLayout>
-  <div>
-    <article
-      class="border-2 rounded-sm border-brandBrown bg-brandRose w-3/4 grid grid-cols-1 mx-auto p-5 my-10"
-    >
-      <h1 class="text-xl py-3 mx-auto">{manuscript.name[0]?.value}</h1>
+  <Article
+  prevLink={manuscript.prev.id}
+  nextLink={manuscript.next.id}
+  mainTitle={manuscript.name[0]?.value}
+>
+      
       <dl class="grid grid-cols-[1fr_5fr] text-sm md:leading-7 md:text-base">
         <dt class="font-semibold border-r border-gray-300 pr-2">Settlement:</dt>
         <dd class="pl-5">{manuscript.library[0]?.place[0]?.name}</dd>
@@ -79,7 +80,7 @@ const { data: manuscript } = Astro.props;
            <ul>
               {
            related_passages.map((passage) => (
-                  <li class="list-disc list-inside">
+                  <li>
                     <NavLink href={`/passages/${passage.jad_id}`}>
                       <span>({passage.id})</span>
                       <span class="italic">
@@ -137,25 +138,6 @@ const { data: manuscript } = Astro.props;
           )
         }
       </div>
-    </article>
-    <div class="my-10 flex p-5 w-3/4 mx-auto justify-between">
-      {
-        manuscript.id > 1 ? (
-          <NavLink
-            href={`/manuscripts/jad_manuscript__${parseInt(manuscript.jad_id.split("__")[1]) - 1}`}
-          >
-            <Icon class="size-20" name="lucide:circle-arrow-left" />
-          </NavLink>
-        ) : (
-          ""
-        )
-      }
-
-      <NavLink
-        href={`/manuscripts/jad_manuscript__${parseInt(manuscript.jad_id.split("__")[1]) + 1}`}
-      >
-        <Icon class="size-20" name="lucide:circle-arrow-right" />
-      </NavLink>
-    </div>
-  </div>
+    </Article>
+   
 </PageLayout>

@@ -1,8 +1,9 @@
 ---
-import PageLayout from "@layouts/page-layout.astro";
-import keywords from "@data/keywords.json";
+import PageLayout from "@/layouts/page-layout.astro";
+import keywords from "@/content/data/keywords.json";
 import { Icon } from "astro-icon/components";
-import NavLink from "@components/nav-link.astro";
+import NavLink from "@/components/nav-link.astro";
+import Article from "@/components/article.astro";
 
 export async function getStaticPaths() {
   const paths = Object.values(keywords).map((keyword) => ({
@@ -16,93 +17,74 @@ const { data: keyword } = Astro.props;
 ---
 
 <PageLayout>
-  <div>
-    <div
-      class="border-2 rounded-sm border-brandBrown bg-brandRose my-10 grid p-5 w-3/4 mx-auto"
-    >
-      <div class="flex p-5 w-3/4 mx-auto justify-between">
-        <NavLink href={`/keywords/${keyword.prev.id}`}>
-          <Icon
-            name="lucide:circle-arrow-left"
-            class="size-20 text-brandBrown"
-          />
-        </NavLink>
-        <h1 class="text-xl py-3 mx-auto font-medium">{keyword.name}</h1>
+  <Article
+    prevLink={`/keywords/${keyword.prev.id}`}
+    nextLink={`/keywords/${keyword.next.id}`}
+    mainTitle={keyword.name}
+  >
+    <dl class="grid grid-cols-[1fr_12fr] text-sm md:text-base md:leading-7">
+      <dt class="font-semibold border-r border-gray-300 pr-2">About:</dt>
+      <dd class="pl-5">{keyword.short_description}</dd>
 
-        <NavLink href={`/keywords/${keyword.next.id}`}>
-          <Icon
-            name="lucide:circle-arrow-right"
-            class="size-20 text-brandBrown"
-          />
-        </NavLink>
-      </div>
-
-      <dl class="grid grid-cols-[1fr_12fr] text-sm md:text-base md:leading-7">
-        <dt class="font-semibold border-r border-gray-300 pr-2">About:</dt>
-        <dd class="pl-5">{keyword.short_description}</dd>
-
-        <dt class="font-semibold border-r border-gray-300 pr-2">Passages:</dt>
-        <dd class="pl-5">
-          {
-            keyword.related__passages.length > 0 ? (
-              <ul class="space-y-2">
-                {keyword.related__passages.map((passage) => (
-                  <li class="list-disc list-inside">
-                    <NavLink href={`/passages/${passage.jad_id}`}>
-                      <span>({passage.id})</span>
+      <dt class="font-semibold border-r border-gray-300 pr-2">Passages:</dt>
+      <dd class="pl-5">
+        {
+          keyword.related__passages.length > 0 ? (
+            <ul class="space-y-2 border-gray-300 p-2">
+              {keyword.related__passages.map((passage) => (
+                <li class="border-b border-gray-300 pb-2">
+                  <NavLink href={`/passages/${passage.jad_id}`}>
+                    <span>({passage.id})</span>
+                    <span class="italic">
+                      {passage.view_label.slice(0, 150)} ...
+                    </span>
+                  </NavLink>
+                  <div class="mt-1 pl-4 text-sm">
+                    <span>
+                      <span class="font-semibold">Author:</span>{" "}
+                      {passage.work[0]?.author[0]?.name || "Unknown"}
+                    </span>
+                    <br />
+                    <span>
+                      <span class="font-semibold">Work:</span>{" "}
                       <span class="italic">
-                        {passage.view_label.slice(0, 150)} ...
+                        {passage.work[0]?.name || "Unknown"}
                       </span>
-                    </NavLink>
-                    <div class="mt-1 pl-4 text-sm">
-                      <span>
-                        <span class="font-semibold">Author:</span>{" "}
-                        {passage.work[0]?.author[0]?.name || "Unknown"}
-                      </span>
-                      <br />
-                      <span>
-                        <span class="font-semibold">Work:</span>{" "}
-                        <span class="italic">
-                          {passage.work[0]?.name || "Unknown"}
-                        </span>
-                      </span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              "N/A"
-            )
+                    </span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            "N/A"
+          )
+        }
+      </dd>
+      <dt class="font-semibold border-r border-gray-300 pr-2">Related:</dt>
+      <dd class="pl-5">
+        <ul>
+          {
+            keyword.part_of.map((part: { jad_id: string; name: string }) => (
+              <li class="list-disc">
+                <NavLink href={`/keywords/${part.jad_id}`}>{part.name}</NavLink>
+              </li>
+            ))
           }
-        </dd>
-        <dt class="font-semibold border-r border-gray-300 pr-2">Related:</dt>
-        <dd class="pl-5">
-          <ul>
-            {
-              keyword.part_of.map((part: { jad_id: string; name: string }) => (
+          {
+            Object.values(keywords)
+              .filter((kword) =>
+                kword.part_of.some((part) => part.jad_id === keyword.jad_id),
+              )
+              .map((kword) => (
                 <li class="list-disc">
-                  <NavLink href={`/keywords/${part.jad_id}`}>
-                    {part.name}
+                  <NavLink href={`/keywords/${kword.jad_id}`}>
+                    {kword.name}
                   </NavLink>
                 </li>
               ))
-            }
-            {
-              Object.values(keywords)
-                .filter((kword) =>
-                  kword.part_of.some((part) => part.jad_id === keyword.jad_id),
-                )
-                .map((kword) => (
-                  <li class="list-disc">
-                    <NavLink href={`/keywords/${kword.jad_id}`}>
-                      {kword.name}
-                    </NavLink>
-                  </li>
-                ))
-            }
-          </ul>
-        </dd>
-      </dl>
-    </div>
-  </div>
+          }
+        </ul>
+      </dd>
+    </dl>
+  </Article>
 </PageLayout>

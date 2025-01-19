@@ -1,10 +1,11 @@
 ---
-import PageLayout from "../../layouts/page-layout.astro";
-import passages from "@data/passages.json";
+import PageLayout from "@/layouts/page-layout.astro";
+import passages from "@/content/data/passages.json";
 import { Icon } from "astro-icon/components";
-import NavLink from "@components/nav-link.astro";
-import msOccurences from "@data/ms_occurrences.json";
-import mss from "@data/manuscripts.json";
+import NavLink from "@/components/nav-link.astro";
+import Article from "@/components/article.astro";
+import msOccurences from "@/content/data/ms_occurrences.json";
+import mss from "@/content/data/manuscripts.json";
 
 export async function getStaticPaths() {
   const paths = Object.values(passages).map((passage) => ({
@@ -96,226 +97,219 @@ const mssSourceLocus = mssSource.map((msSource) => {
       </section>
     </aside>
 
-    <div>
-      <div
-        class="border-2 rounded-sm border-brandBrown bg-brandRose mt-5 mx-5 grid p-5"
-      >
-        <div class="flex p-5 w-3/4 mx-auto justify-between">
+    <Article
+      prevLink={`/passages/${passage.prev.id}`}
+      nextLink={`/passages/${passage.next.id}`}
+      mainTitle=`(${passage.id}) ${passage.passage} `
+    >
+      <dl class="grid grid-cols-[1fr_5fr] text-sm md:text-base md:leading-7">
+        <dt class="font-semibold border-r border-gray-300 pr-2">Author:</dt>
+        <dd class="pl-5">
           {
-            passage.id > 1 && (
-              <NavLink href={`/passages/${passage.prev.id}`}>
-                <Icon name="lucide:circle-arrow-left" class="size-20" />
+            passage.work[0].author.length > 0 ? (
+              <NavLink href={`/authors/${passage.work[0].author[0].jad_id}`}>
+                {passage.work[0].author[0]?.name}
               </NavLink>
+            ) : (
+              "N/A"
             )
           }
-          <h1 class="text-xl py-3 mx-auto font-medium">
-            ({passage.id}) <span class="italic">{passage.passage}</span>
-          </h1>
+        </dd>
 
-          <NavLink href={`/passages/${passage.next.id}`}>
-            <Icon name="lucide:circle-arrow-right" class="size-20" />
-          </NavLink>
-        </div>
-        <dl class="grid grid-cols-[1fr_5fr] text-sm md:text-base md:leading-7">
-          <dt class="font-semibold border-r border-gray-300 pr-2">Author:</dt>
-          <dd class="pl-5">{passage.author_lookup[0]?.value ?? "N/A"}</dd>
+        <dt class="font-semibold border-r border-gray-300 pr-2">Work:</dt>
+        <dd class="pl-5">
+          {
+            passage.work.length > 0
+              ? passage.work.map(
+                  (werk: { jad_id: string; title: any }, index: number) => (
+                    <>
+                      <NavLink href={`/works/${werk.jad_id}`}>
+                        {werk.title}
+                      </NavLink>
+                      {index < passage.work.length - 1 && ", "}
+                    </>
+                  ),
+                )
+              : "N/A"
+          }
+        </dd>
 
-          <dt class="font-semibold border-r border-gray-300 pr-2">Work:</dt>
-          <dd class="pl-5">
-            {
-              passage.work.length > 0
-                ? passage.work.map(
-                    (werk: { jad_id: string; title: any }, index: number) => (
-                      <>
-                        <NavLink href={`/works/${werk.jad_id}`}>
-                          {werk.title}
-                        </NavLink>
-                        {index < passage.work.length - 1 && ", "}
-                      </>
-                    ),
+        <dt class="font-semibold border-r border-gray-300 pr-2">
+          Position in work
+        </dt>
+
+        <dd class="pl-5">
+          {
+            passage.position_in_work
+              ? passage.position_in_work.length > 0
+                ? passage.position_in_work
+                : "N/A"
+              : "N/A"
+          }
+        </dd>
+
+        <dt class="font-semibold border-r border-gray-300 pr-2">
+          Manuscripts:
+        </dt>
+        <dd class="pl-5">
+          {
+            passage.manuscripts.length > 0 ? (
+              <ul>
+                {mssSourceLocus.map(
+                  (ms: {
+                    id: number;
+                    view_label: string;
+                    jad_id: string;
+                    locus: {
+                      position_in_ms: string;
+                      facsimile_position: string;
+                    }[];
+                  }) => (
+                    <li>
+                      <NavLink href={`/manuscripts/${ms.jad_id}`}>
+                        {ms.view_label}
+                      </NavLink>
+                      {/* add exact position preprocessed from json ms_occurences */}
+                      {ms.locus.length > 0 &&
+                        ms.locus
+                          .filter((locus) => locus.position_in_ms)
+                          .map((locus) => (
+                            <span>
+                              (f. {locus.position_in_ms})
+                              {locus.facsimile_position && (
+                                <NavLink href={locus.facsimile_position}>
+                                  Facsimile{" "}
+                                  <Icon
+                                    name="lucide:external-link"
+                                    class="size-4 inline-flex"
+                                  />
+                                </NavLink>
+                              )}
+                            </span>
+                          ))}
+                    </li>
+                  ),
+                )}
+              </ul>
+            ) : (
+              "N/A"
+            )
+          }
+        </dd>
+
+        <dt class="font-semibold border-r border-gray-300 pr-2">
+          Biblical references:
+        </dt>
+        <dd class="pl-5">
+          {
+            passage.biblical_references.length > 0
+              ? passage.biblical_references
+                  .map((reference: { value: any }) => reference.value)
+                  .join(", ")
+              : "N/A"
+          }
+        </dd>
+
+        <dt class="font-semibold border-r border-gray-300 pr-2">
+          Liturgical references:
+        </dt>
+        <dd class="pl-5">
+          {
+            passage.liturgical_references.length > 0
+              ? passage.liturgical_references
+                  .map((reference: { value: any }) => reference.value)
+                  .join(", ")
+              : "N/A"
+          }
+        </dd>
+
+        <dt class="font-semibold border-r border-gray-300 pr-2">Sources:</dt>
+        <dd class="pl-5">
+          {
+            passage.source_passage.length > 0
+              ? source.map((source) => (
+                  <Fragment>
+                    {source.work[0].author[0].name} - {source.work[0].name}:
+                    <NavLink href={`/passages/${source.jad_id}`}>
+                      ({source.id}) {source.passage}
+                    </NavLink>
+                  </Fragment>
+                ))
+              : "N/A"
+          }
+        </dd>
+
+        <dt class="font-semibold border-r border-gray-300 pr-2">Used by:</dt>
+        <dd class="pl-5">
+          {
+            usedBy.length > 0
+              ? usedBy.map((passage) => (
+                  <Fragment>
+                    {passage.work[0].author[0].name} - {passage.work[0].name}:
+                    <NavLink href={`/passages/${passage.jad_id}`}>
+                      ({passage.id}) {passage.passage}
+                    </NavLink>
+                  </Fragment>
+                ))
+              : "N/A"
+          }
+        </dd>
+
+        <dt class="font-semibold border-r border-gray-300 pr-2">Cluster:</dt>
+        <dd class="pl-5">
+          {
+            passage.part_of_cluster.length > 0
+              ? passage.part_of_cluster
+                  .map(
+                    (cluster: { value: string; id: number }) => cluster.value,
                   )
-                : "N/A"
-            }
-          </dd>
+                  .join(", ")
+              : "N/A"
+          }
+        </dd>
 
-          <dt class="font-semibold border-r border-gray-300 pr-2">
-            Position in work
-          </dt>
-
-          <dd class="pl-5">
-            {
-              passage.position_in_work
-                ? passage.position_in_work.length > 0
-                  ? passage.position_in_work
-                  : "N/A"
-                : "N/A"
-            }
-          </dd>
-
-          <dt class="font-semibold border-r border-gray-300 pr-2">
-            Manuscripts:
-          </dt>
-          <dd class="pl-5">
-            {
-              passage.manuscripts.length > 0 ? (
-                <ul>
-                  {mssSourceLocus.map(
-                    (ms: {
-                      id: number;
-                      view_label: string;
-                      jad_id: string;
-                      locus: {
-                        position_in_ms: string;
-                        facsimile_position: string;
-                      }[];
-                    }) => (
-                      <li>
-                        <NavLink href={`/manuscripts/${ms.jad_id}`}>
-                          {ms.view_label}
-                        </NavLink>
-                        {/* add exact position preprocessed from json ms_occurences */}
-                        {ms.locus.length > 0 &&
-                          ms.locus
-                            .filter((locus) => locus.position_in_ms)
-                            .map((locus) => (
-                              <span>
-                                (f. {locus.position_in_ms})
-                                {locus.facsimile_position && (
-                                  <NavLink href={locus.facsimile_position}>
-                                    Facsimile{" "}
-                                    <Icon
-                                      name="lucide:external-link"
-                                      class="size-4 inline-flex"
-                                    />
-                                  </NavLink>
-                                )}
-                              </span>
-                            ))}
-                      </li>
-                    ),
-                  )}
-                </ul>
-              ) : (
-                "N/A"
-              )
-            }
-          </dd>
-
-          <dt class="font-semibold border-r border-gray-300 pr-2">
-            Biblical references:
-          </dt>
-          <dd class="pl-5">
-            {
-              passage.biblical_references.length > 0
-                ? passage.biblical_references
-                    .map((reference: { value: any }) => reference.value)
-                    .join(", ")
-                : "N/A"
-            }
-          </dd>
-
-          <dt class="font-semibold border-r border-gray-300 pr-2">
-            Liturgical references:
-          </dt>
-          <dd class="pl-5">
-            {
-              passage.liturgical_references.length > 0
-                ? passage.liturgical_references
-                    .map((reference: { value: any }) => reference.value)
-                    .join(", ")
-                : "N/A"
-            }
-          </dd>
-
-          <dt class="font-semibold border-r border-gray-300 pr-2">Sources:</dt>
-          <dd class="pl-5">
-            {
-              passage.source_passage.length > 0
-                ? source.map((source) => (
-                    <Fragment>
-                      {source.work[0].author[0].name} - {source.work[0].name}:
-                      <NavLink href={`/passages/${source.jad_id}`}>
-                        ({source.id}) {source.passage}
-                      </NavLink>
-                    </Fragment>
+        <dt class="font-semibold border-r border-gray-300 pr-2">Keywords:</dt>
+        <dd class="pl-5">
+          {
+            passage.keywords.length > 0
+              ? passage.keywords
+                  .map((keyword: { name: string; id: number }) => (
+                    <NavLink href={`/keywords/jad_keyword__${keyword.id}`}>
+                      {keyword.name}
+                    </NavLink>
                   ))
-                : "N/A"
-            }
-          </dd>
+                  .reduce((prev, curr) => [prev, ", ", curr])
+              : "N/A"
+          }
+        </dd>
 
-          <dt class="font-semibold border-r border-gray-300 pr-2">Used by:</dt>
-          <dd class="pl-5">
-            {
-              usedBy.length > 0
-                ? usedBy.map((passage) => (
-                    <Fragment>
-                      {passage.work[0].author[0].name} - {passage.work[0].name}:
-                      <NavLink href={`/passages/${passage.jad_id}`}>
-                        ({passage.id}) {passage.passage}
-                      </NavLink>
-                    </Fragment>
-                  ))
+        <dt class="font-semibold border-r border-gray-300 pr-2">Full text:</dt>
+        <dd class="pl-5">
+          {
+            passage.text_paragraph
+              ? passage.text_paragraph.length > 0
+                ? passage.text_paragraph
                 : "N/A"
-            }
-          </dd>
+              : "N/A"
+          }
+        </dd>
 
-          <dt class="font-semibold border-r border-gray-300 pr-2">Cluster:</dt>
-          <dd class="pl-5">
-            {
-              passage.part_of_cluster.length > 0
-                ? passage.part_of_cluster
-                    .map(
-                      (cluster: { value: string; id: number }) => cluster.value,
-                    )
-                    .join(", ")
-                : "N/A"
-            }
-          </dd>
-
-          <dt class="font-semibold border-r border-gray-300 pr-2">Keywords:</dt>
-          <dd class="pl-5">
-            {
-              passage.keywords.length > 0
-                ? passage.keywords
-                    .map((keyword: { name: string; id: number }) => (
-                      <NavLink href={`/keywords/jad_keyword__${keyword.id}`}>
-                        {keyword.name}
-                      </NavLink>
-                    ))
-                    .reduce((prev, curr) => [prev, ", ", curr])
-                : "N/A"
-            }
-          </dd>
-
-          <dt class="font-semibold border-r border-gray-300 pr-2">
-            Full text:
-          </dt>
-          <dd class="pl-5">
-            {
-              passage.text_paragraph
-                ? passage.text_paragraph.length > 0
-                  ? passage.text_paragraph
-                  : "N/A"
-                : "N/A"
-            }
-          </dd>
-
-          <dt class="font-semibold border-r border-gray-300 pr-2">
-            Passage found in:
-          </dt>
-          <dd class="pl-5">
-            {
-              passage.occurrence_found_in.length > 0
-                ? passage.occurrence_found_in
-                    .map((find: { value: string }) => find.value)
-                    .join(", ")
-                : "N/A"
-            }
-            {passage.note && <span>: {passage.note}</span>}
-          </dd>
-        </dl>
-      </div>
-    </div>
+        <dt class="font-semibold border-r border-gray-300 pr-2">
+          Passage found in:
+        </dt>
+        <dd class="pl-5">
+          {
+            passage.occurrence_found_in.length > 0
+              ? passage.occurrence_found_in
+                  .map((find: { value: string }) => find.value)
+                  .join(", ")
+              : "N/A"
+          }
+          {passage.note && <span>: {passage.note}</span>}
+        </dd>
+      </dl>
+    </Article>
   </div>
 </PageLayout>
+
 <script src="../../lib/search-aside.js"></script>

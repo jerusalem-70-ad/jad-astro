@@ -163,7 +163,7 @@ search.addWidgets([
           <article>
             <h3 class="font-semibold text-lg text-brandBrown">
               <a href="${withBasePath(`/passages/${hit.id}`)}" class="underline">
-                ${hit.title || "Untitled"}
+                (#${hit.id.substr(15)}) ${hit.title}
               </a>
             </h3>            
           

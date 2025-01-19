@@ -18,8 +18,8 @@ import TableHead from "../components/table-head.astro";
     import { JSONPath } from "jsonpath-plus";
     import { withBasePath } from "../lib/withBasePath";
 
-    import pass from "@data/passages.json";
-    import mss from "@data/manuscripts.json";
+    import pass from "@/content/data/passages.json";
+    import mss from "@/content/data/manuscripts.json";
     const manuscripts = Object.values(mss);
     const passages = Object.values(pass);
 

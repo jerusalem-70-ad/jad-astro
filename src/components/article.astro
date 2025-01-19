@@ -1,0 +1,51 @@
+---
+import NavLink from "./nav-link.astro";
+import { Icon } from "astro-icon/components";
+// Props for the component
+const { prevLink, nextLink, mainLink, mainTitle } = Astro.props;
+---
+
+<article class="mx-auto md:w-3/4 sm:w-5/6 p-10">
+    <div
+        class="flex justify-between gap-3 text-brandBrown md:text-3xl text-xl p-5"
+    >
+        {
+            prevLink && (
+                <NavLink href={prevLink} class="flex items-center">
+                    <Icon
+                        class="size-12"
+                        aria-hidden="true"
+                        name="lucide:circle-chevron-left"
+                    />
+                    <span class="sr-only">to previous item</span>
+                </NavLink>
+            )
+        }
+        <h1 class="font-semibold">
+            {
+                mainLink ? (
+                    <NavLink href={mainLink}>{mainTitle}</NavLink>
+                ) : (
+                    mainTitle
+                )
+            }
+        </h1>
+        {
+            nextLink && (
+                <NavLink href={nextLink} class="flex items-center">
+                    <Icon
+                        class="size-12"
+                        aria-hidden="true"
+                        name="lucide:circle-chevron-right"
+                    />
+                    <span class="sr-only">to next item</span>
+                </NavLink>
+            )
+        }
+    </div>
+    <div
+        class="border-2 border-gray-300 rounded-sm p-5 bg-brandRose text-sm md:leading-7 md:text-base"
+    >
+        <slot />
+    </div>
+</article>

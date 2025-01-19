@@ -1,9 +1,9 @@
 ---
-import PageLayout from "../../layouts/page-layout.astro";
-import institutions from "@data/institutional_contexts.json";
+import PageLayout from "@/layouts/page-layout.astro";
+import institutions from "@/content/data/institutional_contexts.json";
 import { Icon } from "astro-icon/components";
-import NavLink from "@components/nav-link.astro";
-
+import NavLink from "@/components/nav-link.astro";
+import Article from "@/components/article.astro";
 export async function getStaticPaths() {
     const paths = Object.values(institutions).map((institution) => ({
         params: { id: institution.jad_id },
@@ -18,76 +18,59 @@ const { data: institution } = Astro.props;
 ---
 
 <PageLayout>
-    <div>
-        <div
-            class="border-2 rounded-sm border-brandBrown bg-brandRose my-10 grid p-5 w-3/4 mx-auto"
-        >
-            <h1 class="text-xl py-3 mx-auto font-medium">{institution.name}</h1>
-            <dl
-                class="grid grid-cols-[1fr_7fr] text-sm md:leading-7 md:text-base"
-            >
-                <dt class="font-semibold border-r border-gray-300 pr-5">
-                    Part of:
-                </dt>
-                <dd class="pl-5">
-                    {
-                        institution.part_of.length > 0
-                            ? institution.part_of.map((part, index) => (
-                                  <>
-                                      <NavLink
-                                          href={`/institutions/${part.jad_id}`}
-                                      >
-                                          {part.name}
-                                      </NavLink>
-                                      {index < institution.part_of.length - 1 &&
-                                          "|"}
-                                  </>
-                              ))
-                            : "N/A"
-                    }
-                </dd>
+    <Article
+        prevLink={`/institutions/${institution.prev.id}`}
+        nextLink={`/institutions/${institution.next.id}`}
+        mainTitle={institution.name}
+    >
+        <dl class="grid grid-cols-[1fr_7fr] text-sm md:leading-7 md:text-base">
+            <dt class="font-semibold border-r border-gray-300 pr-5">
+                Part of:
+            </dt>
+            <dd class="pl-5">
+                {
+                    institution.part_of.length > 0
+                        ? institution.part_of.map((part, index) => (
+                              <>
+                                  <NavLink
+                                      href={`/institutions/${part.jad_id}`}
+                                  >
+                                      {part.name}
+                                  </NavLink>
+                                  {index < institution.part_of.length - 1 &&
+                                      "|"}
+                              </>
+                          ))
+                        : "N/A"
+                }
+            </dd>
 
-                <dt class="font-semibold border-r border-gray-300 pr-5">
-                    Manuscripts:
-                </dt>
-                <dd class="pl-5">
-                    {
-                        institution.related__manuscripts.length > 0 ? (
-                            <ul>
-                                {institution.related__manuscripts
-                                    .sort((a, b) =>
-                                        a.view_label.localeCompare(
-                                            b.view_label,
-                                        ),
-                                    )
-                                    .map((ms) => (
-                                        <li class="py-1 list-disc list-inside">
-                                            <NavLink
-                                                href={`/manuscripts/${ms.jad_id}`}
-                                            >
-                                                {ms.view_label}
-                                            </NavLink>
-                                        </li>
-                                    ))}
-                            </ul>
-                        ) : (
-                            "N/A"
-                        )
-                    }
-                </dd>
-            </dl>
-        </div>
-        <div class="my-10 flex p-5 w-3/4 mx-auto justify-between">
-            <NavLink href=`/institutions/${institution.prev}`>
-                <Icon class="size-20" name="lucide:circle-arrow-left" />
-            </NavLink>
-
-            <NavLink href=`/institutions/${institution.next}`>
-                <Icon
-                    class="size-20"
-                    name="lucide:circle-arrow-right"
-                /></NavLink
-            >
-        </div>
-    </div>
+            <dt class="font-semibold border-r border-gray-300 pr-5">
+                Manuscripts:
+            </dt>
+            <dd class="pl-5">
+                {
+                    institution.related__manuscripts.length > 0 ? (
+                        <ul>
+                            {institution.related__manuscripts
+                                .sort((a, b) =>
+                                    a.view_label.localeCompare(b.view_label),
+                                )
+                                .map((ms) => (
+                                    <li class="py-1 list-disc list-inside">
+                                        <NavLink
+                                            href={`/manuscripts/${ms.jad_id}`}
+                                        >
+                                            {ms.view_label}
+                                        </NavLink>
+                                    </li>
+                                ))}
+                        </ul>
+                    ) : (
+                        "N/A"
+                    )
+                }
+            </dd>
+        </dl>
+    </Article>
 </PageLayout>

@@ -11,7 +11,7 @@ import TableHead from "../components/table-head.astro";
     import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
     import { jsonpathLookup } from "../lib/tabulator-utils.js";
     import { withBasePath } from "../lib/withBasePath";
-    import data from "@data/passages.json";
+    import data from "@/content/data/passages.json";
 
     const dataSet = Object.values(data).map((passage) => {
       return {
