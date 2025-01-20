@@ -8,8 +8,22 @@ async function generate() {
   const client = createTypesenseAdminClient();
 
   // check if the collection exist if so delete and write anew
-  await client.collections(collectionName).delete();
-  log.success("Deleted the collection");
+
+  try {
+    // Check if the collection exists
+    const collections = await client.collections().retrieve();
+    const collectionExists = collections.some(
+      (collection) => collection.name === collectionName
+    );
+
+    if (collectionExists) {
+      // If the collection exists, delete it
+      await client.collections(collectionName).delete();
+      log.success(`Deleted the existing collection: ${collectionName}`);
+    }
+  } catch (error) {
+    log.error("Error while checking or deleting collection:\n", String(error));
+  }
 
   // create collection
   const schema = {
@@ -17,6 +31,7 @@ async function generate() {
     enable_nested_fields: true,
     fields: [
       { name: "id", type: "string", sort: true },
+      { name: "sort_id", type: "int32", sort: true },
       { name: "rec_id", type: "string", sort: true },
       { name: "title", type: "string", sort: true },
       { name: "full_text", type: "string", sort: true },
@@ -27,7 +42,7 @@ async function generate() {
       { name: "cluster", type: "object[]", facet: true, optional: true },
       { name: "keywords", type: "object[]", facet: true, optional: true },
     ],
-    default_sorting_field: "title",
+    default_sorting_field: "sort_id",
   };
 
   await client.collections().create(schema);
@@ -43,6 +58,7 @@ async function generate() {
   const records = [];
   Object.values(data).forEach((value) => {
     const item = {
+      sort_id: value.id,
       id: value.jad_id,
       rec_id: value.jad_id,
       title: value.passage,

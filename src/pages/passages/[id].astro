@@ -6,6 +6,7 @@ import NavLink from "@/components/nav-link.astro";
 import Article from "@/components/article.astro";
 import msOccurences from "@/content/data/ms_occurrences.json";
 import mss from "@/content/data/manuscripts.json";
+import "instantsearch.css/themes/satellite.css";
 
 export async function getStaticPaths() {
   const paths = Object.values(passages).map((passage) => ({
@@ -53,47 +54,11 @@ const mssSourceLocus = mssSource.map((msSource) => {
 <PageLayout>
   <div class="md:grid md:grid-cols-[1fr_4fr] md:gap-2">
     <aside
-      class="hidden md:block border-2 border-r-brandBrown border-b-brandBrown bg-brandRose overflow-scroll max-h-svh"
+      class="hidden md:block border-r-brandBrown border-b-brandBrown bg-brandRose overflow-scroll max-h-svh"
     >
-      <form role="search" data-search-form class="flex flex-row">
-        <label class="basis-3/4">
-          <div class="sr-only">Search</div>
-          <input
-            type="search"
-            name="q"
-            placeholder="Search passages ..."
-            data-input
-            class="border py-2 pl-4 rounded-sm focus:border-brandBrown min-w-full"
-          />
-        </label>
-        <button
-          type="submit"
-          class="py-2 px-4 border bg-brandBrown text-brandRose hover:bg-brandRed transition basis-1/4 rounded-sm shadow-sm"
-          >Search</button
-        >
-      </form>
+      <div id="searchbox" class="py-3 px-5"></div>
       <section>
-        <div class="sr-only">Results</div>
-        <ul data-results-list>
-          {
-            Object.values(passages).map((passage) => {
-              return (
-                <li
-                  id={`passage-${passage.jad_id}`}
-                  class="list-disc overflow-hidden whitespace-nowrap text-ellipsis max-w-md hover:text-wrap"
-                >
-                  <NavLink
-                    href={`/passages/${passage.jad_id}`}
-                    class="hover: text-brandBrown"
-                  >
-                    ({passage.jad_id.substring(15)}){" "}
-                    <span class="italic">{passage.passage}</span>
-                  </NavLink>
-                </li>
-              );
-            })
-          }
-        </ul>
+        <div id="hits" class="bg-white p-4 rounded-lg shadow-sm"></div>
       </section>
     </aside>
 
@@ -312,4 +277,4 @@ const mssSourceLocus = mssSource.map((msSource) => {
   </div>
 </PageLayout>
 
-<script src="../../lib/search-aside.js"></script>
+<script src="@/lib/advanced-search-aside.js"></script>
