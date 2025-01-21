@@ -61,6 +61,11 @@ const { data: manuscript } = Astro.props;
         <dt class="font-semibold border-r border-gray-300 pr-2">Shelfmark:</dt>
         <dd class="pl-5">{manuscript?.idno}</dd>
 
+        <dt class="font-semibold border-r border-gray-300 pr-2">Format:</dt>
+        <dd class="pl-5">{manuscript?.format !== null
+          ? manuscript?.format
+        : 'N/A'}</dd>
+
        {manuscript.institutional_context.length > 0 && (
          <dt class="font-semibold border-r border-gray-300 pr-2">
           Insitutional context:
