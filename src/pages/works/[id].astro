@@ -30,6 +30,10 @@ type Passage = {
     position_in_work_url: string;
     text_paragraph: string;
     note: string;
+    occurrence_found_in: {
+        id: number;
+        value: string;
+    }[];
     // other properties...
     next: {
         id: number;
@@ -71,6 +75,16 @@ const grouped = work.related__passages.reduce<{ [key: string]: Passage[] }>(
                     )
                 }
             </dd>
+            {
+                work.incipit !== null && (
+                    <>
+                        <dt class="font-semibold border-r border-gray-300 pr-5">
+                            Incipit:
+                        </dt>
+                        <dd class="pl-5">{work.incipit}</dd>
+                    </>
+                )
+            }
 
             <dt class="font-semibold border-r border-gray-300 pr-5">
                 Manuscripts:
@@ -195,6 +209,16 @@ const grouped = work.related__passages.reduce<{ [key: string]: Passage[] }>(
                                                     {passage.passage}
                                                 </span>
                                             </NavLink>
+                                            <span class="text-xs">
+                                                (Source:
+                                                {passage.occurrence_found_in
+                                                    .map(
+                                                        (source) =>
+                                                            source.value,
+                                                    )
+                                                    .join(", ")}
+                                                )
+                                            </span>
                                         </li>
                                     ))}
                                 </ul>
