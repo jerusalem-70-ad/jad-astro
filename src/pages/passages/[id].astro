@@ -71,7 +71,7 @@ const mssSourceLocus = mssSource.map((msSource) => {
         <dt class="font-semibold border-r border-gray-300 pr-2">Author:</dt>
         <dd class="pl-5">
           {
-            passage.work[0].author.length > 0 ? (
+            passage.work.length > 0 && passage.work[0].author.length > 0 ? (
               <NavLink href={`/authors/${passage.work[0].author[0].jad_id}`}>
                 {passage.work[0].author[0]?.name}
               </NavLink>
@@ -105,10 +105,8 @@ const mssSourceLocus = mssSource.map((msSource) => {
 
         <dd class="pl-5">
           {
-            passage.position_in_work
-              ? passage.position_in_work.length > 0
-                ? passage.position_in_work
-                : "N/A"
+            passage.position_in_work.length > 0
+              ? passage.position_in_work
               : "N/A"
           }
         </dd>
@@ -193,12 +191,14 @@ const mssSourceLocus = mssSource.map((msSource) => {
           {
             passage.source_passage.length > 0
               ? source.map((source) => (
-                  <Fragment>
-                    {source.work[0].author[0].name} - {source.work[0].name}:
+                  <span>
+                    {source.work?.[0]?.author?.length > 0
+                      ? `${source.work[0].author[0].name} - ${source.work[0].name}`
+                      : source.work?.[0]?.name}
                     <NavLink href={`/passages/${source.jad_id}`}>
                       ({source.id}) {source.passage}
                     </NavLink>
-                  </Fragment>
+                  </span>
                 ))
               : "N/A"
           }
@@ -209,12 +209,14 @@ const mssSourceLocus = mssSource.map((msSource) => {
           {
             usedBy.length > 0
               ? usedBy.map((passage) => (
-                  <Fragment>
-                    {passage.work[0].author[0].name} - {passage.work[0].name}:
+                  <span>
+                    {passage.work?.[0].author.length > 0
+                      ? `${passage.work[0].author[0].name} - ${passage.work[0].name}`
+                      : passage.work[0].name}
                     <NavLink href={`/passages/${passage.jad_id}`}>
                       ({passage.id}) {passage.passage}
                     </NavLink>
-                  </Fragment>
+                  </span>
                 ))
               : "N/A"
           }
@@ -250,13 +252,7 @@ const mssSourceLocus = mssSource.map((msSource) => {
 
         <dt class="font-semibold border-r border-gray-300 pr-2">Full text:</dt>
         <dd class="pl-5">
-          {
-            passage.text_paragraph
-              ? passage.text_paragraph.length > 0
-                ? passage.text_paragraph
-                : "N/A"
-              : "N/A"
-          }
+          {passage.text_paragraph !== null ? passage.text_paragraph : "N/A"}
         </dd>
 
         <dt class="font-semibold border-r border-gray-300 pr-2">
