@@ -17,34 +17,42 @@ export async function getStaticPaths() {
 }
 const { data: work } = Astro.props;
 
-type Passage = {
-    id: number;
-    passage: string;
-    jad_id: string;
-    language: {
-        id: number;
-        value: string;
-        color: string;
-    } | null;
-    position_in_work: string;
-    position_in_work_url: string;
-    text_paragraph: string;
-    note: string;
-    // other properties...
-    next: {
-        id: number;
-        passage: string;
-        // other properties...
-    };
-};
-const grouped = work.related__passages.reduce<{ [key: string]: Passage[] }>(
+type Passage = any;
+
+// group passages by position in work (sermon number, or book and chapter)
+const groupedPassages = work.related__passages.reduce<{
+    [key: string]: Passage[];
+}>(
     (grouped, passage) => {
         const key = passage.position_in_work || "Unknown Position";
         if (!grouped[key]) grouped[key] = [];
-        grouped[key].push(passage as any);
+        grouped[key].push(passage);
         return grouped;
     },
     {} as { [key: string]: Passage[] },
+);
+
+// sort passages by both book and chapter
+const sortedPassages = Object.entries(groupedPassages).sort(
+    ([keyA], [keyB]) => {
+        // Extract the main and secondary parts (e.g., "Sermo 46" or "B3 Ch5")
+        const extractParts = (key: any) => {
+            const mainPart = key.match(/^[A-Za-z]+\s*\d+/)?.[0] || ""; // Allow space between letters and numbers
+            const subPart = key.match(/Ch\d+/)?.[0] || ""; // Secondary part like "Ch5"
+            const mainNum = parseInt(mainPart.replace(/[^\d]/g, ""), 10) || 0; // Extract number from main part
+            const subNum = parseInt(subPart.replace(/[^\d]/g, ""), 10) || 0; // Extract number from sub part
+            return { mainPart, mainNum, subPart, subNum };
+        };
+
+        const partA = extractParts(keyA);
+        const partB = extractParts(keyB);
+
+        // Compare main parts first, then secondary parts
+        if (partA.mainPart !== partB.mainPart) {
+            return partA.mainNum - partB.mainNum; // Compare main numbers
+        }
+        return partA.subNum - partB.subNum; // Compare sub numbers if main parts are equal
+    },
 );
 ---
 
@@ -71,6 +79,16 @@ const grouped = work.related__passages.reduce<{ [key: string]: Passage[] }>(
                     )
                 }
             </dd>
+            {
+                work.incipit !== null && (
+                    <>
+                        <dt class="font-semibold border-r border-gray-300 pr-5">
+                            Incipit:
+                        </dt>
+                        <dd class="pl-5">{work.incipit}</dd>
+                    </>
+                )
+            }
 
             <dt class="font-semibold border-r border-gray-300 pr-5">
                 Manuscripts:
@@ -160,7 +178,9 @@ const grouped = work.related__passages.reduce<{ [key: string]: Passage[] }>(
             <dd class="pl-5">
                 {
                     work.date.length > 0
-                        ? work.date.map((singleDate) => singleDate.value)
+                        ? work.date
+                              .map((singleDate) => singleDate.value)
+                              .join(", ")
                         : "N/A"
                 }
             </dd>
@@ -169,37 +189,34 @@ const grouped = work.related__passages.reduce<{ [key: string]: Passage[] }>(
             </dt>
             <dd class="pl-5">
                 {
-                    Object.entries(grouped)
-                        .sort(([keyA], [keyB]) => {
-                            const numA = parseInt(
-                                keyA.match(/\d+/)?.[0] || "0",
-                                10,
-                            );
-                            const numB = parseInt(
-                                keyB.match(/\d+/)?.[0] || "0",
-                                10,
-                            );
-                            return numA - numB;
-                        })
-                        .map(([position, passages]) => (
-                            <li class="mb-4">
-                                <strong>{position}</strong>
-                                <ul class="ml-5 list-disc">
-                                    {passages.map((passage) => (
-                                        <li>
-                                            <NavLink
-                                                href={`/passages/${passage.jad_id}`}
-                                            >
-                                                #{passage.jad_id.substring(15)}{" "}
-                                                <span class="italic">
-                                                    {passage.passage}
-                                                </span>
-                                            </NavLink>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </li>
-                        ))
+                    sortedPassages.map(([position, passages]) => (
+                        <li class="mb-4">
+                            <strong>{position}</strong>
+                            <ul class="ml-5 list-disc">
+                                {passages.map((passage) => (
+                                    <li>
+                                        <NavLink
+                                            href={`/passages/${passage.jad_id}`}
+                                        >
+                                            #{passage.jad_id.substring(15)}{" "}
+                                            <span class="italic">
+                                                {passage.passage}
+                                            </span>
+                                        </NavLink>
+                                        <span class="text-xs">
+                                            Source:
+                                            {passage.occurrence_found_in
+                                                .map(
+                                                    (source: any) =>
+                                                        source.value,
+                                                )
+                                                .join(", ")}
+                                        </span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </li>
+                    ))
                 }
             </dd>
         </dl>
