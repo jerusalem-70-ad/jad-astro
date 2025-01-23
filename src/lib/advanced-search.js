@@ -15,7 +15,6 @@ import { withBasePath } from "./withBasePath";
 const project_collection_name = "JAD-temp";
 const main_search_field = "full_text";
 const search_api_key = "IA6BWzRrMo7yX3eFqgcFelJzhWkIl64W";
-// const search_api_key = "nxZkKN7Jphnp1mUFjataIhbKzdxEtd1Y";
 
 const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
   server: {
@@ -30,6 +29,7 @@ const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
   },
   additionalSearchParameters: {
     query_by: main_search_field,
+    typo_tokens_threshold: 50,
   },
 });
 // create searchClient
@@ -177,64 +177,7 @@ search.addWidgets([
         `;
       },
     },
-  }),
-  
-  
-  /* hits({
-    
-    container: "#hits",
-    templates: {
-      empty: "No results for <q>{{ query }}</q>",
-      item(hit, { html, components }) {
-        const href = withBasePath(`/passages/${hit.id}`);
-     // Helper function to render the list of works and their authors
-     const renderWorks = (works) => {
-      if (!works || works.length === 0) return "<p>No works available</p>";
-
-      return works
-        .map(
-          (work) => `
-            <div class="work-item">
-              <p><strong>Title:</strong> ${work.name || "Unknown Title"}</p>
-              <p><strong>Authors:</strong> ${
-                work.author && work.author.length > 0
-                  ? work.author.map((author) => author.name).join(", ")
-                  : "Unknown Authors"
-              }</p>
-            </div>
-          `
-        )
-        .join("");
-    };
-        return html` <article>
-          <h3 class="font-semibold text-lg text-brandBrown">
-            <a href="${href}" class="underline">
-              ${components.Highlight({
-                hit,
-                attribute: "title",
-              })}
-            </a>
-          </h3>
-  
-          <p class="italic">
-            ${hit._snippetResult.full_text.matchedWords.length > 0
-              ? components.Snippet({ hit, attribute: "full_text" })
-              : ""}
-          </p>
-  
-          <!-- Work title and author -->
-           <div class="work-details">
-            ${renderWorks(hit.work)}
-          </div>
-
-  
-          <a href="${href}" class="underline decoration-dotted text-sm">
-            See passage
-          </a>
-        </article>`;
-      },
-    },
-  }), */
+  }), 
   
 
   pagination({
