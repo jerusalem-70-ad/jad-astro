@@ -20,29 +20,29 @@ const { data: passage } = Astro.props;
 
 // extract the sources for the current passage
 const source = Object.values(passages).filter(
-  (item) => item.id === passage.source_passage[0]?.id,
+  (item) => item.id === passage.source_passage[0]?.id
 );
 
 // passage as source (look where one passage is used as source for another)
 const usedBy = Object.values(passages).filter((item) =>
-  item.source_passage.some((source) => source.id === passage.id),
+  item.source_passage.some((source) => source.id === passage.id)
 );
 
 // use ms_occurences.json to look for the manuscripts and their loci
 const msLocus = Object.values(msOccurences).filter(
-  (item) => item.occurrence[0]?.id === passage.id,
+  (item) => item.occurrence[0]?.id === passage.id
 );
 
 // filter the manuscripts that are used in the current passage
 // to get information about the manuscripts (jad_id)
 const mssSource = Object.values(mss).filter((ms) =>
-  passage.manuscripts.some((man) => man.value === ms.name[0]?.value),
+  passage.manuscripts.some((man) => man.value === ms.name[0]?.value)
 );
 
 // combine the locus information to the manuscript
 const mssSourceLocus = mssSource.map((msSource) => {
   const locus = msLocus.filter(
-    (locus) => locus.manuscript[0]?.value === msSource.name[0].value,
+    (locus) => locus.manuscript[0]?.value === msSource.name[0].value
   );
   return {
     ...msSource,
@@ -56,9 +56,9 @@ const mssSourceLocus = mssSource.map((msSource) => {
     <aside
       class="hidden md:block border-r-brandBrown border-b-brandBrown bg-brandRose overflow-scroll max-h-svh"
     >
-      <div id="searchbox" class="py-3 px-5"></div>
+      <div id="searchbox" class="py-3 px-4"></div>
       <section>
-        <div id="hits" class="bg-white p-4 rounded-lg shadow-sm"></div>
+        <div id="hits" class="px-4"></div>
       </section>
     </aside>
 
@@ -73,7 +73,8 @@ const mssSourceLocus = mssSource.map((msSource) => {
           {
             passage.work.length > 0 && passage.work[0].author.length > 0 ? (
               <NavLink href={`/authors/${passage.work[0].author[0].jad_id}`}>
-                {passage.work[0].author[0]?.name}
+                {passage.work[0].author[0]?.name}{" "}
+                {passage.work[0].author_certainty === false && " (?)"}
               </NavLink>
             ) : (
               "N/A"
@@ -93,7 +94,7 @@ const mssSourceLocus = mssSource.map((msSource) => {
                       </NavLink>
                       {index < passage.work.length - 1 && ", "}
                     </>
-                  ),
+                  )
                 )
               : "N/A"
           }
@@ -151,7 +152,7 @@ const mssSourceLocus = mssSource.map((msSource) => {
                             </span>
                           ))}
                     </li>
-                  ),
+                  )
                 )}
               </ul>
             ) : (
@@ -228,7 +229,7 @@ const mssSourceLocus = mssSource.map((msSource) => {
             passage.part_of_cluster.length > 0
               ? passage.part_of_cluster
                   .map(
-                    (cluster: { value: string; id: number }) => cluster.value,
+                    (cluster: { value: string; id: number }) => cluster.value
                   )
                   .join(", ")
               : "N/A"
@@ -251,7 +252,7 @@ const mssSourceLocus = mssSource.map((msSource) => {
         </dd>
 
         <dt class="font-semibold border-r border-gray-300 pr-2">Full text:</dt>
-        <dd class="pl-5">
+        <dd class="pl-5 italic">
           {passage.text_paragraph !== null ? passage.text_paragraph : "N/A"}
         </dd>
 
