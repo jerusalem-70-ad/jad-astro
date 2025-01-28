@@ -100,4 +100,4 @@ Contributions are welcome! Please follow these steps:
 
 ## :raised_hands: License
 
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/jerusalem-70-ad/jad-astro/blob/main/LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/jerusalem-70-ad/jad-astro/blob/main/LICENSE.txt) file for details.
