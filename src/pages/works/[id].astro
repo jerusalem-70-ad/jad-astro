@@ -1,18 +1,14 @@
 ---
 import PageLayout from "@/layouts/page-layout.astro";
-import { Icon } from "astro-icon/components";
 import Article from "@/components/article.astro";
-// Read and parse the JSON file using import
 import works from "@/content/data/works.json";
 import NavLink from "@/components/nav-link.astro";
+
 export async function getStaticPaths() {
-    // Map over the values in the object and create an array of paths
     const paths = Object.values(works).map((work) => ({
-        params: { id: work.jad_id.toString() }, // Make sure id is a string
+        params: { id: work.jad_id },
         props: { data: work },
     }));
-
-    // Return the array of paths
     return paths;
 }
 const { data: work } = Astro.props;
@@ -73,6 +69,7 @@ const sortedPassages = Object.entries(groupedPassages).sort(
                     work.author && work.author.length > 0 ? (
                         <NavLink href={`/authors/${work.author[0].jad_id}`}>
                             {work.author[0]?.name}
+                            {work.author_certainty === false && " (?)"}
                         </NavLink>
                     ) : (
                         "N/A"
@@ -143,37 +140,37 @@ const sortedPassages = Object.entries(groupedPassages).sort(
                         : "N/A"
                 }
             </dd>
-
-            <dt class="font-semibold border-r border-gray-300 pr-5">
-                Institutional context:
+            
+            {
+                work.institutional_context.length > 0 &&
+            ( <dt class="font-semibold border-r border-gray-300 pr-5">
+            Institutional context:
             </dt>
             <dd class="pl-5">
-                {
-                    work.institutional_context.length > 0
-                        ? work.institutional_context.map(
-                              (
-                                  institution: {
-                                      jad_id: string;
-                                      name: string;
-                                  },
-                                  index: number,
-                              ) => (
-                                  <>
-                                      <NavLink
-                                          href={`/institutions/${institution.jad_id}`}
-                                      >
-                                          {institution.name}
-                                      </NavLink>
-                                      {index <
-                                          work.institutional_context.length -
-                                              1 && "| "}
-                                  </>
-                              ),
-                          )
-                        : "N/A"
-                }
-            </dd>
 
+                    {work.institutional_context.map(
+                        (
+                            institution: {
+                                jad_id: string;
+                                name: string;
+                            },
+                            index: number,
+                        ) => (
+                            <>
+                                <NavLink
+                                    href={`/institutions/${institution.jad_id}`}
+                                >
+                                    {institution.name}
+                                </NavLink>
+                                {index <
+                                    work.institutional_context.length -
+                                        1 && "| "}
+                            </>
+                        ),
+                    )}
+
+            </dd>)
+            }
             <dt class="font-semibold border-r border-gray-300 pr-5">Date:</dt>
             <dd class="pl-5">
                 {
@@ -182,6 +179,11 @@ const sortedPassages = Object.entries(groupedPassages).sort(
                               .map((singleDate) => singleDate.value)
                               .join(", ")
                         : "N/A"
+                }
+                {
+                    work.date.length > 0 &&
+                        work.date_certainty === false &&
+                        " (?)"
                 }
             </dd>
             <dt class="font-semibold border-r border-gray-300 pr-5">
