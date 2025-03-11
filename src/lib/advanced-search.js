@@ -13,7 +13,7 @@ import {
 import { withBasePath } from "./withBasePath";
 
 const project_collection_name = "JAD-temp";
-const main_search_field = "search_text";
+const main_search_field = "full_text";
 const search_api_key = "IA6BWzRrMo7yX3eFqgcFelJzhWkIl64W";
 
 const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
