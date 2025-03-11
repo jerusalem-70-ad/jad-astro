@@ -35,10 +35,21 @@ async function generate() {
       { name: "rec_id", type: "string", sort: true },
       { name: "title", type: "string", sort: true },
       { name: "full_text", type: "string", sort: true },
+      { name: "search_text", type: "string", sort: true },
       { name: "manuscripts", type: "object[]", facet: true, optional: true },
       { name: "work", type: "object[]", facet: true, optional: true },
-      { name: "liturgical_references", type: "object[]", facet: true, optional: true },
-      { name: "biblical_references", type: "object[]", facet: true, optional: true },
+      {
+        name: "liturgical_references",
+        type: "object[]",
+        facet: true,
+        optional: true,
+      },
+      {
+        name: "biblical_references",
+        type: "object[]",
+        facet: true,
+        optional: true,
+      },
       { name: "cluster", type: "object[]", facet: true, optional: true },
       { name: "keywords", type: "object[]", facet: true, optional: true },
     ],
@@ -54,6 +65,9 @@ async function generate() {
     "https://raw.githubusercontent.com/jerusalem-70-ad/jad-baserow-dump/refs/heads/main/data/",
     "passages.json"
   );
+  // function to normalize the text
+  const normalizedPassage = (text) => text.replace(/j/g, "i");
+
   // transform data so it conforms to the typesense collection shape
   const records = [];
   Object.values(data).forEach((value) => {
@@ -63,6 +77,9 @@ async function generate() {
       rec_id: value.jad_id,
       title: value.passage,
       full_text: `${value.passage} ${value.text_paragraph}`,
+      search_text: `${normalizedPassage(
+        value.passage ?? ""
+      )} ${normalizedPassage(value.text_paragraph ?? "")}`,
       manuscripts: value.manuscripts || [],
       work: value.work || [],
       cluster: value.part_of_cluster || [],
@@ -75,6 +92,17 @@ async function generate() {
 
   await client.collections(collectionName).documents().import(records);
   log.success("All imported");
+
+  // function to create synonyms
+  const jerusalem_synonym = {
+    synonyms: ["jerusalem", "ierusalem", "hierusalem"],
+  };
+
+  await client
+    .collections(collectionName)
+    .synonyms()
+    .upsert("jerusalem-synonyms", jerusalem_synonym);
+  log.success("Created synonyms for Jerusalem");
 }
 
 generate()

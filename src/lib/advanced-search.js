@@ -13,7 +13,7 @@ import {
 import { withBasePath } from "./withBasePath";
 
 const project_collection_name = "JAD-temp";
-const main_search_field = "full_text";
+const main_search_field = "search_text";
 const search_api_key = "IA6BWzRrMo7yX3eFqgcFelJzhWkIl64W";
 
 const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
@@ -112,8 +112,6 @@ const refinementListContext = panel({
   },
 })(refinementList);
 
-
-
 // add widgets
 search.addWidgets([
   searchBox({
@@ -128,10 +126,12 @@ search.addWidgets([
         // Transform `work` array for easier rendering
         const transformedWorks = (item.work || []).map((work) => ({
           title: work.name || "Unknown Title",
-          authors: (work.author || []).map((author) => author.name || "Unknown Author"),
+          authors: (work.author || []).map(
+            (author) => author.name || "Unknown Author"
+          ),
           date: (work.date.map((date) => date.value) || []).join(", "),
         }));
-  
+
         return {
           ...item,
           transformedWorks,
@@ -144,7 +144,7 @@ search.addWidgets([
         // Generate HTML for each transformed work
         const renderWorks = (works) => {
           if (!works || works.length === 0) return "<p>No works available</p>";
-  
+
           return works
             .map(
               (work) => `
@@ -157,12 +157,14 @@ search.addWidgets([
             )
             .join("");
         };
-  
+
         // Generate the main HTML for the hit
         return `
           <article>
             <h3 class="font-semibold text-lg text-brandBrown">
-              <a href="${withBasePath(`/passages/${hit.id}`)}" class="underline">
+              <a href="${withBasePath(
+                `/passages/${hit.id}`
+              )}" class="underline">
                 (#${hit.id.substr(15)}) ${hit.title}
               </a>
             </h3>            
@@ -177,8 +179,7 @@ search.addWidgets([
         `;
       },
     },
-  }), 
-  
+  }),
 
   pagination({
     container: "#pagination",
@@ -261,9 +262,9 @@ search.addWidgets([
     showMore: true,
     showMoreLimit: 50,
     limit: 10,
-    searchablePlaceholder: "Search for liturgical references"
+    searchablePlaceholder: "Search for liturgical references",
   }),
- 
+
   currentRefinements({
     container: "#current-refinements",
   }),
