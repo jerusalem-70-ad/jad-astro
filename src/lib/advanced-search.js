@@ -40,77 +40,23 @@ const search = instantsearch({
   indexName: project_collection_name,
 });
 
-const refinementListAuthor = panel({
-  collapsed: ({ state }) => {
-    return state.query.length === 0;
-  },
-  templates: {
-    header: "Authors",
-  },
-})(refinementList);
+// refinements list in panel function
 
-const refinementListWork = panel({
-  collapsed: ({ state }) => {
-    return state.query.length === 0;
-  },
-  templates: {
-    header: "Works",
-  },
-})(refinementList);
+const refinementListAuthor = wrapInPanel("Autor");
 
-const refinementListManuscript = panel({
-  collapsed: ({ state }) => {
-    return state.query.length === 0;
-  },
-  templates: {
-    header: "Manuscripts",
-  },
-})(refinementList);
+const refinementListWork = wrapInPanel("Work");
 
-const refinementListWorkDate = panel({
-  collapsed: ({ state }) => {
-    return state.query.length === 0;
-  },
-  templates: {
-    header: "Date of work",
-  },
-})(refinementList);
+const refinementListManuscript = wrapInPanel("Manuscripts");
 
-const refinementListKeywords = panel({
-  collapsed: ({ state }) => {
-    return state.query.length === 0;
-  },
-  templates: {
-    header: "Keywords",
-  },
-})(refinementList);
+const refinementListWorkDate = wrapInPanel("Date of work");
 
-const refinementListClusters = panel({
-  collapsed: ({ state }) => {
-    return state.query.length === 0;
-  },
-  templates: {
-    header: "Clusters",
-  },
-})(refinementList);
+const refinementListContext = wrapInPanel("Institutional context");
 
-const refinementListliturgical = panel({
-  collapsed: ({ state }) => {
-    return state.query.length === 0;
-  },
-  templates: {
-    header: "Liturgical references",
-  },
-})(refinementList);
+const refinementListliturgical = wrapInPanel("Liturgical references");
 
-const refinementListContext = panel({
-  collapsed: ({ state }) => {
-    return state.query.length === 0;
-  },
-  templates: {
-    header: "Institutional context",
-  },
-})(refinementList);
+const refinementListClusters = wrapInPanel("Clusters");
+
+const refinementListKeywords = wrapInPanel("Keywords");
 
 // add widgets
 search.addWidgets([
@@ -275,3 +221,22 @@ search.addWidgets([
 ]);
 
 search.start();
+
+// function to wrap refinements filter in a panel
+function wrapInPanel(title) {
+  return panel({
+    collapsed: ({ state }) => {
+      return state.query.length === 0;
+    },
+    templates: {
+      header: () =>
+        `<span class="normal-case text-base font-normal">${title}</span>`,
+    },
+    cssClasses: {
+      header: "cursor-pointer relative z-10",
+      collapseButton: "absolute inset-0 z-20 flex flex-row-reverse",
+      collapseIcon: "",
+      root: "border-b",
+    },
+  })(refinementList);
+}
