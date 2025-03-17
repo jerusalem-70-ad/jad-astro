@@ -80,26 +80,25 @@ import TableHead from "../components/table-head.astro";
 
     //trigger download of data.csv file
     document
-      .getElementById("download-csv")!
+      .querySelector("download-csv")!
       .addEventListener("click", function () {
         table.download("csv", "data.csv");
       });
 
     //trigger download of data.json file
     document
-      .getElementById("download-json")!
+      .querySelector("download-json")!
       .addEventListener("click", function () {
         table.download("json", "data.json");
       });
 
     //trigger download of data.html file
     document
-      .getElementById("download-html")!
+      .querySelector("download-html")!
       .addEventListener("click", function () {
         table.download("html", "data.html", { style: true });
       });
 
-    // event listeners set:
     // href to the entry detail view page
     table.on("rowClick", function (e, row) {
       var data = row.getData();
@@ -107,18 +106,18 @@ import TableHead from "../components/table-head.astro";
       window.open(url, "_self");
     });
     table.on("dataLoaded", function (data) {
-      var el = document.getElementById("counter1");
+      var el = document.querySelector("counter1");
       if (el) {
         el.innerHTML = `${data.length}`;
       }
-      var el = document.getElementById("counter2");
+      var el = document.querySelector("counter2");
       if (el) {
         el.innerHTML = `${data.length}`;
       }
     });
 
     table.on("dataFiltered", function (filters, data) {
-      var el = document.getElementById("counter1");
+      var el = document.querySelector("counter1");
       if (el) {
         el.innerHTML = `${data.length}`;
       }
