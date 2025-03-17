@@ -1,6 +1,5 @@
 ---
-import DownloadButtons from "./download-buttons.astro";
-import { Icon } from "astro-icon/components";
+import DownloadButtons from "@/components/download-buttons.astro";
 interface Props {
   title: string;
   definition?: string;
@@ -12,13 +11,13 @@ const { title } = Astro.props;
 <div class="mx-auto md:w-4/5 w-screen px-2">
   <div class="flex justify-between align-middle mb-2">
     <h1
-      class="text-2xl font-semibold text-brandBrown py-2 flex items-center gap-1"
+      class="text-2xl font-semibold text-brand-800 py-2 flex items-center gap-1"
     >
       {title}
     </h1>
     <DownloadButtons />
   </div>
-  <div class="text-brandRed text-xl">
+  <div class="text-brand-600 text-xl">
     Showing
     <span id="counter1"></span> from a total of
     <span id="counter2"></span> entries

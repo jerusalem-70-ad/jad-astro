@@ -23,16 +23,20 @@ const { data: keyword } = Astro.props;
     mainTitle={keyword.name}
   >
     <dl class="grid grid-cols-[1fr_12fr] text-sm md:text-base md:leading-7">
-      <dt class="font-semibold border-r border-gray-300 pr-2">About:</dt>
+      <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">
+        About:
+      </dt>
       <dd class="pl-5">{keyword.short_description}</dd>
 
-      <dt class="font-semibold border-r border-gray-300 pr-2">Passages:</dt>
+      <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">
+        Passages:
+      </dt>
       <dd class="pl-5">
         {
           keyword.related__passages.length > 0 ? (
-            <ul class="space-y-2 border-gray-300 p-2">
+            <ul class="space-y-2 border-neutral-300 p-2">
               {keyword.related__passages.map((passage) => (
-                <li class="border-b border-gray-300 pb-2">
+                <li class="border-b border-neutral-300 pb-2">
                   <NavLink href={`/passages/${passage.jad_id}`}>
                     <span>({passage.id})</span>
                     <span class="italic">
@@ -60,7 +64,9 @@ const { data: keyword } = Astro.props;
           )
         }
       </dd>
-      <dt class="font-semibold border-r border-gray-300 pr-2">Related:</dt>
+      <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">
+        Related:
+      </dt>
       <dd class="pl-5">
         <ul>
           {
@@ -73,7 +79,7 @@ const { data: keyword } = Astro.props;
           {
             Object.values(keywords)
               .filter((kword) =>
-                kword.part_of.some((part) => part.jad_id === keyword.jad_id),
+                kword.part_of.some((part) => part.jad_id === keyword.jad_id)
               )
               .map((kword) => (
                 <li class="list-disc">

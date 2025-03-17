@@ -107,7 +107,7 @@ search.addWidgets([
         // Generate the main HTML for the hit
         return `
           <article>
-            <h3 class="font-semibold text-lg text-brandBrown">
+            <h3 class="font-semibold text-base md:text-lg text-brand-800">
               <a href="${withBasePath(
                 `/passages/${hit.id}`
               )}" class="underline">
@@ -213,6 +213,29 @@ search.addWidgets([
 
   currentRefinements({
     container: "#current-refinements",
+    transformItems(items) {
+      return items.map((item) => ({
+        ...item,
+        label:
+          item.attribute === "work.author.name"
+            ? "Author"
+            : item.attribute === "work.title"
+            ? "Work"
+            : item.attribute === "manuscripts.value"
+            ? "Manuscript"
+            : item.attribute === "work.date.value"
+            ? "Date"
+            : item.attribute === "work.institutional_context.name"
+            ? "Institution"
+            : item.attribute === "cluster.value"
+            ? "Cluster"
+            : item.attribute === "keywords.name"
+            ? "Keyword"
+            : item.attribute === "Liturgical_references.value"
+            ? "Liturgy"
+            : item.label,
+      }));
+    },
   }),
 
   clearRefinements({
@@ -239,4 +262,29 @@ function wrapInPanel(title) {
       root: "border-b",
     },
   })(refinementList);
+}
+
+// Back to top functionality
+const backToTopButton = document.getElementById("back-to-top");
+if (backToTopButton) {
+  backToTopButton.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // Show/hide based on scroll position
+  window.addEventListener("scroll", function () {
+    if (window.scrollY > 300) {
+      backToTopButton.classList.remove("hidden");
+    } else {
+      backToTopButton.classList.add("hidden");
+    }
+  });
+}
+// Filter show/hide panel
+const showFilter = document.querySelector("#filter-button");
+const filters = document.querySelector("#refinements-section");
+if (showFilter) {
+  showFilter.addEventListener("click", function () {
+    filters?.classList.toggle("hidden");
+  });
 }

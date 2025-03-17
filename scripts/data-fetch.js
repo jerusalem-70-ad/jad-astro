@@ -25,7 +25,7 @@ const fileNames = [
 // async function to fetch the data from the url
 
 async function fetchAllData() {
-  // make a folder to store the data - use process.cwd to get the root (node operates fro the root), concatinate src etc. - node knows to put / or \
+  // make a folder to store the data - use process.cwd to get the root (node operates from the root), concatinate src etc. - node knows to put / or \
   const folderPath = join(process.cwd(), "src", "content", "data");
   mkdirSync(folderPath, { recursive: true });
 
@@ -39,11 +39,6 @@ async function fetchAllData() {
   // takes an iterable of promises as input and returns a single Promise. Returns an array of the fulfillment values.
 
   await Promise.all(promises);
-
-  // for (const url of urls) {
-  //   const fullUrl = baseUrl + url;
-  //   await fetchData(fullUrl, folderPath);
-  // }
 }
 
 async function fetchData(fileName, folderPath) {

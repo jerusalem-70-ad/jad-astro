@@ -18,27 +18,27 @@
 
 /* background color of all headers */
 .tabulator .tabulator-header {
-  @apply bg-brandRose text-brandBrown;
+  @apply bg-brand-100 text-brand-800;
 }
 
 /* background, font, text size of each header column */
 .tabulator .tabulator-col-content {
-  @apply bg-brandRose text-brandBrown font-semibold text-base;
+  @apply bg-brand-100 text-brand-800 font-semibold text-base;
 }
 
 /* Ensure header filter inputs match the styling */
 .tabulator .tabulator-header-filter input {
-  @apply bg-white text-gray-700 border-gray-300 px-2 py-1 rounded;
+  @apply bg-white text-gray-700 border-neutral-300 px-2 py-1 rounded;
 }
 
 /* sorting arrow color */
 .tabulator .tabulator-col-sorter .tabulator-arrow {
-  @apply text-brandBrown;
+  @apply text-brand-800;
 }
 
 @screen md {
   .tabulator .tabulator-row:nth-child(even) {
-    @apply bg-brandPaleWhite;
+    @apply bg-brand-50;
   }
   .tabulator .tabulator-cell {
     @apply border-l;
@@ -47,6 +47,34 @@
 /* Apply styles only for small screens (Mobile: <640px) */
 @media (max-width: 639px) {
   .tabulator .tabulator-cell {
-    @apply font-semibold text-brandBrown bg-brandPaleWhite bg-opacity-50;
+    @apply font-semibold text-brand-800 bg-brand-50 bg-opacity-50;
   }
+}
+
+/* Algolia */
+
+/* Hits */
+
+.ais-Hits-list {
+  @apply md:space-y-4 space-y-2;
+}
+
+.ais-Hits-item {
+  @apply border-l-2 border-brand-600 hover:bg-brand-50 rounded-md shadow-sm;
+}
+
+/* Base Pagination List */
+
+.ais-Pagination-list {
+  @apply flex-wrap items-center justify-center gap-1 my-4;
+}
+
+/* All Pagination Items */
+.ais-Pagination-item {
+  @apply items-center justify-center;
+}
+
+/* Pagination Links */
+.ais-Pagination-link {
+  @apply h-8 w-8 items-center justify-center rounded-md text-sm;
 }

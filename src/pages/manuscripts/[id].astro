@@ -47,11 +47,11 @@ const { data: manuscript } = Astro.props;
 >
       
       <dl class="grid grid-cols-[1fr_5fr] text-sm md:leading-7 md:text-base">
-        <dt class="font-semibold border-r border-gray-300 pr-2">Settlement:</dt>
+        <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">Settlement:</dt>
         <dd class="pl-5">{manuscript.library[0]?.place[0]?.name}</dd>
 
        {manuscript.library.length > 0 && (
-         <dt class="font-semibold border-r border-gray-300 pr-2">
+         <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">
           Library / Collection:
         </dt>
         <dd class="pl-5">
@@ -59,10 +59,10 @@ const { data: manuscript } = Astro.props;
         </dd>
        )}
 
-        <dt class="font-semibold border-r border-gray-300 pr-2">Shelfmark:</dt>
+        <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">Shelfmark:</dt>
         <dd class="pl-5">
           <NavLink href={manuscript.catalog_url} target="_blank"
-                class="inline-flex hover:text-brandRed underline underline-offset-2"
+                class="inline-flex hover:text-brand-600 underline underline-offset-2"
               >
               {manuscript?.idno}          
                 <span class="sr-only">Catalog entry</span>
@@ -70,13 +70,13 @@ const { data: manuscript } = Astro.props;
               </NavLink>
         </dd>
 
-        <dt class="font-semibold border-r border-gray-300 pr-2">Format:</dt>
+        <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">Format:</dt>
         <dd class="pl-5">{manuscript?.format !== null
           ? manuscript?.format
         : 'N/A'}</dd>
 
        {manuscript.institutional_context.length > 0 && (
-         <dt class="font-semibold border-r border-gray-300 pr-2">
+         <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">
           Insitutional context:
         </dt>
         <dd class="pl-5">
@@ -88,7 +88,7 @@ const { data: manuscript } = Astro.props;
 
         
         {related_passages.length > 0 && (
-          <dt class="font-semibold border-r border-gray-300 pr-2">Passages:</dt>
+          <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">Passages:</dt>
           <dd class="pl-5"> 
            {related_passages.length > 0 ?  
            <ul>
@@ -130,7 +130,7 @@ const { data: manuscript } = Astro.props;
             <div class="flex">
               <NavLink target="_blank"
                 href={manuscript.digi_url}
-                class="inline-flex hover:text-brandRed"
+                class="inline-flex hover:text-brand-600"
               >
                 <span>Digital facsimile</span>
                 <Icon aria-hidden="true" name="lucide:external-link" />
@@ -144,7 +144,7 @@ const { data: manuscript } = Astro.props;
             <div class="flex">
               <NavLink target="_blank"
                 href={manuscript.catalog_url}
-                class="inline-flex hover:text-brandRed"
+                class="inline-flex hover:text-brand-600"
               >
                 <span>Catalog entry</span>
                 <Icon aria-hidden="true" name="lucide:external-link" />
