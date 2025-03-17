@@ -33,9 +33,9 @@ export default {
           900: "#332923",
           950: "#1f1813",
         },
-        backgroundImage: {
-          jerusalem: "url('title-image.png')",
-        },
+      },
+      backgroundImage: {
+        jerusalem: "url('title-image.png')",
       },
     },
   },
