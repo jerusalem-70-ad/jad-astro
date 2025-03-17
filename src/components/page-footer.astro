@@ -8,127 +8,115 @@ import oeawlogo from "../../public/assets/images/oeaw-logo.png";
 import NavLink from "./nav-link.astro";
 ---
 
-<footer class="bg-brandRose text-brandBrown">
+<footer class="bg-brand-100 text-brand-800">
+  <div
+    class="mx-auto grid w-full max-w-(--breakpoint-lg) gap-y-6 px-4 py-12 text-[#444]"
+  >
     <div
-        class="mx-auto grid w-full max-w-screen-lg gap-y-6 px-4 py-12 text-[#444]"
+      class="flex w-full items-center gap-x-1.5 border-b border-[#00000026] pb-4"
     >
-        <div
-            class="flex w-full items-center gap-x-1.5 border-b border-[#00000026] pb-4"
-        >
-            <Icon
-                aria-hidden="true"
-                class="size-4.5"
-                name="lucide:message-circle"
+      <Icon aria-hidden="true" class="size-4.5" name="lucide:message-circle" />
+      <span class="text-sm font-medium">Contact:</span>
+    </div>
+
+    <div class="mx-auto grid md:flex gap-4">
+      <div class="md:grid grid-cols-[2fr_3fr] gap-4 m-2">
+        <div class="grid">
+          <a
+            class="hidden md:inline-flex py-1"
+            href="https://www.oeaw.ac.at/en/imafo/home"
+          >
+            <Image src={imafoLogo} alt="" class="h-auto w-60 m-auto" />
+            <span class="sr-only">Institute for Mediaeval Research (IMAFO)</span
+            >
+          </a>
+          <a href="https://www.oeaw.ac.at">
+            <Image
+              src={oeawlogo}
+              alt="Austrian academy of sciences"
+              class="h-auto w-28 m-auto"
             />
-            <span class="text-sm font-medium">Contact:</span>
+          </a>
         </div>
+        <p>
+          <NavLink
+            class="font-semibold"
+            href="https://www.oeaw.ac.at/en/imafo/home"
+            >Institute for Mediaeval Research (IMAFO)</NavLink
+          >
+          <br /> Austrian Academy of Sciences
 
-        <div class="mx-auto grid md:flex gap-4">
-            <div class="md:grid grid-cols-[2fr_3fr] gap-4 m-2">
-                <div class="grid">
-                    <a
-                        class="hidden md:inline-flex py-1"
-                        href="https://www.oeaw.ac.at/en/imafo/home"
-                    >
-                        <Image
-                            src={imafoLogo}
-                            alt=""
-                            class="h-auto w-60 m-auto"
-                        />
-                        <span class="sr-only"
-                            >Institute for Mediaeval Research (IMAFO)</span
-                        >
-                    </a>
-                    <a href="https://www.oeaw.ac.at">
-                        <Image
-                            src={oeawlogo}
-                            alt="Austrian academy of sciences"
-                            class="h-auto w-28 m-auto"
-                        />
-                    </a>
-                </div>
-                <p>
-                    <NavLink
-                        class="font-semibold"
-                        href="https://www.oeaw.ac.at/en/imafo/home"
-                        >Institute for Mediaeval Research (IMAFO)</NavLink
-                    >
-                    <br /> Austrian Academy of Sciences
-
-                    <br /> Dominikanerbastei 16, 1010 Vienna
-                    <br />
-                    E:
-                    <a
-                        class="underline decoration-dotted underline-offset-4 hover:no-underline"
-                        href="mailto:Alexander.Marx@oeaw.ac.at"
-                    >
-                        Alexander.Marx@oeaw.ac.at
-                    </a>
-                </p>
-            </div>
-            <div class="flex gap-4 items-start">
-                <a
-                    class="hidden md:inline-flex mt-4"
-                    href="https://www.oeaw.ac.at/acdh/"
-                >
-                    <Image src={acdhLogo} alt="" />
-                    <span class="sr-only">
-                        Austrian Centre for Digital Humanities and Cultural
-                        Heritage
-                    </span>
-                </a>
-                <p>
-                    <NavLink
-                        class="font-semibold"
-                        href="https://www.oeaw.ac.at/acdh/"
-                        >ACDH-CH Austrian Centre for Digital Humanities and
-                        Cultural Heritage</NavLink
-                    >
-                    <br />
-                    Austrian Academy of Sciences
-                    <br />
-                    Bäckerstraße 13, 1010 Vienna
-                    <br />
-                    T:
-                    <a
-                        class="underline decoration-dotted underline-offset-4 hover:no-underline"
-                        href="tel:+43 1 51581-2200"
-                    >
-                        +43 1 51581-2200
-                    </a>
-                    <br />
-                    E:
-                    <a
-                        class="underline decoration-dotted underline-offset-4 hover:no-underline"
-                        href="mailto:acdh-ch@oeaw.ac.at">acdh-ch@oeaw.ac.at</a
-                    >
-                </p>
-            </div>
-
-            <a href="https://www.fwf.ac.at/forschungsradar/10.55776/ESP678">
-                <Image
-                    src={fwfLogo}
-                    alt="Österreichischer Wissenschaftsfonds"
-                    class="h-auto w-60 m-auto py-10"
-                />
-            </a>
-        </div>
-    </div>
-    <div class="bg-brandBrown text-brandPaleWhite py-2 text-center">
-        &copy; Copyright OEAW |
-        <NavLink
+          <br /> Dominikanerbastei 16, 1010 Vienna
+          <br />
+          E:
+          <a
             class="underline decoration-dotted underline-offset-4 hover:no-underline"
-            href="/imprint"
+            href="mailto:Alexander.Marx@oeaw.ac.at"
+          >
+            Alexander.Marx@oeaw.ac.at
+          </a>
+        </p>
+      </div>
+      <div class="flex gap-4 items-start">
+        <a
+          class="hidden md:inline-flex mt-4"
+          href="https://www.oeaw.ac.at/acdh/"
         >
-            Imprint
-        </NavLink>
-        |
-        <NavLink
+          <Image src={acdhLogo} alt="" />
+          <span class="sr-only">
+            Austrian Centre for Digital Humanities and Cultural Heritage
+          </span>
+        </a>
+        <p>
+          <NavLink class="font-semibold" href="https://www.oeaw.ac.at/acdh/"
+            >ACDH-CH Austrian Centre for Digital Humanities and Cultural
+            Heritage</NavLink
+          >
+          <br />
+          Austrian Academy of Sciences
+          <br />
+          Bäckerstraße 13, 1010 Vienna
+          <br />
+          T:
+          <a
             class="underline decoration-dotted underline-offset-4 hover:no-underline"
-            href="https://github.com/jerusalem-70-ad/jad-astro"
-        >
-            Code Repo
-            <Icon class="inline-flex" aria-hidden="true" name="lucide:github" />
-        </NavLink>
+            href="tel:+43 1 51581-2200"
+          >
+            +43 1 51581-2200
+          </a>
+          <br />
+          E:
+          <a
+            class="underline decoration-dotted underline-offset-4 hover:no-underline"
+            href="mailto:acdh-ch@oeaw.ac.at">acdh-ch@oeaw.ac.at</a
+          >
+        </p>
+      </div>
+
+      <a href="https://www.fwf.ac.at/forschungsradar/10.55776/ESP678">
+        <Image
+          src={fwfLogo}
+          alt="Österreichischer Wissenschaftsfonds"
+          class="h-auto w-60 m-auto py-10"
+        />
+      </a>
     </div>
+  </div>
+  <div class="bg-brand-800 text-brand-50 py-2 text-center">
+    &copy; Copyright OEAW |
+    <NavLink
+      class="underline decoration-dotted underline-offset-4 hover:no-underline"
+      href="/imprint"
+    >
+      Imprint
+    </NavLink>
+    |
+    <NavLink
+      class="underline decoration-dotted underline-offset-4 hover:no-underline"
+      href="https://github.com/jerusalem-70-ad/jad-astro"
+    >
+      Code Repo
+      <Icon class="inline-flex" aria-hidden="true" name="lucide:github" />
+    </NavLink>
+  </div>
 </footer>

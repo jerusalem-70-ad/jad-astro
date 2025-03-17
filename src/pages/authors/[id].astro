@@ -5,59 +5,63 @@ import { Icon } from "astro-icon/components";
 import NavLink from "@/components/nav-link.astro";
 import Article from "@/components/article.astro";
 export async function getStaticPaths() {
-    const paths = Object.values(authors).map((author) => ({
-        params: { id: author.jad_id },
-        props: { data: author },
-    }));
-    return paths;
+  const paths = Object.values(authors).map((author) => ({
+    params: { id: author.jad_id },
+    props: { data: author },
+  }));
+  return paths;
 }
 
 const { data: author } = Astro.props;
 ---
 
 <PageLayout>
-    <Article
-        prevLink={`/authors/${author.prev.id}`}
-        nextLink={`/authors/${author.next.id}`}
-        mainTitle={author.name}
-    >
-        <dl class="grid grid-cols-[1fr_7fr] text-sm md:leading-7 md:text-base">
-            <dt class="font-semibold border-r border-gray-300 pr-5">GND:</dt>
-            <dd class="pl-5">
-                {
-                    author.gnd_url.length > 0 ? (
-                        <NavLink href={author.gnd_url}>
-                            {author.gnd_url.split("/").at(-1)}
-                            <Icon
-                                class="inline-flex align-top"
-                                aria-hidden="true"
-                                name="lucide:external-link"
-                            />
-                        </NavLink>
-                    ) : (
-                        "N/A"
-                    )
-                }
-            </dd>
+  <Article
+    prevLink={`/authors/${author.prev.id}`}
+    nextLink={`/authors/${author.next.id}`}
+    mainTitle={author.name}
+  >
+    <dl class="grid grid-cols-[1fr_7fr] md:leading-7">
+      <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
+        GND:
+      </dt>
+      <dd class="pl-5">
+        {
+          author.gnd_url.length > 0 ? (
+            <NavLink href={author.gnd_url}>
+              {author.gnd_url.split("/").at(-1)}
+              <Icon
+                class="inline-flex align-top"
+                aria-hidden="true"
+                name="lucide:external-link"
+              />
+            </NavLink>
+          ) : (
+            "N/A"
+          )
+        }
+      </dd>
 
-            <dt class="font-semibold border-r border-gray-300 pr-5">Works:</dt>
-            <dd class="pl-5">
-                {
-                    author.related__works.length > 0 ? (
-                        <ul>
-                            {author.related__works.map((work) => (
-                                <li>
-                                    <NavLink href={`/works/${work.jad_id}`}>
-                                        {work.view_label}
-                                    </NavLink>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        "N/A"
-                    )
-                }
-            </dd>
-        </dl>
-    </Article>
+      <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
+        Works:
+      </dt>
+      <dd class="pl-5">
+        {
+          author.related__works.length > 0 ? (
+            <ul>
+              {author.related__works.map((work) => (
+                <li>
+                  <NavLink href={`/works/${work.jad_id}`}>
+                    {work.view_label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            "N/A"
+          )
+        }
+      </dd>
+    </dl>
+  </Article>
 </PageLayout>

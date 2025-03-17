@@ -62,8 +62,8 @@ const sortedPassages = Object.entries(groupedPassages).sort(
               work.title
             : work?.title}
     >
-        <dl class="grid grid-cols-[1fr_5fr] text-sm md:leading-7 md:text-base">
-            <dt class="font-semibold border-r border-gray-300 pr-5">Author:</dt>
+        <dl class="grid grid-cols-[1fr_5fr] md:leading-7 md:text-base">
+            <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">Author:</dt>
             <dd class="pl-5">
                 {
                     work.author && work.author.length > 0 ? (
@@ -79,7 +79,7 @@ const sortedPassages = Object.entries(groupedPassages).sort(
             {
                 work.incipit !== null && (
                     <>
-                        <dt class="font-semibold border-r border-gray-300 pr-5">
+                        <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
                             Incipit:
                         </dt>
                         <dd class="pl-5">{work.incipit}</dd>
@@ -87,7 +87,7 @@ const sortedPassages = Object.entries(groupedPassages).sort(
                 )
             }
 
-            <dt class="font-semibold border-r border-gray-300 pr-5">
+            <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
                 Manuscripts:
             </dt>
             <dd class="pl-5">
@@ -113,12 +113,12 @@ const sortedPassages = Object.entries(groupedPassages).sort(
                 }
             </dd>
 
-            <dt class="font-semibold border-r border-gray-300 pr-5">Genre:</dt>
+            <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">Genre:</dt>
             <dd class="pl-5">
                 {work.genre !== null ? work.genre.value : "N/A"}
             </dd>
 
-            <dt class="font-semibold border-r border-gray-300 pr-5">
+            <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
                 Edition:
             </dt>
             <dd class="pl-5">
@@ -143,7 +143,7 @@ const sortedPassages = Object.entries(groupedPassages).sort(
             
             {
                 work.institutional_context.length > 0 &&
-            ( <dt class="font-semibold border-r border-gray-300 pr-5">
+            ( <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
             Institutional context:
             </dt>
             <dd class="pl-5">
@@ -171,7 +171,7 @@ const sortedPassages = Object.entries(groupedPassages).sort(
 
             </dd>)
             }
-            <dt class="font-semibold border-r border-gray-300 pr-5">Date:</dt>
+            <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">Date:</dt>
             <dd class="pl-5">
                 {
                     work.date.length > 0
@@ -186,14 +186,14 @@ const sortedPassages = Object.entries(groupedPassages).sort(
                         " (?)"
                 }
             </dd>
-            <dt class="font-semibold border-r border-gray-300 pr-5">
+            <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
                 Passages:
             </dt>
             <dd class="pl-5">
                 {
                     sortedPassages.map(([position, passages]) => (
                         <li class="mb-4">
-                            <strong>{position}</strong>
+                            <span class="font-semibold text-brand-900">{position}</span>
                             <ul class="ml-5 list-disc">
                                 {passages.map((passage) => (
                                     <li>

@@ -1,50 +1,88 @@
 ---
 import Layout from "@/layouts/page-layout.astro";
 import "instantsearch.css/themes/satellite.css";
+import { Icon } from "astro-icon/components";
 ---
 
 <Layout>
-    <main class="md:w-3/4 mx-auto py-6">
-        <h2 class="text-3xl font-bold text-brandBrown mb-6">Advanced Search</h2>
+  <main class="md:w-3/4 mx-auto md:p-6 sm:w-4/5 p-2">
+    <h2
+      class="text-xl md:text-3xl font-bold md:bg-brand-600 md:text-brand-50 text-brand-600 md:rounded-t-lg p-3"
+    >
+      Advanced Search
+    </h2>
 
-        <div class="space-y-6">
-            <!-- Search Input and Stats -->
-            <div class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                <div id="searchbox" class="mb-4"></div>
-                <div class="flex items-center justify-between">
-                    <div id="stats-container" class="text-sm text-gray-600">
-                    </div>
-                    <div id="current-refinements" class="text-sm text-gray-600">
-                    </div>
-                    <div id="clear-refinements"></div>
-                </div>
-            </div>
+    <div class="md:space-y-6">
+      <!-- Search Input and Stats -->
+      <div class="flex items-center gap-2">
+        <button
+          id="filter-button"
+          aria-label="filter"
+          class="md:hidden flex items-center justify-center rounded-lg border border-neutral-300 w-12 h-12"
+        >
+          <Icon aria-hidden="true" name="lucide:sliders-horizontal" />
+        </button>
 
-            <!-- Refinements and Results -->
-            <div class="grid md:grid-cols-[1fr_3fr] gap-6">
-                <!-- Refinements Section -->
-                <aside class="bg-gray-50 p-4 rounded-lg shadow-sm space-y-6">
-                    <div id="refinement-list-author" class="space-y-2"></div>
-                    <div id="refinement-list-work" class="space-y-2"></div>
-                    <div id="refinement-list-workdate" class="space-y-2"></div>
-                    <div id="refinement-list-manuscript" class="space-y-2">
-                    </div>
-                    <div id="refinement-list-context" class="space-y-2"></div>
-                    <div id="refinement-list-clusters" class="space-y-2"></div>
-                    <div id="refinement-list-keywords" class="space-y-2"></div>
-                    <div id="refinement-list-liturgical" class="space-y-2">
-                    </div>
-                </aside>
-
-                <!-- Results Section -->
-                <section>
-                    <div id="hits" class="bg-white p-4 rounded-lg shadow-sm">
-                    </div>
-                    <div id="pagination" class="mt-4 flex justify-center"></div>
-                </section>
-            </div>
+        <div
+          id="searchbox"
+          class="flex-1 md:p-4 p-3 rounded-b-md md:bg-brand-600"
+        >
         </div>
-    </main>
+      </div>
+
+      <!-- Refinements and Results -->
+      <div class="grid md:grid-cols-[1fr_3fr] gap-6">
+        <!-- Refinements Section -->
+        <aside
+          class="bg-brand-50 p-4 rounded-lg shadow-xs md:block hidden"
+          id="refinements-section"
+        >
+          <div id="refinement-list-author"></div>
+          <div id="refinement-list-work"></div>
+          <div id="refinement-list-workdate"></div>
+          <div id="refinement-list-manuscript"></div>
+          <div id="refinement-list-context"></div>
+          <div id="refinement-list-clusters"></div>
+          <div id="refinement-list-keywords"></div>
+          <div id="refinement-list-liturgical"></div>
+        </aside>
+
+        <section class="space-y-4">
+          <!-- Results Section -->
+          <div class="md:flex items-center justify-between px-2 space-y-2">
+            <div
+              id="stats-container"
+              class="text-sm text-brand-800 font-medium"
+            >
+            </div>
+            <div id="current-refinements" class="text-sm text-gray-600"></div>
+            <div id="clear-refinements"></div>
+          </div>
+          <div id="hits" class="bg-white p-2 md:p-4 rounded-lg shadow-xs"></div>
+          <div id="pagination" class="flex md:justify-center"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <!-- Back to Top Button for Mobile -->
+  <button
+    id="back-to-top"
+    class="fixed bottom-20 right-4 md:hidden bg-brand-600 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg opacity-65"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M5 15l7-7 7 7"></path>
+    </svg>
+  </button>
 </Layout>
 
 <script src="@/lib/advanced-search.js"></script>

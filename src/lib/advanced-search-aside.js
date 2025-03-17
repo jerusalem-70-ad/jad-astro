@@ -1,9 +1,6 @@
 import instantsearch from "instantsearch.js";
 import TypesenseInstantsearchAdapter from "typesense-instantsearch-adapter";
-import {
-  searchBox,
-  infiniteHits,
-} from "instantsearch.js/es/widgets";
+import { searchBox, infiniteHits } from "instantsearch.js/es/widgets";
 import { withBasePath } from "./withBasePath";
 
 const project_collection_name = "JAD-temp";
@@ -23,7 +20,7 @@ const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
   },
   additionalSearchParameters: {
     query_by: main_search_field,
-    sort_by: "sort_id:asc"
+    sort_by: "sort_id:asc",
   },
 });
 // create searchClient
@@ -34,40 +31,41 @@ const search = instantsearch({
   indexName: project_collection_name,
 });
 
-
 // add widgets
 search.addWidgets([
   searchBox({
     container: "#searchbox",
     autofocus: true,
-    placeholder: "Search pasage text", 
-    
+    placeholder: "Search pasage text",
   }),
   infiniteHits({
-    container: "#hits",    
-    sortBy: ['id:asc'],
-      templates: {
+    container: "#hits",
+    sortBy: ["id:asc"],
+    templates: {
       empty: "No results for <q>{{ query }}</q>",
-      item(hit, {html, components}) {     
-    // Generate the main HTML for the hit
+      item(hit, { html, components }) {
+        // Generate the main HTML for the hit
         return html`
           <article>
-            <h3 class="font-semibold text-brandBrown">
-              <a href="${withBasePath(`/passages/${hit.id}`)}" class="underline">
+            <h3 class="font-semibold text-brand-800">
+              <a
+                href="${withBasePath(`/passages/${hit.id}`)}"
+                class="underline"
+              >
                 (#${hit.id.substr(15)}) ${hit.title}
               </a>
-            </h3>          
-          
-            <p>${hit._snippetResult.full_text.matchedWords.length > 0 ? components.Snippet({ hit, attribute: 'full_text' }) : ''}</p>
-                      
+            </h3>
+
+            <p>
+              ${hit._snippetResult.full_text.matchedWords.length > 0
+                ? components.Snippet({ hit, attribute: "full_text" })
+                : ""}
+            </p>
           </article>
         `;
       },
     },
   }),
-  
-  
- 
 ]);
 
 search.start();

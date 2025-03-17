@@ -67,21 +67,23 @@ async function generate() {
 
   // transform data so it conforms to the typesense collection shape
   const records = [];
-  Object.values(data).forEach((value) => {
-    const item = {
-      sort_id: value.id,
-      id: value.jad_id,
-      rec_id: value.jad_id,
-      title: value.passage,
-      full_text: `${value.passage} ${value.text_paragraph}`,
-      manuscripts: value.manuscripts || [],
-      work: value.work || [],
-      cluster: value.part_of_cluster || [],
-      liturgical_references: value.liturgical_references || [],
-      keywords: value.keywords || [],
-    };
-    records.push(item);
-  });
+  Object.values(data)
+    .filter((value) => value.passage !== "")
+    .forEach((value) => {
+      const item = {
+        sort_id: value.id,
+        id: value.jad_id,
+        rec_id: value.jad_id,
+        title: value.passage,
+        full_text: `${value.passage} ${value.text_paragraph}`,
+        manuscripts: value.manuscripts || [],
+        work: value.work || [],
+        cluster: value.part_of_cluster || [],
+        liturgical_references: value.liturgical_references || [],
+        keywords: value.keywords || [],
+      };
+      records.push(item);
+    });
   // - import data into typesense collection
 
   await client.collections(collectionName).documents().import(records);

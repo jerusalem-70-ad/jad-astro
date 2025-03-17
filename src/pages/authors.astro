@@ -1,18 +1,18 @@
 ---
-import PageLayout from "../layouts/page-layout.astro";
+import PageLayout from "@/layouts/page-layout.astro";
 
-import TableHead from "../components/table-head.astro";
+import TableHead from "@/components/table-head.astro";
 ---
 
 <PageLayout title="Authors">
   <TableHead title="Authors" />
 
   <script>
+    import { setupTableActions } from "@/lib/table-actions";
     import { TabulatorFull as Tabulator } from "tabulator-tables";
     import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
-    import data from "../content/data/authors.json";
-    import { jsonpathLookup } from "../lib/tabulator-utils.js";
-    import { withBasePath } from "../lib/withBasePath";
+    import data from "@/content/data/authors.json";
+    import { jsonpathLookup } from "@/lib/tabulator-utils.js";
 
     var tabledata = [...Object.values(data)];
 
@@ -54,7 +54,7 @@ import TableHead from "../components/table-head.astro";
           mutator: jsonpathLookup,
           mutatorParams: {
             path: "$[*].view_label",
-            separator: "\n",
+            separator: "| ",
           },
           headerFilter: "input",
           formatter: "textarea",
@@ -62,50 +62,6 @@ import TableHead from "../components/table-head.astro";
       ],
     });
 
-    //trigger download of data.csv file
-    document
-      .getElementById("download-csv")!
-      .addEventListener("click", function () {
-        table.download("csv", "data.csv");
-      });
-
-    //trigger download of data.json file
-    document
-      .getElementById("download-json")!
-      .addEventListener("click", function () {
-        table.download("json", "data.json");
-      });
-
-    //trigger download of data.html file
-    document
-      .getElementById("download-html")!
-      .addEventListener("click", function () {
-        table.download("html", "data.html", { style: true });
-      });
-
-    // event listeners set:
-    // href to the entry detail view page
-    table.on("rowClick", function (e, row) {
-      var data = row.getData();
-      var url = withBasePath(`/authors/${data["jad_id"]}`);
-      window.open(url, "_self");
-    });
-    table.on("dataLoaded", function (data) {
-      var el = document.getElementById("counter1");
-      if (el) {
-        el.innerHTML = `${data.length}`;
-      }
-      var el = document.getElementById("counter2");
-      if (el) {
-        el.innerHTML = `${data.length}`;
-      }
-    });
-
-    table.on("dataFiltered", function (filters, data) {
-      var el = document.getElementById("counter1");
-      if (el) {
-        el.innerHTML = `${data.length}`;
-      }
-    });
+    setupTableActions(table, "authors");
   </script>
 </PageLayout>

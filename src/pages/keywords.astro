@@ -1,18 +1,18 @@
 ---
-import PageLayout from "../layouts/page-layout.astro";
-
-import TableHead from "../components/table-head.astro";
+import PageLayout from "@/layouts/page-layout.astro";
+import TableHead from "@/components/table-head.astro";
+const title = "Keywords";
 ---
 
-<PageLayout title="Keywords">
-  <TableHead title="Keywods" />
+<PageLayout title={title}>
+  <TableHead title={title} />
 
   <script>
+    import { setupTableActions } from "@/lib/table-actions";
     import { TabulatorFull as Tabulator } from "tabulator-tables";
     import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
-    import data from "../content/data/keywords.json";
+    import data from "@/content/data/keywords.json";
     import { JSONPath } from "jsonpath-plus";
-    import { withBasePath } from "../lib/withBasePath";
 
     var tabledata = [...Object.values(data)];
 
@@ -78,50 +78,6 @@ import TableHead from "../components/table-head.astro";
       ],
     });
 
-    //trigger download of data.csv file
-    document
-      .getElementById("download-csv")!
-      .addEventListener("click", function () {
-        table.download("csv", "data.csv");
-      });
-
-    //trigger download of data.json file
-    document
-      .getElementById("download-json")!
-      .addEventListener("click", function () {
-        table.download("json", "data.json");
-      });
-
-    //trigger download of data.html file
-    document
-      .getElementById("download-html")!
-      .addEventListener("click", function () {
-        table.download("html", "data.html", { style: true });
-      });
-
-    // event listeners set:
-    // href to the entry detail view page
-    table.on("rowClick", function (e, row) {
-      var data = row.getData();
-      var url = withBasePath(`/keywords/${data["jad_id"]}`);
-      window.open(url, "_self");
-    });
-    table.on("dataLoaded", function (data) {
-      var el = document.getElementById("counter1");
-      if (el) {
-        el.innerHTML = `${data.length}`;
-      }
-      var el = document.getElementById("counter2");
-      if (el) {
-        el.innerHTML = `${data.length}`;
-      }
-    });
-
-    table.on("dataFiltered", function (filters, data) {
-      var el = document.getElementById("counter1");
-      if (el) {
-        el.innerHTML = `${data.length}`;
-      }
-    });
+    setupTableActions(table, "keywords");
   </script>
 </PageLayout>
