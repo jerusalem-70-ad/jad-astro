@@ -1,6 +1,52 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@plugin '@tailwindcss/typography';
+
+@theme {
+  --color-brand-50: #faf7f3;
+  --color-brand-100: #f3ede3;
+  --color-brand-200: #e6d5c3;
+  --color-brand-300: #e5894a;
+  --color-brand-400: #c55a28;
+  --color-brand-500: #a92d03;
+  --color-brand-600: #87260c;
+  --color-brand-700: #6f2009;
+  --color-brand-800: #581908;
+  --color-brand-900: #421305;
+  --color-brand-950: #2c0d03;
+
+  --color-neutral-50: #f9f6f1;
+  --color-neutral-100: #f1ece4;
+  --color-neutral-200: #e8e0d4;
+  --color-neutral-300: #d5c6b3;
+  --color-neutral-400: #bba795;
+  --color-neutral-500: #a08978;
+  --color-neutral-600: #86705f;
+  --color-neutral-700: #6b594b;
+  --color-neutral-800: #4e3f35;
+  --color-neutral-900: #332923;
+  --color-neutral-950: #1f1813;
+
+  --background-image-jerusalem: url("title-image.png");
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
 
 :root {
   --brand-600: #953c04;
@@ -28,7 +74,7 @@
 
 /* Ensure header filter inputs match the styling */
 .tabulator .tabulator-header-filter input {
-  @apply bg-white text-gray-700 border-neutral-300 px-2 py-1 rounded;
+  @apply bg-white text-gray-700 border-neutral-300 px-2 py-1 rounded-sm;
 }
 
 /* sorting arrow color */
@@ -36,7 +82,7 @@
   @apply text-brand-800;
 }
 
-@screen md {
+@media (width >= theme(--breakpoint-md)) {
   .tabulator .tabulator-row:nth-child(even) {
     @apply bg-brand-50;
   }
@@ -47,7 +93,7 @@
 /* Apply styles only for small screens (Mobile: <640px) */
 @media (max-width: 639px) {
   .tabulator .tabulator-cell {
-    @apply font-semibold text-brand-800 bg-brand-50 bg-opacity-50;
+    @apply font-semibold text-brand-800 bg-brand-50;
   }
 }
 
@@ -60,7 +106,7 @@
 }
 
 .ais-Hits-item {
-  @apply border-l-2 border-brand-600 hover:bg-brand-50 rounded-md shadow-sm;
+  @apply border-l-2 border-brand-600 hover:bg-brand-50 rounded-md shadow-xs;
 }
 
 /* Base Pagination List */
