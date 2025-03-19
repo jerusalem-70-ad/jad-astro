@@ -52,11 +52,11 @@ const mssSourceLocus = mssSource.map((msSource) => {
 ---
 
 <PageLayout title=`passage #${passage.id.toString()}`>
-  <div class="md:grid md:grid-cols-[1fr_4fr] md:gap-2 items-start">
+  <div class="md:grid md:grid-cols-[1fr_4fr] md:gap-2 items-start h-full">
     <aside
-      class="hidden md:block border border-neutral-400 overflow-scroll max-h-svh bg-white"
+      class="hidden md:block border-r border-neutral-400 min-h-full overflow-y-auto bg-white"
     >
-      <div id="searchbox" class="py-3 px-4 bg-brand-700"></div>
+      <div id="searchbox" class="py-3 px-4"></div>
       <section>
         <div id="hits" class="px-4"></div>
       </section>
@@ -65,7 +65,7 @@ const mssSourceLocus = mssSource.map((msSource) => {
     <Article
       prevLink={`/passages/${passage.prev.id}`}
       nextLink={`/passages/${passage.next.id}`}
-      mainTitle=`(${passage.id}) ${passage.passage} `
+      mainTitle=`Passage #${passage.id}: ${passage.passage} `
     >
       <dl class="grid grid-cols-[1fr_5fr] text-sm md:text-base md:leading-7">
         <dt

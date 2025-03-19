@@ -21,11 +21,11 @@ const segments = path.split("/").filter((segment) => segment);
     <ul />
   ) : (
     <nav aria-label="Breadcrumbs">
-      <ol class="flex items-center text-brand-800 gap-1 p-3">
+      <ol class="flex items-center bg-brand-400 gap-1 px-10 py-1 ">
         <li>
           <NavLink
             href="/"
-            class="flex items-center text-brand-800 hover:underline"
+            class="flex items-center text-white hover:underline"
           >
             <span>Home</span>
           </NavLink>
@@ -40,11 +40,15 @@ const segments = path.split("/").filter((segment) => segment);
           const isLastSegment = index === segments.length - 1;
           return (
             <li class="flex items-center">
-              <Icon aria-hidden="true" name="lucide:chevron-right" />
+              <Icon
+                aria-hidden="true"
+                name="lucide:chevron-right"
+                class="text-white"
+              />
               {isLastSegment ? (
-                <span class="text-brand-800">{label}</span> // Plain text for the last segment
+                <span class="text-white">{label}</span> // Plain text for the last segment
               ) : (
-                <NavLink href={url} class="text-brand-800 hover:underline">
+                <NavLink href={url} class="text-white hover:underline">
                   {displayName}
                 </NavLink>
               )}

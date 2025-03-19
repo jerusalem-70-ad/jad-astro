@@ -4,17 +4,17 @@ import NavLink from "./nav-link.astro";
 
 <header class="sticky top-0 bg-brand-800 min-w-full z-50">
   <div
-    class="w-full p-4 md:px-16 grid grid-cols-[auto_auto] gap-4 md:gap-8 justify-between"
+    class="w-full p-4 md:px-8 lg:px-16 grid grid-cols-[1fr_auto] gap-4 md:gap-8 justify-between"
   >
     <h1 class="text-brand-100 self-center text-lg md:text-2xl font-semibold">
       <NavLink href="/" class="text-brand-50"
         >Medieval Reception of the Roman Conquest of Jerusalem</NavLink
       >
     </h1>
-    <nav-bar class="md:hidden">
+    <nav-bar class="lg:hidden">
       <button
         id="hamburger"
-        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-brand-50 rounded-lg md:hidden"
+        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-brand-50 rounded-lg"
         aria-controls="navbar-default"
         aria-expanded="false"
       >
@@ -34,10 +34,9 @@ import NavLink from "./nav-link.astro";
             d="M1 1h15M1 7h15M1 13h15"></path>
         </svg>
       </button>
-      <!-- <button id="hamburger"><img src="/burger-menu.svg" class="w-10"></img></button>                       -->
     </nav-bar>
 
-    <nav class="hidden md:flex items-center gap-x-4 text-brand-50">
+    <nav class="hidden lg:flex items-center gap-x-4 text-brand-50">
       <NavLink
         class="hover:underline underline-offset-4 hover:text-brand-200"
         href="/passages">Passages</NavLink
