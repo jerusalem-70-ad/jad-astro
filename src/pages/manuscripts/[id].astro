@@ -39,7 +39,7 @@ const { data: manuscript } = Astro.props;
     }));
 ---
 
-<PageLayout>
+<PageLayout title=`${manuscript.view_label}`>
   <Article
   prevLink={manuscript.prev.id}
   nextLink={manuscript.next.id}
@@ -122,9 +122,9 @@ const { data: manuscript } = Astro.props;
             
         
           </dd>
-        )}
-      </dl>
-      <div class="flex flex-col gap-2 py-2 text-sm md:text-base font-semibold">
+          <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">External links:</dt>
+          <dd class="pl-5">
+            <div class="flex flex-col gap-2">
         {
           manuscript.digi_url && (
             <div class="flex">
@@ -153,6 +153,10 @@ const { data: manuscript } = Astro.props;
           )
         }
       </div>
+          </dd>
+        )}
+      </dl>
+      
     </Article>
    
 </PageLayout>

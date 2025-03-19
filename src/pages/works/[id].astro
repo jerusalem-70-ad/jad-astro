@@ -52,7 +52,7 @@ const sortedPassages = Object.entries(groupedPassages).sort(
 );
 ---
 
-<PageLayout>
+<PageLayout title={work.title}>
     <Article
         prevLink={`/works/${work.prev.id}`}
         nextLink={`/works/${work.next.id}`}
@@ -62,7 +62,7 @@ const sortedPassages = Object.entries(groupedPassages).sort(
               work.title
             : work?.title}
     >
-        <dl class="grid grid-cols-[1fr_5fr] md:leading-7 md:text-base">
+        <dl class="grid grid-cols-[1fr_5fr] text-sm md:leading-7 md:text-base">
             <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">Author:</dt>
             <dd class="pl-5">
                 {

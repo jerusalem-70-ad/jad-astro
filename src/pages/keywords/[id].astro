@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 const { data: keyword } = Astro.props;
 ---
 
-<PageLayout>
+<PageLayout title={keyword.view_label}>
   <Article
     prevLink={`/keywords/${keyword.prev.id}`}
     nextLink={`/keywords/${keyword.next.id}`}

@@ -1,0 +1,57 @@
+---
+import NavLink from "./nav-link.astro";
+import { Icon } from "astro-icon/components";
+
+const pathname = Astro.url.pathname; // Current path
+const base = import.meta.env.BASE_URL; // Base URL
+interface Props {
+  label?: string;
+}
+
+const { label = "" } = Astro.props;
+
+// Remove the base path from the start of the pathname
+const path = pathname.startsWith(base) ? pathname.slice(base.length) : pathname;
+// Split the remaining path into segments
+const segments = path.split("/").filter((segment) => segment);
+---
+
+{
+  pathname.endsWith("jad-astro/") || pathname.endsWith("index.html") ? (
+    <ul />
+  ) : (
+    <nav aria-label="Breadcrumbs">
+      <ol class="flex items-center text-brand-800 gap-1 p-3">
+        <li>
+          <NavLink
+            href="/"
+            class="flex items-center text-brand-800 hover:underline"
+          >
+            <span>Home</span>
+          </NavLink>
+        </li>
+        {segments.map((segment, index) => {
+          // Rebuild the URL for the current segment without prepending the base
+          // base comes with NavLink
+          const url = `/${segments.slice(0, index + 1).join("/")}/`;
+
+          const displayName = segment.replace("jad_", " ").replace("__", " #"); // Format the segment name
+          // If it's the last segment, render as plain text
+          const isLastSegment = index === segments.length - 1;
+          return (
+            <li class="flex items-center">
+              <Icon aria-hidden="true" name="lucide:chevron-right" />
+              {isLastSegment ? (
+                <span class="text-brand-800">{label}</span> // Plain text for the last segment
+              ) : (
+                <NavLink href={url} class="text-brand-800 hover:underline">
+                  {displayName}
+                </NavLink>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+    </nav>
+  )
+}

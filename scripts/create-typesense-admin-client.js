@@ -1,4 +1,5 @@
 import { Client } from "typesense";
+import { log } from "@acdh-oeaw/lib";
 
 export function createTypesenseAdminClient() {
   const client = new Client({
@@ -29,10 +30,10 @@ export async function createJerusalemSynonyms(collectionName = "JAD-temp") {
       .collections(collectionName)
       .synonyms()
       .upsert("jerusalem-synonyms", synonym);
-    console.log("Jerusalem synonyms created:", result);
+    log.success("Jerusalem synonyms created:", result);
     return result;
   } catch (error) {
-    console.error("Error creating Jerusalem synonyms:", error);
+    log.error("Error creating Jerusalem synonyms:", String(error));
     throw error;
   }
 }
@@ -49,10 +50,10 @@ export async function createSynonyms(collectionName, synonymId, synonymsArray) {
       .collections(collectionName)
       .synonyms()
       .upsert(synonymId, synonym);
-    console.log(`Synonyms '${synonymId}' created:`, result);
+    log.success(`Synonyms '${synonymId}' created:`, result);
     return result;
   } catch (error) {
-    console.error(`Error creating synonyms '${synonymId}':`, error);
+    log.error(`Error creating synonyms '${synonymId}':`, String(error));
     throw error;
   }
 }

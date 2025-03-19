@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 const { data: institution } = Astro.props;
 ---
 
-<PageLayout>
+<PageLayout title={institution.name}>
   <Article
     prevLink={`/institutions/${institution.prev.id}`}
     nextLink={`/institutions/${institution.next.id}`}

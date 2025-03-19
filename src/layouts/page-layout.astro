@@ -2,6 +2,7 @@
 import PageFooter from "@/components/page-footer.astro";
 import PageHeader from "@/components/page-header.astro";
 import "../styles/global.css";
+import Breadcrumbs from "@/components/breadcrumbs.astro";
 interface Props {
   title?: string;
 }
@@ -22,8 +23,9 @@ const { title = "Medieval Reception of the Roman Conquest of Jerusalem" } =
     />
     <title>J·AD 70 · {title}</title>
   </head>
-  <body class="min-h-screen grid grid-rows-[auto_1fr_auto] bg-brand-50">
+  <body class="min-h-screen grid grid-rows-[auto_auto_1fr_auto] bg-brand-50">
     <PageHeader />
+    <Breadcrumbs label={title} />
     <slot />
     <PageFooter />
   </body>

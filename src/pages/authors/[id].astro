@@ -15,13 +15,13 @@ export async function getStaticPaths() {
 const { data: author } = Astro.props;
 ---
 
-<PageLayout>
+<PageLayout title={author.name}>
   <Article
     prevLink={`/authors/${author.prev.id}`}
     nextLink={`/authors/${author.next.id}`}
     mainTitle={author.name}
   >
-    <dl class="grid grid-cols-[1fr_7fr] md:leading-7">
+    <dl class="grid grid-cols-[1fr_7fr] text-sm md:leading-7 md:text-base">
       <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
         GND:
       </dt>

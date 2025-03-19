@@ -4,9 +4,11 @@ import { Icon } from "astro-icon/components";
 const { prevLink, nextLink, mainLink, mainTitle } = Astro.props;
 ---
 
-<article class="mx-auto md:w-4/5 sm:w-5/6 md:p-10">
+<article
+  class="mx-auto md:max-w-4/5 sm:w-5/6 md:p-5 bg-white md:m-5 md:border border-neutral-300 rounded-md"
+>
   <div
-    class="flex justify-between gap-3 text-brand-800 md:text-3xl text-xl p-5"
+    class="flex justify-between gap-3 text-brand-800 md:text-3xl text-xl p-5 border-b-2 border-neutral-300"
   >
     {
       prevLink && (
@@ -36,9 +38,7 @@ const { prevLink, nextLink, mainLink, mainTitle } = Astro.props;
       )
     }
   </div>
-  <div
-    class="md:border border-brand-600 rounded-md p-5 bg-brand-50 text-base md:leading-7 md:text-base"
-  >
+  <div class="p-5 bg-white text-base md:leading-7 md:text-base">
     <slot />
   </div>
 </article>

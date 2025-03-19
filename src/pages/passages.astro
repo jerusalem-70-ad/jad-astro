@@ -1,10 +1,11 @@
 ---
 import PageLayout from "@/layouts/page-layout.astro";
 import TableHead from "@/components/table-head.astro";
+const title = "Passages";
 ---
 
-<PageLayout title="Passages">
-  <TableHead title="Passages" />
+<PageLayout title={title}>
+  <TableHead title={title} />
 
   <script>
     import { setupTableActions } from "@/lib/table-actions";
