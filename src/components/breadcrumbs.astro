@@ -16,46 +16,39 @@ const path = pathname.startsWith(base) ? pathname.slice(base.length) : pathname;
 const segments = path.split("/").filter((segment) => segment);
 ---
 
-{
-  pathname.endsWith("jad-astro/") || pathname.endsWith("index.html") ? (
-    <ul />
-  ) : (
-    <nav aria-label="Breadcrumbs">
-      <ol class="flex items-center bg-brand-400 gap-1 px-10 py-1 ">
-        <li>
-          <NavLink
-            href="/"
-            class="flex items-center text-white hover:underline"
-          >
-            <span>Home</span>
-          </NavLink>
-        </li>
-        {segments.map((segment, index) => {
-          // Rebuild the URL for the current segment without prepending the base
-          // base comes with NavLink
-          const url = `/${segments.slice(0, index + 1).join("/")}/`;
+<nav aria-label="Breadcrumbs">
+  <ol class="flex items-center bg-brand-400 gap-1 px-10 py-1">
+    <li>
+      <NavLink href="/" class="flex items-center text-white hover:underline">
+        <span>Home</span>
+      </NavLink>
+    </li>
+    {
+      segments.map((segment, index) => {
+        // Rebuild the URL for the current segment without prepending the base
+        // base comes with NavLink
+        const url = `/${segments.slice(0, index + 1).join("/")}/`;
 
-          const displayName = segment.replace("jad_", " ").replace("__", " #"); // Format the segment name
-          // If it's the last segment, render as plain text
-          const isLastSegment = index === segments.length - 1;
-          return (
-            <li class="flex items-center">
-              <Icon
-                aria-hidden="true"
-                name="lucide:chevron-right"
-                class="text-white"
-              />
-              {isLastSegment ? (
-                <span class="text-white">{label}</span> // Plain text for the last segment
-              ) : (
-                <NavLink href={url} class="text-white hover:underline">
-                  {displayName}
-                </NavLink>
-              )}
-            </li>
-          );
-        })}
-      </ol>
-    </nav>
-  )
-}
+        const displayName = segment.replace("jad_", " ").replace("__", " #"); // Format the segment name
+        // If it's the last segment, render as plain text
+        const isLastSegment = index === segments.length - 1;
+        return (
+          <li class="flex items-center">
+            <Icon
+              aria-hidden="true"
+              name="lucide:chevron-right"
+              class="text-white"
+            />
+            {isLastSegment ? (
+              <span class="text-white">{label}</span> // Plain text for the last segment
+            ) : (
+              <NavLink href={url} class="text-white hover:underline">
+                {displayName}
+              </NavLink>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>
