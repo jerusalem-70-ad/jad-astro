@@ -1,7 +1,8 @@
 ---
 import PageFooter from "@/components/page-footer.astro";
 import PageHeader from "@/components/page-header.astro";
-import "../styles/global.css";
+import ScrollToTop from "@/components/scroll-to-top.astro";
+import "@/styles/global.css";
 import Breadcrumbs from "@/components/breadcrumbs.astro";
 interface Props {
   title?: string;
@@ -30,5 +31,6 @@ const { title = "Medieval Reception of the Roman Conquest of Jerusalem" } =
     </main>
     <slot />
     <PageFooter />
+    <ScrollToTop />
   </body>
 </html>
