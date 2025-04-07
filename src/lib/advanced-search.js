@@ -58,6 +58,8 @@ const refinementListClusters = wrapInPanel("Clusters");
 
 const refinementListKeywords = wrapInPanel("Keywords");
 
+const refinementListBiblical = wrapInPanel("Biblical references");
+
 // add widgets
 search.addWidgets([
   searchBox({
@@ -209,6 +211,16 @@ search.addWidgets([
     showMoreLimit: 50,
     limit: 10,
     searchablePlaceholder: "Search for liturgical references",
+  }),
+
+  refinementListBiblical({
+    container: "#refinement-list-biblical",
+    attribute: "biblical_references.value",
+    searchable: true,
+    showMore: true,
+    showMoreLimit: 50,
+    limit: 10,
+    searchablePlaceholder: "e.g. Lk. 19",
   }),
 
   currentRefinements({

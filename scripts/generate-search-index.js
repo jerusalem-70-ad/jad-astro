@@ -80,6 +80,7 @@ async function generate() {
         work: value.work || [],
         cluster: value.part_of_cluster || [],
         liturgical_references: value.liturgical_references || [],
+        biblical_references: value.biblical_references || [],
         keywords: value.keywords || [],
       };
       records.push(item);
