@@ -6,6 +6,7 @@ import NavLink from "@/components/nav-link.astro";
 import Article from "@/components/article.astro";
 import msOccurences from "@/content/data/ms_occurrences.json";
 import mss from "@/content/data/manuscripts.json";
+import biblRef from "@/content/data/biblical_references.json";
 import "instantsearch.css/themes/satellite.css";
 
 export async function getStaticPaths() {
@@ -49,6 +50,10 @@ const mssSourceLocus = mssSource.map((msSource) => {
     locus, // Add a new property 'locus' containing the matching locus array
   };
 });
+// filter the biblical references that are used in the current passage
+const biblRefSource = Object.values(biblRef).filter((ref) =>
+  passage.biblical_references.some((bibl) => bibl.id === ref.id)
+);
 ---
 
 <PageLayout title=`passage #${passage.id.toString()}`>
@@ -178,12 +183,38 @@ const mssSourceLocus = mssSource.map((msSource) => {
         >
           Biblical references:
         </dt>
-        <dd class="pl-5">
+        <dd class="pl-5 flex">
           {
-            passage.biblical_references.length > 0
-              ? passage.biblical_references
-                  .map((reference) => reference.value)
-                  .join(", ")
+            biblRefSource.length > 0
+              ? biblRefSource
+                  .map((reference, index) => (
+                    <span class="group relative">
+                      {reference.nova_vulgata_url ? (
+                        <NavLink
+                          href={reference.nova_vulgata_url}
+                          class="flex underline underline-offset-4 decoration-dotted"
+                        >
+                          {reference.name}
+                          <Icon
+                            name="lucide:external-link"
+                            class="size-4 text-brand-800 inline-flex"
+                          />
+                        </NavLink>
+                      ) : (
+                        <span>{reference.name}</span>
+                      )}
+
+                      <span class="italic invisible group-hover:visible absolute w-180 top-8 left-0 bg-brand-900 text-white opacity-95 p-2 rounded-md shadow-md">
+                        {reference.text}
+                      </span>
+                    </span>
+                  ))
+                  // use reduce to add the space and separator between entries
+                  .reduce((prev, curr) => [
+                    prev,
+                    <span class="mx-1">|</span>,
+                    curr,
+                  ])
               : "N/A"
           }
         </dd>
