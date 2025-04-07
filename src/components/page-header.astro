@@ -1,16 +1,21 @@
 ---
 import NavLink from "./nav-link.astro";
+import logo from "../../public/assets/images/logo.svg";
+import { Image } from "astro:assets";
 ---
 
 <header class="sticky top-0 bg-brand-800 min-w-full z-50">
   <div
-    class="w-full p-4 md:px-8 lg:px-16 grid grid-cols-[1fr_auto] gap-4 md:gap-8 justify-between"
+    class="w-full p-4 md:px-8 grid grid-cols-[1fr_auto] gap-4 md:gap-8 justify-between"
   >
-    <h1 class="text-brand-100 self-center text-lg md:text-2xl font-semibold">
-      <NavLink href="/" class="text-brand-50"
-        >Medieval Reception of the Roman Conquest of Jerusalem</NavLink
-      >
-    </h1>
+    <div class="flex items-center gap-x-4">
+      <Image src={logo} alt="" width="60" height="60" loading="lazy" />
+      <h1 class="text-brand-100 self-center text-lg md:text-2xl font-semibold">
+        <NavLink href="/" class="text-brand-50"
+          >Medieval Reception of the Roman Conquest of Jerusalem</NavLink
+        >
+      </h1>
+    </div>
     <nav-bar class="lg:hidden">
       <button
         id="hamburger"

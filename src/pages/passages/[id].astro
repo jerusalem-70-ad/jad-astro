@@ -182,12 +182,24 @@ const mssSourceLocus = mssSource.map((msSource) => {
           {
             passage.biblical_references.length > 0
               ? passage.biblical_references
-                  .map((reference: { value: any }) => reference.value)
+                  .map((reference) => reference.value)
                   .join(", ")
               : "N/A"
           }
         </dd>
-
+        <dt
+          class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
+        >
+        </dt>
+        <dd class="pl-5">
+          {
+            passage.ai_bibl_ref.length > 0
+              ? passage.ai_bibl_ref
+                  .map((reference) => reference.value)
+                  .join(", ")
+              : "N/A"
+          }
+        </dd>
         <dt
           class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
         >
@@ -197,7 +209,7 @@ const mssSourceLocus = mssSource.map((msSource) => {
           {
             passage.liturgical_references.length > 0
               ? passage.liturgical_references
-                  .map((reference: { value: any }) => reference.value)
+                  .map((reference) => reference.value)
                   .join(", ")
               : "N/A"
           }
