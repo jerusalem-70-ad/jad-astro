@@ -9,10 +9,15 @@ import { Image } from "astro:assets";
     class="w-full p-4 md:px-8 grid grid-cols-[1fr_auto] gap-4 md:gap-8 justify-between"
   >
     <div class="flex items-center gap-x-4">
-      <Image src={logo} alt="" width="60" height="60" loading="lazy" />
       <h1 class="text-brand-100 self-center text-lg md:text-2xl font-semibold">
-        <NavLink href="/" class="text-brand-50"
-          >Medieval Reception of the Roman Conquest of Jerusalem</NavLink
+        <NavLink href="/" class="text-brand-50 flex items-center gap-x-2"
+          ><Image
+            src={logo}
+            alt=""
+            width="60"
+            height="60"
+            loading="lazy"
+          />Medieval Reception of the Roman Conquest of Jerusalem</NavLink
         >
       </h1>
     </div>
@@ -41,7 +46,9 @@ import { Image } from "astro:assets";
       </button>
     </nav-bar>
 
-    <nav class="hidden lg:flex items-center gap-x-4 text-brand-50">
+    <nav
+      class="hidden lg:flex items-center gap-x-4 text-brand-50 text-lg font-semibold"
+    >
       <NavLink
         class="hover:underline underline-offset-4 hover:text-brand-200"
         href="/passages">Passages</NavLink
