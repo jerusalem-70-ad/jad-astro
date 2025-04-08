@@ -1,13 +1,9 @@
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { join } from "path";
 
 const loadJSON = (file) =>
   JSON.parse(
-    readFileSync(join(__dirname, "../src/content/data", file), "utf8")
+    readFileSync(join(process.cwd(), "src/content/data", file), "utf8")
   );
 
 const passages = Object.values(loadJSON("passages.json"));
