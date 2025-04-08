@@ -204,7 +204,7 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
                         <span>{reference.name}</span>
                       )}
 
-                      <span class="italic invisible group-hover:visible absolute w-180 top-8 left-0 bg-brand-900 text-white opacity-95 p-2 rounded-md shadow-md">
+                      <span class="italic invisible group-hover:visible absolute w-[280px] top-8 left-0 bg-brand-900 text-white opacity-95 p-2 rounded-md shadow-md">
                         {reference.text}
                       </span>
                     </span>
@@ -256,9 +256,18 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
             passage.source_passage.length > 0
               ? source.map((source) => (
                   <span>
-                    {source.work?.[0]?.author?.length > 0
-                      ? `${source.work[0].author[0].name} - ${source.work[0].name}`
-                      : source.work?.[0]?.name}
+                    {source.work?.[0]?.author?.length > 0 ? (
+                      <span>
+                        {source.work[0].author[0].name} -{" "}
+                        <span class="italic">{source.work[0].name}</span>
+                      </span>
+                    ) : (
+                      <span class="italic">{source.work[0].name}</span>
+                    )}
+                    <Icon
+                      name="lucide:arrow-right"
+                      class="size-4 text-brand-800 inline-flex"
+                    />
                     <NavLink href={`/passages/${source.jad_id}`}>
                       ({source.id}) {source.passage}
                     </NavLink>
@@ -275,18 +284,31 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
         </dt>
         <dd class="pl-5">
           {
-            usedBy.length > 0
-              ? usedBy.map((passage) => (
-                  <span>
-                    {passage.work?.[0].author.length > 0
-                      ? `${passage.work[0].author[0].name} - ${passage.work[0].name}`
-                      : passage.work[0].name}
+            usedBy.length > 0 ? (
+              <ul class="list-disc list-inside">
+                {usedBy.map((passage) => (
+                  <li class="">
+                    {passage.work?.[0].author.length > 0 ? (
+                      <span>
+                        {passage.work[0].author[0].name} -{" "}
+                        <span class="italic">{passage.work[0].name}</span>
+                      </span>
+                    ) : (
+                      <span class="italic">{passage.work[0].name}</span>
+                    )}
+                    <Icon
+                      name="lucide:arrow-right"
+                      class="size-4 text-brand-800 inline-flex"
+                    />
                     <NavLink href={`/passages/${passage.jad_id}`}>
                       ({passage.id}) {passage.passage}
                     </NavLink>
-                  </span>
-                ))
-              : "N/A"
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              "N/A"
+            )
           }
         </dd>
 

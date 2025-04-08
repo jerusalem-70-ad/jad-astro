@@ -2,6 +2,18 @@ import { log } from "@acdh-oeaw/lib";
 import { getData } from "./api-client.js";
 import { createTypesenseAdminClient } from "../scripts/create-typesense-admin-client.js";
 import { collectionName } from "../config/search.config.js";
+import { readFileSync, writeFileSync, mkdirSync } from "fs";
+import { fileURLToPath } from "url";
+import { dirname, join } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const loadJSON = (file) =>
+  JSON.parse(
+    readFileSync(join(__dirname, "../src/content/data", file), "utf8")
+  );
+
+const data = Object.values(loadJSON("passages.json"));
 
 async function generate() {
   // instantiate typesense client using helpers function
@@ -44,8 +56,20 @@ async function generate() {
         optional: true,
       },
       {
-        name: "biblical_references",
-        type: "object[]",
+        name: "biblical_ref_lvl0",
+        type: "string[]",
+        facet: true,
+        optional: true,
+      },
+      {
+        name: "biblical_ref_lvl1",
+        type: "string[]",
+        facet: true,
+        optional: true,
+      },
+      {
+        name: "biblical_ref_lvl2",
+        type: "string[]",
         facet: true,
         optional: true,
       },
@@ -60,10 +84,12 @@ async function generate() {
   // import data into typesense collection
 
   //  get data from github
-  const data = await getData(
+  /*  const data = await getData(
     "https://raw.githubusercontent.com/jerusalem-70-ad/jad-baserow-dump/refs/heads/main/data/",
     "passages.json"
-  );
+  ); */
+
+  // preprocess data
 
   // transform data so it conforms to the typesense collection shape
   const records = [];
@@ -80,7 +106,9 @@ async function generate() {
         work: value.work || [],
         cluster: value.part_of_cluster || [],
         liturgical_references: value.liturgical_references || [],
-        biblical_references: value.biblical_references || [],
+        biblical_ref_lvl0: value.biblical_ref_lvl0 || [],
+        biblical_ref_lvl1: value.biblical_ref_lvl1 || [],
+        biblical_ref_lvl2: value.biblical_ref_lvl2 || [],
         keywords: value.keywords || [],
       };
       records.push(item);

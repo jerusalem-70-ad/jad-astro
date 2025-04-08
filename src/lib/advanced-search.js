@@ -9,6 +9,7 @@ import {
   refinementList,
   clearRefinements,
   currentRefinements,
+  hierarchicalMenu,
 } from "instantsearch.js/es/widgets";
 import { withBasePath } from "./withBasePath";
 
@@ -59,6 +60,8 @@ const refinementListClusters = wrapInPanel("Clusters");
 const refinementListKeywords = wrapInPanel("Keywords");
 
 const refinementListBiblical = wrapInPanel("Biblical references");
+
+const hierarchicalMenuBibl = wrapHierarcicalMenuInPanel("Biblical references");
 
 // add widgets
 search.addWidgets([
@@ -212,15 +215,14 @@ search.addWidgets([
     limit: 10,
     searchablePlaceholder: "Search for liturgical references",
   }),
-
-  refinementListBiblical({
+  hierarchicalMenuBibl({
     container: "#refinement-list-biblical",
-    attribute: "biblical_references.value",
-    searchable: true,
+    attributes: ["biblical_ref_lvl0", "biblical_ref_lvl1", "biblical_ref_lvl2"],
+    separator: " > ",
     showMore: true,
     showMoreLimit: 50,
     limit: 10,
-    searchablePlaceholder: "e.g. Lk. 19",
+    searchablePlaceholder: "e.g. Luke",
   }),
 
   currentRefinements({
@@ -229,7 +231,9 @@ search.addWidgets([
       return items.map((item) => ({
         ...item,
         label:
-          item.attribute === "work.author.name"
+          item.attribute === "biblical_ref_lvl0"
+            ? "Bible book"
+            : item.attribute === "work.author.name"
             ? "Author"
             : item.attribute === "work.title"
             ? "Work"
@@ -274,6 +278,24 @@ function wrapInPanel(title) {
       root: "border-b",
     },
   })(refinementList);
+}
+
+function wrapHierarcicalMenuInPanel(title) {
+  return panel({
+    collapsed: ({ state }) => {
+      return state.query.length === 0;
+    },
+    templates: {
+      header: () =>
+        `<span class="normal-case text-base font-normal">${title}</span>`,
+    },
+    cssClasses: {
+      header: "cursor-pointer relative z-10",
+      collapseButton: "absolute inset-0 z-20 flex flex-row-reverse",
+      collapseIcon: "",
+      root: "border-b",
+    },
+  })(hierarchicalMenu);
 }
 
 // Back to top functionality
