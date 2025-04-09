@@ -1,6 +1,8 @@
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
 
+import { buildTransmissionGraph } from "./build-transmission-graph.js";
+
 const loadJSON = (file) =>
   JSON.parse(
     readFileSync(join(process.cwd(), "src/content/data", file), "utf8")
@@ -150,14 +152,21 @@ const passagesPlus = passages.map((passage) => {
   };
 });
 
-// Save the merged msitems in json
+// use imported function to build the transmission graph
+const graph = buildTransmissionGraph(passagesPlus);
+
+// Optionally attach graph to each passage
+const enrichedPassages = passagesPlus.map((p) => ({
+  ...p,
+  transmission_graph: graph[p.id],
+}));
+
 writeFileSync(
   join(folderPath, "passages.json"),
-  JSON.stringify(passagesPlus, null, 2),
-  {
-    encoding: "utf-8",
-  }
+  JSON.stringify(enrichedPassages, null, 2),
+  { encoding: "utf-8" }
 );
+
 console.log(
   "passages.json file updated successfully with biblical ref in hierarchical structure."
 );
