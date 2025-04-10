@@ -1,8 +1,10 @@
 ---
 // passage-network.astro
+import type { TransmissionGraph } from "../types";
+
 export interface Props {
   // Accept the pre-processed transmission_graph from the passage
-  transmissionGraph: any;
+  transmissionGraph: TransmissionGraph;
   // Optional configuration properties with defaults
   height?: number;
   showLegend?: boolean;
@@ -90,40 +92,36 @@ const {
   // This script will be processed by Astro and allows imports
   import * as echarts from "echarts";
   import { withBasePath } from "../lib/withBasePath";
-
-  declare global {
-    interface Window {
-      passageGraphConfig: any;
-      passageGraphData: any;
-      debugGraphRendering: boolean;
-    }
-  }
+  import type { GraphNode, NodeType } from "../types";
 
   // Initialize chart when DOM is ready
   document.addEventListener("DOMContentLoaded", () => {
     // Get data from global variables
     const graphData = window.passageGraphData;
-    const config = window.passageGraphConfig || {};
+    const config = {
+      showLegend: true,
+      enableZoom: true,
+      enableNavigation: true,
+      ...window.passageGraphConfig,
+    };
 
     if (graphData && graphData.nodes && graphData.nodes.length > 0) {
       const chartElement = document.getElementById("passage-network");
       if (chartElement) {
         const chart = echarts.init(chartElement);
 
-        // Define valid node types
-        type NodeType = 'current' | 'ancestor' | 'descendant';
-
         // Color scheme - Use distinct colors
         const colorMap: Record<NodeType, string> = {
           current: "#e74a3b", // Red
           ancestor: "#318f38", // Green
           descendant: "#f6c23e", // Yellow
+          regular: "#95a5a6", // Gray (fallback)
         };
 
         // Create a mapping of node IDs to array indices
         const nodeIdToIndex: { [key: string]: number } = {};
         graphData.nodes.forEach((node, index) => {
-          nodeIdToIndex[node.id] = index;
+          nodeIdToIndex[node.id.toString()] = index;
         });
 
         // Process nodes
@@ -170,12 +168,12 @@ const {
                 targetNode.nodeType === "current"))
           ) {
             // Reverse the direction
-            sourceIndex = nodeIdToIndex[link.target];
-            targetIndex = nodeIdToIndex[link.source];
+            sourceIndex = nodeIdToIndex[link.target.toString()];
+            targetIndex = nodeIdToIndex[link.source.toString()];
           } else {
             // Keep original direction
-            sourceIndex = nodeIdToIndex[link.source];
-            targetIndex = nodeIdToIndex[link.target];
+            sourceIndex = nodeIdToIndex[link.source.toString()];
+            targetIndex = nodeIdToIndex[link.target.toString()];
           }
 
           // Return the link with correct indices
@@ -218,7 +216,7 @@ const {
               fontSize: 12,
             },
             extraCssText: `max-width: 300px; overflow-wrap: break-word; white-space: normal;`,
-            formatter: function (params) {
+            formatter: function (params: any) {
               if (params.dataType === "node") {
                 const node = params.data;
                 return `<strong>ID: ${node.id}</strong><br/>${node.passage}`;
@@ -237,7 +235,7 @@ const {
                   top: 10,
                   left: "center",
                   // Custom formatter for legend items
-                  formatter: function (name) {
+                  formatter: function (name: string) {
                     return name;
                   },
                   // Add click handler for legend items
@@ -315,13 +313,15 @@ const {
         chart.setOption(option);
 
         // Custom event to filter nodes based on legend selection
-        chart.on("legendselectchanged", function (params) {
+        chart.on("legendselectchanged", function (params: any) {
           const selectedTypes = Object.keys(params.selected).filter(
             (type) => params.selected[type]
           );
 
           // You can add custom filtering logic here if needed
-          console.log("Selected node types:", selectedTypes);
+          if (window.debugGraphRendering) {
+            console.log("Selected node types:", selectedTypes);
+          }
         });
 
         // Force a resize after initialization
@@ -336,10 +336,9 @@ const {
 
         // Add click handler for nodes
         if (config.enableNavigation !== false) {
-          chart.on("click", function (params) {
+          chart.on("click", function (params: any) {
             if (params.dataType === "node") {
               // Navigate to the clicked passage
-
               window.location.href = withBasePath(
                 `/passages/${params.data.jad_id}`
               );
@@ -347,7 +346,7 @@ const {
           });
         }
       }
-    } else {
+    } else if (window.debugGraphRendering) {
       console.error("No graph data available or data is empty:", graphData);
     }
   });
