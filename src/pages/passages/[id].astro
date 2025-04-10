@@ -8,6 +8,7 @@ import msOccurences from "@/content/data/ms_occurrences.json";
 import mss from "@/content/data/manuscripts.json";
 import biblRef from "@/content/data/biblical_references.json";
 import "instantsearch.css/themes/satellite.css";
+import PassageNetwork from "@/components/passage-network.astro";
 
 export async function getStaticPaths() {
   const paths = Object.values(passages).map((passage) => ({
@@ -73,6 +74,7 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
       mainTitle=`Passage #${passage.id}: ${passage.passage} `
     >
       <dl class="grid grid-cols-[1fr_5fr] text-sm md:text-base md:leading-7">
+        
         <dt
           class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
         >
@@ -245,7 +247,23 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
               : "N/A"
           }
         </dd>
-
+        <dt
+        class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
+      >
+        Transmission:
+      </dt>
+      <dd class="pl-5">
+        {
+          passage.transmission_graph && (
+            <PassageNetwork transmissionGraph={passage.transmission_graph} />
+          )
+        }
+        {
+          !passage.transmission_graph && (
+            <p>No transmission data available for this passage.</p>
+          )
+        }
+      </dd>
         <dt
           class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
         >

@@ -1,0 +1,354 @@
+---
+// passage-network.astro
+export interface Props {
+  // Accept the pre-processed transmission_graph from the passage
+  transmissionGraph: any;
+  // Optional configuration properties with defaults
+  height?: number;
+  showLegend?: boolean;
+  enableZoom?: boolean;
+  enableNavigation?: boolean;
+}
+
+const {
+  transmissionGraph,
+  height = 400,
+  showLegend = true,
+  enableZoom = true,
+  enableNavigation = true,
+} = Astro.props;
+---
+
+<div class="network-visualization">
+  <div
+    id="passage-network"
+    class="chart-container"
+    style={`height: ${height}px;`}
+  >
+  </div>
+
+  <!-- Optional metadata display -->
+  <div class="network-metadata">
+    <span class="metadata-item"
+      >Ancestors: {transmissionGraph.metadata.ancestorCount}</span
+    >
+    <span class="metadata-item"
+      >Descendants: {transmissionGraph.metadata.descendantCount}</span
+    >
+  </div>
+</div>
+
+<style>
+  .network-visualization {
+    margin: 2rem 0;
+  }
+
+  .chart-container {
+    width: 100%;
+    border: 1px solid #eaeaea;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  .network-metadata {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #555;
+    text-align: center;
+  }
+
+  .metadata-item {
+    margin: 0 1rem;
+  }
+</style>
+
+<!-- First script: Inline script to store data globally -->
+<script
+  is:inline
+  define:vars={{
+    graph: transmissionGraph.graph,
+    showLegendProp: showLegend,
+    enableZoomProp: enableZoom,
+    enableNavigationProp: enableNavigation,
+  }}
+>
+  // Store configuration in global variables
+  window.passageGraphData = graph;
+  window.passageGraphConfig = {
+    showLegend: showLegendProp,
+    enableZoom: enableZoomProp,
+    enableNavigation: enableNavigationProp,
+  };
+
+  // Enable debug mode for troubleshooting
+  window.debugGraphRendering = true;
+</script>
+
+<!-- Second script: Client script with imports -->
+<script>
+  // This script will be processed by Astro and allows imports
+  import * as echarts from "echarts";
+  import { withBasePath } from "../lib/withBasePath";
+
+  declare global {
+    interface Window {
+      passageGraphConfig: any;
+      passageGraphData: any;
+      debugGraphRendering: boolean;
+    }
+  }
+
+  // Initialize chart when DOM is ready
+  document.addEventListener("DOMContentLoaded", () => {
+    // Get data from global variables
+    const graphData = window.passageGraphData;
+    const config = window.passageGraphConfig || {};
+
+    if (graphData && graphData.nodes && graphData.nodes.length > 0) {
+      const chartElement = document.getElementById("passage-network");
+      if (chartElement) {
+        const chart = echarts.init(chartElement);
+
+        // Define valid node types
+        type NodeType = 'current' | 'ancestor' | 'descendant';
+
+        // Color scheme - Use distinct colors
+        const colorMap: Record<NodeType, string> = {
+          current: "#e74a3b", // Red
+          ancestor: "#318f38", // Green
+          descendant: "#f6c23e", // Yellow
+        };
+
+        // Create a mapping of node IDs to array indices
+        const nodeIdToIndex: { [key: string]: number } = {};
+        graphData.nodes.forEach((node, index) => {
+          nodeIdToIndex[node.id] = index;
+        });
+
+        // Process nodes
+        const processedNodes = graphData.nodes.map((node, index) => {
+          // Position nodes in a circle
+          const angle = (index * 2 * Math.PI) / graphData.nodes.length;
+          const radius = 150;
+
+          return {
+            ...node,
+            name: node.name,
+            // Mark the node type as a custom property
+            nodeType: node.nodeType,
+            itemStyle: {
+              color: colorMap[node.nodeType] || "#95a5a6",
+            },
+            symbolSize: node.nodeType === "current" ? 30 : 20,
+            // Using a consistent property for the legend
+            category: node.nodeType || "regular",
+            // Initial position in a circle
+            x: Math.cos(angle) * radius + radius,
+            y: Math.sin(angle) * radius + radius,
+            // Fix central node position
+            fixed: node.nodeType === "current",
+          };
+        });
+
+        // Process links
+        const processedLinks = graphData.links.map((link) => {
+          let sourceIndex, targetIndex;
+
+          // Get the source and target nodes
+          const sourceNode = graphData.nodes.find((n) => n.id === link.source);
+          const targetNode = graphData.nodes.find((n) => n.id === link.target);
+
+          // If source is current and target is ancestor, or source is descendant and target is current,
+          // reverse the direction to show the correct flow
+          if (
+            sourceNode &&
+            targetNode &&
+            ((sourceNode.nodeType === "current" &&
+              targetNode.nodeType === "ancestor") ||
+              (sourceNode.nodeType === "descendant" &&
+                targetNode.nodeType === "current"))
+          ) {
+            // Reverse the direction
+            sourceIndex = nodeIdToIndex[link.target];
+            targetIndex = nodeIdToIndex[link.source];
+          } else {
+            // Keep original direction
+            sourceIndex = nodeIdToIndex[link.source];
+            targetIndex = nodeIdToIndex[link.target];
+          }
+
+          // Return the link with correct indices
+          return {
+            source: sourceIndex,
+            target: targetIndex,
+            lineStyle: {
+              color: "#7f8c8d",
+              width: 2,
+              opacity: 0.8,
+              curveness: 0.3,
+            },
+          };
+        });
+
+        // Create proper legend items that match node colors
+        const legendData = [
+          {
+            name: "current",
+            icon: "circle",
+            itemStyle: { color: colorMap.current },
+          },
+          {
+            name: "ancestor",
+            icon: "circle",
+            itemStyle: { color: colorMap.ancestor },
+          },
+          {
+            name: "descendant",
+            icon: "circle",
+            itemStyle: { color: colorMap.descendant },
+          },
+        ];
+
+        // Configure chart options
+        const option = {
+          tooltip: {
+            trigger: "item",
+            textStyle: {
+              fontSize: 12,
+            },
+            extraCssText: `max-width: 300px; overflow-wrap: break-word; white-space: normal;`,
+            formatter: function (params) {
+              if (params.dataType === "node") {
+                const node = params.data;
+                return `<strong>ID: ${node.id}</strong><br/>${node.passage}`;
+              } else if (params.dataType === "edge") {
+                return "Connection";
+              }
+              return "";
+            },
+          },
+          legend:
+            config.showLegend !== false
+              ? {
+                  data: legendData,
+                  selectedMode: "multiple",
+                  orient: "horizontal",
+                  top: 10,
+                  left: "center",
+                  // Custom formatter for legend items
+                  formatter: function (name) {
+                    return name;
+                  },
+                  // Add click handler for legend items
+                  selector: [
+                    {
+                      type: "all",
+                      title: "All",
+                    },
+                    {
+                      type: "inverse",
+                      title: "Inverse",
+                    },
+                  ],
+                }
+              : undefined,
+          series: [
+            {
+              type: "graph",
+              layout: "force",
+              data: processedNodes,
+              links: processedLinks,
+              // Categories must match node.category values
+              categories: [
+                { name: "current" },
+                { name: "ancestor" },
+                { name: "descendant" },
+                { name: "regular" },
+              ],
+              roam: config.enableZoom !== false,
+              draggable: true,
+              // Enhanced node label settings
+              label: {
+                show: true,
+                position: "right",
+                formatter: "{b}",
+                fontSize: 12,
+                color: "#333",
+              },
+              // Force layout settings
+              force: {
+                repulsion: 350,
+                gravity: 0.1,
+                edgeLength: 150,
+                layoutAnimation: true,
+              },
+              // Edge styling
+              edgeSymbol: ["none", "arrow"],
+              edgeSymbolSize: [0, 8],
+              lineStyle: {
+                color: "#7f8c8d",
+                width: 2,
+                opacity: 0.8,
+                curveness: 0.3,
+              },
+              // Selection emphasis
+              emphasis: {
+                focus: "adjacency",
+                lineStyle: {
+                  width: 4,
+                  color: "#444",
+                },
+                itemStyle: {
+                  borderWidth: 2,
+                  borderColor: "#fff",
+                },
+              },
+              // Node selection by legend
+              legendHoverLink: true,
+              animation: true,
+            },
+          ],
+        };
+
+        // Apply the configuration
+        chart.setOption(option);
+
+        // Custom event to filter nodes based on legend selection
+        chart.on("legendselectchanged", function (params) {
+          const selectedTypes = Object.keys(params.selected).filter(
+            (type) => params.selected[type]
+          );
+
+          // You can add custom filtering logic here if needed
+          console.log("Selected node types:", selectedTypes);
+        });
+
+        // Force a resize after initialization
+        setTimeout(() => {
+          chart.resize();
+        }, 200);
+
+        // Handle window resize
+        window.addEventListener("resize", () => {
+          chart.resize();
+        });
+
+        // Add click handler for nodes
+        if (config.enableNavigation !== false) {
+          chart.on("click", function (params) {
+            if (params.dataType === "node") {
+              // Navigate to the clicked passage
+
+              window.location.href = withBasePath(
+                `/passages/${params.data.jad_id}`
+              );
+            }
+          });
+        }
+      }
+    } else {
+      console.error("No graph data available or data is empty:", graphData);
+    }
+  });
+</script>
