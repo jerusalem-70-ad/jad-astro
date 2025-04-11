@@ -6,14 +6,13 @@ export type NodeType = "current" | "ancestor" | "descendant" | "regular";
 // Basic node information
 export interface GraphNode {
   id: string | number;
-  jad_id: string;
   name: string;
   work: string;
   author: string;
   passage: string;
+  jad_id: string;
   depth: number;
   nodeType: NodeType;
-  children: GraphNode[];
 }
 
 // Link between nodes
@@ -21,12 +20,12 @@ export interface GraphLink {
   source: string | number;
   target: string | number;
   depth: number;
+  type?: string;
 }
 
 // Complete graph structure
 export interface TransmissionGraph {
   id: string | number;
-  tree: GraphNode;
   graph: {
     nodes: GraphNode[];
     links: GraphLink[];
@@ -37,91 +36,119 @@ export interface TransmissionGraph {
   };
 }
 
+// Language interface
+export interface Language {
+  id: number;
+  value: string;
+  color: string;
+}
+
+// Reference interfaces
+export interface Reference {
+  id: number;
+  value: string;
+}
+
+// Author interface
+export interface Author {
+  id: number;
+  name: string;
+  jad_id: string;
+  gnd_url?: string;
+  notes?: string | null;
+  lebensdaten?: string | null;
+}
+
+// Published Edition interface
+export interface PublishedEdition {
+  id: number;
+  name: string;
+  jad_id: string;
+  digi_url?: string;
+}
+
+// Date interface
+export interface DateItem {
+  id: number;
+  value: string;
+}
+
+// Genre interface
+export interface Genre {
+  id: number;
+  value: string;
+  color: string;
+}
+
+// Work interface
+export interface Work {
+  id: number;
+  name: string;
+  jad_id: string;
+  author: Author[];
+  manuscripts: any[]; // This appears to be empty in the sample
+  title: string;
+  genre: Genre;
+  notes: string | null;
+  notes__author: string | null;
+  institutional_context: any[]; // This appears to be empty in the sample
+  published_edition: PublishedEdition[];
+  date_certainty: boolean;
+  date: DateItem[];
+  link_digital_editions: string;
+  author_certainty: boolean;
+  incipit: string | null;
+  volume_edition_or_individual_editor: string | null;
+}
+
+// Value-only interface (used for multiple fields)
+export interface ValueItem {
+  id: number;
+  value: string;
+}
+
+// Navigation interface
+export interface Navigation {
+  id: string;
+  label: string;
+}
+
 // Passage interface
 export interface Passage {
-  id: number | string;
-  jad_id: string;
+  id: number;
   passage: string;
-  text_paragraph: string;
+  jad_id: string;
+  language: Language;
   position_in_work: string;
-  work: Work[];
-  manuscripts: Manuscript[];
+  text_paragraph: string;
+  note: string | null;
+  explicit_contemp_ref: string | null;
   biblical_references: Reference[];
-  liturgical_references: Reference[];
-  ai_bibl_ref: Reference[];
-  source_passage: SourcePassage[];
-  keywords: Keyword[];
-  part_of_cluster: Cluster[];
-  occurrence_found_in: Occurrence[];
-  note?: string;
-  transmission_graph?: TransmissionGraph;
-  prev: { id: string };
-  next: { id: string };
-  biblical_ref_lvl0?: string[];
-  biblical_ref_lvl1?: string[];
-  biblical_ref_lvl2?: string[];
-}
-
-// Other related interfaces
-export interface Work {
-  id: number | string;
-  jad_id: string;
-  name: string;
-  title: string;
-  author: Author[];
-  author_certainty: boolean;
-  date: DateItem[];
-  institutional_context?: Institution[];
-}
-
-export interface Author {
-  id: number | string;
-  jad_id: string;
-  name: string;
-}
-
-export interface DateItem {
-  id: number | string;
-  value: string;
-}
-
-export interface Manuscript {
-  id: number | string;
-  jad_id: string;
-  value: string;
-  view_label?: string;
-}
-
-export interface Reference {
-  id: number | string;
-  value: string;
-  name?: string;
-  text?: string;
-  nova_vulgata_url?: string;
-}
-
-export interface SourcePassage {
-  id: number | string;
-  jad_id?: string;
-}
-
-export interface Keyword {
-  id: number | string;
-  jad_id: string;
-  name: string;
-}
-
-export interface Cluster {
-  id: number | string;
-  value: string;
-}
-
-export interface Institution {
-  id: number | string;
-  jad_id: string;
-  name: string;
-}
-
-export interface Occurrence {
-  value: string;
+  work: Work[];
+  sources_used: ValueItem[];
+  keywords: any[]; // This appears to be empty in the sample
+  part_of_cluster: any[]; // This appears to be empty in the sample
+  authority_discourse: number;
+  liturgical_references: any[]; // This appears to be empty in the sample
+  occurrence_found_in: ValueItem[];
+  author_lookup: {
+    ids: {
+      [key: string]: number;
+    };
+    value: string;
+  }[];
+  source_passage: ValueItem[];
+  mss_locus: any[]; // This appears to be empty in the sample
+  occurrence_ms: any[]; // This appears to be empty in the sample
+  main_ms: any[]; // This appears to be empty in the sample
+  incipit: string | null;
+  manuscripts: any[]; // This appears to be empty in the sample
+  ai_bibl_ref: ValueItem[];
+  view_label: string;
+  prev: Navigation;
+  next: Navigation;
+  biblical_ref_lvl0: string[];
+  biblical_ref_lvl1: string[];
+  biblical_ref_lvl2: string[];
+  transmission_graph: TransmissionGraph;
 }

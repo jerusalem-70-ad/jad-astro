@@ -190,7 +190,7 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
                         <span>{reference.name}</span>
                       )}
 
-                      <span class="italic invisible group-hover:visible absolute w-[280px] top-8 left-0 bg-brand-900 text-white opacity-95 p-2 rounded-md shadow-md">
+                      <span class="italic invisible group-hover:visible absolute z-10 w-[300px] top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
                         {reference.text}
                       </span>
                     </span>
@@ -231,7 +231,8 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
               : "N/A"
           }
         </dd>
-        <dt
+        {passage.source_passage.length > 0 || usedBy.length > 0 ? (
+          <dt
           class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
         >
           Transmission:
@@ -245,6 +246,9 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
             )
           }
         </dd>
+        )
+        : ''}
+       
         <dt
           class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
         >

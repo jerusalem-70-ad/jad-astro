@@ -14,7 +14,7 @@ export interface Props {
 
 const {
   transmissionGraph,
-  height = 400,
+  height = 500,
   showLegend = true,
   enableZoom = true,
   enableNavigation = true,
@@ -137,6 +137,10 @@ const {
             nodeType: node.nodeType,
             itemStyle: {
               color: colorMap[node.nodeType] || "#95a5a6",
+              borderWidth: 2,
+              borderColor: "#fff",
+              shadowColor: "rgba(0, 0, 0, 0.3)",
+              shadowBlur: 5,
             },
             symbolSize: node.nodeType === "current" ? 30 : 20,
             // Using a consistent property for the legend
@@ -219,9 +223,9 @@ const {
             formatter: function (params: any) {
               if (params.dataType === "node") {
                 const node = params.data;
-                return `<strong>ID: ${node.id}</strong><br/>${node.passage}`;
+                return `<strong>#${node.id} ${node.name}</strong><br/><span class="italic">${node.passage}</span>`;
               } else if (params.dataType === "edge") {
-                return "Connection";
+                return "";
               }
               return "";
             },
@@ -238,17 +242,6 @@ const {
                   formatter: function (name: string) {
                     return name;
                   },
-                  // Add click handler for legend items
-                  selector: [
-                    {
-                      type: "all",
-                      title: "All",
-                    },
-                    {
-                      type: "inverse",
-                      title: "Inverse",
-                    },
-                  ],
                 }
               : undefined,
           series: [
@@ -273,17 +266,21 @@ const {
                 formatter: "{b}",
                 fontSize: 12,
                 color: "#333",
+                distance: 5, // Add some distance between node and label
+                backgroundColor: "rgba(255,255,255,0.7)", // Semi-transparent background
+                padding: [2, 4], // Padding around text
               },
               // Force layout settings
               force: {
-                repulsion: 350,
+                repulsion: 650,
                 gravity: 0.1,
                 edgeLength: 150,
                 layoutAnimation: true,
+                friction: 0.1, // slow down node movement
               },
               // Edge styling
               edgeSymbol: ["none", "arrow"],
-              edgeSymbolSize: [0, 8],
+              edgeSymbolSize: [0, 10],
               lineStyle: {
                 color: "#7f8c8d",
                 width: 2,
@@ -319,9 +316,6 @@ const {
           );
 
           // You can add custom filtering logic here if needed
-          if (window.debugGraphRendering) {
-            console.log("Selected node types:", selectedTypes);
-          }
         });
 
         // Force a resize after initialization
