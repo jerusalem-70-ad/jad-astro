@@ -8,11 +8,13 @@ import msOccurences from "@/content/data/ms_occurrences.json";
 import mss from "@/content/data/manuscripts.json";
 import biblRef from "@/content/data/biblical_references.json";
 import "instantsearch.css/themes/satellite.css";
+import PassageNetwork from "@/components/passage-network.astro";
+import type { Passage } from "@/types";
 
 export async function getStaticPaths() {
   const paths = Object.values(passages).map((passage) => ({
     params: { id: passage.jad_id.toString() },
-    props: { data: passage },
+    props: { data: passage as Passage },
   }));
   return paths;
 }
@@ -99,16 +101,14 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
         <dd class="pl-5">
           {
             passage.work.length > 0
-              ? passage.work.map(
-                  (werk: { jad_id: string; title: any }, index: number) => (
-                    <>
-                      <NavLink href={`/works/${werk.jad_id}`}>
-                        {werk.title}
-                      </NavLink>
-                      {index < passage.work.length - 1 && ", "}
-                    </>
-                  )
-                )
+              ? passage.work.map((werk, index) => (
+                  <>
+                    <NavLink href={`/works/${werk.jad_id}`}>
+                      {werk.name}
+                    </NavLink>
+                    {index < passage.work.length - 1 && ", "}
+                  </>
+                ))
               : "N/A"
           }
         </dd>
@@ -120,11 +120,7 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
         </dt>
 
         <dd class="pl-5">
-          {
-            passage.position_in_work.length > 0
-              ? passage.position_in_work
-              : "N/A"
-          }
+          {passage.position_in_work || "N/A"}
         </dd>
 
         <dt
@@ -136,41 +132,31 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
           {
             passage.manuscripts.length > 0 ? (
               <ul>
-                {mssSourceLocus.map(
-                  (ms: {
-                    id: number;
-                    view_label: string;
-                    jad_id: string;
-                    locus: {
-                      position_in_ms: string;
-                      facsimile_position: string;
-                    }[];
-                  }) => (
-                    <li>
-                      <NavLink href={`/manuscripts/${ms.jad_id}`}>
-                        {ms.view_label}
-                      </NavLink>
-                      {/* add exact position preprocessed from json ms_occurences */}
-                      {ms.locus.length > 0 &&
-                        ms.locus
-                          .filter((locus) => locus.position_in_ms)
-                          .map((locus) => (
-                            <span>
-                              (f. {locus.position_in_ms})
-                              {locus.facsimile_position && (
-                                <NavLink href={locus.facsimile_position}>
-                                  Facsimile{" "}
-                                  <Icon
-                                    name="lucide:external-link"
-                                    class="size-4 inline-flex"
-                                  />
-                                </NavLink>
-                              )}
-                            </span>
-                          ))}
-                    </li>
-                  )
-                )}
+                {mssSourceLocus.map((ms) => (
+                  <li>
+                    <NavLink href={`/manuscripts/${ms.jad_id}`}>
+                      {ms.view_label}
+                    </NavLink>
+                    {/* add exact position preprocessed from json ms_occurences */}
+                    {ms.locus?.length > 0 &&
+                      ms.locus
+                        .filter((locus) => locus.position_in_ms)
+                        .map((locus) => (
+                          <span>
+                            (f. {locus.position_in_ms})
+                            {locus.facsimile_position && (
+                              <NavLink href={locus.facsimile_position}>
+                                Facsimile{" "}
+                                <Icon
+                                  name="lucide:external-link"
+                                  class="size-4 inline-flex"
+                                />
+                              </NavLink>
+                            )}
+                          </span>
+                        ))}
+                  </li>
+                ))}
               </ul>
             ) : (
               "N/A"
@@ -204,17 +190,17 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
                         <span>{reference.name}</span>
                       )}
 
-                      <span class="italic invisible group-hover:visible absolute w-[280px] top-8 left-0 bg-brand-900 text-white opacity-95 p-2 rounded-md shadow-md">
+                      <span class="italic invisible group-hover:visible absolute z-10 w-[300px] top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
                         {reference.text}
                       </span>
                     </span>
                   ))
                   // use reduce to add the space and separator between entries
-                  .reduce((prev, curr) => [
-                    prev,
-                    <span class="mx-1">|</span>,
-                    curr,
-                  ])
+                  .reduce((prev, curr, idx) =>
+                    idx === 0
+                      ? [curr]
+                      : [prev, <span class="mx-1">|</span>, curr]
+                  )
               : "N/A"
           }
         </dd>
@@ -224,7 +210,7 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
         </dt>
         <dd class="pl-5 text-brand-600">
           {
-            passage.ai_bibl_ref.length > 0
+            passage.ai_bibl_ref?.length > 0
               ? passage.ai_bibl_ref
                   .map((reference) => reference.value)
                   .join(", ")
@@ -245,7 +231,24 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
               : "N/A"
           }
         </dd>
-
+        {passage.source_passage.length > 0 || usedBy.length > 0 ? (
+          <dt
+          class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
+        >
+          Transmission:
+        </dt>
+        <dd class="pl-5">
+          {
+            passage.transmission_graph ? (
+              <PassageNetwork transmissionGraph={passage.transmission_graph} />
+            ) : (
+              <p>No transmission data available for this passage.</p>
+            )
+          }
+        </dd>
+        )
+        : ''}
+       
         <dt
           class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
         >
@@ -319,11 +322,9 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
         </dt>
         <dd class="pl-5">
           {
-            passage.part_of_cluster.length > 0
+            passage.part_of_cluster?.length > 0
               ? passage.part_of_cluster
-                  .map(
-                    (cluster: { value: string; id: number }) => cluster.value
-                  )
+                  .map((cluster) => cluster.value)
                   .join(", ")
               : "N/A"
           }
@@ -336,14 +337,16 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
         </dt>
         <dd class="pl-5">
           {
-            passage.keywords.length > 0
+            passage.keywords?.length > 0
               ? passage.keywords
-                  .map((keyword: { name: string; id: number }) => (
+                  .map((keyword) => (
                     <NavLink href={`/keywords/jad_keyword__${keyword.id}`}>
                       {keyword.name}
                     </NavLink>
                   ))
-                  .reduce((prev, curr) => [prev, ", ", curr])
+                  .reduce((prev, curr, idx) =>
+                    idx === 0 ? [curr] : [prev, ", ", curr]
+                  )
               : "N/A"
           }
         </dd>
@@ -354,7 +357,7 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
           Full text:
         </dt>
         <dd class="pl-5 italic">
-          {passage.text_paragraph !== null ? passage.text_paragraph : "N/A"}
+          {passage.text_paragraph || "N/A"}
         </dd>
 
         <dt
@@ -364,10 +367,8 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
         </dt>
         <dd class="pl-5">
           {
-            passage.occurrence_found_in.length > 0
-              ? passage.occurrence_found_in
-                  .map((find: { value: string }) => find.value)
-                  .join(", ")
+            passage.occurrence_found_in?.length > 0
+              ? passage.occurrence_found_in.map((find) => find.value).join(", ")
               : "N/A"
           }
           {passage.note && <span>: {passage.note}</span>}
