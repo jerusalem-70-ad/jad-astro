@@ -231,23 +231,7 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
               : "N/A"
           }
         </dd>
-        {passage.source_passage.length > 0 || usedBy.length > 0 ? (
-          <dt
-          class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
-        >
-          Transmission:
-        </dt>
-        <dd class="pl-5">
-          {
-            passage.transmission_graph ? (
-              <PassageNetwork transmissionGraph={passage.transmission_graph} />
-            ) : (
-              <p>No transmission data available for this passage.</p>
-            )
-          }
-        </dd>
-        )
-        : ''}
+       
        
         <dt
           class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
@@ -373,6 +357,31 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
           }
           {passage.note && <span>: {passage.note}</span>}
         </dd>
+        {passage.source_passage.length > 0 || usedBy.length > 0 ? (
+          <dt
+          class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
+        >
+          Transmission:
+        </dt>
+        <dd class="pl-5">
+          {
+            passage.transmission_graph ? (
+            <details>
+            <summary class="cursor-pointer p-2 border border-neutral-200 bg-brand-50 hover:bg-brand-700 hover:text-brand-50 w-80 rounded-md">See visualization graph</summary>
+            <div>
+              <p class="text-sm text-brand-600">
+                The transmission graph shows the relationships between this passage
+                and its sources, as well as the passages that use it as a source.
+              </p>
+                <PassageNetwork transmissionGraph={passage.transmission_graph} />
+            </div></details>
+            ) : (
+              <p>No transmission data available for this passage.</p>
+            )
+          }
+        </dd>
+        )
+        : ''}
       </dl>
     </Article>
   </div>
