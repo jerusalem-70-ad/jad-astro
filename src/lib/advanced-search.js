@@ -61,12 +61,14 @@ const refinementListKeywords = wrapInPanel("Keywords");
 
 const hierarchicalMenuBibl = wrapHierarcicalMenuInPanel("Biblical references");
 
+const refinementListSources = wrapInPanel("Sources");
+
 // add widgets
 search.addWidgets([
   searchBox({
     container: "#searchbox",
     autofocus: true,
-    placeholder: "Search",
+    placeholder: "Text search",
   }),
   hits({
     container: "#hits",
@@ -142,7 +144,7 @@ search.addWidgets([
     container: "#refinement-list-author",
     attribute: "work.author.name",
     searchable: true,
-    searchablePlaceholder: "Search for authors",
+    searchablePlaceholder: "e.g. Hieronymus",
   }),
 
   refinementListWork({
@@ -152,7 +154,7 @@ search.addWidgets([
     showMore: true,
     showMoreLimit: 50,
     limit: 10,
-    searchablePlaceholder: "Search for works",
+    searchablePlaceholder: "e.g. Epistolae",
   }),
 
   refinementListWorkDate({
@@ -172,7 +174,7 @@ search.addWidgets([
     showMore: true,
     showMoreLimit: 50,
     limit: 10,
-    searchablePlaceholder: "Search for manuscript",
+    searchablePlaceholder: "e.g. MS 999",
   }),
 
   refinementListClusters({
@@ -182,7 +184,7 @@ search.addWidgets([
     showMore: true,
     showMoreLimit: 50,
     limit: 10,
-    searchablePlaceholder: "Search for clusters",
+    searchablePlaceholder: "e.g. Crusade",
   }),
 
   refinementListContext({
@@ -192,7 +194,7 @@ search.addWidgets([
     showMore: true,
     showMoreLimit: 50,
     limit: 10,
-    searchablePlaceholder: "Search for context",
+    searchablePlaceholder: "e.g. Benedictines",
   }),
 
   refinementListKeywords({
@@ -202,7 +204,7 @@ search.addWidgets([
     showMore: true,
     showMoreLimit: 50,
     limit: 10,
-    searchablePlaceholder: "Search for keywords",
+    searchablePlaceholder: "e.g. Heresy",
   }),
   refinementListliturgical({
     container: "#refinement-list-liturgical",
@@ -211,8 +213,18 @@ search.addWidgets([
     showMore: true,
     showMoreLimit: 50,
     limit: 10,
-    searchablePlaceholder: "Search for liturgical references",
+    searchablePlaceholder: "e.g. Pentecost",
   }),
+  refinementListSources({
+    container: "#refinement-list-sources",
+    attribute: "sources.author",
+    searchable: true,
+    showMore: true,
+    showMoreLimit: 50,
+    limit: 10,
+    searchablePlaceholder: "e.g. Beda",
+  }),
+
   hierarchicalMenuBibl({
     container: "#refinement-list-biblical",
     attributes: ["biblical_ref_lvl0", "biblical_ref_lvl1", "biblical_ref_lvl2"],
@@ -247,7 +259,9 @@ search.addWidgets([
             ? "Keyword"
             : item.attribute === "Liturgical_references.value"
             ? "Liturgy"
-            : item.label,
+            : item.label
+            ? "Source"
+            : item.attribute === "sources.author",
       }));
     },
   }),

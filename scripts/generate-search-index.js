@@ -75,6 +75,7 @@ async function generate() {
       },
       { name: "cluster", type: "object[]", facet: true, optional: true },
       { name: "keywords", type: "object[]", facet: true, optional: true },
+      { name: "sources", type: "object[]", facet: true, optional: true },
     ],
     default_sorting_field: "sort_id",
   };
@@ -96,6 +97,10 @@ async function generate() {
   Object.values(data)
     .filter((value) => value.passage !== "")
     .forEach((value) => {
+      const ancestorNodes =
+        value.transmission_graph?.graph?.nodes?.filter(
+          (node) => node.nodeType === "ancestor" && node.depth === 0
+        ) || [];
       const item = {
         sort_id: value.id,
         id: value.jad_id,
@@ -110,6 +115,7 @@ async function generate() {
         biblical_ref_lvl1: value.biblical_ref_lvl1 || [],
         biblical_ref_lvl2: value.biblical_ref_lvl2 || [],
         keywords: value.keywords || [],
+        sources: ancestorNodes,
       };
       records.push(item);
     });
