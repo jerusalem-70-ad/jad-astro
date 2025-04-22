@@ -6,12 +6,14 @@ interface Props extends HTMLAttributes<"a"> {}
 
 const { href, ...rest } = Astro.props; // destructures Astro.props to extract the href property and group the remaining props into rest to be reattached.
 
-const pathname = withBasePath(href);
+const { pathname, isExternal } = withBasePath(href);
 ---
 
 <a
   {...rest}
   href={pathname}
+  target={isExternal ? "_blank" : undefined}
+  rel={isExternal ? "noopener noreferrer" : undefined}
   class="text-brand-900 underline underline-offset-2 hover:text-brand-600"
   ><slot /></a
 >
