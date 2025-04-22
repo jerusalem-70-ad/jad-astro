@@ -173,7 +173,7 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
           {
             biblRefSource.length > 0
               ? biblRefSource
-                  .map((reference, index) => (
+                  .map((reference) => (
                     <span class="group relative">
                       {reference.nova_vulgata_url ? (
                         <NavLink

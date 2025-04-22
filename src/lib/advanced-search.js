@@ -59,8 +59,6 @@ const refinementListClusters = wrapInPanel("Clusters");
 
 const refinementListKeywords = wrapInPanel("Keywords");
 
-const refinementListBiblical = wrapInPanel("Biblical references");
-
 const hierarchicalMenuBibl = wrapHierarcicalMenuInPanel("Biblical references");
 
 // add widgets

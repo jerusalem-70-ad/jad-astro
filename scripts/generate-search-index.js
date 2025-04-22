@@ -1,8 +1,8 @@
 import { log } from "@acdh-oeaw/lib";
-import { getData } from "./api-client.js";
+// import { getData } from "./api-client.js";
 import { createTypesenseAdminClient } from "../scripts/create-typesense-admin-client.js";
 import { collectionName } from "../config/search.config.js";
-import { readFileSync, writeFileSync, mkdirSync } from "fs";
+import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
