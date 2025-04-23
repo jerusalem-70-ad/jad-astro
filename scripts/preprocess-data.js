@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
-
+import { enrichDates } from "./utils.js";
 import { buildTransmissionGraph } from "./build-transmission-graph.js";
 
 const loadJSON = (file) =>
@@ -9,6 +9,7 @@ const loadJSON = (file) =>
   );
 
 const passages = Object.values(loadJSON("passages.json"));
+const dates = Object.values(loadJSON("dates.json"));
 
 // set the output folder
 const folderPath = join(process.cwd(), "src", "content", "data");
@@ -144,6 +145,12 @@ const passagesPlus = passages.map((passage) => {
     });
   }
 
+  if (passage.work.some((w) => w.date.length > 0)) {
+    passage.work = passage.work.map((w) => ({
+      ...w,
+      date: enrichDates(w.date, dates),
+    }));
+  }
   return {
     ...passage,
     biblical_ref_lvl0: lvl0,
