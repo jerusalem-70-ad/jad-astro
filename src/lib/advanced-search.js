@@ -10,8 +10,10 @@ import {
   clearRefinements,
   currentRefinements,
   hierarchicalMenu,
-  sortBy,
+  rangeInput,
+  configure,
 } from "instantsearch.js/es/widgets";
+import { connectRange } from "instantsearch.js/es/connectors";
 import { withBasePath } from "./withBasePath";
 
 const project_collection_name = "JAD-temp";
@@ -61,6 +63,8 @@ const refinementListWork = wrapInPanel("Work");
 
 const refinementListManuscript = wrapInPanel("Manuscripts");
 
+const inputRangeDate = wrapInputRangeInPanel("Date");
+
 const refinementListWorkDate = wrapInPanel("Date of work");
 
 const refinementListWorkCentury = wrapInPanel("Century of work");
@@ -76,6 +80,89 @@ const refinementListKeywords = wrapInPanel("Keywords");
 const hierarchicalMenuBibl = wrapHierarcicalMenuInPanel("Biblical references");
 
 const refinementListSources = wrapInPanel("Sources");
+
+const renderRangeSlider = (renderOptions, isFirstRender) => {
+  const {
+    refine,
+    widgetParams,
+    range: { min, max },
+    start,
+  } = renderOptions;
+
+  if (isFirstRender) {
+    const container =
+      typeof widgetParams.container === "string"
+        ? document.querySelector(widgetParams.container)
+        : widgetParams.container;
+
+    // Create wrapper div using InstantSearch.js class naming convention
+    const wrapper = document.createElement("div");
+    wrapper.className = "ais-RangeInput";
+
+    const form = document.createElement("div");
+    form.className = "ais-RangeInput-form";
+
+    const inputMin = document.createElement("input");
+    inputMin.type = "number";
+    inputMin.placeholder = "From year";
+    inputMin.value = start[0] || "";
+    inputMin.className = "ais-RangeInput-input";
+
+    const inputMax = document.createElement("input");
+    inputMax.type = "number";
+    inputMax.placeholder = "To year";
+    inputMax.value = start[1] || "";
+    inputMax.className = "ais-RangeInput-input";
+
+    const button = document.createElement("button");
+    button.innerText = "Apply";
+    button.className = "ais-RangeInput-submit";
+
+    // Function to handle submission
+    const handleSubmit = () => {
+      const minVal = parseInt(inputMin.value, 10);
+      const maxVal = parseInt(inputMax.value, 10);
+      refine([minVal, maxVal]);
+    };
+    // Add enter key handler to inputs
+    const handleEnterKey = (e) => {
+      if (e.key === "Enter") {
+        handleSubmit();
+      }
+    };
+    inputMin.addEventListener("keypress", handleEnterKey);
+    inputMax.addEventListener("keypress", handleEnterKey);
+    button.addEventListener("click", handleSubmit);
+
+    form.appendChild(inputMin);
+    form.appendChild(inputMax);
+    form.appendChild(button);
+    wrapper.appendChild(form);
+    container.appendChild(wrapper);
+  }
+};
+
+const customRangeWidget = connectRange(renderRangeSlider);
+
+function wrapCustomRangeInPanel(title) {
+  return panel({
+    collapsed: ({ state }) => {
+      return state.query.length === 0;
+    },
+    templates: {
+      header: () =>
+        `<span class="normal-case text-base font-normal">${title}</span>`,
+    },
+    cssClasses: {
+      header: "cursor-pointer relative z-10",
+      collapseButton: "absolute inset-0 z-20 flex flex-row-reverse",
+      collapseIcon: "",
+      root: "border-b",
+    },
+  })(customRangeWidget);
+}
+
+const customRangeDate = wrapCustomRangeInPanel("Date");
 
 // add widgets
 search.addWidgets([
@@ -152,6 +239,15 @@ search.addWidgets([
 
   stats({
     container: "#stats-container",
+  }),
+
+  customRangeDate({
+    container: "#refinement-list-date",
+    attribute: "work_date_not_before",
+  }),
+
+  configure({
+    filters: "", // initially empty; will be controlled dynamically
   }),
 
   refinementListAuthor({
@@ -335,6 +431,24 @@ function wrapHierarcicalMenuInPanel(title) {
       root: "border-b",
     },
   })(hierarchicalMenu);
+}
+
+function wrapInputRangeInPanel(title) {
+  return panel({
+    collapsed: ({ state }) => {
+      return state.query.length === 0;
+    },
+    templates: {
+      header: () =>
+        `<span class="normal-case text-base font-normal">${title}</span>`,
+    },
+    cssClasses: {
+      header: "cursor-pointer relative z-10",
+      collapseButton: "absolute inset-0 z-20 flex flex-row-reverse",
+      collapseIcon: "",
+      root: "border-b",
+    },
+  })(rangeInput);
 }
 
 // Back to top functionality
