@@ -41,8 +41,8 @@ const { data: manuscript } = Astro.props;
 
 <PageLayout title=`${manuscript.view_label}`>
   <Article
-  prevLink={manuscript.prev.id}
-  nextLink={manuscript.next.id}
+  prevLink={`/manuscripts/${manuscript.prev.id}`}
+  nextLink={`/manuscripts/${manuscript.next.id}`}
   mainTitle=`${manuscript.library[0]?.place[0]?.name}, ${manuscript.name[0]?.value}`
 >
       
