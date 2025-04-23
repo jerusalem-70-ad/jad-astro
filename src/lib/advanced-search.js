@@ -10,6 +10,7 @@ import {
   clearRefinements,
   currentRefinements,
   hierarchicalMenu,
+  sortBy,
 } from "instantsearch.js/es/widgets";
 import { withBasePath } from "./withBasePath";
 
@@ -41,6 +42,17 @@ const search = instantsearch({
   indexName: project_collection_name,
 });
 
+// Custom comparator function to sort century arrays
+const centuryComparator = (a, b) => {
+  const extractCentury = (str) => {
+    const value = str?.name || str; // Handle both direct strings and refinement objects
+    const match = value.match(/(\d+)/);
+    return match ? parseInt(match[1], 10) : 0;
+  };
+
+  return extractCentury(a) - extractCentury(b);
+};
+
 // refinements list in panel function
 
 const refinementListAuthor = wrapInPanel("Autor");
@@ -50,6 +62,8 @@ const refinementListWork = wrapInPanel("Work");
 const refinementListManuscript = wrapInPanel("Manuscripts");
 
 const refinementListWorkDate = wrapInPanel("Date of work");
+
+const refinementListWorkCentury = wrapInPanel("Century of work");
 
 const refinementListContext = wrapInPanel("Institutional context");
 
@@ -167,6 +181,17 @@ search.addWidgets([
     searchablePlaceholder: "Search for dates",
   }),
 
+  refinementListWorkCentury({
+    container: "#refinement-list-workcentury",
+    attribute: "work.date.century",
+    searchable: true,
+    sortBy: centuryComparator,
+    showMore: true,
+    showMoreLimit: 50,
+    limit: 10,
+    searchablePlaceholder: "e.g. 9th c.",
+  }),
+
   refinementListManuscript({
     container: "#refinement-list-manuscript",
     attribute: "manuscripts.value",
@@ -251,6 +276,8 @@ search.addWidgets([
             ? "Manuscript"
             : item.attribute === "work.date.value"
             ? "Date"
+            : item.attribute === "work.date.century"
+            ? "Century"
             : item.attribute === "work.institutional_context.name"
             ? "Institution"
             : item.attribute === "cluster.value"
