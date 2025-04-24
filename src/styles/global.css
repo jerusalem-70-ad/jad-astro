@@ -1,3 +1,4 @@
+@import "tailwindcss";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -82,7 +83,7 @@
   @apply text-brand-800;
 }
 
-@media (width >= theme(--breakpoint-md)) {
+@media (min-width: 640px) {
   .tabulator .tabulator-row:nth-child(even) {
     @apply bg-brand-50;
   }
