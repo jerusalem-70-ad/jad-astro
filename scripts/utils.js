@@ -18,8 +18,8 @@ export function enrichDates(dateArray, dates) {
       id: date.id,
       value: date.value,
       range: `${dateRange.not_before || 0}-${dateRange.not_after || 1600}`,
-      not_before: dateRange.not_before || "",
-      not_after: dateRange.not_after || "",
+      not_before: Number(dateRange.not_before) || 70,
+      not_after: Number(dateRange.not_after) || 1600,
       century: [
         ...new Set([
           getCentury(dateRange.not_before || ""),

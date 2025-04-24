@@ -10,8 +10,9 @@ import {
   clearRefinements,
   currentRefinements,
   hierarchicalMenu,
-  sortBy,
+  configure,
 } from "instantsearch.js/es/widgets";
+
 import { withBasePath } from "./withBasePath";
 
 const project_collection_name = "JAD-temp";
@@ -34,15 +35,17 @@ const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
     typo_tokens_threshold: 50,
   },
 });
-// create searchClient
+
+// Create the searchClient
 const searchClient = typesenseInstantsearchAdapter.searchClient;
-//
+
+// Initialize InstantSearch
 const search = instantsearch({
   searchClient,
   indexName: project_collection_name,
 });
 
-// Custom comparator function to sort century arrays
+// Custom comparator function to sort century arrays for the refinement list 'Century of work'
 const centuryComparator = (a, b) => {
   const extractCentury = (str) => {
     const value = str?.name || str; // Handle both direct strings and refinement objects
@@ -54,27 +57,16 @@ const centuryComparator = (a, b) => {
 };
 
 // refinements list in panel function
-
 const refinementListAuthor = wrapInPanel("Autor");
-
 const refinementListWork = wrapInPanel("Work");
-
 const refinementListManuscript = wrapInPanel("Manuscripts");
-
 const refinementListWorkDate = wrapInPanel("Date of work");
-
 const refinementListWorkCentury = wrapInPanel("Century of work");
-
 const refinementListContext = wrapInPanel("Institutional context");
-
 const refinementListliturgical = wrapInPanel("Liturgical references");
-
 const refinementListClusters = wrapInPanel("Clusters");
-
 const refinementListKeywords = wrapInPanel("Keywords");
-
 const hierarchicalMenuBibl = wrapHierarcicalMenuInPanel("Biblical references");
-
 const refinementListSources = wrapInPanel("Sources");
 
 // add widgets
@@ -84,6 +76,7 @@ search.addWidgets([
     autofocus: true,
     placeholder: "Text search",
   }),
+
   hits({
     container: "#hits",
     transformItems(items) {
@@ -300,6 +293,86 @@ search.addWidgets([
 
 search.start();
 
+// Initialize the standalone date range filter
+// This runs after InstantSearch has initialized
+document.addEventListener("DOMContentLoaded", function () {
+  const dateRangeContainer = document.getElementById("date-range-widget");
+  if (!dateRangeContainer) return;
+
+  // Create standalone date range filter widget
+  // mimic the algolia panel with collapsible details
+  const panelHTML = `
+    <details class="ais-Panel border-b group">
+  <summary class="ais-Panel-header cursor-pointer relative z-10 flex items-center justify-between">
+    <span class="normal-case text-base font-normal">Year Range</span>
+    <span class="ais-Panel-collapseIcon transition-transform duration-300 group-open:rotate-270">
+    <svg class="ais-Panel-collapseIcon" style="width: 1em; height: 1em;" viewBox="0 0 500 500">
+        <path d="M100 250l300-150v300z" fill="currentColor"></path>
+        </svg>      
+    </span>
+  </summary>
+
+  <div class="ais-Panel-body">
+    <div class="ais-RangeInput">
+      <form class="ais-RangeInput-form">
+        <input class="ais-RangeInput-input" type="number" id="date-from-year" min="70" max="1600" value="70" placeholder="From year">
+        <input class="ais-RangeInput-input" type="number" id="date-to-year" min="70" max="1600" value="1600" placeholder="To year">           
+        <button type="button" class="ais-RangeInput-submit" id="apply-date-range">Apply</button>
+      </form>
+    </div>
+  </div>
+</details>
+
+  `;
+
+  // Add the panel to the container
+  dateRangeContainer.innerHTML = panelHTML;
+
+  // Add event listener to the apply button
+  // Extract the common filter building logic to a separate function
+  function applyDateFilter() {
+    const fromYear =
+      parseInt(document.getElementById("date-from-year").value, 10) || 70;
+    const toYear =
+      parseInt(document.getElementById("date-to-year").value, 10) || 1600;
+
+    // Build filter string
+    let filterStr = "";
+    if (fromYear > 70) {
+      filterStr += `work_date_not_before:>=${fromYear}`;
+    }
+    if (toYear < 1600) {
+      if (filterStr) filterStr += " && ";
+      filterStr += `work_date_not_after:<=${toYear}`;
+    }
+
+    // Apply the filter using the helper API
+    search.helper.setQueryParameter("filters", filterStr).search();
+  }
+
+  // Add event listener to the apply button
+  const applyButton = document.getElementById("apply-date-range");
+  if (applyButton) {
+    applyButton.addEventListener("click", applyDateFilter);
+  }
+
+  // Also listen for Enter key on the inputs
+  const fromYearInput = document.getElementById("date-from-year");
+  const toYearInput = document.getElementById("date-to-year");
+
+  [fromYearInput, toYearInput].forEach((input) => {
+    if (input) {
+      input.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          applyDateFilter();
+          // Prevent form submission
+          e.preventDefault();
+        }
+      });
+    }
+  });
+});
+
 // function to wrap refinements filter in a panel
 function wrapInPanel(title) {
   return panel({
@@ -337,23 +410,7 @@ function wrapHierarcicalMenuInPanel(title) {
   })(hierarchicalMenu);
 }
 
-// Back to top functionality
-const backToTopButton = document.getElementById("back-to-top");
-if (backToTopButton) {
-  backToTopButton.addEventListener("click", function () {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-
-  // Show/hide based on scroll position
-  window.addEventListener("scroll", function () {
-    if (window.scrollY > 300) {
-      backToTopButton.classList.remove("hidden");
-    } else {
-      backToTopButton.classList.add("hidden");
-    }
-  });
-}
-// Filter show/hide panel
+// Filter show/hide functionality
 const showFilter = document.querySelector("#filter-button");
 const filters = document.querySelector("#refinements-section");
 if (showFilter) {
