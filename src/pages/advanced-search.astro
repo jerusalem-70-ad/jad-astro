@@ -5,7 +5,7 @@ import { Icon } from "astro-icon/components";
 ---
 
 <Layout title="Search">
-  <main class="md:w-3/4 mx-auto md:p-6 sm:w-4/5 p-2">
+  <div class="md:w-3/4 mx-auto md:p-6 sm:w-4/5 p-2">
     <h2
       class="text-xl md:text-3xl font-bold md:text-brand-400 text-brand-600 rounded-t-lg p-3"
     >
@@ -63,26 +63,7 @@ import { Icon } from "astro-icon/components";
         </section>
       </div>
     </div>
-  </main>
-  <!-- Back to Top Button for Mobile -->
-  <button
-    id="back-to-top"
-    class="fixed bottom-20 right-4 md:hidden bg-brand-600 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-lg opacity-65"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="h-6 w-6"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M5 15l7-7 7 7"></path>
-    </svg>
-  </button>
+  </div>
 </Layout>
 
 <script src="@/lib/advanced-search.js"></script>
