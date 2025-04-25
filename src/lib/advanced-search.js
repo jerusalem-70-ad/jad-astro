@@ -123,7 +123,7 @@ search.addWidgets([
               <a href="${withBasePath(
                 `/passages/${hit.id}`
               )}" class="underline">
-                (#${hit.id.substr(15)}) ${hit.title}
+                (#${hit.id.substr(16)}) ${hit.title}
               </a>
             </h3>            
           
@@ -279,9 +279,13 @@ search.addWidgets([
             ? "Keyword"
             : item.attribute === "Liturgical_references.value"
             ? "Liturgy"
-            : item.label
+            : item.attribute === "sources.author"
             ? "Source"
-            : item.attribute === "sources.author",
+            : item.attribute === "work_date_not_before"
+            ? "Date"
+            : item.attribute === "work_date_not_after"
+            ? "Date"
+            : item.attribute,
       }));
     },
   }),
@@ -322,13 +326,12 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
   </div>
 </details>
-
   `;
 
   // Add the panel to the container
   dateRangeContainer.innerHTML = panelHTML;
 
-  // Add event listener to the apply button
+  // Add event listener for the custom dateRange widget (ENter key and Apply button)
   // Extract the common filter building logic to a separate function
   function applyDateFilter() {
     const fromYear =
@@ -345,7 +348,22 @@ document.addEventListener("DOMContentLoaded", function () {
       if (filterStr) filterStr += " && ";
       filterStr += `work_date_not_after:<=${toYear}`;
     }
+    // Clear any existing date range refinements first
+    search.helper.clearRefinements("work_date_not_before");
+    search.helper.clearRefinements("work_date_not_after");
 
+    // Add the new refinements
+    if (fromYear > 70) {
+      search.helper.addNumericRefinement(
+        "work_date_not_before",
+        ">=",
+        fromYear
+      );
+    }
+
+    if (toYear < 1600) {
+      search.helper.addNumericRefinement("work_date_not_after", "<=", toYear);
+    }
     // Apply the filter using the helper API
     search.helper.setQueryParameter("filters", filterStr).search();
   }
@@ -410,7 +428,8 @@ function wrapHierarcicalMenuInPanel(title) {
   })(hierarchicalMenu);
 }
 
-// Filter show/hide functionality
+// Filter show/hide functionality for mobile
+// This code will show/hide the filter section when the button is clicked
 const showFilter = document.querySelector("#filter-button");
 const filters = document.querySelector("#refinements-section");
 if (showFilter) {
