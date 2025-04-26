@@ -206,14 +206,24 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
         </dd>
         <dt
           class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
-        >
+        >AI:
         </dt>
         <dd class="pl-5 text-brand-600">
           {
             passage.ai_bibl_ref
               ? passage.ai_bibl_ref
-                  .map((reference) => reference.bibl)
-                  .join(", ")
+                  .map((reference) => 
+                  (<span class="group relative">
+                    <span>{reference.bibl}</span>
+                    <span class="italic invisible group-hover:visible absolute z-10 w-[300px] top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
+                        {reference.text}
+                      </span>
+                  </span>))
+                   .reduce((prev, curr, idx) =>
+                    idx === 0
+                      ? [curr]
+                      : [prev, <span class="mx-1">|</span>, curr]
+                  )
               : "N/A"
           }
         </dd>
