@@ -143,12 +143,7 @@ export interface Passage {
   main_ms: any[]; // This appears to be empty in the sample
   incipit: string | null;
   manuscripts: any[]; // This appears to be empty in the sample
-  ai_bibl_ref: [
-    {
-      bibl: string;
-      text: string;
-    }
-  ];
+  ai_bibl_ref: any[];
   view_label: string;
   prev: Navigation;
   next: Navigation;
