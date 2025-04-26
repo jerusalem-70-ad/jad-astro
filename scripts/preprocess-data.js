@@ -10,6 +10,7 @@ const loadJSON = (file) =>
 
 const passages = Object.values(loadJSON("passages.json"));
 const dates = Object.values(loadJSON("dates.json"));
+const aiBiblRef = loadJSON("ai_bibl_ref.json");
 
 // set the output folder
 const folderPath = join(process.cwd(), "src", "content", "data");
@@ -144,25 +145,30 @@ const passagesPlus = passages.map((passage) => {
       lvl2.push(`${book} > ${chapterTrimmed} > ${verseTrimmed}`);
     });
   }
-
+  // enrich the date from dates.json using helper function
   if (passage.work.some((w) => w.date.length > 0)) {
     passage.work = passage.work.map((w) => ({
       ...w,
       date: enrichDates(w.date, dates),
     }));
   }
+
+  // add aiBiblicalRef to each passage
+  const aiBiblicalRefEntry = aiBiblRef[passage.jad_id];
+
   return {
     ...passage,
     biblical_ref_lvl0: lvl0,
     biblical_ref_lvl1: lvl1,
     biblical_ref_lvl2: lvl2,
+    ai_bibl_ref: aiBiblicalRefEntry || [],
   };
 });
 
 // use imported function to build the transmission graph
 const graph = buildTransmissionGraph(passagesPlus);
 
-// Optionally attach graph to each passage
+// attach graph to each passage
 const enrichedPassages = passagesPlus.map((p) => ({
   ...p,
   transmission_graph: graph[p.id],

@@ -210,9 +210,9 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
         </dt>
         <dd class="pl-5 text-brand-600">
           {
-            passage.ai_bibl_ref?.length > 0
+            passage.ai_bibl_ref
               ? passage.ai_bibl_ref
-                  .map((reference) => reference.value)
+                  .map((reference) => reference.bibl)
                   .join(", ")
               : "N/A"
           }

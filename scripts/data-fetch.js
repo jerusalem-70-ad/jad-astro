@@ -54,6 +54,32 @@ async function fetchData(fileName, folderPath) {
     log.error("Error while fetching data:\n", String(error));
   }
 }
+// function to get ai generated biblical references (different baseUrl)
+async function fetchAIbibl() {
+  try {
+    const folderPath = join(process.cwd(), "src", "content", "data");
+    mkdirSync(folderPath, { recursive: true });
+    const response = await fetch(
+      "https://raw.githubusercontent.com/jerusalem-70-ad/jad-ai/refs/heads/main/out/all_in_one.json"
+    );
+    if (!response.ok) {
+      throw new Error("API issues " + response.statusText + "\n" + fullUrl);
+    }
+    const data = await response.json();
+    const jsonString = JSON.stringify(data, null, 2);
+    writeFileSync(join(folderPath, "ai_bibl_ref.json"), jsonString, {
+      encoding: "utf-8",
+    });
+    log.success(`AI ref file has been fetched and stored in ${folderPath}`);
+  } catch (error) {
+    log.error("Error while fetching ai bibl ref data:\n", String(error));
+  }
+}
 
-// Call the async function to fetch the data
-fetchAllData();
+// Call both functions
+async function fetchAllDatasets() {
+  await fetchAllData();
+  await fetchAIbibl();
+}
+
+fetchAllDatasets();
