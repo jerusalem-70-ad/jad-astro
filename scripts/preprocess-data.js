@@ -9,6 +9,7 @@ const loadJSON = (file) =>
   );
 
 const passages = Object.values(loadJSON("passages.json"));
+const authors = Object.values(loadJSON("authors.json"));
 const dates = Object.values(loadJSON("dates.json"));
 const aiBiblRef = loadJSON("ai_bibl_ref.json");
 
@@ -183,3 +184,75 @@ writeFileSync(
 console.log(
   "passages.json file updated successfully with biblical ref in hierarchical structure."
 );
+
+async function enrichAuthorsWithVariants() {
+  // Create a function to fetch name variants from lobid API
+  const fetchNameVariants = async (gndUrl) => {
+    try {
+      if (!gndUrl) {
+        console.warn("No GND URL provided");
+        return [];
+      }
+
+      // Extract GND ID and validate format
+      const gndId = gndUrl
+        .split("/")
+        .pop()
+        ?.replace(/[^0-9X-]/g, "");
+      if (!gndId) {
+        console.warn(`Invalid GND URL format: ${gndUrl}`);
+        return [];
+      }
+
+      const url = `https://lobid.org/gnd/${gndId}.json`;
+
+      const response = await fetch(url, {
+        headers: {
+          "User-Agent": "JAD-Project/1.0; ivana.dob@gmail.com",
+          Accept: "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        console.warn(
+          `No data returned for GND ID: ${gndId} (status: ${response.status})`
+        );
+        return [];
+      }
+
+      const lobidData = await response.json();
+
+      // Handle array or string variant names
+      const variants = Array.isArray(lobidData.variantName)
+        ? lobidData.variantName
+        : [lobidData.variantName].filter(Boolean);
+
+      return variants;
+    } catch (error) {
+      console.error(`Error fetching name variants for ${gndUrl}:`, error);
+      return [];
+    }
+  };
+
+  // Enrich authors with name variants
+  const enrichedAuthors = await Promise.all(
+    authors.map(async (author) => {
+      const nameVariants = await fetchNameVariants(author.gnd_url);
+      return {
+        ...author,
+        nameVariants,
+      };
+    })
+  );
+
+  return enrichedAuthors;
+}
+
+enrichAuthorsWithVariants(authors).then((enrichedAuthors) => {
+  writeFileSync(
+    join(folderPath, "authors.json"),
+    JSON.stringify(enrichedAuthors, null, 2),
+    { encoding: "utf-8" }
+  );
+  console.log("authors.json file updated successfully with name variants.");
+});

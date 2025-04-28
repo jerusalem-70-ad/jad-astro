@@ -14,7 +14,7 @@ import TableHead from "@/components/table-head.astro";
     import data from "@/content/data/authors.json";
     import { jsonpathLookup } from "@/lib/tabulator-utils.js";
 
-    var tabledata = [...Object.values(data)];
+    var tabledata = data;
 
     var table = new Tabulator("#tabulator-table", {
       headerFilterLiveFilterDelay: 600,
@@ -33,11 +33,28 @@ import TableHead from "@/components/table-head.astro";
       columns: [
         {
           title: "Name",
-          resizable: true,
           field: "name",
           minWidth: 200,
+          resizable: true,
           headerFilter: "input",
+          // Custom filter: checks both name and nameVariants
+          headerFilterFunc: function (headerValue, rowValue, rowData) {
+            if (!headerValue) return true;
+            const search = headerValue.toLowerCase();
+            const nameMatch = rowData.name?.toLowerCase().includes(search);
+            const variantsMatch = Array.isArray(rowData.nameVariants)
+              ? rowData.nameVariants.some((variant: string) =>
+                  variant.toLowerCase().includes(search)
+                )
+              : false;
+            return nameMatch || variantsMatch;
+          },
+          // Formatter: just show the main name
+          formatter: function (cell) {
+            return cell.getValue();
+          },
         },
+
         {
           title: "GND",
           resizable: true,
