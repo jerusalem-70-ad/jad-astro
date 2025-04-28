@@ -77,10 +77,6 @@ const centuryComparator = (a, b) => {
   return extractCentury(a) - extractCentury(b);
 };
 
-const routing = {
-  stateMapping: simple(),
-};
-
 // refinements list in panel function
 const refinementListAuthor = wrapInPanel("Autor");
 const refinementListWork = wrapInPanel("Work");
@@ -111,7 +107,7 @@ const customDateRangeWidget = (containerId) => {
         <details class="ais-Panel border-b group">
           <summary class="ais-Panel-header cursor-pointer relative z-10 flex items-center justify-between">
             <span class="normal-case text-base font-normal">Year Range</span>
-            <span class="ais-Panel-collapseIcon transition-transform duration-300 group-open:rotate-270">
+            <span class="ais-Panel-collapseIcon transition-transform duration-300 group-open:rotate-[-90deg]">
               <svg style="width: 1em; height: 1em;" viewBox="0 0 500 500">
                 <path d="M100 250l300-150v300z" fill="currentColor"></path>
               </svg>

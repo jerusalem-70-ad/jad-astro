@@ -47,40 +47,50 @@ import { Image } from "astro:assets";
     </nav-bar>
 
     <nav
-      class="hidden lg:flex items-center gap-x-4 text-brand-50 text-lg font-semibold"
+      class="hidden lg:flex items-center gap-x-2 text-brand-50 text-lg font-semibold"
     >
       <NavLink
-        class="hover:underline underline-offset-4 hover:text-brand-200"
+        class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
         href="/passages">Passages</NavLink
       >
       <NavLink
-        class="hover:underline underline-offset-4 hover:text-brand-200"
+        class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
         href="/works">Works</NavLink
       >
       <NavLink
-        class="hover:underline underline-offset-4 hover:text-brand-200"
+        class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
         href="/manuscripts">Manuscripts</NavLink
       >
       <NavLink
-        class="hover:underline underline-offset-4 hover:text-brand-200"
+        class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
         href="/institutions">Institutions</NavLink
       >
       <NavLink
-        class="hover:underline underline-offset-4 hover:text-brand-200"
+        class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
         href="/authors">Authors</NavLink
       >
       <NavLink
-        class="hover:underline underline-offset-4 hover:text-brand-200"
+        class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
         href="/keywords">Keywords</NavLink
       >
       <NavLink
-        class="hover:underline underline-offset-4 hover:text-brand-200"
+        class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
         href="/about">About</NavLink
       >
-      <NavLink
-        class="hover:underline underline-offset-4 hover:text-brand-200"
-        href="/advanced-search">Search</NavLink
-      >
+      <form id="searchForm" class="hidden md:flex items-center gap-x-2">
+        <input
+          type="text"
+          id="searchInput"
+          class="hidden md:block w-64 p-2 rounded-md bg-brand-100 text-brand-800 focus:outline-none focus:ring-3 focus:ring-brand-400 italic"
+          placeholder="Passage text ..."
+        />
+        <button
+          id="searchButton"
+          type="submit"
+          class="hover:bg-brand-400 bg-brand-100 text-brand-900 hover-text-brand-100 transition hover:text-brand-100 p-2 rounded-md focus:outline-none focus:ring-3 focus:ring-brand-400"
+          >Search</button
+        >
+      </form>
     </nav>
   </div>
   <div id="nav-links" class="hidden rounded-xs grid grid-cols-1 p-5">
@@ -116,5 +126,6 @@ import { Image } from "astro:assets";
     >
   </div>
 
-  <script src="../lib/menu.js"></script>
+  <script src="@/lib/menu.js"></script>
+  <script src="@/lib/search-link.js"></script>
 </header>
