@@ -10,8 +10,8 @@ import {
   clearRefinements,
   currentRefinements,
   hierarchicalMenu,
-  configure,
 } from "instantsearch.js/es/widgets";
+import { simple } from "instantsearch.js/es/lib/stateMappings";
 
 import { withBasePath } from "./withBasePath";
 
@@ -43,6 +43,27 @@ const searchClient = typesenseInstantsearchAdapter.searchClient;
 const search = instantsearch({
   searchClient,
   indexName: project_collection_name,
+  routing: {
+    stateMapping: simple(),
+    createURL: (state) => {
+      const { query, refinementList, page } = state;
+      // Modify the structure here to avoid square brackets
+      const queryParam = query ? `JAD-query=${query}` : "";
+      const filters = refinementList
+        ? `filters=${JSON.stringify(refinementList)}`
+        : "";
+      const pageParam = page ? `page=${page}` : "";
+      return `/?${[queryParam, filters, pageParam].filter(Boolean).join("&")}`;
+    },
+    parseURL: (url) => {
+      const urlParams = new URLSearchParams(url);
+      return {
+        query: urlParams.get("JAD-query") || "",
+        refinementList: JSON.parse(urlParams.get("filters") || "{}"),
+        page: parseInt(urlParams.get("page") || "1", 10),
+      };
+    },
+  },
 });
 
 // Custom comparator function to sort century arrays for the refinement list 'Century of work'
@@ -54,6 +75,10 @@ const centuryComparator = (a, b) => {
   };
 
   return extractCentury(a) - extractCentury(b);
+};
+
+const routing = {
+  stateMapping: simple(),
 };
 
 // refinements list in panel function
@@ -69,6 +94,138 @@ const refinementListKeywords = wrapInPanel("Keywords");
 const hierarchicalMenuBibl = wrapHierarcicalMenuInPanel("Biblical references");
 const refinementListSources = wrapInPanel("Sources");
 
+// Initialize a custom Algolia widget to allow users to filter results by a range of years
+// filter input from and to to two different attributes in the schema (not possible with the default range input widget)
+// init() required function when building a custom widget
+// inside it 1. create the HTML structure
+// 2. add event listeners to the form
+// 3. use the helper to add the filter to the search, clear the old refinements
+// 4. add real-time validation to the inputs
+// 5. add getWidgetRenderState() to allow the currentRefinements widget to "see" this refinement
+const customDateRangeWidget = (containerId) => {
+  return {
+    init({ helper, state, createURL }) {
+      // Create the HTML structure for the date range widget with two inputs and apply button
+      const container = document.querySelector(containerId);
+      container.innerHTML = `
+        <details class="ais-Panel border-b group">
+          <summary class="ais-Panel-header cursor-pointer relative z-10 flex items-center justify-between">
+            <span class="normal-case text-base font-normal">Year Range</span>
+            <span class="ais-Panel-collapseIcon transition-transform duration-300 group-open:rotate-270">
+              <svg style="width: 1em; height: 1em;" viewBox="0 0 500 500">
+                <path d="M100 250l300-150v300z" fill="currentColor"></path>
+              </svg>
+            </span>
+          </summary>
+          <div class="ais-Panel-body">
+            <div class="ais-RangeInput">
+              <form class="ais-RangeInput-form">
+                <input class="ais-RangeInput-input" type="number" id="date-from-year" min="70" max="1600" placeholder="From year">
+                <input class="ais-RangeInput-input" type="number" id="date-to-year" min="70" max="1600" placeholder="To year">
+                <button type="submit" class="ais-RangeInput-submit">Apply</button>
+              </form>
+            </div>
+          </div>
+        </details>
+      `;
+
+      const form = container.querySelector("form");
+      const fromInput = container.querySelector("#date-from-year");
+      const toInput = container.querySelector("#date-to-year");
+
+      // add event listeners to the inputs
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // Clear old refinements
+        helper.clearRefinements("work_date_not_before");
+        helper.clearRefinements("work_date_not_after");
+
+        const from = parseInt(fromInput.value, 10);
+        const to = parseInt(toInput.value, 10);
+        // Validate: Ensure 'From year' < 'To year'
+        if (from >= to) {
+          toInput.setCustomValidity(
+            "The 'To year' must be greater than the 'From year'."
+          );
+          // Don't submit if validation fails
+          return;
+        } else {
+          toInput.setCustomValidity(""); // Reset the error message if valid
+        }
+
+        // Proceed if both values are valid numbers;
+        // helper.addNummericRefinemnt - standard Algolia method to add a numeric filter
+        if (!isNaN(from)) {
+          helper.addNumericRefinement("work_date_not_before", ">=", from);
+        }
+        if (!isNaN(to)) {
+          helper.addNumericRefinement("work_date_not_after", "<=", to);
+        }
+
+        // Perform the search after validation
+        helper.search();
+      });
+      // Add real-time validation reset to allow resubmission after correcting the input
+      fromInput.addEventListener("input", () => {
+        toInput.setCustomValidity(""); // Reset error if the user changes 'From year'
+        toInput.reportValidity(); // Show the validity message (if any)
+      });
+
+      toInput.addEventListener("input", () => {
+        const from = parseInt(fromInput.value, 10);
+        const to = parseInt(toInput.value, 10);
+
+        // Re-check the condition if the 'To year' is still valid after the change
+        if (from >= to) {
+          toInput.setCustomValidity(
+            "The 'To year' must be greater than the 'From year'."
+          );
+        } else {
+          toInput.setCustomValidity(""); // Reset the error if condition is met
+        }
+
+        toInput.reportValidity(); // Show the validity message (if any)
+      });
+    },
+
+    getWidgetRenderState({ helper }) {
+      // Required so currentRefinements widget can "see" this refinement
+      const refinements = [];
+
+      const from = helper.getNumericRefinements("work_date_not_before");
+      if (from["≥"]) {
+        refinements.push({
+          attribute: "work_date_not_before",
+          type: "numeric",
+          value: () => {
+            helper.removeNumericRefinement("work_date_not_before", ">=");
+            helper.search();
+          },
+          label: `From ${from["≥"][0]}`,
+        });
+      }
+
+      const to = helper.getNumericRefinements("work_date_not_after");
+      if (to["≤"]) {
+        refinements.push({
+          attribute: "work_date_not_after",
+          type: "numeric",
+          value: () => {
+            helper.removeNumericRefinement("work_date_not_after", "<=");
+            helper.search();
+          },
+          label: `To ${to["≤"][0]}`,
+        });
+      }
+
+      return {
+        refinements,
+      };
+    },
+  };
+};
+
 // add widgets
 search.addWidgets([
   searchBox({
@@ -76,7 +233,7 @@ search.addWidgets([
     autofocus: true,
     placeholder: "Text search",
   }),
-
+  customDateRangeWidget("#date-range-widget"),
   hits({
     container: "#hits",
     transformItems(items) {
@@ -296,100 +453,6 @@ search.addWidgets([
 ]);
 
 search.start();
-
-// Initialize the standalone date range filter
-// This runs after InstantSearch has initialized
-document.addEventListener("DOMContentLoaded", function () {
-  const dateRangeContainer = document.getElementById("date-range-widget");
-  if (!dateRangeContainer) return;
-
-  // Create standalone date range filter widget
-  // mimic the algolia panel with collapsible details
-  const panelHTML = `
-    <details class="ais-Panel border-b group">
-  <summary class="ais-Panel-header cursor-pointer relative z-10 flex items-center justify-between">
-    <span class="normal-case text-base font-normal">Year Range</span>
-    <span class="ais-Panel-collapseIcon transition-transform duration-300 group-open:rotate-270">
-    <svg class="ais-Panel-collapseIcon" style="width: 1em; height: 1em;" viewBox="0 0 500 500">
-        <path d="M100 250l300-150v300z" fill="currentColor"></path>
-        </svg>      
-    </span>
-  </summary>
-
-  <div class="ais-Panel-body">
-    <div class="ais-RangeInput">
-      <form class="ais-RangeInput-form">
-        <input class="ais-RangeInput-input" type="number" id="date-from-year" min="70" max="1600" value="70" placeholder="From year">
-        <input class="ais-RangeInput-input" type="number" id="date-to-year" min="70" max="1600" value="1600" placeholder="To year">           
-        <button type="button" class="ais-RangeInput-submit" id="apply-date-range">Apply</button>
-      </form>
-    </div>
-  </div>
-</details>
-  `;
-
-  // Add the panel to the container
-  dateRangeContainer.innerHTML = panelHTML;
-
-  // Add event listener for the custom dateRange widget (ENter key and Apply button)
-  // Extract the common filter building logic to a separate function
-  function applyDateFilter() {
-    const fromYear =
-      parseInt(document.getElementById("date-from-year").value, 10) || 70;
-    const toYear =
-      parseInt(document.getElementById("date-to-year").value, 10) || 1600;
-
-    // Build filter string
-    let filterStr = "";
-    if (fromYear > 70) {
-      filterStr += `work_date_not_before:>=${fromYear}`;
-    }
-    if (toYear < 1600) {
-      if (filterStr) filterStr += " && ";
-      filterStr += `work_date_not_after:<=${toYear}`;
-    }
-    // Clear any existing date range refinements first
-    search.helper.clearRefinements("work_date_not_before");
-    search.helper.clearRefinements("work_date_not_after");
-
-    // Add the new refinements
-    if (fromYear > 70) {
-      search.helper.addNumericRefinement(
-        "work_date_not_before",
-        ">=",
-        fromYear
-      );
-    }
-
-    if (toYear < 1600) {
-      search.helper.addNumericRefinement("work_date_not_after", "<=", toYear);
-    }
-    // Apply the filter using the helper API
-    search.helper.setQueryParameter("filters", filterStr).search();
-  }
-
-  // Add event listener to the apply button
-  const applyButton = document.getElementById("apply-date-range");
-  if (applyButton) {
-    applyButton.addEventListener("click", applyDateFilter);
-  }
-
-  // Also listen for Enter key on the inputs
-  const fromYearInput = document.getElementById("date-from-year");
-  const toYearInput = document.getElementById("date-to-year");
-
-  [fromYearInput, toYearInput].forEach((input) => {
-    if (input) {
-      input.addEventListener("keypress", function (e) {
-        if (e.key === "Enter") {
-          applyDateFilter();
-          // Prevent form submission
-          e.preventDefault();
-        }
-      });
-    }
-  });
-});
 
 // function to wrap refinements filter in a panel
 function wrapInPanel(title) {
