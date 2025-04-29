@@ -11,12 +11,20 @@ const title = "Passages";
     import { setupTableActions } from "@/lib/table-actions";
     import { TabulatorFull as Tabulator } from "tabulator-tables";
     import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
-    import { jsonpathLookup } from "../lib/tabulator-utils.js";
+    import { jsonpathLookup } from "@/lib/tabulator-utils.js";
     import data from "@/content/data/passages.json";
 
     const dataSet = Object.values(data).map((passage) => {
       return {
         ...passage,
+        // get author from nested work object to be used in a separate column
+        author_l: passage.work.flatMap((work) =>
+          work.author.map((author) => ({
+            name: author.name,
+            alt_name: author.alt_name,
+          }))
+        ),
+
         // get date from nested work object to be used in a separate column
         work_date: passage.work
           .map((work) => work.date.map((datum) => datum.value).join(", "))
@@ -31,7 +39,7 @@ const title = "Passages";
           .join("; "),
       };
     });
-
+    console.log(dataSet[0]);
     var tabledata = dataSet;
 
     var table = new Tabulator("#tabulator-table", {
@@ -66,21 +74,39 @@ const title = "Passages";
         {
           title: "Author",
           resizable: true,
-          field: "author_lookup",
+          field: "author_l",
           minWidth: 200,
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].value",
-            separator: "; ",
-          },
           headerFilter: "input",
+          // Custom filter: checks all names AND alt_names in the array
+          headerFilterFunc: function (headerValue, rowValue, rowData) {
+            if (!headerValue) return true;
+            const search = headerValue.toLowerCase();
+            // rowValue is the array of author objects
+            return (
+              Array.isArray(rowValue) &&
+              rowValue.some((author) => {
+                const nameMatch = author.name?.toLowerCase().includes(search);
+                const altNameMatch = author.alt_name
+                  ? // some alt_name are empty strings need to check for that
+                    author.alt_name.toLowerCase().includes(search)
+                  : false;
+                return nameMatch || altNameMatch;
+              })
+            );
+          },
+          // Formatter: show only the author names
+          formatter: function (cell) {
+            return cell
+              .getValue()
+              .map((author: { name: string; alt_name?: string }) => author.name)
+              .join(", ");
+          },
         },
         {
           title: "Work",
           resizable: true,
           field: "work_position",
           minWidth: 200,
-
           headerFilter: "input",
         },
 

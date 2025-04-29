@@ -14,7 +14,7 @@ import TableHead from "@/components/table-head.astro";
     import data from "@/content/data/authors.json";
     import { jsonpathLookup } from "@/lib/tabulator-utils.js";
 
-    var tabledata = data;
+    var tabledata = Object.values(data);
 
     var table = new Tabulator("#tabulator-table", {
       headerFilterLiveFilterDelay: 600,
@@ -37,17 +37,15 @@ import TableHead from "@/components/table-head.astro";
           minWidth: 200,
           resizable: true,
           headerFilter: "input",
-          // Custom filter: checks both name and nameVariants
+          // Custom filter: checks both name and alt_name fields
           headerFilterFunc: function (headerValue, rowValue, rowData) {
             if (!headerValue) return true;
             const search = headerValue.toLowerCase();
             const nameMatch = rowData.name?.toLowerCase().includes(search);
-            const variantsMatch = Array.isArray(rowData.nameVariants)
-              ? rowData.nameVariants.some((variant: string) =>
-                  variant.toLowerCase().includes(search)
-                )
+            const altNameMatch = rowData?.alt_name
+              ? rowData.alt_name.toLowerCase().includes(search)
               : false;
-            return nameMatch || variantsMatch;
+            return nameMatch || altNameMatch;
           },
           // Formatter: just show the main name
           formatter: function (cell) {

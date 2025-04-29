@@ -43,12 +43,31 @@ const title = "Works";
           resizable: true,
           field: "author",
           minWidth: 200,
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].name",
-            separator: "; ",
-          },
           headerFilter: "input",
+          // Custom filter: checks all names AND alt_names in the array
+          headerFilterFunc: function (headerValue, rowValue, rowData) {
+            if (!headerValue) return true;
+            const search = headerValue.toLowerCase();
+            // rowValue is the array of author objects
+            return (
+              Array.isArray(rowValue) &&
+              rowValue.some((author) => {
+                const nameMatch = author.name?.toLowerCase().includes(search);
+                const altNameMatch = author.alt_name
+                  ? // some alt_name are empty strings need to check for that
+                    author.alt_name.toLowerCase().includes(search)
+                  : false;
+                return nameMatch || altNameMatch;
+              })
+            );
+          },
+          // Formatter: show only the author names
+          formatter: function (cell) {
+            return cell
+              .getValue()
+              .map((author: { name: string; alt_name?: string }) => author.name)
+              .join(", ");
+          },
         },
         {
           title: "Genre",
