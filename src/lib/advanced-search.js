@@ -340,7 +340,7 @@ search.addWidgets([
 
   refinementListManuscript({
     container: "#refinement-list-manuscript",
-    attribute: "manuscripts.value",
+    attribute: "manuscripts.manuscript",
     searchable: true,
     showMore: true,
     showMoreLimit: 50,

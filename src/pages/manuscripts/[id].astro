@@ -24,8 +24,8 @@ const { data: manuscript } = Astro.props;
 
   const related_passages = passages
     .filter((passage) =>
-      passage.manuscripts.some(
-        (m) => m.value === manuscript.name[0]?.value,
+      passage.mss_occurrences.some(
+        (m) => m.manuscript_jad_id === manuscript.jad_id,
       ),
     )
     .map((passage) => ({

@@ -102,7 +102,7 @@ async function generate() {
         rec_id: value.jad_id,
         title: value.passage,
         full_text: `${value.passage} ${value.text_paragraph}`,
-        manuscripts: value.manuscripts || [],
+        manuscripts: value.mss_occurrences || [],
         work: value.work || [],
         cluster: value.part_of_cluster || [],
         liturgical_references: value.liturgical_references || [],

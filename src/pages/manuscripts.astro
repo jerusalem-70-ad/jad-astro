@@ -22,7 +22,7 @@ import TableHead from "@/components/table-head.astro";
     const data = manuscripts.map((manuscript) => {
       const related_passages = passages
         .filter((passage) =>
-          passage.manuscripts.some((m) => m.value === manuscript.name[0]?.value)
+          passage.mss_occurrences.some((m) => m.manuscript_jad_id === manuscript.jad_id)
         )
         .map((passage) => ({
           id: passage.id,

@@ -8,7 +8,8 @@
     "process-data": "node ./scripts/preprocess-data.js",
     "get-data": "node ./scripts/data-fetch.js",
     "generate:search-index": "node ./scripts/generate-search-index.js",
-    "start": "astro preview"
+    "start": "astro preview",
+    "check": "tsc --noEmit && astro check"
   },
   "dependencies": {
     "@acdh-oeaw/lib": "^0.1.12",
