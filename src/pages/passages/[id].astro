@@ -4,9 +4,6 @@ import passages from "@/content/data/passages.json";
 import { Icon } from "astro-icon/components";
 import NavLink from "@/components/nav-link.astro";
 import Article from "@/components/article.astro";
-import msOccurences from "@/content/data/ms_occurrences.json";
-import mss from "@/content/data/manuscripts.json";
-import biblRef from "@/content/data/biblical_references.json";
 import "instantsearch.css/themes/satellite.css";
 import PassageNetwork from "@/components/passage-network.astro";
 import type { Passage } from "@/types";
@@ -31,31 +28,6 @@ const usedBy = Object.values(passages).filter((item) =>
   item.source_passage.some((source) => source.id === passage.id)
 );
 
-// use ms_occurences.json to look for the manuscripts and their loci
-const msLocus = Object.values(msOccurences).filter(
-  (item) => item.occurrence[0]?.id === passage.id
-);
-
-// filter the manuscripts that are used in the current passage
-// to get information about the manuscripts (jad_id)
-const mssSource = Object.values(mss).filter((ms) =>
-  passage.manuscripts.some((man) => man.value === ms.name[0]?.value)
-);
-
-// combine the locus information to the manuscript
-const mssSourceLocus = mssSource.map((msSource) => {
-  const locus = msLocus.filter(
-    (locus) => locus.manuscript[0]?.value === msSource.name[0].value
-  );
-  return {
-    ...msSource,
-    locus, // Add a new property 'locus' containing the matching locus array
-  };
-});
-// filter the biblical references that are used in the current passage
-const biblRefSource = Object.values(biblRef).filter((ref) =>
-  passage.biblical_references.some((bibl) => bibl.id === ref.id)
-);
 ---
 
 <PageLayout title=`passage #${passage.id.toString()}`>
@@ -130,22 +102,20 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
         </dt>
         <dd class="pl-5">
           {
-            passage.manuscripts.length > 0 ? (
+            passage.mss_occurrences.length > 0 ? (
               <ul>
-                {mssSourceLocus.map((ms) => (
+                {passage.mss_occurrences.map((ms) => (
                   <li>
-                    <NavLink href={`/manuscripts/${ms.jad_id}`}>
-                      {ms.view_label}
-                    </NavLink>
+                    <NavLink href={`/manuscripts/${ms.manuscript_jad_id}`}>
+                      {ms.manuscript}                  
+                      </NavLink>
                     {/* add exact position preprocessed from json ms_occurences */}
-                    {ms.locus?.length > 0 &&
-                      ms.locus
-                        .filter((locus) => locus.position_in_ms)
-                        .map((locus) => (
+                    {ms.position_in_ms &&
+                     
                           <span>
-                            (f. {locus.position_in_ms})
-                            {locus.facsimile_position && (
-                              <NavLink href={locus.facsimile_position}>
+                            (f. {ms.position_in_ms})
+                            {ms.facsimile_position && (
+                              <NavLink href={ms.facsimile_position}>
                                 Facsimile{" "}
                                 <Icon
                                   name="lucide:external-link"
@@ -154,7 +124,7 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
                               </NavLink>
                             )}
                           </span>
-                        ))}
+                        }
                   </li>
                 ))}
               </ul>
@@ -171,8 +141,8 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
         </dt>
         <dd class="pl-5 flex">
           {
-            biblRefSource.length > 0
-              ? biblRefSource
+            passage.biblical_references.length > 0
+              ? passage.biblical_references
                   .map((reference) => (
                     <span class="group relative">
                       {reference.nova_vulgata_url ? (
@@ -180,14 +150,14 @@ const biblRefSource = Object.values(biblRef).filter((ref) =>
                           href={reference.nova_vulgata_url}
                           class="flex underline underline-offset-4 decoration-dotted"
                         >
-                          {reference.name}
+                          {reference.value}
                           <Icon
                             name="lucide:external-link"
                             class="size-4 text-brand-800 inline-flex"
                           />
                         </NavLink>
                       ) : (
-                        <span>{reference.name}</span>
+                        <span>{reference.value}</span>
                       )}
 
                       <span class="italic invisible group-hover:visible absolute z-10 w-[300px] top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">

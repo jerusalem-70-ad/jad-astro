@@ -11,6 +11,9 @@ const loadJSON = (file) =>
 const passages = Object.values(loadJSON("passages.json"));
 const dates = Object.values(loadJSON("dates.json"));
 const aiBiblRef = loadJSON("ai_bibl_ref.json");
+const biblicalRef = Object.values(loadJSON("biblical_references.json"));
+const manuscripts = Object.values(loadJSON("manuscripts.json"));
+const msOccurrences = Object.values(loadJSON("ms_occurrences.json"));
 
 // set the output folder
 const folderPath = join(process.cwd(), "src", "content", "data");
@@ -112,6 +115,8 @@ const bookMap = {
 };
 
 const passagesPlus = passages.map((passage) => {
+  // hierarchical 3-level index for the typesense schema for biblical references
+  // level 0 for book (using the bookMap above), lv 1 for chapter, and lv 2 for verse
   const lvl0 = [];
   const lvl1 = [];
   const lvl2 = [];
@@ -156,15 +161,76 @@ const passagesPlus = passages.map((passage) => {
   // add aiBiblicalRef to each passage
   const aiBiblicalRefEntry = aiBiblRef[passage.jad_id];
 
+  // sort biblical_references by book and chapter for display in table and detail view.
+  if (passage.biblical_references?.length > 0) {
+    passage.biblical_references = passage.biblical_references
+      .sort((a, b) => a.value.localeCompare(b.value))
+      .map((ref) => {
+        const biblRefSource = biblicalRef.find(
+          (biblical) => biblical.id === ref.id
+        );
+        return {
+          ...ref,
+          nova_vulgata_url: biblRefSource?.nova_vulgata_url || null,
+          text: biblRefSource?.text || null,
+        };
+      });
+  }
+
+  // enrich passage with data from manuscripts.json
+  // see if the passage.id is in the ms_occurrences.json
+  const msOccurrence = msOccurrences
+    .filter(
+      (item) =>
+        item.occurrence.length > 0 && item.occurrence[0].id === passage.id
+    )
+    .map((item) => {
+      const mss = manuscripts
+        .filter((ms) => item.manuscript.some((man) => man.id === ms.id))
+        // map them to get only the necessary fields
+        .map((ms) => {
+          return {
+            id: ms.id,
+            name: `${ms.library[0].place[0]?.name}, ${ms.name[0].value}`,
+            jad_id: ms.jad_id,
+          };
+        });
+      return {
+        manuscript: mss.map((ms) => ms.name).join(", "),
+        manuscript_jad_id: mss.map((ms) => ms.jad_id).join(", "),
+        position_in_ms: item.position_in_ms,
+        main_ms: item.main_ms,
+        facsimile_position: item.facsimile_position,
+        ms_locus: item.ms_locus[0].value,
+      };
+    });
+  // filter the manuscripts.json to get the manuscripts that are in the ms_occurrences.json
+
   return {
-    ...passage,
+    id: passage.id,
+    jad_id: passage.jad_id,
+    passage: passage.passage,
+    work: passage.work,
+    position_in_work: passage.position_in_work,
+    note: passage.note,
+    explicit_contemp_ref: passage.explicit_contemp_ref,
+    biblical_references: passage.biblical_references,
+    keywords: passage.keywords,
+    part_of_cluster: passage.part_of_cluster,
+    liturgical_references: passage.liturgical_references,
+    occurrence_found_in: passage.occurrence_found_in,
+    source_passage: passage.source_passage,
+    incipit: passage.incipit,
+    prev: passage.prev,
+    next: passage.next,
+    text_paragraph: passage.text_paragraph,
+    mss_occurrences: msOccurrence,
     biblical_ref_lvl0: lvl0,
     biblical_ref_lvl1: lvl1,
     biblical_ref_lvl2: lvl2,
     ai_bibl_ref: aiBiblicalRefEntry || [],
   };
 });
-
 // use imported function to build the transmission graph
 const graph = buildTransmissionGraph(passagesPlus);
 
@@ -180,6 +246,4 @@ writeFileSync(
   { encoding: "utf-8" }
 );
 
-console.log(
-  "passages.json file updated successfully with biblical ref in hierarchical structure."
-);
+console.log("passages.json file enriched successfully.");

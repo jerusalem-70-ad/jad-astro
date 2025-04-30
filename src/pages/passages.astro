@@ -113,11 +113,11 @@ const title = "Passages";
         {
           title: "Manuscript",
           resizable: true,
-          field: "manuscripts",
+          field: "mss_occurrences",
           minWidth: 200,
           mutator: jsonpathLookup,
           mutatorParams: {
-            path: "$[*].value",
+            path: "$[*].manuscript",
             separator: "\n",
           },
           headerFilter: "input",

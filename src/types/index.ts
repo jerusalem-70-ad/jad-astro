@@ -1,5 +1,7 @@
 // src/types/index.ts
 
+import type { b } from "node_modules/tailwindcss/dist/types-B254mqw1.d.mts";
+
 // Node types for the transmission graph
 export type NodeType = "current" | "ancestor" | "descendant" | "regular";
 
@@ -47,6 +49,8 @@ export interface Language {
 export interface Reference {
   id: number;
   value: string;
+  nova_vulgata_url?: string;
+  text?: string;
 }
 
 // Author interface
@@ -118,37 +122,34 @@ export interface Passage {
   id: number;
   passage: string;
   jad_id: string;
-  language: Language;
-  position_in_work: string;
-  text_paragraph: string;
+  position_in_work: string | null;
+  text_paragraph: string | null;
   note: string | null;
   explicit_contemp_ref: string | null;
   biblical_references: Reference[];
   work: Work[];
-  sources_used: ValueItem[];
   keywords: any[]; // This appears to be empty in the sample
   part_of_cluster: any[]; // This appears to be empty in the sample
-  authority_discourse: number;
+  authority_discourse?: number;
   liturgical_references: any[]; // This appears to be empty in the sample
   occurrence_found_in: ValueItem[];
-  author_lookup: {
-    ids: {
-      [key: string]: number;
-    };
-    value: string;
-  }[];
   source_passage: ValueItem[];
-  mss_locus: any[]; // This appears to be empty in the sample
-  occurrence_ms: any[]; // This appears to be empty in the sample
-  main_ms: any[]; // This appears to be empty in the sample
+  mss_occurrences: Mss_occurrences[] | null;
   incipit: string | null;
-  manuscripts: any[]; // This appears to be empty in the sample
   ai_bibl_ref: any[];
-  view_label: string;
+  view_label?: string;
   prev: Navigation;
   next: Navigation;
   biblical_ref_lvl0: string[];
   biblical_ref_lvl1: string[];
   biblical_ref_lvl2: string[];
   transmission_graph: TransmissionGraph;
+}
+export interface Mss_occurrences {
+  manuscript: string;
+  manuscript_jad_id: string;
+  position_in_ms: string;
+  main_ms: boolean;
+  facsimile_position: string;
+  ms_locus: string;
 }
