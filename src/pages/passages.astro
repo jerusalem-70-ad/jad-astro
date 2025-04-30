@@ -31,12 +31,23 @@ const title = "Passages";
           .join("; "),
         // combine work.title with position in work to read in one column
         work_position: passage.work
-          .map((work) =>
-            passage.position_in_work
-              ? `${work.title}: ${passage.position_in_work}`
-              : work.title
-          )
+          .map((work) => {
+            const title = work.title;
+            const position = passage.position_in_work;
+            const page = passage.text_paragraph?.match(/p\. (\d+\w?)/)?.[1]; // get first page like '0246C'
+
+            if (position && page) {
+              return `${title}: ${position} (p. ${page})`;
+            } else if (position) {
+              return `${title}: ${position}`;
+            } else if (page) {
+              return `${title} (p. ${page})`;
+            } else {
+              return title;
+            }
+          })
           .join("; "),
+
       };
     });
     console.log(dataSet[0]);

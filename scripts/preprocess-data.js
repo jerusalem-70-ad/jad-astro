@@ -212,6 +212,7 @@ const passagesPlus = passages.map((passage) => {
     passage: passage.passage,
     work: passage.work,
     position_in_work: passage.position_in_work,
+    pages: passage.text_paragraph?.match(/p\. (\d+\w?)/)?.[1] || null,
     note: passage.note,
     explicit_contemp_ref: passage.explicit_contemp_ref,
     biblical_references: passage.biblical_references,
