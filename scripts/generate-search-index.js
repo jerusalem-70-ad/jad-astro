@@ -15,6 +15,16 @@ const loadJSON = (file) =>
 
 const data = Object.values(loadJSON("passages.json"));
 
+// function to normalize text spelling
+const normalizeText = (text) => {
+  return text
+    .toLowerCase()
+    .replace(/ae/g, "e")
+    .replace(/oe/g, "e")
+    .replace(/j/g, "i")
+    .replace(/u/g, "v");
+};
+
 async function generate() {
   // instantiate typesense client using helpers function
   const client = createTypesenseAdminClient();
@@ -47,6 +57,7 @@ async function generate() {
       { name: "rec_id", type: "string", sort: true },
       { name: "title", type: "string", sort: true, facet: true },
       { name: "full_text", type: "string", sort: true },
+      { name: "search_text", type: "string", sort: true },
       { name: "manuscripts", type: "object[]", facet: true, optional: true },
       { name: "work", type: "object[]", facet: true, optional: true },
       {
@@ -102,6 +113,9 @@ async function generate() {
         rec_id: value.jad_id,
         title: value.passage,
         full_text: `${value.passage} ${value.text_paragraph}`,
+        search_text: `${normalizeText(value.passage ?? "")} ${normalizeText(
+          value.text_paragraph ?? ""
+        )}`,
         manuscripts: value.mss_occurrences || [],
         work: value.work || [],
         cluster: value.part_of_cluster || [],
