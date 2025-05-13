@@ -22,7 +22,7 @@ const normalizeText = (text) => {
     .replace(/ae/g, "e")
     .replace(/oe/g, "e")
     .replace(/j/g, "i")
-    .replace(/u/g, "v");
+    .replace(/v/g, "u");
 };
 
 async function generate() {
