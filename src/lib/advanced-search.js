@@ -17,6 +17,7 @@ import { withBasePath } from "./withBasePath";
 
 const project_collection_name = "JAD-temp";
 const main_search_field = "full_text";
+const secondary_field = "search_text";
 const search_api_key = "IA6BWzRrMo7yX3eFqgcFelJzhWkIl64W";
 
 const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
@@ -31,8 +32,9 @@ const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
     ],
   },
   additionalSearchParameters: {
-    query_by: main_search_field,
-    typo_tokens_threshold: 50,
+    query_by: `${main_search_field}, ${secondary_field}`,
+    query_by_weights: "2,1",
+    typo_tokens_threshold: 1,
   },
 });
 
@@ -269,6 +271,21 @@ search.addWidgets([
             .join("");
         };
 
+        // Determine best highlight (prefer full_text if it has a match)
+        const fullTextHighlight = hit._highlightResult?.full_text?.value || "";
+        const searchTextHighlight =
+          hit._highlightResult?.search_text?.value || "";
+
+        const highlightHTML = fullTextHighlight.includes("<mark>")
+          ? fullTextHighlight
+          : searchTextHighlight.includes("<mark>")
+          ? `${searchTextHighlight} <span class="text-xs text-brand-400">(normalized match)</span>
+          <details class="m-1 px-3 py-2 text-sm">
+            <summary class="cursor-pointer text-brand-400"><span class="font-semibold">NB!</span> This is the normalized match. Click here to see the original text </summary>
+            <p class="mt-1 italic">${hit.full_text}</p>
+          </details>`
+          : hit.full_text;
+
         // Generate the main HTML for the hit
         return `
           <article>
@@ -278,11 +295,12 @@ search.addWidgets([
               )}" class="underline">
                 (#${hit.id.substr(16)}) ${hit.title}
               </a>
-            </h3>            
-          
-            <p class="italic line-clamp-2">
-              ${hit._snippetResult?.full_text?.value || ""}
+            </h3>     
+
+            <p class="italic line-clamp-2 sm:line-clamp-15">
+             ${highlightHTML}
             </p>
+         
             <div class="work-details">
               ${renderWorks(hit.transformedWorks)}
             </div>            
