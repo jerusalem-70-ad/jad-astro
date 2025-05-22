@@ -7,6 +7,7 @@ import Article from "@/components/article.astro";
 import "instantsearch.css/themes/satellite.css";
 import PassageNetwork from "@/components/passage-network.astro";
 import type { Passage } from "@/types";
+import ChronologicalTree from "@/components/chronological-tree.astro";
 
 export async function getStaticPaths() {
   const paths = Object.values(passages).map((passage) => ({
@@ -46,6 +47,12 @@ const usedBy = Object.values(passages).filter((item) =>
       nextLink={`/passages/${passage.next.id}`}
       mainTitle=`Passage #${passage.id}: ${passage.passage} `
     >
+    {passage.transmission_graph && (
+      <ChronologicalTree
+        transmissionGraph={passage.transmission_graph}/>
+      
+    )}
+
       <dl class="grid grid-cols-[1fr_5fr] text-sm md:text-base md:leading-7">
         <dt
           class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"

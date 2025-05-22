@@ -1,0 +1,175 @@
+---
+import type { TransmissionGraph } from "../types";
+
+export interface Props {
+  transmissionGraph: TransmissionGraph;
+  height?: number;
+}
+
+const { transmissionGraph, height = 500 } = Astro.props;
+---
+
+<div class="chronological-tree-container">
+  <div id="chronological-tree" style={`height: ${height}px; width: 100%;`}>
+  </div>
+</div>
+
+<script
+  is:inline
+  define:vars={{
+    graph: transmissionGraph.graph,
+  }}
+>
+  // Store data globally for ECharts
+  window.chronologicalTreeGraph = graph;
+</script>
+
+<script>
+  import * as echarts from "echarts";
+  import { withBasePath } from "../lib/withBasePath";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const graphData = window.chronologicalTreeGraph;
+    if (!graphData || !graphData.nodes || graphData.nodes.length === 0) {
+      console.error("No graph data available for chronological tree.");
+      return;
+    }
+
+    const chartElement = document.getElementById("chronological-tree");
+    if (!chartElement) return;
+    const config = {
+      showLegend: true,
+      enableZoom: true,
+      enableNavigation: true,
+      ...window.passageGraphConfig,
+    };
+
+    // Prepare nodes: x = date, y = random (already assigned in build-transmission-graph)
+    const nodes = graphData.nodes.map((node) => ({
+      ...node,
+      value: [Number(node.date) || 0, node.y ?? Math.random()],
+      symbolSize: node.nodeType === "current" ? 30 : 18,
+      itemStyle: {
+        color:
+          node.nodeType === "current"
+            ? "#e74a3b"
+            : node.nodeType === "ancestor"
+              ? "#318f38"
+              : node.nodeType === "descendant"
+                ? "#f6c23e"
+                : "#95a5a6",
+        borderWidth: node.nodeType === "current" ? 3 : 1,
+        borderColor: "#222",
+      },
+      label: {
+        show: true,
+        position: "top",
+        fontSize: 12,
+        color: "#333",
+        formatter: node.name,
+      },
+      category: node.nodeType || "regular",
+    }));
+
+    // Prepare links
+    // ECharts expects source and target to be
+    // the index of the node in the data array, not the node's id string.
+    const idToIndex = new Map();
+    nodes.forEach((node, idx) => {
+      idToIndex.set(node.id, idx);
+    });
+
+    const links = graphData.links.map((link) => ({
+      source: idToIndex.get(link.source),
+      target: idToIndex.get(link.target),
+      lineStyle: {
+        color: "#7f8c8d",
+        width: 2,
+        opacity: 0.8,
+        curveness: 0,
+        type: link.type === "influence" ? "dashed" : "solid",
+      },
+    }));
+
+    // ECharts option
+    const option = {
+      tooltip: {
+        trigger: "item",
+        textStyle: {
+          fontSize: 12,
+        },
+        extraCssText: `max-width: 300px; overflow-wrap: break-word; white-space: normal;`,
+        formatter: function (params: any) {
+          if (params.dataType === "node") {
+            const node = params.data;
+            return `<strong>#${node.id} ${node.name}</strong><br/><span class="italic">${node.passage}</span>`;
+          } else if (params.dataType === "edge") {
+            return "";
+          }
+          return "";
+        },
+      },
+      xAxis: {
+        type: "value",
+        name: "Year",
+        min: (value) => value.min - 10,
+        max: (value) => value.max + 10,
+        axisLabel: { fontSize: 12 },
+      },
+      yAxis: {
+        type: "value",
+        name: "Branch (random)",
+        show: false,
+      },
+      series: [
+        {
+          type: "graph",
+          layout: "none",
+          coordinateSystem: "cartesian2d",
+          data: nodes,
+          links: links,
+          edgeSymbol: ["none", "arrow"],
+          edgeSymbolSize: [0, 10],
+          label: { show: true, position: "top" },
+          lineStyle: { color: "#7f8c8d", width: 4, opacity: 0.9 },
+          emphasis: {
+            focus: "adjacency",
+            lineStyle: { width: 4, color: "#444" },
+            itemStyle: { borderWidth: 2, borderColor: "#fff" },
+          },
+          categories: [
+            { name: "current" },
+            { name: "ancestor" },
+            { name: "descendant" },
+            { name: "regular" },
+          ],
+        },
+      ],
+      animation: true,
+    };
+
+    const chart = echarts.init(chartElement);
+    chart.setOption(option);
+
+    window.addEventListener("resize", () => chart.resize());
+
+    // Add click handler for nodes
+    if (config.enableNavigation !== false) {
+      chart.on("click", function (params: any) {
+        if (params.dataType === "node") {
+          // Navigate to the clicked passage
+          window.location.href = withBasePath(
+            `/passages/${params.data.jad_id}`
+          );
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  .chronological-tree-container {
+    margin: 2rem 0;
+    width: 100%;
+  }
+</style>

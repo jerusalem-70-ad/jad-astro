@@ -3,6 +3,7 @@
  * @param {Array} passages - Array of passage objects
  * @returns {Object} - Map of passage ID to transmission graph data
  */
+
 export function buildTransmissionGraph(passages) {
   const idMap = new Map();
   passages.forEach((p) => idMap.set(p.id, p));
@@ -25,15 +26,18 @@ export function buildTransmissionGraph(passages) {
     const workName = node.work?.[0]?.name || "";
     const authorName =
       node.work?.[0]?.author?.map((a) => a.name).join(", ") || "";
+    const workDate = node.work?.[0]?.date[0]?.not_before || "";
     return {
       name: `${authorName}: ${workName}`,
       id: node.id,
       work: workName,
       author: authorName,
+      date: workDate,
       passage: node.passage,
       jad_id: node.jad_id,
       depth: depth,
       nodeType: nodeType,
+      y: Math.random() * 10, // Random y position for layout
     };
   }
 
