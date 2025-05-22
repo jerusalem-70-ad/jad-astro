@@ -37,7 +37,7 @@ export function buildTransmissionGraph(passages) {
       jad_id: node.jad_id,
       depth: depth,
       nodeType: nodeType,
-      y: Math.random() * 10, // Random y position for layout
+      x: Math.random() * 10, // Random y position for layout
     };
   }
 

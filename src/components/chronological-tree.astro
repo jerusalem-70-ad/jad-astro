@@ -47,7 +47,7 @@ const { transmissionGraph, height = 500 } = Astro.props;
     // Prepare nodes: x = date, y = random (already assigned in build-transmission-graph)
     const nodes = graphData.nodes.map((node) => ({
       ...node,
-      value: [Number(node.date) || 0, node.y ?? Math.random()],
+      value: [node.y ?? Math.random(), Number(node.date) || 0],
       symbolSize: node.nodeType === "current" ? 30 : 18,
       itemStyle: {
         color:
@@ -109,14 +109,14 @@ const { transmissionGraph, height = 500 } = Astro.props;
           return "";
         },
       },
-      xAxis: {
+      yAxis: {
         type: "value",
         name: "Year",
         min: (value) => value.min - 10,
         max: (value) => value.max + 10,
         axisLabel: { fontSize: 12 },
       },
-      yAxis: {
+      xAxis: {
         type: "value",
         name: "Branch (random)",
         show: false,

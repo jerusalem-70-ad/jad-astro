@@ -297,7 +297,7 @@ search.addWidgets([
               </a>
             </h3>     
 
-            <p class="italic line-clamp-2 sm:line-clamp-15">
+            <p class="italic line-clamp-2">
              ${highlightHTML}
             </p>
          

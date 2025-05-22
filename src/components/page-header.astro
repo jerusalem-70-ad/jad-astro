@@ -77,7 +77,11 @@ import { Image } from "astro:assets";
         class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
         href="/about">About</NavLink
       >
-      <form id="searchForm" class="hidden md:flex items-center gap-x-2">
+      <NavLink
+        class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+        href="/advanced-search">Search</NavLink
+      >
+      <!--  <form id="searchForm" class="hidden md:flex items-center gap-x-2">
         <input
           type="text"
           id="searchInput"
@@ -90,7 +94,7 @@ import { Image } from "astro:assets";
           class="hover:bg-brand-400 bg-brand-100 text-brand-900 hover-text-brand-100 transition hover:text-brand-100 p-2 rounded-md focus:outline-none focus:ring-3 focus:ring-brand-400"
           >Search</button
         >
-      </form>
+      </form> -->
     </nav>
   </div>
   <div id="nav-links" class="hidden rounded-xs grid grid-cols-1 p-5">
@@ -127,5 +131,5 @@ import { Image } from "astro:assets";
   </div>
 
   <script src="@/lib/menu.js"></script>
-  <script src="@/lib/search-link.js"></script>
+  <!-- <script src="@/lib/search-link.js"></script> -->
 </header>
