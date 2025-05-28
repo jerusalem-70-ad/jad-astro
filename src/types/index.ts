@@ -1,7 +1,3 @@
-// src/types/index.ts
-
-import type { b } from "node_modules/tailwindcss/dist/types-B254mqw1.d.mts";
-
 // Node types for the transmission graph
 export type NodeType = "current" | "ancestor" | "descendant" | "regular";
 
@@ -15,6 +11,7 @@ export interface GraphNode {
   jad_id: string;
   depth: number;
   nodeType: NodeType;
+  x: number;
 }
 
 // Link between nodes

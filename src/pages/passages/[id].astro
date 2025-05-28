@@ -358,11 +358,11 @@ const usedBy = Object.values(passages).filter((item) =>
           </dt>
           <dd class="pl-5 p-2">
             {
-              passage.work[0].published_edition.length > 0
+              passage.work[0]?.published_edition?.length > 0
                 ? passage.work[0].published_edition.map((edition) => edition.name).join(", ")
                 : "N/A"
             }
-            {passage.work[0].volume_edition_or_individual_editor && <span>: {passage.work[0].volume_edition_or_individual_editor}</span>}
+            {passage.work[0]?.volume_edition_or_individual_editor && <span>: {passage.work[0].volume_edition_or_individual_editor}</span>}
           </dd>
             <dt
             class="font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
