@@ -3,6 +3,7 @@
  * @param {Array} passages - Array of passage objects
  * @returns {Object} - Map of passage ID to transmission graph data
  */
+
 export function buildTransmissionGraph(passages) {
   const idMap = new Map();
   passages.forEach((p) => idMap.set(p.id, p));
@@ -25,11 +26,13 @@ export function buildTransmissionGraph(passages) {
     const workName = node.work?.[0]?.name || "";
     const authorName =
       node.work?.[0]?.author?.map((a) => a.name).join(", ") || "";
+    const workDate = node.work?.[0]?.date[0]?.not_before || "";
     return {
       name: `${authorName}: ${workName}`,
       id: node.id,
       work: workName,
       author: authorName,
+      date: workDate,
       passage: node.passage,
       jad_id: node.jad_id,
       depth: depth,
@@ -125,6 +128,48 @@ export function buildTransmissionGraph(passages) {
       },
     };
   });
+
+  function assignXCoordinates(nodes) {
+    // Set current node x = 5
+    const current = nodes.find((n) => n.nodeType === "current");
+    if (current) current.x = 5;
+
+    // Group descendants by depth
+    const descendantsByDepth = {};
+    nodes.forEach((n) => {
+      if (n.nodeType === "descendant") {
+        descendantsByDepth[n.depth] ??= [];
+        descendantsByDepth[n.depth].push(n);
+      }
+    });
+
+    // For each depth, spread descendants along x axis
+    Object.entries(descendantsByDepth).forEach(([depth, arr]) => {
+      const count = arr.length;
+      arr.forEach((node, i) => {
+        // Spread in [1, 9], center if only one node
+        node.x = count === 1 ? 5 : 1 + (i * 8) / (count - 1);
+      });
+    });
+
+    // Do the same for ancestors if you want symmetry
+    const ancestorsByDepth = {};
+    nodes.forEach((n) => {
+      if (n.nodeType === "ancestor") {
+        ancestorsByDepth[n.depth] ??= [];
+        ancestorsByDepth[n.depth].push(n);
+      }
+    });
+    Object.entries(ancestorsByDepth).forEach(([depth, arr]) => {
+      const count = arr.length;
+      arr.forEach((node, i) => {
+        node.x = count === 1 ? 5 : 1 + (i * 8) / (count - 1);
+      });
+    });
+  }
+
+  // Assign x coordinates for layout
+  Object.values(result).forEach((r) => assignXCoordinates(r.graph.nodes));
 
   return result;
 }

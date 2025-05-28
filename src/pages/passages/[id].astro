@@ -7,6 +7,7 @@ import Article from "@/components/article.astro";
 import "instantsearch.css/themes/satellite.css";
 import PassageNetwork from "@/components/passage-network.astro";
 import type { Passage } from "@/types";
+import ChronologicalTree from "@/components/chronological-tree.astro";
 
 export async function getStaticPaths() {
   const paths = Object.values(passages).map((passage) => ({
@@ -20,7 +21,7 @@ const { data: passage } = Astro.props;
 
 // extract the sources for the current passage
 const source = Object.values(passages).filter(
-  (item) => item.id === passage.source_passage[0]?.id
+  (item) => passage.source_passage.some(s_passage => s_passage.id === item.id)
 );
 
 // passage as source (look where one passage is used as source for another)
@@ -46,323 +47,334 @@ const usedBy = Object.values(passages).filter((item) =>
       nextLink={`/passages/${passage.next.id}`}
       mainTitle=`Passage #${passage.id}: ${passage.passage} `
     >
-      <dl class="grid grid-cols-[1fr_5fr] text-sm md:text-base md:leading-7">
-        <dt
-          class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
-        >
-          Author:
-        </dt>
-        <dd class="pl-5">
-          {
-            passage.work.length > 0 && passage.work[0].author.length > 0 ? (
-              <NavLink href={`/authors/${passage.work[0].author[0].jad_id}`}>
-                {passage.work[0].author[0]?.name}{" "}
-                {passage.work[0].author_certainty === false && " (?)"}
-              </NavLink>
-            ) : (
-              "N/A"
-            )
-          }
-        </dd>
+  <!--   {passage.transmission_graph && (
+      <ChronologicalTree
+        transmissionGraph={passage.transmission_graph}/>
+      
+    )} -->
 
-        <dt
-          class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
-        >
-          Work:
-        </dt>
-        <dd class="pl-5">
-          {
-            passage.work.length > 0
-              ? passage.work.map((werk, index) => (
-                  <>
-                    <NavLink href={`/works/${werk.jad_id}`}>
-                      {werk.name}
-                    </NavLink>
-                    {index < passage.work.length - 1 && ", "}
-                  </>
-                ))
-              : "N/A"
-          }
-        </dd>
-
-        <dt
-          class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
-        >
-          Position in work
-        </dt>
-
-        <dd class="pl-5">
-          {passage.position_in_work || "N/A"}
-        </dd>
-
-        <dt
-          class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
-        >
-          Manuscripts:
-        </dt>
-        <dd class="pl-5">
-          {
-            passage.mss_occurrences.length > 0 ? (
-              <ul>
-                {passage.mss_occurrences.map((ms) => (
-                  <li>
-                    <NavLink href={`/manuscripts/${ms.manuscript_jad_id}`}>
-                      {ms.manuscript}                  
+      <div class="grid gap-4">
+        <dl class="grid grid-cols-[1fr_5fr] text-sm md:text-base md:leading-5 border border-neutral-300">
+          <dt
+            class="font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
+          >
+            Author:
+          </dt>
+          <dd class="pl-5 p-2 bg-brand-50">
+            {
+              passage.work.length > 0 && passage.work[0].author.length > 0 ? (
+                <NavLink href={`/authors/${passage.work[0].author[0].jad_id}`}>
+                  {passage.work[0].author[0]?.name}{" "}
+                  {passage.work[0].author_certainty === false && " (?)"}
+                </NavLink>
+              ) : (
+                "N/A"
+              )
+            }
+          </dd>
+          <dt
+            class="font-semibold text-brand-800 border-r border-neutral-300 p-2"
+          >
+            Work:
+          </dt>
+          <dd class="pl-5 p-2">
+            {
+              passage.work.length > 0
+                ? passage.work.map((werk, index) => (
+                    <>
+                      <NavLink href={`/works/${werk.jad_id}`}>
+                        {werk.name}
                       </NavLink>
-                    {/* add exact position preprocessed from json ms_occurences */}
-                    {ms.position_in_ms &&
-                     
-                          <span>
-                            (f. {ms.position_in_ms})
-                            {ms.facsimile_position && (
-                              <NavLink href={ms.facsimile_position}>
-                                Facsimile{" "}
-                                <Icon
-                                  name="lucide:external-link"
-                                  class="size-4 inline-flex"
-                                />
-                              </NavLink>
-                            )}
-                          </span>
-                        }
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              "N/A"
-            )
-          }
-        </dd>
-
-        <dt
-          class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
-        >
-          Biblical references:
-        </dt>
-        <dd class="pl-5 flex">
-          {
-            passage.biblical_references.length > 0
-              ? passage.biblical_references
-                  .map((reference) => (
-                    <span class="group relative">
-                      {reference.nova_vulgata_url ? (
-                        <NavLink
-                          href={reference.nova_vulgata_url}
-                          class="flex underline underline-offset-4 decoration-dotted"
-                        >
-                          {reference.value}
+                      {index < passage.work.length - 1 && ", "}
+                    </>
+                  ))
+                : "N/A"
+            }
+          </dd>
+          <dt
+            class="font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
+          >
+            Position in work
+          </dt>
+          <dd class="pl-5 p-2 bg-brand-50">
+            {passage.position_in_work || "N/A"}
+          </dd>
+          <dt
+            class="font-semibold text-brand-800 border-r border-neutral-300 p-2"
+          >
+            Manuscripts:
+          </dt>
+          <dd class="pl-5 p-2">
+            {
+              passage.mss_occurrences.length > 0 ? (
+                <ul>
+                  {passage.mss_occurrences.map((ms) => (
+                    <li>
+                      <NavLink href={`/manuscripts/${ms.manuscript_jad_id}`}>
+                        {ms.manuscript}
+                        </NavLink>
+                      {/* add exact position preprocessed from json ms_occurences */}
+                      {ms.position_in_ms &&
+        
+                            <span>
+                              (f. {ms.position_in_ms})
+                              {ms.facsimile_position && (
+                                <NavLink href={ms.facsimile_position}>
+                                  Facsimile{" "}
+                                  <Icon
+                                    name="lucide:external-link"
+                                    class="size-4 inline-flex"
+                                  />
+                                </NavLink>
+                              )}
+                            </span>
+                          }
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                "N/A"
+              )
+            }
+          </dd>
+          <dt
+            class="font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
+          >
+            Biblical references:
+          </dt>
+          <dd class="pl-5 p-2 flex bg-brand-50">
+            {
+              passage.biblical_references.length > 0
+                ? passage.biblical_references
+                    .map((reference) => (
+                      <span class="group relative">
+                        {reference.nova_vulgata_url ? (
+                          <NavLink
+                            href={reference.nova_vulgata_url}
+                            class="flex underline underline-offset-4 decoration-dotted"
+                          >
+                            {reference.value}
+                            <Icon
+                              name="lucide:external-link"
+                              class="size-4 text-brand-800 inline-flex"
+                            />
+                          </NavLink>
+                        ) : (
+                          <span>{reference.value}</span>
+                        )}
+                        <span class="italic invisible group-hover:visible absolute z-10 w-[300px] top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
+                          {reference.text}
+                        </span>
+                      </span>
+                    ))
+                    // use reduce to add the space and separator between entries
+                    .reduce((prev, curr, idx) =>
+                      idx === 0
+                        ? [curr]
+                        : [prev, <span class="mx-1">|</span>, curr]
+                    )
+                : "N/A"
+            }
+          </dd>
+          <dt
+            class="font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
+          >AI:
+          </dt>
+          <dd class="pl-5 p-2 text-brand-600 bg-brand-50">
+            {
+              passage.ai_bibl_ref.length > 0
+                ? passage.ai_bibl_ref
+                    .map((reference) =>
+                    (<span class="group relative">
+                      <span>{reference.bibl}</span>
+                      <span class="italic invisible group-hover:visible absolute z-10 w-[300px] top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
+                          {reference.text}
+                        </span>
+                    </span>))
+                     .reduce((prev, curr, idx) =>
+                      idx === 0
+                        ? [curr]
+                        : [prev, <span class="mx-1">|</span>, curr]
+                    )
+                : "N/A"
+            }
+          </dd>
+          <dt
+            class="font-semibold text-brand-800 border-r border-neutral-300 p-2"
+          >
+            Liturgical references:
+          </dt>
+          <dd class="pl-5 p-2">
+            {
+              passage.liturgical_references.length > 0
+                ? passage.liturgical_references
+                    .map((reference) => reference.value)
+                    .join(", ")
+                : "N/A"
+            }
+          </dd>
+        </dl>
+        
+        
+          <dl class="grid grid-cols-[1fr_5fr] text-sm md:text-base md:leading-5 border border-neutral-300">
+            <dt
+              class="font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
+            >
+              Sources:
+            </dt>
+            <dd class="pl-5 p-2  bg-brand-50">
+              <ul class="list-disc list-inside">
+                {
+                  passage.source_passage.length > 0
+                    ? source.map((source) => (
+                        <li>
+                          {source.work?.[0]?.author?.length > 0 ? (
+                            <span>
+                              {source.work[0].author[0].name} -{" "}
+                              <span class="italic">{source.work[0].name}</span>
+                            </span>
+                          ) : (
+                            <span class="italic">{source.work[0].name}</span>
+                          )}
                           <Icon
-                            name="lucide:external-link"
+                            name="lucide:arrow-right"
                             class="size-4 text-brand-800 inline-flex"
                           />
-                        </NavLink>
-                      ) : (
-                        <span>{reference.value}</span>
-                      )}
-
-                      <span class="italic invisible group-hover:visible absolute z-10 w-[300px] top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
-                        {reference.text}
-                      </span>
-                    </span>
-                  ))
-                  // use reduce to add the space and separator between entries
-                  .reduce((prev, curr, idx) =>
-                    idx === 0
-                      ? [curr]
-                      : [prev, <span class="mx-1">|</span>, curr]
-                  )
-              : "N/A"
-          }
-        </dd>
-        <dt
-          class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
-        >AI:
-        </dt>
-        <dd class="pl-5 text-brand-600">
-          {
-            passage.ai_bibl_ref.length > 0
-              ? passage.ai_bibl_ref
-                  .map((reference) => 
-                  (<span class="group relative">
-                    <span>{reference.bibl}</span>
-                    <span class="italic invisible group-hover:visible absolute z-10 w-[300px] top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
-                        {reference.text}
-                      </span>
-                  </span>))
-                   .reduce((prev, curr, idx) =>
-                    idx === 0
-                      ? [curr]
-                      : [prev, <span class="mx-1">|</span>, curr]
-                  )
-              : "N/A"
-          }
-        </dd>
-        <dt
-          class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
-        >
-          Liturgical references:
-        </dt>
-        <dd class="pl-5">
-          {
-            passage.liturgical_references.length > 0
-              ? passage.liturgical_references
-                  .map((reference) => reference.value)
-                  .join(", ")
-              : "N/A"
-          }
-        </dd>
-       
-       
-        <dt
-          class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
-        >
-          Sources:
-        </dt>
-        <dd class="pl-5">
-          {
-            passage.source_passage.length > 0
-              ? source.map((source) => (
-                  <span>
-                    {source.work?.[0]?.author?.length > 0 ? (
-                      <span>
-                        {source.work[0].author[0].name} -{" "}
-                        <span class="italic">{source.work[0].name}</span>
-                      </span>
-                    ) : (
-                      <span class="italic">{source.work[0].name}</span>
-                    )}
-                    <Icon
-                      name="lucide:arrow-right"
-                      class="size-4 text-brand-800 inline-flex"
-                    />
-                    <NavLink href={`/passages/${source.jad_id}`}>
-                      ({source.id}) {source.passage}
-                    </NavLink>
-                  </span>
-                ))
-              : "N/A"
-          }
-        </dd>
-
-        <dt
-          class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
-        >
-          Used by:
-        </dt>
-        <dd class="pl-5">
-          {
-            usedBy.length > 0 ? (
-              <ul class="list-disc list-inside">
-                {usedBy.map((passage) => (
-                  <li class="">
-                    {passage.work?.[0].author.length > 0 ? (
-                      <span>
-                        {passage.work[0].author[0].name} -{" "}
-                        <span class="italic">{passage.work[0].name}</span>
-                      </span>
-                    ) : (
-                      <span class="italic">{passage.work[0].name}</span>
-                    )}
-                    <Icon
-                      name="lucide:arrow-right"
-                      class="size-4 text-brand-800 inline-flex"
-                    />
-                    <NavLink href={`/passages/${passage.jad_id}`}>
-                      ({passage.id}) {passage.passage}
-                    </NavLink>
-                  </li>
-                ))}
+                          <NavLink href={`/passages/${source.jad_id}`}>
+                            ({source.id}) {source.passage}
+                          </NavLink>
+                        </li>
+                      ))
+                    : "N/A"
+                }
               </ul>
-            ) : (
-              "N/A"
-            )
-          }
-        </dd>
-
-        <dt
-          class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
-        >
-          Cluster:
-        </dt>
-        <dd class="pl-5">
-          {
-            passage.part_of_cluster?.length > 0
-              ? passage.part_of_cluster
-                  .map((cluster) => cluster.value)
-                  .join(", ")
-              : "N/A"
-          }
-        </dd>
-
-        <dt
-          class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
-        >
-          Keywords:
-        </dt>
-        <dd class="pl-5">
-          {
-            passage.keywords?.length > 0
-              ? passage.keywords
-                  .map((keyword) => (
-                    <NavLink href={`/keywords/jad_keyword__${keyword.id}`}>
-                      {keyword.name}
-                    </NavLink>
-                  ))
-                  .reduce((prev, curr, idx) =>
-                    idx === 0 ? [curr] : [prev, ", ", curr]
-                  )
-              : "N/A"
-          }
-        </dd>
-
-        <dt
-          class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
-        >
-          Full text:
-        </dt>
-        <dd class="pl-5 italic">
-          {passage.text_paragraph || "N/A"}
-        </dd>
-
-        <dt
-          class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
-        >
-          Passage found in:
-        </dt>
-        <dd class="pl-5">
-          {
-            passage.occurrence_found_in?.length > 0
-              ? passage.occurrence_found_in.map((find) => find.value).join(", ")
-              : "N/A"
-          }
-          {passage.note && <span>: {passage.note}</span>}
-        </dd>
-        {passage.source_passage.length > 0 || usedBy.length > 0 ? (
+            </dd>
+            <dt
+              class="font-semibold text-brand-800 border-r border-neutral-300 p-2"
+            >
+              Used by:
+            </dt>
+            <dd class="pl-5 p-2">
+              {
+                usedBy.length > 0 ? (
+                  <ul class="list-disc list-inside">
+                    {usedBy.map((passage) => (
+                      <li class="">
+                        {passage.work?.[0].author.length > 0 ? (
+                          <span>
+                            {passage.work[0].author[0].name} -{" "}
+                            <span class="italic">{passage.work[0].name}</span>
+                          </span>
+                        ) : (
+                          <span class="italic">{passage.work[0].name}</span>
+                        )}
+                        <Icon
+                          name="lucide:arrow-right"
+                          class="size-4 text-brand-800 inline-flex"
+                        />
+                        <NavLink href={`/passages/${passage.jad_id}`}>
+                          ({passage.id}) {passage.passage}
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  "N/A"
+                )
+              }
+            </dd>
+              {passage.source_passage.length > 0 || usedBy.length > 0 ? (
+            <dt
+            class="font-semibold text-brand-800 border-r border-neutral-300 p-2"
+          >
+            Transmission:
+          </dt>
+          <dd class="pl-5 p-2">
+            {passage.transmission_graph && (
+              <details>
+              <summary class="cursor-pointer p-2 border border-neutral-200 bg-brand-50 hover:bg-brand-700 hover:text-brand-50 w-60 rounded-md">See visualization graph</summary>
+              <div>               
+                  <ChronologicalTree
+        transmissionGraph={passage.transmission_graph}/>
+              </div></details>
+              ) 
+            }
+          </dd>
+          )
+          : ''}
+          </dl>
+          <dl class="grid grid-cols-[1fr_5fr] text-sm md:text-base md:leading-5 border border-neutral-300">
           <dt
-          class="font-semibold text-brand-800 border-r border-neutral-300 pr-2"
-        >
-          Transmission:
-        </dt>
-        <dd class="pl-5">
-          {
-            passage.transmission_graph ? (
-            <details>
-            <summary class="cursor-pointer p-2 border border-neutral-200 bg-brand-50 hover:bg-brand-700 hover:text-brand-50 w-60 rounded-md">See visualization graph</summary>
-            <div>
-              <p class="text-sm text-brand-600">
-                The transmission graph shows the relationships between this passage
-                and its sources, as well as the passages that use it as a source.
-              </p>
-                <PassageNetwork transmissionGraph={passage.transmission_graph} />
-            </div></details>
-            ) : (
-              <p>No transmission data available for this passage.</p>
-            )
-          }
-        </dd>
-        )
-        : ''}
-      </dl>
+            class="font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
+          >
+            Cluster:
+          </dt>
+          <dd class="pl-5 p-2 bg-brand-50">
+            {
+              passage.part_of_cluster?.length > 0
+                ? passage.part_of_cluster
+                    .map((cluster) => cluster.value)
+                    .join(", ")
+                : "N/A"
+            }
+          </dd>
+          <dt
+            class="font-semibold text-brand-800 border-r border-neutral-300 p-2"
+          >
+            Keywords:
+          </dt>
+          <dd class="pl-5 p-2">
+            {
+              passage.keywords?.length > 0
+                ? passage.keywords
+                    .map((keyword) => (
+                      <NavLink href={`/keywords/jad_keyword__${keyword.id}`}>
+                        {keyword.name}
+                      </NavLink>
+                    ))
+                    .reduce((prev, curr, idx) =>
+                      idx === 0 ? [curr] : [prev, ", ", curr]
+                    )
+                : "N/A"
+            }
+          </dd>
+          <dt
+            class="font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
+          >
+            Passage found in:
+          </dt>
+          <dd class="pl-5 p-2 bg-brand-50">
+            {
+              passage.occurrence_found_in?.length > 0
+                ? passage.occurrence_found_in.map((find) => find.value).join(", ")
+                : "N/A"
+            }
+            {passage.note && <span>: {passage.note}</span>}
+          </dd>
+          <dt
+            class="font-semibold text-brand-800 border-r border-neutral-300 p-2"
+          >
+            Edition:
+          </dt>
+          <dd class="pl-5 p-2">
+            {
+              passage.work[0]?.published_edition?.length > 0
+                ? passage.work[0].published_edition.map((edition) => edition.name).join(", ")
+                : "N/A"
+            }
+            {passage.work[0]?.volume_edition_or_individual_editor && <span>: {passage.work[0].volume_edition_or_individual_editor}</span>}
+          </dd>
+            <dt
+            class="font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
+          >
+            Full text:
+          </dt>
+          <dd class="pl-5 p-2 italic bg-brand-50">
+            {passage.text_paragraph || "N/A"}
+          </dd>
+        
+        </dl>
+      </div>
     </Article>
   </div>
 </PageLayout>
