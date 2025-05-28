@@ -67,6 +67,12 @@ export function buildTransmissionGraph(passages) {
             sourceNode.id,
             formatNode(sourceNode, depth, "ancestor")
           );
+        } else {
+          // Update depth if this path yields a shallower ancestor
+          const existing = graphNodes.get(sourceNode.id);
+          if (existing.depth > depth + 1) {
+            existing.depth = depth + 1;
+          }
         }
 
         // Add link to graphLinks - for ancestors, the source should be the older text
@@ -78,7 +84,7 @@ export function buildTransmissionGraph(passages) {
         });
 
         // Process this source's own sources
-        processAncestors(sourceNode, new Set(visited), depth + 1);
+        processAncestors(sourceNode, visited, depth + 1);
       }
     }
 
@@ -129,47 +135,131 @@ export function buildTransmissionGraph(passages) {
     };
   });
 
-  function assignXCoordinates(nodes) {
-    // Set current node x = 5
+  function assignXCoordinates(nodes, links) {
+    const nodeMap = Object.fromEntries(nodes.map((n) => [n.id, n]));
+
+    // Create adjacency maps for both directions
+    const childrenMap = {}; // parent -> [children]
+    const parentsMap = {}; // child -> [parents]
+
+    // Build both maps from links
+    links.forEach((link) => {
+      // Children map: source -> targets
+      if (!childrenMap[link.source]) childrenMap[link.source] = [];
+      childrenMap[link.source].push(link.target);
+
+      // Parents map: target -> sources
+      if (!parentsMap[link.target]) parentsMap[link.target] = [];
+      parentsMap[link.target].push(link.source);
+    });
+
+    // 1. Set current node at x = 5
     const current = nodes.find((n) => n.nodeType === "current");
     if (current) current.x = 5;
 
-    // Group descendants by depth
-    const descendantsByDepth = {};
-    nodes.forEach((n) => {
-      if (n.nodeType === "descendant") {
-        descendantsByDepth[n.depth] ??= [];
-        descendantsByDepth[n.depth].push(n);
-      }
-    });
+    // 2. Spread depth 0 nodes evenly between x = 1 and x = 9
+    const depth0 = nodes.filter(
+      (n) => n.depth === 0 && n.nodeType !== "current"
+    );
 
-    // For each depth, spread descendants along x axis
-    Object.entries(descendantsByDepth).forEach(([depth, arr]) => {
-      const count = arr.length;
-      arr.forEach((node, i) => {
-        // Spread in [1, 9], center if only one node
-        node.x = count === 1 ? 5 : 1 + (i * 8) / (count - 1);
-      });
-    });
-
-    // Do the same for ancestors if you want symmetry
-    const ancestorsByDepth = {};
-    nodes.forEach((n) => {
-      if (n.nodeType === "ancestor") {
-        ancestorsByDepth[n.depth] ??= [];
-        ancestorsByDepth[n.depth].push(n);
+    if (depth0.length > 0) {
+      if (depth0.length === 1) {
+        depth0[0].x = 5; // Center single node
+      } else {
+        const spacing = 8 / (depth0.length - 1);
+        depth0.forEach((n, i) => {
+          n.x = 1 + i * spacing;
+        });
       }
-    });
-    Object.entries(ancestorsByDepth).forEach(([depth, arr]) => {
-      const count = arr.length;
-      arr.forEach((node, i) => {
-        node.x = count === 1 ? 5 : 1 + (i * 8) / (count - 1);
+    }
+
+    // 3. For nodes with depth > 0, inherit x from connected nodes at previous depth
+    const maxDepth = Math.max(...nodes.map((n) => n.depth));
+
+    for (let d = 1; d <= maxDepth; d++) {
+      const thisDepth = nodes.filter((n) => n.depth === d);
+
+      thisDepth.forEach((n) => {
+        // Find connected nodes at depth d-1
+        let parentXs = [];
+
+        // Check parents (for descendants going forward in time)
+        if (parentsMap[n.id]) {
+          const connectedParents = parentsMap[n.id]
+            .map((id) => nodeMap[id])
+            .filter(
+              (parent) =>
+                parent && parent.depth === d - 1 && parent.x !== undefined
+            );
+          parentXs.push(...connectedParents.map((p) => p.x));
+        }
+
+        // Check children (for ancestors going backward in time)
+        if (childrenMap[n.id]) {
+          const connectedChildren = childrenMap[n.id]
+            .map((id) => nodeMap[id])
+            .filter(
+              (child) => child && child.depth === d - 1 && child.x !== undefined
+            );
+          parentXs.push(...connectedChildren.map((c) => c.x));
+        }
+
+        if (parentXs.length > 0) {
+          // Use average x of connected nodes at previous depth
+          const baseX = parentXs.reduce((a, b) => a + b, 0) / parentXs.length;
+
+          // If multiple nodes at this depth share the same parent, spread them out
+          const siblingsAtSameDepth = thisDepth.filter((sibling) => {
+            if (sibling === n) return false;
+
+            let siblingParentXs = [];
+            if (parentsMap[sibling.id]) {
+              const siblingConnectedParents = parentsMap[sibling.id]
+                .map((id) => nodeMap[id])
+                .filter(
+                  (parent) =>
+                    parent && parent.depth === d - 1 && parent.x !== undefined
+                );
+              siblingParentXs.push(...siblingConnectedParents.map((p) => p.x));
+            }
+            if (childrenMap[sibling.id]) {
+              const siblingConnectedChildren = childrenMap[sibling.id]
+                .map((id) => nodeMap[id])
+                .filter(
+                  (child) =>
+                    child && child.depth === d - 1 && child.x !== undefined
+                );
+              siblingParentXs.push(...siblingConnectedChildren.map((c) => c.x));
+            }
+
+            if (siblingParentXs.length === 0) return false;
+            const siblingBaseX =
+              siblingParentXs.reduce((a, b) => a + b, 0) /
+              siblingParentXs.length;
+            return Math.abs(siblingBaseX - baseX) < 0.1; // Same parent group
+          });
+
+          // Assign positions with small offsets for siblings
+          if (siblingsAtSameDepth.length > 0) {
+            const allSiblingsIncludingCurrent = [n, ...siblingsAtSameDepth];
+            const totalSiblings = allSiblingsIncludingCurrent.length;
+            const currentIndex = allSiblingsIncludingCurrent.indexOf(n);
+
+            // Spread siblings around the base position
+            const offset = (currentIndex - (totalSiblings - 1) / 2) * 0.5;
+            n.x = Math.max(0, Math.min(10, baseX + offset));
+          } else {
+            n.x = Math.max(0, Math.min(10, baseX));
+          }
+        }
       });
-    });
+    }
   }
 
   // Assign x coordinates for layout
-  Object.values(result).forEach((r) => assignXCoordinates(r.graph.nodes));
+  Object.values(result).forEach((r) =>
+    assignXCoordinates(r.graph.nodes, r.graph.links)
+  );
 
   return result;
 }
