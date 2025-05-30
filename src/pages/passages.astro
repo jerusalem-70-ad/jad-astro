@@ -11,7 +11,7 @@ const title = "Passages";
     import { setupTableActions } from "@/lib/table-actions";
     import { TabulatorFull as Tabulator } from "tabulator-tables";
     import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
-    import { jsonpathLookup } from "@/lib/tabulator-utils.js";
+    import { jsonpathLookup, sortByKey } from "@/lib/tabulator-utils.js";
     import data from "@/content/data/passages.json";
 
     const dataSet = Object.values(data).map((passage) => {
@@ -47,7 +47,6 @@ const title = "Passages";
             }
           })
           .join("; "),
-
       };
     });
     console.log(dataSet[0]);
@@ -140,9 +139,8 @@ const title = "Passages";
           resizable: true,
           field: "biblical_references",
           minWidth: 200,
-          mutator: jsonpathLookup,
+          mutator: sortByKey,
           mutatorParams: {
-            path: "$[*].value",
             separator: "; ",
           },
           headerFilter: "input",

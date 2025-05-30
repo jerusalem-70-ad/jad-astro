@@ -145,9 +145,12 @@ const usedBy = Object.values(passages).filter((item) =>
           <dd class="pl-5 p-2 flex bg-brand-50">
             {
               passage.biblical_references.length > 0
-                ? passage.biblical_references
+                ? <ul class="list-none flex"> 
+                  {passage.biblical_references
+                  .sort((a, b) => a.key - b.key)
                     .map((reference) => (
-                      <span class="group relative">
+                      <li class="group relative">
+                        {/* if reference.nova_vulgata_url is defined, use NavLink, otherwise just span */}
                         {reference.nova_vulgata_url ? (
                           <NavLink
                             href={reference.nova_vulgata_url}
@@ -165,14 +168,15 @@ const usedBy = Object.values(passages).filter((item) =>
                         <span class="italic invisible group-hover:visible absolute z-10 w-[300px] top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
                           {reference.text}
                         </span>
-                      </span>
+                      </li>
                     ))
                     // use reduce to add the space and separator between entries
                     .reduce((prev, curr, idx) =>
                       idx === 0
                         ? [curr]
                         : [prev, <span class="mx-1">|</span>, curr]
-                    )
+                    )}
+                    </ul>
                 : "N/A"
             }
           </dd>

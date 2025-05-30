@@ -48,6 +48,7 @@ export interface Reference {
   value: string;
   nova_vulgata_url?: string;
   text?: string;
+  key?: number;
 }
 
 // Author interface

@@ -2,6 +2,7 @@ import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
 import { enrichDates } from "./utils.js";
 import { buildTransmissionGraph } from "./build-transmission-graph.js";
+import { generateBiblicalSortKey } from "./sort-bibl-ref.js";
 
 const loadJSON = (file) =>
   JSON.parse(
@@ -18,6 +19,27 @@ const msOccurrences = Object.values(loadJSON("ms_occurrences.json"));
 // set the output folder
 const folderPath = join(process.cwd(), "src", "content", "data");
 mkdirSync(folderPath, { recursive: true });
+
+// sort biblical references according to nova vulgarta order
+const biblicalRefSorted = {};
+Object.values(biblicalRef).forEach((ref) => {
+  const sortKey = generateBiblicalSortKey(ref.name);
+
+  biblicalRefSorted[String(ref.id)] = {
+    id: ref.id,
+    jad_id: ref.jad_id,
+    value: ref.name.trim(),
+    text: ref.text || "",
+    nova_vulgata_url: ref.nova_vulgata_url || "",
+    key: sortKey,
+  };
+});
+
+// Write the enhanced biblical references back to file
+writeFileSync(
+  join(folderPath, "biblical_references.json"),
+  JSON.stringify(biblicalRefSorted, null, 2)
+);
 
 //rewrite passages
 // mapping abbreviations with book names
@@ -161,22 +183,6 @@ const passagesPlus = passages.map((passage) => {
   // add aiBiblicalRef to each passage
   const aiBiblicalRefEntry = aiBiblRef[passage.jad_id];
 
-  // sort biblical_references by book and chapter for display in table and detail view.
-  if (passage.biblical_references?.length > 0) {
-    passage.biblical_references = passage.biblical_references
-      .sort((a, b) => a.value.localeCompare(b.value))
-      .map((ref) => {
-        const biblRefSource = biblicalRef.find(
-          (biblical) => biblical.id === ref.id
-        );
-        return {
-          ...ref,
-          nova_vulgata_url: biblRefSource?.nova_vulgata_url || null,
-          text: biblRefSource?.text || null,
-        };
-      });
-  }
-
   // enrich passage with data from manuscripts.json
   // see if the passage.id is in the ms_occurrences.json
   const msOccurrence = msOccurrences
@@ -205,6 +211,17 @@ const passagesPlus = passages.map((passage) => {
       };
     });
   // filter the manuscripts.json to get the manuscripts that are in the ms_occurrences.json
+
+  //enrich biblical_references with sort key using the biblicalRefSorted
+  if (passage.biblical_references && passage.biblical_references.length > 0) {
+    passage.biblical_references = passage.biblical_references.map((ref) => {
+      // Find the enriched reference by id (as string, since biblicalRefSorted keys are likely strings)
+      const enriched = biblicalRefSorted[String(ref.id)];
+      return {
+        ...(enriched || {}), // Merge in all properties from biblicalRefSorted if found
+      };
+    });
+  }
 
   return {
     id: passage.id,
