@@ -37,7 +37,6 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
 <script>
   import * as echarts from "echarts";
   import { withBasePath } from "../lib/withBasePath";
-  import type { NodeType } from "../types";
 
   document.addEventListener("DOMContentLoaded", () => {
     // Get data from global variables
@@ -124,9 +123,16 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
       yAxis: {
         type: "value",
         name: "Year",
-        min: (value: { min: number }) => value.min - 10,
-        max: (value: { max: number }) => value.max + 10,
-        axisLabel: { fontSize: 12 },
+        min: (value: { min: number; max: number }) => value.min - 10,
+        max: (value: { min: number; max: number }) => value.max + 10,
+        axisLabel: {
+          fontSize: 12,
+          interval: function (_index: number, value: number) {
+            // Show only values that are multiples of 50
+            return value % 50 === 0;
+          },
+        },
+        splitNumber: 10, // Suggest around 10 major ticks
       },
       xAxis: {
         type: "value",
@@ -177,6 +183,31 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
         },
       ],
       animation: true,
+      toolbox: {
+        show: true,
+        orient: "vertical",
+        right: "20",
+        top: "top",
+        itemSize: 20,
+        itemGap: 20,
+        feature: {
+          saveAsImage: {
+            show: true,
+            title: "Download as PNG",
+            type: "png",
+            pixelRatio: 2, // Higher quality
+            backgroundColor: "#fff",
+          },
+          dataZoom: {
+            show: config.enableZoom,
+            title: {
+              zoom: "Zoom",
+              back: "Reset Zoom",
+            },
+          },
+          restore: { show: true, title: "Reset View" },
+        },
+      },
     };
 
     const chart = echarts.init(chartElement);
