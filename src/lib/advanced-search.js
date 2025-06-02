@@ -14,6 +14,7 @@ import {
 import { simple } from "instantsearch.js/es/lib/stateMappings";
 
 import { withBasePath } from "./withBasePath";
+import { biblicalComparator } from "./sort-bibl-ref-menu.js";
 
 const project_collection_name = "JAD-temp";
 const main_search_field = "full_text";
@@ -421,6 +422,7 @@ search.addWidgets([
     showMore: true,
     showMoreLimit: 50,
     limit: 10,
+    sortBy: biblicalComparator,
     searchablePlaceholder: "e.g. Luke",
   }),
 

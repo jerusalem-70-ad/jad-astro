@@ -1,5 +1,5 @@
 // Nova Vulgata book order mapping
-const NOVA_VULGATA_ORDER = {
+export const NOVA_VULGATA_ORDER = {
   // Old Testament
   Gen: 1,
   Genesis: 1,
