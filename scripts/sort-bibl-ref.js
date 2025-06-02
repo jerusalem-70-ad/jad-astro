@@ -177,30 +177,35 @@ export const NOVA_VULGATA_ORDER = {
 };
 
 function extractBookAbbreviation(referenceValue) {
-  const cleanRef = referenceValue.trim();
+  if (referenceValue) {
+    const cleanRef = referenceValue.trim();
 
-  // Handle numbered books with spaces first (4 Reg, 1 Macc, etc.)
-  const numberedWithSpaceMatch = cleanRef.match(/^(\d+\s+[A-Za-z]+)/);
-  if (numberedWithSpaceMatch) {
-    return numberedWithSpaceMatch[0];
-  }
-  // Handle numbered books without spaces (1Cor, 2Sam, etc.)
-  const numberedBookMatch = cleanRef.match(/^(\d[A-Za-z]+)/);
-  if (numberedBookMatch) {
-    return numberedBookMatch[0];
-  }
-
-  // Handle special cases that don't follow the typical pattern
-  const specialCases = ["Joel", "Acts", "Job", "Ruth", "Jude", "Hebr", "Koh"];
-  for (const special of specialCases) {
-    if (cleanRef.startsWith(special)) {
-      return special;
+    // Handle numbered books with spaces first (4 Reg, 1 Macc, etc.)
+    const numberedWithSpaceMatch = cleanRef.match(/^(\d+\s+[A-Za-z]+)/);
+    if (numberedWithSpaceMatch) {
+      return numberedWithSpaceMatch[0];
     }
-  }
+    // Handle numbered books without spaces (1Cor, 2Sam, etc.)
+    const numberedBookMatch = cleanRef.match(/^(\d[A-Za-z]+)/);
+    if (numberedBookMatch) {
+      return numberedBookMatch[0];
+    }
 
-  // Default case: split on first period, comma, or space
-  const parts = cleanRef.split(/[\s.,]/);
-  return parts[0];
+    // Handle special cases that don't follow the typical pattern
+    const specialCases = ["Joel", "Acts", "Job", "Ruth", "Jude", "Hebr", "Koh"];
+    for (const special of specialCases) {
+      if (cleanRef.startsWith(special)) {
+        return special;
+      }
+    }
+
+    // Default case: split on first period, comma, or space
+    const parts = cleanRef.split(/[\s.,]/);
+    return parts[0];
+  } else {
+    console.warn("Reference value is empty or undefined");
+    return null;
+  }
 }
 
 function parseChapterVerse(referenceValue, bookAbbrev) {

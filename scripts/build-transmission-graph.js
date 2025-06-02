@@ -138,122 +138,121 @@ export function buildTransmissionGraph(passages) {
   function assignXCoordinates(nodes, links) {
     const nodeMap = Object.fromEntries(nodes.map((n) => [n.id, n]));
 
-    // Create adjacency maps for both directions
+    // Build parent-child relationships based on the actual links
     const childrenMap = {}; // parent -> [children]
     const parentsMap = {}; // child -> [parents]
 
-    // Build both maps from links
     links.forEach((link) => {
-      // Children map: source -> targets
+      // source -> target represents the flow of influence
       if (!childrenMap[link.source]) childrenMap[link.source] = [];
       childrenMap[link.source].push(link.target);
 
-      // Parents map: target -> sources
       if (!parentsMap[link.target]) parentsMap[link.target] = [];
       parentsMap[link.target].push(link.source);
     });
 
     // 1. Set current node at x = 5
     const current = nodes.find((n) => n.nodeType === "current");
-    if (current) current.x = 5;
-
-    // 2. Spread depth 0 nodes evenly between x = 1 and x = 9
-    const depth0 = nodes.filter(
-      (n) => n.depth === 0 && n.nodeType !== "current"
-    );
-
-    if (depth0.length > 0) {
-      if (depth0.length === 1) {
-        depth0[0].x = 5; // Center single node
-      } else {
-        const spacing = 8 / (depth0.length - 1);
-        depth0.forEach((n, i) => {
-          n.x = 1 + i * spacing;
-        });
-      }
+    if (current) {
+      current.x = 5;
     }
 
-    // 3. For nodes with depth > 0, inherit x from connected nodes at previous depth
-    const maxDepth = Math.max(...nodes.map((n) => n.depth));
+    // 2. Process ancestors (going backwards in time, increasing depth)
+    const ancestors = nodes.filter((n) => n.nodeType === "ancestor");
+    processNodeGroup(ancestors, childrenMap, nodeMap, "ancestor");
 
-    for (let d = 1; d <= maxDepth; d++) {
-      const thisDepth = nodes.filter((n) => n.depth === d);
+    // 3. Process descendants (going forward in time, increasing depth)
+    const descendants = nodes.filter((n) => n.nodeType === "descendant");
+    processNodeGroup(descendants, parentsMap, nodeMap, "descendant");
+  }
 
-      thisDepth.forEach((n) => {
-        // Find connected nodes at depth d-1
-        let parentXs = [];
+  function processNodeGroup(nodes, connectionMap, nodeMap, groupType) {
+    if (nodes.length === 0) return;
 
-        // Check parents (for descendants going forward in time)
-        if (parentsMap[n.id]) {
-          const connectedParents = parentsMap[n.id]
-            .map((id) => nodeMap[id])
-            .filter(
-              (parent) =>
-                parent && parent.depth === d - 1 && parent.x !== undefined
-            );
-          parentXs.push(...connectedParents.map((p) => p.x));
-        }
+    // Group nodes by depth
+    const depthGroups = {};
+    nodes.forEach((node) => {
+      if (!depthGroups[node.depth]) depthGroups[node.depth] = [];
+      depthGroups[node.depth].push(node);
+    });
 
-        // Check children (for ancestors going backward in time)
-        if (childrenMap[n.id]) {
-          const connectedChildren = childrenMap[n.id]
-            .map((id) => nodeMap[id])
-            .filter(
-              (child) => child && child.depth === d - 1 && child.x !== undefined
-            );
-          parentXs.push(...connectedChildren.map((c) => c.x));
-        }
+    const depths = Object.keys(depthGroups)
+      .map(Number)
+      .sort((a, b) => a - b);
 
-        if (parentXs.length > 0) {
-          // Use average x of connected nodes at previous depth
-          const baseX = parentXs.reduce((a, b) => a + b, 0) / parentXs.length;
+    depths.forEach((depth) => {
+      const nodesAtDepth = depthGroups[depth];
 
-          // If multiple nodes at this depth share the same parent, spread them out
-          const siblingsAtSameDepth = thisDepth.filter((sibling) => {
-            if (sibling === n) return false;
+      if (depth === 1) {
+        // First level: spread evenly across x = 1 to 9
+        spreadNodesEvenly(nodesAtDepth, 1, 9);
+      } else {
+        // Higher depths: position based on parent positions
+        positionBasedOnParents(nodesAtDepth, connectionMap, nodeMap);
+      }
+    });
+  }
 
-            let siblingParentXs = [];
-            if (parentsMap[sibling.id]) {
-              const siblingConnectedParents = parentsMap[sibling.id]
-                .map((id) => nodeMap[id])
-                .filter(
-                  (parent) =>
-                    parent && parent.depth === d - 1 && parent.x !== undefined
-                );
-              siblingParentXs.push(...siblingConnectedParents.map((p) => p.x));
-            }
-            if (childrenMap[sibling.id]) {
-              const siblingConnectedChildren = childrenMap[sibling.id]
-                .map((id) => nodeMap[id])
-                .filter(
-                  (child) =>
-                    child && child.depth === d - 1 && child.x !== undefined
-                );
-              siblingParentXs.push(...siblingConnectedChildren.map((c) => c.x));
-            }
-
-            if (siblingParentXs.length === 0) return false;
-            const siblingBaseX =
-              siblingParentXs.reduce((a, b) => a + b, 0) /
-              siblingParentXs.length;
-            return Math.abs(siblingBaseX - baseX) < 0.1; // Same parent group
-          });
-
-          // Assign positions with small offsets for siblings
-          if (siblingsAtSameDepth.length > 0) {
-            const allSiblingsIncludingCurrent = [n, ...siblingsAtSameDepth];
-            const totalSiblings = allSiblingsIncludingCurrent.length;
-            const currentIndex = allSiblingsIncludingCurrent.indexOf(n);
-
-            // Spread siblings around the base position
-            const offset = (currentIndex - (totalSiblings - 1) / 2) * 0.5;
-            n.x = Math.max(0, Math.min(10, baseX + offset));
-          } else {
-            n.x = Math.max(0, Math.min(10, baseX));
-          }
-        }
+  function spreadNodesEvenly(nodes, minX, maxX) {
+    if (nodes.length === 1) {
+      nodes[0].x = 5; // Center single node
+    } else {
+      const spacing = (maxX - minX) / (nodes.length - 1);
+      nodes.forEach((node, index) => {
+        node.x = minX + index * spacing;
       });
     }
+  }
+
+  function positionBasedOnParents(nodes, connectionMap, nodeMap) {
+    // Group nodes by their parent positions
+    const parentGroups = new Map();
+
+    nodes.forEach((node) => {
+      const connectedParentIds = connectionMap[node.id] || [];
+      const connectedParents = connectedParentIds
+        .map((id) => nodeMap[id])
+        .filter((parent) => parent && parent.x !== undefined);
+
+      if (connectedParents.length > 0) {
+        // Calculate average x position of parents
+        const avgParentX =
+          connectedParents.reduce((sum, parent) => sum + parent.x, 0) /
+          connectedParents.length;
+        const parentKey = Math.round(avgParentX * 10) / 10; // Round to avoid floating point issues
+
+        if (!parentGroups.has(parentKey)) {
+          parentGroups.set(parentKey, []);
+        }
+        parentGroups.get(parentKey).push(node);
+      } else {
+        // If no connected parents found, place at center
+        node.x = 5;
+      }
+    });
+
+    // Check if all nodes belong to a single parent group
+    // If so, spread them across the full range instead of clustering
+    if (parentGroups.size === 1 && nodes.length > 1) {
+      spreadNodesEvenly(nodes, 1, 9);
+      return;
+    }
+
+    // Position nodes within each parent group
+    parentGroups.forEach((groupNodes, parentX) => {
+      if (groupNodes.length === 1) {
+        groupNodes[0].x = parentX;
+      } else {
+        // Spread siblings around parent position with small offsets
+        const offsetRange = Math.min(2, 8 / groupNodes.length); // Max offset of 2 units
+        const spacing = offsetRange / (groupNodes.length - 1);
+
+        groupNodes.forEach((node, index) => {
+          const offset = (index - (groupNodes.length - 1) / 2) * spacing;
+          node.x = Math.max(1, Math.min(9, parentX + offset));
+        });
+      }
+    });
   }
 
   // Assign x coordinates for layout

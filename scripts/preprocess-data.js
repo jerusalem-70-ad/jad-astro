@@ -23,16 +23,18 @@ mkdirSync(folderPath, { recursive: true });
 // sort biblical references according to nova vulgarta order
 const biblicalRefSorted = {};
 Object.values(biblicalRef).forEach((ref) => {
-  const sortKey = generateBiblicalSortKey(ref.name);
+  if (ref.name) {
+    const sortKey = generateBiblicalSortKey(ref.name);
 
-  biblicalRefSorted[String(ref.id)] = {
-    id: ref.id,
-    jad_id: ref.jad_id,
-    value: ref.name.trim(),
-    text: ref.text || "",
-    nova_vulgata_url: ref.nova_vulgata_url || "",
-    key: sortKey,
-  };
+    biblicalRefSorted[String(ref.id)] = {
+      id: ref.id,
+      jad_id: ref.jad_id,
+      value: ref.name.trim(),
+      text: ref.text || "",
+      nova_vulgata_url: ref.nova_vulgata_url || "",
+      key: sortKey,
+    };
+  }
 });
 
 // Write the enhanced biblical references back to file
@@ -143,7 +145,11 @@ const passagesPlus = passages.map((passage) => {
   const lvl1 = [];
   const lvl2 = [];
 
-  if (passage.biblical_references && passage.biblical_references.length > 0) {
+  if (
+    passage.biblical_references &&
+    passage.biblical_references.length > 0 &&
+    passage.biblical_references[0].value
+  ) {
     passage.biblical_references.forEach((ref) => {
       let bookAbbrev, chapterVerse;
       const specialCases = ["Joel", "Acts", "Job", "Osee", "Amos", "Ruth"];
