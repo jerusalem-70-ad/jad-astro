@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml"
+	schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>Work X</title>
+         </titleStmt>
+         <publicationStmt>
+            <p>Publication Information</p>
+         </publicationStmt>
+         <sourceDesc>
+            <listPerson>
+               <person xml:id="jad_person_id">
+                  <persName></persName>
+               </person>
+            </listPerson>
+            <listPlace>
+               <place xml:id="jad_place_id"></place>
+            </listPlace>
+            <list type="genres">
+               <item></item>
+            </list>
+         </sourceDesc>
+      </fileDesc>
+     <encodingDesc>
+        <classDecl>
+           <taxonomy>
+              <category xml:id="jad_institution_id">
+                 <catDesc>[institution]</catDesc>
+                 <category xml:id="jad_institution_id2">
+                    <catDesc>[institution]</catDesc>
+                 </category>
+              </category>
+           </taxonomy>
+           <taxonomy xml:id="genres">
+              <category xml:id="genre_1"/>              
+           </taxonomy>
+           <taxonomy xml:id="liturgical_ref">
+              <category xml:id="jad_liturg_ref_id">
+                 <catDesc key="1">[name]</catDesc>
+                 <catDesc key="2">[description]</catDesc>
+              </category>
+           </taxonomy>
+        </classDecl>
+     </encodingDesc>
+  </teiHeader>
+  <text>
+      <body>
+         <head>
+            <title>[work/title]</title>
+            <persName role="author" cert="" ref="#jad_person_id">[work/author]</persName>   
+         </head>
+         <p>
+            <origDate notBefore="" notAfter="" cert="">[work/date]</origDate>
+            <ref type="genre" target="#jad_genre_id">[work/genre]</ref>
+            <ref type="incipit"></ref>
+         </p>
+         <list>
+            <head>Passages</head>
+            <item xml:id="jad_id">
+               
+            </item>
+         </list>
+         <p>Passages.</p>
+      </body>
+  </text>
+</TEI>
