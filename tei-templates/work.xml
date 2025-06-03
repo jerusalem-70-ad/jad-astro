@@ -12,34 +12,141 @@
             <p>Publication Information</p>
          </publicationStmt>
          <sourceDesc>
+         <!--   ##### ENTITIES ####  -->
+         <!--   #### REGISTER PEOPLE #####-->
             <listPerson>
                <person xml:id="jad_person_id">
                   <persName></persName>
+                  <persName type="alt"></persName>
+                  <birth></birth>
+                  <death></death>
+                  <ptr type="gnd" target=""/>
                </person>
             </listPerson>
+         <!--     #### REGISTER PLACES #####-->
             <listPlace>
-               <place xml:id="jad_place_id"></place>
+               <place xml:id="jad_place__1">
+                  <placeName></placeName>
+                  <ptr type="geonames" target=""/>
+               </place>
             </listPlace>
-            <list type="genres">
-               <item></item>
-            </list>
+         <!--     #### REGISTER ORGANISATIONS (intitutional_context + libraries) #####-->
+            <listOrg>
+               <org xml:id="jad_institutional_context_id">
+                  <orgName>[institution]</orgName>
+                  <placeName ref="#jad_places__1"></placeName>
+                  <ptr type="gnd" target=""/>
+                  <ptr type="wikidata" target=""/>               
+         <!--    subordinate organisations -->
+                  <org xml:id="jad_institutional_context_id2">
+                     <orgName>[subordinate_institution]</orgName>
+                     <placeName ref="#jad_places__1"></placeName>
+                     <ptr type="gnd" target=""/>
+                     <ptr type="wikidata" target=""/>
+                  </org>
+               </org>
+            </listOrg>
+            <!-- #### Sources References #####  -->
+            <listBibl>
+               <bibl xml:id="jad_sources_occurrences_1">
+                  <title>[name]</title>
+                  <ptr target="digi_url"/>
+               </bibl>
+            </listBibl>
+            
+   <!-- #### Biblical References #####  -->
+            <listBibl>
+               <bibl xml:id="jad_biblical_reference__1">
+                  <title></title>
+                  <biblScope unit="chapter"></biblScope>
+                  <biblScope unit="verse"></biblScope>
+                  <abbr></abbr>
+                  <quote xml:lang="la"></quote>
+                  <ref type="external" target=""></ref>
+               </bibl>
+            </listBibl>
+<!--    ##### collect all manuscripts related 1) to this work (column manuscript in table works) and 
+               2) to passages from that work (table ms_occurrences) #### -->
+            <msDesc xml:id="jad_ms_id">
+               <msIdentifier>
+                  <settlement></settlement>
+                  <repository></repository>
+                  <idno></idno>
+               </msIdentifier>
+               <physDesc>
+                  <objectDesc>
+                     <supportDesc>
+                        <extent>
+                           <measure type="leavesCount"></measure>
+                           <dimensions type="leaf">
+                              <height></height>
+                              <width></width>
+                           </dimensions>
+                        </extent>
+                     </supportDesc>
+                  </objectDesc>
+               </physDesc>
+               <history>
+                  <summary>
+                     <origDate notBefore="" notAfter=""></origDate>
+                     <ref type="intiutionl_context" target="#jad_institution_id"></ref>
+                  </summary>
+               </history>
+               <additional>
+                  <surrogates>
+                     <ptr target="" type="digi_url"/>
+                     <ptr target="" type="catalog_url"/>
+                  </surrogates>
+               </additional>
+            </msDesc>
+            <msDesc>
+               <msIdentifier>
+                  <settlement></settlement>
+                  <repository></repository>
+                  <idno></idno>
+               </msIdentifier>
+               <physDesc>
+                  <objectDesc>
+                     <supportDesc>
+                        <extent>
+                           <measure type="leavesCount"></measure>
+                           <dimensions type="leaf">
+                              <height></height>
+                              <width></width>
+                           </dimensions>
+                        </extent>
+                     </supportDesc>
+                  </objectDesc>
+               </physDesc>
+               <history>
+                  <summary>
+                     <origDate notBefore="" notAfter=""></origDate>
+                     <ref type="intiutionl_context" target="#jad_institution_id"></ref>
+                  </summary>
+               </history>
+               <additional>
+                  <surrogates>
+                     <ptr target="" type="digi_url"/>
+                     <ptr target="" type="catalog_url"/>
+                  </surrogates>
+               </additional>
+            </msDesc>
          </sourceDesc>
       </fileDesc>
      <encodingDesc>
-        <classDecl>
-           <taxonomy>
-              <category xml:id="jad_institution_id">
-                 <catDesc>[institution]</catDesc>
-                 <category xml:id="jad_institution_id2">
-                    <catDesc>[institution]</catDesc>
-                 </category>
-              </category>
-           </taxonomy>
+<!--        #### taxonomies for genres | clusters | keywords | litugical references -->
+        <classDecl>          
            <taxonomy xml:id="genres">
-              <category xml:id="genre_1"/>              
+              <category xml:id="jad_genre_1"/>              
+           </taxonomy>
+           <taxonomy xml:id="clusters">
+              <category xml:id="jad_cluster__1"/>              
+           </taxonomy>
+           <taxonomy xml:id="keywords">
+              <category xml:id="jad_keyword__1"/>              
            </taxonomy>
            <taxonomy xml:id="liturgical_ref">
-              <category xml:id="jad_liturg_ref_id">
+              <category xml:id="jad_liturgical_reference__1">
                  <catDesc key="1">[name]</catDesc>
                  <catDesc key="2">[description]</catDesc>
               </category>
@@ -57,11 +164,16 @@
             <origDate notBefore="" notAfter="" cert="">[work/date]</origDate>
             <ref type="genre" target="#jad_genre_id">[work/genre]</ref>
             <ref type="incipit"></ref>
+            <list type="mss_transmission">
+               <item>
+                  <ref target="#jad_manuscript__1"></ref>
+               </item>
+            </list>
          </p>
-         <list>
+         <list type="passages">
             <head>Passages</head>
             <item xml:id="jad_id">
-               
+               <ref type="biblical" target="#jad_biblical_reference__1"></ref>
             </item>
          </list>
          <p>Passages.</p>
