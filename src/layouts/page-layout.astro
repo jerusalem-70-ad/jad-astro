@@ -29,13 +29,13 @@ const { title = "Medieval Reception of the Roman Conquest of Jerusalem" } =
     />
     <title>J·AD 70 · {title}</title>
   </head>
-  <body class="min-h-screen grid grid-rows-[auto_1fr_auto] bg-brand-50">
+  <body class="min-h-screen grid grid-rows-[auto_1fr_auto_auto] bg-brand-50">
     <PageHeader />
     <main>
       {title !== "Home" && <Breadcrumbs label={title} />}
       <slot />
-      <ScrollToTop />
     </main>
     <PageFooter />
+    <ScrollToTop />
   </body>
 </html>
