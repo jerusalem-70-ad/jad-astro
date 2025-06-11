@@ -24,8 +24,8 @@ importers:
         specifier: ^4.0.14
         version: 4.1.8(vite@6.3.5(@types/node@20.17.57)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.40.0)(yaml@2.8.0))
       astro:
-        specifier: ^5.7.4
-        version: 5.8.1(@types/node@20.17.57)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.41.1)(terser@5.40.0)(typescript@5.8.3)(yaml@2.8.0)
+        specifier: ^5.9.2
+        version: 5.9.2(@types/node@20.17.57)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.41.1)(terser@5.40.0)(typescript@5.8.3)(yaml@2.8.0)
       astro-icon:
         specifier: ^1.1.1
         version: 1.1.5
@@ -165,6 +165,9 @@ packages:
 
   '@astrojs/compiler@2.12.0':
     resolution: {integrity: sha512-7bCjW6tVDpUurQLeKBUN9tZ5kSv5qYrGmcn0sG0IwacL7isR2ZbyyA3AdZ4uxsuUFOS2SlgReTH7wkxO6zpqWA==}
+
+  '@astrojs/compiler@2.12.2':
+    resolution: {integrity: sha512-w2zfvhjNCkNMmMMOn5b0J8+OmUaBL1o40ipMvqcG6NRpdC+lKxmTi48DT8Xw0SzJ3AfmeFLB45zXZXtmbsjcgw==}
 
   '@astrojs/internal-helpers@0.6.1':
     resolution: {integrity: sha512-l5Pqf6uZu31aG+3Lv8nl/3s4DbUzdlxTWDof4pEpto6GUJNhhCbelVi9dEyurOVyqaelwmS9oSyOWOENSfgo9A==}
@@ -1008,8 +1011,8 @@ packages:
   astro-icon@1.1.5:
     resolution: {integrity: sha512-CJYS5nWOw9jz4RpGWmzNQY7D0y2ZZacH7atL2K9DeJXJVaz7/5WrxeyIxO8KASk1jCM96Q4LjRx/F3R+InjJrw==}
 
-  astro@5.8.1:
-    resolution: {integrity: sha512-lkBg1smMRFW+FQ6i92SgEN53o4+ItRjlRt6Ck+rEjmTcb57Bid7faTNKUQNYuNnxiesTWw3NJDyVPQPbfKDyfw==}
+  astro@5.9.2:
+    resolution: {integrity: sha512-K/zZlQOWMpamfLDOls5jvG7lrsjH1gkk3ESRZyZDCkVBtKHMF4LbjwCicm/iBb3mX3V/PerqRYzLbOy3/4JLCQ==}
     engines: {node: 18.20.8 || ^20.3.0 || >=22.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -3060,6 +3063,8 @@ snapshots:
 
   '@astrojs/compiler@2.12.0': {}
 
+  '@astrojs/compiler@2.12.2': {}
+
   '@astrojs/internal-helpers@0.6.1': {}
 
   '@astrojs/language-server@2.15.4(typescript@5.8.3)':
@@ -3884,9 +3889,9 @@ snapshots:
       - debug
       - supports-color
 
-  astro@5.8.1(@types/node@20.17.57)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.41.1)(terser@5.40.0)(typescript@5.8.3)(yaml@2.8.0):
+  astro@5.9.2(@types/node@20.17.57)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.41.1)(terser@5.40.0)(typescript@5.8.3)(yaml@2.8.0):
     dependencies:
-      '@astrojs/compiler': 2.12.0
+      '@astrojs/compiler': 2.12.2
       '@astrojs/internal-helpers': 0.6.1
       '@astrojs/markdown-remark': 6.3.2
       '@astrojs/telemetry': 3.3.0
