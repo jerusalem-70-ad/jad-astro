@@ -2,19 +2,26 @@
 import PageLayout from "@/layouts/page-layout.astro";
 import TableHead from "@/components/table-head.astro";
 const title = "Keywords";
+import Chart from "@/components/chart-keywords.astro";
 ---
 
 <PageLayout title={title}>
   <TableHead title={title} />
 
+  <Chart />
   <script>
     import { setupTableActions } from "@/lib/table-actions";
     import { TabulatorFull as Tabulator } from "tabulator-tables";
     import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
-    import data from "@/content/data/keywords.json";
     import { JSONPath } from "jsonpath-plus";
-
-    var tabledata = [...Object.values(data)];
+    import data from "@/content/data/keywords.json";
+    // Add the new property to each object for number of passages
+    const tabledata = Object.values(data).map((keyword) => ({
+      ...keyword,
+      relatedPassagesLength: keyword.related__passages
+        ? keyword.related__passages.length
+        : 0,
+    }));
 
     var table = new Tabulator("#tabulator-table", {
       headerFilterLiveFilterDelay: 600,
@@ -47,6 +54,14 @@ const title = "Keywords";
           headerFilter: "input",
           formatter: "textarea",
         },
+        {
+          title: "occurrences",
+          field: "relatedPassagesLength",
+          headerFilter: "number",
+          minWidth: 20,
+          maxWidth: 100,
+        },
+
         {
           title: "Passages",
           field: "related__passages",

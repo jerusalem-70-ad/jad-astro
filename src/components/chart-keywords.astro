@@ -1,0 +1,185 @@
+---
+// chart-keywords.astro
+import data from "@/content/data/keywords.json";
+
+// Process data to get keyword names and passage counts
+const keywordsData = Object.values(data).map((keyword) => ({
+  jad_id: keyword.jad_id,
+  name: keyword.name,
+  passageCount: keyword.related__passages
+    ? keyword.related__passages.length
+    : 0,
+  shortDescription: keyword.short_description,
+}));
+
+// Sort by passage count (descending) - show all keywords
+const sortedKeywords = keywordsData.sort(
+  (a, b) => b.passageCount - a.passageCount
+);
+
+// Prepare data for ECharts
+const chartData = {
+  categories: sortedKeywords.map((k) => k.name),
+  values: sortedKeywords.map((k) => k.passageCount),
+  descriptions: sortedKeywords.map((k) => k.shortDescription),
+  ids: sortedKeywords.map((k) => k.jad_id),
+};
+---
+
+<div class="chart-container">
+  <h3>Keywords by Passage Count</h3>
+  <div id="keywords-chart" style="width: 100%; height: 800px;"></div>
+</div>
+
+<script>
+  import * as echarts from "echarts";
+  import { withBasePath } from "@/lib/withBasePath";
+
+  // Get the data passed from Astro component
+  const chartDataElement = document.getElementById("chart-data");
+  const chartData = JSON.parse(chartDataElement.textContent);
+
+  // Initialize the chart
+  const chartDom = document.getElementById("keywords-chart");
+  const myChart = echarts.init(chartDom);
+
+  // Chart configuration for horizontal bar chart
+  const chartOption = {
+    tooltip: {
+      trigger: "axis",
+      axisPointer: {
+        type: "shadow",
+      },
+      formatter: function (params: any) {
+        const dataIndex = params[0].dataIndex;
+        const description = chartData.descriptions[dataIndex];
+        return `
+          <strong>${params[0].name}</strong><br/>
+          Passages: ${params[0].value}<br/>
+          ${description ? `<em>${description.substring(0, 150)}${description.length > 150 ? "..." : ""}</em>` : ""}
+          <br/><small style="color: #666;">Click to view details</small>
+        `;
+      },
+    },
+    grid: {
+      left: "20%",
+      right: "4%",
+      top: "8%",
+      bottom: "3%",
+      containLabel: true,
+    },
+    xAxis: {
+      type: "value",
+      name: "Number of Passages",
+      nameLocation: "middle",
+      nameGap: 30,
+    },
+    yAxis: {
+      type: "category",
+      data: chartData.categories,
+      axisLabel: {
+        fontSize: 11,
+        width: 150,
+        overflow: "truncate",
+      },
+      inverse: true, // Show highest values at top
+    },
+    series: [
+      {
+        name: "Passages",
+        type: "bar",
+        data: chartData.values.map((value: any) => ({
+          value: value,
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+              { offset: 0, color: "#a92d03" },
+              { offset: 0.7, color: "#6f2009" },
+              { offset: 1, color: "#581908" },
+            ]),
+          },
+        })),
+        emphasis: {
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [
+              { offset: 0, color: "#e6d5c3" },
+              { offset: 0.5, color: "#e5894a" },
+              { offset: 1, color: "#a92d03" },
+            ]),
+          },
+        },
+        cursor: "pointer",
+      },
+    ],
+  };
+
+  // Set chart option
+  myChart.setOption(chartOption);
+
+  // Handle bar clicks
+  myChart.on("click", function (params) {
+    if (params.componentType === "series") {
+      const keywordId = chartData.ids[params.dataIndex];
+      const keywordName = chartData.categories[params.dataIndex];
+
+      // Navigate to keyword detail page
+      const detailUrl = withBasePath(`/keywords/${keywordId}`);
+
+      // Add some visual feedback
+      console.log(`Navigating to keyword: ${keywordName} (ID: ${keywordId})`);
+
+      // Navigate to the detail page
+      window.location.href = detailUrl;
+    }
+  });
+
+  // Handle window resize
+  window.addEventListener("resize", function () {
+    myChart.resize();
+  });
+
+  // Add hover cursor styling
+  myChart.on("mouseover", function (params) {
+    if (params.componentType === "series") {
+      chartDom.style.cursor = "pointer";
+    }
+  });
+
+  myChart.on("mouseout", function (params) {
+    chartDom.style.cursor = "default";
+  });
+</script>
+
+<!-- Hidden data container -->
+<script
+  id="chart-data"
+  type="application/json"
+  set:html={JSON.stringify(chartData)}
+/>
+
+<style>
+  .chart-container {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #fafafa;
+  }
+
+  .chart-container h3 {
+    margin: 0 0 20px 0;
+    color: #333;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  #keywords-chart {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background: white;
+  }
+
+  /* Add visual indicator that bars are clickable */
+  #keywords-chart:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+</style>
