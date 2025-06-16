@@ -78,6 +78,7 @@ export const NOVA_VULGATA_ORDER = {
   Am: 37,
   Amos: 37,
   Abd: 38,
+  Abdiam: 38,
   Abdias: 38,
   Jon: 39,
   Jonas: 39,
@@ -85,6 +86,7 @@ export const NOVA_VULGATA_ORDER = {
   Michea: 40,
   Nah: 41,
   Nahum: 41,
+  Naum: 41,
   Hab: 42,
   Habacuc: 42,
   Soph: 43,
@@ -175,6 +177,57 @@ export const NOVA_VULGATA_ORDER = {
   Apocalypse: 75,
   Rev: 75,
 };
+// function to sort passages based on their position_in_work
+export function calculateSortPosition(positionInWork) {
+  if (!positionInWork) return 999999; // Put undefined positions at the end
+
+  const position = positionInWork.trim();
+
+  // Pattern 1: Biblical books (e.g., "Amos, B2")
+  // handle optional period and optional comma/B prefix
+  const biblicalMatch = position.match(/^([A-Za-z0-9]+)\.?,?\s*B?(\d+)$/);
+  if (biblicalMatch) {
+    const [, bookName, bookNumber] = biblicalMatch;
+    const biblicalOrder = NOVA_VULGATA_ORDER[bookName];
+    if (biblicalOrder) {
+      return biblicalOrder * 10 + parseInt(bookNumber, 10);
+    }
+  }
+
+  // Pattern 2: Book and Chapter (e.g., "B3, Ch63")
+  const bookChapterMatch = position.match(/^B(\d+),?\s*Ch(\d+)$/);
+  if (bookChapterMatch) {
+    const [, bookNum, chapterNum] = bookChapterMatch;
+    // Book/Chapter: 10,000+ range
+    // This gives us room for 999 books with 9999 chapters each
+    return 10000 + parseInt(bookNum, 10) * 10000 + parseInt(chapterNum, 10);
+  }
+
+  // Pattern 3: Sermons (e.g., "Sermo 2")
+  const sermonMatch = position.match(/^Sermo\s+(\d+)/);
+  if (sermonMatch) {
+    const [, sermonNum] = sermonMatch;
+    // Sermons: 100,000+ range
+    return 100000 + parseInt(sermonNum, 10);
+  }
+
+  // Pattern 4: Praefatio/Prefatio
+  if (position.startsWith("Praefatio") || position.startsWith("Prefatio")) {
+    return 1;
+  }
+
+  // Fallback: Unknown patterns go to 900,000+ range
+  // Try to extract any number for basic sorting
+  const numberMatch = position.match(/(\d+)/);
+  if (numberMatch) {
+    return 900000 + parseInt(numberMatch[1], 10);
+  }
+
+  // If no number found, sort alphabetically by converting to char codes
+  return 950000 + position.charCodeAt(0);
+}
+
+// Extracts the book abbreviation from a biblical reference
 
 function extractBookAbbreviation(referenceValue) {
   if (referenceValue) {

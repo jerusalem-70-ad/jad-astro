@@ -34,7 +34,7 @@ const title = "Works";
         {
           title: "Title",
           resizable: true,
-          field: "name",
+          field: "title",
           minWidth: 200,
           headerFilter: "input",
         },
@@ -72,7 +72,7 @@ const title = "Works";
         {
           title: "Genre",
           resizable: true,
-          field: "genre.value",
+          field: "genre",
           minWidth: 200,
           headerFilter: "input",
           formatter: "textarea",
@@ -85,7 +85,7 @@ const title = "Works";
           minWidth: 200,
           mutator: jsonpathLookup,
           mutatorParams: {
-            path: "$[*].value",
+            path: "$[*].name",
             separator: "; ",
           },
           headerFilter: "input",
@@ -94,21 +94,12 @@ const title = "Works";
           title: "Passages",
           resizable: true,
           field: "related__passages",
-          minWidth: 200,
-          mutator: function (value) {
-            if (!value || !Array.isArray(value)) {
-              return ""; // Handle cases where the field is empty or not an array
-            }
-
-            // Extract just the number from each 'jad_id' and join it with a separator
-            return value
-              .map((item) => {
-                const match = item.jad_id.match(/__([0-9]+)$/); // Match the number after "__"
-                return match ? match[1] : ""; // Return the matched number or an empty string
-              })
-              .filter((id) => id) // Remove empty values
-              .join(", "); // Join the extracted IDs with a comma
+          mutator: jsonpathLookup,
+          mutatorParams: {
+            path: "$[*].position_in_work",
+            separator: "; ",
           },
+          minWidth: 200,
           headerFilter: "input",
         },
         {

@@ -2,7 +2,10 @@ import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
 import { enrichDates } from "./utils.js";
 import { buildTransmissionGraph } from "./build-transmission-graph.js";
-import { generateBiblicalSortKey } from "./sort-bibl-ref.js";
+import {
+  generateBiblicalSortKey,
+  calculateSortPosition,
+} from "./sort-bibl-ref.js";
 
 const loadJSON = (file) =>
   JSON.parse(
@@ -15,6 +18,7 @@ const aiBiblRef = loadJSON("ai_bibl_ref.json");
 const biblicalRef = Object.values(loadJSON("biblical_references.json"));
 const manuscripts = Object.values(loadJSON("manuscripts.json"));
 const msOccurrences = Object.values(loadJSON("ms_occurrences.json"));
+const works = Object.values(loadJSON("works.json"));
 
 // set the output folder
 const folderPath = join(process.cwd(), "src", "content", "data");
@@ -271,3 +275,83 @@ writeFileSync(
 );
 
 console.log("passages.json file enriched successfully.");
+
+const worksPlus = works.map((work) => {
+  let processedPassages = [];
+
+  if (work.related__passages && work.related__passages.length > 0) {
+    // First, group passages by position_in_work
+    const groupedPassages = work.related__passages.reduce(
+      (grouped, passage) => {
+        const key = passage.position_in_work || "";
+
+        if (!grouped[key]) {
+          grouped[key] = [];
+        }
+
+        // Add only the fields you want from each passage
+        grouped[key].push({
+          id: passage.id,
+          jad_id: passage.jad_id,
+          passage: passage.passage,
+          occurrence_found_in: passage.occurrence_found_in.map(
+            (occ) => occ.value
+          ),
+        });
+
+        return grouped;
+      },
+      {}
+    );
+
+    // Then convert the grouped object into the array format you want
+    processedPassages = Object.entries(groupedPassages).map(
+      ([position, passages]) => ({
+        position_in_work: position,
+        sort_position: calculateSortPosition(position),
+        passages: passages,
+      })
+    );
+    // Sort the processedPassages array by sort_position
+    processedPassages.sort((a, b) => a.sort_position - b.sort_position);
+  }
+
+  return {
+    id: work.id,
+    jad_id: work.jad_id,
+    title: work.title,
+    author: work.author,
+    author_certainty: work.author_certainty || true,
+    manuscripts: manuscripts
+      .filter((ms) => work.manuscripts.some((w_ms) => w_ms.id === ms.id))
+      .map((ms) => ({
+        id: ms.id,
+        jad_id: ms.jad_id,
+        name: `${ms.library[0].place[0]?.name}, ${ms.name[0].value}`,
+      })),
+    genre: work.genre?.value || "",
+    description: work.description,
+    notes: work.notes || "",
+    notes__author: work.notes__author || "",
+    institutional_context: work.institutional_context || [],
+    published_edition: work.published_edition || [],
+    date: enrichDates(work.date, dates),
+    date_certainty: work.date_certainty || true,
+    link_digital_editions: work.link_digital_editions || "",
+    incipit: work.incipit || "",
+    volume_edition_or_individual_editor:
+      work.volume_edition_or_individual_editor || "",
+    related__passages: processedPassages, // Use the processed passages here
+    view_label: work.view_label || "",
+    next: work.next || {},
+    prev: work.prev || {},
+  };
+});
+
+writeFileSync(
+  join(folderPath, "works.json"),
+  JSON.stringify(worksPlus, null, 2),
+  { encoding: "utf-8" }
+);
+
+console.log("works.json file enriched successfully.");

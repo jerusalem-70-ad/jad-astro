@@ -15,7 +15,7 @@ const { data: work } = Astro.props;
 
 type Passage = any;
 
-// group passages by position in work (sermon number, or book and chapter)
+/* // group passages by position in work (sermon number, or book and chapter)
 const groupedPassages = work.related__passages.reduce<{
     [key: string]: Passage[];
 }>(
@@ -26,10 +26,10 @@ const groupedPassages = work.related__passages.reduce<{
         return grouped;
     },
     {} as { [key: string]: Passage[] },
-);
+); */
 
 // sort passages by both book and chapter
-const sortedPassages = Object.entries(groupedPassages).sort(
+/* const sortedPassages = Object.entries(groupedPassages).sort(
     ([keyA], [keyB]) => {
         // Extract the main and secondary parts (e.g., "Sermo 46" or "B3 Ch5")
         const extractParts = (key: any) => {
@@ -49,7 +49,7 @@ const sortedPassages = Object.entries(groupedPassages).sort(
         }
         return partA.subNum - partB.subNum; // Compare sub numbers if main parts are equal
     },
-);
+); */
 ---
 
 <PageLayout title={work.title}>
@@ -93,16 +93,12 @@ const sortedPassages = Object.entries(groupedPassages).sort(
             <dd class="pl-5">
                 {
                     work.manuscripts.length > 0
-                        ? work.manuscripts.map(
-                              (
-                                  ms: { id: number; value: any },
-                                  index: number,
-                              ) => (
+                        ? work.manuscripts.map((ms,index,) => (
                                   <>
                                       <NavLink
                                           href={`/manuscripts/jad_manuscript__${ms.id}`}
                                       >
-                                          {ms.value}
+                                          {ms.name}
                                       </NavLink>
                                       {index < work.manuscripts.length - 1 &&
                                           "| "}
@@ -115,7 +111,7 @@ const sortedPassages = Object.entries(groupedPassages).sort(
 
             <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">Genre:</dt>
             <dd class="pl-5">
-                {work.genre !== null ? work.genre.value : "N/A"}
+                {work.genre ? work.genre : "N/A"}
             </dd>
 
             <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
@@ -190,35 +186,33 @@ const sortedPassages = Object.entries(groupedPassages).sort(
                 Passages:
             </dt>
             <dd class="pl-5">
-                {
-                    sortedPassages.map(([position, passages]) => (
+                {work.related__passages.length > 0 ? (
+                    <ul>
+                    {work.related__passages.map(rel_passages => (
                         <li class="mb-4">
-                            <span class="font-semibold text-brand-900">{position}</span>
-                            <ul class="ml-5 list-disc">
-                                {passages.map((passage) => (
-                                    <li>
-                                        <NavLink
-                                            href={`/passages/${passage.jad_id}`}
-                                        >
-                                            #{passage.jad_id.substring(16)}{" "}
-                                            <span class="italic">
-                                                {passage.passage}
-                                            </span>
-                                        </NavLink>
-                                        <span class="text-xs">
-                                            Source:
-                                            {passage.occurrence_found_in
-                                                .map(
-                                                    (source: any) =>
-                                                        source.value,
-                                                )
-                                                .join(", ")}
-                                        </span>
-                                    </li>
-                                ))}
-                            </ul>
+                        <span class="font-semibold text-brand-900">{rel_passages.position_in_work}</span>
+                        <ul class="ml-5 list-disc">
+                          {rel_passages.passages.map((passage) => (
+                            <li class="mb-2">
+                                <NavLink href={`/passages/${passage.jad_id}`}>
+                                    #{passage.jad_id.substring(16)}
+                                    <span class="italic">
+                                        {passage.passage}
+                                    </span>
+                                </NavLink>
+                                <span class="text-xs">
+                                    Source:
+                                    {passage.occurrence_found_in.length > 0 ? ` ${passage.occurrence_found_in}` : " N/A"}
+                                </span>
+                            </li>
+                          ))}
+                        </ul>
                         </li>
-                    ))
+                    ))}
+                    </ul>
+                            
+                ) : 
+                    "N/A"
                 }
             </dd>
         </dl>
