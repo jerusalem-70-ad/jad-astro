@@ -192,13 +192,24 @@ const groupedPassages = work.related__passages.reduce<{
                         <li class="mb-4">
                         <span class="font-semibold text-brand-900">{rel_passages.position_in_work}</span>
                         <ul class="ml-5 list-disc">
-                          {rel_passages.passages.map((passage) => (
+                          {rel_passages.passages
+                            .sort((a, b) => {
+                                const pageA = a.page ? parseInt(a.page) : Infinity;
+                                const pageB = b.page ? parseInt(b.page) : Infinity;
+                                return pageA - pageB;
+                                })
+                          .map((passage) => (
                             <li class="mb-2">
                                 <NavLink href={`/passages/${passage.jad_id}`}>
                                     #{passage.jad_id.substring(16)}
                                     <span class="italic">
                                         {passage.passage}
                                     </span>
+                                    { passage.page && (
+                                        <span class="text-xs">
+                                            (p. {passage.page})
+                                        </span>
+                                    )}
                                 </NavLink>
                                 <span class="text-xs">
                                     Source:

@@ -294,6 +294,7 @@ const worksPlus = works.map((work) => {
           id: passage.id,
           jad_id: passage.jad_id,
           passage: passage.passage,
+          page: passage.text_paragraph?.match(/ p\. (\d+\w?)/)?.[1] || "",
           occurrence_found_in: passage.occurrence_found_in.map(
             (occ) => occ.value
           ),
