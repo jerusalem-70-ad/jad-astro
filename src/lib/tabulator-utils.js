@@ -132,6 +132,32 @@ export function jsonpathsDateRanges(value, data, type, params, component) {
   return [...new Set(yearRanges)].join(separator);
 }
 
+// function to filter numeric not_before and not_After date in separate columns (TPQ and TAQ)
+
+export function filterTPQ(headerValue, rowValue, rowData) {
+  if (!headerValue) return true; // Show all if no filter value
+  const filterValue = parseInt(headerValue); // Parse filter value as integer
+  if (isNaN(filterValue)) return true; // Show all if filter value is not a number
+
+  // rowValue is an array of dates, so check if ANY of them is greater than the filter value
+  return rowValue.some((date) => {
+    const dateValue = parseInt(date); // Parse date value as integer
+    return !isNaN(dateValue) && dateValue >= filterValue; // Compare only if date is a number
+  });
+}
+
+export function filterTAQ(headerValue, rowValue, rowData) {
+  if (!headerValue) return true; // Show all if no filter value
+  const filterValue = parseInt(headerValue); // Parse filter value as integer
+  if (isNaN(filterValue)) return true; // Show all if filter value is not a number
+
+  // rowValue is an array of dates, so check if ANY of them is greater than the filter value
+  return rowValue.some((date) => {
+    const dateValue = parseInt(date); // Parse date value as integer
+    return !isNaN(dateValue) && dateValue <= filterValue; // Compare only if date is a number
+  });
+}
+
 /* // To get the century of not_before not_after dates
 export function jsonpathGetCentury(value, data, type, params, component) {
   const paths = params.paths;

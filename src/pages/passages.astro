@@ -2,16 +2,24 @@
 import PageLayout from "@/layouts/page-layout.astro";
 import TableHead from "@/components/table-head.astro";
 const title = "Passages";
+import PassagesTimeline from "@/components/passages-timeline.astro";
 ---
 
 <PageLayout title={title}>
-  <TableHead title={title} />
+  <TableHead title={title}>
+    <PassagesTimeline />
+  </TableHead>
 
   <script>
     import { setupTableActions } from "@/lib/table-actions";
     import { TabulatorFull as Tabulator } from "tabulator-tables";
     import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
-    import { jsonpathLookup, sortByKey } from "@/lib/tabulator-utils.js";
+    import {
+      jsonpathLookup,
+      sortByKey,
+      filterTAQ,
+      filterTPQ,
+    } from "@/lib/tabulator-utils.js";
     import data from "@/content/data/passages.json";
 
     const dataSet = Object.values(data).map((passage) => {
@@ -47,9 +55,21 @@ const title = "Passages";
             }
           })
           .join("; "),
+        date_ante_quem: passage.work[0]?.date[0]?.not_before || "N/A",
+        date_post_quem: passage.work[0]?.date[0]?.not_after || "N/A",
       };
     });
     console.log(dataSet[0]);
+
+    window.passagesTimelineData = dataSet.map((item) => ({
+      id: item.jad_id,
+      passage: item.passage.substring(0, 100) + "...", // Truncate for tooltip
+      author: item.author_l.map((a) => a.name).join(", "),
+      date_post_quem: item.date_post_quem,
+      date_ante_quem: item.date_ante_quem,
+      work_title: item.work_position,
+    }));
+
     var tabledata = dataSet;
 
     var table = new Tabulator("#tabulator-table", {
@@ -164,9 +184,65 @@ const title = "Passages";
           minWidth: 200,
           headerFilter: "input",
         },
+        {
+          title: "TPQ",
+          headerTooltip: "Terminus post quem (date after which)",
+          resizable: true,
+          field: "date_ante_quem",
+          minWidth: 100,
+          headerFilter: "number", // Use number filter for numerical comparison
+          headerFilterFunc: filterTPQ,
+        },
+        {
+          title: "TAQ",
+          headerTooltip: "Terminus ante quem (date before which)",
+          resizable: true,
+          field: "date_post_quem",
+          minWidth: 100,
+          headerFilter: "number",
+          headerFilterFunc: filterTAQ,
+        },
       ],
     });
 
     setupTableActions(table, "passages");
+    table.on("dataFiltered", function (filters, rows) {
+      console.log("Table filtered! Found", rows.length, "rows");
+
+      // Get the filtered data
+      const filteredData = rows.map((row) => row.getData());
+
+      // Update timeline colors
+      updateTimelineColors(filteredData);
+    });
+    // Function to update node colors based on filtered data
+    function updateTimelineColors(filteredData: any[]) {
+      const timelineChart = window.timelineChart;
+      if (!timelineChart) return;
+
+      // Get IDs of filtered items
+      const filteredIds = new Set(filteredData.map((item: any) => item.jad_id));
+
+      // Get current chart option
+      const currentOption = timelineChart.getOption();
+
+      // Update the scatter series data with colors
+      const updatedData = currentOption.series[0].data.map((node: any) => ({
+        ...node,
+        itemStyle: {
+          color: filteredIds.has(node.id) ? "#a92d03" : "#FFD700", // Red if filtered, gold if not
+          opacity: 0.8,
+        },
+      }));
+
+      // Update the chart
+      timelineChart.setOption({
+        series: [
+          {
+            data: updatedData,
+          },
+        ],
+      });
+    }
   </script>
 </PageLayout>

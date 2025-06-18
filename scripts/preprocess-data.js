@@ -6,6 +6,7 @@ import {
   generateBiblicalSortKey,
   calculateSortPosition,
 } from "./sort-bibl-ref.js";
+import { createNetworkData } from "./create-network-data.js";
 
 const loadJSON = (file) =>
   JSON.parse(
@@ -356,3 +357,15 @@ writeFileSync(
 );
 
 console.log("works.json file enriched successfully.");
+
+console.log("Generating network data...");
+const networkData = createNetworkData(enrichedPassages);
+
+// Save the network data
+writeFileSync(
+  join(folderPath, "network_data.json"),
+  JSON.stringify(networkData, null, 2),
+  { encoding: "utf-8" }
+);
+
+console.log("Network data generated successfully.");

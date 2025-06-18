@@ -1,0 +1,176 @@
+---
+export interface Props {
+  height?: number;
+}
+const { height = 400 } = Astro.props;
+---
+
+<div class="passages-timeline-container">
+  <div
+    id="passages-timeline"
+    class="border border-neutral-800 mb-5"
+    style={`height: ${height}px`}
+  >
+  </div>
+</div>
+
+<script>
+  import * as echarts from "echarts";
+  import { forceSimulation, forceCollide, forceX, forceY } from "d3-force";
+  import { extent } from "d3-array";
+
+  declare global {
+    interface Window {
+      passagesTimelineData?: any[];
+      timelineChart?: any;
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    console.log("Timeline component loaded");
+
+    const timelineData = (window as any).passagesTimelineData || [];
+
+    if (!timelineData.length) {
+      console.warn("No timeline data available");
+      return;
+    }
+
+    const chartElement = document.getElementById("passages-timeline");
+    if (!chartElement) return;
+
+    // Calculate date extent
+    const dateExtent = extent(timelineData, (d: any) => d.date_post_quem);
+    const [minDate, maxDate] = dateExtent;
+
+    // Config values from reference code
+    const nodeRadius = 3;
+    const nodePadding = 1;
+    const collideStrength = 0.7;
+    const xStrength = 0.1;
+    const yStrength = 0.2;
+
+    // Prepare nodes exactly like the reference
+    const simulationData = timelineData.map((item: any) => ({
+      ...item,
+      // Initial position - all nodes start on the same timeline
+      x: item.date_post_quem,
+      y: 0, // Single timeline like reference
+      date: new Date(item.date_post_quem, 0), // Convert to Date object
+    }));
+
+    // Force simulation exactly like reference
+    const simulation = forceSimulation()
+      .force(
+        "collide",
+        forceCollide(nodeRadius + nodePadding).strength(collideStrength)
+      )
+      .force("x", forceX((d) => d.date_post_quem).strength(xStrength))
+      .force(
+        "y",
+        forceY(0).strength(yStrength) // Pull to center line
+      );
+
+    // Run simulation with tick handling like reference
+    simulation
+      .on("tick", () => {
+        // Update node positions during simulation
+        // The reference runs this in real-time, we'll do it in batches
+      })
+      .nodes(simulationData);
+
+    // Run simulation for many ticks to settle
+    for (let i = 0; i < 300; i++) {
+      simulation.tick();
+    }
+
+    simulation.stop();
+    // Prepare data for ECharts
+
+    const option = {
+      title: {
+        text: "Passages Timeline",
+        left: "center",
+      },
+      tooltip: {
+        trigger: "item",
+        formatter: function (params: any) {
+          return `
+            <strong>#${params.data.id.substring(16)}</strong><br/>
+            <strong>Author:</strong> ${params.data.author}<br/>
+            <strong>Work:</strong> ${params.data.work_title}<br/>
+            <strong>Date:</strong> ${params.data.date_post_quem}- ${params.data.date_ante_quem}<br/>
+          `;
+        },
+      },
+      xAxis: {
+        type: "value",
+        name: "Year",
+        min: minDate - 10,
+        max: maxDate + 10,
+        position: "bottom",
+        axisLabel: {
+          fontSize: 12,
+          interval: function (_index: number, value: number) {
+            // Show only values that are multiples of 50
+            return value % 50 === 0;
+          },
+        },
+        splitNumber: 10,
+      },
+      yAxis: {
+        type: "value",
+        show: false,
+        min: "dataMin",
+        max: "dataMax",
+      },
+      grid: {
+        bottom: 40, // Add some bottom margin to show the X-axis
+      },
+      dataZoom: [
+        {
+          type: "inside", // Mouse wheel zoom and pan
+          xAxisIndex: 0,
+          filterMode: "none", // Don't filter data when zooming
+        },
+      ],
+      series: [
+        {
+          type: "scatter",
+          symbolSize: nodeRadius * 2,
+          itemStyle: {
+            color: "#FFD700",
+            opacity: 0.8,
+          },
+
+          data: simulationData.map((node: any) => ({
+            value: [node.x, node.y],
+            ...node,
+          })),
+          dataZoom: [
+            {
+              type: "inside", // Mouse wheel zoom and pan
+              xAxisIndex: 0,
+              filterMode: "none", // Don't filter data when zooming
+            },
+            {
+              type: "slider", // Shows a zoom slider at the bottom
+              xAxisIndex: 0,
+              filterMode: "none",
+              bottom: 10,
+            },
+          ],
+        },
+      ],
+    };
+
+    const chart = echarts.init(chartElement);
+    chart.setOption(option);
+
+    // Store chart globally so table can access it
+    window.timelineChart = chart;
+
+    // Handle window resize
+    window.addEventListener("resize", () => chart.resize());
+  });
+</script>
