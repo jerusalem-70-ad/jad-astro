@@ -323,7 +323,7 @@ const worksPlus = works.map((work) => {
     jad_id: work.jad_id,
     title: work.title,
     author: work.author,
-    author_certainty: work.author_certainty || true,
+    author_certainty: work.author_certainty,
     manuscripts: manuscripts
       .filter((ms) => work.manuscripts.some((w_ms) => w_ms.id === ms.id))
       .map((ms) => ({
@@ -338,7 +338,7 @@ const worksPlus = works.map((work) => {
     institutional_context: work.institutional_context || [],
     published_edition: work.published_edition || [],
     date: enrichDates(work.date, dates),
-    date_certainty: work.date_certainty || true,
+    date_certainty: work.date_certainty,
     link_digital_editions: work.link_digital_editions || "",
     incipit: work.incipit || "",
     volume_edition_or_individual_editor:
