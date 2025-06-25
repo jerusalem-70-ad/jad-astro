@@ -131,6 +131,8 @@ export function buildTransmissionGraph(passages) {
         ancestorCount: nodes.filter((n) => n.nodeType === "ancestor").length,
         descendantCount: nodes.filter((n) => n.nodeType === "descendant")
           .length,
+        allRelatedPassages: nodes.filter((node) => node.nodeType !== "current")
+          .length,
       },
     };
   });

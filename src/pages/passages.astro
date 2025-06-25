@@ -189,7 +189,7 @@ import PassagesTimeline from "@/components/passages-timeline.astro";
           headerTooltip: "Terminus post quem (date after which)",
           resizable: true,
           field: "date_ante_quem",
-          minWidth: 100,
+          minWidth: 60,
           headerFilter: "number", // Use number filter for numerical comparison
           headerFilterFunc: filterTPQ,
         },
@@ -198,9 +198,23 @@ import PassagesTimeline from "@/components/passages-timeline.astro";
           headerTooltip: "Terminus ante quem (date before which)",
           resizable: true,
           field: "date_post_quem",
-          minWidth: 100,
+          minWidth: 60,
           headerFilter: "number",
           headerFilterFunc: filterTAQ,
+        },
+        {
+          title: "related passages",
+          headerTooltip:
+            "Sources of this passage, or passages that cite this one",
+          resizable: true,
+          field: "transmission_graph",
+          mutator: jsonpathLookup,
+          mutatorParams: {
+            path: "$.metadata.allRelatedPassages",
+          },
+          minWidth: 60,
+          headerFilter: "number",
+          visible: true,
         },
       ],
     });
@@ -211,7 +225,7 @@ import PassagesTimeline from "@/components/passages-timeline.astro";
 
       // Get the filtered data
       const filteredData = rows.map((row) => row.getData());
-
+      console.log("1st row data:", filteredData[0]);
       // Update timeline colors
       updateTimelineColors(filteredData);
     });
@@ -223,6 +237,8 @@ import PassagesTimeline from "@/components/passages-timeline.astro";
       // Get IDs of filtered items
       const filteredIds = new Set(filteredData.map((item: any) => item.jad_id));
 
+      
+
       // Get current chart option
       const currentOption = timelineChart.getOption();
 
@@ -230,7 +246,9 @@ import PassagesTimeline from "@/components/passages-timeline.astro";
       const updatedData = currentOption.series[0].data.map((node: any) => ({
         ...node,
         itemStyle: {
-          color: filteredIds.has(node.id) ? "#a92d03" : "#FFD700", // Red if filtered, gold if not
+          color: filteredIds.has(node.id)
+            ? "#a92d03"           
+              : "#FFD700", // Red if filtered, gold if not
           opacity: 0.8,
         },
       }));
