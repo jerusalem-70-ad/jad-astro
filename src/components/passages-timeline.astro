@@ -6,6 +6,10 @@ const { height = 400 } = Astro.props;
 ---
 
 <div class="passages-timeline-container" >
+  <div id="timeline-loading" class="flex items-center justify-center h-[400px]">
+    <span class="animate-spin mr-2">&#9696;</span>
+    <span>Graph loading...</span>
+  </div>
   <div
     id="passages-timeline"
     class="hidden sm:block border border-neutral-800 mb-5"
@@ -167,6 +171,11 @@ const { height = 400 } = Astro.props;
 
     const chart = echarts.init(chartElement);
     chart.setOption(option);
+
+    // Show chart after loading
+    const loadingDiv = document.getElementById("timeline-loading");
+if (loadingDiv) loadingDiv.style.display = "none";
+chartElement.style.display = "block";
 
     chart.on("click", function (params: any) {
       if (params.data && params.data.id) {
