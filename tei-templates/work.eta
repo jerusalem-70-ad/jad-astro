@@ -87,8 +87,13 @@
   <text>
       <body>
          <head>
-            <title>[work/title]</title>
-            <persName role="author" cert="" ref="#jad_person_id">[work/author]</persName>   
+            <title><%= it.title %></title>
+            <% if (it.author.length > 0) { %>
+                <% it.author.forEach(aut => { %>
+                    <persName role="author" 
+                    cert="<%= it.author_certainty === true ? 'high' : 'low' %>" 
+                    ref="<%= aut.jad_id %>"><%= aut.name %></persName> <% })  %>
+            <% } %>
          </head>
          <p>
             <origDate notBefore="" notAfter="" cert="">[work/date]</origDate>
@@ -111,8 +116,7 @@
                2) to passages from that work (table ms_occurrences) #### -->
          <list>
             <head>Manuscripts</head>
-            <item>
-               
+            <item>               
                <msDesc xml:id="jad_ms_id">
                   <msIdentifier>
                      <settlement></settlement>
