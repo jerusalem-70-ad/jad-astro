@@ -1,4 +1,4 @@
-<TEI xmlns="http://www.tei-c.org/ns/1.0">
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="<%= it.jad_id %>">
   <teiHeader>
       <fileDesc>
          <titleStmt>
@@ -65,23 +65,7 @@
       </fileDesc>
      <encodingDesc>
 <!--        #### taxonomies for genres | clusters | keywords | litugical references -->
-        <classDecl>          
-           <taxonomy xml:id="genres">
-              <category xml:id="jad_genre_1"/>              
-           </taxonomy>
-           <taxonomy xml:id="clusters">
-              <category xml:id="jad_cluster__1"/>              
-           </taxonomy>
-           <taxonomy xml:id="keywords">
-              <category xml:id="jad_keyword__1"/>              
-           </taxonomy>
-           <taxonomy xml:id="liturgical_ref">
-              <category xml:id="jad_liturgical_reference__1">
-                 <catDesc key="1">[name]</catDesc>
-                 <catDesc key="2">[description]</catDesc>
-              </category>
-           </taxonomy>
-        </classDecl>
+        <%~ include('partials/taxonomies', it) %>
      </encodingDesc>
   </teiHeader>
   <text>
@@ -96,61 +80,38 @@
             <% } %>
          </head>
          <p>
-            <origDate notBefore="" notAfter="" cert="">[work/date]</origDate>
-            <ref type="genre" target="#jad_genre_id">[work/genre]</ref>
-            <ref type="incipit"></ref>
-            <list type="mss_transmission">
-               <item>
-                  <ref target="#jad_manuscript__1"></ref>
-               </item>
-            </list>
+          <% if (Array.isArray(it.date)) { %>
+               <% it.date.forEach(date => { %>
+                  <origDate notBefore="<%= date.not_before %>" notAfter="<%= date.not_after %>" 
+                  cert="<%= it.date_certainty === true ? 'high' : 'low' %>"><%= date.value %></origDate>
+               <% }) %>
+            <% } %>
+            <ref type="genre"><%= it.genre %></ref>
+            <ref type="incipit"><%= it.genre || '' %></ref>
+            
          </p>
-         <list type="passages">
-            <head>Passages</head>
-            <item xml:id="jad_id">
-               <ref type="biblical" target="#jad_biblical_reference__1"></ref>
-            </item>
-         </list>
-         <p>Passages.</p>
+         <% if (it.passages.length > 0) { %>
+            <list type="passages">
+               <head>Passages</head>
+               <% it.passages.forEach(function(pass) { %> 
+                <%~ include('partials/passage', {pass}) %>
+               <% }) %>
+            </list>
+         <% } %>
+        
           <!--    ##### collect all manuscripts related 1) to this work (column manuscript in table works) and 
                2) to passages from that work (table ms_occurrences) #### -->
-         <list>
-            <head>Manuscripts</head>
-            <item>               
-               <msDesc xml:id="jad_ms_id">
-                  <msIdentifier>
-                     <settlement></settlement>
-                     <repository></repository>
-                     <idno></idno>
-                  </msIdentifier>
-                  <physDesc>
-                     <objectDesc>
-                        <supportDesc>
-                           <extent>
-                              <measure type="leavesCount"></measure>
-                              <dimensions type="leaf">
-                                 <height></height>
-                                 <width></width>
-                              </dimensions>
-                           </extent>
-                        </supportDesc>
-                     </objectDesc>
-                  </physDesc>
-                  <history>
-                     <summary>
-                        <origDate notBefore="" notAfter=""></origDate>
-                        <ref type="intiutionl_context" target="#jad_institution_id"></ref>
-                     </summary>
-                  </history>
-                  <additional>
-                     <surrogates>
-                        <ptr target="" type="digi_url"/>
-                        <ptr target="" type="catalog_url"/>
-                     </surrogates>
-                  </additional>
-               </msDesc>              
-            </item>
-         </list>
+         <% if (it.full_manuscripts ) { %>
+            <list type="manuscripts">
+            <% it.full_manuscripts.forEach(function(ms) { %>
+            <item>    
+                   <%~ include('partials/ms-desc', { ms }) %>    
+                       
+            </item> 
+            <% }) %>
+            </list> <%
+         } %>
+        
       </body>
   </text>
 </TEI>

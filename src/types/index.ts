@@ -115,6 +115,15 @@ export interface Navigation {
   label: string;
 }
 
+export interface SourcePass {
+  id: number;
+  jad_id: number;
+  title: string;
+  author?: string;
+  position_in_work?: string;
+  passage: string;
+}
+
 // Passage interface
 export interface Passage {
   id: number;
@@ -131,7 +140,7 @@ export interface Passage {
   authority_discourse?: number;
   liturgical_references: any[]; // This appears to be empty in the sample
   occurrence_found_in: ValueItem[];
-  source_passage: ValueItem[];
+  source_passage: SourcePass[];
   mss_occurrences: Mss_occurrences[] | null;
   incipit: string | null;
   ai_bibl_ref: any[];

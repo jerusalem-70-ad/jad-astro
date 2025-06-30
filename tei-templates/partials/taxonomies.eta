@@ -1,0 +1,26 @@
+<classDecl>
+            <taxonomy xml:id="keywords">           
+               <% it.taxonomy_keywords.forEach(keyword => { %>
+                  <category xml:id="<%= keyword.jad_id %>">
+                     <catDesc key="1"><%= keyword.name %></catDesc>
+                     <catDesc key="2"><%= keyword.short_description || '' %></catDesc>
+                  </category>
+               <% }) %>
+            </taxonomy>               
+            <taxonomy xml:id="clusters">
+            <% it.taxonomy_clusters.forEach(cluster => { %>
+                  <category xml:id="<%= cluster.jad_id %>">
+                     <catDesc key="1"><%= cluster.name %></catDesc>
+                  </category>
+               <% }) %>
+            </taxonomy>
+            <taxonomy xml:id="liturgical_ref">
+             <% it.taxonomy_liturgical_references.forEach(ref => { %>
+                  <category xml:id="<%= ref.jad_id %>">
+                     <catDesc key="1"><%= ref.name %></catDesc>
+                     <catDesc key="2"><%= ref.description || '' %></catDesc>
+                  </category>
+               <% }) %>
+            </taxonomy>
+           
+         </classDecl>

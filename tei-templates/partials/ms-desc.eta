@@ -1,0 +1,40 @@
+<msDesc xml:id="<%= it.ms.jad_id %>">
+                  <msIdentifier>
+                     <settlement><%= it.ms.library[0].place[0]?.name %></settlement>
+                     <repository><%= it.ms.library[0].full_name %></repository>
+                     <idno><%= it.ms.idno %></idno>
+                  </msIdentifier>
+                  <physDesc>
+                     <objectDesc>
+                        <supportDesc>
+                           <extent>
+                              <measure type="leavesCount"><%= it.ms.format?.split(',')[1]?.trim() || '' %></measure>
+                              <dimensions type="leaf" unit="cm">
+                                 <height><%= it.ms.format?.split(',')[0]?.split('x')[0]?.trim() || '' %></height>
+                                 <width><%= it.ms.format?.split(',')[0]?.split('x')[1]?.trim() || '' %></width>
+                              </dimensions>
+                           </extent>
+                        </supportDesc>
+                     </objectDesc>
+                  </physDesc>
+                  <history>
+                     <summary>
+                        <% if (Array.isArray(it.ms.date_written)) { %>
+                           <% it.ms.date_written.forEach(date => { %>
+                              <origDate notBefore="<%= date.not_before %>" notAfter="<%= date.not_after %>"><%= date.value %></origDate>
+                           <% }) %>
+                        <% } %>
+                         <% if (Array.isArray(it.ms.institutional_context)) {  %>Institutional context:
+                           <% it.ms.institutional_context.forEach(inst => { %>
+                              <ref type="intitutional_context" target="#<%= inst.jad_id %>"><%= inst.name %></ref>
+                           <% }) %>
+                        <% } %>
+                                            </summary>
+                  </history>
+                  <additional>
+                     <surrogates>
+                        <ptr target="<%= it.ms.digi_url %>" type="digi_url"/>
+                        <ptr target="<%= it.ms.catalog_url %>" type="catalog_url"/>
+                     </surrogates>
+                  </additional>
+               </msDesc>      

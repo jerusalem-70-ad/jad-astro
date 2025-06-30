@@ -234,6 +234,21 @@ const passagesPlus = passages.map((passage) => {
     });
   }
 
+  // enrich source_passage with title and author from works.json
+  if (passage.source_passage && passage.source_passage.length > 0) {
+    passage.source_passage = passage.source_passage.map((source) => {
+      const p = passages.find((p) => p.id === source.id);
+      return {
+        id: p.id,
+        jad_id: p.jad_id,
+        title: p.work[0]?.title || "",
+        author: p.work[0]?.author?.[0]?.name || "",
+        position_in_work: p.position_in_work,
+        passage: p.passage,
+      };
+    });
+  }
+
   return {
     id: passage.id,
     jad_id: passage.jad_id,

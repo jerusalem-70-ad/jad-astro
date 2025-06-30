@@ -1,0 +1,83 @@
+ <item xml:id="<%= it.pass.jad_id %>">
+    <label><%= it.pass.passage %></label>
+    <note type="position"><%= it.pass.position_in_work %></note>
+    <% if (it.pass.note) { %>
+        <note type="comment"><%= it.pass.note %></note>
+    <% } %>
+    <% if (it.pass.explicit_contemp_ref) { %>
+        <note type="explicit_contemp_ref"><%= it.pass.explicit_contemp_ref %></note>
+    <% } %>
+    <% if (it.pass.keywords.length > 0) { %>
+        <list type="keywords">
+            <head>Keywords</head>
+            <% it.pass.keywords.forEach(keyword => { %>
+            <item>
+                <ref type="keyword" target="#<%= keyword.jad_id %>"><%= keyword.name %></ref>
+            </item>
+            <% })
+            %>
+        </list>
+    <% } %>
+    <% if( it.pass.liturgical_references.length > 0) { %>
+        <list type="liturgical_ref">
+            <head>Liturgical References</head>
+            <% it.pass.liturgical_references.forEach(ref => { %>
+            <item>
+                <ref type="liturgical" target="#<%= ref.id %>"><%= ref.value %></ref>
+            </item>
+            <% })
+            %>
+        </list>
+    <% } %>
+    <% if (it.pass.biblical_references.length > 0) { %>
+        <list type="biblical_references">
+            <head>Biblical References</head>
+            <% it.pass.biblical_references.forEach(ref => { %>
+            <item>
+                <ref type="biblical" target="#<%= ref.jad_id %>"><%= ref.value %></ref>
+            </item>
+            <% })
+            %>
+        </list>
+    <% } %>
+    <% if (it.pass.part_of_cluster.length > 0) { %>
+        <list type="clusters">
+            <head>Clusters</head>
+            <% it.pass.part_of_cluster.forEach(cluster => { %>
+            <item>
+                <ref type="cluster" target="#<%= cluster.id %>"><%= cluster.value %></ref>
+            </item>
+            <% })
+            %>
+        </list>
+    <% } %>
+    <% if (it.pass.source_passage.length > 0) { %>
+         <listBibl type="sources">
+            <head>Textual Sources</head>
+            <% it.pass.source_passage.forEach(source => { %>
+            <bibl>
+                <ref type="source" target="#<%= source.jad_id %>"><%= source.author %>: <%= source.title %>
+                <% if (source.position_in_work) { %>
+                    (<%= source.position_in_work %>)
+                <% } %>
+                </ref>
+            </bibl>
+            <% })
+            %>
+        </listBibl>
+        
+    <% } %>
+    <% if (it.pass.mss_occurrences.length > 0) { %>
+        <list type="mss_occurrences">
+            <head>Manuscript Occurrences</head>
+            <% it.pass.mss_occurrences.forEach(ms => { %>
+            <item>
+                <ref type="mss" target="#<%= ms.manuscript_jad_id %>"><%= ms.manuscript %></ref>
+            </item> <% }) %>
+        </list>
+    <% } %>
+    <p><%= it.pass.text_paragraph %></p>
+    <% if (it.pass.incipit) { %>
+        <note type="incipit"><%= it.pass.incipit %></note>
+    <% } %>
+</item>

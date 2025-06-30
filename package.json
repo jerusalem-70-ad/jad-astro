@@ -7,6 +7,7 @@
     "dev": "astro dev",
     "process-data": "node ./scripts/preprocess-data.js",
     "get-data": "node ./scripts/data-fetch.js",
+    "generate-tei": "node ./scripts/generate-tei.js",
     "generate-search-index": "node ./scripts/generate-search-index.js",
     "start": "astro preview",
     "check": "tsc --noEmit && astro check"

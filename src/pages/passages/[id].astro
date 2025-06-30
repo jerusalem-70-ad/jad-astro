@@ -230,15 +230,15 @@ const usedBy = Object.values(passages).filter((item) =>
               <ul class="list-disc list-inside">
                 {
                   passage.source_passage.length > 0
-                    ? source.map((source) => (
+                    ? passage.source_passage.map((source) => (
                         <li>
-                          {source.work?.[0]?.author?.length > 0 ? (
+                          {source.author ? (
                             <span>
-                              {source.work[0].author[0].name} -{" "}
-                              <span class="italic">{source.work[0].name}</span>
+                              {source.author} -{" "}
+                              <span class="italic">{source.title}</span>
                             </span>
                           ) : (
-                            <span class="italic">{source.work[0].name}</span>
+                            <span class="italic">{source.title}</span>
                           )}
                           <Icon
                             name="lucide:arrow-right"
