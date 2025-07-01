@@ -13,43 +13,6 @@ export async function getStaticPaths() {
 }
 const { data: work } = Astro.props;
 
-type Passage = any;
-
-/* // group passages by position in work (sermon number, or book and chapter)
-const groupedPassages = work.related__passages.reduce<{
-    [key: string]: Passage[];
-}>(
-    (grouped, passage) => {
-        const key = passage.position_in_work || "Unknown Position";
-        if (!grouped[key]) grouped[key] = [];
-        grouped[key].push(passage);
-        return grouped;
-    },
-    {} as { [key: string]: Passage[] },
-); */
-
-// sort passages by both book and chapter
-/* const sortedPassages = Object.entries(groupedPassages).sort(
-    ([keyA], [keyB]) => {
-        // Extract the main and secondary parts (e.g., "Sermo 46" or "B3 Ch5")
-        const extractParts = (key: any) => {
-            const mainPart = key.match(/^[A-Za-z]+\s*\d+/)?.[0] || ""; // Allow space between letters and numbers
-            const subPart = key.match(/Ch\d+/)?.[0] || ""; // Secondary part like "Ch5"
-            const mainNum = parseInt(mainPart.replace(/[^\d]/g, ""), 10) || 0; // Extract number from main part
-            const subNum = parseInt(subPart.replace(/[^\d]/g, ""), 10) || 0; // Extract number from sub part
-            return { mainPart, mainNum, subPart, subNum };
-        };
-
-        const partA = extractParts(keyA);
-        const partB = extractParts(keyB);
-
-        // Compare main parts first, then secondary parts
-        if (partA.mainPart !== partB.mainPart) {
-            return partA.mainNum - partB.mainNum; // Compare main numbers
-        }
-        return partA.subNum - partB.subNum; // Compare sub numbers if main parts are equal
-    },
-); */
 ---
 
 <PageLayout title={work.title}>
@@ -62,6 +25,12 @@ const groupedPassages = work.related__passages.reduce<{
               work.title
             : work?.title}
     >
+    <div class="flex justify-end m-2">               
+                <NavLink href=`/tei/works/${work.jad_id}.xml` 
+                class="border border-brand-800 rounded-md py-2 px-4 bg-brand-600 text-brand-100 hover:bg-brand-100 hover:text-brand-800 transition"
+                id="download-tei">TEI</NavLink>             
+                
+             </div>
         <dl class="grid grid-cols-[1fr_5fr] text-sm md:leading-7 md:text-base">
             <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">Author:</dt>
             <dd class="pl-5">

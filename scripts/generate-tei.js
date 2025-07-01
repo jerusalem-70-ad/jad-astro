@@ -29,7 +29,6 @@ passages.forEach((passage) => {
   }
   passagesByWorkId.get(workJadId).push(passage);
 });
-console.log(passagesByWorkId.size, "works with passages found.");
 
 // Create a lookup map for manuscripts by id or jad_id
 const manuscriptById = new Map();
@@ -59,7 +58,7 @@ works.forEach((work) => {
   // get passages from this work
   work.passages = passagesByWorkId.get(work.jad_id) || [];
 
-  // create array with keywords, clusters, and liturgical references for taxonomies
+  // create arrays with keywords, clusters, and liturgical references for taxonomies
   work.taxonomy_keywords = keywords;
   work.taxonomy_clusters = clusters;
   work.taxonomy_liturgical_references = liturgical_references;

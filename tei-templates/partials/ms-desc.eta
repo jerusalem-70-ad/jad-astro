@@ -1,6 +1,6 @@
 <msDesc xml:id="<%= it.ms.jad_id %>">
                   <msIdentifier>
-                     <settlement><%= it.ms.library[0].place[0]?.name %></settlement>
+                     <settlement ref="#<%= it.ms.library[0].place[0]?.jad_id %>"><%= it.ms.library[0].place[0]?.name %></settlement>
                      <repository><%= it.ms.library[0].full_name %></repository>
                      <idno><%= it.ms.idno %></idno>
                   </msIdentifier>
@@ -32,9 +32,15 @@
                                             </summary>
                   </history>
                   <additional>
+                  <% if (it.ms.digi_url || it.ms.catalog_url) { %>
                      <surrogates>
-                        <ptr target="<%= it.ms.digi_url %>" type="digi_url"/>
-                        <ptr target="<%= it.ms.catalog_url %>" type="catalog_url"/>
+                     <% if (it.ms.digi_url) { %>   
+                        <ptr type="digi_url" target="<%= it.ms.digi_url %>"/>
+                     <% } %>
+                     <% if (it.ms.catalog_url) { %>
+                        <ptr type="catalog_url" target="<%= it.ms.catalog_url %>"/>
+                     <% } %>
                      </surrogates>
+                  <% } %>
                   </additional>
                </msDesc>      

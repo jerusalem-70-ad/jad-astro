@@ -56,11 +56,12 @@
             <head>Textual Sources</head>
             <% it.pass.source_passage.forEach(source => { %>
             <bibl>
-                <ref type="source" target="#<%= source.jad_id %>"><%= source.author %>: <%= source.title %>
+                <title><%= source.title %></title>
+                <author><%= source.author %></author>
+                <ptr type="source" target="#<%= source.jad_id %>"/>
                 <% if (source.position_in_work) { %>
-                    (<%= source.position_in_work %>)
+                    <biblScope><%= source.position_in_work %></biblScope>
                 <% } %>
-                </ref>
             </bibl>
             <% })
             %>
@@ -73,6 +74,12 @@
             <% it.pass.mss_occurrences.forEach(ms => { %>
             <item>
                 <ref type="mss" target="#<%= ms.manuscript_jad_id %>"><%= ms.manuscript %></ref>
+                <% if (ms.position_in_ms) { %>
+                    <note type="position_in_ms"><%= ms.position_in_ms %></note>
+                <% } %>
+                <% if (ms.facsimile_position) { %>
+                    <ptr type="facsimile_position" target="<%= ms.facsimile_position %>"/>  
+                <% } %>
             </item> <% }) %>
         </list>
     <% } %>

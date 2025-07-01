@@ -2,70 +2,26 @@
   <teiHeader>
       <fileDesc>
          <titleStmt>
-            <title><%= it.title %></title>
+            <title> 
+               <% if (it.author.length > 0) { %>
+                  <% it.author.forEach(aut => { %>
+                     <%= aut.name %>: <% })  %>
+               <% } %>
+               <%= it.title %>
+            </title>
          </titleStmt>
          <publicationStmt>
             <p>Publication Information</p>
          </publicationStmt>
          <sourceDesc>
-         <!--   ##### ENTITIES ####  -->
-         <!--   #### REGISTER PEOPLE #####-->
-            <listPerson>
-               <person xml:id="jad_person_id">
-                  <persName></persName>
-                  <persName type="alt"></persName>
-                  <birth></birth>
-                  <death></death>
-                  <ptr type="gnd" target=""/>
-               </person>
-            </listPerson>
-         <!--     #### REGISTER PLACES #####-->
-            <listPlace>
-               <place xml:id="jad_place__1">
-                  <placeName></placeName>
-                  <ptr type="geonames" target=""/>
-               </place>
-            </listPlace>
-         <!--     #### REGISTER ORGANISATIONS (intitutional_context + libraries) #####-->
-            <listOrg>
-               <org xml:id="jad_institutional_context_id">
-                  <orgName>[institution]</orgName>
-                  <placeName ref="#jad_places__1"></placeName>
-                  <ptr type="gnd" target=""/>
-                  <ptr type="wikidata" target=""/>               
-         <!--    subordinate organisations -->
-                  <org xml:id="jad_institutional_context_id2">
-                     <orgName>[subordinate_institution]</orgName>
-                     <placeName ref="#jad_places__1"></placeName>
-                     <ptr type="gnd" target=""/>
-                     <ptr type="wikidata" target=""/>
-                  </org>
-               </org>
-            </listOrg>
-            <!-- #### Sources References #####  -->
-            <listBibl>
-               <bibl xml:id="jad_sources_occurrences_1">
-                  <title>[name]</title>
-                  <ptr target="digi_url"/>
-               </bibl>
-            </listBibl>
-            
-   <!-- #### Biblical References #####  -->
-            <listBibl>
-               <bibl xml:id="jad_biblical_reference__1">
-                  <title></title>
-                  <biblScope unit="chapter"></biblScope>
-                  <biblScope unit="verse"></biblScope>
-                  <abbr></abbr>
-                  <quote xml:lang="la"></quote>
-                  <ref type="external" target=""></ref>
-               </bibl>
-            </listBibl>
+         <!--   ##### ENTITIES ####  -->         
+         <%~ include('partials/register', it) %>     
          </sourceDesc>
       </fileDesc>
      <encodingDesc>
-<!--        #### taxonomies for genres | clusters | keywords | litugical references -->
-        <%~ include('partials/taxonomies', it) %>
+<!--        #### taxonomies for genres | clusters | keywords | litugical references--> 
+<%~ include('partials/taxonomies', it) %>
+        
      </encodingDesc>
   </teiHeader>
   <text>
@@ -86,8 +42,8 @@
                   cert="<%= it.date_certainty === true ? 'high' : 'low' %>"><%= date.value %></origDate>
                <% }) %>
             <% } %>
-            <ref type="genre"><%= it.genre %></ref>
-            <ref type="incipit"><%= it.genre || '' %></ref>
+            <note type="genre"><%= it.genre %></note>
+            <note type="incipit"><%= it.incipit || '' %></note>
             
          </p>
          <% if (it.passages.length > 0) { %>

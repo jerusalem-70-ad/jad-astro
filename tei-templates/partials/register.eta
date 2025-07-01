@@ -1,0 +1,158 @@
+
+             <% 
+             // recursive collectio function to get all references based on type of jad_id pass as prefix
+                function collectById(obj, map, prefix) {
+                  if (Array.isArray(obj)) {
+                    obj.forEach(item => collectById(item, map, prefix));
+                  } else if (obj && typeof obj === 'object') {
+                    if (obj.jad_id && obj.jad_id.startsWith(prefix)) {
+                      map.set(obj.jad_id, obj);
+                    }
+                    for (const key in obj) {
+                      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+                        collectById(obj[key], map, prefix);
+                      }
+                    }
+                  }
+                }
+
+  // destructure 'it' to use only the current relevant data without taxonomy properties
+  // otherwise too many false authors entries (coming from keywords with nested works)
+  const { taxonomy_keywords, taxonomy_clusters, taxonomy_liturgical_references, ...workData } = it;
+
+  const personMap = new Map();
+  collectById(workData, personMap, 'jad_author__');
+
+                // Use to populate Maps:
+                const placeMap = new Map();
+                collectById(workData, placeMap, 'jad_places__');
+
+                const orgMap = new Map();
+                collectById(workData, orgMap, 'jad_institutional_context__');
+
+                const libMap = new Map();
+                collectById(workData, libMap, 'jad_library__');
+
+                const worksMap = new Map();
+                collectById(workData, worksMap, 'jad_works__')
+
+                const sourceMap = new Map();
+                collectById(workData, sourceMap, 'jad_sources_occurrences__')
+
+                const biblRefMap = new Map();
+                collectById(workData, biblRefMap, 'jad_biblical_reference__')
+              %>  
+                     
+            <% if (personMap.size > 0) { %>   
+             <!--   #### REGISTER PEOPLE #####-->          
+            <listPerson type="authors">
+              <% personMap.forEach((a, id) => { %>
+                <person xml:id="<%= id %>">
+                  <persName><%= a.name %></persName>
+                  <% if (a.alt_name) { %>
+                    <persName type="alt"><%= a.alt_name %></persName>
+                  <% } %>
+                  <birth><%= a.date_of_birth || '' %></birth>
+                  <death><%= a.date_of_death || '' %></death>
+                  <% if (a.gnd_url) { %>
+                    <ptr type="gnd" target="<%= a.gnd_url %>"/>
+                  <% } %>
+                  
+                </person>
+              <% }) %>
+            </listPerson>
+          <% } %>
+          
+          <% if (placeMap.size > 0) { %>
+          <!--     #### REGISTER PLACES #####-->            
+            <listPlace>
+              <% placeMap.forEach((place, id) => { %>
+                <place xml:id="<%= id %>">
+                  <placeName><%= place.name %></placeName>
+                  <% if (place.geonames_url) { %>
+                    <ptr type="geonames" target="<%= place.geonames_url %>"/>
+                  <% } %>
+                </place>
+              <% }) %>
+            </listPlace>
+          <% } %>
+          
+          <% if (orgMap.size > 0) { %>
+          <!--     #### REGISTER ORGS #####--> 
+            <listOrg>
+              <% orgMap.forEach((org, id) => { %>
+                <org xml:id="<%= id %>">
+                  <orgName><%= org.name %>
+                    <% if (org.wikidata) { %>
+                      <ptr type="wikidata" target="<%= org.wikidata %>"/>
+                    <% } %>
+                     <% if (org.gnd_url) { %>
+                      <ptr type="gnd" target="<%= org.gnd_url %>"/>
+                    <% } %>
+                  </orgName>
+                 </org>
+              <% }) %>
+            </listOrg>
+          <% } %>
+
+           <% if (libMap.size > 0) { %>
+          <!--     #### REGISTER ORGS-Libraries #####--> 
+            <listOrg type="libraries">
+              <% libMap.forEach((org, id) => { %>
+                <org xml:id="<%= id %>">
+                  <orgName><%= org.full_name %>                   
+                     <% if (org.gnd_url) { %>
+                      <ptr type="gnd" target="<%= org.gnd_url %>"/>
+                    <% } %>
+                  </orgName>
+                  <% if (org.place?.length > 0) { %>
+                    <placeName ref="#<%= org.place[0].jad_id %>"><%= org.place[0].name %></placeName>
+                  <% } %>
+                 </org>
+              <% }) %>
+            </listOrg>
+          <% } %>
+
+           <% if (biblRefMap.size > 0) { %>
+          <!--     #### REGISTER Biblical References #####--> 
+            <listBibl type="biblical_references">
+              <% biblRefMap.forEach((ref, id) => { %>
+                <bibl xml:id="<%= id %>">
+                  <title><%= ref.value %></title>
+                  <quote xml:lang="la"><%= ref.text %></quote>
+                  <ptr type="nova_vulgata_url" target="<%= ref.nova_vulgata_url %>"/>
+               </bibl>
+              <% }) %>
+            </listBibl>
+          <% } %>
+          
+          <% if (sourceMap.size > 0) { %>
+            <listBibl type="bibliography">
+              <% sourceMap.forEach((bibl, id) => { %>
+                <bibl xml:id="<%= id %>">
+                  <title><%= bibl.name %></title>
+                  <ptr target="<%= bibl.digi_url %>"/>
+               </bibl>
+              <% }); %>
+            </listBibl>
+          <% } %>
+
+          <% if (worksMap.size > 0) { %>
+            <listBibl type="works">
+              <% worksMap.forEach((work, id) => { %>
+                <bibl xml:id="<%= id %>">
+                  <title><%= work.title %></title>
+                  <% if (work.author?.length > 0) { %>
+                    <% work.author.forEach(author => { %>
+                      <author ref="#<%= author.jad_id %>"><%= author.name %></author>
+                    <% }); %>
+                  <% } %>
+                  <% if (work.gnd_url) { %>
+                    <ptr type="gnd" target="<%= work.gnd_url %>"/>
+                  <% } %>
+                </bibl>
+              <% }); %>
+            </listBibl>
+          <% } %>
+
+          
