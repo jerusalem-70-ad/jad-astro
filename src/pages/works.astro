@@ -22,6 +22,7 @@ const title = "Works";
       data: tabledata,
       layout: "fitColumns",
       responsiveLayout: "collapse",
+      initialSort: [{ column: "title", dir: "asc" }],
       rowHeader: {
         formatter: "responsiveCollapse",
         width: 30,
@@ -37,6 +38,8 @@ const title = "Works";
           field: "title",
           minWidth: 200,
           headerFilter: "input",
+          responsive: 0,
+          widthGrow: 2,
         },
         {
           title: "Author",
@@ -68,6 +71,8 @@ const title = "Works";
               .map((author: { name: string; alt_name?: string }) => author.name)
               .join(", ");
           },
+          responsive: 0,
+          widthGrow: 2,
         },
         {
           title: "Genre",
@@ -76,6 +81,8 @@ const title = "Works";
           minWidth: 200,
           headerFilter: "input",
           formatter: "textarea",
+          responsive: 1,
+          widthGrow: 2,
         },
 
         {
@@ -89,18 +96,20 @@ const title = "Works";
             separator: "; ",
           },
           headerFilter: "input",
+          responsive: 1,
+          widthGrow: 3,
         },
         {
-          title: "Passages",
+          title: "Passages #",
           resizable: true,
           field: "related__passages",
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].position_in_work",
-            separator: "; ",
+          minWidth: 80,
+          mutator: function (value, data, type, params, component) {
+            return Array.isArray(value) ? value.length : 0;
           },
-          minWidth: 200,
           headerFilter: "input",
+          responsive: 3,
+          widthGrow: 1,
         },
         {
           title: "Context",
@@ -113,6 +122,7 @@ const title = "Works";
             separator: "; ",
           },
           headerFilter: "input",
+          responsive: 2,
         },
         {
           title: "Date",
@@ -125,6 +135,7 @@ const title = "Works";
           },
           minWidth: 200,
           headerFilter: "input",
+          responsive: 3,
         },
       ],
     });

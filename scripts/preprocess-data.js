@@ -143,138 +143,140 @@ const bookMap = {
   Rev: "Revelation",
 };
 
-const passagesPlus = passages.map((passage) => {
-  // hierarchical 3-level index for the typesense schema for biblical references
-  // level 0 for book (using the bookMap above), lv 1 for chapter, and lv 2 for verse
-  const lvl0 = [];
-  const lvl1 = [];
-  const lvl2 = [];
+const passagesPlus = passages
+  .filter((passage) => passage.passage) // filter out empty passages
+  .map((passage) => {
+    // hierarchical 3-level index for the typesense schema for biblical references
+    // level 0 for book (using the bookMap above), lv 1 for chapter, and lv 2 for verse
+    const lvl0 = [];
+    const lvl1 = [];
+    const lvl2 = [];
 
-  if (
-    passage.biblical_references &&
-    passage.biblical_references.length > 0 &&
-    passage.biblical_references[0].value
-  ) {
-    passage.biblical_references.forEach((ref) => {
-      let bookAbbrev, chapterVerse;
-      const specialCases = ["Joel", "Acts", "Job", "Osee", "Amos", "Ruth"];
-      if (specialCases.includes(ref.value.split(/[\s.,]/)[0])) {
-        bookAbbrev = ref.value.split(/[\s.,]/)[0];
-        chapterVerse = ref.value.substring(bookAbbrev.length).trim();
-      } else {
-        [bookAbbrev, chapterVerse] = ref.value.split(".");
-      }
-      const book = bookMap[bookAbbrev.trim()] || bookAbbrev;
+    if (
+      passage.biblical_references &&
+      passage.biblical_references.length > 0 &&
+      passage.biblical_references[0].value
+    ) {
+      passage.biblical_references.forEach((ref) => {
+        let bookAbbrev, chapterVerse;
+        const specialCases = ["Joel", "Acts", "Job", "Osee", "Amos", "Ruth"];
+        if (specialCases.includes(ref.value.split(/[\s.,]/)[0])) {
+          bookAbbrev = ref.value.split(/[\s.,]/)[0];
+          chapterVerse = ref.value.substring(bookAbbrev.length).trim();
+        } else {
+          [bookAbbrev, chapterVerse] = ref.value.split(".");
+        }
+        const book = bookMap[bookAbbrev.trim()] || bookAbbrev;
 
-      let chapter, verse;
-      if (chapterVerse?.includes(",")) {
-        [chapter, verse] = chapterVerse.split(",");
-      } else {
-        chapter = chapterVerse;
-        verse = "";
-      }
+        let chapter, verse;
+        if (chapterVerse?.includes(",")) {
+          [chapter, verse] = chapterVerse.split(",");
+        } else {
+          chapter = chapterVerse;
+          verse = "";
+        }
 
-      // Trim any accidental spaces
-      const chapterTrimmed = chapter?.trim();
-      const verseTrimmed = verse?.trim();
+        // Trim any accidental spaces
+        const chapterTrimmed = chapter?.trim();
+        const verseTrimmed = verse?.trim();
 
-      lvl0.push(book);
-      lvl1.push(`${book} > ${chapterTrimmed}`);
-      lvl2.push(`${book} > ${chapterTrimmed} > ${verseTrimmed}`);
-    });
-  }
-  // enrich the date from dates.json using helper function
-  if (passage.work.some((w) => w.date.length > 0)) {
-    passage.work = passage.work.map((w) => ({
-      ...w,
-      date: enrichDates(w.date, dates),
-    }));
-  }
+        lvl0.push(book);
+        lvl1.push(`${book} > ${chapterTrimmed}`);
+        lvl2.push(`${book} > ${chapterTrimmed} > ${verseTrimmed}`);
+      });
+    }
+    // enrich the date from dates.json using helper function
+    if (passage.work.some((w) => w.date.length > 0)) {
+      passage.work = passage.work.map((w) => ({
+        ...w,
+        date: enrichDates(w.date, dates),
+      }));
+    }
 
-  // add aiBiblicalRef to each passage
-  const aiBiblicalRefEntry = aiBiblRef[passage.jad_id];
+    // add aiBiblicalRef to each passage
+    const aiBiblicalRefEntry = aiBiblRef[passage.jad_id];
 
-  // enrich passage with data from manuscripts.json
-  // see if the passage.id is in the ms_occurrences.json
-  const msOccurrence = msOccurrences
-    .filter(
-      (item) =>
-        item.occurrence.length > 0 && item.occurrence[0].id === passage.id
-    )
-    .map((item) => {
-      const mss = manuscripts
-        .filter((ms) => item.manuscript.some((man) => man.id === ms.id))
-        // map them to get only the necessary fields
-        .map((ms) => {
-          return {
-            id: ms.id,
-            name: `${ms.library[0].place[0]?.name}, ${ms.name[0].value}`,
-            jad_id: ms.jad_id,
-          };
-        });
-      return {
-        manuscript: mss.map((ms) => ms.name).join(", "),
-        manuscript_jad_id: mss.map((ms) => ms.jad_id).join(", "),
-        position_in_ms: item.position_in_ms,
-        main_ms: item.main_ms,
-        facsimile_position: item.facsimile_position,
-        ms_locus: item.ms_locus[0].value,
-      };
-    });
-  // filter the manuscripts.json to get the manuscripts that are in the ms_occurrences.json
+    // enrich passage with data from manuscripts.json
+    // see if the passage.id is in the ms_occurrences.json
+    const msOccurrence = msOccurrences
+      .filter(
+        (item) =>
+          item.occurrence.length > 0 && item.occurrence[0].id === passage.id
+      )
+      .map((item) => {
+        const mss = manuscripts
+          .filter((ms) => item.manuscript.some((man) => man.id === ms.id))
+          // map them to get only the necessary fields
+          .map((ms) => {
+            return {
+              id: ms.id,
+              name: `${ms.library[0].place[0]?.name}, ${ms.name[0].value}`,
+              jad_id: ms.jad_id,
+            };
+          });
+        return {
+          manuscript: mss.map((ms) => ms.name).join(", "),
+          manuscript_jad_id: mss.map((ms) => ms.jad_id).join(", "),
+          position_in_ms: item.position_in_ms,
+          main_ms: item.main_ms,
+          facsimile_position: item.facsimile_position,
+          ms_locus: item.ms_locus[0].value,
+        };
+      });
+    // filter the manuscripts.json to get the manuscripts that are in the ms_occurrences.json
 
-  //enrich biblical_references with sort key using the biblicalRefSorted
-  if (passage.biblical_references && passage.biblical_references.length > 0) {
-    passage.biblical_references = passage.biblical_references.map((ref) => {
-      // Find the enriched reference by id (as string, since biblicalRefSorted keys are likely strings)
-      const enriched = biblicalRefSorted[String(ref.id)];
-      return {
-        ...(enriched || {}), // Merge in all properties from biblicalRefSorted if found
-      };
-    });
-  }
+    //enrich biblical_references with sort key using the biblicalRefSorted
+    if (passage.biblical_references && passage.biblical_references.length > 0) {
+      passage.biblical_references = passage.biblical_references.map((ref) => {
+        // Find the enriched reference by id (as string, since biblicalRefSorted keys are likely strings)
+        const enriched = biblicalRefSorted[String(ref.id)];
+        return {
+          ...(enriched || {}), // Merge in all properties from biblicalRefSorted if found
+        };
+      });
+    }
 
-  // enrich source_passage with title and author from works.json
-  if (passage.source_passage && passage.source_passage.length > 0) {
-    passage.source_passage = passage.source_passage.map((source) => {
-      const p = passages.find((p) => p.id === source.id);
-      return {
-        id: p.id,
-        jad_id: p.jad_id,
-        title: p.work[0]?.title || "",
-        author: p.work[0]?.author?.[0]?.name || "",
-        position_in_work: p.position_in_work,
-        passage: p.passage,
-      };
-    });
-  }
+    // enrich source_passage with title and author from works.json
+    if (passage.source_passage && passage.source_passage.length > 0) {
+      passage.source_passage = passage.source_passage.map((source) => {
+        const p = passages.find((p) => p.id === source.id);
+        return {
+          id: p.id,
+          jad_id: p.jad_id,
+          title: p.work[0]?.title || "",
+          author: p.work[0]?.author?.[0]?.name || "",
+          position_in_work: p.position_in_work,
+          passage: p.passage,
+        };
+      });
+    }
 
-  return {
-    id: passage.id,
-    jad_id: passage.jad_id,
-    passage: passage.passage,
-    work: passage.work,
-    position_in_work: passage.position_in_work,
-    pages: passage.text_paragraph?.match(/p\. (\d+\w?)/)?.[1] || null,
-    note: passage.note,
-    explicit_contemp_ref: passage.explicit_contemp_ref,
-    biblical_references: passage.biblical_references,
-    keywords: passage.keywords,
-    part_of_cluster: passage.part_of_cluster,
-    liturgical_references: passage.liturgical_references,
-    occurrence_found_in: passage.occurrence_found_in,
-    source_passage: passage.source_passage,
-    incipit: passage.incipit,
-    prev: passage.prev,
-    next: passage.next,
-    text_paragraph: passage.text_paragraph,
-    mss_occurrences: msOccurrence,
-    biblical_ref_lvl0: lvl0,
-    biblical_ref_lvl1: lvl1,
-    biblical_ref_lvl2: lvl2,
-    ai_bibl_ref: aiBiblicalRefEntry || [],
-  };
-});
+    return {
+      id: passage.id,
+      jad_id: passage.jad_id,
+      passage: passage.passage,
+      work: passage.work,
+      position_in_work: passage.position_in_work,
+      pages: passage.text_paragraph?.match(/p\. (\d+\w?)/)?.[1] || null,
+      note: passage.note,
+      explicit_contemp_ref: passage.explicit_contemp_ref,
+      biblical_references: passage.biblical_references,
+      keywords: passage.keywords,
+      part_of_cluster: passage.part_of_cluster,
+      liturgical_references: passage.liturgical_references,
+      occurrence_found_in: passage.occurrence_found_in,
+      source_passage: passage.source_passage,
+      incipit: passage.incipit,
+      prev: passage.prev,
+      next: passage.next,
+      text_paragraph: passage.text_paragraph,
+      mss_occurrences: msOccurrence,
+      biblical_ref_lvl0: lvl0,
+      biblical_ref_lvl1: lvl1,
+      biblical_ref_lvl2: lvl2,
+      ai_bibl_ref: aiBiblicalRefEntry || [],
+    };
+  });
 // use imported function to build the transmission graph
 const graph = buildTransmissionGraph(passagesPlus);
 
@@ -292,78 +294,80 @@ writeFileSync(
 
 console.log("passages.json file enriched successfully.");
 
-const worksPlus = works.map((work) => {
-  let processedPassages = [];
+const worksPlus = works
+  .filter((work) => work.title) // filter out works without title
+  .map((work) => {
+    let processedPassages = [];
 
-  if (work.related__passages && work.related__passages.length > 0) {
-    // First, group passages by position_in_work
-    const groupedPassages = work.related__passages.reduce(
-      (grouped, passage) => {
-        const key = passage.position_in_work || "";
+    if (work.related__passages && work.related__passages.length > 0) {
+      // First, group passages by position_in_work
+      const groupedPassages = work.related__passages.reduce(
+        (grouped, passage) => {
+          const key = passage.position_in_work || "";
 
-        if (!grouped[key]) {
-          grouped[key] = [];
-        }
+          if (!grouped[key]) {
+            grouped[key] = [];
+          }
 
-        // Add only the fields you want from each passage
-        grouped[key].push({
-          id: passage.id,
-          jad_id: passage.jad_id,
-          passage: passage.passage,
-          page: passage.text_paragraph?.match(/ p\. (\d+\w?)/)?.[1] || "",
-          occurrence_found_in: passage.occurrence_found_in.map(
-            (occ) => occ.value
-          ),
-        });
+          // Add only the fields you want from each passage
+          grouped[key].push({
+            id: passage.id,
+            jad_id: passage.jad_id,
+            passage: passage.passage,
+            page: passage.text_paragraph?.match(/ p\. (\d+\w?)/)?.[1] || "",
+            occurrence_found_in: passage.occurrence_found_in.map(
+              (occ) => occ.value
+            ),
+          });
 
-        return grouped;
-      },
-      {}
-    );
+          return grouped;
+        },
+        {}
+      );
 
-    // Then convert the grouped object into the array format you want
-    processedPassages = Object.entries(groupedPassages).map(
-      ([position, passages]) => ({
-        position_in_work: position,
-        sort_position: calculateSortPosition(position),
-        passages: passages,
-      })
-    );
-    // Sort the processedPassages array by sort_position
-    processedPassages.sort((a, b) => a.sort_position - b.sort_position);
-  }
+      // Then convert the grouped object into the array format you want
+      processedPassages = Object.entries(groupedPassages).map(
+        ([position, passages]) => ({
+          position_in_work: position,
+          sort_position: calculateSortPosition(position),
+          passages: passages,
+        })
+      );
+      // Sort the processedPassages array by sort_position
+      processedPassages.sort((a, b) => a.sort_position - b.sort_position);
+    }
 
-  return {
-    id: work.id,
-    jad_id: work.jad_id,
-    title: work.title,
-    author: work.author,
-    author_certainty: work.author_certainty,
-    manuscripts: manuscripts
-      .filter((ms) => work.manuscripts.some((w_ms) => w_ms.id === ms.id))
-      .map((ms) => ({
-        id: ms.id,
-        jad_id: ms.jad_id,
-        name: `${ms.library[0].place[0]?.name}, ${ms.name[0].value}`,
-      })),
-    genre: work.genre?.value || "",
-    description: work.description,
-    notes: work.notes || "",
-    notes__author: work.notes__author || "",
-    institutional_context: work.institutional_context || [],
-    published_edition: work.published_edition || [],
-    date: enrichDates(work.date, dates),
-    date_certainty: work.date_certainty,
-    link_digital_editions: work.link_digital_editions || "",
-    incipit: work.incipit || "",
-    volume_edition_or_individual_editor:
-      work.volume_edition_or_individual_editor || "",
-    related__passages: processedPassages, // Use the processed passages here
-    view_label: work.view_label || "",
-    next: work.next || {},
-    prev: work.prev || {},
-  };
-});
+    return {
+      id: work.id,
+      jad_id: work.jad_id,
+      title: work.title,
+      author: work.author,
+      author_certainty: work.author_certainty,
+      manuscripts: manuscripts
+        .filter((ms) => work.manuscripts.some((w_ms) => w_ms.id === ms.id))
+        .map((ms) => ({
+          id: ms.id,
+          jad_id: ms.jad_id,
+          name: `${ms.library[0].place[0]?.name}, ${ms.name[0].value}`,
+        })),
+      genre: work.genre?.value || "",
+      description: work.description,
+      notes: work.notes || "",
+      notes__author: work.notes__author || "",
+      institutional_context: work.institutional_context || [],
+      published_edition: work.published_edition || [],
+      date: enrichDates(work.date, dates),
+      date_certainty: work.date_certainty,
+      link_digital_editions: work.link_digital_editions || "",
+      incipit: work.incipit || "",
+      volume_edition_or_individual_editor:
+        work.volume_edition_or_individual_editor || "",
+      related__passages: processedPassages, // Use the processed passages here
+      view_label: work.view_label || "",
+      next: work.next || {},
+      prev: work.prev || {},
+    };
+  });
 
 writeFileSync(
   join(folderPath, "works.json"),

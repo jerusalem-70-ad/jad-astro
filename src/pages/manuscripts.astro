@@ -19,7 +19,8 @@ import TableHead from "@/components/table-head.astro";
     const passages = Object.values(pass);
 
     // Add related passages to each manuscript
-    const data = manuscripts.map((manuscript) => {
+    const data = manuscripts.filter(manuscript => manuscript.name[0]?.value)
+    .map((manuscript) => {
       const related_passages = passages
         .filter((passage) =>
           passage.mss_occurrences.some((m) => m.manuscript_jad_id === manuscript.jad_id)
@@ -43,6 +44,7 @@ import TableHead from "@/components/table-head.astro";
       data: tabledata,
       layout: "fitColumns",
       responsiveLayout: "collapse",
+      initialSort: [{ column: "library", dir: "asc" }],
       rowHeader: {
         formatter: "responsiveCollapse",
         width: 30,

@@ -16,12 +16,14 @@ import Chart from "@/components/chart-keywords.astro";
     import { JSONPath } from "jsonpath-plus";
     import data from "@/content/data/keywords.json";
     // Add the new property to each object for number of passages
-    const tabledata = Object.values(data).map((keyword) => ({
-      ...keyword,
-      relatedPassagesLength: keyword.related__passages
-        ? keyword.related__passages.length
-        : 0,
-    }));
+    const tabledata = Object.values(data)
+      .filter((keyword) => keyword.name)
+      .map((keyword) => ({
+        ...keyword,
+        relatedPassagesLength: keyword.related__passages
+          ? keyword.related__passages.length
+          : 0,
+      }));
 
     var table = new Tabulator("#tabulator-table", {
       headerFilterLiveFilterDelay: 600,
@@ -29,6 +31,7 @@ import Chart from "@/components/chart-keywords.astro";
       data: tabledata,
       layout: "fitColumns",
       responsiveLayout: "collapse",
+      initialSort: [{ column: "name", dir: "asc" }],
       rowHeader: {
         formatter: "responsiveCollapse",
         width: 30,
