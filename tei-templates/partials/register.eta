@@ -131,7 +131,9 @@
               <% sourceMap.forEach((bibl, id) => { %>
                 <bibl xml:id="<%= id %>">
                   <title><%= bibl.name %></title>
+                  <% if (bibl.digi_url) { %>                  
                   <ptr target="<%= bibl.digi_url %>"/>
+                  <% } %>
                </bibl>
               <% }); %>
             </listBibl>
