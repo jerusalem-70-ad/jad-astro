@@ -74,6 +74,7 @@ export const NOVA_VULGATA_ORDER = {
   Daniel: 34,
   Os: 35,
   Osee: 35,
+  Hos: 35,
   Joel: 36,
   Am: 37,
   Amos: 37,

@@ -215,12 +215,12 @@ const passagesPlus = passages
             };
           });
         return {
-          manuscript: mss.map((ms) => ms.name).join(", "),
+          manuscript: mss.map((ms) => ms.name).join(", ") || "TBD",
           manuscript_jad_id: mss.map((ms) => ms.jad_id).join(", "),
           position_in_ms: item.position_in_ms,
           main_ms: item.main_ms,
           facsimile_position: item.facsimile_position,
-          ms_locus: item.ms_locus[0].value,
+          ms_locus: item.ms_locus[0]?.value || "",
         };
       });
     // filter the manuscripts.json to get the manuscripts that are in the ms_occurrences.json
@@ -315,9 +315,8 @@ const worksPlus = works
             jad_id: passage.jad_id,
             passage: passage.passage,
             page: passage.text_paragraph?.match(/ p\. (\d+\w?)/)?.[1] || "",
-            occurrence_found_in: passage.occurrence_found_in.map(
-              (occ) => occ.value
-            ),
+            occurrence_found_in:
+              passage.occurrence_found_in.map((occ) => occ.value) || [],
           });
 
           return grouped;
