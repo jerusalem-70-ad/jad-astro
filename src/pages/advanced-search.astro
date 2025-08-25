@@ -2,6 +2,7 @@
 import Layout from "@/layouts/page-layout.astro";
 import "instantsearch.css/themes/satellite.css";
 import { Icon } from "astro-icon/components";
+import PassagesTimeline from "@/components/passages-timeline.astro";
 ---
 
 <Layout title="Search">
@@ -11,6 +12,7 @@ import { Icon } from "astro-icon/components";
     >
       Search
     </h2>
+    <PassagesTimeline dataSource="search" />
 
     <div class="md:space-y-6">
       <!-- Search Input and Stats -->

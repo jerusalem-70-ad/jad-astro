@@ -1,11 +1,12 @@
 ---
 export interface Props {
   height?: number;
+  dataSource?: 'table' | 'search'; // Add prop to identify data source
 }
-const { height = 400 } = Astro.props;
+const { height = 400, dataSource = 'table' } = Astro.props;
 ---
 
-<div class="passages-timeline-container" >
+<div class="passages-timeline-container">
   <div id="timeline-loading" class="flex items-center justify-center h-[400px]">
     <span class="animate-spin mr-2">&#9696;</span>
     <span>Graph loading...</span>
@@ -14,6 +15,7 @@ const { height = 400 } = Astro.props;
     id="passages-timeline"
     class="hidden sm:block border border-neutral-800 mb-5"
     style={`height: ${height}px`}
+    data-source={dataSource}
   >
   </div>
 </div>
@@ -28,70 +30,97 @@ const { height = 400 } = Astro.props;
     interface Window {
       passagesTimelineData?: any[];
       timelineChart?: any;
+      updateTimelineColors?: (filteredIds: Set<string>) => void;
+      initializeTimeline?: (data: any[]) => void;
     }
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    console.log("Timeline component loaded");
+  // Make the update function globally available
+  window.updateTimelineColors = function(filteredIds: Set<string>) {
+    const timelineChart = window.timelineChart;
+    if (!timelineChart) return;
 
-    const timelineData = (window as any).passagesTimelineData || [];
+    // Get current chart option
+    const currentOption = timelineChart.getOption();
+    if (!currentOption.series || !currentOption.series[0]) return;
 
-    if (!timelineData.length) {
-      console.warn("No timeline data available");
-      return;
-    }
+    // Update the scatter series data with colors
+    const updatedData = currentOption.series[0].data.map((node: any) => ({
+      ...node,
+      itemStyle: {
+        color: filteredIds.has(node.id)
+          ? "#a92d03"  // Red/brown for filtered items
+          : "#FFD700", // Gold for non-filtered
+        opacity: filteredIds.has(node.id) ? 0.9 : 0.3, // Make non-filtered items more transparent
+      },
+    }));
 
+    // Update the chart
+    timelineChart.setOption({
+      series: [
+        {
+          data: updatedData,
+        },
+      ],
+    });
+  };
+
+  // Make the initialization function globally available
+  window.initializeTimeline = function(timelineData: any[]) {
     const chartElement = document.getElementById("passages-timeline");
     if (!chartElement) return;
+
+    // If chart already exists, destroy it first
+    if (window.timelineChart) {
+      window.timelineChart.dispose();
+    }
+
+    if (!timelineData || !timelineData.length) {
+      console.warn("No timeline data available");
+      const loadingDiv = document.getElementById("timeline-loading");
+      if (loadingDiv) {
+        loadingDiv.innerHTML = '<span>No data available</span>';
+      }
+      return;
+    }
 
     // Calculate date extent
     const dateExtent = extent(timelineData, (d: any) => d.date_post_quem);
     const [minDate, maxDate] = dateExtent;
 
-    // Config values from reference code
+    // Config values
     const nodeRadius = 3;
     const nodePadding = 1;
     const collideStrength = 0.7;
     const xStrength = 0.1;
     const yStrength = 0.2;
 
-    // Prepare nodes exactly like the reference
+    // Prepare nodes
     const simulationData = timelineData.map((item: any) => ({
       ...item,
-      // Initial position - all nodes start on the same timeline
       x: item.date_post_quem,
-      y: 0, // Single timeline like reference
-      date: new Date(item.date_post_quem, 0), // Convert to Date object
+      y: 0,
+      date: new Date(item.date_post_quem, 0),
     }));
 
-    // Force simulation exactly like reference
+    // Force simulation
     const simulation = forceSimulation()
       .force(
         "collide",
         forceCollide(nodeRadius + nodePadding).strength(collideStrength)
       )
-      .force("x", forceX((d) => d.date_post_quem).strength(xStrength))
-      .force(
-        "y",
-        forceY(0).strength(yStrength) // Pull to center line
-      );
+      .force("x", forceX((d: any) => d.date_post_quem).strength(xStrength))
+      .force("y", forceY(0).strength(yStrength));
 
-    // Run simulation with tick handling like reference
-    simulation
-      .on("tick", () => {
-        // Update node positions during simulation
-        // The reference runs this in real-time, we'll do it in batches
-      })
-      .nodes(simulationData);
+    simulation.nodes(simulationData);
 
-    // Run simulation for many ticks to settle
+    // Run simulation
     for (let i = 0; i < 300; i++) {
       simulation.tick();
     }
-
     simulation.stop();
-    // Prepare data for ECharts
 
+    // Prepare ECharts option
     const option = {
       title: {
         text: "Passages Timeline",
@@ -117,7 +146,6 @@ const { height = 400 } = Astro.props;
         axisLabel: {
           fontSize: 12,
           interval: function (_index: number, value: number) {
-            // Show only values that are multiples of 50
             return value % 50 === 0;
           },
         },
@@ -130,13 +158,13 @@ const { height = 400 } = Astro.props;
         max: "dataMax",
       },
       grid: {
-        bottom: 40, // Add some bottom margin to show the X-axis
+        bottom: 40,
       },
       dataZoom: [
         {
-          type: "inside", // Mouse wheel zoom and pan
+          type: "inside",
           xAxisIndex: 0,
-          filterMode: "none", // Don't filter data when zooming
+          filterMode: "none",
         },
       ],
       series: [
@@ -147,24 +175,10 @@ const { height = 400 } = Astro.props;
             color: "#FFD700",
             opacity: 0.8,
           },
-
           data: simulationData.map((node: any) => ({
             value: [node.x, node.y],
             ...node,
           })),
-          dataZoom: [
-            {
-              type: "inside", // Mouse wheel zoom and pan
-              xAxisIndex: 0,
-              filterMode: "none", // Don't filter data when zooming
-            },
-            {
-              type: "slider", // Shows a zoom slider at the bottom
-              xAxisIndex: 0,
-              filterMode: "none",
-              bottom: 10,
-            },
-          ],
         },
       ],
     };
@@ -174,19 +188,37 @@ const { height = 400 } = Astro.props;
 
     // Show chart after loading
     const loadingDiv = document.getElementById("timeline-loading");
-if (loadingDiv) loadingDiv.style.display = "none";
-chartElement.style.display = "block";
+    if (loadingDiv) loadingDiv.style.display = "none";
+    chartElement.style.display = "block";
 
     chart.on("click", function (params: any) {
       if (params.data && params.data.id) {
         window.location.href = withBasePath(`/passages/${params.data.id}`);
       }
-      console.log("Clicked on node:", params.data);
     });
-    // Store chart globally so table can access it
+
+    // Store chart globally
     window.timelineChart = chart;
 
     // Handle window resize
     window.addEventListener("resize", () => chart.resize());
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    console.log("Timeline component loaded");
+    
+    const chartElement = document.getElementById("passages-timeline");
+    const dataSource = chartElement?.getAttribute('data-source') || 'table';
+    
+    // For table view, use the data that's set by the table page
+    if (dataSource === 'table') {
+      const timelineData = window.passagesTimelineData || [];
+      if (timelineData.length) {
+        window.initializeTimeline(timelineData);
+      }
+    } else if (dataSource === 'search') {
+      // For search view, just wait - the search widget will call initializeTimeline
+      console.log("Timeline waiting for search widget to provide data...");
+    }
   });
 </script>

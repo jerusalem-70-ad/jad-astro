@@ -69,6 +69,322 @@ const search = instantsearch({
   },
 });
 
+// ============= TIMELINE WIDGET =============
+// Custom widget for timeline integration
+// Timeline widget with pagination for search page
+const timelineWidgetWithPagination = () => ({
+  $$type: "custom.timeline",
+  allTimelineIds: new Set(),
+  lastSearchState: null,
+
+  init({ helper, instantSearchInstance }) {
+    const checkAndInitialize = async () => {
+      if (!window.initializeTimeline) {
+        setTimeout(checkAndInitialize, 500);
+        return;
+      }
+
+      try {
+        const allHits = [];
+        let page = 0;
+        let hasMore = true;
+        const hitsPerPage = 250;
+
+        // Fetch all pages
+        while (hasMore && page < 20) {
+          const { results } = await searchClient.search([
+            {
+              indexName: project_collection_name,
+              params: {
+                query: "",
+                hitsPerPage: hitsPerPage,
+                page: page,
+                attributesToRetrieve: ["*"],
+              },
+            },
+          ]);
+
+          if (
+            results &&
+            results[0] &&
+            results[0].hits &&
+            results[0].hits.length > 0
+          ) {
+            allHits.push(...results[0].hits);
+            hasMore = results[0].hits.length === hitsPerPage;
+            page++;
+          } else {
+            hasMore = false;
+          }
+        }
+
+        // Process all hits for timeline
+        const allTimelineData = allHits
+          .map((hit) => ({
+            id: hit.id || hit.objectID,
+            passage:
+              (hit.full_text || hit.passage || "").substring(0, 100) + "...",
+            author: extractAuthors(hit),
+            date_post_quem: extractDatePostQuem(hit),
+            date_ante_quem: extractDateAnteQuem(hit),
+            work_title: extractWorkTitle(hit),
+          }))
+          .filter((item) => item.date_post_quem && item.date_post_quem > 0);
+
+        this.allTimelineIds = new Set(allTimelineData.map((item) => item.id));
+        window.initializeTimeline(allTimelineData);
+      } catch (error) {
+        console.error("Error in paginated timeline fetch:", error);
+      }
+    };
+
+    checkAndInitialize();
+  },
+
+  async render({ results, helper }) {
+    if (!window.updateTimelineColors) return;
+
+    // Check for active filters
+    const hasQuery = helper.state.query && helper.state.query.trim().length > 0;
+
+    const hasFacetRefinements =
+      helper.state.facetsRefinements &&
+      Object.keys(helper.state.facetsRefinements).some(
+        (key) =>
+          Array.isArray(helper.state.facetsRefinements[key]) &&
+          helper.state.facetsRefinements[key].length > 0
+      );
+
+    const hasDisjunctiveFacets =
+      helper.state.disjunctiveFacetsRefinements &&
+      Object.keys(helper.state.disjunctiveFacetsRefinements).some(
+        (key) =>
+          Array.isArray(helper.state.disjunctiveFacetsRefinements[key]) &&
+          helper.state.disjunctiveFacetsRefinements[key].length > 0
+      );
+
+    const hasNumericRefinements =
+      helper.state.numericRefinements &&
+      Object.keys(helper.state.numericRefinements).some((attr) => {
+        const operators = helper.state.numericRefinements[attr];
+        return Object.keys(operators).some(
+          (op) => Array.isArray(operators[op]) && operators[op].length > 0
+        );
+      });
+
+    const hasHierarchicalRefinements =
+      helper.state.hierarchicalFacetsRefinements &&
+      Object.keys(helper.state.hierarchicalFacetsRefinements).some(
+        (key) =>
+          Array.isArray(helper.state.hierarchicalFacetsRefinements[key]) &&
+          helper.state.hierarchicalFacetsRefinements[key].length > 0
+      );
+
+    const hasActiveFilters =
+      hasQuery ||
+      hasFacetRefinements ||
+      hasDisjunctiveFacets ||
+      hasNumericRefinements ||
+      hasHierarchicalRefinements;
+
+    // Skip if state hasn't changed
+    const stateSignature = JSON.stringify({
+      query: helper.state.query,
+      facets: helper.state.facetsRefinements,
+      disjunctiveFacets: helper.state.disjunctiveFacetsRefinements,
+      numericRefinements: helper.state.numericRefinements,
+      hierarchicalFacets: helper.state.hierarchicalFacetsRefinements,
+    });
+
+    if (this.lastSearchState === stateSignature) return;
+    this.lastSearchState = stateSignature;
+
+    if (!hasActiveFilters) {
+      // No filters - show all items in gold
+      window.updateTimelineColors(new Set());
+    } else {
+      // Use the results that InstantSearch already computed instead of making new queries
+      // This ensures we get exactly the same filtered results
+      const totalHits = results.nbHits || 0;
+
+      // For small result sets (under 250), we already have all the data
+      if (totalHits <= 250) {
+        const filteredIds = new Set(
+          results.hits.map((hit) => hit.id || hit.objectID)
+        );
+        window.updateTimelineColors(filteredIds);
+      } else {
+        // For larger result sets, we need to fetch additional pages
+        try {
+          // Clone the current search state to get the exact same query/filters
+          const currentState = helper.state;
+          const allFilteredIds = new Set();
+          let page = 0;
+          let hasMore = true;
+
+          while (hasMore && page < 20 && allFilteredIds.size < totalHits) {
+            // Use helper to create a search with the exact same state but different page
+            const searchParams = helper.searchOnlyWithDerivedHelperState({
+              ...currentState,
+              page: page,
+              hitsPerPage: 250,
+            });
+
+            // If searchOnlyWithDerivedHelperState doesn't work, fall back to manual construction
+            if (!searchParams) {
+              const params = {
+                query: currentState.query || "",
+                hitsPerPage: 250,
+                page: page,
+                attributesToRetrieve: ["id", "objectID"],
+              };
+
+              // Copy all refinements from current state
+              if (currentState.facetsRefinements) {
+                params.facetFilters = [];
+                Object.entries(currentState.facetsRefinements).forEach(
+                  ([facet, values]) => {
+                    if (Array.isArray(values) && values.length > 0) {
+                      params.facetFilters.push(
+                        ...values.map((value) => `${facet}:["${value}"]`)
+                      );
+                    }
+                  }
+                );
+              }
+
+              if (currentState.disjunctiveFacetsRefinements) {
+                params.facetFilters = params.facetFilters || [];
+                Object.entries(
+                  currentState.disjunctiveFacetsRefinements
+                ).forEach(([facet, values]) => {
+                  if (Array.isArray(values) && values.length > 0) {
+                    params.facetFilters.push(
+                      values.map((value) => `${facet}:"${value}"`)
+                    );
+                  }
+                });
+              }
+
+              if (currentState.numericRefinements) {
+                params.numericFilters = [];
+                Object.entries(currentState.numericRefinements).forEach(
+                  ([attribute, operators]) => {
+                    Object.entries(operators).forEach(([operator, values]) => {
+                      if (Array.isArray(values) && values.length > 0) {
+                        values.forEach((value) => {
+                          params.numericFilters.push(
+                            `${attribute}${operator}${value}`
+                          );
+                        });
+                      }
+                    });
+                  }
+                );
+              }
+
+              const { results: searchResults } = await searchClient.search([
+                {
+                  indexName: project_collection_name,
+                  params: params,
+                },
+              ]);
+
+              if (searchResults && searchResults[0] && searchResults[0].hits) {
+                searchResults[0].hits.forEach((hit) => {
+                  allFilteredIds.add(hit.id || hit.objectID);
+                });
+
+                hasMore = searchResults[0].hits.length === 250;
+                page++;
+              } else {
+                hasMore = false;
+              }
+            }
+          }
+
+          window.updateTimelineColors(allFilteredIds);
+        } catch (error) {
+          console.error("Error fetching filtered results:", error);
+          // Fallback to current page results
+          const filteredIds = new Set(
+            results.hits.map((hit) => hit.id || hit.objectID)
+          );
+          window.updateTimelineColors(filteredIds);
+        }
+      }
+    }
+  },
+
+  dispose() {},
+});
+
+// DOM-based fallback for clear refinements
+search.on("render", () => {
+  setTimeout(() => {
+    const currentRefinementsContainer = document.querySelector(
+      "#current-refinements"
+    );
+    const hasRefinementItems = currentRefinementsContainer?.querySelector(
+      ".ais-CurrentRefinements-item"
+    );
+    const searchBox = document.querySelector("#searchbox input");
+    const hasSearchQuery =
+      searchBox?.value && searchBox.value.trim().length > 0;
+
+    if (!hasRefinementItems && !hasSearchQuery && window.updateTimelineColors) {
+      window.updateTimelineColors(new Set());
+    }
+  }, 100);
+});
+
+// Helper functions
+function extractAuthors(hit) {
+  if (hit.work && Array.isArray(hit.work)) {
+    return hit.work
+      .flatMap((w) => w.author || [])
+      .map((a) => a.name || "Unknown")
+      .filter((v, i, a) => a.indexOf(v) === i)
+      .join(", ");
+  }
+  return "Unknown Author";
+}
+
+function extractDatePostQuem(hit) {
+  if (hit.work_date_not_after) {
+    return parseInt(hit.work_date_not_after, 10);
+  }
+  if (hit.work && Array.isArray(hit.work) && hit.work[0]) {
+    const work = hit.work[0];
+    if (work.date && Array.isArray(work.date) && work.date[0]) {
+      return parseInt(work.date[0].not_after || work.date[0].value, 10) || 0;
+    }
+  }
+  return 0;
+}
+
+function extractDateAnteQuem(hit) {
+  if (hit.work_date_not_before) {
+    return parseInt(hit.work_date_not_before, 10);
+  }
+  if (hit.work && Array.isArray(hit.work) && hit.work[0]) {
+    const work = hit.work[0];
+    if (work.date && Array.isArray(work.date) && work.date[0]) {
+      return parseInt(work.date[0].not_before || work.date[0].value, 10) || 0;
+    }
+  }
+  return 0;
+}
+
+function extractWorkTitle(hit) {
+  if (hit.work && Array.isArray(hit.work)) {
+    return hit.work.map((w) => w.title || w.name || "Unknown Work").join("; ");
+  }
+  return hit.title || "Unknown Work";
+}
+
+// ============= END TIMELINE WIDGET =============
+
 // Custom comparator function to sort century arrays for the refinement list 'Century of work'
 const centuryComparator = (a, b) => {
   const extractCentury = (str) => {
@@ -84,7 +400,7 @@ const centuryComparator = (a, b) => {
 const refinementListAuthor = wrapInPanel("Autor");
 const refinementListWork = wrapInPanel("Work");
 const refinementListManuscript = wrapInPanel("Manuscripts");
-const refinementListWorkDate = wrapInPanel("Date of work");
+// const refinementListWorkDate = wrapInPanel("Date of work");
 const refinementListWorkCentury = wrapInPanel("Century of work");
 const refinementListContext = wrapInPanel("Institutional context");
 const refinementListliturgical = wrapInPanel("Liturgical references");
@@ -227,6 +543,9 @@ const customDateRangeWidget = (containerId) => {
 
 // add widgets
 search.addWidgets([
+  // Add timeline widget FIRST so it initializes early
+  timelineWidgetWithPagination(),
+
   searchBox({
     container: "#searchbox",
     autofocus: true,
@@ -336,7 +655,7 @@ search.addWidgets([
     searchablePlaceholder: "e.g. Epistolae",
   }),
 
-  refinementListWorkDate({
+  /*  refinementListWorkDate({
     container: "#refinement-list-workdate",
     attribute: "work.date.value",
     searchable: true,
@@ -344,7 +663,7 @@ search.addWidgets([
     showMoreLimit: 50,
     limit: 10,
     searchablePlaceholder: "Search for dates",
-  }),
+  }), */
 
   refinementListWorkCentury({
     container: "#refinement-list-workcentury",
