@@ -3,13 +3,24 @@ import PageLayout from "@/layouts/page-layout.astro";
 import TableHead from "@/components/table-head.astro";
 const title = "Passages";
 import PassagesTimeline from "@/components/passages-timeline.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <PageLayout title={title}>
   <TableHead title={title}>
+    <!-- <details class="mb-5">
+      <summary
+        class="rounded-md py-2 px-4 bg-brand-400 text-brand-100 hover:bg-brand-700 hover:text-brand-50 transition cursor-pointer"
+        >Passages Timeline <Icon
+          aria-hidden="true"
+          name="lucide:chart-scatter"
+          class="inline-flex"
+        />
+      </summary>
+
+    </details> -->
     <PassagesTimeline />
   </TableHead>
-
   <script>
     import { setupTableActions } from "@/lib/table-actions";
     import { TabulatorFull as Tabulator } from "tabulator-tables";
@@ -59,16 +70,6 @@ import PassagesTimeline from "@/components/passages-timeline.astro";
         date_post_quem: passage.work[0]?.date[0]?.not_after || "N/A",
       };
     });
-    console.log(dataSet[0]);
-
-    window.passagesTimelineData = dataSet.map((item) => ({
-      id: item.jad_id,
-      passage: item.passage.substring(0, 100) + "...", // Truncate for tooltip
-      author: item.author_l.map((a) => a.name).join(", "),
-      date_post_quem: item.date_post_quem,
-      date_ante_quem: item.date_ante_quem,
-      work_title: item.work_position,
-    }));
 
     var tabledata = dataSet;
 
@@ -178,9 +179,14 @@ import PassagesTimeline from "@/components/passages-timeline.astro";
           headerFilter: "input",
         },
         {
-          title: "Date",
+          title: "Keywords",
           resizable: true,
-          field: "work_date",
+          field: "keywords",
+          mutator: jsonpathLookup,
+          mutatorParams: {
+            path: "$[*].name",
+            separator: "; ",
+          },
           minWidth: 200,
           headerFilter: "input",
         },
@@ -225,10 +231,28 @@ import PassagesTimeline from "@/components/passages-timeline.astro";
 
       // Get the filtered data
       const filteredData = rows.map((row) => row.getData());
-      console.log("1st row data:", filteredData[0]);
-      // Update timeline colors
-      updateTimelineColors(filteredData);
+      //console.log("1st row data:", filteredData[0]);
+      // Only update timeline colors if graph is ready
+      // The graph component will set window.timelineChart when it's done loading
+      if (window.timelineChart) {
+        updateTimelineColors(filteredData);
+      } else {
+        console.log("Graph not ready yet - filter applied to table only");
+      }
     });
+
+    //  PREPARE DATA FOR GRAPH COMPONENT (let it access when ready)
+    // The graph component can use this data when it's ready to load
+
+    window.passagesTimelineData = dataSet.map((item) => ({
+      id: item.jad_id,
+      passage: item.passage.substring(0, 100) + "...", // Truncate for tooltip
+      author: item.author_l.map((a) => a.name).join(", "),
+      date_post_quem: item.date_post_quem,
+      date_ante_quem: item.date_ante_quem,
+      work_title: item.work_position,
+    }));
+
     // Function to update node colors based on filtered data
     function updateTimelineColors(filteredData: any[]) {
       const timelineChart = window.timelineChart;
@@ -237,8 +261,6 @@ import PassagesTimeline from "@/components/passages-timeline.astro";
       // Get IDs of filtered items
       const filteredIds = new Set(filteredData.map((item: any) => item.jad_id));
 
-      
-
       // Get current chart option
       const currentOption = timelineChart.getOption();
 
@@ -246,9 +268,7 @@ import PassagesTimeline from "@/components/passages-timeline.astro";
       const updatedData = currentOption.series[0].data.map((node: any) => ({
         ...node,
         itemStyle: {
-          color: filteredIds.has(node.id)
-            ? "#a92d03"           
-              : "#FFD700", // Red if filtered, gold if not
+          color: filteredIds.has(node.id) ? "#a92d03" : "#FFD700", // Red if filtered, gold if not
           opacity: 0.8,
         },
       }));

@@ -1,19 +1,22 @@
 ---
-export interface Props {
-  height?: number;
-}
 const { height = 400 } = Astro.props;
 ---
 
-<div class="passages-timeline-container" >
-  <div id="timeline-loading" class="flex items-center justify-center h-[400px]">
+<!-- wrapper with fixed height so page doesn’t jump -->
+<div class="relative mb-5" style={`height:${height}px;`}>
+  <!-- spinner overlay -->
+  <div
+    id="timeline-loading"
+    class="absolute inset-0 flex justify-center items-center bg-white z-10"
+  >
     <span class="animate-spin mr-2">&#9696;</span>
     <span>Graph loading...</span>
   </div>
+
+  <!-- chart container: always visible but underneath spinner -->
   <div
     id="passages-timeline"
-    class="hidden sm:block border border-neutral-800 mb-5"
-    style={`height: ${height}px`}
+    class="sm:block border border-gray-200 rounded-md w-full h-full"
   >
   </div>
 </div>
@@ -33,7 +36,8 @@ const { height = 400 } = Astro.props;
 
   document.addEventListener("DOMContentLoaded", () => {
     console.log("Timeline component loaded");
-
+// Only start timeline processing after a small delay
+  setTimeout(() => {
     const timelineData = (window as any).passagesTimelineData || [];
 
     if (!timelineData.length) {
@@ -114,13 +118,7 @@ const { height = 400 } = Astro.props;
         min: minDate - 10,
         max: maxDate + 10,
         position: "bottom",
-        axisLabel: {
-          fontSize: 12,
-          interval: function (_index: number, value: number) {
-            // Show only values that are multiples of 50
-            return value % 50 === 0;
-          },
-        },
+        axisLabel: { interval: 0, formatter: (v: any) => (v % 50 === 0 ? v : "") },
         splitNumber: 10,
       },
       yAxis: {
@@ -172,10 +170,9 @@ const { height = 400 } = Astro.props;
     const chart = echarts.init(chartElement);
     chart.setOption(option);
 
-    // Show chart after loading
-    const loadingDiv = document.getElementById("timeline-loading");
-if (loadingDiv) loadingDiv.style.display = "none";
-chartElement.style.display = "block";
+    // hide spinner overlay now that chart is ready
+    const loadingElement = document.getElementById("timeline-loading");
+    loadingElement.classList.add("hidden");
 
     chart.on("click", function (params: any) {
       if (params.data && params.data.id) {
@@ -188,5 +185,6 @@ chartElement.style.display = "block";
 
     // Handle window resize
     window.addEventListener("resize", () => chart.resize());
+  });
   });
 </script>
