@@ -3,7 +3,7 @@ const { height = 400 } = Astro.props;
 ---
 
 <!-- wrapper with fixed height so page doesn’t jump -->
-<div class="relative mb-5" style={`height:${height}px;`}>
+<div class="relative mb-5 hidden md:block" style={`height:${height}px;`}>
   <!-- spinner overlay -->
   <div
     id="timeline-loading"
