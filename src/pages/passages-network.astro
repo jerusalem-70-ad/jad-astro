@@ -2,311 +2,369 @@
 import PageLayout from "@/layouts/page-layout.astro";
 ---
 
-<PageLayout title="Passages Network" >
+<PageLayout title="Passages Network">
   <div class="p-10 h-120">
     <h2 class="text-3xl font-bold mb-5">Passages Network</h2>
-    <div id="passages-timeline" class="sm:block border border-gray-200 rounded-md w-full h-full">
+    <div
+      id="passages-timeline"
+      class="sm:block border border-gray-200 rounded-md w-full h-full"
+    >
     </div>
   </div>
 </PageLayout>
 
 <script>
   import * as echarts from "echarts";
-  import { forceSimulation, forceCollide, forceX, forceY, forceLink, forceManyBody } from "d3-force";
-  import { extent } from "d3-array";
+  import { forceSimulation, forceCollide, forceX, forceY } from "d3-force";
   import { withBasePath } from "@/lib/withBasePath";
   import timelineData from "@/content/data/passages.json";
 
-  
- document.addEventListener("DOMContentLoaded", () => {
-  console.log("Timeline component loaded");
+  document.addEventListener("DOMContentLoaded", () => {
+    console.log("Timeline component loaded");
 
-  const chartElement = document.getElementById("passages-timeline");
-  if (!chartElement) {
-    console.error("Chart element not found");
-    return;
-  }
+    const chartElement = document.getElementById("passages-timeline");
+    if (!chartElement) {
+      console.error("Chart element not found");
+      return;
+    }
 
-  // 1. TRANSFORM RAW JSON DATA to extract the date fields
-  const transformedData = Object.values(timelineData).map((passage) => {
-    // Extract date from nested work structure
-    const datePostQuem = passage.work[0]?.date[0]?.not_before || null;
-    const dateAnteQuem = passage.work[0]?.date[0]?.not_after || null;
-    
-    return {
-      id: passage.jad_id,
-      passage: passage.passage,
-      author: passage.work[0]?.author[0]?.name || "Unknown",
-      work_title: passage.work[0]?.title || "Unknown Work", 
-      date_post_quem: datePostQuem,
-      date_ante_quem: dateAnteQuem,
-      // For tooltip display
-      date_range: datePostQuem && dateAnteQuem ? `${datePostQuem}-${dateAnteQuem}` : "Unknown",
-      // IMPORTANT: Keep the transmission graph for click functionality
-      transmission_graph: passage.transmission_graph
-    };
-  });
+    // 1. TRANSFORM RAW JSON DATA to extract the date fields
+    const transformedData = Object.values(timelineData).map((passage) => {
+      // Extract date from nested work structure
+      const datePostQuem = passage.work[0]?.date[0]?.not_before || null;
+      const dateAnteQuem = passage.work[0]?.date[0]?.not_after || null;
 
-  console.log("Sample transformed data:", transformedData[0]);
+      return {
+        id: passage.jad_id,
+        passage: passage.passage,
+        author: passage.work[0]?.author[0]?.name || "Unknown",
+        work_title: passage.work[0]?.title || "Unknown Work",
+        date_post_quem: datePostQuem,
+        date_ante_quem: dateAnteQuem,
+        // For tooltip display
+        date_range:
+          datePostQuem && dateAnteQuem
+            ? `${datePostQuem}-${dateAnteQuem}`
+            : "Unknown",
+        // IMPORTANT: Keep the transmission graph for click functionality
+        transmission_graph: passage.transmission_graph,
+      };
+    });
 
-  // 2. FILTER OUT PASSAGES WITHOUT VALID DATES
-  const validData = transformedData.filter(item => 
-    item.date_post_quem && !isNaN(item.date_post_quem)
-  );
+    console.log("Sample transformed data:", transformedData[0]);
 
-  console.log(`Found ${validData.length} passages with valid dates out of ${transformedData.length} total`);
+    // 2. FILTER OUT PASSAGES WITHOUT VALID DATES
+    const validData = transformedData.filter(
+      (item) => item.date_post_quem && !isNaN(item.date_post_quem)
+    );
 
-  if (!validData.length) {
-    console.warn("No passages with valid dates found");
-    chartElement.innerHTML = '<div style="text-align: center; padding: 50px; color: #666;">No passages with valid dates found</div>';
-    return;
-  }
+    console.log(
+      `Found ${validData.length} passages with valid dates out of ${transformedData.length} total`
+    );
 
-  // 3. CALCULATE DATE RANGE for X-axis
-  const dates = validData.map(item => item.date_post_quem);
-  const minDate = Math.min(...dates) - 20;
-  const maxDate = Math.max(...dates) + 20;
+    if (!validData.length) {
+      console.warn("No passages with valid dates found");
+      chartElement.innerHTML =
+        '<div style="text-align: center; padding: 50px; color: #666;">No passages with valid dates found</div>';
+      return;
+    }
 
-  console.log(`Date range: ${minDate} to ${maxDate}`);
+    // 3. CALCULATE DATE RANGE for X-axis
+    const dates = validData.map((item) => item.date_post_quem);
+    const minDate = Math.min(...dates) - 20;
+    const maxDate = Math.max(...dates) + 20;
 
-  // 4. PREPARE DATA FOR D3 FORCE SIMULATION
-  // This will spread out overlapping points vertically while keeping timeline position
-  const simulationData = validData.map((item) => ({
-    ...item,
-    x: item.date_post_quem, // X position = date
-    y: 0, // Start all at same Y level
-  }));
+    console.log(`Date range: ${minDate} to ${maxDate}`);
 
-  // 5. RUN D3 FORCE SIMULATION to avoid overlapping dots
-  const nodeRadius = 4;
-  const nodePadding = 2;
+    // 4. PREPARE DATA FOR D3 FORCE SIMULATION
+    // This will spread out overlapping points vertically while keeping timeline position
+    const simulationData = validData.map((item) => ({
+      ...item,
+      x: item.date_post_quem, // X position = date
+      y: 0, // Start all at same Y level
+    }));
 
-  const simulation = forceSimulation(simulationData)
-    .force("collide", forceCollide(nodeRadius + nodePadding).strength(0.7))
-    .force("x", forceX(d => d.date_post_quem).strength(0.8)) // Keep X position close to date
-    .force("y", forceY(0).strength(0.1)); // Gently pull toward center line
+    // 5. RUN D3 FORCE SIMULATION to avoid overlapping dots
+    const nodeRadius = 4;
+    const nodePadding = 2;
 
-  // Run simulation for enough iterations to settle
-  for (let i = 0; i < 300; i++) {
-    simulation.tick();
-  }
-  simulation.stop();
+    const simulation = forceSimulation(simulationData)
+      .force("collide", forceCollide(nodeRadius + nodePadding).strength(0.7))
+      .force("x", forceX((d) => d.date_post_quem).strength(0.8)) // Keep X position close to date
+      .force("y", forceY(0).strength(0.1)); // Gently pull toward center line
 
-  console.log("Force simulation complete");
+    // Run simulation for enough iterations to settle
+    for (let i = 0; i < 300; i++) {
+      simulation.tick();
+    }
+    simulation.stop();
 
-  // 6. PREPARE ECHARTS DATA
-  const chartData = simulationData.map((node) => ({
-    value: [node.x, node.y], // [date, y-position after simulation]
-    id: node.id,
-    passage: node.passage,
-    author: node.author,
-    work_title: node.work_title,
-    date_post_quem: node.date_post_quem,
-    date_ante_quem: node.date_ante_quem,
-    date_range: node.date_range
-  }));
+    console.log("Force simulation complete");
 
-  // 7. ECHARTS CONFIGURATION
-  const option = {
-    title: {
-      text: "Passages Timeline",
-      left: "center",
-      textStyle: { fontSize: 18 }
-    },
-    tooltip: {
-      trigger: "item",
-      formatter: function (params) {
-        const data = params.data;
-        return `
+    // Helper function to calculate node size based on number of relations
+    function calculateNodeSize(relatedCount) {
+      // Base size of 6, scale up based on relations, max size 18
+      const baseSize = 6;
+      const scaleFactor = 1.2;
+      const maxSize = 18;
+
+      const calculatedSize = baseSize + relatedCount * scaleFactor;
+      return Math.min(calculatedSize, maxSize);
+    }
+
+    // 6. PREPARE ECHARTS DATA with dynamic node sizes
+    const chartData = simulationData.map((node) => {
+      // Get the number of related passages from metadata
+      const relatedCount =
+        node.transmission_graph?.metadata?.allRelatedPassages || 0;
+      const nodeSize = calculateNodeSize(relatedCount);
+
+      return {
+        value: [node.x, node.y], // [date, y-position after simulation]
+        id: node.id,
+        passage: node.passage,
+        author: node.author,
+        work_title: node.work_title,
+        date_post_quem: node.date_post_quem,
+        date_ante_quem: node.date_ante_quem,
+        date_range: node.date_range,
+        relatedCount: relatedCount,
+        symbolSize: nodeSize,
+      };
+    });
+
+    // 7. ECHARTS CONFIGURATION
+    const option = {
+      title: {
+        text: "Passages Timeline",
+        left: "center",
+        textStyle: { fontSize: 18 },
+      },
+      tooltip: {
+        trigger: "item",
+        formatter: function (params) {
+          const data = params.data;
+          return `
           <strong>ID:</strong> ${data.id.substring(16)}<br/>
           <strong>Author:</strong> ${data.author}<br/>
           <strong>Work:</strong> ${data.work_title}<br/>
           <strong>Date:</strong> ${data.date_range}<br/>
+          <strong>Related passages:</strong> ${data.relatedCount}<br/>
           <strong>Passage:</strong> ${data.passage.substring(0, 100)}...
         `;
-      },
-    },
-    xAxis: {
-      type: "value",
-      name: "Year",
-      nameLocation: "middle",
-      nameGap: 30,
-      min: minDate,
-      max: maxDate,
-      position: "bottom",
-      axisLabel: { 
-        interval: 0, 
-        formatter: (v) => (v % 50 === 0 ? v : "")
-      },
-      splitNumber: 10,
-    },
-    yAxis: {
-      type: "value",
-      show: false, // Hide Y-axis since it's just for spacing
-      min: "dataMin",
-      max: "dataMax",
-    },
-    grid: {
-      bottom: 60,
-      top: 80,
-      left: 60,
-      right: 60
-    },
-    dataZoom: [
-      {
-        type: "inside", // Mouse wheel zoom and pan
-        xAxisIndex: 0,
-        filterMode: "none",
-      },
-      {
-        type: "slider", // Zoom slider at bottom
-        xAxisIndex: 0,
-        filterMode: "none",
-        bottom: 10,
-        height: 20
-      },
-    ],
-    series: [
-      {
-        type: "scatter",
-        symbolSize: nodeRadius * 2,
-        data: chartData,
-        itemStyle: {
-          color: "#FFD700", // Gold color for all dots
-          opacity: 0.8,
-          borderColor: "#333",
-          borderWidth: 1
         },
-        emphasis: {
-          itemStyle: {
-            color: "#FF6B6B",
-            opacity: 1,
-            borderWidth: 2
-          }
-        }
       },
-    ],
-  };
+      xAxis: {
+        type: "value",
+        name: "Year",
+        nameLocation: "middle",
+        nameGap: 30,
+        min: minDate,
+        max: maxDate,
+        position: "bottom",
+        axisLabel: {
+          interval: 0,
+          formatter: (v) => (v % 50 === 0 ? v : ""),
+        },
+        splitNumber: 10,
+      },
+      yAxis: {
+        type: "value",
+        show: false, // Hide Y-axis since it's just for spacing
+        min: "dataMin",
+        max: "dataMax",
+      },
+      grid: {
+        bottom: 60,
+        top: 80,
+        left: 60,
+        right: 60,
+      },
+      dataZoom: [
+        {
+          type: "inside", // Mouse wheel zoom and pan
+          xAxisIndex: 0,
+          filterMode: "none",
+        },
+        {
+          type: "slider", // Zoom slider at bottom
+          xAxisIndex: 0,
+          filterMode: "none",
+          bottom: 10,
+          height: 20,
+        },
+      ],
+      series: [
+        {
+          type: "scatter",
+          data: chartData,
+          itemStyle: {
+            color: "#FFD700", // Gold color for all dots
+            opacity: 0.8,
+            borderColor: "#333",
+            borderWidth: 1,
+          },
+          emphasis: {
+            itemStyle: {
+              color: "#FF6B6B",
+              opacity: 1,
+              borderWidth: 2,
+            },
+          },
+        },
+      ],
+    };
 
-  // 8. INITIALIZE CHART
-  const chart = echarts.init(chartElement);
-  chart.setOption(option);
+    // 8. INITIALIZE CHART
+    const chart = echarts.init(chartElement);
+    chart.setOption(option);
 
-  // Store chart globally for table integration
-  window.timelineChart = chart;
+    // Store chart globally for table integration
+    window.timelineChart = chart;
 
-  // 9. HANDLE CLICKS - Show related passages
-  chart.on("click", function (params) {
-    if (params.data && params.data.id) {
-      console.log("Clicked on passage:", params.data);
-      console.log("Looking for passage with ID:", params.data.id);
-      
-      // DEBUG: Let's see what IDs we have in validData
-      console.log("Available IDs in validData:", validData.map(p => p.id));
-      
-      // Find the clicked passage in original data to get its transmission graph
-      const clickedPassageId = params.data.id;
-      const clickedPassage = validData.find(p => p.id === clickedPassageId);
-      
-      console.log("Found clicked passage:", clickedPassage);
-      
-      if (clickedPassage) {
-        console.log("Transmission graph:", clickedPassage.transmission_graph);
-        
-        if (clickedPassage.transmission_graph && clickedPassage.transmission_graph.graph) {
+    // 9. HANDLE CLICKS - Show related passages with edges
+    chart.on("click", function (params) {
+      if (params.data && params.data.id) {
+        const clickedPassageId = params.data.id;
+        const clickedPassage = validData.find((p) => p.id === clickedPassageId);
+
+        if (
+          clickedPassage &&
+          clickedPassage.transmission_graph &&
+          clickedPassage.transmission_graph.graph
+        ) {
           // Get all related node IDs from transmission graph
           const relatedNodeIds = new Set();
-          const transmissionNodes = clickedPassage.transmission_graph.graph.nodes || [];
-          
-          console.log("Transmission nodes:", transmissionNodes);
-          
-          transmissionNodes.forEach(node => {
+          const transmissionNodes =
+            clickedPassage.transmission_graph.graph.nodes || [];
+
+          transmissionNodes.forEach((node) => {
             relatedNodeIds.add(node.jad_id);
           });
-          
-          console.log(`Found ${relatedNodeIds.size} related passages for ${clickedPassageId}`);
-          console.log("Related IDs:", Array.from(relatedNodeIds));
-          
-          // Update chart colors
-          updateChartColors(clickedPassageId, relatedNodeIds);
+
+          // Get links for edges
+          const transmissionLinks =
+            clickedPassage.transmission_graph.graph.links || [];
+
+          // Update chart colors and show edges
+          updateChartWithEdges(
+            clickedPassageId,
+            relatedNodeIds,
+            transmissionLinks
+          );
         } else {
-          console.log("No transmission graph.graph found for this passage");
-          console.log("Transmission graph structure:", clickedPassage.transmission_graph);
           // Still highlight the clicked node even if no relations
-          updateChartColors(clickedPassageId, new Set());
+          updateChartWithEdges(clickedPassageId, new Set(), []);
         }
-      } else {
-        console.error("Could not find clicked passage in validData!");
-        console.log("Searched for:", clickedPassageId);
-        console.log("Available IDs:", validData.map(p => p.id));
+      }
+    });
+
+    // Function to update chart colors and add edges as separate series
+    function updateChartWithEdges(selectedId, relatedIds, links) {
+      const currentOption = chart.getOption();
+
+      // Update node colors for the scatter series
+      const updatedNodeData = currentOption.series[0].data.map((item) => {
+        let color, opacity;
+
+        if (item.id === selectedId) {
+          // Clicked node = red
+          color = "#FF0000";
+          opacity = 1.0;
+        } else if (relatedIds.has(item.id)) {
+          // Related nodes = orange
+          color = "#e6810e";
+          opacity = 0.9;
+        } else {
+          // All other nodes = pale yellow
+          color = "#FFD700";
+          opacity = 0.3;
+        }
+
+        return {
+          ...item,
+          itemStyle: {
+            color: color,
+            opacity: opacity,
+            borderColor: "#333",
+            borderWidth: item.id === selectedId ? 2 : 1,
+          },
+        };
+      });
+
+      // Create line data for edges
+      const lineData = [];
+      links.forEach((link) => {
+        // Find source and target nodes in our chart data
+        const sourceNode = updatedNodeData.find((node) => {
+          return node.id.includes(`__${link.source}`);
+        });
+        const targetNode = updatedNodeData.find((node) => {
+          return node.id.includes(`__${link.target}`);
+        });
+
+        if (sourceNode && targetNode) {
+          // Add line connecting the two nodes
+          lineData.push({
+            coords: [sourceNode.value, targetNode.value],
+            lineStyle: {
+              color: getLinkColor(link.type),
+              width: 2,
+              type: link.type === "ancestor" ? "dashed" : "solid",
+              opacity: 0.7,
+            },
+          });
+        }
+      });
+
+      // Update chart with both nodes and edges
+      const newSeries = [
+        {
+          type: "scatter",
+          data: updatedNodeData,
+          itemStyle: {
+            borderColor: "#333",
+            borderWidth: 1,
+          },
+          emphasis: {
+            itemStyle: {
+              color: "#FF6B6B",
+              opacity: 1,
+              borderWidth: 2,
+            },
+          },
+        },
+      ];
+
+      // Add lines series if we have edges to show
+      if (lineData.length > 0) {
+        newSeries.push({
+          type: "lines",
+          data: lineData,
+          animation: false,
+        });
+      }
+
+      chart.setOption({
+        series: newSeries,
+      });
+    }
+
+    // Helper function for link colors
+    function getLinkColor(linkType) {
+      switch (linkType) {
+        case "ancestor":
+          return "#4ecdc4"; // Teal for ancestor links
+        case "descendant":
+          return "#45b7d1"; // Blue for descendant links
+        default:
+          return "#999"; // Gray for other links
       }
     }
+
+    // Handle window resize
+    window.addEventListener("resize", () => chart.resize());
+
+    console.log("Simple timeline chart initialized successfully");
   });
-
-  // Function to update chart colors based on selection
-  function updateChartColors(selectedId, relatedIds) {
-    const currentOption = chart.getOption();
-    
-    // Update the scatter series data with new colors
-    const updatedData = currentOption.series[0].data.map((item) => {
-      let color, opacity;
-      
-      if (item.id === selectedId) {
-        // Clicked node = red
-        color = "#FF0000";
-        opacity = 1.0;
-      } else if (relatedIds.has(item.id)) {
-        // Related nodes = bright yellow
-        color = "#e6810e"; 
-        opacity = 0.9;
-      } else {
-        // All other nodes = pale yellow
-        color = "#FFD700";
-        opacity = 0.3;
-      }
-      
-      return {
-        ...item,
-        itemStyle: {
-          color: color,
-          opacity: opacity,
-          borderColor: "#333",
-          borderWidth: item.id === selectedId ? 2 : 1
-        }
-      };
-    });
-
-    // Apply the color changes
-    chart.setOption({
-      series: [{
-        data: updatedData
-      }]
-    });
-    
-    console.log(`Updated colors: clicked=${selectedId}, related=${relatedIds.size} nodes`);
-  }
-
-  // Handle window resize
-  window.addEventListener("resize", () => chart.resize());
-
-  console.log("Simple timeline chart initialized successfully");
-});
-
-// Helper functions
-function getNodeSize(nodeType) {
-  switch(nodeType) {
-    case 'current': return 8;
-    case 'ancestor': return 6;
-    case 'descendant': return 5;
-    default: return 4;
-  }
-}
-
-function getNodeColor(nodeType) {
-  switch(nodeType) {
-    case 'current': return '#ff6b6b';
-    case 'ancestor': return '#4ecdc4';
-    case 'descendant': return '#45b7d1';
-    default: return '#FFD700';
-  }
-}
+</script>
