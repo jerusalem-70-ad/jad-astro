@@ -1,0 +1,256 @@
+---
+import type { TransmissionGraph } from "../types";
+
+export interface Props {
+  transmissionGraph: TransmissionGraph;
+  height?: number;
+  enableZoom?: boolean;
+}
+
+const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
+---
+
+<div class="chronological-tree-container">
+  <div id="chronological-tree" style={`height: 900px; width: 100%;`}>
+  </div>
+</div>
+
+<script>
+  import * as echarts from "echarts";
+  import { withBasePath } from "../lib/withBasePath";
+  import passages from "@/content/data/passages.json";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Get data from global variables
+    const chartElement = document.getElementById("chronological-tree");
+    if (!chartElement) {
+      console.log("No container for graph found");
+      return;
+    }
+
+    // Prepare graphData from passages.json
+    const graphData = {
+      nodes: [],
+      links: [],
+    };
+
+    passages.forEach((passage) => {
+      if (passage.transmission_graph?.graph?.nodes) {
+        passage.transmission_graph.graph.nodes
+        .filter((node) => node.date) // Only include nodes with a date
+        .forEach((node) => {
+          // Avoid duplicate nodes by checking existing IDs
+          if (!graphData.nodes.find((n) => n.id === node.id)) {
+            graphData.nodes.push({
+              ...node,
+              sourcePassage: passage.passage,
+              jad_id: passage.jad_id, // Add jad_id for navigation
+              x: Math.random() * 10, // Initial random X position
+              y: Number(node.date) || 0, // Use date for Y position
+            });
+          }
+        });
+        
+        if (passage.transmission_graph.graph.links) {
+          passage.transmission_graph.graph.links.forEach((link) => {
+            graphData.links.push({
+              source: link.source,
+              target: link.target,
+            });
+          });
+        }        
+      }
+    });
+
+    console.log("Found total nodes:", graphData.nodes.length);
+    console.log("Found total links:", graphData.links.length);
+
+    const config = {
+      showLegend: true,
+      enableZoom: true,
+      enableNavigation: true,
+    };
+
+    if (!graphData || !graphData.nodes || graphData.nodes.length === 0) {
+      console.error("No graph data available for chronological tree.");
+      return;
+    }
+
+     // Prepare nodes: y = date, x-random later use d3 force to spread
+
+     // Helper function to calculate node size based on number of relations
+    function calculateNodeSize(relatedCount) {
+      // Base size of 6, scale up based on relations, max size 18
+      const baseSize = 6;
+      const scaleFactor = 1.2;
+      const maxSize = 18;
+
+      const calculatedSize = baseSize + relatedCount * scaleFactor;
+      return Math.min(calculatedSize, maxSize);
+    }
+    const nodes = graphData.nodes.map((node: any) => {
+    // Get the number of related passages from metadata
+    // !!!!! consider if using this number or only the immediate source/children nodes !!!!
+      const relatedCount =
+        passages.find((passage) => passage.id === node.id)?.transmission_graph?.metadata?.allRelatedPassages || 0;
+      const nodeSize = calculateNodeSize(relatedCount);  
+      return {
+      ...node,
+      value: [node.x, Number(node.date) || 0],      
+      label: {
+        show: false,
+      },
+      relatedCount: relatedCount,
+      symbolSize: nodeSize,
+    }});
+
+    // Prepare links
+    // ECharts expects source and target to be
+    // the index of the node in the data array, not the node's id string.
+    const idToIndex = new Map();
+    graphData.nodes.forEach((node, idx) => {
+      idToIndex.set(node.id, idx);
+    });
+
+    const links = graphData.links.map((link) => ({
+      source: idToIndex.get(link.source),
+      target: idToIndex.get(link.target),
+      lineStyle: {
+        color: "#6b594b",
+        width: 1,
+        opacity: 0.8,
+        curveness: 0.1,
+      },
+    }));
+
+    // ECharts option
+    const option = {
+      tooltip: {
+        trigger: "item",
+        textStyle: {
+          fontSize: 12,
+        },
+        extraCssText: `max-width: 300px; overflow-wrap: break-word; white-space: normal;`,
+        formatter: function (params: any) {
+          if (params.dataType === "node") {
+            const node = params.data;
+            return `<strong>#${node.id} ${node.name}</strong><br/><span class="italic">${node.passage}</span>
+            </br><span>Related passages: ${node.relatedCount}</span>`;
+          } else if (params.dataType === "edge") {
+            return "";
+          }
+          return "";
+        },
+      },
+      yAxis: {
+        type: "value",
+        name: "Year",
+        min: (value: { min: number; max: number }) => value.min - 10,
+        max: (value: { min: number; max: number }) => value.max + 10,
+        axisLabel: {
+          fontSize: 12,
+          interval: function (_index: number, value: number) {
+            // Show only values that are multiples of 50
+            return value % 50 === 0;
+          },
+        },
+        splitNumber: 10, // Suggest around 10 major ticks
+      },
+      xAxis: {
+        type: "value",
+        name: "(random)",
+        show: false,
+        max: 10,
+      },
+      
+      dataZoom: [
+        {
+          type: "slider",
+          yAxisIndex: 0,
+          filterMode: "weakFilter",
+          show: true,
+          left: "left",
+          top: 50,
+          bottom: 50,
+        },
+        {
+          type: "inside",
+          yAxisIndex: 0,
+          filterMode: "weakFilter",
+        },
+      ],
+
+      series: [
+        {
+          type: "graph",
+          layout: "none",
+          roam: true,
+          coordinateSystem: "cartesian2d",
+          data: nodes,
+          itemStyle: {
+            color: "#a92d03",
+            borderColor: "#333",
+            borderWidth: 1,
+          },
+          links: links,
+          edgeSymbol: ["none", "arrow"],
+          edgeSymbolSize: [0, 6],          
+          lineStyle: { color: "#7f8c8d", width: 2, opacity: 0.9 },
+          emphasis: {
+            focus: "adjacency",
+            lineStyle: { width: 2, color: "#444" },
+            itemStyle: { borderWidth: 2 },
+          },
+         
+        },
+      ],
+      animation: false,
+      toolbox: {
+        show: true,
+        orient: "vertical",
+        right: "20",
+        top: "top",
+        itemSize: 20,
+        itemGap: 20,
+        feature: {
+          saveAsImage: {
+            show: true,
+            title: "Download as PNG",
+            type: "png",
+            pixelRatio: 2, // Higher quality
+            backgroundColor: "#fff",
+          },
+          dataZoom: {
+            show: config.enableZoom,
+            title: {
+              zoom: "Zoom",
+              back: "Reset Zoom",
+            },
+          },
+          restore: { show: true, title: "Reset View" },
+        },
+      },
+    };
+
+    const chart = echarts.init(chartElement);
+    chart.setOption(option);
+
+    window.addEventListener("resize", () => chart.resize());
+
+    // Add click handler for nodes
+    chart.on("click", function (params: any) {
+      if (params.data && params.data.id) {
+        window.location.href = withBasePath(`/passages/jad_occurrence__${params.data.id}`);
+        console.log("Clicked on node:", params.data);
+      }
+    });
+    
+  });
+</script>
+
+<style>
+  .chronological-tree-container {
+    margin: 2rem 0;
+    width: 100%;
+  }
+</style>
