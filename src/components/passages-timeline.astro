@@ -150,6 +150,9 @@ const { height = 400 } = Astro.props;
             value: [node.x, node.y],
             ...node,
           })),
+           label: {
+            show: false, // Keep labels hidden even on hover
+          },
           dataZoom: [
             {
               type: "inside", // Mouse wheel zoom and pan
