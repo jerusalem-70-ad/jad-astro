@@ -1,14 +1,3 @@
----
-import type { TransmissionGraph } from "../types";
-
-export interface Props {
-  transmissionGraph: TransmissionGraph;
-  height?: number;
-  enableZoom?: boolean;
-}
-
-const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
----
 
 <div class="m-1 w-full">
   <div
@@ -25,7 +14,6 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
   import passages from "@/content/data/passages.json";
 
   document.addEventListener("DOMContentLoaded", () => {
-    // Get data from global variables
     const chartElement = document.getElementById("network-all");
     if (!chartElement) {
       console.log("No container for graph found");
@@ -33,7 +21,7 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
     }
 
     // Prepare graphData from passages.json
-    const graphData = {
+    const graphData: { nodes: any[]; links: any[] } = {
       nodes: [],
       links: [],
     };
@@ -49,9 +37,6 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
                 ...node,
                 sourcePassage: passage.passage,
                 jad_id: passage.jad_id,
-                relatedPassages:
-                  passage.transmission_graph?.metadata?.allRelatedPassagesIds ||
-                  [],
                 label: { show: false, position: "top" },
               });
             }
@@ -122,7 +107,7 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
         trigger: "item",
         textStyle: { fontSize: 12 },
         extraCssText: `max-width: 300px; overflow-wrap: break-word; white-space: normal;`,
-        formatter: function (params) {
+        formatter: function (params: any) {
           if (params.dataType === "node") {
             const node = params.data;
             return `<strong>#${node.id} ${node.name}</strong><br/>
@@ -208,7 +193,7 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
     window.addEventListener("resize", () => chart.resize());
 
     // Add click handler for nodes
-    chart.on("click", function (params) {
+    chart.on("click", function (params: any) {
       if (params.data) {
         window.location.href = withBasePath(
           `/passages/jad_occurrence__${params.data.id}`

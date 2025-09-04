@@ -1,14 +1,4 @@
----
-import type { TransmissionGraph } from "../types";
 
-export interface Props {
-  transmissionGraph: TransmissionGraph;
-  height?: number;
-  enableZoom?: boolean;
-}
-
-const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
----
 
 <div class="m-1 w-full">
   <div
@@ -24,7 +14,6 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
   import { withBasePath } from "../lib/withBasePath";
   import passages from "@/content/data/passages.json";
   import { forceSimulation, forceCollide, forceX, forceY } from "d3-force";
-
   document.addEventListener("DOMContentLoaded", () => {
     // Get data from global variables
     const chartElement = document.getElementById("chronological-tree");
@@ -34,10 +23,10 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
     }
 
     // Prepare graphData from passages.json
-    const graphData = {
-      nodes: [],
-      links: [],
-    };
+   const graphData: { nodes: any[]; links: any[] } = {
+  nodes: [],
+  links: [],
+};
 
     passages.forEach((passage) => {
       if (passage.transmission_graph?.graph?.nodes) {
@@ -50,9 +39,7 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
                 ...node,
                 sourcePassage: passage.passage,
                 jad_id: passage.jad_id, 
-                relatedPassages: passage.transmission_graph?.metadata
-                  ?.allRelatedPassagesIds || [],
-                  label: { show: false, position: 'top'}
+                label: { show: false, position: 'top'}
               });
             }
           });
@@ -84,7 +71,7 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
     }
 
     // Helper function to calculate node size based on number of relations
-    function calculateNodeSize(relatedCount) {
+    function calculateNodeSize(relatedCount : number) {
       // Base size of 6, scale up based on relations, max size 18
       const baseSize = 6;
       const scaleFactor = 1.5; // Improved scaling
@@ -185,7 +172,7 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
 
     // Create ECharts nodes with simulation positions
 
-    function nodeColor(node) {
+    function nodeColor(node : any) {
       // color based on relatedCount
       const count = node.relatedCount || 0;
       if (count >= 10) return "#6f2009"; // Dark red for highly connected
@@ -228,7 +215,7 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
         trigger: "item",
         textStyle: { fontSize: 12 },
         extraCssText: `max-width: 300px; overflow-wrap: break-word; white-space: normal;`,
-        formatter: function (params) {
+        formatter: function (params : any) {
           if (params.dataType === "node") {
             const node = params.data;
             return `<strong>#${node.id} ${node.name}</strong><br/>
@@ -251,7 +238,7 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
         max: maxDate + dateRange * 0.05,
         axisLabel: {
           interval: 0,
-          formatter: (value) => {
+          formatter: (value : number) => {
             // Show labels every 25 or 50 years depending on range
             const interval = dateRange > 500 ? 50 : 25;
             return value % interval === 0 ? value : "";
@@ -350,10 +337,10 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
     window.addEventListener("resize", () => chart.resize());
 
     // Add click handler for nodes
-    chart.on("click", function (params) {
+    chart.on("click", function (params: any) {
       if (params.data ) {
         window.location.href = withBasePath(
-          `/passages/jad_occurrence__${params.data.id}`
+          `/passages/jad_occurrence__${params.data?.id}`
         );
         console.log("Clicked on node:", params.data);
       }

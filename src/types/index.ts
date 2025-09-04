@@ -32,6 +32,7 @@ export interface TransmissionGraph {
   metadata: {
     ancestorCount: number;
     descendantCount: number;
+    allRelatedPassages: number;
   };
 }
 
