@@ -8,18 +8,13 @@ import { Icon } from "astro-icon/components";
 
 <PageLayout title={title}>
   <TableHead title={title}>
-    <!-- <details class="mb-5">
+    <details class="mb-5">
       <summary
-        class="rounded-md py-2 px-4 bg-brand-400 text-brand-100 hover:bg-brand-700 hover:text-brand-50 transition cursor-pointer"
-        >Passages Timeline <Icon
-          aria-hidden="true"
-          name="lucide:chart-scatter"
-          class="inline-flex"
-        />
+        class="rounded-md py-2 px-4 bg-brand-400 text-brand-100 hover:bg-brand-700 hover:text-brand-50 transition cursor-pointer mb-4"
+        >Passages Timeline Graph
       </summary>
-
-    </details> -->
-    <PassagesTimeline />
+      <PassagesTimeline />
+    </details>
   </TableHead>
   <script>
     import { setupTableActions } from "@/lib/table-actions";

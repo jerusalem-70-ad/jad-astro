@@ -1,0 +1,219 @@
+---
+import type { TransmissionGraph } from "../types";
+
+export interface Props {
+  transmissionGraph: TransmissionGraph;
+  height?: number;
+  enableZoom?: boolean;
+}
+
+const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
+---
+
+<div class="m-1 w-full">
+  <div
+    id="network-all"
+    class="w-full"
+    style={`height: 900px; width: 100%;`}
+  >
+  </div>
+</div>
+
+<script>
+  import * as echarts from "echarts";
+  import { withBasePath } from "../lib/withBasePath";
+  import passages from "@/content/data/passages.json";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Get data from global variables
+    const chartElement = document.getElementById("network-all");
+    if (!chartElement) {
+      console.log("No container for graph found");
+      return;
+    }
+
+    // Prepare graphData from passages.json
+    const graphData = {
+      nodes: [],
+      links: [],
+    };
+
+    passages.forEach((passage) => {
+      if (passage.transmission_graph?.graph?.nodes) {
+        passage.transmission_graph.graph.nodes
+          .filter((node) => node.date) // Only include nodes with a date
+          .forEach((node) => {
+            // Avoid duplicate nodes by checking existing IDs
+            if (!graphData.nodes.find((n) => n.id === node.id)) {
+              graphData.nodes.push({
+                ...node,
+                sourcePassage: passage.passage,
+                jad_id: passage.jad_id,
+                relatedPassages:
+                  passage.transmission_graph?.metadata?.allRelatedPassagesIds ||
+                  [],
+                label: { show: false, position: "top" },
+              });
+            }
+          });
+
+        if (passage.transmission_graph.graph.links) {
+          passage.transmission_graph.graph.links.forEach((link) => {
+            graphData.links.push({
+              source: link.source,
+              target: link.target,
+            });
+          });
+        }
+      }
+    });
+
+    console.log("Found total nodes:", graphData.nodes.length);
+    console.log("Found total links:", graphData.links.length);
+    console.log("Sample node structure:", graphData.nodes[463]);
+
+    const config = {
+      showLegend: true,
+      enableZoom: true,
+      enableNavigation: true,
+    };
+
+    if (!graphData || !graphData.nodes || graphData.nodes.length === 0) {
+      console.error("No graph data available");
+      return;
+    }
+
+   
+
+    // Prepare initial nodes with metadata
+    const nodes = graphData.nodes.map((node) => {
+      // Get the number of related passages from metadata
+      const relatedCount =
+        passages.find((passage) => passage.id === node.id)?.transmission_graph
+          ?.metadata?.allRelatedPassages || 0;
+
+      return {
+        ...node,
+        relatedCount: relatedCount,
+        symbolSize: relatedCount + 6,
+      };
+    });
+   
+
+    // Prepare links - ECharts expects source and target to be indices
+    const idToIndex = new Map();
+    graphData.nodes.forEach((node, idx) => {
+      idToIndex.set(node.id, idx);
+    });
+
+    const links = graphData.links.map((link) => ({
+      source: idToIndex.get(link.source),
+      target: idToIndex.get(link.target),
+      lineStyle: {
+        color: "#7f8c8d",
+        width: 2,
+        opacity: 0.6,
+        curveness: 0.1,
+      },
+    }));
+
+    const option = {
+      tooltip: {
+        trigger: "item",
+        textStyle: { fontSize: 12 },
+        extraCssText: `max-width: 300px; overflow-wrap: break-word; white-space: normal;`,
+        formatter: function (params) {
+          if (params.dataType === "node") {
+            const node = params.data;
+            return `<strong>#${node.id} ${node.name}</strong><br/>
+                    <span class="italic">${node.passage || node.sourcePassage}</span><br/>
+                    <span>Year: ${node.date}</span><br/>
+                    <span>Related passages: ${node.relatedCount || 0}</span>`;
+          } else if (params.dataType === "edge") {
+            return "";
+          }
+          return "";
+        },
+      },
+
+      dataZoom: [
+        {
+          type: "inside",
+          yAxisIndex: 0,
+          filterMode: "weakFilter",
+        },
+        {
+          type: "slider",
+          yAxisIndex: 0,
+          width: 20,
+          right: 10,
+          start: 0,
+          end: 100,
+        },
+      ],
+
+      series: [
+        {
+          type: "graph",
+          layout: "force",
+          roam: true,
+          data: nodes,
+
+          links: links,
+          edgeSymbol: ["none", "arrow"],
+          edgeSymbolSize: [0, 6],
+
+          lineStyle: {
+            color: "#7f8c8d",
+            width: 2,
+            opacity: 0.6,
+            curveness: 0.1,
+          },
+
+          emphasis: {
+            focus: "adjacency",
+          },
+        },
+      ],
+
+      animation: false,
+
+      toolbox: {
+        show: true,
+        orient: "vertical",
+        right: 20,
+        top: 20,
+        itemSize: 20,
+        itemGap: 20,
+        feature: {
+          saveAsImage: {
+            show: true,
+            title: "Download as PNG",
+            type: "png",
+            pixelRatio: 2,
+            backgroundColor: "#fff",
+          },
+          dataZoom: {
+            show: config.enableZoom,
+            title: { zoom: "Zoom", back: "Reset Zoom" },
+          },
+          restore: { show: true, title: "Reset View" },
+        },
+      },
+    };
+
+    const chart = echarts.init(chartElement);
+    chart.setOption(option);
+
+    window.addEventListener("resize", () => chart.resize());
+
+    // Add click handler for nodes
+    chart.on("click", function (params) {
+      if (params.data) {
+        window.location.href = withBasePath(
+          `/passages/jad_occurrence__${params.data.id}`
+        );
+      }
+    });
+  });
+</script>
