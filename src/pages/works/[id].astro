@@ -95,7 +95,7 @@ const { data: work } = Astro.props;
                         : "N/A"
                 }
                 {work?.volume_edition_or_individual_editor &&
-                (work.volume_edition_or_individual_editor)}
+                (<span>: {work.volume_edition_or_individual_editor}</span>)}
                 {work.link_digital_editions &&
                 (<NavLink href={work?.link_digital_editions}>
                     (Facsimile{" "}
