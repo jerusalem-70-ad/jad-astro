@@ -15,7 +15,6 @@ const loadJSON = (file) =>
 
 const passages = Object.values(loadJSON("passages.json"));
 const dates = Object.values(loadJSON("dates.json"));
-const aiBiblRef = loadJSON("ai_bibl_ref.json");
 const biblicalRef = Object.values(loadJSON("biblical_references.json"));
 const manuscripts = Object.values(loadJSON("manuscripts.json"));
 const msOccurrences = Object.values(loadJSON("ms_occurrences.json"));
@@ -193,9 +192,6 @@ const passagesPlus = passages
       }));
     }
 
-    // add aiBiblicalRef to each passage
-    const aiBiblicalRefEntry = aiBiblRef[passage.jad_id];
-
     // enrich passage with data from manuscripts.json
     // see if the passage.id is in the ms_occurrences.json
     const msOccurrence = msOccurrences
@@ -274,7 +270,7 @@ const passagesPlus = passages
       biblical_ref_lvl0: lvl0,
       biblical_ref_lvl1: lvl1,
       biblical_ref_lvl2: lvl2,
-      ai_bibl_ref: aiBiblicalRefEntry || [],
+      edition_link: passage.edition_link || "",
     };
   });
 // use imported function to build the transmission graph
@@ -361,6 +357,7 @@ const worksPlus = works
       incipit: work.incipit || "",
       volume_edition_or_individual_editor:
         work.volume_edition_or_individual_editor || "",
+      other_editions: work.other_editions || "",
       related__passages: processedPassages, // Use the processed passages here
       view_label: work.view_label || "",
       next: work.next || {},
