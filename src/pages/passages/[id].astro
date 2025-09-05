@@ -5,7 +5,6 @@ import { Icon } from "astro-icon/components";
 import NavLink from "@/components/nav-link.astro";
 import Article from "@/components/article.astro";
 import "instantsearch.css/themes/satellite.css";
-import PassageNetwork from "@/components/passage-network.astro";
 import type { Passage } from "@/types";
 import ChronologicalTree from "@/components/chronological-tree.astro";
 
@@ -19,10 +18,6 @@ export async function getStaticPaths() {
 
 const { data: passage } = Astro.props;
 
-// extract the sources for the current passage
-const source = Object.values(passages).filter((item) =>
-  passage.source_passage.some((s_passage) => s_passage.id === item.id)
-);
 
 // passage as source (look where one passage is used as source for another)
 const usedBy = Object.values(passages).filter((item) =>
@@ -102,11 +97,11 @@ const usedBy = Object.values(passages).filter((item) =>
             Manuscripts:
           </dt>
           <dd class="pl-5 p-2">
-            {
-              passage.mss_occurrences.length > 0 ? (
+            {passage.mss_occurrences &&
+              passage.mss_occurrences?.length > 0 ? (
                 <ul>
                   {passage.mss_occurrences.map((ms) => (
-                    <li>
+                    <li class={ms.main_ms ? "font-semibold" : ""}>
                       <NavLink href={`/manuscripts/${ms.manuscript_jad_id}`}>
                         {ms.manuscript}
                         </NavLink>
@@ -177,32 +172,7 @@ const usedBy = Object.values(passages).filter((item) =>
                 : "N/A"
             }
           </dd>
-          <dt class="font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
-          >AI:
-          </dt>
-          <dd class="pl-5 p-2 text-brand-600 bg-brand-50">
-             {
-              passage.ai_bibl_ref.length > 0
-                ? <ul class="sm:flex sm:flex-wrap sm:gap-2">
-                    {/* map through ai_bibl_ref and create a list item for each reference */}
-                {passage.ai_bibl_ref
-                    .map((reference) =>
-                    (<li class="group relative">
-                      <span>{reference.bibl}</span>
-                      <span class="hidden sm:block italic invisible group-hover:visible absolute z-10 w-[300px] top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
-                          {reference.text}
-                        </span>
-                    </li>))
-                    .reduce((prev, curr, idx) =>
-                      idx === 0
-                        ? [curr]
-                        : [prev, <span class="hidden sm:block mx-1">|</span>, curr]
-                    )
-                    }
-                    </ul>
-                : "N/A"
-            }
-          </dd> 
+         
           <dt
             class="font-semibold text-brand-800 border-r border-neutral-300 p-2"
           >
@@ -227,10 +197,10 @@ const usedBy = Object.values(passages).filter((item) =>
               Sources:
             </dt>
             <dd class="pl-5 p-2  bg-brand-50">
-              <ul class="list-disc list-inside">
+              
                 {
-                  passage.source_passage.length > 0
-                    ? passage.source_passage.map((source) => (
+                  passage.source_passage.length > 0 ? (<ul class="list-disc list-inside">
+                    {passage.source_passage.slice(0, 4).map((source) => (
                         <li>
                           {source.author ? (
                             <span>
@@ -248,45 +218,95 @@ const usedBy = Object.values(passages).filter((item) =>
                             ({source.id}) {source.passage}
                           </NavLink>
                         </li>
-                      ))
-                    : "N/A"
+                      ))}
+
+                      {/* //hidden extra items */}
+                      {passage.source_passage.slice(4).map((source) => (
+                        <li class="hidden extra-item">
+                          {source.author ? (
+                            <span>
+                              {source.author} -{" "}
+                              <span class="italic">{source.title}</span>
+                            </span>
+                          ) : (
+                            <span class="italic">{source.title}</span>
+                          )}
+                          <Icon
+                            name="lucide:arrow-right"
+                            class="size-4 text-brand-800 inline-flex"
+                          />
+                          <NavLink href={`/passages/${source.jad_id}`}>
+                            ({source.id}) {source.passage}
+                          </NavLink>
+                        </li>))}
+
+              </ul>) : "N/A"
                 }
-              </ul>
+                 {passage.source_passage.length > 4 && (
+    <button id="toggleUsedBy" class="text-brand-800 underline mt-2 cursor-pointer">
+      Show more
+    </button>
+  )}
             </dd>
-            <dt
-              class="font-semibold text-brand-800 border-r border-neutral-300 p-2"
-            >
-              Used by:
-            </dt>
-            <dd class="pl-5 p-2">
-              {
-                usedBy.length > 0 ? (
-                  <ul class="list-disc list-inside">
-                    {usedBy.map((passage) => (
-                      <li class="">
-                        {passage.work?.[0].author.length > 0 ? (
-                          <span>
-                            {passage.work[0].author[0].name} -{" "}
-                            <span class="italic">{passage.work[0].name}</span>
-                          </span>
-                        ) : (
-                          <span class="italic">{passage.work[0].name}</span>
-                        )}
-                        <Icon
-                          name="lucide:arrow-right"
-                          class="size-4 text-brand-800 inline-flex"
-                        />
-                        <NavLink href={`/passages/${passage.jad_id}`}>
-                          ({passage.id}) {passage.passage}
-                        </NavLink>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  "N/A"
-                )
-              }
-            </dd>
+            <dt class="font-semibold text-brand-800 border-r border-neutral-300 p-2">
+  Used by:
+</dt>
+<dd class="pl-5 p-2">
+  {
+    usedBy.length > 0 ? (
+      <ul class="list-disc list-inside" id="usedByList">
+        {usedBy.slice(0, 4).map((passage) => (
+          <li>
+            {passage.work?.[0].author.length > 0 ? (
+              <span>
+                {passage.work[0].author[0].name} -{" "}
+                <span class="italic">{passage.work[0].name}</span>
+              </span>
+            ) : (
+              <span class="italic">{passage.work[0].name}</span>
+            )}
+            <Icon
+              name="lucide:arrow-right"
+              class="size-4 text-brand-800 inline-flex"
+            />
+            <NavLink href={`/passages/${passage.jad_id}`}>
+              ({passage.id}) {passage.passage}
+            </NavLink>
+          </li>
+        ))}
+
+        {/* hidden extra items */}
+        {usedBy.slice(4).map((passage) => (
+          <li class="hidden extra-item">
+            {passage.work?.[0].author.length > 0 ? (
+              <span>
+                {passage.work[0].author[0].name} -{" "}
+                <span class="italic">{passage.work[0].name}</span>
+              </span>
+            ) : (
+              <span class="italic">{passage.work[0].name}</span>
+            )}
+            <Icon
+              name="lucide:arrow-right"
+              class="size-4 text-brand-800 inline-flex"
+            />
+            <NavLink href={`/passages/${passage.jad_id}`}>
+              ({passage.id}) {passage.passage}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      "N/A"
+    )
+  }
+<!-- button for showing extra items -->
+  {usedBy.length > 4 && (
+    <button id="toggleUsedBy" class="text-brand-800 underline mt-2 cursor-pointer">
+      Show more
+    </button>
+  )}
+</dd>
               {passage.source_passage.length > 0 || usedBy.length > 0 ? (
             <dt
             class="hidden sm:block font-semibold text-brand-800 border-r border-neutral-300 p-2"
@@ -296,7 +316,7 @@ const usedBy = Object.values(passages).filter((item) =>
           <dd class="hidden sm:block pl-5 p-2">
             {passage.transmission_graph && (
               <details>
-              <summary class="cursor-pointer p-2 border border-neutral-200 bg-brand-50 hover:bg-brand-700 hover:text-brand-50 w-60 rounded-md">See visualization graph</summary>
+              <summary class="cursor-pointer p-2  bg-brand-800/90 hover:bg-brand-700 text-brand-50 w-60 rounded-md">See visualization graph</summary>
               <div>               
                   <ChronologicalTree
         transmissionGraph={passage.transmission_graph}/>
@@ -354,6 +374,9 @@ const usedBy = Object.values(passages).filter((item) =>
                 : "N/A"
             }
             {passage.note && <span>: {passage.note}</span>}
+            {passage?.edition_link && 
+            <NavLink href={passage.edition_link}> (Facsimile <Icon name="lucide:external-link" class="size-4 text-brand-800 inline-flex"/>)</NavLink>
+            }
           </dd>
           <dt
             class="font-semibold text-brand-800 border-r border-neutral-300 p-2"
@@ -384,3 +407,17 @@ const usedBy = Object.values(passages).filter((item) =>
 </PageLayout>
 
 <script src="@/lib/advanced-search-aside.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggleBtn = document.getElementById("toggleUsedBy");
+    if (!toggleBtn) return;
+
+    toggleBtn.addEventListener("click", () => {
+      const extraItems = document.querySelectorAll("#usedByList .extra-item");
+      const isHidden = extraItems[0].classList.contains("hidden");
+
+      extraItems.forEach(li => li.classList.toggle("hidden"));
+      toggleBtn.textContent = isHidden ? "Show less" : "Show more";
+    });
+  });
+</script>

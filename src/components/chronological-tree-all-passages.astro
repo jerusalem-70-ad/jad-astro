@@ -1,0 +1,350 @@
+
+
+<div class="m-1 w-full">
+  <div
+    id="chronological-tree"
+    class="w-full"
+    style={`height: 900px; width: 100%;`}
+  >
+  </div>
+</div>
+
+<script>
+  import * as echarts from "echarts";
+  import { withBasePath } from "../lib/withBasePath";
+  import passages from "@/content/data/passages.json";
+  import { forceSimulation, forceCollide, forceX, forceY } from "d3-force";
+  document.addEventListener("DOMContentLoaded", () => {
+    // Get data from global variables
+    const chartElement = document.getElementById("chronological-tree");
+    if (!chartElement) {
+      console.log("No container for graph found");
+      return;
+    }
+
+    // Prepare graphData from passages.json
+   const graphData: { nodes: any[]; links: any[] } = {
+  nodes: [],
+  links: [],
+};
+
+    passages.forEach((passage) => {
+      if (passage.transmission_graph?.graph?.nodes) {
+        passage.transmission_graph.graph.nodes
+          .filter((node) => node.date) // Only include nodes with a date
+          .forEach((node) => {
+            // Avoid duplicate nodes by checking existing IDs
+            if (!graphData.nodes.find((n) => n.id === node.id)) {
+              graphData.nodes.push({
+                ...node,
+                sourcePassage: passage.passage,
+                jad_id: passage.jad_id, 
+                label: { show: false, position: 'top'}
+              });
+            }
+          });
+
+        if (passage.transmission_graph.graph.links) {
+          passage.transmission_graph.graph.links.forEach((link) => {
+            graphData.links.push({
+              source: link.source,
+              target: link.target,
+            });
+          });
+        }
+      }
+    });
+
+    console.log("Found total nodes:", graphData.nodes.length);
+    console.log("Found total links:", graphData.links.length);
+    console.log('Sample node structure:', graphData.nodes[0]);
+
+    const config = {
+      showLegend: true,
+      enableZoom: true,
+      enableNavigation: true,
+    };
+
+    if (!graphData || !graphData.nodes || graphData.nodes.length === 0) {
+      console.error("No graph data available for chronological tree.");
+      return;
+    }
+
+    // Helper function to calculate node size based on number of relations
+    function calculateNodeSize(relatedCount : number) {
+      // Base size of 6, scale up based on relations, max size 18
+      const baseSize = 6;
+      const scaleFactor = 1.5; // Improved scaling
+      const maxSize = 20; // Slightly larger max
+
+      const calculatedSize =
+        baseSize + Math.sqrt(relatedCount || 0) * scaleFactor;
+      return Math.min(calculatedSize, maxSize);
+    }
+
+    // Get min/max dates to establish proper scales
+    const dates = graphData.nodes
+      .map((node) => Number(node.date))
+      .filter((date) => !isNaN(date));
+
+    if (dates.length === 0) {
+      console.error("No valid dates found in nodes");
+      return;
+    }
+
+    const minDate = Math.min(...dates);
+    const maxDate = Math.max(...dates);
+    const dateRange = maxDate - minDate;
+
+    console.log(`Date range: ${minDate} - ${maxDate} (span: ${dateRange})`);
+
+    // Prepare initial nodes with metadata
+    const nodes = graphData.nodes.map((node) => {
+      // Get the number of related passages from metadata
+      const relatedCount =
+        passages.find((passage) => passage.id === node.id)?.transmission_graph
+          ?.metadata?.allRelatedPassages || 0;
+      const nodeSize = calculateNodeSize(relatedCount);
+
+      
+      return {
+        ...node,
+        relatedCount: relatedCount,
+        symbolSize: nodeSize,
+      };
+    });
+
+    // Prepare initial simulation data with proper positioning
+    const simulationData = nodes.map((node) => {
+      const nodeDate = Number(node.date) || minDate;
+      return {
+        ...node,
+        // Start nodes at center horizontally, correct y position
+        x: 0, // Center position
+        y: nodeDate, // Actual year
+        fx: null, // Allow x to move freely
+        fy: null, // Allow y to move freely initially
+      };
+    });
+
+    // Calculate appropriate force strengths based on data scale
+    const nodeRadius = 9;
+    const nodePadding = 2;
+    const collideStrength = 1.25;
+    const xStrength = 0.1; // Weak horizontal centering
+    const yStrength = 0.75; // Strong vertical positioning to maintain chronological order
+
+    // Create D3 force simulation with proper scaling
+    const simulation = forceSimulation(simulationData)
+      .force(
+        "collide",
+        forceCollide(nodeRadius + nodePadding).strength(collideStrength)
+      )
+      .force(
+        "x",
+        forceX(0) // Pull towards center (x=0)
+          .strength(xStrength)
+      )
+      .force(
+        "y",
+        forceY((d) => Number(d.date) || minDate) // Maintain chronological positioning
+          .strength(yStrength)
+      );
+
+    // Run simulation for enough iterations to stabilize
+    console.log("Running force simulation...");
+    for (let i = 0; i < 500; i++) {
+      simulation.tick();
+    }
+    simulation.stop();
+    console.log("Force simulation complete");
+
+    // Calculate proper axis ranges from simulation results
+    const xExtent = simulationData.reduce(
+      (acc, node) => {
+        return [Math.min(acc[0], node.x), Math.max(acc[1], node.x)];
+      },
+      [Infinity, -Infinity]
+    );
+
+    const xPadding = Math.abs(xExtent[1] - xExtent[0]) * 0.2 || 50;
+   
+
+    // Create ECharts nodes with simulation positions
+
+    function nodeColor(node : any) {
+      // color based on relatedCount
+      const count = node.relatedCount || 0;
+      if (count >= 10) return "#6f2009"; // Dark red for highly connected
+      if (count >= 1)
+        return "#a92d03"; // red-orange for moderately connected
+      else return "#d5c6b3"; //neutral for less connected
+    }
+
+    const echartNodes = simulationData.map((node) => ({
+      ...node,
+      value: [node.x, node.y], // Use simulation-calculated positions
+      symbolSize: node.symbolSize,
+      itemStyle: {
+        color: nodeColor(node),
+        borderColor: "#333",
+        borderWidth: 1,
+      },
+    }));
+
+    // Prepare links - ECharts expects source and target to be indices
+    const idToIndex = new Map();
+    graphData.nodes.forEach((node, idx) => {
+      idToIndex.set(node.id, idx);
+    });
+
+    const links = graphData.links.map((link) => ({
+      source: idToIndex.get(link.source),
+      target: idToIndex.get(link.target),
+      lineStyle: {
+        color: "#7f8c8d",
+        width: 2,
+        opacity: 0.6,
+        curveness: 0.1,
+      },
+    }));
+
+    // Updated ECharts option with proper axis configuration
+    const option = {
+      tooltip: {
+        trigger: "item",
+        textStyle: { fontSize: 12 },
+        extraCssText: `max-width: 300px; overflow-wrap: break-word; white-space: normal;`,
+        formatter: function (params : any) {
+          if (params.dataType === "node") {
+            const node = params.data;
+            return `<strong>#${node.id} ${node.name}</strong><br/>
+                    <span class="italic">${node.passage || node.sourcePassage}</span><br/>
+                    <span>Year: ${node.date}</span><br/>
+                    <span>Related passages: ${node.relatedCount || 0}</span>`;
+          } else if (params.dataType === "edge") {
+            return "";
+          }
+          return "";
+        },
+      },
+
+      // Y-axis for chronological data
+      yAxis: {
+        type: "value",
+        name: "Year",
+        position: "left", // Ensure y-axis is on the left
+        min: minDate - dateRange * 0.05, // Add 5% padding
+        max: maxDate + dateRange * 0.05,
+        axisLabel: {
+          interval: 0,
+          formatter: (value : number) => {
+            // Show labels every 25 or 50 years depending on range
+            const interval = dateRange > 500 ? 50 : 25;
+            return value % interval === 0 ? value : "";
+          },
+        },
+        splitLine: {
+          show: true,
+          lineStyle: { color: "#e0e0e0", width: 1, type: "dashed" },
+        },
+        splitNumber: 10, // Suggest around 10 major ticks
+      },
+
+      // X-axis for horizontal spread
+      xAxis: {
+        type: "value",
+        name: "Horizontal Spread",
+        show: false, // Hide for cleaner look, enable for debugging
+        min: xExtent[0] - xPadding,
+        max: xExtent[1] + xPadding,
+        axisLabel: { show: false },
+        splitLine: { show: false },
+        axisTick: { show: false },
+      },
+
+      dataZoom: [
+        {
+          type: "inside",
+          yAxisIndex: 0,
+          filterMode: "weakFilter",
+        },
+        {
+          type: "slider",
+          yAxisIndex: 0,
+          width: 20,
+          right: 10,
+          start: 0,
+          end: 100,
+        },
+      ],
+
+      series: [
+        {
+          type: "graph",
+          layout: "none", // Use custom positioning
+          roam: true,
+          coordinateSystem: "cartesian2d",
+          data: echartNodes,
+
+          links: links,
+          edgeSymbol: ["none", "arrow"],
+          edgeSymbolSize: [0, 6],
+
+          lineStyle: {
+            color: "#7f8c8d",
+            width: 2,
+            opacity: 0.6,
+            curveness: 0.1, 
+          },
+
+
+          emphasis: {
+            focus: "adjacency",
+          },
+        },
+      ],
+
+      animation: false,
+
+      toolbox: {
+        show: true,
+        orient: "vertical",
+        right: 20,
+        top: 20,
+        itemSize: 20,
+        itemGap: 20,
+        feature: {
+          saveAsImage: {
+            show: true,
+            title: "Download as PNG",
+            type: "png",
+            pixelRatio: 2,
+            backgroundColor: "#fff",
+          },
+          dataZoom: {
+            show: config.enableZoom,
+            title: { zoom: "Zoom", back: "Reset Zoom" },
+          },
+          restore: { show: true, title: "Reset View" },
+        },
+      },
+    };
+
+    const chart = echarts.init(chartElement);
+    chart.setOption(option);
+
+    window.addEventListener("resize", () => chart.resize());
+
+    // Add click handler for nodes
+    chart.on("click", function (params: any) {
+      if (params.data ) {
+        window.location.href = withBasePath(
+          `/passages/jad_occurrence__${params.data?.id}`
+        );
+        console.log("Clicked on node:", params.data);
+      }
+    });
+   
+  });
+</script>

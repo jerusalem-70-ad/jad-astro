@@ -3,6 +3,7 @@ import PageLayout from "@/layouts/page-layout.astro";
 import Article from "@/components/article.astro";
 import works from "@/content/data/works.json";
 import NavLink from "@/components/nav-link.astro";
+import { Icon } from "astro-icon/components";
 
 export async function getStaticPaths() {
     const paths = Object.values(works).map((work) => ({
@@ -89,21 +90,19 @@ const { data: work } = Astro.props;
             <dd class="pl-5">
                 {
                     work.published_edition.length > 0
-                        ? work.published_edition.map((ed, index) => (
-                              <>
-                                  {ed.digi_url !== null ? (
-                                      <NavLink href={ed.digi_url}>
-                                          {ed.name}
-                                      </NavLink>
-                                  ) : (
-                                      ed.name
-                                  )}
-                                  {index < work.published_edition.length - 1 &&
-                                      "| "}
-                              </>
-                          ))
+                        ? work.published_edition[0].name
+                                
                         : "N/A"
                 }
+                {work?.volume_edition_or_individual_editor &&
+                (work.volume_edition_or_individual_editor)}
+                {work.link_digital_editions &&
+                (<NavLink href={work?.link_digital_editions}>
+                    (Facsimile{" "}
+                                  <Icon
+                                    name="lucide:external-link"
+                                    class="size-4 inline-flex"
+                                  />)</NavLink>)}
             </dd>
             
             {

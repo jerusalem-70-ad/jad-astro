@@ -14,7 +14,7 @@ import TableHead from "@/components/table-head.astro";
     import data from "@/content/data/authors.json";
     import { jsonpathLookup } from "@/lib/tabulator-utils.js";
 
-    var tabledata = Object.values(data);
+    var tabledata = Object.values(data).filter((author) => author.name);
 
     var table = new Tabulator("#tabulator-table", {
       headerFilterLiveFilterDelay: 600,
