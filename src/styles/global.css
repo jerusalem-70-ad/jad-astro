@@ -140,3 +140,14 @@
 .ais-RangeInput-submit {
   @apply w-1/4 px-4 py-2 text-black rounded-md;
 }
+
+.arrow {
+  @apply text-gray-600 transition-transform duration-200;
+}
+.arrow.rotate-90 {
+  @apply transform rotate-90;
+}
+/* 1. Remove Algolia’s default arrow (they use borders) */
+.ais-HierarchicalMenu-link::before {
+  content: none !important;
+}

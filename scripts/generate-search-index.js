@@ -81,15 +81,9 @@ async function generate() {
         facet: true,
         optional: true,
       },
-      {
-        name: "biblical_ref_lvl2",
-        type: "string[]",
-        facet: true,
-        optional: true,
-      },
+
       { name: "cluster", type: "object[]", facet: true, optional: true },
       { name: "keywords", type: "object[]", facet: true, optional: true },
-      { name: "sources", type: "object[]", facet: true, optional: true },
       // get dates as separate numbers for filtering 'from -to' in the frontend
       { name: "work_date_not_before", type: "int32", facet: true, sort: true },
       { name: "work_date_not_after", type: "int32", facet: true, sort: true },
@@ -105,10 +99,6 @@ async function generate() {
   Object.values(data)
     .filter((value) => value.passage !== "")
     .forEach((value) => {
-      const ancestorNodes =
-        value.transmission_graph?.graph?.nodes?.filter(
-          (node) => node.nodeType === "ancestor" && node.depth === 0
-        ) || [];
       const workDate = value.work?.[0]?.date[0] || {};
       const item = {
         sort_id: value.id,
@@ -125,9 +115,7 @@ async function generate() {
         liturgical_references: value.liturgical_references || [],
         biblical_ref_lvl0: value.biblical_ref_lvl0 || [],
         biblical_ref_lvl1: value.biblical_ref_lvl1 || [],
-        biblical_ref_lvl2: value.biblical_ref_lvl2 || [],
         keywords: value.keywords || [],
-        sources: ancestorNodes,
         work_date_not_before: workDate.not_before || 70,
         work_date_not_after: workDate.not_after || 1600,
       };

@@ -84,14 +84,12 @@ const centuryComparator = (a, b) => {
 const refinementListAuthor = wrapInPanel("Autor");
 const refinementListWork = wrapInPanel("Work");
 const refinementListManuscript = wrapInPanel("Manuscripts");
-const refinementListWorkDate = wrapInPanel("Date of work");
 const refinementListWorkCentury = wrapInPanel("Century of work");
 const refinementListContext = wrapInPanel("Institutional context");
 const refinementListliturgical = wrapInPanel("Liturgical references");
 const refinementListClusters = wrapInPanel("Clusters");
 const refinementListKeywords = wrapInPanel("Keywords");
 const hierarchicalMenuBibl = wrapHierarcicalMenuInPanel("Biblical references");
-const refinementListSources = wrapInPanel("Sources");
 
 // Initialize a custom Algolia widget to allow users to filter results by a range of years
 // filter input from and to to two different attributes in the schema (not possible with the default range input widget)
@@ -237,7 +235,7 @@ search.addWidgets([
     container: "#hits",
     transformItems(items) {
       return items.map((item) => {
-        // Transform `work` array for easier rendering
+        // Transform works (keeping your existing logic)
         const transformedWorks = (item.work || []).map((work) => ({
           title: work.name || "Unknown Title",
           authors: (work.author || []).map(
@@ -246,9 +244,26 @@ search.addWidgets([
           date: (work.date.map((date) => date.value) || []).join(", "),
         }));
 
+        // Extract snippet with highlights
+        const fullTextHighlight = item._highlightResult?.full_text?.value || "";
+        const searchTextHighlight =
+          item._highlightResult?.search_text?.value || "";
+
+        let snippet = "";
+
+        if (fullTextHighlight.includes("<mark>")) {
+          snippet = extractSnippetAroundHighlight(fullTextHighlight);
+        } else if (searchTextHighlight.includes("<mark>")) {
+          snippet = extractSnippetAroundHighlight(searchTextHighlight);
+        } else {
+          // Fallback to first 400 characters
+          snippet = item.full_text.substring(0, 400) + "...";
+        }
+
         return {
           ...item,
           transformedWorks,
+          displaySnippet: snippet,
         };
       });
     },
@@ -289,24 +304,22 @@ search.addWidgets([
 
         // Generate the main HTML for the hit
         return `
-          <article>
-            <h3 class="font-semibold text-base md:text-lg text-brand-800">
-              <a href="${withBasePath(
-                `/passages/${hit.id}`
-              )}" class="underline">
-                (#${hit.id.substr(16)}) ${hit.title}
-              </a>
-            </h3>     
+    <article>
+      <h3 class="font-semibold text-base md:text-lg text-brand-800">
+        <a href="${withBasePath(`/passages/${hit.id}`)}" class="underline">
+          (#${hit.id.substr(16)}) ${hit.title}
+        </a>
+      </h3>     
 
-            <p class="italic line-clamp-2">
-             ${highlightHTML}
-            </p>
-         
-            <div class="work-details">
-              ${renderWorks(hit.transformedWorks)}
-            </div>            
-          </article>
-        `;
+      <p class="italic line-clamp-2">
+        ${hit.displaySnippet}
+      </p>
+   
+      <div class="work-details">
+        ${renderWorks(hit.transformedWorks)}
+      </div>            
+    </article>
+  `;
       },
     },
   }),
@@ -334,16 +347,6 @@ search.addWidgets([
     showMoreLimit: 50,
     limit: 10,
     searchablePlaceholder: "e.g. Epistolae",
-  }),
-
-  refinementListWorkDate({
-    container: "#refinement-list-workdate",
-    attribute: "work.date.value",
-    searchable: true,
-    showMore: true,
-    showMoreLimit: 50,
-    limit: 10,
-    searchablePlaceholder: "Search for dates",
   }),
 
   refinementListWorkCentury({
@@ -405,19 +408,10 @@ search.addWidgets([
     limit: 10,
     searchablePlaceholder: "e.g. Pentecost",
   }),
-  refinementListSources({
-    container: "#refinement-list-sources",
-    attribute: "sources.author",
-    searchable: true,
-    showMore: true,
-    showMoreLimit: 50,
-    limit: 10,
-    searchablePlaceholder: "e.g. Beda",
-  }),
 
   hierarchicalMenuBibl({
     container: "#refinement-list-biblical",
-    attributes: ["biblical_ref_lvl0", "biblical_ref_lvl1", "biblical_ref_lvl2"],
+    attributes: ["biblical_ref_lvl0", "biblical_ref_lvl1"],
     separator: " > ",
     showMore: true,
     showMoreLimit: 50,
@@ -440,8 +434,6 @@ search.addWidgets([
             ? "Work"
             : item.attribute === "manuscripts.value"
             ? "Manuscript"
-            : item.attribute === "work.date.value"
-            ? "Date"
             : item.attribute === "work.date.century"
             ? "Century"
             : item.attribute === "work.institutional_context.name"
@@ -515,4 +507,41 @@ if (showFilter) {
   showFilter.addEventListener("click", function () {
     filters?.classList.toggle("hidden");
   });
+}
+
+// Helper function to extract text around highlights
+function extractSnippetAroundHighlight(text, maxLength = 400) {
+  const markIndex = text.indexOf("<mark>");
+  if (markIndex === -1) return text.substring(0, maxLength) + "...";
+
+  // Find a good starting point (try to go back ~150 chars, but stop at word boundaries)
+  const idealStart = Math.max(0, markIndex - 150);
+  let actualStart = idealStart;
+
+  // Find the nearest word boundary before our ideal start
+  if (idealStart > 0) {
+    const spaceIndex = text.lastIndexOf(" ", markIndex - 20); // Don't go too close to the mark
+    if (spaceIndex > idealStart - 50) {
+      actualStart = spaceIndex + 1;
+    }
+  }
+
+  // Extract snippet and add ellipsis if needed
+  let snippet = text.substring(actualStart, actualStart + maxLength);
+
+  // Clean up partial words at the end
+  const lastSpaceIndex = snippet.lastIndexOf(" ");
+  if (
+    lastSpaceIndex > snippet.length - 20 &&
+    actualStart + maxLength < text.length
+  ) {
+    snippet = snippet.substring(0, lastSpaceIndex) + "...";
+  }
+
+  // Add leading ellipsis if we didn't start from the beginning
+  if (actualStart > 0) {
+    snippet = "..." + snippet;
+  }
+
+  return snippet;
 }
