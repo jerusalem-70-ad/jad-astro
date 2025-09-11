@@ -122,15 +122,19 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
       },
       yAxis: {
         type: "value",
+        inverse: true, // A. Marx want earliest dates at top
         name: "Year",
-        min: (value: { min: number; max: number }) => value.min - 10,
-        max: (value: { min: number; max: number }) => value.max + 10,
+        min: (value: { min: number; max: number }) =>
+          Math.floor(value.min / 50) * 50, // round down to nearest 50
+        max: (value: { min: number; max: number }) =>
+          Math.ceil(value.max / 50) * 50, // round up to nearest 50
         axisLabel: {
           fontSize: 12,
           interval: function (_index: number, value: number) {
             // Show only values that are multiples of 50
             return value % 50 === 0;
           },
+          formatter: (val: number) => String(val), // no comma
         },
         splitNumber: 10, // Suggest around 10 major ticks
       },
