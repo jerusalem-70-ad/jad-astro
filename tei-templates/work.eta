@@ -44,6 +44,23 @@
             <% } %>
             <note type="genre"><%= it.genre %></note>
             <note type="incipit"><%= it.incipit || '' %></note>
+
+             <% if (it.institutional_context.length > 0) { %>
+                <% it.institutional_context.forEach(institute => { %>
+                    <note type="institutional_context"><ref target="<%= institute.jad_id %>"><%= institute.name %></ref></note> <% })  %> 
+            <% } %>
+
+            <% if (it.published_edition.length > 0) { %>
+                <% it.published_edition.forEach(edition => { %>
+                    <bibl><%= edition.name %>
+                        <% if (it.volume_edition_or_individual_editor) { %>
+                            , <%= it.volume_edition_or_individual_editor %>
+                        <% } %>
+                        <% if (it.link_digital_editions) { %>
+                            , <ref target="<%= it.link_digital_editions %>">digital edition</ref>
+                        <% } %>
+                    </bibl> <% })  %>
+            <% } %>
             
          </p>
          <% if (it.passages.length > 0) { %>
