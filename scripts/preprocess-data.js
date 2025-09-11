@@ -180,7 +180,7 @@ const passagesPlus = passages
         const verseTrimmed = verse?.trim();
 
         lvl0.push(book);
-        lvl1.push(`${book} > ${chapterTrimmed}`);
+        lvl1.push(`${book} > ${book} ${chapterTrimmed}`);
         lvl2.push(`${book} > ${chapterTrimmed} > ${verseTrimmed}`);
       });
     }
