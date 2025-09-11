@@ -7,6 +7,7 @@ import Article from "@/components/article.astro";
 import "instantsearch.css/themes/satellite.css";
 import type { Passage } from "@/types";
 import ChronologicalTree from "@/components/chronological-tree.astro";
+import {addItalics} from "@/lib/utils.js";
 
 export async function getStaticPaths() {
   const paths = Object.values(passages).map((passage) => ({
@@ -373,7 +374,7 @@ const usedBy = Object.values(passages).filter((item) =>
                 ? passage.occurrence_found_in.map((find) => find.value).join(", ")
                 : "N/A"
             }
-            {passage.note && <span>: {passage.note}</span>}
+            {passage.note && <span set:html={addItalics(passage.note)}></span>}
             {passage?.edition_link && 
             <NavLink href={passage.edition_link}> (Facsimile <Icon name="lucide:external-link" class="size-4 text-brand-800 inline-flex"/>)</NavLink>
             }
