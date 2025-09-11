@@ -57,31 +57,33 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
     if (!chartElement) return;
 
     // Prepare nodes: y = date, x-spread accross branches
-    const nodes = graphData.nodes.map((node: any) => ({
-      ...node,
-      value: [node.x, Number(node.date) || 0],
-      symbolSize: node.nodeType === "current" ? 30 : 18,
-      itemStyle: {
-        color:
-          node.nodeType === "current"
-            ? "#e74a3b"
-            : node.nodeType === "ancestor"
-              ? "#318f38"
-              : node.nodeType === "descendant"
-                ? "#f6c23e"
-                : "#95a5a6",
-        borderWidth: node.nodeType === "current" ? 3 : 1,
-        borderColor: "#222",
-      },
-      label: {
-        show: true,
-        position: "top",
-        fontSize: 12,
-        color: "#333",
-        formatter: node.name,
-      },
-      category: node.nodeType || "regular",
-    }));
+    const nodes = graphData.nodes
+      .filter((node) => node.depth === 0) // A. Marx want only immediate nodes
+      .map((node: any) => ({
+        ...node,
+        value: [node.x, Number(node.date) || 0],
+        symbolSize: node.nodeType === "current" ? 30 : 18,
+        itemStyle: {
+          color:
+            node.nodeType === "current"
+              ? "#e74a3b"
+              : node.nodeType === "ancestor"
+                ? "#318f38"
+                : node.nodeType === "descendant"
+                  ? "#f6c23e"
+                  : "#95a5a6",
+          borderWidth: node.nodeType === "current" ? 3 : 1,
+          borderColor: "#222",
+        },
+        label: {
+          show: true,
+          position: "top",
+          fontSize: 12,
+          color: "#333",
+          formatter: node.name,
+        },
+        category: node.nodeType || "regular",
+      }));
 
     // Prepare links
     // ECharts expects source and target to be
@@ -91,16 +93,18 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
       idToIndex.set(node.id, idx);
     });
 
-    const links = graphData.links.map((link) => ({
-      source: idToIndex.get(link.source),
-      target: idToIndex.get(link.target),
-      lineStyle: {
-        color: "#7f8c8d",
-        width: 2,
-        opacity: 0.8,
-        curveness: 0,
-      },
-    }));
+    const links = graphData.links
+      .filter((link) => link.depth === 0) // A. Marx want only immediate nodes
+      .map((link) => ({
+        source: idToIndex.get(link.source),
+        target: idToIndex.get(link.target),
+        lineStyle: {
+          color: "#7f8c8d",
+          width: 2,
+          opacity: 0.8,
+          curveness: 0,
+        },
+      }));
 
     // ECharts option
     const option = {
