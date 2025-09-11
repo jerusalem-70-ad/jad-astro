@@ -120,3 +120,16 @@ export async function enrichAuthorsWithVariants() {
 
   return enrichedAuthors;
 }
+
+// helpers function to normalize text
+export function normalizeText(text) {
+  if (!text) {
+    console.log("No text provided");
+    return text;
+  } else {
+    return text
+      .replace(/\n/g, " \n ") // keep newline, but ensure a space after
+      .replace(/\t+/g, " ") // replace tabs (single or multiple) with one space
+      .replace(/ +/g, " "); // collapse multiple spaces, just in case
+  }
+}

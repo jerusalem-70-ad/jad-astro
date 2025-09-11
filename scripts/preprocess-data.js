@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
-import { enrichDates } from "./utils.js";
+import { enrichDates, normalizeText } from "./utils.js";
 import { buildTransmissionGraph } from "./build-transmission-graph.js";
 import {
   generateBiblicalSortKey,
@@ -265,7 +265,7 @@ const passagesPlus = passages
       incipit: passage.incipit,
       prev: passage.prev,
       next: passage.next,
-      text_paragraph: passage.text_paragraph,
+      text_paragraph: normalizeText(passage.text_paragraph),
       mss_occurrences: msOccurrence,
       biblical_ref_lvl0: lvl0,
       biblical_ref_lvl1: lvl1,

@@ -23,8 +23,8 @@ const normalizeText = (text) => {
     .replace(/oe/g, "e")
     .replace(/j/g, "i")
     .replace(/v/g, "u")
-    .replace(/^\s*\d+\s*/, "") // remove leading numbers/tabs/spaces
-    .replace(/\s+/g, " ") // collapse multiple spaces/tabs/newlines
+    .replace(/\u00A0/g, " ") // replace non-breaking space
+    .replace(/\s+/g, " ") // collapse all whitespace
     .trim(); // remove leading/trailing whitespace
 };
 
