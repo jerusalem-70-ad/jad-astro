@@ -227,6 +227,8 @@ const customDateRangeWidget = (containerId) => {
   };
 };
 
+let biblicalSearchTerm = "";
+
 // add widgets
 search.addWidgets([
   searchBox({
@@ -442,9 +444,15 @@ search.addWidgets([
     separator: " > ",
     showMore: true,
     showMoreLimit: 50,
-    limit: 10,
+    limit: 40,
     sortBy: biblicalComparator,
-    searchablePlaceholder: "e.g. Luke",
+    transformItems(items) {
+      if (!biblicalSearchTerm) return items;
+
+      return items.filter((item) =>
+        item.label.toLowerCase().includes(biblicalSearchTerm.toLowerCase())
+      );
+    },
   }),
 
   currentRefinements({
@@ -489,6 +497,39 @@ search.addWidgets([
 
 search.start();
 
+// Add  search input to the biblical references panel
+setTimeout(() => {
+  const biblicalPanel = document.querySelector("#refinement-list-biblical");
+  if (biblicalPanel) {
+    // Find the panel body (where the hierarchical menu content is)
+    const panelBody = biblicalPanel.querySelector(".ais-Panel-body");
+    if (panelBody) {
+      // Create the search input
+      const searchContainer = document.createElement("div");
+      searchContainer.className = "mb-3";
+      searchContainer.innerHTML = `
+        <input 
+          type="text" 
+          class="w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-transparent" 
+          placeholder="e.g. Luke"
+          id="biblical-search-input"
+        />
+      `;
+
+      // Insert the search input at the beginning of the panel body
+      panelBody.insertBefore(searchContainer, panelBody.firstChild);
+    }
+  }
+}, 100); // Small delay to ensure the DOM is ready
+
+// Add the search functionality
+document.addEventListener("input", (e) => {
+  if (e.target.id === "biblical-search-input") {
+    biblicalSearchTerm = e.target.value;
+    search.refresh();
+  }
+});
+
 // function to wrap refinements filter in a panel
 function wrapInPanel(title) {
   return panel({
@@ -514,8 +555,9 @@ function wrapHierarcicalMenuInPanel(title) {
       return state.query.length === 0;
     },
     templates: {
-      header: () =>
-        `<span class="normal-case text-base font-normal">${title}</span>`,
+      header: () => `
+        <span class="normal-case text-base font-normal">${title}</span>
+      `,
     },
     cssClasses: {
       header: "cursor-pointer relative z-10",
