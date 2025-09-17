@@ -19,10 +19,25 @@ const biblicalRef = Object.values(loadJSON("biblical_references.json"));
 const manuscripts = Object.values(loadJSON("manuscripts.json"));
 const msOccurrences = Object.values(loadJSON("ms_occurrences.json"));
 const works = Object.values(loadJSON("works.json"));
+const authors = Object.values(loadJSON("authors.json"));
 
 // set the output folder
 const folderPath = join(process.cwd(), "src", "content", "data");
 mkdirSync(folderPath, { recursive: true });
+
+// create map for authros to use in instant search to match the search normalized field and use the normal name for display
+
+const authorMapObject = {};
+authors.forEach((aut) => {
+  const normalizedKey = aut.name.toLowerCase().replace(/-/g, " ");
+  authorMapObject[normalizedKey] = aut.name;
+});
+
+// Write as JSON file
+writeFileSync(
+  join(folderPath, "authors_map.json"),
+  JSON.stringify(authorMapObject, null, 2)
+);
 
 // sort biblical references according to nova vulgarta order
 const biblicalRefSorted = {};

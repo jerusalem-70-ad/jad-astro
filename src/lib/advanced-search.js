@@ -16,6 +16,9 @@ import { simple } from "instantsearch.js/es/lib/stateMappings";
 import { withBasePath } from "./withBasePath";
 import { biblicalComparator } from "./sort-bibl-ref-menu.js";
 
+// import authorLookupMap to display normal author names, while use normalized in the facet search
+import authorLookupMap from "@/content/data/authors_map.json";
+
 const project_collection_name = "JAD-temp";
 const main_search_field = "full_text";
 const secondary_field = "search_text";
@@ -36,6 +39,7 @@ const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
     query_by: `${main_search_field}, ${secondary_field}`,
     query_by_weights: "2,1",
     typo_tokens_threshold: 1,
+    facet_query_num_typos: 0,
   },
 });
 
@@ -334,9 +338,32 @@ search.addWidgets([
 
   refinementListAuthor({
     container: "#refinement-list-author",
-    attribute: "work.author.name",
+    attribute: "author_search", // searching in the normalized field lower case no dashes
     searchable: true,
-    searchablePlaceholder: "e.g. Hieronymus",
+    showMore: true,
+    showMoreLimit: 50,
+    limit: 10,
+    searchablePlaceholder: "e.g. Saint-Cher",
+    // customized template to get the original names using authorLookupMap
+    templates: {
+      item: (item) => {
+        const displayName = authorLookupMap[item.label] || item.label;
+        const isRefined = item.isRefined ? "checked" : "";
+
+        return `
+        <label class="ais-RefinementList-label">
+          <input
+            type="checkbox"
+            class="ais-RefinementList-checkbox"
+            value="${item.value}"
+            ${isRefined}
+          />
+          <span class="ais-RefinementList-labelText">${displayName}</span>
+          <span class="ais-RefinementList-count">${item.count}</span>
+        </label>
+      `;
+      },
+    },
   }),
 
   refinementListWork({

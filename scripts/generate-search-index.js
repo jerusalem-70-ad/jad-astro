@@ -62,7 +62,14 @@ async function generate() {
       { name: "full_text", type: "string", sort: true },
       { name: "search_text", type: "string", sort: true },
       { name: "manuscripts", type: "object[]", facet: true, optional: true },
-      { name: "work", type: "object[]", facet: true, optional: true },
+      {
+        name: "work",
+        type: "object[]",
+        facet: true,
+        optional: true,
+      },
+      { name: "author_search", type: "string[]", facet: true, optional: true },
+
       {
         name: "liturgical_references",
         type: "object[]",
@@ -88,6 +95,7 @@ async function generate() {
       { name: "work_date_not_before", type: "int32", facet: true, sort: true },
       { name: "work_date_not_after", type: "int32", facet: true, sort: true },
     ],
+    token_separators: ["-"],
     default_sorting_field: "sort_id",
   };
 
@@ -95,11 +103,25 @@ async function generate() {
   log.success("Created new collection");
 
   // transform data so it conforms to the typesense collection shape
+  //helpers function to get author names normalized for facet search
+  function extractAuthors(value) {
+    if (!Array.isArray(value.work)) return [];
+    return value.work.flatMap((work) => {
+      if (!Array.isArray(work.author)) return [];
+      return work.author.map((a) => a.name || "").filter(Boolean);
+    });
+  }
+
+  function normalizeAuthor(name) {
+    return name.toLowerCase().replace(/-/g, " "); // normalize for searching
+  }
+
   const records = [];
   Object.values(data)
     .filter((value) => value.passage !== "")
     .forEach((value) => {
-      const workDate = value.work?.[0]?.date[0] || {};
+      const workDate = value.work?.[0]?.date?.[0] || {};
+      const authors = extractAuthors(value);
       const item = {
         sort_id: value.id,
         id: value.jad_id,
@@ -111,6 +133,8 @@ async function generate() {
         )}`,
         manuscripts: value.mss_occurrences || [],
         work: value.work || [],
+        // normalized values for filtering
+        author_search: authors.map((name) => normalizeAuthor(name)),
         cluster: value.part_of_cluster || [],
         liturgical_references: value.liturgical_references || [],
         biblical_ref_lvl0: value.biblical_ref_lvl0 || [],
@@ -119,6 +143,7 @@ async function generate() {
         work_date_not_before: workDate.not_before || 70,
         work_date_not_after: workDate.not_after || 1600,
       };
+
       records.push(item);
     });
   // - import data into typesense collection
