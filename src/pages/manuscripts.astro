@@ -10,7 +10,7 @@ import TableHead from "@/components/table-head.astro";
     import { setupTableActions } from "@/lib/table-actions";
     import { TabulatorFull as Tabulator } from "tabulator-tables";
     import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
-    import { jsonpathLookup } from "../lib/tabulator-utils.js";
+    import { jsonpathLookup, jsonpathsLookup } from "../lib/tabulator-utils.js";
     import { JSONPath } from "jsonpath-plus";
 
     import pass from "@/content/data/passages.json";
@@ -19,21 +19,42 @@ import TableHead from "@/components/table-head.astro";
     const passages = Object.values(pass);
 
     // Add related passages to each manuscript
-    const data = manuscripts.filter(manuscript => manuscript.name[0]?.value)
-    .map((manuscript) => {
-      const related_passages = passages
-        .filter((passage) =>
-          passage.mss_occurrences.some((m) => m.manuscript_jad_id === manuscript.jad_id)
-        )
-        .map((passage) => ({
-          id: passage.id,
-          passage: passage.passage,
-        }));
-      return {
-        ...manuscript,
-        related_passages, // Attach related_passages array
-      };
-    });
+    const data = manuscripts
+      .filter((manuscript) => manuscript.name[0]?.value)
+      .map((manuscript) => {
+        const related_passages = passages
+          .filter((passage) =>
+            passage.mss_occurrences.some(
+              (m) => m.manuscript_jad_id === manuscript.jad_id
+            )
+          )
+          .map((passage) => ({
+            id: passage.id,
+            passage: passage.passage,
+          }));
+
+        const related_works = [
+          ...new Map(
+            passages
+              .filter((passage) =>
+                passage.mss_occurrences.some(
+                  (m) => m.manuscript_jad_id === manuscript.jad_id
+                )
+              )
+              .map((passage) => [
+                passage.work[0].jad_id,
+                {
+                  title: `${passage.work[0]?.author[0].name}: ${passage.work[0]?.name}`,
+                }
+              ])
+          ).values()
+        ];
+        return {
+          ...manuscript,
+          related_works,
+          related_passages, // Attach related_passages array
+        };
+      });
     console.log(data);
 
     var tabledata = [...data];
@@ -79,6 +100,18 @@ import TableHead from "@/components/table-head.astro";
           headerFilter: "input",
         },
         {
+          title: "Works",
+          field: "related_works",
+          mutator: jsonpathLookup,
+          mutatorParams: {
+            path: "$[*].title",
+            separator: "; ",
+          },
+          resizable: true,
+          headerFilter: "input",          
+				formatter: "textarea",
+        },
+        {
           title: "Passages",
           field: "related_passages",
           minWidth: 300,
@@ -106,7 +139,6 @@ import TableHead from "@/components/table-head.astro";
           formatter: "textarea",
           headerFilter: "input",
         },
-
         {
           title: "Institutional context",
           resizable: true,
