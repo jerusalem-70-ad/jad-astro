@@ -211,41 +211,22 @@ export const authorsTableConfig = {
 export const worksTableConfig = {
   transformData: (works) => {
     return works.map((work) => {
-      const orgDate = [
-        ...new Map(
-          work.ms_transmission
-            .flatMap((ms) => ms.orig_date.flatMap((d) => d.date))
-            .map((date) => [date.id, date]) // Use ID as a unique key
-        ).values(),
-      ];
-      const orgPlace = [
-        ...new Set(
-          work.ms_transmission.flatMap((ms) =>
-            ms.orig_place.flatMap((p) => p.place.map((place) => place.value))
-          )
-        ),
-      ].join(" | ");
-      const provenance = [
-        ...new Set(
-          work.ms_transmission.flatMap((ms) =>
-            ms.provenance.flatMap((placement) =>
-              placement.places.map((place) => place.value)
-            )
-          )
-        ),
-      ].join(", ");
+      const totalPassages = work.related_passages.reduce(
+        (total, positionObj) => {
+          return total + positionObj.passages.length;
+        },
+        0
+      );
       return {
         id: work.id || "",
-        hit_id: work.hit_id || "",
+        jad_id: work.jad_id || "",
         title: work.title || "",
         author: [...new Set(work.author.map((a) => a.name))].join(", "),
-        genre: [...new Set(work.genre.map((g) => g.value))].join(", "),
-        ms_transmission: [
-          ...new Set(work.ms_transmission.map((m) => m.manuscript[0]?.value)),
-        ].join(", "),
-        origPlace: orgPlace,
-        provenance: provenance,
-        origDate: orgDate,
+        genre: work.genre,
+        ms_transmission: work.manuscripts.map((ms) => ms.name).join(" | "),
+        related_passages: totalPassages,
+        context: work.institutional_context.map((context) => context.value),
+        origDate: date,
       };
     });
   },
@@ -270,20 +251,13 @@ export const worksTableConfig = {
       {
         title: "Genre",
         field: "genre",
-        headerFilter: "list",
-        headerFilterParams: {
-          valuesLookup: true,
-          clearable: true,
-          sort: "asc",
-        },
         minWidth: 150,
         widthGrow: 1,
         responsive: 2,
       },
       {
-        title: "Überlieferung",
+        title: "Manuscripts",
         field: "ms_transmission",
-        headerFilterPlaceholder: "e.g. Clm. 6380",
         minWidth: 150,
         headerFilter: "input",
         formatter: "textarea",
@@ -291,28 +265,22 @@ export const worksTableConfig = {
         responsive: 2,
       },
       {
-        title: "Entstehungsort",
-        field: "origPlace",
-        headerFilterPlaceholder: "e.g. Reims",
-        minWidth: 150,
-        formatter: "textarea",
+        title: "Passages",
+        field: "related_passages",
+        minWidth: 100,
         responsive: 2,
       },
       {
-        title: "Provenienz",
-        field: "provenance",
-        headerFilterPlaceholder: "e.g. Freising",
+        title: "Context",
+        field: "context",
         minWidth: 150,
-        formatter: "textarea",
         responsive: 2,
       },
       {
-        title: "Datum",
+        title: "Date",
         field: "origDate",
         headerFilterPlaceholder: "e.g. 850, nach 850",
         minWidth: 150,
-        // Ensures filtering and sorting work correctly
-
         responsive: 2,
       },
     ];
@@ -321,7 +289,7 @@ export const worksTableConfig = {
   // Row click configuration for work-mss-transmission table
   getRowClickConfig: {
     urlPattern: "/works/{id}",
-    idField: "hit_id",
+    idField: "jad_id",
     target: "_self",
   },
 };
