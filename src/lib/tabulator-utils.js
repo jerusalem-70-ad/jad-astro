@@ -1,5 +1,27 @@
 import { JSONPath } from "jsonpath-plus";
 
+// function for tabulator accessor  Ensures filtering and sorting dates correctly
+export function dateAccessor(value) {
+  if (!value || !Array.isArray(value)) return "";
+  return value.map((dateObj) => dateObj.range || "").join(", ");
+}
+
+//  function for tabulator formatter - Formatting the displayed values
+export function dateFormatter(cell) {
+  const value = cell.getValue();
+  if (!value || !Array.isArray(value)) {
+    console.log("Returning 'not array'");
+    return "not array";
+  }
+
+  const result = value
+    .map((dateObj) => {
+      return dateObj.value || "";
+    })
+    .join(" | ");
+  return result;
+}
+
 export function jsonpathLookup(value, data, type, params, component) {
   const path = params.path;
   const separator = params.separator || ", ";
@@ -66,6 +88,18 @@ export function jsonpathsDistinctLookup(value, data, type, params, component) {
   }
 
   return allResults.join(separator);
+}
+
+// Define the function outside, before your config
+export function customNameFilter(headerValue, rowValue, rowData) {
+  if (!headerValue) return true;
+
+  const search = headerValue.toLowerCase();
+  const nameMatch = rowData.name?.toLowerCase().includes(search);
+  const altNameMatch = rowData?.alt_name
+    ? rowData.alt_name.toLowerCase().includes(search)
+    : false;
+  return nameMatch || altNameMatch;
 }
 
 /* for several years ranges in msItem tabulator */

@@ -5,19 +5,20 @@ import { log } from "@acdh-oeaw/lib";
 
 // fetch data from github ; variable with the URL
 const baseUrl =
-  "https://raw.githubusercontent.com/jerusalem-70-ad/jad-baserow-dump/refs/heads/main/data/";
+  "https://raw.githubusercontent.com/jerusalem-70-ad/jad-baserow-dump/refs/heads/main/json_dumps/";
 
 const fileNames = [
   "manuscripts.json",
   "keywords.json",
-  "passages.json",
+  "occurrences.json",
   "works.json",
-  "institutional_contexts.json",
+  "institutional_context.json",
   "libraries.json",
   "authors.json",
   "biblical_references.json",
-  "clusters.json",
-  "dates.json",
+  "cluster.json",
+  "date.json",
+  "places.json",
   "liturgical_references.json",
   "ms_occurrences.json",
   "sources_occurrences.json",
@@ -27,7 +28,7 @@ const fileNames = [
 
 async function fetchAllData() {
   // make a folder to store the data - use process.cwd to get the root (node operates from the root), concatinate src etc. - node knows to put / or \
-  const folderPath = join(process.cwd(), "src", "content", "data");
+  const folderPath = join(process.cwd(), "src", "content", "row");
   mkdirSync(folderPath, { recursive: true });
 
   // iterate over the fileNames, for each we call the function fetchData - which receives two parameters - fileName and folderPath

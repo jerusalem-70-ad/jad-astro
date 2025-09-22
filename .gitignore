@@ -25,6 +25,6 @@ pnpm-debug.log*
 .idea/
 
 # don't check in src/content/data folder
-src/content/data
+src/content/
 
 public/tei

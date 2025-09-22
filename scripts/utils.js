@@ -1,3 +1,57 @@
+import { readFileSync, writeFileSync, mkdirSync } from "fs";
+import { join } from "path";
+const loadJSON = (file) =>
+  JSON.parse(
+    readFileSync(join(process.cwd(), "src/content/row", file), "utf8")
+  );
+const places = Object.values(loadJSON("places.json"));
+
+export function enrichLibraries(librariesArray, libraries) {
+  return librariesArray.map((lib) => {
+    // Find matching library in libraries.json
+    const library = libraries.find((l) => l.id === lib.id) || {};
+    return {
+      id: lib.id,
+      name: lib.value,
+      full_name: library.full_name ?? "",
+      place: enrichPlaces(library.place, places) ?? "",
+      jad_id: library.jad_id ?? "",
+      url: library.url ?? "",
+    };
+  });
+}
+
+export function addPrevNextToItems(
+  item,
+  idField = "jad_id",
+  labelField = "view_label"
+) {
+  // Sort item by their keys or any specific field (if needed)
+  const sorteditem = [...item].sort((a, b) => a[idField] - b[idField]);
+
+  // Loop through the sorted array and add 'prev' and 'next' properties
+  for (let i = 0; i < sorteditem.length; i++) {
+    const prevIndex = (i - 1 + sorteditem.length) % sorteditem.length; // Wrap around to the last item
+    const nextIndex = (i + 1) % sorteditem.length; // Wrap around to the first item
+
+    // Get the previous and next items
+    const prevItem = sorteditem[prevIndex];
+    const nextItem = sorteditem[nextIndex];
+
+    // Add 'prev' and 'next' properties to the current item
+    sorteditem[i]["prev"] = {
+      id: prevItem[idField],
+      label: prevItem[labelField] || prevItem[idField], // Fallback to id if label is not available
+    };
+    sorteditem[i]["next"] = {
+      id: nextItem[idField],
+      label: nextItem[labelField] || nextItem[idField], // Fallback to id if label is not available
+    };
+  }
+
+  return sorteditem;
+}
+
 export function enrichDates(dateArray, dates) {
   return dateArray.map((date) => {
     // Find matching date in dates.json
@@ -131,4 +185,19 @@ export function normalizeText(text) {
       .replace(/\t+/g, " ") // replace tabs (single or multiple) with one space
       .replace(/ +/g, " "); // collapse multiple spaces, just in case
   }
+}
+
+export function enrichPlaces(placeArray, places) {
+  return placeArray.map((place) => {
+    // Find matching place in places.json
+    const place_geo = places.find((p) => p.id === place.id) || {};
+    return {
+      id: place.id,
+      value: place.value,
+      geonames_url: place_geo.geonames_url ?? "",
+      jad_id: place_geo.jad_id ?? "",
+      lat: place_geo.lat ?? "",
+      long: place_geo.long ?? "",
+    };
+  });
 }

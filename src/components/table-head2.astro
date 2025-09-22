@@ -1,0 +1,58 @@
+---
+import DownloadButtons from "./download-buttons.astro";
+import { Icon } from "astro-icon/components";
+interface Props {
+	title: string;
+	definition?: string;
+}
+
+const { title, definition } = Astro.props;
+---
+
+<div class="mx-auto md:w-4/5 w-screen px-2">
+	<div class="flex justify-between align-middle mb-2">
+		<h1 class="text-2xl font-semibold text-brand-800 py-2 flex items-center gap-1">
+			{title}
+			{
+				definition && (
+					<span class="md:hidden group flex gap-2 items-start relative">
+						<button
+							type="button"
+							class="peer"
+							aria-expanded="false"
+							onclick="this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true')"
+						>
+							<Icon name="lucide:info" aria-hidden="true" class="cursor-pointer" />
+							<span class="sr-only">Definition des Begriffes</span>
+						</button>
+						<span class="hidden peer-aria-expanded:block rounded-md px-2 py-1 text-sm md:text-base font-medium border-2 border-brand-800 bg-brand-100 text-brand-800 w-52 z-50 absolute left-8">
+							{definition}
+						</span>
+					</span>
+					<span class="hidden group md:flex gap-2 items-start relative">
+						<Icon name="lucide:info" aria-hidden="true" class="hover:bg-brand-800 hover:text-brand-50 rounded-full" />
+						<span class="sr-only">Definition des Begriffes</span>
+						<span class="invisible group-hover:visible rounded-md p-3 text-sm md:text-base font-medium bg-brand-900/90 text-brand-50 w-96 z-50 absolute left-8">
+							{definition}
+						</span>
+					</span>
+				)
+			}
+		</h1>
+	</div>
+	
+	<slot/>
+	<div class="text-sm md:text-base">
+		<div id="tabulator-table"></div>
+	</div>
+	<div class="border-t border-neutral-300 py-5 space-y-2 text-brand-900 p-4 md:px-0">
+		<p class="text-brand-700 font-semibold">Zitierhinweis:</p>
+		<p>
+			"{title}",
+			<span class="italic">Histories in Transition</span> (2025). URL: <span
+				id="pathname-placeholder"></span>.
+		</p>
+	</div>
+
+	<script src="@/lib/getCurrentURL.js"></script>
+</div>
