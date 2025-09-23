@@ -1,158 +1,125 @@
-// Configuration for Tabulator tables in work detail pages
-export const workDetailTableConfig = {
-  transformData: (msTransmission) => {
-    return msTransmission.map((item) => ({
-      manuscript: item.manuscript[0]?.value || "",
-      manuscriptId: item.manuscript[0]?.id || "",
-      locus: item.locus || "",
-      hit_id: item.hit_id || "",
-      role: item.role || "",
-      function: item.function || "",
-      origPlace: [
-        ...new Set(
-          item.orig_place.flatMap((p) => p.place.map((pl) => pl.value))
-        ),
-      ].join(", "),
-      origDate: [
-        ...new Map(
-          item.orig_date.flatMap((d) => d.date).map((date) => [date.id, date]) // Use ID as a unique key
-        ).values(),
-      ],
-      annotationDate: [
-        ...new Set(
-          item.annotation_date.flatMap((anDat) =>
-            anDat.date.map((d) => d.value)
-          )
-        ),
-      ].join(" | "),
-      annotationType: [...new Set(item.annotation_typ)].join(" | "),
-      version: [...new Set(item.version.map((ver) => ver.value))].join(" | "),
-      textModification: [...new Set(item.text_modification)].join(" | "),
-      decoration: [...new Set(item.decoration.map((deco) => deco.value))].join(
-        " | "
-      ),
-      form: [...new Set(item.form.map((f) => f.value))].join(" | "),
-    }));
+// Configuration for Tabulator tables for passages
+
+export const passagesTableConfig = {
+  transformData: (passages) => {
+    return passages.map((passage) => {
+      const work_position =
+        passage.work
+          .map((work) => {
+            const title = work.title;
+            const position = passage.position_in_work;
+            const page = passage.text_paragraph?.match(/p\. (\d+\w?)/)?.[1]; // get first page like '0246C'
+
+            if (position && page) {
+              return `${title}: ${position} (p. ${page})`;
+            } else if (position) {
+              return `${title}: ${position}`;
+            } else if (page) {
+              return `${title} (p. ${page})`;
+            } else {
+              return title;
+            }
+          })
+          .join("; ") || "";
+      return {
+        jad_id: passage.jad_id || "",
+        id: passage.id || "",
+        passage: passage.passage || "",
+        aut_name: passage.work[0]?.author[0]?.name || "",
+        alt_name: passage.work[0]?.author[0]?.alt_name || "",
+        work: passage.work[0]?.title || "",
+        work_position: work_position || "",
+        mss_occurrences: passage.mss_occurrences
+          .map((ms) => ms.manuscript)
+          .join(" | "),
+        biblical_references: passage.biblical_references
+          .map((ref) => ref.value)
+          .join(" | "),
+        liturgical_references: passage.liturgical_references
+          .map((ref) => ref.value)
+          .join(" | "),
+        keywords: passage.keywords.map((kw) => kw.value).join(" | ") || "",
+        transmission_graph:
+          passage.transmission_graph.graph.nodes.length - 1 || 0,
+      };
+    });
   },
 
-  getColumns: (
-    hasRole = false,
-    hasVersion = false,
-    hasTextModification = false,
-    hasForm = false,
-    hasAnnotationType = false,
-    hasAnnotationDate = false
-  ) => {
-    const baseColumns = [
+  getColumns: () => {
+    const columns = [
       {
-        title: "Handschrift",
-        field: "manuscript",
-        responsive: 0,
-
+        title: "ID",
+        resizable: true,
+        field: "id",
+        width: 80,
+        headerFilter: "input",
+      },
+      {
+        title: "Passage",
+        field: "passage",
+        responsive: 1,
         widthGrow: 3,
         minWidth: 150,
       },
       {
-        title: "Locus",
-        field: "locus",
-        responsive: 0,
-        widthGrow: 1,
-        minWidth: 80,
-      },
-      ...(hasRole
-        ? [
-            {
-              title: "Role",
-              field: "role",
-              responsive: 3,
-              minWidth: 150,
-            },
-          ]
-        : []),
-      {
-        title: "Schreibort",
-        field: "origPlace",
-        responsive: 1,
+        title: "Author",
+        field: "aut_name", //using custom filter to check also alt_name
+        resposive: 1,
         widthGrow: 2,
         minWidth: 150,
       },
       {
-        title: "Datierung",
-        field: "origDate",
-        responsive: 2,
-        headerFilterPlaceholder: "z.B. vor 1000",
-        widthGrow: 1,
-        minWidth: 150,
+        title: "Work",
+        resizable: true,
+        field: "work_position",
+        minWidth: 200,
+        headerFilter: "input",
       },
-      ...(hasAnnotationDate
-        ? [
-            {
-              title: "Annotationen - Datierung",
-              field: "annotationDate",
-              responsive: 3,
-              minWidth: 150,
-            },
-          ]
-        : []),
-      ...(hasAnnotationType
-        ? [
-            {
-              title: "Annotationen - Typ",
-              field: "annotationType",
-              responsive: 2,
-              widthGrow: 2,
-              minWidth: 150,
-              formatter: "textarea",
-            },
-          ]
-        : []),
+      {
+        title: "Manuscript",
+        resizable: true,
+        field: "mss_occurrences",
+        minWidth: 200,
+      },
 
-      ...(hasForm
-        ? [
-            {
-              title: "Form",
-              field: "form",
-              responsive: 3,
-              widthGrow: 2,
-              minWidth: 150,
-            },
-          ]
-        : []),
-      ...(hasVersion
-        ? [
-            {
-              title: "Version",
-              field: "version",
-              responsive: 3,
-              widthGrow: 2,
-              minWidth: 150,
-              formatter: "textarea",
-            },
-          ]
-        : []),
-      ...(hasTextModification
-        ? [
-            {
-              title: "Textmodifikation",
-              field: "textModification",
-              responsive: 3,
-              widthGrow: 2,
-              minWidth: 120,
-              formatter: "textarea",
-            },
-          ]
-        : []),
+      {
+        title: "Biblical Reference",
+        resizable: true,
+        field: "biblical_references",
+        minWidth: 200,
+      },
+      {
+        title: "Liturgical Reference",
+        resizable: true,
+        field: "liturgical_references",
+        minWidth: 200,
+      },
+      {
+        title: "Keywords",
+        resizable: true,
+        field: "keywords",
+        minWidth: 200,
+        headerFilter: "input",
+      },
+      {
+        title: "related passages",
+        headerTooltip:
+          "Sources of this passage, or passages that cite this one",
+        resizable: true,
+        field: "transmission_graph",
+        minWidth: 60,
+        headerFilter: "number",
+      },
     ];
 
-    return addHeaderFilters(baseColumns);
+    return addHeaderFilters(columns);
   },
-
-  // Row click configuration for work-mss-transmission table
-  getRowClickConfig: () => ({
-    urlPattern: "/msitems/{id}",
-    idField: "hit_id",
+  // Row click configuration for passages table
+  getRowClickConfig: {
+    urlPattern: "/passages/{id}",
+    idField: "jad_id",
     target: "_self",
-  }),
+  },
 };
 
 // Configuration for Tabulator tables in authors
@@ -163,7 +130,7 @@ export const authorsTableConfig = {
       .map((aut) => {
         return {
           id: aut.id || "",
-          name: aut.name || "",
+          aut_name: aut.name || "",
           alt_name: aut.alt_name || "",
           works: aut.works.map((w) => w.title).join(" | ") || "",
           jad_id: aut.jad_id || "",
@@ -176,7 +143,7 @@ export const authorsTableConfig = {
     const columns = [
       {
         title: "Name",
-        field: "name",
+        field: "aut_name",
         responsive: 1,
         widthGrow: 1,
         minWidth: 200,
@@ -211,22 +178,22 @@ export const authorsTableConfig = {
 export const worksTableConfig = {
   transformData: (works) => {
     return works.map((work) => {
-      const totalPassages = work.related_passages.reduce(
-        (total, positionObj) => {
-          return total + positionObj.passages.length;
-        },
-        0
-      );
+      const totalPassages = work.related__passages
+        .map((positionObj) => positionObj.passages.length)
+        .reduce((total, count) => total + count, 0);
       return {
         id: work.id || "",
         jad_id: work.jad_id || "",
         title: work.title || "",
-        author: [...new Set(work.author.map((a) => a.name))].join(", "),
+        aut_name: work.author.map((a) => a.name).join(", "),
+        alt_name: work.author[0].alt_name || "",
         genre: work.genre,
         ms_transmission: work.manuscripts.map((ms) => ms.name).join(" | "),
         related_passages: totalPassages,
-        context: work.institutional_context.map((context) => context.value),
-        origDate: date,
+        institutional_context: (work.institutional_context || [])
+          .map((context) => context.value)
+          .join(" | "),
+        origDate: work.date,
       };
     });
   },
@@ -242,8 +209,7 @@ export const worksTableConfig = {
       },
       {
         title: "Autor",
-        field: "author",
-        headerFilterPlaceholder: "e.g. Isidor",
+        field: "aut_name", //using custom filter to check also alt_name
         minWidth: 100,
         widthGrow: 2,
         responsive: 1,
@@ -259,8 +225,6 @@ export const worksTableConfig = {
         title: "Manuscripts",
         field: "ms_transmission",
         minWidth: 150,
-        headerFilter: "input",
-        formatter: "textarea",
         widthGrow: 1,
         responsive: 2,
       },
@@ -272,14 +236,14 @@ export const worksTableConfig = {
       },
       {
         title: "Context",
-        field: "context",
+        field: "institutional_context",
         minWidth: 150,
         responsive: 2,
       },
       {
         title: "Date",
         field: "origDate",
-        headerFilterPlaceholder: "e.g. 850, nach 850",
+        headerFilterPlaceholder: "e.g. 1000, after 1001",
         minWidth: 150,
         responsive: 2,
       },
@@ -294,194 +258,147 @@ export const worksTableConfig = {
   },
 };
 
-export const strataTableConfig = {
-  transformData: (strata) => {
-    return strata.map((stratum) => {
-      const origDate = [
-        ...new Map(
-          stratum.date.map((date) => [date.id, date]) // Use ID as a unique key
-        ).values(),
-      ];
-      return {
-        id: stratum.id || "",
-        hit_id: stratum.hit_id || "",
-        manuscript: stratum.manuscript[0]?.value || "",
-        number: stratum.number || "",
-        character: stratum.character.join(" | ") || "",
-        texts: [...new Set(stratum.msitems.map((item) => item.w_aut))].join(
-          "\n"
-        ),
-        origDate: origDate,
-        place: stratum.place.map((pl) => pl.value).join(" | ") || "",
-      };
-    });
+export const manuscriptsTableConfig = {
+  transformData: (mss) => {
+    return mss
+      .filter((ms) => ms.name[0].value)
+      .map((ms) => {
+        return {
+          id: ms.id || "",
+          ms_name: ms.name[0].value || "",
+          settlement: ms.library[0]?.place[0].value || "",
+          related_works:
+            ms.related_works
+              .map((w) => (w.author ? `${w.author.name}: ${w.title}` : w.title))
+              .join(" | ") || "",
+          related_passages:
+            ms.related_passages
+              .map(
+                (rel_p) =>
+                  `(${rel_p.passage.id}) ${rel_p.passage.passage.substring(
+                    0,
+                    50
+                  )}${rel_p.passage.passage.length > 50 ? "..." : ""}`
+              )
+              .join("\n") || "",
+
+          jad_id: ms.jad_id || "",
+          institutional_context:
+            ms.institutional_context
+              .map((context) => context.value)
+              .join(" | ") || "",
+          origDate: ms.date_written || "",
+        };
+      });
   },
 
-  getColumns() {
+  getColumns: () => {
     const columns = [
       {
-        title: "Handschrift",
-        field: "manuscript",
-        headerFilterPlaceholder: "e.g. Clm. 6380",
-        minWidth: 150,
-        widthGrow: 1,
-        responsive: 0,
+        title: "Settlement",
+        field: "settlement",
+        width: 150,
       },
       {
-        title: "Stratum",
-        field: "number",
-        headerFilterPlaceholder: "e.g. 1",
-        minWidth: 80,
-        widthGrow: 1,
-        responsive: 1,
+        title: "Shelfmark",
+        field: "ms_name",
+        width: 150,
       },
-
       {
-        title: "Texte",
-        field: "texts",
-        headerFilterPlaceholder: "e.g. Ostertafel",
-        minWidth: 150,
+        title: "Works",
+        field: "related_works",
+      },
+      {
+        title: "Passages",
+        field: "related_passages",
+        minWidth: 300,
         formatter: "textarea",
-        widthGrow: 3,
-        responsive: 2,
       },
       {
-        title: "Charakter",
-        field: "character",
-        headerFilterPlaceholder: "e.g. Anlage",
-        minWidth: 150,
-        formatter: "textarea",
-        widthGrow: 2,
-        responsive: 2,
+        title: "Institutional context",
+        resizable: true,
+        field: "institutional_context",
       },
       {
-        title: "Datum",
-        headerTooltip: "Datierung der beteiligten Hände",
+        title: "Date",
+        resizable: true,
         field: "origDate",
-        headerFilterPlaceholder: "e.g. 850, nach 850",
-        minWidth: 150,
-        responsive: 2,
-        widthGrow: 1,
-      },
-      {
-        title: "Ort",
-        field: "place",
-        headerFilterPlaceholder: "e.g. Reims",
-        minWidth: 150,
-        formatter: "textarea",
-        responsive: 2,
+        headerFilterPlaceholder: "e.g. 1000, after 1001",
       },
     ];
+
     return addHeaderFilters(columns);
   },
-  // Row click configuration for strata table
+  // Row click configuration for work-mss-transmission table
   getRowClickConfig: {
-    urlPattern: "/strata/{id}",
-    idField: "hit_id",
+    urlPattern: "/manuscripts/{id}",
+    idField: "jad_id",
     target: "_self",
   },
 };
 
-export const msItemsTableConfig = {
-  transformData: (msitems) => {
-    return msitems.map((item) => {
-      const origDate = [
-        ...new Map(
-          item.orig_date.flatMap((dating) =>
-            dating.date?.map((date) => [date.id, date])
-          ) || []
-        ).values(),
-      ];
-      const editDate = [
-        ...new Map(
-          item.hands
-            .filter((hand) =>
-              hand.jobs.some((j) => j.role.some((r) => r.value !== "Schreiber"))
-            )
-            .flatMap((hand) =>
-              hand.dating.flatMap((dat) =>
-                dat.date.map((date) => [date.id, date])
-              )
-            ) || []
-        ).values(),
-      ];
+export const keywordsTableConfig = {
+  transformData: (keywords) => {
+    return keywords.map((kw) => {
       return {
-        id: item.id || "",
-        hit_id: item.hit_id || "",
-        manuscript: item.manuscript[0].value,
-        locus: item.locus || "",
-        work:
-          item.title_work[0].author?.length > 0
-            ? `${item.title_work[0].author[0].name}: ${item.title_work[0].title}`
-            : item.title_work[0].title,
-        decoration: item.decoration.map((deco) => deco.value).join(" | "),
-        origPlace: [
-          ...new Set(
-            item.orig_place.flatMap((placement) =>
-              placement.place.map((place) => place.value)
+        id: kw.id || "",
+        name: kw.name || "",
+        description: kw.description || "",
+        related_passages:
+          kw.passages
+            .map(
+              (p) =>
+                `(${p.id}) ${p.passage.substring(0, 50)}${
+                  p.passage.length > 50 ? "..." : ""
+                }`
             )
-          ),
-        ].join(" | "),
-        origDate: origDate,
-        editDate: editDate,
-        // Add other fields as needed
+            .join(" | ") || "",
+
+        jad_id: kw.jad_id || "",
+        relatedPassagesLength: kw.passages.length || 0,
       };
     });
   },
 
-  getColumns() {
+  getColumns: () => {
     const columns = [
       {
-        title: "Handschrift",
-        field: "manuscript",
-        minWidth: 200,
-        responsive: 0,
-      },
-      {
-        title: "Locus",
-        field: "locus",
-        minWidth: 80,
-        responsive: 2,
-      },
-      {
-        title: "Werk",
-        field: "work",
-        minWidth: 200,
+        title: "Name",
+        resizable: true,
+        field: "name",
         responsive: 1,
+        widthGrow: 2,
       },
       {
-        title: "Dekoration",
-        field: "decoration",
-        minWidth: 100,
-        responsive: 2,
+        title: "info",
+        resizable: true,
+        field: "description",
+        responsive: 1,
+        widthGrow: 3,
       },
       {
-        title: "Schreiberort",
-        field: "origPlace",
-        minWidth: 200,
-        responsive: 2,
-      },
-      {
-        title: "Datum der Niederschrift",
-        field: "origDate",
-        headerFilterPlaceholder: "e.g. nach 810",
-        responsive: 2,
+        title: "occurrences",
+        field: "relatedPassagesLength",
+        headerFilter: "number",
+        responsive: 1,
+        widthGrow: 1,
       },
 
       {
-        title: "Datum der Bearbeitung",
-        field: "editDate",
-        minWidth: 200,
-        headerFilterPlaceholder: "e.g. nach 810",
+        title: "Passages",
+        field: "related_passages",
         responsive: 2,
+        widthGrow: 3,
+        formatter: "textarea",
       },
     ];
+
     return addHeaderFilters(columns);
   },
-  // Row click configuration for strata table
+  // Row click configuration for work-mss-transmission table
   getRowClickConfig: {
-    urlPattern: "/msitems/{id}",
-    idField: "hit_id",
+    urlPattern: "/keywords/{id}",
+    idField: "jad_id",
     target: "_self",
   },
 };
@@ -489,8 +406,8 @@ export const msItemsTableConfig = {
 // Helper function to add header filters to columns
 function addHeaderFilters(columns) {
   return columns.map((column) => ({
-    ...column, // Spread column properties first
-    headerFilter: column.headerFilter || "input", // Only set if not already defined
-    headerFilterPlaceholder: column.headerFilterPlaceholder || "Filtern ...", // Only set if not already defined
+    headerFilter: "input", // Default
+    headerFilterPlaceholder: "Search ...", // Default
+    ...column,
   }));
 }

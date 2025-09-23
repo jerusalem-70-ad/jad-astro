@@ -14,33 +14,38 @@ export default function TabulatorTable({
   columns,
   tableId = "tabulator-table",
   options = {},
-  showDownloadButtons = true, //  to control download buttons
-  downloadTitle = "data", //  for filename prefix
+  showDownloadButtons = true,
+  downloadTitle = "data",
   rowClickConfig = null,
   updateMapOnFilter = false,
-  mapIdField = "hit_id",
+  mapIdField = "jad_id",
+  // NEW: Timeline integration props
+  updateTimelineOnFilter = false,
+  timelineIdField = "jad_id",
+  timelineDataMapping = null, // Function to transform data for timeline
 }) {
   const tableRef = useRef(null);
   const tabulatorRef = useRef(null);
 
   // Process columns to add functions on the client side
-  // needed for date filtering function, getting lost otherwise
   const processedColumns = columns.map((column) => {
-    if (column.field === "origDate" || column.field === "editDate") {
-      return {
-        ...column,
-        accessor: dateAccessor,
-        formatter: dateFormatter,
-        headerFilterFunc: dateRangeFilter,
-      };
+    switch (column.field) {
+      case "origDate":
+      case "editDate":
+        return {
+          ...column,
+          accessor: dateAccessor,
+          formatter: dateFormatter,
+          headerFilterFunc: dateRangeFilter,
+        };
+      case "aut_name":
+        return {
+          ...column,
+          headerFilterFunc: customNameFilter,
+        };
+      default:
+        return column;
     }
-    if (column.field === "name") {
-      return {
-        ...column,
-        headerFilterFunc: customNameFilter,
-      };
-    }
-    return column;
   });
 
   const defaultOptions = {
@@ -72,6 +77,16 @@ export default function TabulatorTable({
       return;
     }
 
+    // NEW: Prepare timeline data if timeline integration is enabled
+    if (updateTimelineOnFilter && timelineDataMapping) {
+      // Transform the data for timeline using the provided mapping function
+      const timelineData = data.map(timelineDataMapping);
+
+      // Set the data on window object for the timeline component to use
+      window.passagesTimelineData = timelineData;
+      console.log("Timeline data prepared:", timelineData.length, "items");
+    }
+
     // Initialize Tabulator
     tabulatorRef.current = new Tabulator(tableRef.current, {
       data: data,
@@ -82,6 +97,7 @@ export default function TabulatorTable({
     // Wait for table to be built before adding event listeners
     tabulatorRef.current.on("tableBuilt", function () {
       console.log("Table built successfully");
+
       // Add row click listener if configuration is provided
       if (rowClickConfig) {
         tabulatorRef.current.on("rowClick", function (e, row) {
@@ -105,41 +121,64 @@ export default function TabulatorTable({
         });
       }
 
-      // Add map update functionality if enabled
-      if (updateMapOnFilter) {
-        // Update map when data is filtered
-        tabulatorRef.current.on("dataFiltered", function (filters, data) {
-          // Extract raw data from each RowComponent (using getData() method)
-          const filteredData = data.map((row) => row.getData());
+      // Add filtering event listeners for both map and timeline
+      tabulatorRef.current.on("dataFiltered", function (filters, rows) {
+        // Extract raw data from each RowComponent
+        const filteredData = rows.map((row) => row.getData());
 
-          // Extract hit_ids from filtered data using the mapIdField
-          const filteredIds = filteredData
+        console.log("Table filtered! Found", rows.length, "rows");
+
+        // Update map if enabled
+        if (updateMapOnFilter) {
+          const filteredMapIds = filteredData
             .map((row) => row[mapIdField])
             .filter((id) => id);
-          // Update the map with the filtered hit_ids
+
           if (window.updateMapWithFilteredIds) {
-            window.updateMapWithFilteredIds(filteredIds);
+            window.updateMapWithFilteredIds(filteredMapIds);
           } else {
             console.warn("Map update function not available");
           }
-        });
+        }
 
-        // Initial map update with all data - use getData() only
-        setTimeout(() => {
-          console.log("Initial map update");
-          try {
-            const initialData = tabulatorRef.current.getData();
-            const initialIds = initialData
+        // NEW: Update timeline if enabled
+        if (updateTimelineOnFilter) {
+          if (window.timelineChart && window.updateTimelineColors) {
+            window.updateTimelineColors(filteredData);
+          } else {
+            console.log(
+              "Timeline not ready yet - filter applied to table only"
+            );
+          }
+        }
+      });
+
+      // Initial updates for both map and timeline
+      setTimeout(() => {
+        console.log("Initial updates for map and timeline");
+        try {
+          const initialData = tabulatorRef.current.getData();
+
+          // Initial map update
+          if (updateMapOnFilter) {
+            const initialMapIds = initialData
               .map((row) => row[mapIdField])
               .filter((id) => id);
             if (window.updateMapWithFilteredIds) {
-              window.updateMapWithFilteredIds(initialIds);
+              window.updateMapWithFilteredIds(initialMapIds);
             }
-          } catch (error) {
-            console.error("Error with initial map update:", error);
           }
-        }, 100);
-      }
+
+          // NEW: Initial timeline update
+          if (updateTimelineOnFilter) {
+            if (window.timelineChart && window.updateTimelineColors) {
+              window.updateTimelineColors(initialData);
+            }
+          }
+        } catch (error) {
+          console.error("Error with initial updates:", error);
+        }
+      }, 100);
 
       // Update counters
       const counter1 = document.getElementById("counter1");
@@ -148,12 +187,8 @@ export default function TabulatorTable({
       if (counter1 && counter2) {
         const updateCounters = () => {
           try {
-            // total rows before filtering
             const totalCount = tabulatorRef.current.getDataCount("all");
-
-            // rows matching current filters
             const filteredCount = tabulatorRef.current.getDataCount("active");
-
             counter1.textContent = filteredCount;
             counter2.textContent = totalCount;
           } catch (error) {
@@ -164,11 +199,63 @@ export default function TabulatorTable({
         updateCounters();
 
         tabulatorRef.current.on("dataFiltered", function (filters, rows) {
-          counter1.textContent = rows.length; // filtered count
-          counter2.textContent = tabulatorRef.current.getDataCount("all"); // total count
+          counter1.textContent = rows.length;
+          counter2.textContent = tabulatorRef.current.getDataCount("all");
         });
       }
     });
+
+    // NEW: Setup timeline update function on window
+    if (updateTimelineOnFilter) {
+      window.updateTimelineColors = function (filteredData) {
+        const timelineChart = window.timelineChart;
+        if (!timelineChart) {
+          console.warn("Timeline chart not available");
+          return;
+        }
+
+        // Get IDs of filtered items using the specified field
+        const filteredIds = new Set(
+          filteredData.map((item) => item[timelineIdField])
+        );
+
+        // Get current chart option
+        const currentOption = timelineChart.getOption();
+
+        if (
+          !currentOption.series ||
+          !currentOption.series[0] ||
+          !currentOption.series[0].data
+        ) {
+          console.warn("Timeline chart data not available");
+          return;
+        }
+
+        // Update the scatter series data with colors
+        const updatedData = currentOption.series[0].data.map((node) => ({
+          ...node,
+          itemStyle: {
+            color: filteredIds.has(node.id) ? "#a92d03" : "#FFD700", // Red if filtered, gold if not
+            opacity: 0.8,
+          },
+        }));
+
+        // Update the chart
+        timelineChart.setOption({
+          series: [
+            {
+              data: updatedData,
+            },
+          ],
+        });
+
+        console.log(
+          "Timeline updated with",
+          filteredIds.size,
+          "filtered items"
+        );
+      };
+    }
 
     // Cleanup
     return () => {
@@ -176,10 +263,24 @@ export default function TabulatorTable({
         tabulatorRef.current.destroy();
         tabulatorRef.current = null;
       }
-    };
-  }, [data, columns, rowClickConfig, updateMapOnFilter, mapIdField]);
 
-  // Download handlers
+      // Clean up timeline function
+      if (updateTimelineOnFilter && window.updateTimelineColors) {
+        delete window.updateTimelineColors;
+      }
+    };
+  }, [
+    data,
+    columns,
+    rowClickConfig,
+    updateMapOnFilter,
+    mapIdField,
+    updateTimelineOnFilter,
+    timelineIdField,
+    timelineDataMapping,
+  ]);
+
+  // Download handlers (unchanged)
   const handleDownloadCSV = () => {
     if (tabulatorRef.current) {
       tabulatorRef.current.download("csv", `${downloadTitle}.csv`);
@@ -203,31 +304,32 @@ export default function TabulatorTable({
   return (
     <div className="text-sm md:text-base w-full">
       <div className="grid gap-2 md:flex my-4 md:justify-between items-start md:items-center mb-2">
-        <div className="text-brand-800 text-xl">
-          Es werden <span id="counter1"></span> von <span id="counter2"></span>{" "}
-          Einträgen angezeigt
+        <div className="text-brand-600 text-xl">
+          Showing <span id="counter1"></span> from total of{" "}
+          <span id="counter2"></span> entries
         </div>
-        {/* Download buttons */}
-        <div className="flex gap-2 justify-end">
-          <button
-            onClick={handleDownloadCSV}
-            className="px-3 py-1 bg-brand-600 text-brand-50 rounded hover:bg-brand-800 text-sm"
-          >
-            Download CSV
-          </button>
-          <button
-            onClick={handleDownloadJSON}
-            className="px-3 py-1 bg-brand-600 text-brand-50 rounded hover:bg-brand-800 text-sm"
-          >
-            Download JSON
-          </button>
-          <button
-            onClick={handleDownloadHTML}
-            className="px-3 py-1 bg-brand-600 text-brand-50 rounded hover:bg-brand-800 text-sm"
-          >
-            Download HTML
-          </button>
-        </div>
+        {showDownloadButtons && (
+          <div className="flex gap-2 justify-end">
+            <button
+              onClick={handleDownloadCSV}
+              className="px-3 py-1 bg-brand-600 text-brand-50 rounded hover:bg-brand-800 text-sm"
+            >
+              Download CSV
+            </button>
+            <button
+              onClick={handleDownloadJSON}
+              className="px-3 py-1 bg-brand-600 text-brand-50 rounded hover:bg-brand-800 text-sm"
+            >
+              Download JSON
+            </button>
+            <button
+              onClick={handleDownloadHTML}
+              className="px-3 py-1 bg-brand-600 text-brand-50 rounded hover:bg-brand-800 text-sm"
+            >
+              Download HTML
+            </button>
+          </div>
+        )}
       </div>
 
       <div

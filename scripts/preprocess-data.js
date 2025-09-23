@@ -27,12 +27,6 @@ const msOccurrences = Object.values(loadJSON("ms_occurrences.json"));
 const works = Object.values(loadJSON("works.json"));
 const authors = Object.values(loadJSON("authors.json"));
 const places = Object.values(loadJSON("places.json"));
-const institutional_context = Object.values(
-  loadJSON("institutional_context.json")
-);
-const liturgical_references = Object.values(
-  loadJSON("liturgical_references.json")
-);
 const libraries = Object.values(loadJSON("libraries.json"));
 
 // set the output folder
@@ -46,7 +40,10 @@ mkdirSync(folderPath, { recursive: true });
 
 const authorMapObject = {};
 authors.forEach((aut) => {
-  const normalizedKey = aut.name.toLowerCase().replace(/-/g, " ");
+  const normalizedKey = aut.name
+    .toLowerCase()
+    .replace(/-/g, " ")
+    .replace(",", "");
   authorMapObject[normalizedKey] = aut.name;
 });
 // enrich authors with places and transform dates
@@ -244,7 +241,7 @@ const passagesPlus = passages
   .filter((passage) => passage.passage) // filter out empty passages
   .map((passage) => {
     // hierarchical 3-level index for the typesense schema for biblical references
-    // level 0 for book (using the bookMap above), lv 1 for chapter, and lv 2 for verse
+    // level 0 for book (not any more using the bookMap above), lv 1 for chapter, and lv 2 for verse
     const lvl0 = [];
     const lvl1 = [];
     const lvl2 = [];
@@ -263,7 +260,8 @@ const passagesPlus = passages
         } else {
           [bookAbbrev, chapterVerse] = ref.value.split(".");
         }
-        const book = bookMap[bookAbbrev.trim()] || bookAbbrev;
+        //const book = bookMap[bookAbbrev.trim()] || bookAbbrev;
+        const book = bookAbbrev;
 
         let chapter, verse;
         if (chapterVerse?.includes(",")) {
@@ -329,21 +327,6 @@ const passagesPlus = passages
       });
     }
 
-    // enrich source_passage with title and author from works.json
-    if (passage.source_passage && passage.source_passage.length > 0) {
-      passage.source_passage = passage.source_passage.map((source) => {
-        const p = passages.find((p) => p.id === source.id);
-        return {
-          id: p.id,
-          jad_id: p.jad_id,
-          title: p.work[0]?.title || "",
-          author: p.work[0]?.author?.[0]?.name || "",
-          position_in_work: p.position_in_work,
-          passage: p.passage,
-        };
-      });
-    }
-
     return {
       id: passage.id,
       jad_id: passage.jad_id,
@@ -360,7 +343,7 @@ const passagesPlus = passages
       occurrence_found_in: passage.occurrence_found_in.map(
         ({ order, ...rest }) => rest
       ),
-      source_passage: passage.source_passage,
+      sources_passage: passage.source_passage,
       incipit: passage.incipit,
       prev: passage.prev,
       next: passage.next,
@@ -474,16 +457,8 @@ writeFileSync(
 
 console.log("works.json file enriched successfully.");
 
-// use imported function to build the transmission graph
-//const graph = buildTransmissionGraph(passagesPlus);
-
-// attach graph to each passage
-/* const enrichedPassages = passagesPlus.map((p) => ({
-  ...p,
-  transmission_graph: graph[p.id],
-})); */
-
-const passagesPlusFinal = passagesPlus.map((p) => {
+// enrich passages with data from worksPlus (author name, dates)
+const passagesPlusWorks = passagesPlus.map((p) => {
   const related_works = worksPlus.filter((w) => w.id === p.work[0]?.id);
   return {
     ...p,
@@ -491,6 +466,47 @@ const passagesPlusFinal = passagesPlus.map((p) => {
     //transmission_graph: graph[p.id],
   };
 });
+// enrich passages with data from passagesPlus and worksPlus for the source_passages
+const passagesPlusPlus = passagesPlusWorks.map((p) => {
+  const source_passages = p.sources_passage.map((sp) => {
+    // Find the matching passage and return the enriched object
+    const matchingPassage = passagesPlusWorks.find((pass) => pass.id === sp.id);
+
+    if (matchingPassage) {
+      return {
+        id: matchingPassage.id,
+        jad_id: matchingPassage.jad_id,
+        title: matchingPassage.work[0]?.title || "Not found",
+        author: matchingPassage.work[0]?.author?.[0]?.name || "",
+        passage: matchingPassage.passage,
+      };
+    }
+
+    // Return original if no match found
+    return sp;
+  });
+
+  return {
+    ...p,
+    source_passage: source_passages,
+    //transmission_graph: graph[p.id],
+  };
+});
+// use imported function to build the transmission graph
+const graph = buildTransmissionGraph(passagesPlusPlus);
+
+// attach graph to each passage
+const enrichedPassages = passagesPlusPlus.map((p) => ({
+  ...p,
+  transmission_graph: graph[p.id],
+}));
+
+// add prev and next to passages.json
+const passagesPlusFinal = addPrevNextToItems(
+  enrichedPassages,
+  "jad_id",
+  "name"
+);
 
 writeFileSync(
   join(folderPath, "passages.json"),
@@ -500,6 +516,19 @@ writeFileSync(
 
 // enrich manuscripts with data from passagesPlus and worksPlus
 const manuscriptPlusPlus = manuscriptsPlus.map((ms) => {
+  const related_works = worksPlus
+    .filter((w) => {
+      return w.manuscripts.some((m) => m.id === ms.id);
+    })
+    .map((w) => ({
+      id: w.id,
+      title: w.title,
+      jad_id: w.jad_id,
+      author: {
+        jad_id: w.author[0]?.jad_id || "",
+        name: w.author[0]?.name || "",
+      },
+    }));
   const related_occurrences = msOccurrences
     .filter((occur) => occur.manuscript.length > 0)
     .filter((occur) => occur.manuscript[0].id === ms.id)
@@ -508,7 +537,7 @@ const manuscriptPlusPlus = manuscriptsPlus.map((ms) => {
         (p) => p.id === occurr.occurrence[0].id
       );
       return {
-        passages: passage,
+        passage: passage,
         position_in_ms: occurr.position_in_ms,
         main_ms: occurr.main_ms,
         facsimile_position: occurr.facsimile_position,
@@ -516,18 +545,63 @@ const manuscriptPlusPlus = manuscriptsPlus.map((ms) => {
     });
   return {
     ...ms,
-    related_occurrences: related_occurrences,
+    related_passages: related_occurrences,
+    related_works: related_works,
   };
 });
 
+// add prev and next to passages.json
+const mssPlusFinal = addPrevNextToItems(
+  manuscriptPlusPlus,
+  "jad_id",
+  "name[0].value"
+);
+
 writeFileSync(
   join(folderPath, "manuscripts.json"),
-  JSON.stringify(manuscriptPlusPlus, null, 2),
+  JSON.stringify(mssPlusFinal, null, 2),
   { encoding: "utf-8" }
 );
 
 console.log("passages.json file enriched successfully.");
 
+const keywords = Object.values(loadJSON("keywords.json"));
+const keywordsPlus = keywords
+  .filter((kw) => kw.name)
+  .map((kw) => {
+    return {
+      id: kw.id,
+      jad_id: kw.jad_id,
+      name: kw.name,
+      description: kw.short_description || "",
+      notes: kw.notes || "",
+      passages: passagesPlusFinal
+        .filter((p) => p.keywords.some((k) => k.id === kw.id))
+        .map((p) => {
+          return {
+            id: p.id,
+            jad_id: p.jad_id,
+            passage: p.passage,
+            work: {
+              id: p.work[0]?.id || "",
+              title: p.work[0]?.title || "",
+              jad_id: p.work[0]?.jad_id || "",
+            },
+            position_in_work: p.position_in_work,
+            author: p.work[0]?.author?.[0]?.name || "",
+          };
+        }),
+      part_of: kw.part_of.map(({ order, ...rest }) => rest) || [],
+    };
+  });
+const keywordsPlusFinal = addPrevNextToItems(keywordsPlus, "jad_id", "name");
+writeFileSync(
+  join(folderPath, "keywords.json"),
+  JSON.stringify(keywordsPlusFinal, null, 2),
+  { encoding: "utf-8" }
+);
+
+console.log("keywords.json file enriched successfully.");
 /* console.log("Generating network data...");
 const networkData = createNetworkData(enrichedPassages);
 

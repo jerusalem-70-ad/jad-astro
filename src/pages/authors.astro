@@ -1,83 +1,31 @@
 ---
 import PageLayout from "@/layouts/page-layout.astro";
-
 import TableHead from "@/components/table-head.astro";
+import TabulatorTable from "@/components/tabulator-table.jsx";
+import { authorsTableConfig } from "@/lib/tabulator-table-configs.js";
+import authorsjson from "@/content/data/authors.json";
+
+// Transform data and prepare columns for Tabulator Table
+const authors = Object.values(authorsjson);
+const tableData = authorsTableConfig.transformData(authors);
+const columns = authorsTableConfig.getColumns();
+const rowClickConfig = authorsTableConfig.getRowClickConfig;
 ---
 
 <PageLayout title="Authors">
-  <TableHead title="Authors" />
-
-  <script>
-    import { setupTableActions } from "@/lib/table-actions";
-    import { TabulatorFull as Tabulator } from "tabulator-tables";
-    import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
-    import data from "@/content/data/authors.json";
-    import { jsonpathLookup } from "@/lib/tabulator-utils.js";
-
-    var tabledata = Object.values(data).filter((author) => author.name);
-
-    var table = new Tabulator("#tabulator-table", {
-      headerFilterLiveFilterDelay: 600,
-      height: 900,
-      data: tabledata,
-      layout: "fitColumns",
-      responsiveLayout: "collapse",
-      initialSort: [{ column: "name", dir: "asc" }],
-      rowHeader: {
-        formatter: "responsiveCollapse",
-        width: 30,
-        minWidth: 30,
-        hozAlign: "center",
-        resizable: false,
-        headerSort: false,
-      },
-      columns: [
-        {
-          title: "Name",
-          field: "name",
-          minWidth: 200,
-          resizable: true,
-          headerFilter: "input",
-          // Custom filter: checks both name and alt_name fields
-          headerFilterFunc: function (headerValue, rowValue, rowData) {
-            if (!headerValue) return true;
-            const search = headerValue.toLowerCase();
-            const nameMatch = rowData.name?.toLowerCase().includes(search);
-            const altNameMatch = rowData?.alt_name
-              ? rowData.alt_name.toLowerCase().includes(search)
-              : false;
-            return nameMatch || altNameMatch;
-          },
-          // Formatter: just show the main name
-          formatter: function (cell) {
-            return cell.getValue();
-          },
-        },
-
-        {
-          title: "GND",
-          resizable: true,
-          field: "gnd_url",
-          minWidth: 200,
-          headerFilter: "input",
-          formatter: "link",
-        },
-        {
-          title: "Works",
-          resizable: true,
-          field: "related__works",
-          minWidth: 200,
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].view_label",
-            separator: "| ",
-          },
-          headerFilter: "input",
-          formatter: "textarea",
-        },
-      ],
-    });
-
-    setupTableActions(table, "authors");
-  </script>
+  <TableHead title="Authors">
+    <TabulatorTable
+      client:only="react"
+      data={tableData}
+      columns={columns}
+      tableId="authors-table"
+      options={{
+        paginationSize: 25,
+        responsiveLayout: "collapse",
+        initialSort: [{ column: "aut_name", dir: "asc" }],
+      }}
+      downloadTitle="jad_authors"
+      rowClickConfig={rowClickConfig}
+    />
+  </TableHead>
 </PageLayout>

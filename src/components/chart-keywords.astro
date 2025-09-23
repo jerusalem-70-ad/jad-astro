@@ -6,10 +6,10 @@ import data from "@/content/data/keywords.json";
 const keywordsData = Object.values(data).map((keyword) => ({
   jad_id: keyword.jad_id,
   name: keyword.name,
-  passageCount: keyword.related__passages
-    ? keyword.related__passages.length
+  passageCount: keyword.passages
+    ? keyword.passages.length
     : 0,
-  shortDescription: keyword.short_description,
+  shortDescription: keyword.description,
 }));
 
 // Sort by passage count (descending) - show all keywords

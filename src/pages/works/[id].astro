@@ -90,7 +90,7 @@ const { data: work } = Astro.props;
             <dd class="pl-5">
                 {
                     work.published_edition.length > 0
-                        ? work.published_edition[0].name
+                        ? work.published_edition[0].value
                                 
                         : "N/A"
                 }
@@ -112,26 +112,7 @@ const { data: work } = Astro.props;
             </dt>
             <dd class="pl-5">
 
-                    {work.institutional_context.map(
-                        (
-                            institution: {
-                                jad_id: string;
-                                name: string;
-                            },
-                            index: number,
-                        ) => (
-                            <>
-                                <NavLink
-                                    href={`/institutions/${institution.jad_id}`}
-                                >
-                                    {institution.name}
-                                </NavLink>
-                                {index <
-                                    work.institutional_context.length -
-                                        1 && "| "}
-                            </>
-                        ),
-                    )}
+                    {work.institutional_context.map(institution => institution.value).join(", ")}
 
             </dd>)
             }

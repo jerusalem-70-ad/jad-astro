@@ -113,7 +113,7 @@ async function generate() {
   }
 
   function normalizeAuthor(name) {
-    return name.toLowerCase().replace(/-/g, " "); // normalize for searching
+    return name.toLowerCase().replace(/-/g, " "); // normalize names with '-' for searching
   }
 
   const records = [];

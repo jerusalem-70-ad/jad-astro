@@ -224,7 +224,11 @@ export function calculateSortPosition(positionInWork) {
   }
 
   // Pattern 5: Praefatio/Prefatio
-  if (position.startsWith("Praefatio") || position.startsWith("Prefatio")) {
+  if (
+    position.startsWith("Praefatio") ||
+    position.startsWith("Prefatio") ||
+    position.startsWith("Prologue")
+  ) {
     return 1;
   }
 

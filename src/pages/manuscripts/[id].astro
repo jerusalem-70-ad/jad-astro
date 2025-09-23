@@ -39,35 +39,41 @@ const { data: manuscript } = Astro.props;
     }));
 ---
 
-<PageLayout title=`${manuscript.view_label}`>
+<PageLayout title=`${manuscript.name[0].value}`>
   <Article
   prevLink={`/manuscripts/${manuscript.prev.id}`}
   nextLink={`/manuscripts/${manuscript.next.id}`}
-  mainTitle=`${manuscript.library[0]?.place[0]?.name}, ${manuscript.name[0]?.value}`
+  mainTitle=`${manuscript.library[0]?.place[0]?.value}, ${manuscript.name[0]?.value}`
 >
       
       <dl class="grid grid-cols-[1fr_5fr] text-sm md:leading-7 md:text-base">
         <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">Settlement:</dt>
-        <dd class="pl-5">{manuscript.library[0]?.place[0]?.name}</dd>
+        <dd class="pl-5">{manuscript.library[0]?.place[0]?.value}</dd>
 
        {manuscript.library.length > 0 && (
          <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">
           Library / Collection:
         </dt>
         <dd class="pl-5">
-         {manuscript.library_full[0]?.value ?? "N/A"}
+         {manuscript.library[0]?.full_name ?? "N/A"}
         </dd>
        )}
 
         <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">Shelfmark:</dt>
         <dd class="pl-5">
-          <NavLink href={manuscript.catalog_url} target="_blank"
+          {manuscript.catalog_url ? (
+            <NavLink href={manuscript.catalog_url} target="_blank"
                 class="inline-flex hover:text-brand-600 underline underline-offset-2"
               >
               {manuscript?.idno}          
                 <span class="sr-only">Catalog entry</span>
                 <Icon aria-hidden="true" name="lucide:external-link" />
               </NavLink>
+          ) : (
+            manuscript?.idno ?? "N/A"
+          )}
+          
+          
         </dd>
 
         <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">Format:</dt>
@@ -80,9 +86,8 @@ const { data: manuscript } = Astro.props;
           Insitutional context:
         </dt>
         <dd class="pl-5">
-          <NavLink href={`/institutions/${manuscript.institutional_context[0]?.jad_id}`}>
-            {manuscript.institutional_context[0]?.name ?? "N/A"}
-          </NavLink>
+          
+            {manuscript.institutional_context[0]?.value ?? "N/A"}
         </dd>
        )}
 
