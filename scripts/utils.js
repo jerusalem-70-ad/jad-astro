@@ -109,7 +109,7 @@ export function getCentury(year) {
 
   return `${century}${getSuffix(century)} cen.`;
 }
-
+/* 
 // helper function to get variant names from lobid API
 
 export async function enrichAuthorsWithVariants() {
@@ -173,7 +173,7 @@ export async function enrichAuthorsWithVariants() {
   );
 
   return enrichedAuthors;
-}
+} */
 
 // helpers function to normalize text
 export function normalizeText(text) {
