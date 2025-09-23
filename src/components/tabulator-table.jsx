@@ -7,6 +7,7 @@ import {
   dateFormatter,
   dateRangeFilter,
   customNameFilter,
+  scrollableCellFormatter,
 } from "@/lib/tabulator-utils.js";
 
 export default function TabulatorTable({
@@ -27,7 +28,7 @@ export default function TabulatorTable({
   const tableRef = useRef(null);
   const tabulatorRef = useRef(null);
 
-  // Process columns to add functions on the client side
+  // Process columns to add functions on the client side for custom filtering/formatting
   const processedColumns = columns.map((column) => {
     switch (column.field) {
       case "origDate":
@@ -42,6 +43,15 @@ export default function TabulatorTable({
         return {
           ...column,
           headerFilterFunc: customNameFilter,
+        };
+      case "related_passages":
+        return {
+          ...column,
+          formatter: scrollableCellFormatter,
+          formatterParams: {
+            scrollable: true,
+          },
+          minWidth: 150,
         };
       default:
         return column;
@@ -115,8 +125,16 @@ export default function TabulatorTable({
 
           if (url) {
             const finalUrl = withBasePath(url);
-            const target = rowClickConfig.target || "_self";
-            window.open(finalUrl, target);
+
+            // Check if Ctrl key (or Cmd on Mac) is pressed
+            if (e.ctrlKey || e.metaKey) {
+              // Open in new tab
+              window.open(finalUrl, "_blank");
+            } else {
+              // Normal click - existing behavior
+              const target = rowClickConfig.target || "_self";
+              window.open(finalUrl, target);
+            }
           }
         });
       }
@@ -302,9 +320,9 @@ export default function TabulatorTable({
   };
 
   return (
-    <div className="text-sm md:text-base w-full">
+    <div className="text-sm w-full">
       <div className="grid gap-2 md:flex my-4 md:justify-between items-start md:items-center mb-2">
-        <div className="text-brand-600 text-xl">
+        <div className="text-brand-600 text-base">
           Showing <span id="counter1"></span> from total of{" "}
           <span id="counter2"></span> entries
         </div>

@@ -57,6 +57,7 @@
 .tabulator-responsive-collapse td {
   @apply break-words whitespace-normal max-w-full;
   @apply align-top;
+  @apply text-xs;
 }
 
 .tabulator-responsive-collapse a {

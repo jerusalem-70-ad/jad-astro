@@ -1,3 +1,11 @@
+// custom function for get scrollable cells in tabulator
+export function scrollableCellFormatter(cell) {
+  const value = cell.getValue();
+  if (!value) return "";
+
+  return `<div style="max-height: 100px; overflow-y: auto; overflow-x: hidden">${value}</div>`;
+}
+
 // custom filter for tabulator to search in both name and alt_name fields
 export function customNameFilter(headerValue, rowValue, rowData) {
   if (!headerValue) return true;
@@ -9,57 +17,6 @@ export function customNameFilter(headerValue, rowValue, rowData) {
     : false;
   return nameMatch || altNameMatch;
 }
-
-// function to filter numeric not_before and not_After date in separate columns (TPQ and TAQ)
-
-export function filterTPQ(headerValue, rowValue, rowData) {
-  if (!headerValue) return true; // Show all if no filter value
-  const filterValue = parseInt(headerValue); // Parse filter value as integer
-  if (isNaN(filterValue)) return true; // Show all if filter value is not a number
-
-  // rowValue is an array of dates, so check if ANY of them is greater than the filter value
-  return rowValue.some((date) => {
-    const dateValue = parseInt(date); // Parse date value as integer
-    return !isNaN(dateValue) && dateValue >= filterValue; // Compare only if date is a number
-  });
-}
-
-export function filterTAQ(headerValue, rowValue, rowData) {
-  if (!headerValue) return true; // Show all if no filter value
-  const filterValue = parseInt(headerValue); // Parse filter value as integer
-  if (isNaN(filterValue)) return true; // Show all if filter value is not a number
-
-  // rowValue is an array of dates, so check if ANY of them is greater than the filter value
-  return rowValue.some((date) => {
-    const dateValue = parseInt(date); // Parse date value as integer
-    return !isNaN(dateValue) && dateValue <= filterValue; // Compare only if date is a number
-  });
-}
-
-/* // To get the century of not_before not_after dates
-export function jsonpathGetCentury(value, data, type, params, component) {
-  const paths = params.paths;
-  const separator = params.separator || ", ";
-  
-  // Helper function to calculate the century
-  const getCentury = (year) => {
-    if (!year) return "N/A"; // Handle null or undefined dates
-    // get the century  by dividing the year by 100 and round it to the nearest integer 
-    // need to add 1 since they use formats 800-899 for 9th c.
-  const century = Math.ceil((parseInt(year) + 1) / 100);
-  return `${century} Jh.`;
-};
-
-// Collect results from each path and convert to centuries
-  let allResults = paths.flatMap(path => {
-  return JSONPath({ path: path, json: value }).map(date => {
-    const year = date ? date.split("-")[0] : null;
-    return getCentury(year);
-  });
-  });
-
-  return [...new Set(allResults)].join(separator); // Remove duplicates
-} */
 
 // function for tabulator accessor  Ensures filtering and sorting dates correctly
 export function dateAccessor(value) {
@@ -141,3 +98,55 @@ export function sortByKey(value, data, type, params, component) {
   // Extract the 'value' property and join with separator
   return sorted.map((ref) => ref.value).join(params.separator || "; ");
 }
+
+/* // function to filter numeric not_before and not_After date in separate columns (TPQ and TAQ) 
+// worked very good but was not welcomed by the user
+
+export function filterTPQ(headerValue, rowValue, rowData) {
+  if (!headerValue) return true; // Show all if no filter value
+  const filterValue = parseInt(headerValue); // Parse filter value as integer
+  if (isNaN(filterValue)) return true; // Show all if filter value is not a number
+
+  // rowValue is an array of dates, so check if ANY of them is greater than the filter value
+  return rowValue.some((date) => {
+    const dateValue = parseInt(date); // Parse date value as integer
+    return !isNaN(dateValue) && dateValue >= filterValue; // Compare only if date is a number
+  });
+}
+
+export function filterTAQ(headerValue, rowValue, rowData) {
+  if (!headerValue) return true; // Show all if no filter value
+  const filterValue = parseInt(headerValue); // Parse filter value as integer
+  if (isNaN(filterValue)) return true; // Show all if filter value is not a number
+
+  // rowValue is an array of dates, so check if ANY of them is greater than the filter value
+  return rowValue.some((date) => {
+    const dateValue = parseInt(date); // Parse date value as integer
+    return !isNaN(dateValue) && dateValue <= filterValue; // Compare only if date is a number
+  });
+} */
+
+/* // To get the century of not_before not_after dates
+export function jsonpathGetCentury(value, data, type, params, component) {
+  const paths = params.paths;
+  const separator = params.separator || ", ";
+  
+  // Helper function to calculate the century
+  const getCentury = (year) => {
+    if (!year) return "N/A"; // Handle null or undefined dates
+    // get the century  by dividing the year by 100 and round it to the nearest integer 
+    // need to add 1 since they use formats 800-899 for 9th c.
+  const century = Math.ceil((parseInt(year) + 1) / 100);
+  return `${century} Jh.`;
+};
+
+// Collect results from each path and convert to centuries
+  let allResults = paths.flatMap(path => {
+  return JSONPath({ path: path, json: value }).map(date => {
+    const year = date ? date.split("-")[0] : null;
+    return getCentury(year);
+  });
+  });
+
+  return [...new Set(allResults)].join(separator); // Remove duplicates
+} */

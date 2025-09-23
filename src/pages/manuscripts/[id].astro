@@ -77,10 +77,14 @@ const { data: manuscript } = Astro.props;
         </dd>
 
         <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">Format:</dt>
-        <dd class="pl-5">{manuscript?.format !== null
+        <dd class="pl-5">{manuscript?.format
           ? manuscript?.format
         : 'N/A'}</dd>
 
+<dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">Date:</dt>
+        <dd class="pl-5">{manuscript?.date_written.length > 0
+          ? manuscript?.date_written[0]?.value
+        : 'N/A'}</dd>
        {manuscript.institutional_context.length > 0 && (
          <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">
           Insitutional context:
@@ -90,7 +94,6 @@ const { data: manuscript } = Astro.props;
             {manuscript.institutional_context[0]?.value ?? "N/A"}
         </dd>
        )}
-
         
         {related_passages.length > 0 && (
           <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">Passages:</dt>

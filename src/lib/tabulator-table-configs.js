@@ -60,26 +60,29 @@ export const passagesTableConfig = {
         field: "passage",
         responsive: 1,
         widthGrow: 3,
-        minWidth: 150,
+        minWidth: 200,
       },
       {
         title: "Author",
         field: "aut_name", //using custom filter to check also alt_name
         resposive: 1,
         widthGrow: 2,
-        minWidth: 150,
+        minWidth: 200,
       },
       {
         title: "Work",
         resizable: true,
         field: "work_position",
+        responsive: 1,
+        widthGrow: 2,
         minWidth: 200,
-        headerFilter: "input",
       },
       {
         title: "Manuscript",
         resizable: true,
         field: "mss_occurrences",
+        widthGrow: 2,
+        responsive: 3,
         minWidth: 200,
       },
 
@@ -87,34 +90,41 @@ export const passagesTableConfig = {
         title: "Biblical Reference",
         resizable: true,
         field: "biblical_references",
-        minWidth: 200,
+        responsive: 4,
+        widthGrow: 1,
+        minWidth: 100,
       },
       {
         title: "Liturgical Reference",
         resizable: true,
         field: "liturgical_references",
-        minWidth: 200,
+        responsive: 4,
+        widthGrow: 1,
+        minWidth: 100,
       },
       {
         title: "Keywords",
         resizable: true,
         field: "keywords",
-        minWidth: 200,
-        headerFilter: "input",
+        responsive: 2,
+        widthGrow: 2,
+        minWidth: 150,
       },
       {
         title: "Date",
         field: "origDate",
         headerFilterPlaceholder: "e.g. 1000, after 1001",
+        responsive: 2,
+        widthGrow: 2,
+        minWidth: 200,
       },
       {
         title: "related passages",
         headerTooltip:
           "Sources of this passage, or passages that cite this one",
-        resizable: true,
         field: "transmission_graph",
-        minWidth: 60,
         headerFilter: "number",
+        responsive: 3,
       },
     ];
 
@@ -269,6 +279,12 @@ export const manuscriptsTableConfig = {
     return mss
       .filter((ms) => ms.name[0].value)
       .map((ms) => {
+        const passages =
+          (ms.related_passages.length > 0 &&
+            `<ul>${ms.related_passages
+              .map((p) => `<li>(${p.passage.id}) ${p.passage.passage})</li>`)
+              .join("")}</ul>`) ||
+          [];
         return {
           id: ms.id || "",
           ms_name: ms.name[0].value || "",
@@ -277,16 +293,7 @@ export const manuscriptsTableConfig = {
             ms.related_works
               .map((w) => (w.author ? `${w.author.name}: ${w.title}` : w.title))
               .join(" | ") || "",
-          related_passages:
-            ms.related_passages
-              .map(
-                (rel_p) =>
-                  `(${rel_p.passage.id}) ${rel_p.passage.passage.substring(
-                    0,
-                    50
-                  )}${rel_p.passage.passage.length > 50 ? "..." : ""}`
-              )
-              .join("\n") || "",
+          related_passages: passages,
 
           jad_id: ms.jad_id || "",
           institutional_context:
@@ -346,20 +353,17 @@ export const manuscriptsTableConfig = {
 export const keywordsTableConfig = {
   transformData: (keywords) => {
     return keywords.map((kw) => {
+      const passages =
+        (kw.passages.length > 0 &&
+          `<ul>${kw.passages
+            .map((p) => `<li>(${p.id}) ${p.passage})</li>`)
+            .join("")}</ul>`) ||
+        [];
       return {
         id: kw.id || "",
         name: kw.name || "",
         description: kw.description || "",
-        related_passages:
-          kw.passages
-            .map(
-              (p) =>
-                `(${p.id}) ${p.passage.substring(0, 50)}${
-                  p.passage.length > 50 ? "..." : ""
-                }`
-            )
-            .join(" | ") || "",
-
+        related_passages: passages,
         jad_id: kw.jad_id || "",
         relatedPassagesLength: kw.passages.length || 0,
       };
@@ -376,14 +380,15 @@ export const keywordsTableConfig = {
         widthGrow: 2,
       },
       {
-        title: "info",
+        title: "Info",
         resizable: true,
         field: "description",
         responsive: 1,
         widthGrow: 3,
+        formatter: "textarea",
       },
       {
-        title: "occurrences",
+        title: "Occurrences",
         field: "relatedPassagesLength",
         headerFilter: "number",
         responsive: 1,

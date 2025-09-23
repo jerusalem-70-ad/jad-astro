@@ -463,7 +463,7 @@ search.addWidgets([
         label:
           item.attribute === "biblical_ref_lvl0"
             ? "Bible book"
-            : item.attribute === "work.author.name"
+            : item.attribute === "author_search"
             ? "Author"
             : item.attribute === "work.title"
             ? "Work"
