@@ -91,7 +91,6 @@ async function main() {
   console.log("📖 Loading data files...");
   const manuscripts = Object.values(loadJSON("manuscripts.json"));
   const passages = loadJSON("passages.json");
-  const dates = Object.values(loadJSON("dates.json"));
   const works = loadJSON("works.json");
   const keywords = Object.values(loadJSON("keywords.json"));
   const clusters = Object.values(loadJSON("clusters.json"));
@@ -113,9 +112,6 @@ async function main() {
 
   const manuscriptById = new Map();
   manuscripts.forEach((ms) => {
-    if (Array.isArray(ms.date_written)) {
-      ms.date_written = enrichDates(ms.date_written, dates);
-    }
     manuscriptById.set(ms.id, ms);
     if (ms.jad_id) manuscriptById.set(ms.jad_id, ms);
   });
