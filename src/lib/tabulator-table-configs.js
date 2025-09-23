@@ -39,6 +39,7 @@ export const passagesTableConfig = {
           .map((ref) => ref.value)
           .join(" | "),
         keywords: passage.keywords.map((kw) => kw.value).join(" | ") || "",
+        origDate: passage.work[0].date || "",
         transmission_graph:
           passage.transmission_graph.graph.nodes.length - 1 || 0,
       };
@@ -100,6 +101,11 @@ export const passagesTableConfig = {
         field: "keywords",
         minWidth: 200,
         headerFilter: "input",
+      },
+      {
+        title: "Date",
+        field: "origDate",
+        headerFilterPlaceholder: "e.g. 1000, after 1001",
       },
       {
         title: "related passages",

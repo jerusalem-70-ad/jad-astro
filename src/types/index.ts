@@ -12,6 +12,7 @@ export interface GraphNode {
   depth: number;
   nodeType: NodeType;
   x: number;
+  date: number;
 }
 
 // Link between nodes
@@ -63,9 +64,9 @@ export interface Author {
   lebensdaten?: string | null;
   date_of_birth?: string | null;
   date_of_death?: string | null;
-  origDates?: [any] | null;
+  origDates?: any[] | null;
   place: Place[];
-  alt_names?: string | null;
+  alt_name?: string | null;
   works: any[]; // This appears to be empty in the sample
   prev: Navigation;
   next: Navigation;
@@ -74,10 +75,10 @@ export interface Author {
 export interface Place {
   id: number;
   value: string;
-  geo_url?: string | null;
+  geonames_url?: string | null;
   jad_id?: string | null;
   lat?: string | null;
-  lon?: string | null;
+  long?: string | null;
 }
 
 // Published Edition interface
@@ -93,8 +94,8 @@ export interface DateItem {
   id: number;
   value: string;
   range: string | null;
-  not_before: string | null;
-  not_after: string | null;
+  not_before: number | null;
+  not_after: number | null;
   century?: string[] | null;
 }
 
@@ -143,7 +144,7 @@ export interface Navigation {
 
 export interface SourcePass {
   id: number;
-  jad_id: number;
+  jad_id: string;
   title: string;
   author?: string;
   position_in_work?: string;
@@ -168,7 +169,7 @@ export interface Passage {
   liturgical_references: any[]; // This appears to be empty in the sample
   occurrence_found_in: ValueItem[];
   edition_link: string | null;
-  source_passage: SourcePass[];
+  source_passage?: SourcePass[];
   mss_occurrences: Mss_occurrences[] | null;
   incipit: string | null;
   view_label?: string;

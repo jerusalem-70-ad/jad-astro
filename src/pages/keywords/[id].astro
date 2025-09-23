@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 const { data: keyword } = Astro.props;
 ---
 
-<PageLayout title={keyword.view_label}>
+<PageLayout title={keyword.name}>
   <Article
     prevLink={`/keywords/${keyword.prev.id}`}
     nextLink={`/keywords/${keyword.next.id}`}
@@ -25,7 +25,7 @@ const { data: keyword } = Astro.props;
       <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">
         About:
       </dt>
-      <dd class="pl-5">{keyword.short_description}</dd>
+      <dd class="pl-5">{keyword.description}</dd>
 
       <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">
         Passages:
@@ -78,7 +78,7 @@ const { data: keyword } = Astro.props;
           {
             Object.values(keywords)
               .filter((kword) =>
-                kword.part_of.some((part) => part.jad_id === keyword.jad_id)
+                kword.part_of.some((part) => part.id === keyword.id)
               )
               .map((kword) => (
                 <li class="list-disc">

@@ -1,280 +1,39 @@
 ---
 import PageLayout from "@/layouts/page-layout.astro";
 import TableHead from "@/components/table-head.astro";
-const title = "Passages";
+import TabulatorTable from "@/components/tabulator-table.jsx";
+import { passagesTableConfig } from "@/lib/tabulator-table-configs.js";
+import passagesjson from "@/content/data/passages.json";
+
 import PassagesTimeline from "@/components/passages-timeline.astro";
+
+// Transform data and prepare columns for Tabulator Table
+const passages = Object.values(passagesjson);
+const tableData = passagesTableConfig.transformData(passages);
+const columns = passagesTableConfig.getColumns();
+const rowClickConfig = passagesTableConfig.getRowClickConfig;
 ---
 
-<PageLayout title={title}>
-  <TableHead title={title}>
-    <details class="mb-5">
+<PageLayout title="Passages">
+  <TableHead title="Passages">
+   <!--  <details class="mb-5">
       <summary
         class="rounded-md py-2 px-4 bg-brand-400 text-brand-100 hover:bg-brand-700 hover:text-brand-50 transition cursor-pointer mb-4"
         >Passages Timeline Graph
       </summary>
       <PassagesTimeline />
-    </details>
+    </details>      -->
+    <TabulatorTable
+      client:only="react"
+      data={tableData}
+      columns={columns}
+      tableId="passages-table"
+      options={{
+        paginationSize: 25,
+        responsiveLayout: "collapse",
+      }}
+      downloadTitle="jad_passages"
+      rowClickConfig={rowClickConfig}
+    />
   </TableHead>
-  <script>
-    import { setupTableActions } from "@/lib/table-actions";
-    import { TabulatorFull as Tabulator } from "tabulator-tables";
-    import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
-    import {
-      jsonpathLookup,
-      sortByKey,
-      filterTAQ,
-      filterTPQ,
-    } from "@/lib/tabulator-utils.js";
-    import data from "@/content/data/passages.json";
-
-    const dataSet = Object.values(data).map((passage) => {
-      return {
-        ...passage,
-        // get author from nested work object to be used in a separate column
-        author_l: passage.work.flatMap((work) =>
-          work.author.map((author) => ({
-            name: author.name,
-            alt_name: author.alt_name,
-          }))
-        ),
-
-        // get date from nested work object to be used in a separate column
-        work_date: passage.work
-          .map((work) => work.date.map((datum) => datum.value).join(", "))
-          .join("; "),
-        // combine work.title with position in work to read in one column
-        work_position: passage.work
-          .map((work) => {
-            const title = work.title;
-            const position = passage.position_in_work;
-            const page = passage.text_paragraph?.match(/p\. (\d+\w?)/)?.[1]; // get first page like '0246C'
-
-            if (position && page) {
-              return `${title}: ${position} (p. ${page})`;
-            } else if (position) {
-              return `${title}: ${position}`;
-            } else if (page) {
-              return `${title} (p. ${page})`;
-            } else {
-              return title;
-            }
-          })
-          .join("; "),
-        date_ante_quem: passage.work[0]?.date[0]?.not_before || "N/A",
-        date_post_quem: passage.work[0]?.date[0]?.not_after || "N/A",
-      };
-    });
-
-    var tabledata = dataSet;
-
-    var table = new Tabulator("#tabulator-table", {
-      headerFilterLiveFilterDelay: 600,
-      height: 900,
-      data: tabledata,
-      layout: "fitColumns",
-      responsiveLayout: "collapse",
-      rowHeader: {
-        formatter: "responsiveCollapse",
-        width: 30,
-        minWidth: 30,
-        hozAlign: "center",
-        resizable: false,
-        headerSort: false,
-      },
-      columns: [
-        {
-          title: "ID",
-          resizable: true,
-          field: "id",
-          width: 80,
-          headerFilter: "input",
-        },
-        {
-          title: "Passage",
-          resizable: true,
-          field: "passage",
-          minWidth: 200,
-          headerFilter: "input",
-        },
-        {
-          title: "Author",
-          resizable: true,
-          field: "author_l",
-          minWidth: 200,
-          headerFilter: "input",
-          // Custom filter: checks all names AND alt_names in the array
-          headerFilterFunc: function (headerValue, rowValue, rowData) {
-            if (!headerValue) return true;
-            const search = headerValue.toLowerCase();
-            // rowValue is the array of author objects
-            return (
-              Array.isArray(rowValue) &&
-              rowValue.some((author) => {
-                const nameMatch = author.name?.toLowerCase().includes(search);
-                const altNameMatch = author.alt_name
-                  ? // some alt_name are empty strings need to check for that
-                    author.alt_name.toLowerCase().includes(search)
-                  : false;
-                return nameMatch || altNameMatch;
-              })
-            );
-          },
-          // Formatter: show only the author names
-          formatter: function (cell) {
-            return cell
-              .getValue()
-              .map((author: { name: string; alt_name?: string }) => author.name)
-              .join(", ");
-          },
-        },
-        {
-          title: "Work",
-          resizable: true,
-          field: "work_position",
-          minWidth: 200,
-          headerFilter: "input",
-        },
-
-        {
-          title: "Manuscript",
-          resizable: true,
-          field: "mss_occurrences",
-          minWidth: 200,
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].manuscript",
-            separator: "\n",
-          },
-          headerFilter: "input",
-          formatter: "textarea",
-        },
-
-        {
-          title: "Biblical Reference",
-          resizable: true,
-          field: "biblical_references",
-          minWidth: 200,
-          mutator: sortByKey,
-          mutatorParams: {
-            separator: "; ",
-          },
-          headerFilter: "input",
-        },
-        {
-          title: "Liturgical Reference",
-          resizable: true,
-          field: "liturgical_references",
-          minWidth: 200,
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].value",
-            separator: "; ",
-          },
-          headerFilter: "input",
-        },
-        {
-          title: "Keywords",
-          resizable: true,
-          field: "keywords",
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].name",
-            separator: "; ",
-          },
-          minWidth: 200,
-          headerFilter: "input",
-        },
-        {
-          title: "TPQ",
-          headerTooltip: "Terminus post quem (date after which)",
-          resizable: true,
-          field: "date_ante_quem",
-          minWidth: 60,
-          headerFilter: "number", // Use number filter for numerical comparison
-          headerFilterFunc: filterTPQ,
-        },
-        {
-          title: "TAQ",
-          headerTooltip: "Terminus ante quem (date before which)",
-          resizable: true,
-          field: "date_post_quem",
-          minWidth: 60,
-          headerFilter: "number",
-          headerFilterFunc: filterTAQ,
-        },
-        {
-          title: "related passages",
-          headerTooltip:
-            "Sources of this passage, or passages that cite this one",
-          resizable: true,
-          field: "transmission_graph",
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$.metadata.allRelatedPassages",
-          },
-          minWidth: 60,
-          headerFilter: "number",
-          visible: true,
-        },
-      ],
-    });
-
-    setupTableActions(table, "passages");
-    table.on("dataFiltered", function (filters, rows) {
-      console.log("Table filtered! Found", rows.length, "rows");
-
-      // Get the filtered data
-      const filteredData = rows.map((row) => row.getData());
-      //console.log("1st row data:", filteredData[0]);
-      // Only update timeline colors if graph is ready
-      // The graph component will set window.timelineChart when it's done loading
-      if (window.timelineChart) {
-        updateTimelineColors(filteredData);
-      } else {
-        console.log("Graph not ready yet - filter applied to table only");
-      }
-    });
-
-    //  PREPARE DATA FOR GRAPH COMPONENT (let it access when ready)
-    // The graph component can use this data when it's ready to load
-
-    window.passagesTimelineData = dataSet.map((item) => ({
-      id: item.jad_id,
-      passage: item.passage.substring(0, 100) + "...", // Truncate for tooltip
-      author: item.author_l.map((a) => a.name).join(", "),
-      date_post_quem: item.date_post_quem,
-      date_ante_quem: item.date_ante_quem,
-      work_title: item.work_position,
-    }));
-
-    // Function to update node colors based on filtered data
-    function updateTimelineColors(filteredData: any[]) {
-      const timelineChart = window.timelineChart;
-      if (!timelineChart) return;
-
-      // Get IDs of filtered items
-      const filteredIds = new Set(filteredData.map((item: any) => item.jad_id));
-
-      // Get current chart option
-      const currentOption = timelineChart.getOption();
-
-      // Update the scatter series data with colors
-      const updatedData = currentOption.series[0].data.map((node: any) => ({
-        ...node,
-        itemStyle: {
-          color: filteredIds.has(node.id) ? "#a92d03" : "#FFD700", // Red if filtered, gold if not
-          opacity: 0.8,
-        },
-      }));
-
-      // Update the chart
-      timelineChart.setOption({
-        series: [
-          {
-            data: updatedData,
-          },
-        ],
-      });
-    }
-  </script>
 </PageLayout>

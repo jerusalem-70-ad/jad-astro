@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdirSync } from "fs";
+import { readFileSync } from "fs";
 import { join } from "path";
 const loadJSON = (file) =>
   JSON.parse(

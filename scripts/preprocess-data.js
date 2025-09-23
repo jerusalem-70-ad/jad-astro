@@ -343,7 +343,7 @@ const passagesPlus = passages
       occurrence_found_in: passage.occurrence_found_in.map(
         ({ order, ...rest }) => rest
       ),
-      sources_passage: passage.source_passage,
+      source_passage: passage.source_passage,
       incipit: passage.incipit,
       prev: passage.prev,
       next: passage.next,
@@ -448,10 +448,11 @@ const worksPlus = works
       prev: work.prev || {},
     };
   });
+const worksEnriched = addPrevNextToItems(worksPlus, "jad_id", "title");
 
 writeFileSync(
   join(folderPath, "works.json"),
-  JSON.stringify(worksPlus, null, 2),
+  JSON.stringify(worksEnriched, null, 2),
   { encoding: "utf-8" }
 );
 
@@ -468,7 +469,7 @@ const passagesPlusWorks = passagesPlus.map((p) => {
 });
 // enrich passages with data from passagesPlus and worksPlus for the source_passages
 const passagesPlusPlus = passagesPlusWorks.map((p) => {
-  const source_passages = p.sources_passage.map((sp) => {
+  const source_passages = p.source_passage.map((sp) => {
     // Find the matching passage and return the enriched object
     const matchingPassage = passagesPlusWorks.find((pass) => pass.id === sp.id);
 
