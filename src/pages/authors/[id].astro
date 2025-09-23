@@ -23,6 +23,29 @@ const { data: author } = Astro.props;
   >
     <dl class="grid grid-cols-[1fr_7fr] text-sm md:leading-7 md:text-base">
       <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
+        Date:
+      </dt>
+      <dd class="pl-5">{author.origDates[0].range}</dd>
+      <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
+        Place:
+      </dt>
+      <dd class="pl-5">
+        {
+          author.place.length > 0 ? (
+            <NavLink href={author.place[0].geonames_url}>
+              {author.place[0].value}
+              <Icon
+                class="inline-flex align-top"
+                aria-hidden="true"
+                name="lucide:external-link"
+              />
+            </NavLink>
+          ) : (
+            ""
+          )
+        }
+      </dd>
+      <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
         GND:
       </dt>
       <dd class="pl-5">
@@ -47,12 +70,12 @@ const { data: author } = Astro.props;
       </dt>
       <dd class="pl-5">
         {
-          author.related__works.length > 0 ? (
+          author.works.length > 0 ? (
             <ul>
-              {author.related__works.map((work) => (
+              {author.works.map((work) => (
                 <li>
-                  <NavLink href={`/works/${work.jad_id}`}>
-                    {work.view_label}
+                  <NavLink href={`/works/jad_work__${work.id}`}>
+                    {work.title}
                   </NavLink>
                 </li>
               ))}
@@ -62,6 +85,10 @@ const { data: author } = Astro.props;
           )
         }
       </dd>
+      <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
+        Alternative Name:
+      </dt>
+      <dd class="pl-5">{author.alt_name}</dd>
     </dl>
   </Article>
 </PageLayout>

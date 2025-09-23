@@ -1,135 +1,13 @@
-import { JSONPath } from "jsonpath-plus";
+// custom filter for tabulator to search in both name and alt_name fields
+export function customNameFilter(headerValue, rowValue, rowData) {
+  if (!headerValue) return true;
 
-export function jsonpathLookup(value, data, type, params, component) {
-  const path = params.path;
-  const separator = params.separator || ", ";
-  const reverse = params.reverse || false;
-  const result = JSONPath({ path: path, json: value });
-  if (reverse) {
-    return result.reverse().join(separator);
-  } else {
-    return result.join(separator);
-  }
-}
-/* for several paths from one field joined in one column */
-export function jsonpathsLookup(value, data, type, params, component) {
-  const paths = params.paths; // Assume `paths` is an array
-  const separator = params.separator || ", ";
-  const reverse = params.reverse || false;
-
-  // Collect results from each path
-  let allResults = paths.flatMap((path) =>
-    JSONPath({ path: path, json: value })
-  );
-
-  // Optionally reverse the results and join them
-  if (reverse) {
-    allResults = allResults.reverse();
-  }
-
-  return allResults.join(separator);
-}
-
-export function jsonpathDistinctLookup(value, data, type, params, component) {
-  const path = params.path;
-  const separator = params.separator || ", ";
-  const reverse = params.reverse || false;
-
-  // Step 1: Use JSONPath to retrieve values
-  const result = JSONPath({ path: path, json: value });
-
-  // Step 2: Extract distinct values
-  const distinctValues = [...new Set(result)];
-
-  // Step 3: Apply reverse ordering if specified
-  if (reverse) {
-    distinctValues.reverse();
-  }
-
-  // Step 4: Join the distinct values with the separator
-  return distinctValues.join(separator);
-}
-/* for several paths from one field joined in one column */
-export function jsonpathsDistinctLookup(value, data, type, params, component) {
-  const paths = params.paths; // Assume `paths` is an array
-  const separator = params.separator || ", ";
-  const reverse = params.reverse || false;
-
-  // Collect results from each path
-  let allResults = [
-    ...new Set(paths.flatMap((path) => JSONPath({ path: path, json: value }))),
-  ];
-
-  // Optionally reverse the results and join them
-  if (reverse) {
-    allResults = allResults.reverse();
-  }
-
-  return allResults.join(separator);
-}
-
-/* for several years ranges in msItem tabulator */
-export function jsonpathsDistinctRanges(value, data, type, params, component) {
-  const paths = params.paths; // Array of JSONPath queries
-  const separator = params.separator || ", ";
-
-  // Collect all yearRange results from each path
-  let yearRanges = paths
-    .flatMap((path) =>
-      JSONPath({ path: path, json: value }).map((range) => {
-        if (range.start != null && range.end != null) {
-          return `${range.start}-${range.end}`; // Format as "start-end"
-        }
-        return null; // Skip invalid ranges
-      })
-    )
-    .filter(Boolean); // Remove null values
-
-  // Return distinct year ranges joined by the separator
-  return [...new Set(yearRanges)].join(separator);
-}
-
-// for original nested date range with not_before, not_after
-export function jsonpathsDateRangles(value, data, type, params, component) {
-  const separator = params.separator || ", ";
-
-  // Extract year ranges from the `dated` arrays in `hands_dated`
-  const yearRanges = value
-    .flatMap((hand) => hand.dated) // Flatten the `dated` arrays
-    .map((item) => {
-      if (item.not_before && item.not_after) {
-        const start = new Date(item.not_before).getFullYear(); // Extract start year
-        const end = new Date(item.not_after).getFullYear(); // Extract end year
-        return `${start}-${end}`; // Format as "start-end"
-      }
-      return null; // Skip invalid entries
-    })
-    .filter(Boolean); // Remove null values
-
-  // Ensure distinct values and join them with the separator
-  return [...new Set(yearRanges)].join(separator);
-}
-
-export function jsonpathsDateRanges(value, data, type, params, component) {
-  const paths = params.paths; // Array of JSONPath queries
-  const separator = params.separator || ", ";
-
-  // Collect all year ranges from each path
-  let yearRanges = paths
-    .flatMap((path) =>
-      JSONPath({ path: path, json: value }).map((item) => {
-        if (item.not_before && item.not_after) {
-          const start = new Date(item.not_before).getFullYear(); // Extract start year
-          const end = new Date(item.not_after).getFullYear(); // Extract end year
-          return `${start}-${end}`; // Format as "start-end"
-        }
-        return null; // Skip invalid ranges
-      })
-    )
-    .filter(Boolean); // Remove null values
-
-  // Return distinct year ranges joined by the separator
-  return [...new Set(yearRanges)].join(separator);
+  const search = headerValue.toLowerCase();
+  const nameMatch = rowData.aut_name?.toLowerCase().includes(search);
+  const altNameMatch = rowData?.alt_name
+    ? rowData.alt_name.toLowerCase().includes(search)
+    : false;
+  return nameMatch || altNameMatch;
 }
 
 // function to filter numeric not_before and not_After date in separate columns (TPQ and TAQ)
@@ -182,30 +60,78 @@ export function jsonpathGetCentury(value, data, type, params, component) {
 
   return [...new Set(allResults)].join(separator); // Remove duplicates
 } */
-export function dateRangeFilter(headerValue, rowValue, rowData, filterParams) {
+
+// function for tabulator accessor  Ensures filtering and sorting dates correctly
+export function dateAccessor(value) {
+  if (!value || !Array.isArray(value)) return "";
+  return value.map((dateObj) => dateObj.range || "").join(", ");
+}
+
+//  function for tabulator formatter - Formatting the displayed values
+export function dateFormatter(cell) {
+  const value = cell.getValue();
+  if (!value || !Array.isArray(value)) {
+    console.log("Returning 'not array'");
+    return "not array";
+  }
+
+  const result = value
+    .map((dateObj) => {
+      return dateObj.value || "";
+    })
+    .join(" | ");
+  return result;
+}
+export function dateRangeFilter(
+  headerValue,
+  rowValue,
+  rowData,
+  filterParams,
+  accessor
+) {
   // Allow all rows if the filter is empty or invalid
-  if (!headerValue || isNaN(headerValue)) {
+  if (
+    !headerValue ||
+    (!/^\d+$/.test(headerValue) &&
+      !/^before \d+$/.test(headerValue) &&
+      !/^after \d+$/.test(headerValue))
+  ) {
     return true;
   }
 
-  const filterYear = parseInt(headerValue, 10);
+  // Determine operator and filter year from input
+  const operatorMatch = headerValue.match(/^(before|after)?\s?(\d+)$/);
+  const operator = operatorMatch?.[1] || null;
+  const filterYear = parseInt(operatorMatch?.[2], 10);
 
-  // Ensure rowValue is a string and process multiple ranges (e.g., "821-930, 950-999")
-  if (typeof rowValue === "string") {
-    const ranges = rowValue.split(",").map((range) => range.trim()); // Split and trim multiple ranges
+  // Use the accessor to preprocess the rowValue if provided
+  const processedRowValue = accessor ? accessor(rowValue, rowData) : rowValue;
 
-    // Iterate over all ranges and check if filterYear falls within any of them
-    return ranges.some((range) => {
-      const [start, end] = range.split("-").map(Number); // Parse start and end years
-      if (!isNaN(start) && !isNaN(end)) {
-        return filterYear >= start && filterYear <= end;
-      }
-      return false; // Skip invalid ranges
-    });
+  // Ensure processedRowValue is an array of strings
+  if (!Array.isArray(processedRowValue)) {
+    console.warn(
+      "Unexpected non-array value in date filtering:",
+      processedRowValue
+    );
+    return false;
   }
 
-  console.warn("Row value is not a valid string:", rowValue);
-  return false; // Filter out rows with invalid rowValue
+  const ranges = processedRowValue.map((dateObj) => dateObj.range || "");
+
+  // Iterate over all ranges and apply the appropriate filtering logic
+  return ranges.some((range) => {
+    const [start, end] = range.split("-").map(Number);
+    if (!isNaN(start) && !isNaN(end)) {
+      if (operator === "before") {
+        return start < filterYear; // terminus ante quem using end
+      } else if (operator === "after") {
+        return end > filterYear; // terminus post quem using start
+      } else {
+        return filterYear >= start && filterYear <= end; // Default range check (inclusive)
+      }
+    }
+    return false; // Skip invalid ranges
+  });
 }
 
 export function sortByKey(value, data, type, params, component) {
@@ -215,66 +141,3 @@ export function sortByKey(value, data, type, params, component) {
   // Extract the 'value' property and join with separator
   return sorted.map((ref) => ref.value).join(params.separator || "; ");
 }
-
-/* NOT FOR NOW - HEADER FOR DATE WITH TWO INPUT FIELDS 'FROM' AND 'TO'
-export function dateRangeHeaderFilter(cell, onRendered, success, cancel, editorParams) {
-  // Create a container for the inputs
-  const container = document.createElement("span");
-
-  // Create and style start and end input fields
-  const start = document.createElement("input");
-  start.type = "number";
-  start.placeholder = "Start Year";
-  start.style.padding = "4px";
-  start.style.width = "50%";
-  start.style.boxSizing = "border-box";
-
-  const end = document.createElement("input");
-  end.type = "number";
-  end.placeholder = "End Year";
-  end.style.padding = "4px";
-  end.style.width = "50%";
-  end.style.boxSizing = "border-box";
-
-  container.appendChild(start);
-  container.appendChild(end);
-
-  // Helper function to build the date range object
-  const buildDateRange = () => ({
-    start: parseInt(start.value, 10) || null,
-    end: parseInt(end.value, 10) || null,
-  });
-
-  // Submit new value on blur or change
-  [start, end].forEach(input => {
-    input.addEventListener("change", () => success(buildDateRange()));
-    input.addEventListener("blur-sm", () => success(buildDateRange()));
-  });
-
-  // Submit new value on Enter, cancel on Esc
-  container.addEventListener("keydown", e => {
-    if (e.key === "Enter") {
-      success(buildDateRange());
-    } else if (e.key === "Escape") {
-      cancel();
-    }
-  });
-
-  return container;
-}; 
-
-
-export function dateRangeFilter(headerValue, rowValue, rowData, filterParams) {
-  if (!headerValue || (!headerValue.start && !headerValue.end)) {
-    return true; // If no filter is set, show all rows
-  }
-
-  const [startYear, endYear] = rowValue.split("-").map(Number); // Assuming "821-930" format
-
-  const filterStart = headerValue.start || -Infinity; // Use -Infinity if no start year
-  const filterEnd = headerValue.end || Infinity; // Use Infinity if no end year
-
-  // Check if the row range overlaps with the filter range
-  return !(startYear > filterEnd || endYear < filterStart);
-}
-*/

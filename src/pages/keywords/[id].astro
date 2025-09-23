@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 const { data: keyword } = Astro.props;
 ---
 
-<PageLayout title={keyword.view_label}>
+<PageLayout title={keyword.name}>
   <Article
     prevLink={`/keywords/${keyword.prev.id}`}
     nextLink={`/keywords/${keyword.next.id}`}
@@ -25,33 +25,33 @@ const { data: keyword } = Astro.props;
       <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">
         About:
       </dt>
-      <dd class="pl-5">{keyword.short_description}</dd>
+      <dd class="pl-5">{keyword.description}</dd>
 
       <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">
         Passages:
       </dt>
       <dd class="pl-5">
         {
-          keyword.related__passages.length > 0 ? (
+          keyword.passages.length > 0 ? (
             <ul class="space-y-2 border-neutral-300 p-2">
-              {keyword.related__passages.map((passage) => (
+              {keyword.passages.map((passage) => (
                 <li class="border-b border-neutral-300 pb-2">
                   <NavLink href={`/passages/${passage.jad_id}`}>
                     <span>({passage.id})</span>
                     <span class="italic">
-                      {passage.view_label.slice(0, 150)} ...
+                      {passage.passage.slice(0, 150)} ...
                     </span>
                   </NavLink>
                   <div class="mt-1 pl-4 text-sm">
                     <span>
                       <span class="font-semibold">Author:</span>{" "}
-                      {passage.work[0]?.author[0]?.name || "Unknown"}
+                      {passage.author || "Unknown"}
                     </span>
                     <br />
                     <span>
                       <span class="font-semibold">Work:</span>{" "}
                       <span class="italic">
-                        {passage.work[0]?.name || "Unknown"}
+                        {passage.work.title || "Unknown"}
                       </span>
                     </span>
                   </div>
@@ -69,16 +69,16 @@ const { data: keyword } = Astro.props;
       <dd class="pl-5">
         <ul>
           {
-            keyword.part_of.map((part: { jad_id: string; name: string }) => (
+            keyword.part_of.map((part) => (
               <li class="list-disc">
-                <NavLink href={`/keywords/${part.jad_id}`}>{part.name}</NavLink>
+                <NavLink href={`/keywords/jad_keyword__${part.id}`}>{part.value}</NavLink>
               </li>
             ))
           }
           {
             Object.values(keywords)
               .filter((kword) =>
-                kword.part_of.some((part) => part.jad_id === keyword.jad_id)
+                kword.part_of.some((part) => part.id === keyword.id)
               )
               .map((kword) => (
                 <li class="list-disc">

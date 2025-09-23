@@ -1,6 +1,12 @@
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
-import { enrichDates, normalizeText } from "./utils.js";
+import {
+  enrichDates,
+  normalizeText,
+  enrichPlaces,
+  enrichLibraries,
+  addPrevNextToItems,
+} from "./utils.js";
 import { buildTransmissionGraph } from "./build-transmission-graph.js";
 import {
   generateBiblicalSortKey,
@@ -10,28 +16,82 @@ import { createNetworkData } from "./create-network-data.js";
 
 const loadJSON = (file) =>
   JSON.parse(
-    readFileSync(join(process.cwd(), "src/content/data", file), "utf8")
+    readFileSync(join(process.cwd(), "src/content/row", file), "utf8")
   );
 
-const passages = Object.values(loadJSON("passages.json"));
-const dates = Object.values(loadJSON("dates.json"));
+const passages = Object.values(loadJSON("occurrences.json"));
+const dates = Object.values(loadJSON("date.json"));
 const biblicalRef = Object.values(loadJSON("biblical_references.json"));
 const manuscripts = Object.values(loadJSON("manuscripts.json"));
 const msOccurrences = Object.values(loadJSON("ms_occurrences.json"));
 const works = Object.values(loadJSON("works.json"));
 const authors = Object.values(loadJSON("authors.json"));
+const places = Object.values(loadJSON("places.json"));
+const libraries = Object.values(loadJSON("libraries.json"));
 
 // set the output folder
 const folderPath = join(process.cwd(), "src", "content", "data");
 mkdirSync(folderPath, { recursive: true });
 
+// enrich places with geonames_url, jad_id, lat, long from places.json
+// used in authors.json and manuscripts.json
+
 // create map for authros to use in instant search to match the search normalized field and use the normal name for display
 
 const authorMapObject = {};
 authors.forEach((aut) => {
-  const normalizedKey = aut.name.toLowerCase().replace(/-/g, " ");
+  const normalizedKey = aut.name
+    .toLowerCase()
+    .replace(/-/g, " ")
+    .replace(",", "");
   authorMapObject[normalizedKey] = aut.name;
 });
+// enrich authors with places and transform dates
+const authorsPlus = authors
+  .filter((aut) => aut.name) // filter out authors without a name
+  .map((aut) => {
+    const raw_dates = [
+      {
+        not_before: aut.date_of_birth || "",
+        not_after: aut.date_of_death || "",
+        range:
+          aut.date_of_birth || aut.date_of_death
+            ? `${aut.date_of_birth || ""}-${aut.date_of_death || ""}`
+            : "",
+      },
+    ];
+    const related_works = works
+      .filter((w) => w.author.some((w_aut) => w_aut.id === aut.id))
+      .map((work) => {
+        return {
+          title: work.title,
+          id: work.id,
+        };
+      });
+    return {
+      id: aut.id,
+      jad_id: aut.jad_id,
+      name: aut.name.replace(",", ""),
+      date_of_birth: aut.date_of_birth || "",
+      date_of_death: aut.date_of_death || "",
+      origDates: raw_dates,
+      place: enrichPlaces(aut.place, places),
+      alt_name: aut.alt_name?.replace(",", "") || "",
+      notes: aut.notes || "",
+      gnd_url: aut.gnd_url || "",
+      works: related_works,
+    };
+  });
+
+const updatedauthors = addPrevNextToItems(authorsPlus, "jad_id", "name");
+
+writeFileSync(
+  join(folderPath, "authors.json"),
+  JSON.stringify(updatedauthors, null, 2),
+  { encoding: "utf-8" }
+);
+
+console.log("authors.json file enriched successfully.");
 
 // Write as JSON file
 writeFileSync(
@@ -61,6 +121,7 @@ writeFileSync(
   join(folderPath, "biblical_references.json"),
   JSON.stringify(biblicalRefSorted, null, 2)
 );
+console.log("Biblical references enriched and written successfully.");
 
 //rewrite passages
 // mapping abbreviations with book names
@@ -157,11 +218,30 @@ const bookMap = {
   Rev: "Revelation",
 };
 
+const manuscriptsPlus = manuscripts
+  .filter((ms) => ms.name[0]?.value)
+  .map((ms) => {
+    return {
+      id: ms.id,
+      jad_id: ms.jad_id,
+      name: ms.name,
+      library: enrichLibraries(ms.library, libraries),
+      idno: ms.idno,
+      catalog_url: ms.catalog_url,
+      digi_url: ms.digi_url,
+      institutional_context: ms.institutional_context.map(
+        ({ order, ...rest }) => rest
+      ),
+      format: ms.format,
+      date_written: enrichDates(ms.date_written, dates),
+    };
+  });
+
 const passagesPlus = passages
   .filter((passage) => passage.passage) // filter out empty passages
   .map((passage) => {
     // hierarchical 3-level index for the typesense schema for biblical references
-    // level 0 for book (using the bookMap above), lv 1 for chapter, and lv 2 for verse
+    // level 0 for book (not any more using the bookMap above), lv 1 for chapter, and lv 2 for verse
     const lvl0 = [];
     const lvl1 = [];
     const lvl2 = [];
@@ -180,7 +260,8 @@ const passagesPlus = passages
         } else {
           [bookAbbrev, chapterVerse] = ref.value.split(".");
         }
-        const book = bookMap[bookAbbrev.trim()] || bookAbbrev;
+        //const book = bookMap[bookAbbrev.trim()] || bookAbbrev;
+        const book = bookAbbrev;
 
         let chapter, verse;
         if (chapterVerse?.includes(",")) {
@@ -200,7 +281,7 @@ const passagesPlus = passages
       });
     }
     // enrich the date from dates.json using helper function
-    if (passage.work.some((w) => w.date.length > 0)) {
+    if (passage.work.some((w) => w.date?.length > 0)) {
       passage.work = passage.work.map((w) => ({
         ...w,
         date: enrichDates(w.date, dates),
@@ -215,13 +296,13 @@ const passagesPlus = passages
           item.occurrence.length > 0 && item.occurrence[0].id === passage.id
       )
       .map((item) => {
-        const mss = manuscripts
+        const mss = manuscriptsPlus
           .filter((ms) => item.manuscript.some((man) => man.id === ms.id))
           // map them to get only the necessary fields
           .map((ms) => {
             return {
               id: ms.id,
-              name: `${ms.library[0].place[0]?.name}, ${ms.name[0].value}`,
+              name: `${ms.library[0].place[0]?.value}, ${ms.name[0].value}`,
               jad_id: ms.jad_id,
             };
           });
@@ -234,7 +315,6 @@ const passagesPlus = passages
           ms_locus: item.ms_locus[0]?.value || "",
         };
       });
-    // filter the manuscripts.json to get the manuscripts that are in the ms_occurrences.json
 
     //enrich biblical_references with sort key using the biblicalRefSorted
     if (passage.biblical_references && passage.biblical_references.length > 0) {
@@ -243,21 +323,6 @@ const passagesPlus = passages
         const enriched = biblicalRefSorted[String(ref.id)];
         return {
           ...(enriched || {}), // Merge in all properties from biblicalRefSorted if found
-        };
-      });
-    }
-
-    // enrich source_passage with title and author from works.json
-    if (passage.source_passage && passage.source_passage.length > 0) {
-      passage.source_passage = passage.source_passage.map((source) => {
-        const p = passages.find((p) => p.id === source.id);
-        return {
-          id: p.id,
-          jad_id: p.jad_id,
-          title: p.work[0]?.title || "",
-          author: p.work[0]?.author?.[0]?.name || "",
-          position_in_work: p.position_in_work,
-          passage: p.passage,
         };
       });
     }
@@ -275,7 +340,9 @@ const passagesPlus = passages
       keywords: passage.keywords,
       part_of_cluster: passage.part_of_cluster,
       liturgical_references: passage.liturgical_references,
-      occurrence_found_in: passage.occurrence_found_in,
+      occurrence_found_in: passage.occurrence_found_in.map(
+        ({ order, ...rest }) => rest
+      ),
       source_passage: passage.source_passage,
       incipit: passage.incipit,
       prev: passage.prev,
@@ -288,52 +355,49 @@ const passagesPlus = passages
       edition_link: passage.edition_link || "",
     };
   });
-// use imported function to build the transmission graph
-const graph = buildTransmissionGraph(passagesPlus);
-
-// attach graph to each passage
-const enrichedPassages = passagesPlus.map((p) => ({
-  ...p,
-  transmission_graph: graph[p.id],
-}));
-
-writeFileSync(
-  join(folderPath, "passages.json"),
-  JSON.stringify(enrichedPassages, null, 2),
-  { encoding: "utf-8" }
-);
 
 console.log("passages.json file enriched successfully.");
+
+// enrich works with manuscripts data from manuscriptsPlus
+// also group passages by position_in_work and sort them accordingly
 
 const worksPlus = works
   .filter((work) => work.title) // filter out works without title
   .map((work) => {
     let processedPassages = [];
-
-    if (work.related__passages && work.related__passages.length > 0) {
+    const related__passages = passages
+      .filter((p) => p.work.some((w) => w.id === work.id))
+      .map((p) => {
+        return {
+          id: p.id,
+          jad_id: p.jad_id,
+          passage: p.passage,
+          position_in_work: p.position_in_work,
+          text_paragraph: p.text_paragraph,
+          occurrence_found_in: p.occurrence_found_in,
+        };
+      });
+    if (related__passages && related__passages.length > 0) {
       // First, group passages by position_in_work
-      const groupedPassages = work.related__passages.reduce(
-        (grouped, passage) => {
-          const key = passage.position_in_work || "";
+      const groupedPassages = related__passages.reduce((grouped, passage) => {
+        const key = passage.position_in_work || "";
 
-          if (!grouped[key]) {
-            grouped[key] = [];
-          }
+        if (!grouped[key]) {
+          grouped[key] = [];
+        }
 
-          // Add only the fields you want from each passage
-          grouped[key].push({
-            id: passage.id,
-            jad_id: passage.jad_id,
-            passage: passage.passage,
-            page: passage.text_paragraph?.match(/ p\. (\d+\w?)/)?.[1] || "",
-            occurrence_found_in:
-              passage.occurrence_found_in.map((occ) => occ.value) || [],
-          });
+        // Add only the fields you want from each passage
+        grouped[key].push({
+          id: passage.id,
+          jad_id: passage.jad_id,
+          passage: passage.passage,
+          page: passage.text_paragraph?.match(/ p\. (\d+\w?)/)?.[1] || "",
+          occurrence_found_in:
+            passage.occurrence_found_in.map((occ) => occ.value) || [],
+        });
 
-          return grouped;
-        },
-        {}
-      );
+        return grouped;
+      }, {});
 
       // Then convert the grouped object into the array format you want
       processedPassages = Object.entries(groupedPassages).map(
@@ -347,25 +411,30 @@ const worksPlus = works
       processedPassages.sort((a, b) => a.sort_position - b.sort_position);
     }
 
+    const related_authors = authorsPlus.filter((aut) =>
+      work.author.some((w_aut) => w_aut.id === aut.id)
+    );
     return {
       id: work.id,
       jad_id: work.jad_id,
       title: work.title,
-      author: work.author,
+      author: related_authors,
       author_certainty: work.author_certainty,
-      manuscripts: manuscripts
+      manuscripts: manuscriptsPlus
         .filter((ms) => work.manuscripts.some((w_ms) => w_ms.id === ms.id))
         .map((ms) => ({
           id: ms.id,
           jad_id: ms.jad_id,
-          name: `${ms.library[0].place[0]?.name}, ${ms.name[0].value}`,
+          name: `${ms.library[0].place[0]?.value}, ${ms.name[0].value}`,
         })),
       genre: work.genre?.value || "",
       description: work.description,
       notes: work.notes || "",
       notes__author: work.notes__author || "",
-      institutional_context: work.institutional_context || [],
-      published_edition: work.published_edition || [],
+      institutional_context:
+        work.institutional_context.map(({ order, ...rest }) => rest) || [],
+      published_edition:
+        work.published_edition.map(({ order, ...rest }) => rest) || [],
       date: enrichDates(work.date, dates),
       date_certainty: work.date_certainty,
       link_digital_editions: work.link_digital_editions || "",
@@ -379,16 +448,162 @@ const worksPlus = works
       prev: work.prev || {},
     };
   });
+const worksEnriched = addPrevNextToItems(worksPlus, "jad_id", "title");
 
 writeFileSync(
   join(folderPath, "works.json"),
-  JSON.stringify(worksPlus, null, 2),
+  JSON.stringify(worksEnriched, null, 2),
   { encoding: "utf-8" }
 );
 
 console.log("works.json file enriched successfully.");
 
-console.log("Generating network data...");
+// enrich passages with data from worksPlus (author name, dates)
+const passagesPlusWorks = passagesPlus.map((p) => {
+  const related_works = worksPlus.filter((w) => w.id === p.work[0]?.id);
+  return {
+    ...p,
+    work: related_works,
+    //transmission_graph: graph[p.id],
+  };
+});
+// enrich passages with data from passagesPlus and worksPlus for the source_passages
+const passagesPlusPlus = passagesPlusWorks.map((p) => {
+  const source_passages = p.source_passage.map((sp) => {
+    // Find the matching passage and return the enriched object
+    const matchingPassage = passagesPlusWorks.find((pass) => pass.id === sp.id);
+
+    if (matchingPassage) {
+      return {
+        id: matchingPassage.id,
+        jad_id: matchingPassage.jad_id,
+        title: matchingPassage.work[0]?.title || "Not found",
+        author: matchingPassage.work[0]?.author?.[0]?.name || "",
+        passage: matchingPassage.passage,
+      };
+    }
+
+    // Return original if no match found
+    return sp;
+  });
+
+  return {
+    ...p,
+    source_passage: source_passages,
+    //transmission_graph: graph[p.id],
+  };
+});
+// use imported function to build the transmission graph
+const graph = buildTransmissionGraph(passagesPlusPlus);
+
+// attach graph to each passage
+const enrichedPassages = passagesPlusPlus.map((p) => ({
+  ...p,
+  transmission_graph: graph[p.id],
+}));
+
+// add prev and next to passages.json
+const passagesPlusFinal = addPrevNextToItems(
+  enrichedPassages,
+  "jad_id",
+  "name"
+);
+
+writeFileSync(
+  join(folderPath, "passages.json"),
+  JSON.stringify(passagesPlusFinal, null, 2),
+  { encoding: "utf-8" }
+);
+
+// enrich manuscripts with data from passagesPlus and worksPlus
+const manuscriptPlusPlus = manuscriptsPlus.map((ms) => {
+  const related_works = worksPlus
+    .filter((w) => {
+      return w.manuscripts.some((m) => m.id === ms.id);
+    })
+    .map((w) => ({
+      id: w.id,
+      title: w.title,
+      jad_id: w.jad_id,
+      author: {
+        jad_id: w.author[0]?.jad_id || "",
+        name: w.author[0]?.name || "",
+      },
+    }));
+  const related_occurrences = msOccurrences
+    .filter((occur) => occur.manuscript.length > 0)
+    .filter((occur) => occur.manuscript[0].id === ms.id)
+    .map((occurr) => {
+      const passage = passagesPlus.find(
+        (p) => p.id === occurr.occurrence[0].id
+      );
+      return {
+        passage: passage,
+        position_in_ms: occurr.position_in_ms,
+        main_ms: occurr.main_ms,
+        facsimile_position: occurr.facsimile_position,
+      };
+    });
+  return {
+    ...ms,
+    related_passages: related_occurrences,
+    related_works: related_works,
+  };
+});
+
+// add prev and next to passages.json
+const mssPlusFinal = addPrevNextToItems(
+  manuscriptPlusPlus,
+  "jad_id",
+  "name[0].value"
+);
+
+writeFileSync(
+  join(folderPath, "manuscripts.json"),
+  JSON.stringify(mssPlusFinal, null, 2),
+  { encoding: "utf-8" }
+);
+
+console.log("passages.json file enriched successfully.");
+
+const keywords = Object.values(loadJSON("keywords.json"));
+const keywordsPlus = keywords
+  .filter((kw) => kw.name)
+  .map((kw) => {
+    return {
+      id: kw.id,
+      jad_id: kw.jad_id,
+      name: kw.name,
+      description: kw.short_description || "",
+      notes: kw.notes || "",
+      passages: passagesPlusFinal
+        .filter((p) => p.keywords.some((k) => k.id === kw.id))
+        .map((p) => {
+          return {
+            id: p.id,
+            jad_id: p.jad_id,
+            passage: p.passage,
+            work: {
+              id: p.work[0]?.id || "",
+              title: p.work[0]?.title || "",
+              jad_id: p.work[0]?.jad_id || "",
+            },
+            position_in_work: p.position_in_work,
+            author: p.work[0]?.author?.[0]?.name || "",
+          };
+        }),
+      part_of: kw.part_of.map(({ order, ...rest }) => rest) || [],
+    };
+  });
+const keywordsPlusFinal = addPrevNextToItems(keywordsPlus, "jad_id", "name");
+writeFileSync(
+  join(folderPath, "keywords.json"),
+  JSON.stringify(keywordsPlusFinal, null, 2),
+  { encoding: "utf-8" }
+);
+
+console.log("keywords.json file enriched successfully.");
+/* console.log("Generating network data...");
 const networkData = createNetworkData(enrichedPassages);
 
 // Save the network data
@@ -398,4 +613,4 @@ writeFileSync(
   { encoding: "utf-8" }
 );
 
-console.log("Network data generated successfully.");
+console.log("Network data generated successfully."); */

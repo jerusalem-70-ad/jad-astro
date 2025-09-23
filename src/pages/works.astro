@@ -1,144 +1,31 @@
 ---
 import PageLayout from "@/layouts/page-layout.astro";
 import TableHead from "@/components/table-head.astro";
-const title = "Works";
+import TabulatorTable from "@/components/tabulator-table.jsx";
+import { worksTableConfig } from "@/lib/tabulator-table-configs.js";
+import worksjson from "@/content/data/works.json";
+
+// Transform data and prepare columns for Tabulator Table
+const works = Object.values(worksjson);
+const tableData = worksTableConfig.transformData(works);
+const columns = worksTableConfig.getColumns();
+const rowClickConfig = worksTableConfig.getRowClickConfig;
 ---
 
-<PageLayout title={title}>
-  <TableHead title={title} />
-
-  <script>
-    import { setupTableActions } from "@/lib/table-actions";
-    import { TabulatorFull as Tabulator } from "tabulator-tables";
-    import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
-    import data from "../content/data/works.json";
-    import { jsonpathLookup } from "@/lib/tabulator-utils.js";
-
-    var tabledata = [...Object.values(data)];
-
-    var table = new Tabulator("#tabulator-table", {
-      headerFilterLiveFilterDelay: 600,
-      height: 900,
-      data: tabledata,
-      layout: "fitColumns",
-      responsiveLayout: "collapse",
-      initialSort: [{ column: "title", dir: "asc" }],
-      rowHeader: {
-        formatter: "responsiveCollapse",
-        width: 30,
-        minWidth: 30,
-        hozAlign: "center",
-        resizable: false,
-        headerSort: false,
-      },
-      columns: [
-        {
-          title: "Title",
-          resizable: true,
-          field: "title",
-          minWidth: 200,
-          headerFilter: "input",
-          responsive: 0,
-          widthGrow: 2,
-        },
-        {
-          title: "Author",
-          resizable: true,
-          field: "author",
-          minWidth: 200,
-          headerFilter: "input",
-          // Custom filter: checks all names AND alt_names in the array
-          headerFilterFunc: function (headerValue, rowValue, rowData) {
-            if (!headerValue) return true;
-            const search = headerValue.toLowerCase();
-            // rowValue is the array of author objects
-            return (
-              Array.isArray(rowValue) &&
-              rowValue.some((author) => {
-                const nameMatch = author.name?.toLowerCase().includes(search);
-                const altNameMatch = author.alt_name
-                  ? // some alt_name are empty strings need to check for that
-                    author.alt_name.toLowerCase().includes(search)
-                  : false;
-                return nameMatch || altNameMatch;
-              })
-            );
-          },
-          // Formatter: show only the author names
-          formatter: function (cell) {
-            return cell
-              .getValue()
-              .map((author: { name: string; alt_name?: string }) => author.name)
-              .join(", ");
-          },
-          responsive: 0,
-          widthGrow: 2,
-        },
-        {
-          title: "Genre",
-          resizable: true,
-          field: "genre",
-          minWidth: 200,
-          headerFilter: "input",
-          formatter: "textarea",
-          responsive: 1,
-          widthGrow: 2,
-        },
-
-        {
-          title: "Manuscripts",
-          resizable: true,
-          field: "manuscripts",
-          minWidth: 200,
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].name",
-            separator: "; ",
-          },
-          headerFilter: "input",
-          responsive: 1,
-          widthGrow: 3,
-        },
-        {
-          title: "Passages #",
-          resizable: true,
-          field: "related__passages",
-          minWidth: 80,
-          mutator: function (value, data, type, params, component) {
-            return Array.isArray(value) ? value.length : 0;
-          },
-          headerFilter: "input",
-          responsive: 3,
-          widthGrow: 1,
-        },
-        {
-          title: "Context",
-          resizable: true,
-          field: "institutional_context",
-          minWidth: 200,
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].name",
-            separator: "; ",
-          },
-          headerFilter: "input",
-          responsive: 2,
-        },
-        {
-          title: "Date",
-          resizable: true,
-          field: "date",
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].value",
-            separator: "; ",
-          },
-          minWidth: 200,
-          headerFilter: "input",
-          responsive: 3,
-        },
-      ],
-    });
-    setupTableActions(table, "works");
-  </script>
+<PageLayout title="Works">
+  <TableHead title="Works">
+    <TabulatorTable
+      client:only="react"
+      data={tableData}
+      columns={columns}
+      tableId="works-table"
+      options={{
+        paginationSize: 25,
+        responsiveLayout: "collapse",
+        initialSort: [{ column: "title", dir: "asc" }],
+      }}
+      downloadTitle="jad_works"
+      rowClickConfig={rowClickConfig}
+    />
+  </TableHead>
 </PageLayout>

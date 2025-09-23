@@ -23,7 +23,7 @@ export function buildTransmissionGraph(passages) {
    * Format a passage node with basic information
    */
   function formatNode(node, depth, nodeType = "regular") {
-    const workName = node.work?.[0]?.name || "";
+    const workName = node.work?.[0]?.title || "";
     const authorName =
       node.work?.[0]?.author?.map((a) => a.name).join(", ") || "";
     const workDate = node.work?.[0]?.date[0]?.not_before || "";

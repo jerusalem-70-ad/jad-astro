@@ -411,7 +411,7 @@ search.addWidgets([
 
   refinementListContext({
     container: "#refinement-list-context",
-    attribute: "work.institutional_context.name",
+    attribute: "work.institutional_context.value",
     searchable: true,
     showMore: true,
     showMoreLimit: 50,
@@ -421,7 +421,7 @@ search.addWidgets([
 
   refinementListKeywords({
     container: "#refinement-list-keywords",
-    attribute: "keywords.name",
+    attribute: "keywords.value",
     searchable: true,
     showMore: true,
     showMoreLimit: 50,
@@ -471,11 +471,11 @@ search.addWidgets([
             ? "Manuscript"
             : item.attribute === "work.date.century"
             ? "Century"
-            : item.attribute === "work.institutional_context.name"
+            : item.attribute === "work.institutional_context.value"
             ? "Institution"
             : item.attribute === "cluster.value"
             ? "Cluster"
-            : item.attribute === "keywords.name"
+            : item.attribute === "keywords.value"
             ? "Keyword"
             : item.attribute === "Liturgical_references.value"
             ? "Liturgy"
@@ -512,7 +512,7 @@ setTimeout(() => {
           type="text" 
           class="w-full px-3 py-1 inset-shadow-sm shadow-sm bg-white border border-gray-300 
           rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-transparent" 
-          placeholder="e.g. Luke"
+          placeholder="e.g. Lk"
           id="biblical-search-input"
         />
       `;

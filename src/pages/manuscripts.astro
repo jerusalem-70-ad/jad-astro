@@ -1,171 +1,30 @@
 ---
 import PageLayout from "@/layouts/page-layout.astro";
 import TableHead from "@/components/table-head.astro";
+import TabulatorTable from "@/components/tabulator-table.jsx";
+import { manuscriptsTableConfig } from "@/lib/tabulator-table-configs.js";
+import manuscriptsjson from "@/content/data/manuscripts.json";
+
+// Transform data and prepare columns for Tabulator Table
+const manuscripts = Object.values(manuscriptsjson);
+const tableData = manuscriptsTableConfig.transformData(manuscripts);
+const columns = manuscriptsTableConfig.getColumns();
+const rowClickConfig = manuscriptsTableConfig.getRowClickConfig;
 ---
 
 <PageLayout title="Manuscripts">
-  <TableHead title="Manuscripts" />
-
-  <script>
-    import { setupTableActions } from "@/lib/table-actions";
-    import { TabulatorFull as Tabulator } from "tabulator-tables";
-    import "tabulator-tables/dist/css/tabulator_semanticui.min.css";
-    import { jsonpathLookup, jsonpathsLookup } from "../lib/tabulator-utils.js";
-    import { JSONPath } from "jsonpath-plus";
-
-    import pass from "@/content/data/passages.json";
-    import mss from "@/content/data/manuscripts.json";
-    const manuscripts = Object.values(mss);
-    const passages = Object.values(pass);
-
-    // Add related passages to each manuscript
-    const data = manuscripts
-      .filter((manuscript) => manuscript.name[0]?.value)
-      .map((manuscript) => {
-        const related_passages = passages
-          .filter((passage) =>
-            passage.mss_occurrences.some(
-              (m) => m.manuscript_jad_id === manuscript.jad_id
-            )
-          )
-          .map((passage) => ({
-            id: passage.id,
-            passage: passage.passage,
-          }));
-
-        const related_works = [
-          ...new Map(
-            passages
-              .filter((passage) =>
-                passage.mss_occurrences.some(
-                  (m) => m.manuscript_jad_id === manuscript.jad_id
-                )
-              )
-              .map((passage) => [
-                passage.work[0].jad_id,
-                {
-                  title: `${passage.work[0]?.author[0].name}: ${passage.work[0]?.name}`,
-                }
-              ])
-          ).values()
-        ];
-        return {
-          ...manuscript,
-          related_works,
-          related_passages, // Attach related_passages array
-        };
-      });
-    console.log(data);
-
-    var tabledata = [...data];
-
-    var table = new Tabulator("#tabulator-table", {
-      headerFilterLiveFilterDelay: 600,
-      height: 900,
-      data: tabledata,
-      layout: "fitColumns",
-      responsiveLayout: "collapse",
-      initialSort: [{ column: "library", dir: "asc" }],
-      rowHeader: {
-        formatter: "responsiveCollapse",
-        width: 30,
-        minWidth: 30,
-        hozAlign: "center",
-        resizable: false,
-        headerSort: false,
-      },
-      columns: [
-        {
-          title: "Settlement",
-          resizable: true,
-          field: "library",
-          width: 150,
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].place[*].name",
-            separator: "; ",
-          },
-          headerFilter: "input",
-        },
-        {
-          title: "Shelfmark",
-          resizable: true,
-          field: "name",
-          minWidth: 200,
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].value",
-            separator: "; ",
-          },
-          headerFilter: "input",
-        },
-        {
-          title: "Works",
-          field: "related_works",
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].title",
-            separator: "; ",
-          },
-          resizable: true,
-          headerFilter: "input",          
-				formatter: "textarea",
-        },
-        {
-          title: "Passages",
-          field: "related_passages",
-          minWidth: 300,
-          mutator: (value) => {
-            // Apply JSONPath to extract 'passage' and 'id' fields
-            const passages = JSONPath({
-              path: "$[*]",
-              json: value,
-            });
-
-            // Flatten and format the extracted data
-            return passages
-              .flatMap((p: any) => {
-                const passage = p.passage ? p.passage.substring(0, 50) : ""; // Truncate passage
-                const id = p.id || ""; // Get ID
-                const formattedPassage =
-                  (id ? ` (${id}) ` : "") +
-                  (passage
-                    ? `${passage}${p.passage.length > 50 ? "..." : ""}`
-                    : ""); // Combine passage and ID
-                return formattedPassage;
-              })
-              .join("\n");
-          },
-          formatter: "textarea",
-          headerFilter: "input",
-        },
-        {
-          title: "Institutional context",
-          resizable: true,
-          field: "institutional_context",
-          minWidth: 200,
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].name",
-            separator: "; ",
-          },
-          headerFilter: "input",
-        },
-        {
-          title: "Date",
-          resizable: true,
-          field: "date_written",
-          minWidth: 200,
-          mutator: jsonpathLookup,
-          mutatorParams: {
-            path: "$[*].value",
-            separator: "; ",
-          },
-          headerFilter: "input",
-        },
-      ],
-    });
-
-    setupTableActions(table, "manuscripts");
-  </script>
+  <TableHead title="Manuscripts">
+    <TabulatorTable
+      client:only="react"
+      data={tableData}
+      columns={columns}
+      tableId="manuscripts-table"
+      options={{
+        paginationSize: 25,
+        initialSort:[{ column: "settlement", dir: "asc" }],
+      }}
+      downloadTitle="jad_manuscripts"
+      rowClickConfig={rowClickConfig}
+    />
+  </TableHead>
 </PageLayout>

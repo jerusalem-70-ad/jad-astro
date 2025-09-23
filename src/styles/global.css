@@ -148,6 +148,17 @@
   @apply transform rotate-90;
 }
 
+/*current refinements make more prominent */
+
+/* specify with the selector */
+.ais-CurrentRefinements .ais-CurrentRefinements-item {
+  @apply bg-brand-500 text-brand-50 border border-brand-600 rounded-md;
+}
+
+.ais-CurrentRefinements-category .ais-CurrentRefinements-delete {
+  @apply text-brand-50 hover:font-bold;
+}
+
 .ais-RefinementList .ais-SearchBox-input,
 .ais-HierarchicalMenu .ais-SearchBox-input {
   @apply w-full px-3 py-2 border border-gray-300 rounded-md text-sm;

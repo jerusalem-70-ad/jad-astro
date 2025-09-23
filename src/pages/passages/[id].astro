@@ -76,7 +76,7 @@ const usedBy = Object.values(passages).filter((item) =>
                 ? passage.work.map((werk, index) => (
                     <>
                       <NavLink href={`/works/${werk.jad_id}`}>
-                        {werk.name}
+                        {werk.title}
                       </NavLink>
                       {index < passage.work.length - 1 && ", "}
                     </>
@@ -261,10 +261,10 @@ const usedBy = Object.values(passages).filter((item) =>
             {passage.work?.[0].author.length > 0 ? (
               <span>
                 {passage.work[0].author[0].name} -{" "}
-                <span class="italic">{passage.work[0].name}</span>
+                <span class="italic">{passage.work[0].title}</span>
               </span>
             ) : (
-              <span class="italic">{passage.work[0].name}</span>
+              <span class="italic">{passage.work[0].title}</span>
             )}
             <Icon
               name="lucide:arrow-right"
@@ -282,10 +282,10 @@ const usedBy = Object.values(passages).filter((item) =>
             {passage.work?.[0].author.length > 0 ? (
               <span>
                 {passage.work[0].author[0].name} -{" "}
-                <span class="italic">{passage.work[0].name}</span>
+                <span class="italic">{passage.work[0].title}</span>
               </span>
             ) : (
-              <span class="italic">{passage.work[0].name}</span>
+              <span class="italic">{passage.work[0].title}</span>
             )}
             <Icon
               name="lucide:arrow-right"
@@ -354,7 +354,7 @@ const usedBy = Object.values(passages).filter((item) =>
                 ? passage.keywords
                     .map((keyword) => (
                       <NavLink href={`/keywords/jad_keyword__${keyword.id}`}>
-                        {keyword.name}
+                        {keyword.value}
                       </NavLink>
                     ))
                     .reduce((prev, curr, idx) =>
@@ -374,23 +374,18 @@ const usedBy = Object.values(passages).filter((item) =>
                 ? passage.occurrence_found_in.map((find) => find.value).join(", ")
                 : "N/A"
             }
-            {passage.note && <span set:html={addItalics(passage.note)}></span>}
-            {passage?.edition_link && 
-            <NavLink href={passage.edition_link}> (Facsimile <Icon name="lucide:external-link" class="size-4 text-brand-800 inline-flex"/>)</NavLink>
-            }
+            {passage.note && (<span>: </span><span set:html={addItalics(passage.note)}></span>)}
+            
           </dd>
           <dt
             class="font-semibold text-brand-800 border-r border-neutral-300 p-2"
           >
-            Edition:
+            Edition :
           </dt>
           <dd class="pl-5 p-2">
-            {
-              passage.work[0]?.published_edition?.length > 0
-                ? passage.work[0].published_edition.map((edition) => edition.name).join(", ")
-                : "N/A"
+           {passage?.edition_link && 
+            <NavLink href={passage.edition_link}> Facsimile <Icon name="lucide:external-link" class="size-4 text-brand-800 inline-flex"/></NavLink>
             }
-            {passage.work[0]?.volume_edition_or_individual_editor && <span>: {passage.work[0].volume_edition_or_individual_editor}</span>}
           </dd>
             <dt
             class="font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
