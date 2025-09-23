@@ -98,7 +98,7 @@ async function main() {
     loadJSON("liturgical_references.json")
   );
 
-  // Create lookup maps (your existing logic)
+  // Create lookup maps
   console.log("🔗 Creating lookup maps...");
   const passagesByWorkId = new Map();
   passages.forEach((passage) => {

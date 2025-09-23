@@ -28,10 +28,57 @@ const works = Object.values(loadJSON("works.json"));
 const authors = Object.values(loadJSON("authors.json"));
 const places = Object.values(loadJSON("places.json"));
 const libraries = Object.values(loadJSON("libraries.json"));
+const clusters = Object.values(loadJSON("cluster.json"));
+const liturgical_references = Object.values(
+  loadJSON("liturgical_references.json")
+);
+const institutional_contexts = Object.values(
+  loadJSON("institutional_context.json")
+);
 
 // set the output folder
 const folderPath = join(process.cwd(), "src", "content", "data");
 mkdirSync(folderPath, { recursive: true });
+
+const clustersClean = clusters
+  .filter((cluster) => cluster.name)
+  .map(({ order, ...rest }) => rest);
+writeFileSync(
+  join(folderPath, "clusters.json"),
+  JSON.stringify(clustersClean, null, 2),
+  { encoding: "utf-8" }
+);
+console.log("clusters.json file written successfully.");
+
+const institutionalContextsClean = institutional_contexts
+  .filter((context) => context.name)
+  .map(({ order, ...rest }) => rest)
+  .map((context) => {
+    return {
+      id: context.id,
+      jad_id: context.jad_id,
+      name: context.name,
+      part_of: context.part_of.map(({ order, ...rest }) => rest) || "",
+      place: enrichPlaces(context.place, places) || [],
+    };
+  });
+
+writeFileSync(
+  join(folderPath, "institutional_context.json"),
+  JSON.stringify(institutionalContextsClean, null, 2),
+  { encoding: "utf-8" }
+);
+console.log("institutional_context.json file written successfully.");
+
+const liturgicalRefClean = liturgical_references
+  .filter((ref) => ref.name)
+  .map(({ order, ...rest }) => rest);
+writeFileSync(
+  join(folderPath, "liturgical_references.json"),
+  JSON.stringify(liturgicalRefClean, null, 2),
+  { encoding: "utf-8" }
+);
+console.log("liturgical_references.json file written successfully.");
 
 // enrich places with geonames_url, jad_id, lat, long from places.json
 // used in authors.json and manuscripts.json
