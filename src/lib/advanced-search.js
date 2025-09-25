@@ -306,7 +306,7 @@ search.addWidgets([
             <summary class="cursor-pointer text-brand-400"><span class="font-semibold">NB!</span> This is the normalized match. Click here to see the original text </summary>
             <p class="mt-1 italic">${hit.full_text}</p>
           </details>`
-          : hit.full_text;
+          : "";
 
         // Generate the main HTML for the hit
         return `
@@ -319,6 +319,7 @@ search.addWidgets([
 
       <p class="italic line-clamp-2">
         ${hit.displaySnippet}
+        ${highlightHTML}
       </p>
    
       <div class="work-details">
