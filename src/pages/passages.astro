@@ -4,36 +4,96 @@ import TableHead from "@/components/table-head.astro";
 import TabulatorTable from "@/components/tabulator-table.jsx";
 import { passagesTableConfig } from "@/lib/tabulator-table-configs.js";
 import passagesjson from "@/content/data/passages.json";
-
 import PassagesTimeline from "@/components/passages-timeline.astro";
+import LeafletMap from "@/components/map-leaflet.jsx";
 
 // Transform data and prepare columns for Tabulator Table
 const passages = Object.values(passagesjson);
 const tableData = passagesTableConfig.transformData(passages);
 const columns = passagesTableConfig.getColumns();
 const rowClickConfig = passagesTableConfig.getRowClickConfig;
+
+// Debug information (only in development)
+if (import.meta.env.DEV) {
+  console.log("Passages data summary:", {
+    totalPassages: passages.length,
+    transformedData: tableData.length,
+    columns: columns.length,
+    sampleData: tableData[0],
+  });
+}
+
+// Validate data before proceeding
+if (!tableData || tableData.length === 0) {
+  console.error("No table data available");
+}
+
+if (!columns || columns.length === 0) {
+  console.error("No columns configured");
+}
 ---
 
 <PageLayout title="Passages">
   <TableHead title="Passages">
-   <!--  <details class="mb-5">
+    <details class="mb-5">
       <summary
-        class="rounded-md py-2 px-4 bg-brand-400 text-brand-100 hover:bg-brand-700 hover:text-brand-50 transition cursor-pointer mb-4"
-        >Passages Timeline Graph
+        class="rounded-md py-2 px-4 bg-brand-400 text-brand-100 hover:bg-brand-700 hover:text-brand-50 transition cursor-pointer mb-4 select-none"
+      >
+        Passages Timeline Graph
       </summary>
-      <PassagesTimeline />
-    </details>      -->
-    <TabulatorTable
-      client:only="react"
-      data={tableData}
-      columns={columns}
-      tableId="passages-table"
-      options={{
-        paginationSize: 25,
-        responsiveLayout: "collapse",
-      }}
-      downloadTitle="jad_passages"
-      rowClickConfig={rowClickConfig}
-    />
+
+      {
+        tableData && tableData.length > 0 ? (
+          <PassagesTimeline />
+        ) : (
+          <div class="p-4 text-center text-gray-500 border border-gray-200 rounded-md">
+            No data available for timeline visualization
+          </div>
+        )
+      }
+    </details>
+    <details class="mb-5" open>
+      <summary
+        class="rounded-md py-2 px-4 bg-brand-400 text-brand-100 hover:bg-brand-700 hover:text-brand-50 transition cursor-pointer mb-4 select-none"
+      >
+        Passages Map
+      </summary>
+
+      {
+        tableData && tableData.length > 0 ? (
+          <LeafletMap />
+        ) : (
+          <div class="p-4 text-center text-gray-500 border border-gray-200 rounded-md">
+            No data available for map visualization
+          </div>
+        )
+      }
+    </details>
+
+    {
+      tableData && tableData.length > 0 && columns && columns.length > 0 ? (
+        <TabulatorTable
+          client:only="react"
+          data={tableData}
+          columns={columns}
+          tableId="passages-table"
+          options={{
+            paginationSize: 25,
+            responsiveLayout: "collapse",
+            placeholder: "No matching passages found",
+            height: "600px",
+          }}
+          downloadTitle="jad_passages"
+          rowClickConfig={rowClickConfig}
+          updateTimelineOnFilter={true}
+          timelineIdField="jad_id"
+        />
+      ) : (
+        <div class="p-8 text-center">
+          <div class="animate-spin inline-block w-6 h-6 border-2 border-brand-600 border-t-transparent rounded-full mb-4" />
+          <div class="text-gray-600">Loading passages data...</div>
+        </div>
+      )
+    }
   </TableHead>
 </PageLayout>
