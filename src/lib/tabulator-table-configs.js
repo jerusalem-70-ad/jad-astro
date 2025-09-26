@@ -65,7 +65,7 @@ export const passagesTableConfig = {
       {
         title: "Author",
         field: "aut_name", //using custom filter to check also alt_name
-        resposive: 1,
+        responsive: 1,
         widthGrow: 2,
         minWidth: 200,
       },
