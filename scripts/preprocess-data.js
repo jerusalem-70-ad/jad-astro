@@ -348,14 +348,15 @@ const passagesPlus = passages
           // map them to get only the necessary fields
           .map((ms) => {
             return {
-              id: ms.id,
               name: `${ms.library[0].place[0]?.value}, ${ms.name[0].value}`,
               jad_id: ms.jad_id,
+              lib_place: ms.library[0].place || [],
             };
           });
         return {
           manuscript: mss.map((ms) => ms.name).join(", ") || "TBD",
           manuscript_jad_id: mss.map((ms) => ms.jad_id).join(", "),
+          lib_place: mss.flatMap((ms) => ms.lib_place) || [],
           position_in_ms: item.position_in_ms,
           main_ms: item.main_ms,
           facsimile_position: item.facsimile_position,
@@ -373,12 +374,21 @@ const passagesPlus = passages
         };
       });
     }
+    const workForPassage = passage.work.map((w) => {
+      return {
+        id: w.id,
+        jad_id: w.jad_id,
+        title: w.title,
+        author: w.author?.map((a) => ({ jad_id: a.jad_id, name: a.name })), // keep only jad_id, and name
+        date: w.date,
+      };
+    });
 
     return {
       id: passage.id,
       jad_id: passage.jad_id,
       passage: passage.passage,
-      work: passage.work,
+      work: workForPassage,
       position_in_work: passage.position_in_work,
       pages: passage.text_paragraph?.match(/p\. (\d+\w?)/)?.[1] || null,
       note: passage.note,
@@ -391,15 +401,15 @@ const passagesPlus = passages
         ({ order, ...rest }) => rest
       ),
       source_passage: passage.source_passage,
-      incipit: passage.incipit,
-      prev: passage.prev,
-      next: passage.next,
-      text_paragraph: normalizeText(passage.text_paragraph),
+      text_paragraph: normalizeText(passage.text_paragraph), // normalize whitespace
       mss_occurrences: msOccurrence,
       biblical_ref_lvl0: lvl0,
       biblical_ref_lvl1: lvl1,
       biblical_ref_lvl2: lvl2,
       edition_link: passage.edition_link || "",
+      incipit: passage.incipit,
+      prev: passage.prev,
+      next: passage.next,
     };
   });
 
@@ -507,7 +517,21 @@ console.log("works.json file enriched successfully.");
 
 // enrich passages with data from worksPlus (author name, dates)
 const passagesPlusWorks = passagesPlus.map((p) => {
-  const related_works = worksPlus.filter((w) => w.id === p.work[0]?.id);
+  const related_works = worksPlus
+    .filter((w) => w.id === p.work[0]?.id)
+    .map((w) => {
+      return {
+        id: w.id,
+        jad_id: w.jad_id,
+        title: w.title,
+        author: w.author?.map((a) => ({
+          jad_id: a.jad_id,
+          name: a.name,
+          alt_name: a.alt_name,
+        })), // keep only jad_id, and name
+        date: w.date,
+      };
+    });
   return {
     ...p,
     work: related_works,
