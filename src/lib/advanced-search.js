@@ -410,16 +410,6 @@ search.addWidgets([
     searchablePlaceholder: "e.g. Crusade",
   }),
 
-  refinementListContext({
-    container: "#refinement-list-context",
-    attribute: "work.institutional_context.value",
-    searchable: true,
-    showMore: true,
-    showMoreLimit: 50,
-    limit: 10,
-    searchablePlaceholder: "e.g. Benedictines",
-  }),
-
   refinementListKeywords({
     container: "#refinement-list-keywords",
     attribute: "keywords.value",
