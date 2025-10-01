@@ -65,7 +65,7 @@ export const passagesTableConfig = {
       {
         title: "Author",
         field: "aut_name", //using custom filter to check also alt_name
-        resposive: 1,
+        responsive: 1,
         widthGrow: 2,
         minWidth: 200,
       },
@@ -282,7 +282,9 @@ export const manuscriptsTableConfig = {
         const passages =
           (ms.related_passages.length > 0 &&
             `<ul>${ms.related_passages
-              .map((p) => `<li>(${p.passage.id}) ${p.passage.passage})</li>`)
+              .map(
+                (p) => `<li>(${p.passage[0].id}) ${p.passage[0].passage})</li>`
+              )
               .join("")}</ul>`) ||
           [];
         return {

@@ -2,7 +2,7 @@
 const { height = 400 } = Astro.props;
 ---
 
-<!-- wrapper with fixed height so page doesn’t jump -->
+<!-- wrapper with fixed height so page doesn't jump -->
 <div class="relative mb-5 hidden md:block" style={`height:${height}px;`}>
   <!-- spinner overlay -->
   <div
@@ -10,10 +10,10 @@ const { height = 400 } = Astro.props;
     class="absolute inset-0 flex justify-center items-center bg-white z-10"
   >
     <span class="animate-spin mr-2">&#9696;</span>
-    <span>Graph loading...</span>
+    <span>Loading timeline...</span>
   </div>
 
-  <!-- chart container: always visible but underneath spinner -->
+  <!-- chart container -->
   <div
     id="passages-timeline"
     class="sm:block border border-gray-200 rounded-md w-full h-full"
@@ -30,164 +30,294 @@ const { height = 400 } = Astro.props;
   declare global {
     interface Window {
       passagesTimelineData?: any[];
-      timelineChart?: any;
+      timelineChart?: echarts.ECharts;
+      updateTimelineColors?: (filteredData: any[]) => void;
     }
   }
+  console.log("📡 Initial window check:", !!window.passagesTimelineData);
 
   document.addEventListener("DOMContentLoaded", () => {
     console.log("Timeline component loaded");
-// Only start timeline processing after a small delay
-  setTimeout(() => {
-    const timelineData = (window as any).passagesTimelineData || [];
+    console.log("📡 Window data at DOMContentLoaded:", {
+      exists: !!window.passagesTimelineData,
+      length: window.passagesTimelineData?.length,
+    });
 
-    if (!timelineData.length) {
-      console.warn("No timeline data available");
-      return;
-    }
+    let retryCount = 0;
+    const maxRetries = 20;
 
-    const chartElement = document.getElementById("passages-timeline");
-    if (!chartElement) return;
+    const initializeTimeline = () => {
+      const timelineData = window.passagesTimelineData || [];
 
-    // Calculate date extent
-    const dateExtent = extent(timelineData, (d: any) => d.date_post_quem);
-    const [minDate, maxDate] = dateExtent;
+      console.log(`Timeline initialization attempt ${retryCount + 1}:`, {
+        dataAvailable: !!window.passagesTimelineData,
+        dataLength: timelineData.length,
+        // sampleItem: timelineData[0],
+      });
 
-    // Config values from reference code
-    const nodeRadius = 3;
-    const nodePadding = 1;
-    const collideStrength = 0.7;
-    const xStrength = 0.1;
-    const yStrength = 0.2;
+      // Check if data is available
+      if (!timelineData.length) {
+        retryCount++;
+        if (retryCount < maxRetries) {
+          console.log("Retrying in 200ms...");
+          setTimeout(initializeTimeline, 200);
+          return;
+        } else {
+          console.error(
+            "Timeline failed to initialize - no data after",
+            maxRetries,
+            "attempts"
+          );
+          showErrorMessage("No timeline data available");
+          return;
+        }
+      }
 
-    // Prepare nodes exactly like the reference
-    const simulationData = timelineData.map((item: any) => ({
-      ...item,
-      // Initial position - all nodes start on the same timeline
-      x: item.date_post_quem,
-      y: 0, // Single timeline like reference
-      date: new Date(item.date_post_quem, 0), // Convert to Date object
-    }));
-
-    // Force simulation exactly like reference
-    const simulation = forceSimulation()
-      .force(
-        "collide",
-        forceCollide(nodeRadius + nodePadding).strength(collideStrength)
-      )
-      .force("x", forceX((d) => d.date_post_quem).strength(xStrength))
-      .force(
-        "y",
-        forceY(0).strength(yStrength) // Pull to center line
+      // Data is available, proceed with initialization
+      console.log(
+        "✅ Initializing timeline with",
+        timelineData.length,
+        "items"
       );
+      createTimeline(timelineData);
+    };
 
-    // Run simulation with tick handling like reference
-    simulation
-      .on("tick", () => {
-        // Update node positions during simulation
-        // The reference runs this in real-time, we'll do it in batches
-      })
-      .nodes(simulationData);
+    const showErrorMessage = (message: string) => {
+      const loadingElement = document.getElementById("timeline-loading");
+      if (loadingElement) {
+        loadingElement.innerHTML = `
+          <div class="text-center text-red-600">
+            <div class="mb-2">⚠️</div>
+            <div>${message}</div>
+          </div>
+        `;
+      }
+    };
 
-    // Run simulation for many ticks to settle
-    for (let i = 0; i < 300; i++) {
-      simulation.tick();
-    }
+    const createTimeline = (timelineData: any[]) => {
+      const chartElement = document.getElementById("passages-timeline");
+      if (!chartElement) {
+        console.error("Chart container not found");
+        return;
+      }
 
-    simulation.stop();
-    // Prepare data for ECharts
+      try {
+        // Validate data structure
+        const validData = timelineData.filter(
+          (item) =>
+            item.date_post_quem &&
+            typeof item.date_post_quem === "number" &&
+            !isNaN(item.date_post_quem)
+        );
 
-    const option = {
-      title: {
-        text: "Passages Timeline",
-        left: "center",
-      },
-      tooltip: {
-        trigger: "item",
-        formatter: function (params: any) {
-          return `
-            <strong>#${params.data.id.substring(16)}</strong><br/>
-            <strong>Author:</strong> ${params.data.author}<br/>
-            <strong>Work:</strong> ${params.data.work_title}<br/>
-            <strong>Date:</strong> ${params.data.date_post_quem}- ${params.data.date_ante_quem}<br/>
-          `;
-        },
-      },
-      xAxis: {
-        type: "value",
-        name: "Year",
-        min: minDate - 10,
-        max: maxDate + 10,
-        position: "bottom",
-        axisLabel: { interval: 0, formatter: (v: any) => (v % 50 === 0 ? v : "") },
-        splitNumber: 10,
-      },
-      yAxis: {
-        type: "value",
-        show: false,
-        min: "dataMin",
-        max: "dataMax",
-      },
-      grid: {
-        bottom: 40, // Add some bottom margin to show the X-axis
-      },
-      dataZoom: [
-        {
-          type: "inside", // Mouse wheel zoom and pan
-          xAxisIndex: 0,
-          filterMode: "none", // Don't filter data when zooming
-        },
-      ],
-      series: [
-        {
-          type: "scatter",
-          symbolSize: nodeRadius * 2,
-          itemStyle: {
-            color: "#FFD700",
-            opacity: 0.8,
+        if (validData.length === 0) {
+          throw new Error("No valid date data found");
+        }
+
+        console.log(
+          `Using ${validData.length} valid items out of ${timelineData.length}`
+        );
+
+        // Calculate date extent
+        const dateExtent = extent(validData, (d: any) => d.date_post_quem);
+        const [minDate, maxDate] = dateExtent;
+
+        if (!minDate || !maxDate) {
+          throw new Error("Unable to calculate date range");
+        }
+
+        // Force simulation configuration
+        const nodeRadius = 3;
+        const nodePadding = 0.5;
+        const collideStrength = 1;
+        const xStrength = 0.1;
+        const yStrength = 0.2;
+
+        // Prepare simulation data
+        const simulationData = validData.map((item: any) => ({
+          ...item,
+          x:
+            (item.date_post_quem + item.date_ante_quem) / 2 ||
+            item.date_post_quem, // use average date
+          y: 0,
+          date: new Date(item.date_post_quem, 0),
+        }));
+
+        // Run force simulation
+        const simulation = forceSimulation(simulationData)
+          .force(
+            "collide",
+            forceCollide(nodeRadius + nodePadding).strength(collideStrength)
+          )
+          .force("x", forceX((d: any) => d.date_post_quem).strength(xStrength))
+          .force("y", forceY(0).strength(yStrength));
+
+        // Run simulation to completion
+        for (let i = 0; i < 300; i++) {
+          simulation.tick();
+        }
+        simulation.stop();
+
+        // Create ECharts configuration
+        const option = {
+          title: {
+            text: "Passages Timeline",
+            left: "center",
+            textStyle: {
+              fontSize: 16,
+              fontWeight: "bold",
+            },
           },
-
-          data: simulationData.map((node: any) => ({
-            value: [node.x, node.y],
-            ...node,
-          })),
-           label: {
-            show: false, // Keep labels hidden even on hover
+          tooltip: {
+            trigger: "item",
+            formatter: function (params: any) {
+              const data = params.data;
+              return `
+                <div class="text-left">
+                  <strong>${data.id ? `#${data.id.substring(16)}` : "Unknown ID"}</strong><br/>
+                  <strong>Author:</strong> ${data.author || "Unknown"}<br/>
+                  <strong>Work:</strong> ${data.work_title || "Unknown"}<br/>
+                  <strong>Date:</strong> ${data.date_post_quem}${data.date_ante_quem && data.date_ante_quem !== data.date_post_quem ? `-${data.date_ante_quem}` : ""}<br/>
+                  ${data.passage ? `<strong>Passage:</strong> ${data.passage.substring(0, 100)}...` : ""}
+                </div>
+              `;
+            },
+            backgroundColor: "rgba(255, 255, 255, 0.95)",
+            borderColor: "#ccc",
+            borderWidth: 1,
+            textStyle: {
+              fontSize: 12,
+            },
+          },
+          xAxis: {
+            type: "value",
+            name: "Year",
+            nameLocation: "middle",
+            nameGap: 25,
+            min: minDate - 20,
+            max: maxDate + 20,
+            axisLabel: {
+              formatter: (value: number) => {
+                // Show labels for significant years
+                if (value % 100 === 0) return value.toString();
+                if (value % 50 === 0) return value.toString();
+                return "";
+              },
+            },
+            splitLine: {
+              show: true,
+              lineStyle: {
+                color: "#e0e0e0",
+                width: 1,
+                type: "dashed",
+              },
+            },
+          },
+          yAxis: {
+            type: "value",
+            show: false,
+            min: "dataMin",
+            max: "dataMax",
+          },
+          grid: {
+            left: 0,
+            right: 0,
+            top: 80,
+            bottom: 60,
           },
           dataZoom: [
             {
-              type: "inside", // Mouse wheel zoom and pan
+              type: "inside",
               xAxisIndex: 0,
-              filterMode: "none", // Don't filter data when zooming
+              filterMode: "none",
             },
             {
-              type: "slider", // Shows a zoom slider at the bottom
+              type: "slider",
               xAxisIndex: 0,
               filterMode: "none",
               bottom: 10,
+              height: 20,
             },
           ],
-        },
-      ],
+          series: [
+            {
+              type: "scatter",
+              symbolSize: nodeRadius * 2,
+              itemStyle: {
+                color: "#FFD700",
+                opacity: 0.8,
+                borderColor: "#DAA520",
+                borderWidth: 1,
+              },
+              emphasis: {
+                itemStyle: {
+                  color: "#FFA500",
+                  opacity: 1,
+                  borderWidth: 2,
+                },
+              },
+              data: simulationData.map((node: any) => ({
+                value: [node.x, node.y],
+                ...node,
+              })),
+              label: {
+                show: false,
+              },
+            },
+          ],
+        };
+
+        // Initialize chart
+        const chart = echarts.init(chartElement, null, {
+          renderer: "canvas",
+          useDirtyRect: false,
+        });
+
+        chart.setOption(option);
+
+        // Hide loading spinner
+        const loadingElement = document.getElementById("timeline-loading");
+        if (loadingElement) {
+          loadingElement.classList.add("hidden");
+        }
+
+        // Add click handler for navigation
+        chart.on("click", function (params: any) {
+          if (params.data?.id) {
+            const url = withBasePath(`/passages/${params.data.id}`);
+            window.location.href = url;
+          }
+        });
+
+        // Store chart globally for table integration
+        window.timelineChart = chart;
+
+        // Handle window resize
+        const resizeHandler = () => {
+          if (chart && !chart.isDisposed()) {
+            chart.resize();
+          }
+        };
+
+        window.addEventListener("resize", resizeHandler);
+
+        // Cleanup function (though not directly called in Astro components)
+        const cleanup = () => {
+          window.removeEventListener("resize", resizeHandler);
+          if (chart && !chart.isDisposed()) {
+            chart.dispose();
+          }
+          delete window.timelineChart;
+        };
+
+        console.log("✅ Timeline successfully initialized");
+      } catch (error) {
+        console.error("❌ Error creating timeline:", error);
+        showErrorMessage("Failed to create timeline chart");
+      }
     };
 
-    const chart = echarts.init(chartElement);
-    chart.setOption(option);
-
-    // hide spinner overlay now that chart is ready
-    const loadingElement = document.getElementById("timeline-loading");
-    loadingElement.classList.add("hidden");
-
-    chart.on("click", function (params: any) {
-      if (params.data && params.data.id) {
-        window.location.href = withBasePath(`/passages/${params.data.id}`);
-      }
-      console.log("Clicked on node:", params.data);
-    });
-    // Store chart globally so table can access it
-    window.timelineChart = chart;
-
-    // Handle window resize
-    window.addEventListener("resize", () => chart.resize());
-  });
+    // Start the initialization process
+    initializeTimeline();
   });
 </script>

@@ -22,7 +22,7 @@ const { data: manuscript } = Astro.props;
 
 // get related passages to each manuscript
 
-  const related_passages = passages
+ /*  const related_passages = passages
     .filter((passage) =>
       passage.mss_occurrences.some(
         (m) => m.manuscript_jad_id === manuscript.jad_id,
@@ -36,7 +36,7 @@ const { data: manuscript } = Astro.props;
       author: passage.work[0].author[0]?.name,
       place: passage.position_in_work,
       author_certainty: passage.work[0].author_certainty,
-    }));
+    })); */
 ---
 
 <PageLayout title=`${manuscript.name[0].value}`>
@@ -95,13 +95,13 @@ const { data: manuscript } = Astro.props;
         </dd>
        )}
         
-        {related_passages.length > 0 && (
+        {manuscript.related_passages.length > 0 && (
           <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">Passages:</dt>
           <dd class="pl-5"> 
-           {related_passages.length > 0 ?  
+           {manuscript.related_passages.length > 0 ?  
            <ul>
               {
-           related_passages.map((passage) => (
+           manuscript.related_passages.map(p => p.passage.map((passage) => (
                   <li>
                     <NavLink href={`/passages/${passage.jad_id}`}>
                       <span>({passage.id})</span>
@@ -112,19 +112,19 @@ const { data: manuscript } = Astro.props;
                     <div class="mt-1 pl-4 text-sm">
                       <span>
                         <span class="font-semibold">Author:</span>{" "}
-                        {passage.author || "Unknown"}
-                        {passage.author_certainty === false && " (?)"}
+                        {passage.work[0].author[0].name || "Unknown"}
+                        {passage.work[0].author_certainty === false && " (?)"}
                       </span>
                       <br />
                       <span>
                         <span class="font-semibold">Work:</span>{" "}
                         <span class="italic">
-                          {passage.work || "Unknown"}
+                          {passage.work[0].title || "Unknown"}
                         </span>
                       </span>
                     </div>
                   </li>
-                ))}
+                )))}
               </ul>
               : "N/A"} 
             
