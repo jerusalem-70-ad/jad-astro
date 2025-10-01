@@ -413,7 +413,7 @@ const passagesPlus = passages
     };
   });
 
-console.log("passages.json file enriched successfully.");
+console.log("1st round passages file enriched.");
 
 // enrich works with manuscripts data from manuscriptsPlus
 // also group passages by position_in_work and sort them accordingly
@@ -528,7 +528,9 @@ const passagesPlusWorks = passagesPlus.map((p) => {
           jad_id: a.jad_id,
           name: a.name,
           alt_name: a.alt_name,
-        })), // keep only jad_id, and name
+          place: a.place,
+        })),
+        author_certainty: w.author_certainty,
         date: w.date,
       };
     });
@@ -550,6 +552,7 @@ const passagesPlusPlus = passagesPlusWorks.map((p) => {
         jad_id: matchingPassage.jad_id,
         title: matchingPassage.work[0]?.title || "Not found",
         author: matchingPassage.work[0]?.author?.[0]?.name || "",
+        author_certainty: matchingPassage.work[0]?.author_certainty || "",
         passage: matchingPassage.passage,
       };
     }
@@ -585,6 +588,7 @@ writeFileSync(
   JSON.stringify(passagesPlusFinal, null, 2),
   { encoding: "utf-8" }
 );
+console.log("passages.json file enriched successfully.");
 
 // enrich manuscripts with data from passagesPlus and worksPlus
 const manuscriptPlusPlus = manuscriptsPlus.map((ms) => {
@@ -600,19 +604,33 @@ const manuscriptPlusPlus = manuscriptsPlus.map((ms) => {
         jad_id: w.author[0]?.jad_id || "",
         name: w.author[0]?.name || "",
       },
+      author_certainty: w.author_certainty,
     }));
   const related_occurrences = msOccurrences
     .filter((occur) => occur.manuscript.length > 0)
     .filter((occur) => occur.manuscript[0].id === ms.id)
     .map((occurr) => {
-      const passage = passagesPlus.find(
-        (p) => p.id === occurr.occurrence[0].id
-      );
+      const passage = passagesPlusPlus
+        .filter((p) => p.id === occurr.occurrence[0].id)
+        .map((p) => {
+          return {
+            id: p.id,
+            jad_id: p.jad_id,
+            passage: p.passage,
+            work: p.work.map((w) => ({
+              id: w.id,
+              jad_id: w.jad_id,
+              title: w.title,
+              author: w.author,
+              author_certainty: w.author_certainty,
+            })),
+          };
+        });
       return {
-        passage: passage,
         position_in_ms: occurr.position_in_ms,
         main_ms: occurr.main_ms,
         facsimile_position: occurr.facsimile_position,
+        passage: passage,
       };
     });
   return {
@@ -635,7 +653,7 @@ writeFileSync(
   { encoding: "utf-8" }
 );
 
-console.log("passages.json file enriched successfully.");
+console.log("manuscripts.json file enriched successfully.");
 
 const keywords = Object.values(loadJSON("keywords.json"));
 const keywordsPlus = keywords

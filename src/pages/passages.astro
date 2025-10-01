@@ -6,6 +6,8 @@ import { passagesTableConfig } from "@/lib/tabulator-table-configs.js";
 import passagesjson from "@/content/data/passages.json";
 import PassagesTimeline from "@/components/passages-timeline.astro";
 import LeafletMap from "@/components/map-leaflet.jsx";
+import { processData } from "@/lib/make-geojson.js";
+const geoJsonData = processData(passagesjson);
 
 // Transform data and prepare columns for Tabulator Table
 const passages = Object.values(passagesjson);
@@ -21,6 +23,11 @@ if (import.meta.env.DEV) {
     columns: columns.length,
     sampleData: tableData[0],
   });
+  console.log("Geojson data summary:", {
+    type: geoJsonData.type,
+    totalFeatures: geoJsonData.features.length,
+    sampleFeature: geoJsonData.features[2],
+  });
 }
 
 // Validate data before proceeding
@@ -35,7 +42,7 @@ if (!columns || columns.length === 0) {
 
 <PageLayout title="Passages">
   <TableHead title="Passages">
-    <details class="mb-5">
+    <details name="extraPanel">
       <summary
         class="rounded-md py-2 px-4 bg-brand-400 text-brand-100 hover:bg-brand-700 hover:text-brand-50 transition cursor-pointer mb-4 select-none"
       >
@@ -52,7 +59,7 @@ if (!columns || columns.length === 0) {
         )
       }
     </details>
-    <details class="mb-5" open>
+    <details name="extraPanel">
       <summary
         class="rounded-md py-2 px-4 bg-brand-400 text-brand-100 hover:bg-brand-700 hover:text-brand-50 transition cursor-pointer mb-4 select-none"
       >
@@ -61,7 +68,7 @@ if (!columns || columns.length === 0) {
 
       {
         tableData && tableData.length > 0 ? (
-          <LeafletMap />
+          <LeafletMap client:only="react" geoJsonData={geoJsonData} />
         ) : (
           <div class="p-4 text-center text-gray-500 border border-gray-200 rounded-md">
             No data available for map visualization
@@ -86,7 +93,7 @@ if (!columns || columns.length === 0) {
           downloadTitle="jad_passages"
           rowClickConfig={rowClickConfig}
           updateTimelineOnFilter={true}
-          timelineIdField="jad_id"
+          updateMapOnFilter={true}
         />
       ) : (
         <div class="p-8 text-center">

@@ -282,7 +282,9 @@ export const manuscriptsTableConfig = {
         const passages =
           (ms.related_passages.length > 0 &&
             `<ul>${ms.related_passages
-              .map((p) => `<li>(${p.passage.id}) ${p.passage.passage})</li>`)
+              .map(
+                (p) => `<li>(${p.passage[0].id}) ${p.passage[0].passage})</li>`
+              )
               .join("")}</ul>`) ||
           [];
         return {
