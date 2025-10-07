@@ -243,7 +243,7 @@ search.addWidgets([
       return items.map((item) => {
         // Transform works (keeping your existing logic)
         const transformedWorks = (item.work || []).map((work) => ({
-          title: work.name || "Unknown Title",
+          title: work.title || "Unknown Title",
           authors: (work.author || []).map(
             (author) => author.name || "Unknown Author"
           ),
