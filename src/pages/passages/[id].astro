@@ -383,6 +383,7 @@ const usedBy = Object.values(passages).filter((item) =>
             Edition :
           </dt>
           <dd class="pl-5 p-2">
+            {passage.work[0].edition}
            {passage?.edition_link && 
             <NavLink href={passage.edition_link}> Facsimile <Icon name="lucide:external-link" class="size-4 text-brand-800 inline-flex"/></NavLink>
             }

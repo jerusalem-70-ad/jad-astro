@@ -471,11 +471,25 @@ const worksPlus = works
     const related_authors = authorsPlus.filter((aut) =>
       work.author.some((w_aut) => w_aut.id === aut.id)
     );
+    let edition;
+    if (
+      work.published_edition[0].value === "Other edition" &&
+      work.volume_edition_or_individual_editor
+    ) {
+      edition = work.volume_edition_or_individual_editor;
+    } else if (
+      work.published_edition[0].value != "Other edition" &&
+      work.volume_edition_or_individual_editor
+    ) {
+      edition = `${work.published_edition[0].value}, ${work.volume_edition_or_individual_editor}`;
+    } else if (work.published_edition[0].value) {
+      edition = work.published_edition[0].value;
+    }
     return {
       id: work.id,
       jad_id: work.jad_id,
       title: work.title,
-      author: related_authors,
+      author: related_authors.map(({ prev, next, works, ...rest }) => rest),
       author_certainty: work.author_certainty,
       manuscripts: manuscriptsPlus
         .filter((ms) => work.manuscripts.some((w_ms) => w_ms.id === ms.id))
@@ -496,6 +510,7 @@ const worksPlus = works
       date_certainty: work.date_certainty,
       link_digital_editions: work.link_digital_editions || "",
       incipit: work.incipit || "",
+      edition: edition || "",
       volume_edition_or_individual_editor:
         work.volume_edition_or_individual_editor || "",
       other_editions: work.other_editions || "",
@@ -532,6 +547,7 @@ const passagesPlusWorks = passagesPlus.map((p) => {
         })),
         author_certainty: w.author_certainty,
         date: w.date,
+        edition: w.edition,
       };
     });
   return {

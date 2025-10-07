@@ -32,12 +32,12 @@ export const passagesTableConfig = {
         mss_occurrences: passage.mss_occurrences
           .map((ms) => ms.manuscript)
           .join(" | "),
-        biblical_references: passage.biblical_references
+        /* biblical_references: passage.biblical_references
           .map((ref) => ref.value)
           .join(" | "),
         liturgical_references: passage.liturgical_references
           .map((ref) => ref.value)
-          .join(" | "),
+          .join(" | "), */
         keywords: passage.keywords.map((kw) => kw.value).join(" | ") || "",
         origDate: passage.work[0].date || "",
         transmission_graph:
@@ -86,7 +86,7 @@ export const passagesTableConfig = {
         minWidth: 200,
       },
 
-      {
+      /*  {
         title: "Biblical Reference",
         resizable: true,
         field: "biblical_references",
@@ -101,7 +101,7 @@ export const passagesTableConfig = {
         responsive: 4,
         widthGrow: 1,
         minWidth: 100,
-      },
+      }, */
       {
         title: "Keywords",
         resizable: true,

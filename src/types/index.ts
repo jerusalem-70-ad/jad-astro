@@ -67,9 +67,9 @@ export interface Author {
   origDates?: any[] | null;
   place: Place[];
   alt_name?: string | null;
-  works: any[]; // This appears to be empty in the sample
-  prev: Navigation;
-  next: Navigation;
+  works?: any[]; // This appears to be empty in the sample
+  prev?: Navigation;
+  next?: Navigation;
 }
 
 export interface Place {
@@ -123,9 +123,10 @@ export interface Work {
   date: DateItem[];
   link_digital_editions: string | null;
   author_certainty: boolean;
-  incipit: string | null;
-  volume_edition_or_individual_editor: string | null;
-  other_editions: string | null;
+  incipit?: string | null;
+  volume_edition_or_individual_editor?: string | null;
+  other_editions?: string | null;
+  edition: string;
   related__passages: any[];
   view_label?: string;
 }
