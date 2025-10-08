@@ -15,6 +15,7 @@ import { simple } from "instantsearch.js/es/lib/stateMappings";
 
 import { withBasePath } from "./withBasePath";
 import { biblicalComparator } from "./sort-bibl-ref-menu.js";
+import { initShowMoreButtons } from "./utils";
 
 // import authorLookupMap to display normal author names, while use normalized in the facet search
 import authorLookupMap from "@/content/data/authors_map.json";
@@ -321,6 +322,14 @@ search.addWidgets([
         ${hit.displaySnippet}
         ${highlightHTML}
       </p>
+
+        <button 
+        class="show-more-btn float-right text-brand-600 hover:bg-brand-400 hover:text-brand-100 text-sm font-medium m-1 
+        py-1 px-2 border border-brand-900 rounded-sm"
+        
+      >
+        Show more
+      </button>
    
       <div class="work-details">
         ${renderWorks(hit.transformedWorks)}
@@ -606,3 +615,5 @@ function extractSnippetAroundHighlight(text, maxLength = 400) {
 
   return snippet;
 }
+// Function to toggle line-clamp-2
+initShowMoreButtons();
