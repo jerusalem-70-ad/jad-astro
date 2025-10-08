@@ -13,24 +13,22 @@ export function addItalics(text) {
  */
 export function initShowMoreButtons() {
   document.addEventListener("click", (event) => {
-    if (event.target.classList.contains("show-more-btn")) {
-      event.preventDefault();
+    const button = event.target.closest(".show-more-btn");
+    if (!button) return;
 
-      const button = event.target;
-      const paragraph = button.previousElementSibling;
+    const article = button.closest("article");
+    const paragraph = article?.querySelector("p.italic");
+    if (!paragraph) return;
 
-      if (!paragraph) {
-        console.error("Could not find paragraph element");
-        return;
-      }
+    const isCollapsed = paragraph.classList.contains("line-clamp-2");
 
-      paragraph.classList.toggle("line-clamp-2");
-
-      if (paragraph.classList.contains("line-clamp-2")) {
-        button.textContent = "Show more";
-      } else {
-        button.textContent = "Show less";
-      }
+    // Toggle state
+    if (isCollapsed) {
+      paragraph.classList.remove("line-clamp-2");
+      button.textContent = "Show less";
+    } else {
+      paragraph.classList.add("line-clamp-2");
+      button.textContent = "Show more";
     }
   });
 }

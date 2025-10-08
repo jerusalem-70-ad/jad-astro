@@ -90,7 +90,6 @@ const refinementListAuthor = wrapInPanel("Autor");
 const refinementListWork = wrapInPanel("Work");
 const refinementListManuscript = wrapInPanel("Manuscripts");
 const refinementListWorkCentury = wrapInPanel("Century of work");
-const refinementListContext = wrapInPanel("Institutional context");
 const refinementListliturgical = wrapInPanel("Liturgical references");
 const refinementListClusters = wrapInPanel("Clusters");
 const refinementListKeywords = wrapInPanel("Keywords");
@@ -263,8 +262,8 @@ search.addWidgets([
         } else if (searchTextHighlight.includes("<mark>")) {
           snippet = extractSnippetAroundHighlight(searchTextHighlight);
         } else {
-          // Fallback to first 400 characters
-          snippet = item.full_text.substring(0, 400) + "...";
+          // Fallback and default in case no text query
+          snippet = item.full_text;
         }
 
         return {
@@ -323,17 +322,18 @@ search.addWidgets([
         ${highlightHTML}
       </p>
 
+      <div class="grid-cols-2 justify-between mt-1">
         <button 
-        class="show-more-btn float-right text-brand-600 hover:bg-brand-400 hover:text-brand-100 text-sm font-medium m-1 
-        py-1 px-2 border border-brand-900 rounded-sm"
-        
-      >
-        Show more
-      </button>
+          class="show-more-btn float-right text-brand-600 hover:bg-brand-400 hover:text-brand-100 text-sm font-medium m-1 
+          py-1 px-2 border border-brand-900 rounded-sm">
+          Show more
+        </button> 
+        <div class="work-details">
+          ${renderWorks(hit.transformedWorks)}
+        </div>   
+      </div>
    
-      <div class="work-details">
-        ${renderWorks(hit.transformedWorks)}
-      </div>            
+              
     </article>
   `;
       },
