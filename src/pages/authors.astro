@@ -5,6 +5,10 @@ import TabulatorTable from "@/components/tabulator-table.jsx";
 import { authorsTableConfig } from "@/lib/tabulator-table-configs.js";
 import authorsjson from "@/content/data/authors.json";
 
+import LeafletMap from "@/components/map-leaflet.jsx";
+import { processAuthors } from "@/lib/make-geojson.js";
+const geoJsonData = processAuthors(authorsjson);
+
 // Transform data and prepare columns for Tabulator Table
 const authors = Object.values(authorsjson);
 const tableData = authorsTableConfig.transformData(authors);
@@ -14,6 +18,23 @@ const rowClickConfig = authorsTableConfig.getRowClickConfig;
 
 <PageLayout title="Authors">
   <TableHead title="Authors">
+    <details name="extraPanel">
+      <summary
+        class="rounded-md py-2 px-4 bg-brand-400 text-brand-100 hover:bg-brand-700 hover:text-brand-50 transition cursor-pointer mb-4 select-none"
+      >
+        Authors Map
+      </summary>
+
+      {
+        tableData && tableData.length > 0 ? (
+          <LeafletMap client:only="react" geoJsonData={geoJsonData} />
+        ) : (
+          <div class="p-4 text-center text-gray-500 border border-gray-200 rounded-md">
+            No data available for map visualization
+          </div>
+        )
+      }
+    </details>
     <TabulatorTable
       client:only="react"
       data={tableData}
