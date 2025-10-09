@@ -497,6 +497,7 @@ const worksPlus = works
           id: ms.id,
           jad_id: ms.jad_id,
           name: `${ms.library[0].place[0]?.value}, ${ms.name[0].value}`,
+          place: ms.library[0].place,
         })),
       genre: work.genre?.value || "",
       description: work.description,
