@@ -43,6 +43,8 @@ export default function LeafletMap({
   initialView = [50, 10],
   initialZoom = 3,
   markerColor = "#B42222",
+  filterMode = "single", // "single" for using only one prop from table or "dual" for using two
+  // as in passages using aut_jad_id and ms_jad_id
 }) {
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
@@ -52,29 +54,72 @@ export default function LeafletMap({
 
   // Create a method that can be called from outside to update the map
   useEffect(() => {
-    // Make the updateMap function available globally to be called in tabulator by table.on filter
     window.updateMapWithFilteredIds = (filteredIds) => {
-      if (!geoJsonData || !geoJsonData.features) return;
+      // Make the updateMap function available globally to be called in tabulator by table.on filter
+      if (!geoJsonData) {
+        console.warn("geoJsonData is undefined");
+        return;
+      }
 
-      // Filter the geoJsonData to only include features with matching jad_ids
-      // Since table sends ms_transmission jad_ids, we need to check against those
-      const filteredGeoJson = {
-        type: "FeatureCollection",
-        features: geoJsonData.features.filter(
-          (feature) =>
-            feature.properties &&
-            filteredIds.includes(feature.properties.jad_id)
-        ),
-      };
+      if (!geoJsonData.features) {
+        console.warn("geoJsonData.features is undefined");
+        return;
+      }
 
-      updateMapMarkers(filteredGeoJson);
+      console.log("Map filter called with mode:", filterMode);
+      console.log(
+        "Filtered IDs:",
+        filteredIds.slice(0, 5),
+        "... (total:",
+        filteredIds.length,
+        ")"
+      );
+
+      // Filter the geoJsonData to only include features with matching jad_ids or dual ids
+
+      let filteredGeoJson;
+
+      if (filterMode === "dual") {
+        // NEW: Dual-ID filtering for passages page
+        filteredGeoJson = {
+          type: "FeatureCollection",
+          features: geoJsonData.features.filter((feature) => {
+            if (!feature.properties) return false;
+
+            // Check the appropriate ID field based on feature type
+            if (feature.properties.type === "author") {
+              return filteredIds.includes(feature.properties.aut_jad_id);
+            } else if (feature.properties.type === "library") {
+              return filteredIds.includes(feature.properties.ms_jad_id);
+            }
+            return false;
+          }),
+        };
+      } else {
+        // DEFAULT: Standard jad_id filtering for other pages
+        filteredGeoJson = {
+          type: "FeatureCollection",
+          features: geoJsonData.features.filter((feature) => {
+            if (!feature.properties) return false;
+            return filteredIds.includes(feature.properties.jad_id);
+          }),
+        };
+      }
+
+      console.log("Filtered features:", filteredGeoJson.features.length);
+
+      // Make sure we have valid data before updating
+      if (filteredGeoJson && filteredGeoJson.features) {
+        updateMapMarkers(filteredGeoJson);
+      } else {
+        console.warn("filteredGeoJson is invalid");
+      }
     };
 
     return () => {
-      // Clean up the global function when component unmounts
       delete window.updateMapWithFilteredIds;
     };
-  }, [geoJsonData]);
+  }, [geoJsonData, filterMode]);
 
   // Function to update markers on the map
   const updateMapMarkers = (dataToShow) => {
@@ -122,7 +167,7 @@ export default function LeafletMap({
           const url = withBasePath(properties.url || "");
           const popupContent = `
                         <div class="map-popup">
-                            <h3><a href=${url} class="font-semibold italic text-base underline decoration-dotted underline-offset-2">${
+                            <h3><a href=${url} class="font-semibold text-base underline decoration-dotted underline-offset-2">${
             properties.title || ""
           } </a><br/></h3>
                             <p>Place: ${properties.place || ""} (${

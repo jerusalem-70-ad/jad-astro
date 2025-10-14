@@ -4,10 +4,12 @@ import TableHead from "@/components/table-head.astro";
 import TabulatorTable from "@/components/tabulator-table.jsx";
 import { passagesTableConfig } from "@/lib/tabulator-table-configs.js";
 import passagesjson from "@/content/data/passages.json";
+import authorsjson from "@/content/data/authors.json"
+import manuscriptsjson from "@/content/data/manuscripts.json"
 import PassagesTimeline from "@/components/passages-timeline.astro";
 import LeafletMap from "@/components/map-leaflet.jsx";
-import { processData } from "@/lib/make-geojson.js";
-const geoJsonData = processData(passagesjson);
+import { processPassagesMap } from "@/lib/make-geojson.js";
+const geoJsonData = processPassagesMap(authorsjson, manuscriptsjson);
 
 // Transform data and prepare columns for Tabulator Table
 const passages = Object.values(passagesjson);
@@ -68,7 +70,7 @@ if (!columns || columns.length === 0) {
 
       {
         tableData && tableData.length > 0 ? (
-          <LeafletMap client:only="react" geoJsonData={geoJsonData} />
+          <LeafletMap client:only="react" geoJsonData={geoJsonData} filterMode="dual"/>
         ) : (
           <div class="p-4 text-center text-gray-500 border border-gray-200 rounded-md">
             No data available for map visualization
@@ -94,6 +96,8 @@ if (!columns || columns.length === 0) {
           rowClickConfig={rowClickConfig}
           updateTimelineOnFilter={true}
           updateMapOnFilter={true}
+          mapIdField="aut_jad_id"
+          mapFilterMode="dual"
         />
       ) : (
         <div class="p-8 text-center">

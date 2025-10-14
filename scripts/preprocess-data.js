@@ -549,6 +549,7 @@ const passagesPlusWorks = passagesPlus.map((p) => {
         author_certainty: w.author_certainty,
         date: w.date,
         edition: w.edition,
+        link_digital_editions: w.link_digital_editions,
       };
     });
   return {

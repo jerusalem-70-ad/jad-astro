@@ -27,17 +27,14 @@ export const passagesTableConfig = {
         passage: passage.passage || "",
         aut_name: passage.work[0]?.author[0]?.name || "",
         alt_name: passage.work[0]?.author[0]?.alt_name || "",
+        aut_jad_id: passage.work[0]?.author[0]?.jad_id,
+        ms_jad_ids:
+          passage.mss_occurrences?.map((occ) => occ.manuscript_jad_id) || [],
         work: passage.work[0]?.title || "",
         work_position: work_position || "",
         mss_occurrences: passage.mss_occurrences
           .map((ms) => ms.manuscript)
           .join(" | "),
-        /* biblical_references: passage.biblical_references
-          .map((ref) => ref.value)
-          .join(" | "),
-        liturgical_references: passage.liturgical_references
-          .map((ref) => ref.value)
-          .join(" | "), */
         keywords: passage.keywords.map((kw) => kw.value).join(" | ") || "",
         origDate: passage.work[0].date || "",
         transmission_graph:

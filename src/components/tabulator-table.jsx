@@ -20,7 +20,8 @@ export default function TabulatorTable({
   rowClickConfig = null,
   // Map integration props
   updateMapOnFilter = false,
-  mapIdField = "jad_id",
+  mapIdField = "jad_id", // Keep for backward compatibility
+  mapFilterMode = "single",
   // Timeline integration props
   updateTimelineOnFilter = false,
   timelineIdField = "jad_id",
@@ -154,9 +155,33 @@ export default function TabulatorTable({
 
       // Update map if enabled
       if (updateMapOnFilter) {
-        const filteredMapIds = filteredData
-          .map((row) => row[mapIdField])
-          .filter((id) => id);
+        let filteredMapIds;
+
+        if (mapFilterMode === "dual") {
+          // NEW: Collect both author and manuscript IDs for passages
+          const filteredAuthorIds = filteredData
+            .map((row) => row.aut_jad_id)
+            .filter((id) => id);
+
+          const filteredMsIds = filteredData
+            .flatMap((row) => row.ms_jad_ids || [])
+            .filter((id) => id);
+
+          // Combine and deduplicate
+          filteredMapIds = [
+            ...new Set([...filteredAuthorIds, ...filteredMsIds]),
+          ];
+        } else {
+          // Standard single ID field filtering
+          console.log("Single mode - using mapIdField:", mapIdField);
+          console.log("Sample row:", filteredData[0]);
+
+          filteredMapIds = filteredData
+            .map((row) => row[mapIdField])
+            .filter((id) => id);
+
+          console.log("Extracted IDs (first 5):", filteredMapIds.slice(0, 5));
+        }
 
         if (window.updateMapWithFilteredIds) {
           window.updateMapWithFilteredIds(filteredMapIds);
@@ -182,9 +207,26 @@ export default function TabulatorTable({
 
         // Initial map update
         if (updateMapOnFilter && window.updateMapWithFilteredIds) {
-          const initialMapIds = initialData
-            .map((row) => row[mapIdField])
-            .filter((id) => id);
+          let initialMapIds;
+
+          if (mapFilterMode === "dual") {
+            // NEW: Collect both IDs for initial load
+            const authorIds = initialData
+              .map((row) => row.aut_jad_id)
+              .filter((id) => id);
+
+            const msIds = initialData
+              .flatMap((row) => row.ms_jad_ids || [])
+              .filter((id) => id);
+
+            initialMapIds = [...new Set([...authorIds, ...msIds])];
+          } else {
+            // DEFAULT: Standard single ID field
+            initialMapIds = initialData
+              .map((row) => row[mapIdField])
+              .filter((id) => id);
+          }
+
           window.updateMapWithFilteredIds(initialMapIds);
         }
 
@@ -307,6 +349,7 @@ export default function TabulatorTable({
     rowClickConfig,
     updateMapOnFilter,
     mapIdField,
+    mapFilterMode, //using single or dual jad_id to match table with map
     updateTimelineOnFilter,
     timelineIdField,
   ]);

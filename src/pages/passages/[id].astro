@@ -12,7 +12,7 @@ import {addItalics} from "@/lib/utils.js";
 export async function getStaticPaths() {
   const paths = Object.values(passages).map((passage) => ({
     params: { id: passage.jad_id.toString() },
-    props: { data: passage as Passage },
+    props: { data: passage as unknown as Passage },
   }));
   return paths;
 }
@@ -370,11 +370,11 @@ const usedBy = Object.values(passages).filter((item) =>
           </dt>
           <dd class="pl-5 p-2 bg-brand-50">
             {
-              passage.occurrence_found_in?.length > 0
+              passage.occurrence_found_in?.length > 0 && passage.occurrence_found_in[0]?.value != 'Secondary literature'
                 ? passage.occurrence_found_in.map((find) => find.value).join(", ")
-                : "N/A"
+                : ""
             }
-            {passage.note && (<span>: </span><span set:html={addItalics(passage.note)}></span>)}
+            {passage.note && (<span set:html={addItalics(passage.note)}></span>)}
             
           </dd>
           <dt
@@ -383,7 +383,12 @@ const usedBy = Object.values(passages).filter((item) =>
             Edition :
           </dt>
           <dd class="pl-5 p-2">
-            {passage.work[0].edition}
+            {passage.work[0]?.edition != 'Other edition' 
+              ? passage.work[0]?.edition
+              : ''}
+             {passage?.work[0]?.link_digital_editions && 
+            <NavLink href={passage.work[0]?.link_digital_editions}> Facsimile <Icon name="lucide:external-link" class="size-4 text-brand-800 inline-flex"/></NavLink>
+            } 
            {passage?.edition_link && 
             <NavLink href={passage.edition_link}> Facsimile <Icon name="lucide:external-link" class="size-4 text-brand-800 inline-flex"/></NavLink>
             }
