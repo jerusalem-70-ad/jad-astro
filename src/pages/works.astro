@@ -22,7 +22,7 @@ const rowClickConfig = worksTableConfig.getRowClickConfig;
       <summary
         class="rounded-md py-2 px-4 bg-brand-400 text-brand-100 hover:bg-brand-700 hover:text-brand-50 transition cursor-pointer mb-4 select-none"
       >
-        Authors Map
+        Works Map
       </summary>
 
       {
@@ -47,6 +47,10 @@ const rowClickConfig = worksTableConfig.getRowClickConfig;
       }}
       downloadTitle="jad_works"
       rowClickConfig={rowClickConfig}
+
+      mapIdField="jad_id"
+      mapFilterMode="single"
+      updateMapOnFilter={true}
     />
   </TableHead>
 </PageLayout>

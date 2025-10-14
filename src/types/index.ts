@@ -121,7 +121,7 @@ export interface Work {
   published_edition: any[];
   date_certainty: boolean;
   date: DateItem[];
-  link_digital_editions: string | null;
+  link_digital_editions?: string | null;
   author_certainty: boolean;
   incipit?: string | null;
   volume_edition_or_individual_editor?: string | null;
@@ -170,7 +170,7 @@ export interface Passage {
   authority_discourse?: number;
   liturgical_references: any[]; // This appears to be empty in the sample
   occurrence_found_in: ValueItem[];
-  edition_link: string | null;
+  edition_link?: string | null;
   source_passage?: SourcePass[];
   mss_occurrences: Mss_occurrences[] | null;
   incipit: string | null;

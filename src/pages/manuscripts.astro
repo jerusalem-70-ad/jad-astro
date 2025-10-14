@@ -14,6 +14,12 @@ const manuscripts = Object.values(manuscriptsjson);
 const tableData = manuscriptsTableConfig.transformData(manuscripts);
 const columns = manuscriptsTableConfig.getColumns();
 const rowClickConfig = manuscriptsTableConfig.getRowClickConfig;
+
+// Add debugging
+if (import.meta.env.DEV) {
+  console.log("Manuscripts page - GeoJSON sample:", geoJsonData.features[0]?.properties);
+  console.log("Manuscripts page - Table data sample:", tableData[0]);
+}
 ---
 
 <PageLayout title="Manuscripts">
@@ -27,7 +33,7 @@ const rowClickConfig = manuscriptsTableConfig.getRowClickConfig;
 
       {
         tableData && tableData.length > 0 ? (
-          <LeafletMap client:only="react" geoJsonData={geoJsonData} />
+          <LeafletMap client:only="react" geoJsonData={geoJsonData} filterMode="single"/>
         ) : (
           <div class="p-4 text-center text-gray-500 border border-gray-200 rounded-md">
             No data available for map visualization
@@ -46,6 +52,9 @@ const rowClickConfig = manuscriptsTableConfig.getRowClickConfig;
       }}
       downloadTitle="jad_manuscripts"
       rowClickConfig={rowClickConfig}
+      mapIdField="jad_id"
+      mapFilterMode="single"
+      updateMapOnFilter={true}
     />
   </TableHead>
 </PageLayout>

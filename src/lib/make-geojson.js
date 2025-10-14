@@ -58,6 +58,31 @@ export function processData(input) {
       .filter((f) => f.geometry.coordinates.every((coord) => !isNaN(coord))), // Filter out invalid coordinates
   };
 }
+// passages showing non-repetitive authors and ms
+
+export function processPassagesMap(authorsData, manuscriptsData) {
+  const authorFeatures = processAuthors(authorsData).features.map((f) => ({
+    ...f,
+    properties: {
+      ...f.properties,
+      aut_jad_id: f.properties.jad_id, // Add explicit author ID field
+    },
+  }));
+
+  const manuscriptFeatures = processMss(manuscriptsData).features.map((f) => ({
+    ...f,
+    properties: {
+      ...f.properties,
+      ms_jad_id: f.properties.jad_id, // Add explicit manuscript ID field
+      type: "library", // Ensure type is set
+    },
+  }));
+
+  return {
+    type: "FeatureCollection",
+    features: [...authorFeatures, ...manuscriptFeatures],
+  };
+}
 // for works
 
 export function processWorks(input) {
@@ -87,28 +112,6 @@ export function processWorks(input) {
               place_id: pl.id,
             },
           })) || []),
-
-          // LIBRARY FEATURES (from manuscripts)
-          ...(work.manuscripts?.flatMap(
-            (ms) =>
-              ms.place.map((pl) => ({
-                type: "Feature",
-                geometry: {
-                  type: "Point",
-                  coordinates: [parseFloat(pl.long), parseFloat(pl.lat)],
-                },
-                properties: {
-                  title: `${work.author[0].name}, ${work.title}`,
-                  description: `MS location`,
-                  place: pl.value,
-                  manuscript: ms.name || "N/A",
-                  type: "library",
-                  url: `/works/${work.jad_id}`,
-                  jad_id: work.jad_id, // to match the table filtering
-                  place_id: pl.id,
-                },
-              })) || []
-          ) || []),
         ];
 
         return geojson;
@@ -137,7 +140,7 @@ export function processMss(input) {
                   coordinates: [parseFloat(pl.long), parseFloat(pl.lat)],
                 },
                 properties: {
-                  title: ms.name[0].value,
+                  title: `MS ${ms.name[0].value}`,
                   description: `Repository`,
                   place: pl.value,
                   type: "library",
@@ -176,9 +179,10 @@ export function processAuthors(input) {
               title: aut.name,
               description: "Authors place",
               place: pl.value,
-              type: "library",
+              type: "author",
               url: `/authors/${aut.jad_id}`,
               jad_id: aut.jad_id, // to match the table filtering
+              aut_jad_id: aut.jad_id,
               place_id: pl.id,
             },
           })) || []),
