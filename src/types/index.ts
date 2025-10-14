@@ -129,6 +129,7 @@ export interface Work {
   edition: string;
   related__passages: any[];
   view_label?: string;
+  edition_link?: string;
 }
 
 // Value-only interface (used for multiple fields)
