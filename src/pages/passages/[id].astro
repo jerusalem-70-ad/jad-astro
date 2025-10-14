@@ -12,7 +12,7 @@ import {addItalics} from "@/lib/utils.js";
 export async function getStaticPaths() {
   const paths = Object.values(passages).map((passage) => ({
     params: { id: passage.jad_id.toString() },
-    props: { data: passage as Passage },
+    props: { data: passage as unknown as Passage },
   }));
   return paths;
 }
@@ -383,11 +383,11 @@ const usedBy = Object.values(passages).filter((item) =>
             Edition :
           </dt>
           <dd class="pl-5 p-2">
-            {passage.work[0].edition != 'Other edition' 
-              ? passage.work[0].edition
+            {passage.work[0]?.edition != 'Other edition' 
+              ? passage.work[0]?.edition
               : ''}
-             {passage?.work[0].link_digital_editions && 
-            <NavLink href={passage.work[0].link_digital_editions}> Facsimile <Icon name="lucide:external-link" class="size-4 text-brand-800 inline-flex"/></NavLink>
+             {passage?.work[0]?.link_digital_editions && 
+            <NavLink href={passage.work[0]?.link_digital_editions}> Facsimile <Icon name="lucide:external-link" class="size-4 text-brand-800 inline-flex"/></NavLink>
             } 
            {passage?.edition_link && 
             <NavLink href={passage.edition_link}> Facsimile <Icon name="lucide:external-link" class="size-4 text-brand-800 inline-flex"/></NavLink>

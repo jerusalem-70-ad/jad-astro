@@ -129,7 +129,7 @@ export interface Work {
   edition: string;
   related__passages: any[];
   view_label?: string;
-  edition_link?: string;
+  edition_link?: string | null;
 }
 
 // Value-only interface (used for multiple fields)
@@ -171,7 +171,7 @@ export interface Passage {
   liturgical_references: any[]; // This appears to be empty in the sample
   occurrence_found_in: ValueItem[];
   edition_link?: string | null;
-  source_passage?: SourcePass[];
+  source_passage: SourcePass[];
   mss_occurrences: Mss_occurrences[] | null;
   incipit: string | null;
   view_label?: string;
