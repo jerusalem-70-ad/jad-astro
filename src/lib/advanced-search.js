@@ -10,6 +10,7 @@ import {
   clearRefinements,
   currentRefinements,
   hierarchicalMenu,
+  configure,
 } from "instantsearch.js/es/widgets";
 import { simple } from "instantsearch.js/es/lib/stateMappings";
 
@@ -25,6 +26,15 @@ const main_search_field = "full_text";
 const secondary_field = "search_text";
 const search_api_key = "IA6BWzRrMo7yX3eFqgcFelJzhWkIl64W";
 
+// Configure how many hits (results) to show per page in both Typesense and InstantSearch
+const HITS_PER_PAGE = 10;
+// Allow user preference persisted in localStorage; fall back to HITS_PER_PAGE
+const INITIAL_HITS_PER_PAGE = parseInt(
+  (typeof window !== "undefined" && localStorage.getItem("hitsPerPage")) ||
+    HITS_PER_PAGE,
+  10
+);
+
 const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
   server: {
     apiKey: search_api_key,
@@ -37,10 +47,13 @@ const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
     ],
   },
   additionalSearchParameters: {
+    // searching in two fields due to basic text-latin normalization
     query_by: `${main_search_field}, ${secondary_field}`,
     query_by_weights: "2,1",
     typo_tokens_threshold: 1,
     facet_query_num_typos: 0,
+    // use the initial hits-per-page (possibly from localStorage)
+    per_page: INITIAL_HITS_PER_PAGE,
   },
 });
 
@@ -237,6 +250,8 @@ search.addWidgets([
     placeholder: "Text search",
   }),
   customDateRangeWidget("#date-range-widget"),
+  // Ensure InstantSearch uses the same hits-per-page as Typesense
+  configure({ hitsPerPage: HITS_PER_PAGE }),
   hits({
     container: "#hits",
     transformItems(items) {
@@ -496,6 +511,56 @@ search.addWidgets([
 ]);
 
 search.start();
+
+// --- Hits-per-page UI control ---
+// Insert a small select control into the stats container so users can choose results/page
+setTimeout(() => {
+  const statsContainer = document.querySelector("#stats-container");
+  if (!statsContainer) return;
+
+  // Create the select wrapper
+  const wrapper = document.createElement("div");
+  wrapper.className = "hits-per-page-control inline-block ml-3 text-sm";
+  wrapper.innerHTML = `
+    <label class="mr-2">Results per page:</label>
+    <select id="hits-per-page-select" class="border rounded px-2 py-1">
+      <option value="10">10</option>
+      <option value="25">25</option>
+      <option value="50">50</option>
+    </select>
+  `;
+
+  statsContainer.appendChild(wrapper);
+
+  const select = document.querySelector("#hits-per-page-select");
+  if (!select) return;
+
+  // Initialize select from localStorage if present
+  const stored =
+    typeof window !== "undefined" && localStorage.getItem("hitsPerPage");
+  const initial = stored ? parseInt(stored, 10) : INITIAL_HITS_PER_PAGE;
+  select.value = String(initial);
+
+  // When changed, persist and update InstantSearch & Typesense param
+  select.addEventListener("change", (e) => {
+    const val = parseInt(e.target.value, 10);
+    try {
+      localStorage.setItem("hitsPerPage", String(val));
+    } catch (err) {
+      // ignore storage errors
+    }
+
+    // Update InstantSearch (client-side) hitsPerPage via configure
+    // and trigger a new search. search.helper is available after start().
+    if (search.helper) {
+      // configure hitsPerPage for the client
+      search.helper.setQueryParameter("hitsPerPage", val);
+      // Typesense-specific per_page can be set via query parameters too
+      search.helper.setQueryParameter("per_page", val);
+      search.helper.search();
+    }
+  });
+}, 200);
 
 // Add  search input to the biblical references panel
 setTimeout(() => {
