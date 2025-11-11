@@ -32,7 +32,7 @@ const { title = "Medieval Reception of the Roman Conquest of Jerusalem" } =
   <body class="min-h-screen grid grid-rows-[auto_1fr_auto_auto] bg-brand-50">
     <PageHeader />
     <main>
-      {title !== "Home" && <Breadcrumbs label={title} />}
+      {title !== "Home" && title !== "404" && <Breadcrumbs label={title} />}
       <slot />
     </main>
     <PageFooter />
