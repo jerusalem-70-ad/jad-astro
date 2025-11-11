@@ -54,6 +54,7 @@ const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
     facet_query_num_typos: 0,
     // use the initial hits-per-page (possibly from localStorage)
     per_page: INITIAL_HITS_PER_PAGE,
+    sort_by: "sort_id:asc",
   },
 });
 
@@ -300,7 +301,7 @@ search.addWidgets([
               (work) => `
                 <div class="work-item">
                   <p><strong>Title:</strong> ${work.title}</p>
-                  <p><strong>Authors:</strong> ${work.authors.join(", ")}</p>
+                  <p><strong>Author:</strong> ${work.authors.join(", ")}</p>
                   <p><strong>Date:</strong> ${work.date}</p>
                 </div>
               `
@@ -325,7 +326,7 @@ search.addWidgets([
 
         // Generate the main HTML for the hit
         return `
-    <article>
+    <article class="grid w-full">
       <h3 class="font-semibold text-base md:text-lg text-brand-800">
         <a href="${withBasePath(`/passages/${hit.id}`)}" class="underline">
           (#${hit.id.substr(16)}) ${hit.title}
@@ -336,18 +337,14 @@ search.addWidgets([
         ${hit.displaySnippet}
         ${highlightHTML}
       </p>
-
-      <div class="grid-cols-2 justify-between mt-1">
-        <button 
-          class="show-more-btn float-right text-brand-600 hover:bg-brand-400 hover:text-brand-100 text-sm font-medium m-1 
-          py-1 px-2 border border-brand-900 rounded-sm">
-          Show more
-        </button> 
-        <div class="work-details">
-          ${renderWorks(hit.transformedWorks)}
-        </div>   
-      </div>
-   
+      <button 
+        class="show-more-btn justify-self-end text-brand-600 hover:bg-brand-400 hover:text-brand-100 text-sm font-medium m-1 
+        py-1 px-2 border border-brand-900 rounded-sm">
+        Show more
+      </button> 
+      <div class="work-details">
+      ${renderWorks(hit.transformedWorks)}
+      </div>   
               
     </article>
   `;
@@ -607,8 +604,9 @@ function wrapInPanel(title) {
         `<span class="normal-case text-base font-normal">${title}</span>`,
     },
     cssClasses: {
-      header: "cursor-pointer relative z-10",
-      collapseButton: "absolute inset-0 z-20 flex flex-row-reverse",
+      header: "relative z-10",
+      collapseButton:
+        "cursor-pointer absolute inset-0 z-20 flex flex-row-reverse",
       collapseIcon: "",
       root: "border-b",
     },
@@ -626,8 +624,9 @@ function wrapHierarcicalMenuInPanel(title) {
       `,
     },
     cssClasses: {
-      header: "cursor-pointer relative z-10",
-      collapseButton: "absolute inset-0 z-20 flex flex-row-reverse",
+      header: "relative z-10",
+      collapseButton:
+        "cursor-pointer absolute inset-0 z-20 flex flex-row-reverse",
       collapseIcon: "",
       root: "border-b",
     },
