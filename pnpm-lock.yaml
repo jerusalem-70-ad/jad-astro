@@ -35,6 +35,9 @@ importers:
       '@xmldom/xmldom':
         specifier: ^0.9.8
         version: 0.9.8
+      acdh-noske-search:
+        specifier: ^0.2.3
+        version: 0.2.3
       astro:
         specifier: ^5.9.2
         version: 5.9.2(@types/node@20.17.57)(jiti@2.4.2)(lightningcss@1.30.1)(rollup@4.41.1)(terser@5.40.0)(typescript@5.8.3)(yaml@2.8.0)
@@ -1116,6 +1119,10 @@ packages:
 
   abbrev@1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}
+
+  acdh-noske-search@0.2.3:
+    resolution: {integrity: sha512-XIJZoyEpOs96Ge77R5M2Pu1IYEB0PVcq8jNtWL20kUI/q0BwGIOpQTdj8h7VanBAgMNgDNWl2aUFIJfmBeeOYw==}
+    engines: {node: ^20.x, npm: ^10.x}
 
   acorn@8.14.1:
     resolution: {integrity: sha512-OvQ/2pUDKmgfCg++xsTX1wGxfTaszcHVcTctW4UJB4hibJx2HXxxO5UmVgyjMa+ZDsiaf5wWLXYpRWMmBI0QHg==}
@@ -4430,6 +4437,8 @@ snapshots:
   '@xtuc/long@4.2.2': {}
 
   abbrev@1.1.1: {}
+
+  acdh-noske-search@0.2.3: {}
 
   acorn@8.14.1: {}
 
