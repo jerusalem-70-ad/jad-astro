@@ -7,20 +7,14 @@ import NavLink from "@/components/nav-link.astro";
 
 <Layout title="Search">
   <div class="md:w-5/6 mx-auto md:p-6 p-2">
-    <h2
-      class="text-xl md:text-3xl font-bold md:text-brand-400 text-brand-600 rounded-t-lg p-3"
-    >
-      Search
-    </h2>
-
-     <!-- button to switch search types -->
-    <div class="mb-4 flex gap-2">
-      <NavLink 
-        href="/noske-search" 
-        class="px-4 py-2 bg-brand-600 text-white rounded hover:bg-brand-700"
-      >
-        Switch to Linguistic Search (test)
-    </NavLink>
+   <div class="inline-flex items-center justify-start mb-4 border border-gray-200 rounded-2xl shadow bg-brand-100 p-1">
+      <h2 class="bg-brand-50 text-xl md:text-3xl font-semibold text-brand-600 rounded-2xl p-3">
+        Faceted Search
+      </h2>
+      
+        <NavLink href="/noske-search" class="text-xl md:text-3xl font-semibold p-3 text-brand-700 hover:text-brand-500">
+            Linguistic Search (TEST)
+            </NavLink>
     </div>
 
     <div class="md:space-y-6">
