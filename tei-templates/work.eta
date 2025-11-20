@@ -9,7 +9,31 @@
                <% } %>
                <%= it.title %>
             </title>
+            <principal>
+               <persName>Alexander Marx</persName>
+               <name type="org">Austrian Academy of Sciences</name>
+            </principal>
+            <funder>
+               <name>FWF - Der Wissenschaftsfonds</name>
+               <address>
+                  <street>Sensengasse 1</street>
+                  <postCode>1090 Wien</postCode>
+                  <placeName>
+                     <country>A</country>
+                     <settlement>Wien</settlement>
+                  </placeName>
+               </address>
+            </funder>
          </titleStmt>
+          <editionStmt>
+            <edition>Born digital edition according to the TEI P5 guidelines.</edition>
+            <respStmt>
+               <resp>TEI-P5 encodng performed with template script</resp>
+               <name type="person">Ivana Dobcheva</name>
+               <name type="org">Austrian Center for Digital Humanities</name>
+               <name type="org">Austrian Academy of Sciences</name>
+            </respStmt>
+         </editionStmt>
          <publicationStmt>
             <p>Publication Information</p>
          </publicationStmt>
@@ -19,6 +43,9 @@
          </sourceDesc>
       </fileDesc>
      <encodingDesc>
+     <projectDesc>
+           <p>Passages are collected, transcribed, and excerpted from electronic and printed sources by the principal investigator, Alexander Marx, as part of the project Medieval Reception of the Roman Conquest of Jerusalem. The project assembles, organises, and preserves textual evidence illustrating how medieval authors understood and reinterpreted the events of 70 CE. The ACDH team develops the data model, manages the dataset, and oversees the electronic publication and long-term archiving. The project is funded by the FWF and aims to provide a consistent, searchable, and accessible corpus of medieval interpretations of the Roman Conquest of Jerusalem.</p>
+        </projectDesc>
 <!--        #### taxonomies for genres | clusters | keywords | litugical references--> 
 <%~ include('partials/taxonomies', it) %>
         
