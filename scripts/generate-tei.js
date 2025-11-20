@@ -84,9 +84,6 @@ const loadJSON = (file) =>
 
 // Main execution
 async function main() {
-  console.log(
-    "🏗️  Starting TEI works generation with well-formedness validation..."
-  );
   // Load data files
   console.log("📖 Loading data files...");
   const manuscripts = Object.values(loadJSON("manuscripts.json"));
@@ -96,6 +93,35 @@ async function main() {
   const clusters = Object.values(loadJSON("clusters.json"));
   const liturgical_references = Object.values(
     loadJSON("liturgical_references.json")
+  );
+
+  //create xml files for passages - for noske indexing (no enrichment needed)
+  console.log("Starting TEI-XML generation for passages...");
+  // Set the output folder
+  const passagesFolderPath = join(process.cwd(), "public", "tei", "passages");
+  mkdirSync(passagesFolderPath, { recursive: true });
+
+  // Eta views path
+  const eta_passages = new Eta({ views: join(process.cwd(), "tei-templates") });
+  // Process each passages
+  passages.forEach((passage) => {
+    try {
+      const filename = `${passage.jad_id}.xml`;
+      const xml = eta_passages.render("./passage.eta", passage);
+      writeFileSync(join(passagesFolderPath, filename), xml);
+    } catch (error) {
+      console.error(
+        `Failed to process passage ${passage.jad_id}:`,
+        error.message
+      );
+    }
+  });
+  console.log("✅ TEI-XML generation for passages completed.");
+  console.log("\n═══════════════════════════════════════");
+
+  // create xml files for works with well-formedness validation and enrichment for archival purposes
+  console.log(
+    "🏗️  Starting TEI works generation with well-formedness validation..."
   );
 
   // Create lookup maps
