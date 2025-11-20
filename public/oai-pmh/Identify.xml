@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/          http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2025-11-20T12:34:09.561Z</responseDate>
+    <request verb="Identify">https://jerusalem-70-ad.github.io/jad-astro</request> 
+    <Identify>
+        <repositoryName>Medieval Reception of the Roman Conquest of Jerusalem</repositoryName>
+        <baseURL>https://jerusalem-70-ad.github.io/jad-astro</baseURL>
+        <protocolVersion>2.0</protocolVersion>
+        <adminEmail>acdh-tech@oeaw.ac.at</adminEmail>
+        <earliestDatestamp>2025-11-20T12:34:09.561Z</earliestDatestamp>
+        <deletedRecord>no</deletedRecord>
+        <granularity>YYYY-MM-DDThh:mm:ssZ</granularity>
+    </Identify>
+</OAI-PMH>

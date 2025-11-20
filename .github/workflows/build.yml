@@ -59,6 +59,9 @@ jobs:
       - name: generate tei
         run: pnpm run generate-tei
 
+      - name: generate oai-pmh
+        run: pnpm run generate-oai-pmh
+
       - name: build
         run: pnpm run build
 
