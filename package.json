@@ -10,7 +10,8 @@
     "generate-tei": "node ./scripts/generate-tei.js",
     "generate-search-index": "node ./scripts/generate-search-index.js",
     "start": "astro preview",
-    "check": "tsc --noEmit && astro check"
+    "check": "tsc --noEmit && astro check",
+    "generate-oai-pmh": "node ./scripts/generate-oai-pmh.js"
   },
   "dependencies": {
     "@acdh-oeaw/lib": "^0.1.12",
