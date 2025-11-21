@@ -1,12 +1,13 @@
 import CustomNoskeSearch from "@/lib/noske-custom-search.js";
+import tsNoskeSearch from "@/lib/ts-search-noske.js";
 
 const search = new CustomNoskeSearch({
   baseUrl: "https://corpus-search.acdh.oeaw.ac.at",
   corpname: "jad",
-  attrs: "word,lemma,pos",
-  refs: "doc#, chapter#, p#, s#",
-  structs: "doc,p", // Structures to include
-  viewmode: "sen", // Sentence view or 'kwic'
+  attrs: "word,lemma,pos,chapter,chapter.ID, chapter.id",
+  refs: "ID, LandingPageURI",
+  structures: "doc,p, chapter",
+  viewmode: "sen",
   pagesize: 20,
   searchTypeSelectId: "search-type-select",
 

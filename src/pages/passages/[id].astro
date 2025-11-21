@@ -400,9 +400,9 @@ const usedBy = Object.values(passages).filter((item) =>
           </dt>
           <dd class="pl-5 p-2 italic bg-brand-50">
             {passage.text_paragraph || "N/A"}
-          </dd>
-        
+          </dd>        
         </dl> 
+        <NavLink href=`/tei/passages/${passage.jad_id}.xml` class="button-custom justify-self-end">See the TEI-XML</NavLink>
       </div>
     </Article>
   </div>

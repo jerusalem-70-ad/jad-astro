@@ -6,9 +6,9 @@ search.search({
   client: {
     base: "https://corpus-search.acdh.oeaw.ac.at/",
     corpname: "jad",
-    attrs: "word,lemma,pos",
-    structs: "doc,p",
-    refs: "doc.id, p.id",
+    attrs: "word,id,chapter.id,chapter.landingpageuri",
+    structs: "doc,p,head,list,docTitle,imprimatur,g",
+    refs: "doc.id,doc.corpus,p.id,head.id,list.id,docTitle.id,imprimatur.id",
     viewmode: "sen",
     pagesize: 20,
   },
@@ -54,10 +54,7 @@ search.search({
     },
   },
   // Additional config
-  config: {
-    results: "kwic", // or "sen" for sentence view
-    urlparam: true, // Enable URL parameters for sharing searches
-  },
+  config: {},
 });
 
 const searchButton = document.getElementById("noske-search-button");

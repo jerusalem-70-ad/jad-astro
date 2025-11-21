@@ -1,0 +1,141 @@
+---
+import Layout from "@/layouts/page-layout.astro";
+import NavLink from "@/components/nav-link.astro";
+---
+
+<Layout title="Linguistic Search">
+  <div class="md:w-5/6 mx-auto md:p-6 p-2">
+    <h2 class="text-xl md:text-3xl font-bold md:text-brand-400 text-brand-600 rounded-t-lg p-3">
+      Linguistic Search (TEST)
+    </h2>
+
+    <div class="mb-4 flex gap-2">
+  <NavLink 
+    href="/advanced-search" 
+    class="px-4 py-2 bg-brand-600 text-white rounded hover:bg-brand-700"
+  >
+    Switch to Faceted Search
+    </NavLink>
+</div>
+
+<!-- Important Note -->
+    <div class="mb-4 p-4 bg-yellow-50 border border-yellow-300 rounded">
+      <h3 class="font-semibold mb-2 text-yellow-800">⚠️ Note:</h3>
+      <p class="text-sm text-gray-700">
+        Currently the corpus is <strong>not</strong> up-to-date and results are not linked to the documents. 
+        However, you can find the relevant passage by copying a text snippet from the result 
+        and searching for it in the 
+        <a href="/advanced-search" class="text-brand-600 underline hover:text-brand-700">Typesense search</a>.
+      </p>
+    </div>
+
+    <!-- Search Guide -->
+<details class="mb-4 p-4 bg-brand-100 border border-brand-200 rounded group">
+  <summary class="font-semibold text-lg cursor-pointer text-brand-700 hover:text-brand-800">
+    How to use the linguistic search
+  </summary>
+  
+  <div class=" grid grid-cols-[repeat(auto-fit,minmax(14rem,1fr))] gap-4 text-sm">
+    <!-- Search Modes -->
+    <div>      
+      <ul class="space-y-2 ml-4">
+        <li>
+          <h3 class="font-semibold text-brand-700 mb-2">Simple mode</h3><code class="bg-white px-2 py-1 rounded text-xs">Jerusalem</code>
+          or
+          <code class="bg-white px-2 py-1 rounded text-xs">.*rusalem</code>
+        </li>
+        <li>
+            <h3 class="font-semibold text-brand-700 mb-2">Corpus Query Language (CQL) mode</h3>
+            <ul class="space-y-2 ml-4">
+                <li>
+                <strong>Search by word form:</strong> <code class="bg-white px-2 py-1 rounded text-xs">[word="Jerusalem"]</code>
+                <br><span class="text-gray-600 text-xs">Finds exact word "Jerusalem"</span>
+                </li>
+                <li>
+                <strong>Search by lemma (root form):</strong> <code class="bg-white px-2 py-1 rounded text-xs">[lemma="cedo"]</code>
+                <br><span class="text-gray-600 text-xs">Finds "cessit", "cedentes", "cediderunt" etc.</span>
+                </li>
+                <li>
+                <strong>Combine with wildcards:</strong> <code class="bg-white px-2 py-1 rounded text-xs">[word="indulg.*"]</code>
+                <br><span class="text-gray-600 text-xs">Finds words starting with "indulg"</span>
+                </li>
+                <li>
+                <strong>Multiple options (OR):</strong> <code class="bg-white px-2 py-1 rounded text-xs">[word="populus|civitatem"]</code>
+                <br><span class="text-gray-600 text-xs">Finds "populus" OR "civitatem"</span>
+                </li>               
+            </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Wildcards -->
+    <div>
+      <h3 class="font-semibold text-brand-700 mb-2">Using Wildcards</h3>
+      <ul class="space-y-2 ml-4">
+        <li>
+          <code class="bg-white px-2 py-1 rounded text-xs">.</code> (dot) = matches any <strong>single</strong> character
+          <br><span class="text-gray-600 text-xs">Example: <code>.erusalem</code> matches "Jerusalem" or "Ierusalem"</span>
+        </li>
+        <li>
+          <code class="bg-white px-2 py-1 rounded text-xs">.*</code> (dot-asterisk) = matches <strong>any number</strong> of characters (including zero)
+          <br><span class="text-gray-600 text-xs">Example: <code>.*erusalem</code> matches "Jerusalem", "Hierusalem", "Ierusalem"</span>
+        </li>
+        <li>
+          <code class="bg-white px-2 py-1 rounded text-xs">.?</code> (dot-question) = matches <strong>zero or one</strong> character
+          <br><span class="text-gray-600 text-xs">Example: <code>honou.?r</code> matches "honor" or "honour"</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Word Distance -->
+    <div>
+      <h3 class="font-semibold text-brand-700 mb-2">Searching with Word Distance (CQL only)</h3>
+      <p class="mb-2">Find words within a certain distance from each other:</p>
+      <ul class="space-y-2 ml-4">        
+         <li>
+            <code class="bg-white px-2 py-1 rounded text-xs">[word="rege"][word="Francorum"]</code>
+            <br><span class="text-gray-600 text-xs">Finds "rege" immediately followed by "Francorum"</span>
+        </li>
+        <li>
+            <code class="bg-white px-2 py-1 rounded text-xs">[word="rege"][][word="Francorum"]</code>
+            <br><span class="text-gray-600 text-xs">Finds "rege" exactly 1 word away from "Francorum"</span>
+        </li>
+        <li>
+          <code class="bg-white px-2 py-1 rounded text-xs">[word="Hieronymus"][]&#123;0,15&#125;[word="Josephus"]</code>
+          <br><span class="text-gray-600 text-xs">"Hieronymus" within 0 to 15 words of "Josephus"</span>
+        </li>
+      </ul>
+    </div>
+
+ 
+    <!-- Quick Examples -->
+    <div>
+      <h3 class="font-semibold text-brand-700 mb-2">Quick Examples</h3>
+      <div class="bg-white p-3 rounded border border-gray-200">
+        <ul class="space-y-1 text-xs font-mono">
+          <li>Simple: <code>Jerusalem</code></li>
+          <li>Simple with wildcard: <code>.*erusalem</code></li>
+          <li>CQL exact match: <code>[word="Jerusalem"]</code></li>
+          <li>CQL wildcard: <code>[word=".*salem"]</code></li>
+          <li>CQL with distance: <code>[word=".ropheta"][]&#123;0,10&#125; [word="Jerusalem"]</code></li>
+          <li>CQL multiple words: <code>[word="temple|church|synagogue"]</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</details>
+
+    <div class="md:space-y-6">
+
+      <div id="noske-search"></div>
+      
+      <div id="noske-stats" class="text-sm text-brand-800 font-medium"></div>
+      
+      <div id="hitsbox" class="bg-white p-2 md:p-4 rounded-lg shadow-xs"></div>
+      
+      <div id="noske-pagination" class="flex md:justify-center"></div>
+    </div>
+  </div>
+</Layout>
+
+<script src="@/lib/noske-search-acdh.js"></script>
