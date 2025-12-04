@@ -6,7 +6,7 @@ class CustomNoskeSearch {
   constructor(config) {
     this.baseUrl = config.baseUrl;
     this.corpname = config.corpname;
-    this.attrs = config.attrs || "word,lemma,pos";
+    this.attrs = "word,lemma,pos,landingPageURI,orth,norm";
     this.refs = config.refs || "doc#";
     this.structs = config.structs || "doc,p";
     this.viewmode = config.viewmode || "sen";
@@ -111,14 +111,19 @@ class CustomNoskeSearch {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const data = await response.json();
+    let data;
+    try {
+      data = await response.json();
+    } catch (e) {
+      throw new Error("Invalid JSON received from NoSketch Engine");
+    }
+
     console.log("=== SEARCH RESPONSE ===");
     console.log("Full response:", data);
 
     if (data.Lines && data.Lines.length > 0) {
       console.log("=== FIRST HIT ===");
-      console.log("Refs:", data.Lines[0].Refs);
-      console.log("Attrs:", data.Lines[0].structures);
+      console.log("Landing Page URI:", data.Lines[0].Kwic[0].attr);
     }
 
     return data;
@@ -139,9 +144,9 @@ class CustomNoskeSearch {
       const leftText = this.buildText(line.Left);
       const kwicText = this.buildText(line.Kwic);
       const rightText = this.buildText(line.Right);
-      const queryText = `${this.buildText(line.Left)} ${this.buildText(
-        line.Kwic
-      )} ${this.buildText(line.Right)}`;
+      // Extract jad_id from landingPageURI
+      const jad_id =
+        line.Kwic[0].attr.split("passages/")[1].split(".html")[0] || "#";
 
       html += `
         <div class="result-item">
@@ -150,7 +155,7 @@ class CustomNoskeSearch {
             <span class="kwic">${kwicText}</span>
             <span class="right-context">${rightText}</span>
           </div> 
-            <div class="ts-details flex justify-between mt-4" data-phrase="${queryText}"></div>       
+            <div class="ts-details flex justify-between mt-4" data-id="${jad_id}"></div>       
         </div>
       `;
     });
@@ -159,8 +164,8 @@ class CustomNoskeSearch {
     resultsContainer.innerHTML = html;
 
     resultsContainer.querySelectorAll(".ts-details").forEach((div) => {
-      const phrase = div.getAttribute("data-phrase");
-      tsNoskeSearch(phrase, div);
+      const rec_id = div.getAttribute("data-id");
+      tsNoskeSearch(rec_id, div);
     });
   }
 

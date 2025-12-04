@@ -23,7 +23,7 @@ export default async function tsNoskeSearch(query, container) {
       .documents()
       .search({
         q: query,
-        query_by: "full_text", // field(s) to search in
+        query_by: "rec_id", // field(s) to search in
         sort_by: "sort_id:asc",
         per_page: 1, // number of results
       });
