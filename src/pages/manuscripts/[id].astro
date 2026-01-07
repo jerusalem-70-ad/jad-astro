@@ -126,13 +126,14 @@ const { data: manuscript } = Astro.props;
                   </li>
                 )))}
               </ul>
-              : "N/A"} 
-            
+              : "N/A"}             
         
           </dd>
+          )}
+    
           <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">External links:</dt>
           <dd class="pl-5">
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-1">
         {
           manuscript.digi_url && (
             <div class="flex">
@@ -162,7 +163,6 @@ const { data: manuscript } = Astro.props;
         }
       </div>
           </dd>
-        )}
       </dl>
       
     </Article>
