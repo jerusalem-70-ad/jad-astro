@@ -277,13 +277,15 @@ export const manuscriptsTableConfig = {
       .filter((ms) => ms.name[0].value)
       .map((ms) => {
         const passages =
-          (ms.related_passages.length > 0 &&
-            `<ul>${ms.related_passages
-              .map(
-                (p) => `<li>(${p.passage[0].id}) ${p.passage[0].passage})</li>`
-              )
-              .join("")}</ul>`) ||
-          [];
+          ms.related_passages?.length > 0
+            ? `<ul>${ms.related_passages
+                .filter((p) => p.passage?.length > 0)
+                .map(
+                  (p) => `<li>(${p.passage[0].id}) ${p.passage[0].passage}</li>`
+                )
+                .join("")}</ul>`
+            : "";
+
         return {
           id: ms.id || "",
           ms_name: ms.name[0].value || "",
