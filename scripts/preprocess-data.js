@@ -629,7 +629,7 @@ const manuscriptPlusPlus = manuscriptsPlus.map((ms) => {
     .filter((occur) => occur.manuscript[0].id === ms.id)
     .map((occurr) => {
       const passage = passagesPlusPlus
-        .filter((p) => p.id === occurr.occurrence[0].id)
+        .filter((p) => p.id === occurr.occurrence[0]?.id)
         .map((p) => {
           return {
             id: p.id,

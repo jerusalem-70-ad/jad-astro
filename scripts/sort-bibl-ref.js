@@ -208,7 +208,7 @@ export function calculateSortPosition(positionInWork) {
   }
 
   // Pattern 3: Book and Chapter (e.g., "B3, Ch63")
-  const bookChapterMatch = position.match(/^B(\d+),?\s*Ch(\d+)$/);
+  const bookChapterMatch = position.match(/^B(\d+),?\s*Ch(\d+)(?:[^\d].*)?$/);
   if (bookChapterMatch) {
     const [, bookNum, chapterNum] = bookChapterMatch;
     // Book/Chapter: 100,000+ range
