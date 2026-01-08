@@ -223,6 +223,26 @@ export function calculateSortPosition(positionInWork) {
     return 200000 + parseInt(sermonNum, 10);
   }
 
+  // Pattern 4a: Pars ... Sermo (e.g., "Sermo 2")
+  const parsMatch = position.match(/\bPars\s+(\w+)/i);
+  const PARS_ORDER = {
+    hiemalis: 1,
+    verna: 2,
+    aestivalis: 3,
+    aestiva: 3,
+    autumnalis: 4,
+  };
+  const sermoMatch = position.match(/\bSermo\s+(\d+)\b/i);
+  if (parsMatch && sermoMatch) {
+    const parsName = parsMatch[1].toLowerCase();
+    const parsRank = PARS_ORDER[parsName] ?? 9; // fallback for unknown pars
+    const sermonNum = parseInt(sermoMatch[1], 10);
+
+    // Pars/Sermo: 200,000+ range
+    // each pars gets 1,000 sermon slots
+    return 200000 + parsRank * 1000 + sermonNum;
+  }
+
   // Pattern 5: Praefatio/Prefatio
   if (
     position.startsWith("Praefatio") ||
