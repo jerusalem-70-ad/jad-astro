@@ -26,8 +26,8 @@ const rowClickConfig = biblrefTableConfig.getRowClickConfig;
 
 <PageLayout title={ref.name}>
   <Article
-    prevLink={`/biblrefs/${ref.prev.id}`}
-    nextLink={`/biblrefs/${ref.next.id}`}
+    prevLink={`/biblical-refs/${ref.prev.id}`}
+    nextLink={`/biblical-refs/${ref.next.id}`}
     mainTitle={ref.name} 
   >
     <dl class="grid grid-cols-[1fr_6fr] text-sm md:leading-7 md:text-base">
@@ -67,8 +67,9 @@ const rowClickConfig = biblrefTableConfig.getRowClickConfig;
       </dt>
       <dd class="pl-5">{ref.text ?? "N/A"}</dd>
      
-         </dl>
-          <TabulatorTable
+      </dl>
+      {tableData.length > 0 && (
+    <TabulatorTable
       client:only="react"
       data={tableData}
       columns={columns}
@@ -79,6 +80,6 @@ const rowClickConfig = biblrefTableConfig.getRowClickConfig;
       }}
       downloadTitle="jad_biblical_references"
       rowClickConfig={rowClickConfig}
-    />
+    /> )}
   </Article>
   </PageLayout>
