@@ -94,6 +94,17 @@ authors.forEach((aut) => {
   authorMapObject[normalizedKey] = aut.name;
 });
 // enrich authors with places and transform dates
+//helper function to remove leading zeros from date ranges and month days
+
+function formatDate(date) {
+  if (date === null || date === undefined) {
+    return "";
+  }
+  return (
+    date.toString().split("-")[0].replace(/^0+/, "") || "0" // Remove leading zeros
+  );
+}
+
 const authorsPlus = authors
   .filter((aut) => aut.name) // filter out authors without a name
   .map((aut) => {
@@ -103,7 +114,9 @@ const authorsPlus = authors
         not_after: aut.date_of_death || "",
         range:
           aut.date_of_birth || aut.date_of_death
-            ? `${aut.date_of_birth || ""}-${aut.date_of_death || ""}`
+            ? `${formatDate(aut.date_of_birth) || "?"}-${
+                formatDate(aut.date_of_death) || "?"
+              }`
             : "",
       },
     ];
@@ -122,6 +135,7 @@ const authorsPlus = authors
       date_of_birth: aut.date_of_birth || "",
       date_of_death: aut.date_of_death || "",
       origDates: raw_dates,
+      date_certainty: aut.date_certainty,
       place: enrichPlaces(aut.place, places),
       alt_name: aut.alt_name?.replace(",", "") || "",
       notes: aut.notes || "",
@@ -607,6 +621,55 @@ writeFileSync(
   { encoding: "utf-8" }
 );
 console.log("passages.json file enriched successfully.");
+
+// add passages to biblical references
+const biblicalRefWithPassages = Object.values(biblicalRef)
+  .filter((ref) => ref.name) // filter out empty names
+  .map(({ order, ...rest }) => rest)
+  .map((ref) => {
+    let processedPassages = [];
+
+    const related__passages = passagesPlusPlus
+      .filter((p) => p.biblical_references.some((b_ref) => b_ref.id === ref.id))
+      .map((p) => ({
+        id: p.id,
+        jad_id: p.jad_id,
+        passage: p.passage,
+        position_in_work: p.position_in_work,
+        work: p.work.map((w) => ({
+          id: w.id,
+          jad_id: w.jad_id,
+          title: w.title,
+          author: w.author.map((a) => ({
+            jad_id: a.jad_id,
+            name: a.name,
+            alt_name: a.alt_name,
+          })),
+          author_certainty: w.author_certainty,
+        })),
+      }));
+
+    return {
+      ...ref,
+      related_passages: related__passages,
+    };
+  });
+
+//process biblical references to add prev and next
+
+const biblicalRefPlusFinal = addPrevNextToItems(
+  biblicalRefWithPassages,
+  "jad_id",
+  "value"
+);
+
+writeFileSync(
+  join(folderPath, "biblical_references.json"),
+  JSON.stringify(biblicalRefPlusFinal, null, 2),
+  { encoding: "utf-8" }
+);
+
+console.log("biblical_references.json file enriched successfully.");
 
 // enrich manuscripts with data from passagesPlus and worksPlus
 const manuscriptPlusPlus = manuscriptsPlus.map((ms) => {

@@ -4,28 +4,31 @@ import authors from "@/content/data/authors.json";
 import { Icon } from "astro-icon/components";
 import NavLink from "@/components/nav-link.astro";
 import Article from "@/components/article.astro";
+import type { Author } from "@/types/index";
 export async function getStaticPaths() {
   const paths = Object.values(authors).map((author) => ({
     params: { id: author.jad_id },
-    props: { data: author },
+    props: { data: author as Author },
   }));
   return paths;
 }
 
-const { data: author } = Astro.props;
+const { data: author} = Astro.props;
+const dates = (author.origDates[0].range) + (author.date_certainty ? "" : " (?)" );
+
 ---
 
 <PageLayout title={author.name}>
   <Article
     prevLink={`/authors/${author.prev.id}`}
     nextLink={`/authors/${author.next.id}`}
-    mainTitle={author.name}
+    mainTitle={`${author.name} ${dates ? `(${dates})` : ""}`}
   >
     <dl class="grid grid-cols-[1fr_7fr] text-sm md:leading-7 md:text-base">
       <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
         Date:
       </dt>
-      <dd class="pl-5">{author.origDates[0].range}</dd>
+      <dd class="pl-5">{dates}</dd>
       <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
         Place:
       </dt>

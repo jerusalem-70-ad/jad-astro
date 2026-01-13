@@ -1,0 +1,84 @@
+---
+import PageLayout from "@/layouts/page-layout.astro";
+import biblrefs from "@/content/data/biblical_references.json";
+import { Icon } from "astro-icon/components";
+import NavLink from "@/components/nav-link.astro";
+import Article from "@/components/article.astro";
+import type { BiblicalReference } from "@/types/index";
+import TabulatorTable from "@/components/tabulator-table";
+import { biblrefTableConfig } from "@/lib/tabulator-table-configs.js";
+
+export async function getStaticPaths() {
+  const paths = Object.values(biblrefs).map((ref) => ({
+    params: { id: ref.jad_id },
+    props: { data: ref as BiblicalReference },
+  }));
+  return paths;
+}
+
+const { data: ref} = Astro.props;
+
+// Transform data and prepare columns for Tabulator Table
+const tableData = biblrefTableConfig.transformData(ref.related_passages ?? []);
+const columns = biblrefTableConfig.getColumns();
+const rowClickConfig = biblrefTableConfig.getRowClickConfig;
+---
+
+<PageLayout title={ref.name}>
+  <Article
+    prevLink={`/biblrefs/${ref.prev.id}`}
+    nextLink={`/biblrefs/${ref.next.id}`}
+    mainTitle={ref.name} 
+  >
+    <dl class="grid grid-cols-[1fr_6fr] text-sm md:leading-7 md:text-base">
+      <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
+        Bible place:
+      </dt>
+      <dd class="pl-5">{ref.name}</dd>
+        {ref.description && (
+            <>
+            <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
+                Description:
+            </dt>
+            <dd class="pl-5">{ref.description}</dd>
+            </>
+        )}
+      <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
+        Nova Vulgata URL:
+      </dt>
+      <dd class="pl-5">
+        {
+          ref.nova_vulgata_url ? (
+            <NavLink href={ref.nova_vulgata_url}>
+              {ref.nova_vulgata_url}
+              <Icon
+                class="inline-flex align-top"
+                aria-hidden="true"
+                name="lucide:external-link"
+              />
+            </NavLink>
+          ) : (
+            "N/A"
+          ) 
+        }
+      </dd>
+      <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
+        Text:
+      </dt>
+      <dd class="pl-5">{ref.text ?? "N/A"}</dd>
+     
+         </dl>
+          <TabulatorTable
+      client:only="react"
+      data={tableData}
+      columns={columns}
+      tableId="biblical-references-table"
+      options={{
+        paginationSize: 25,
+        responsiveLayout: "collapse",
+      }}
+      downloadTitle="jad_biblical_references"
+      rowClickConfig={rowClickConfig}
+    />
+  </Article>
+  </PageLayout>

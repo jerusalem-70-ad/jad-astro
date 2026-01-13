@@ -423,3 +423,172 @@ function addHeaderFilters(columns) {
     ...column,
   }));
 }
+// Configuration for Tabulator tables in biblical references
+export const biblrefsTableConfig = {
+  transformData: (biblrefs) => {
+    return biblrefs.map((ref) => {
+      const totalPassages = ref.related_passages?.length;
+      const works = [
+        ...new Map(
+          ref.related_passages.map((p) => p.work[0])?.map((w) => [w.id, w])
+        ).values(),
+      ];
+      const worksList =
+        works.length === 0
+          ? "N/A"
+          : works
+              .map(
+                (w) =>
+                  `${w.author?.[0]?.name ? w.author[0].name + ": " : ""}${
+                    w.title
+                  }`
+              )
+              .join("\n");
+      const book = ref.name?.split(" ")?.[0] || "";
+      const chapterVerseMatch = ref.name?.match(/(\d+),(\d+)/);
+      const chapter = chapterVerseMatch ? chapterVerseMatch[1] : "";
+      const verse = chapterVerseMatch ? chapterVerseMatch[2] : "";
+      return {
+        id: ref.id || "",
+        jad_id: ref.jad_id || "",
+        title: ref.name || "",
+        text: ref.text || "",
+        works: worksList,
+        related_passages: totalPassages,
+        book: book,
+        chapter: chapter,
+        verse: verse,
+      };
+    });
+  },
+
+  getColumns() {
+    const columns = [
+      {
+        title: "Book",
+        field: "book",
+        responsive: 1,
+        widthGrow: 1,
+        minWidth: 50,
+      },
+      {
+        title: "Chapter",
+        field: "chapter",
+        responsive: 1,
+        widthGrow: 1,
+        minWidth: 50,
+      },
+      {
+        title: "Verse",
+        field: "verse",
+        responsive: 1,
+        widthGrow: 1,
+        minWidth: 50,
+      },
+      {
+        title: "Vulgata Text",
+        field: "text",
+        minWidth: 100,
+        widthGrow: 3,
+        responsive: 1,
+      },
+      {
+        title: "Works",
+        field: "works",
+        minWidth: 150,
+        widthGrow: 3,
+        responsive: 2,
+        formatter: "textarea",
+      },
+
+      {
+        title: "Passages",
+        field: "related_passages",
+        minWidth: 100,
+        responsive: 2,
+      },
+    ];
+    return addHeaderFilters(columns);
+  },
+  // Row click configuration for work-mss-transmission table
+  getRowClickConfig: {
+    urlPattern: "/biblical-refs/{id}",
+    idField: "jad_id",
+    target: "_self",
+  },
+};
+
+// Configuration for Tabulator tables in biblical references detail view page
+export const biblrefTableConfig = {
+  transformData: (passages) => {
+    return passages.map((passage) => {
+      const work_title = passage.work[0]?.title || "";
+      const author = passage.work?.[0]?.author?.[0]
+        ? `${passage.work[0].author[0].name}${
+            passage.work[0].author[0].alt_name
+              ? ` (${passage.work[0].author[0].alt_name})`
+              : ""
+          }`
+        : "";
+
+      return {
+        id: passage.id,
+        jad_id: passage.jad_id,
+        title_work: work_title,
+        passage: passage.passage,
+        aut_name: passage.work[0].author.map((a) => a.name).join(", "),
+        alt_name: passage.work[0].author[0].alt_name || "",
+        position: passage.position_in_work,
+      };
+    });
+  },
+
+  getColumns() {
+    const columns = [
+      {
+        title: "#",
+        field: "id",
+        responsive: 1,
+        widthGrow: 1,
+        maxWidth: 40,
+      },
+      {
+        title: "Passage",
+        field: "passage",
+        responsive: 1,
+        widthGrow: 3,
+        minWidth: 150,
+      },
+
+      {
+        title: "Author",
+        field: "aut_name",
+        minWidth: 100,
+        widthGrow: 2,
+        responsive: 2,
+        formatter: "textarea",
+      },
+      {
+        title: "Work",
+        field: "title_work",
+        minWidth: 100,
+        widthGrow: 2,
+        responsive: 1,
+      },
+
+      {
+        title: "Position in Work",
+        field: "position",
+        minWidth: 50,
+        responsive: 2,
+      },
+    ];
+    return addHeaderFilters(columns);
+  },
+  // Row click configuration for work-mss-transmission table
+  getRowClickConfig: {
+    urlPattern: "/passages/{id}",
+    idField: "jad_id",
+    target: "_self",
+  },
+};

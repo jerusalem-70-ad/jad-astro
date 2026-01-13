@@ -86,6 +86,12 @@
   @apply text-brand-800;
 }
 
+/* Tabulator cell set max-height and make scrollable */
+.tabulator .tabulator-row .tabulator-cell {
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
 @media (min-width: 640px) {
   .tabulator .tabulator-row:nth-child(even) {
     @apply bg-brand-50;
@@ -94,6 +100,7 @@
     @apply border-l;
   }
 }
+
 /* Apply styles only for small screens (Mobile: <640px) */
 @media (max-width: 639px) {
   .tabulator .tabulator-cell {

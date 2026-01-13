@@ -47,11 +47,28 @@ export interface Language {
 // Reference interfaces
 export interface Reference {
   id: number;
+  name: string;
+  order?: number;
   jad_id?: string;
-  value: string;
+  value?: string;
   nova_vulgata_url?: string;
   text?: string;
   key?: number;
+  description?: string | null;
+}
+
+export interface BiblicalReference extends Reference {
+  related_passages: ReferencePassage[];
+  prev?: Navigation;
+  next?: Navigation;
+}
+
+interface ReferenceAuthor {
+  id?: number;
+  name: string;
+  jad_id: string;
+  alt_name?: string | null;
+  place?: Place[];
 }
 
 // Author interface
@@ -64,12 +81,19 @@ export interface Author {
   lebensdaten?: string | null;
   date_of_birth?: string | null;
   date_of_death?: string | null;
-  origDates?: any[] | null;
+  origDates?: OrigDate[] | null;
+  date_certainty: boolean;
   place: Place[];
   alt_name?: string | null;
   works?: any[]; // This appears to be empty in the sample
   prev?: Navigation;
   next?: Navigation;
+}
+
+interface OrigDate {
+  not_before: string | null;
+  not_after: string | null;
+  range: string | null;
 }
 
 export interface Place {
@@ -104,6 +128,14 @@ export interface Genre {
   id: number;
   value: string;
   color?: string;
+}
+
+export interface ReferenceWork {
+  id?: number;
+  jad_id: string;
+  title: string;
+  author: ReferenceAuthor[];
+  author_certainty: boolean;
 }
 
 // Work interface
@@ -151,6 +183,16 @@ export interface SourcePass {
   author?: string;
   position_in_work?: string;
   passage: string;
+}
+
+export interface ReferencePassage {
+  id: number;
+  jad_id: string;
+  passage: string;
+  position_in_work: string;
+  sort_position?: number;
+  page?: string;
+  work: ReferenceWork[];
 }
 
 // Passage interface
