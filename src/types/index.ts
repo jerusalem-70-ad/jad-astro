@@ -81,8 +81,8 @@ export interface Author {
   lebensdaten?: string | null;
   date_of_birth?: string | null;
   date_of_death?: string | null;
-  origDates?: OrigDate[] | null;
-  date_certainty: boolean;
+  rawDates?: OrigDate[] | null;
+  origDates: string;
   place: Place[];
   alt_name?: string | null;
   works?: any[]; // This appears to be empty in the sample

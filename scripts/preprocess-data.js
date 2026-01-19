@@ -16,7 +16,7 @@ import { createNetworkData } from "./create-network-data.js";
 
 const loadJSON = (file) =>
   JSON.parse(
-    readFileSync(join(process.cwd(), "src/content/row", file), "utf8")
+    readFileSync(join(process.cwd(), "src/content/row", file), "utf8"),
   );
 
 const passages = Object.values(loadJSON("occurrences.json"));
@@ -30,10 +30,10 @@ const places = Object.values(loadJSON("places.json"));
 const libraries = Object.values(loadJSON("libraries.json"));
 const clusters = Object.values(loadJSON("cluster.json"));
 const liturgical_references = Object.values(
-  loadJSON("liturgical_references.json")
+  loadJSON("liturgical_references.json"),
 );
 const institutional_contexts = Object.values(
-  loadJSON("institutional_context.json")
+  loadJSON("institutional_context.json"),
 );
 
 // set the output folder
@@ -46,7 +46,7 @@ const clustersClean = clusters
 writeFileSync(
   join(folderPath, "clusters.json"),
   JSON.stringify(clustersClean, null, 2),
-  { encoding: "utf-8" }
+  { encoding: "utf-8" },
 );
 console.log("clusters.json file written successfully.");
 
@@ -66,7 +66,7 @@ const institutionalContextsClean = institutional_contexts
 writeFileSync(
   join(folderPath, "institutional_context.json"),
   JSON.stringify(institutionalContextsClean, null, 2),
-  { encoding: "utf-8" }
+  { encoding: "utf-8" },
 );
 console.log("institutional_context.json file written successfully.");
 
@@ -76,7 +76,7 @@ const liturgicalRefClean = liturgical_references
 writeFileSync(
   join(folderPath, "liturgical_references.json"),
   JSON.stringify(liturgicalRefClean, null, 2),
-  { encoding: "utf-8" }
+  { encoding: "utf-8" },
 );
 console.log("liturgical_references.json file written successfully.");
 
@@ -100,26 +100,39 @@ function formatDate(date) {
   if (date === null || date === undefined) {
     return "";
   }
+  if (date.includes("-")) {
+    return date.split("-")[-1];
+  }
   return (
-    date.toString().split("-")[0].replace(/^0+/, "") || "0" // Remove leading zeros
+    date.toString().replace(/^0+/, "") || "0" // Remove leading zeros
   );
 }
 
 const authorsPlus = authors
   .filter((aut) => aut.name) // filter out authors without a name
   .map((aut) => {
+    const date_birth = aut.date_of_birth
+      ? formatDate(aut.date_of_birth)
+      : "unknown";
+    const date_death = aut.date_of_death
+      ? formatDate(aut.date_of_death)
+      : "unknown";
     const raw_dates = [
       {
         not_before: aut.date_of_birth || "",
         not_after: aut.date_of_death || "",
         range:
           aut.date_of_birth || aut.date_of_death
-            ? `${formatDate(aut.date_of_birth) || "?"}-${
-                formatDate(aut.date_of_death) || "?"
-              }`
+            ? `${aut.date_of_birth || "?"}-${aut.date_of_death || "?"}`
             : "",
       },
     ];
+    const bdates =
+      aut.date_birth_certainty && date_birth !== "uncertain"
+        ? date_birth
+        : `${date_birth} (?)`;
+    const ddates = aut.date_death_certainty ? date_death : `${date_death} (?)`;
+    const dates = `${bdates} — ${ddates}`;
     const related_works = works
       .filter((w) => w.author.some((w_aut) => w_aut.id === aut.id))
       .map((work) => {
@@ -132,10 +145,8 @@ const authorsPlus = authors
       id: aut.id,
       jad_id: aut.jad_id,
       name: aut.name.replace(",", ""),
-      date_of_birth: aut.date_of_birth || "",
-      date_of_death: aut.date_of_death || "",
-      origDates: raw_dates,
-      date_certainty: aut.date_certainty,
+      rawDates: raw_dates,
+      origDates: dates,
       place: enrichPlaces(aut.place, places),
       alt_name: aut.alt_name?.replace(",", "") || "",
       notes: aut.notes || "",
@@ -149,7 +160,7 @@ const updatedauthors = addPrevNextToItems(authorsPlus, "jad_id", "name");
 writeFileSync(
   join(folderPath, "authors.json"),
   JSON.stringify(updatedauthors, null, 2),
-  { encoding: "utf-8" }
+  { encoding: "utf-8" },
 );
 
 console.log("authors.json file enriched successfully.");
@@ -157,7 +168,7 @@ console.log("authors.json file enriched successfully.");
 // Write as JSON file
 writeFileSync(
   join(folderPath, "authors_map.json"),
-  JSON.stringify(authorMapObject, null, 2)
+  JSON.stringify(authorMapObject, null, 2),
 );
 
 // sort biblical references according to nova vulgarta order
@@ -180,7 +191,7 @@ Object.values(biblicalRef).forEach((ref) => {
 // Write the enhanced biblical references back to file
 writeFileSync(
   join(folderPath, "biblical_references.json"),
-  JSON.stringify(biblicalRefSorted, null, 2)
+  JSON.stringify(biblicalRefSorted, null, 2),
 );
 console.log("Biblical references enriched and written successfully.");
 
@@ -291,7 +302,7 @@ const manuscriptsPlus = manuscripts
       catalog_url: ms.catalog_url,
       digi_url: ms.digi_url,
       institutional_context: ms.institutional_context.map(
-        ({ order, ...rest }) => rest
+        ({ order, ...rest }) => rest,
       ),
       format: ms.format,
       date_written: enrichDates(ms.date_written, dates),
@@ -354,7 +365,7 @@ const passagesPlus = passages
     const msOccurrence = msOccurrences
       .filter(
         (item) =>
-          item.occurrence.length > 0 && item.occurrence[0].id === passage.id
+          item.occurrence.length > 0 && item.occurrence[0].id === passage.id,
       )
       .map((item) => {
         const mss = manuscriptsPlus
@@ -412,7 +423,7 @@ const passagesPlus = passages
       part_of_cluster: passage.part_of_cluster,
       liturgical_references: passage.liturgical_references,
       occurrence_found_in: passage.occurrence_found_in.map(
-        ({ order, ...rest }) => rest
+        ({ order, ...rest }) => rest,
       ),
       source_passage: passage.source_passage,
       text_paragraph: normalizeText(passage.text_paragraph), // normalize whitespace
@@ -476,14 +487,14 @@ const worksPlus = works
           position_in_work: position,
           sort_position: calculateSortPosition(position),
           passages: passages,
-        })
+        }),
       );
       // Sort the processedPassages array by sort_position
       processedPassages.sort((a, b) => a.sort_position - b.sort_position);
     }
 
     const related_authors = authorsPlus.filter((aut) =>
-      work.author.some((w_aut) => w_aut.id === aut.id)
+      work.author.some((w_aut) => w_aut.id === aut.id),
     );
     let edition;
     if (
@@ -540,7 +551,7 @@ const worksEnriched = addPrevNextToItems(worksPlus, "jad_id", "title");
 writeFileSync(
   join(folderPath, "works.json"),
   JSON.stringify(worksEnriched, null, 2),
-  { encoding: "utf-8" }
+  { encoding: "utf-8" },
 );
 
 console.log("works.json file enriched successfully.");
@@ -612,13 +623,13 @@ const enrichedPassages = passagesPlusPlus.map((p) => ({
 const passagesPlusFinal = addPrevNextToItems(
   enrichedPassages,
   "jad_id",
-  "name"
+  "name",
 );
 
 writeFileSync(
   join(folderPath, "passages.json"),
   JSON.stringify(passagesPlusFinal, null, 2),
-  { encoding: "utf-8" }
+  { encoding: "utf-8" },
 );
 console.log("passages.json file enriched successfully.");
 
@@ -660,13 +671,13 @@ const biblicalRefWithPassages = Object.values(biblicalRef)
 const biblicalRefPlusFinal = addPrevNextToItems(
   biblicalRefWithPassages,
   "jad_id",
-  "value"
+  "value",
 );
 
 writeFileSync(
   join(folderPath, "biblical_references.json"),
   JSON.stringify(biblicalRefPlusFinal, null, 2),
-  { encoding: "utf-8" }
+  { encoding: "utf-8" },
 );
 
 console.log("biblical_references.json file enriched successfully.");
@@ -725,13 +736,13 @@ const manuscriptPlusPlus = manuscriptsPlus.map((ms) => {
 const mssPlusFinal = addPrevNextToItems(
   manuscriptPlusPlus,
   "jad_id",
-  "name[0].value"
+  "name[0].value",
 );
 
 writeFileSync(
   join(folderPath, "manuscripts.json"),
   JSON.stringify(mssPlusFinal, null, 2),
-  { encoding: "utf-8" }
+  { encoding: "utf-8" },
 );
 
 console.log("manuscripts.json file enriched successfully.");
@@ -769,7 +780,7 @@ const keywordsPlusFinal = addPrevNextToItems(keywordsPlus, "jad_id", "name");
 writeFileSync(
   join(folderPath, "keywords.json"),
   JSON.stringify(keywordsPlusFinal, null, 2),
-  { encoding: "utf-8" }
+  { encoding: "utf-8" },
 );
 
 console.log("keywords.json file enriched successfully.");

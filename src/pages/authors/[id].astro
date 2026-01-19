@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 }
 
 const { data: author} = Astro.props;
-const dates = (author.origDates[0].range) + (author.date_certainty ? "" : " (?)" );
+const dates = author.origDates;
 
 ---
 
@@ -22,13 +22,17 @@ const dates = (author.origDates[0].range) + (author.date_certainty ? "" : " (?)"
   <Article
     prevLink={`/authors/${author.prev.id}`}
     nextLink={`/authors/${author.next.id}`}
-    mainTitle={`${author.name} ${dates ? `(${dates})` : ""}`}
+    mainTitle={`${author.name} ${dates ? `[${dates}]` : ""}`}
   >
     <dl class="grid grid-cols-[1fr_7fr] text-sm md:leading-7 md:text-base">
       <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
-        Date:
+        Date of birth:
       </dt>
-      <dd class="pl-5">{dates}</dd>
+      <dd class="pl-5">{dates.split(' — ')[0]}</dd>
+      <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
+        Date of Death:
+      </dt>
+       <dd class="pl-5">{dates.split(' — ')[1]}</dd>
       <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
         Place:
       </dt>
