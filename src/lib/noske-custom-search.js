@@ -144,6 +144,10 @@ class CustomNoskeSearch {
       const leftText = this.buildText(line.Left);
       const kwicText = this.buildText(line.Kwic);
       const rightText = this.buildText(line.Right);
+      console.log(
+        line.Right,
+        line.Kwic.map((t) => [t.str, typeof t.str]),
+      );
       // Extract jad_id from landingPageURI
       const jad_id =
         line.Kwic[0].attr.split("passages/")[1].split(".html")[0] || "#";
@@ -151,9 +155,9 @@ class CustomNoskeSearch {
       html += `
         <div class="result-item">
           <div class="result-text">
-            <span class="left-context">${leftText}</span>
+            ${leftText ? `<span class="left-context">${leftText}</span>` : ""}
             <span class="kwic">${kwicText}</span>
-            <span class="right-context">${rightText}</span>
+            ${rightText ? `<span class="right-context">${rightText}</span>` : ""}
           </div> 
             <div class="ts-details flex justify-between mt-4" data-id="${jad_id}"></div>       
         </div>
@@ -170,8 +174,14 @@ class CustomNoskeSearch {
   }
 
   buildText(tokenArray) {
-    if (!tokenArray || tokenArray.length === 0) return "";
-    return tokenArray.map((token) => token.str).join(" ");
+    if (!Array.isArray(tokenArray)) return "";
+
+    return tokenArray
+      .map((token) => token?.str)
+      .filter(
+        (str) => typeof str === "string" && str.trim() !== "" && str !== "null",
+      )
+      .join(" ");
   }
 
   displayStats(data) {
