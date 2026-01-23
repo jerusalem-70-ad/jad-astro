@@ -101,14 +101,15 @@ const usedBy = Object.values(passages).filter((item) =>
             {passage.mss_occurrences &&
               passage.mss_occurrences?.length > 0 ? (
                 <ul>
-                  {passage.mss_occurrences.map((ms) => (
+                  {passage.mss_occurrences
+                  .sort((a, b) => a.manuscript.localeCompare(b.manuscript))
+                  .map((ms) => (
                     <li class={ms.main_ms ? "font-semibold" : ""}>
                       <NavLink href={`/manuscripts/${ms.manuscript_jad_id}`}>
                         {ms.manuscript}
                         </NavLink>
                       {/* add exact position preprocessed from json ms_occurences */}
-                      {ms.position_in_ms &&
-        
+                      {ms.position_in_ms &&        
                             <span>
                               (f. {ms.position_in_ms})
                               {ms.facsimile_position && (
