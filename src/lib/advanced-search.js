@@ -32,7 +32,7 @@ const HITS_PER_PAGE = 10;
 const INITIAL_HITS_PER_PAGE = parseInt(
   (typeof window !== "undefined" && localStorage.getItem("hitsPerPage")) ||
     HITS_PER_PAGE,
-  10
+  10,
 );
 
 const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
@@ -161,7 +161,7 @@ const customDateRangeWidget = (containerId) => {
         // Validate: Ensure 'From year' < 'To year'
         if (from >= to) {
           toInput.setCustomValidity(
-            "The 'To year' must be greater than the 'From year'."
+            "The 'To year' must be greater than the 'From year'.",
           );
           // Don't submit if validation fails
           return;
@@ -194,7 +194,7 @@ const customDateRangeWidget = (containerId) => {
         // Re-check the condition if the 'To year' is still valid after the change
         if (from >= to) {
           toInput.setCustomValidity(
-            "The 'To year' must be greater than the 'From year'."
+            "The 'To year' must be greater than the 'From year'.",
           );
         } else {
           toInput.setCustomValidity(""); // Reset the error if condition is met
@@ -261,7 +261,7 @@ search.addWidgets([
         const transformedWorks = (item.work || []).map((work) => ({
           title: work.title || "Unknown Title",
           authors: (work.author || []).map(
-            (author) => author.name || "Unknown Author"
+            (author) => author.name || "Unknown Author",
           ),
           date: (work.date.map((date) => date.value) || []).join(", "),
         }));
@@ -304,7 +304,7 @@ search.addWidgets([
                   <p><strong>Author:</strong> ${work.authors.join(", ")}</p>
                   <p><strong>Date:</strong> ${work.date}</p>
                 </div>
-              `
+              `,
             )
             .join("");
         };
@@ -317,12 +317,12 @@ search.addWidgets([
         const highlightHTML = fullTextHighlight.includes("<mark>")
           ? fullTextHighlight
           : searchTextHighlight.includes("<mark>")
-          ? `${searchTextHighlight} <span class="text-xs text-brand-400">(normalized match)</span>
+            ? `${searchTextHighlight} <span class="text-xs text-brand-400">(normalized match)</span>
           <details class="m-1 px-3 py-2 text-sm">
             <summary class="cursor-pointer text-brand-400"><span class="font-semibold">NB!</span> This is the normalized match. Click here to see the original text </summary>
             <p class="mt-1 italic">${hit.full_text}</p>
           </details>`
-          : "";
+            : "";
 
         // Generate the main HTML for the hit
         return `
@@ -458,12 +458,22 @@ search.addWidgets([
     showMoreLimit: 50,
     limit: 40,
     sortBy: biblicalComparator,
-    transformItems(items) {
-      if (!biblicalSearchTerm) return items;
 
-      return items.filter((item) =>
-        item.label.toLowerCase().includes(biblicalSearchTerm.toLowerCase())
-      );
+    templates: {
+      item(item) {
+        let label = item.label;
+
+        if (label.includes("|")) {
+          label = label.split("|")[1];
+        }
+
+        return `
+        <a class="${item.isRefined ? "ais-HierarchicalMenu-link--selected" : "ais-HierarchicalMenu-link"}">
+          <span class="ais-HierarchicalMenu-label">${label}</span>
+          <span class="ais-HierarchicalMenu-count">${item.count}</span>
+        </a>
+      `;
+      },
     },
   }),
 
@@ -476,28 +486,28 @@ search.addWidgets([
           item.attribute === "biblical_ref_lvl0"
             ? "Bible book"
             : item.attribute === "author_search"
-            ? "Author"
-            : item.attribute === "work.title"
-            ? "Work"
-            : item.attribute === "manuscripts.value"
-            ? "Manuscript"
-            : item.attribute === "work.date.century"
-            ? "Century"
-            : item.attribute === "work.institutional_context.value"
-            ? "Institution"
-            : item.attribute === "cluster.value"
-            ? "Cluster"
-            : item.attribute === "keywords.value"
-            ? "Keyword"
-            : item.attribute === "Liturgical_references.value"
-            ? "Liturgy"
-            : item.attribute === "sources.author"
-            ? "Source"
-            : item.attribute === "work_date_not_before"
-            ? "Date"
-            : item.attribute === "work_date_not_after"
-            ? "Date"
-            : item.attribute,
+              ? "Author"
+              : item.attribute === "work.title"
+                ? "Work"
+                : item.attribute === "manuscripts.value"
+                  ? "Manuscript"
+                  : item.attribute === "work.date.century"
+                    ? "Century"
+                    : item.attribute === "work.institutional_context.value"
+                      ? "Institution"
+                      : item.attribute === "cluster.value"
+                        ? "Cluster"
+                        : item.attribute === "keywords.value"
+                          ? "Keyword"
+                          : item.attribute === "Liturgical_references.value"
+                            ? "Liturgy"
+                            : item.attribute === "sources.author"
+                              ? "Source"
+                              : item.attribute === "work_date_not_before"
+                                ? "Date"
+                                : item.attribute === "work_date_not_after"
+                                  ? "Date"
+                                  : item.attribute,
       }));
     },
   }),

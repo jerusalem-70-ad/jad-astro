@@ -346,9 +346,10 @@ const passagesPlus = passages
         // Trim any accidental spaces
         const chapterTrimmed = chapter?.trim();
         const verseTrimmed = verse?.trim();
+        const chapterNum = String(chapterTrimmed).padStart(3, "0");
 
         lvl0.push(book);
-        lvl1.push(`${book} > ${book} ${chapterTrimmed}`);
+        lvl1.push(`${book} > ${chapterNum}|${chapterTrimmed}`);
         lvl2.push(`${book} > ${chapterTrimmed} > ${verseTrimmed}`);
       });
     }
