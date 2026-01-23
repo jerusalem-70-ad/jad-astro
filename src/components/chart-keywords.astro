@@ -42,6 +42,11 @@ const chartData = {
   // Initialize the chart
   const chartDom = document.getElementById("keywords-chart");
   const myChart = echarts.init(chartDom);
+  
+// Dynamically set chart height based on number of categories
+  const chartHeight = Math.max(800, chartData.categories.length * 18);
+  chartDom.style.height = `${chartHeight}px`;
+  myChart.resize();
 
   // Chart configuration for horizontal bar chart
   const chartOption = {
@@ -79,6 +84,7 @@ const chartData = {
       data: chartData.categories,
       axisLabel: {
         fontSize: 11,
+        interval: 0,
         width: 150,
         overflow: "truncate",
       },
