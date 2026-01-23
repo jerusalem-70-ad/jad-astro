@@ -281,7 +281,8 @@ export const manuscriptsTableConfig = {
             ? `<ul>${ms.related_passages
                 .filter((p) => p.passage?.length > 0)
                 .map(
-                  (p) => `<li>(${p.passage[0].id}) ${p.passage[0].passage}</li>`
+                  (p) =>
+                    `<li>(${p.passage[0].id}) ${p.passage[0].passage}</li>`,
                 )
                 .join("")}</ul>`
             : "";
@@ -430,7 +431,7 @@ export const biblrefsTableConfig = {
       const totalPassages = ref.related_passages?.length;
       const works = [
         ...new Map(
-          ref.related_passages.map((p) => p.work[0])?.map((w) => [w.id, w])
+          ref.related_passages.map((p) => p.work[0])?.map((w) => [w.id, w]),
         ).values(),
       ];
       const worksList =
@@ -441,13 +442,19 @@ export const biblrefsTableConfig = {
                 (w) =>
                   `${w.author?.[0]?.name ? w.author[0].name + ": " : ""}${
                     w.title
-                  }`
+                  }`,
               )
               .join("\n");
-      const book = ref.name?.split(" ")?.[0] || "";
-      const chapterVerseMatch = ref.name?.match(/(\d+),(\d+)/);
+      const book = ref.name?.includes(".")
+        ? ref.name?.split(".")?.[0] || ""
+        : ref.name?.split(" ")?.[0] || "";
+      const chapterVerse = ref.name?.includes(".")
+        ? ref.name?.split(".")?.[1] || ""
+        : ref.name?.split(" ")?.[1] || "";
+      const chapterVerseMatch = chapterVerse?.match(/(\d+)(?:,(\d+))?/);
       const chapter = chapterVerseMatch ? chapterVerseMatch[1] : "";
-      const verse = chapterVerseMatch ? chapterVerseMatch[2] : "";
+      const verse = chapterVerseMatch ? (chapterVerseMatch[2] ?? "") : "";
+
       return {
         id: ref.id || "",
         jad_id: ref.jad_id || "",
@@ -469,28 +476,28 @@ export const biblrefsTableConfig = {
         field: "book",
         responsive: 1,
         widthGrow: 1,
-        minWidth: 50,
+        minWidth: 30,
       },
       {
         title: "Chapter",
         field: "chapter",
         responsive: 1,
         widthGrow: 1,
-        minWidth: 50,
+        minWidth: 30,
       },
       {
         title: "Verse",
         field: "verse",
         responsive: 1,
         widthGrow: 1,
-        minWidth: 50,
+        minWidth: 30,
       },
       {
         title: "Vulgata Text",
         field: "text",
         minWidth: 100,
         widthGrow: 3,
-        responsive: 1,
+        responsive: 2,
       },
       {
         title: "Works",
@@ -502,7 +509,7 @@ export const biblrefsTableConfig = {
       },
 
       {
-        title: "Passages",
+        title: "# Passages",
         field: "related_passages",
         minWidth: 100,
         responsive: 2,
