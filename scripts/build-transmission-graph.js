@@ -65,7 +65,7 @@ export function buildTransmissionGraph(passages) {
         if (!graphNodes.has(sourceNode.id)) {
           graphNodes.set(
             sourceNode.id,
-            formatNode(sourceNode, depth, "ancestor")
+            formatNode(sourceNode, depth, "ancestor"),
           );
         } else {
           // Update depth if this path yields a shallower ancestor
@@ -207,6 +207,10 @@ export function buildTransmissionGraph(passages) {
   }
 
   function positionBasedOnParents(nodes, connectionMap, nodeMap) {
+    const NODE_RADIUS = 15; // match ECharts symbolSize / 2
+    const EDGE_GAP = 10; // extra spacing so edge is visible
+    const SINGLE_PARENT_OFFSET = NODE_RADIUS * 2 + EDGE_GAP;
+
     // Group nodes by their parent positions
     const parentGroups = new Map();
 
@@ -243,7 +247,12 @@ export function buildTransmissionGraph(passages) {
     // Position nodes within each parent group
     parentGroups.forEach((groupNodes, parentX) => {
       if (groupNodes.length === 1) {
-        groupNodes[0].x = parentX;
+        const node = groupNodes[0];
+
+        const direction = node.nodeType === "ancestor" ? -1 : 1;
+        const offset = (SINGLE_PARENT_OFFSET / 80) * (1 + node.depth * 0.2);
+
+        node.x = Math.max(1, Math.min(9, parentX + direction * offset));
       } else {
         // Spread siblings around parent position with small offsets
         const offsetRange = Math.min(2, 8 / groupNodes.length); // Max offset of 2 units
@@ -259,7 +268,7 @@ export function buildTransmissionGraph(passages) {
 
   // Assign x coordinates for layout
   Object.values(result).forEach((r) =>
-    assignXCoordinates(r.graph.nodes, r.graph.links)
+    assignXCoordinates(r.graph.nodes, r.graph.links),
   );
 
   return result;
