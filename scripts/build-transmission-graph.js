@@ -26,13 +26,16 @@ export function buildTransmissionGraph(passages) {
     const workName = node.work?.[0]?.title || "";
     const authorName =
       node.work?.[0]?.author?.map((a) => a.name).join(", ") || "";
-    const workDate = node.work?.[0]?.date[0]?.not_before || "";
+    const dateNotBefore = node.work?.[0]?.date[0]?.not_before ?? null;
+    const dateNotAfter = node.work?.[0]?.date[0]?.not_after ?? null;
+
     return {
       name: `${authorName}: ${workName}`,
       id: node.id,
       work: workName,
       author: authorName,
-      date: workDate,
+      dateNotBefore: dateNotBefore,
+      dateNotAfter: dateNotAfter,
       passage: node.passage,
       jad_id: node.jad_id,
       depth: depth,

@@ -12,7 +12,8 @@ export interface GraphNode {
   depth: number;
   nodeType: NodeType;
   x: number;
-  date: number;
+  dateNotBefore: number;
+  dateNotAfter: number;
 }
 
 // Link between nodes
