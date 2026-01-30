@@ -1,5 +1,5 @@
 import { defineConfig } from "astro/config";
-
+import svelte from "@astrojs/svelte";
 import icon from "astro-icon";
 
 import tailwindcss from "@tailwindcss/vite";
@@ -13,7 +13,7 @@ export default defineConfig({
     open: "jad-astro",
   },
 
-  integrations: [icon(), react()],
+  integrations: [icon(), react(), svelte()],
   site: "https://jerusalem-70-ad.github.io",
   base: "/jad-astro",
 
