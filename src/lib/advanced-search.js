@@ -51,7 +51,7 @@ const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
     query_by: `${main_search_field}, ${secondary_field}`,
     query_by_weights: "2,1",
     typo_tokens_threshold: 1,
-    facet_query_num_typos: 0,
+    facet_query_num_typos: 1,
     // use the initial hits-per-page (possibly from localStorage)
     per_page: INITIAL_HITS_PER_PAGE,
     sort_by: "sort_id:asc",
