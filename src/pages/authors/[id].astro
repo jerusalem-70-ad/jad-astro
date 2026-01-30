@@ -22,7 +22,7 @@ const dates = author.origDates;
   <Article
     prevLink={`/authors/${author.prev.id}`}
     nextLink={`/authors/${author.next.id}`}
-    mainTitle={`${author.name} ${dates ? `[${dates}]` : ""}`}
+    mainTitle={`${author.name} ${dates ? `(${dates})` : ""}`}
   >
     <dl class="grid grid-cols-[1fr_7fr] text-sm md:leading-7 md:text-base">
       <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">

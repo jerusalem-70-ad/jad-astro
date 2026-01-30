@@ -127,11 +127,8 @@ const authorsPlus = authors
             : "",
       },
     ];
-    const bdates =
-      aut.date_birth_certainty && date_birth !== "uncertain"
-        ? date_birth
-        : `${date_birth} (?)`;
-    const ddates = aut.date_death_certainty ? date_death : `${date_death} (?)`;
+    const bdates = aut.date_birth_certainty ? date_birth : `c. ${date_birth}`;
+    const ddates = aut.date_death_certainty ? date_death : `c. ${date_death}`;
     const dates = `${bdates} — ${ddates}`;
     const related_works = works
       .filter((w) => w.author.some((w_aut) => w_aut.id === aut.id))
