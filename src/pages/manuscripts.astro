@@ -1,11 +1,11 @@
 ---
 import PageLayout from "@/layouts/page-layout.astro";
 import TableHead from "@/components/table-head.astro";
-import TabulatorTable from "@/components/tabulator-table.jsx";
+import TabulatorTable from "@/components/tabulator-table.svelte";
 import { manuscriptsTableConfig } from "@/lib/tabulator-table-configs.js";
 import manuscriptsjson from "@/content/data/manuscripts.json";
 
-import LeafletMap from "@/components/map-leaflet.jsx";
+import LeafletMap from "@/components/map-leaflet.svelte";
 import { processMss } from "@/lib/make-geojson.js";
 const geoJsonData = processMss(manuscriptsjson);
 
@@ -33,7 +33,7 @@ if (import.meta.env.DEV) {
 
       {
         tableData && tableData.length > 0 ? (
-          <LeafletMap client:only="react" geoJsonData={geoJsonData} filterMode="single"/>
+          <LeafletMap client:only="svelte" geoJsonData={geoJsonData} filterMode="single"/>
         ) : (
           <div class="p-4 text-center text-gray-500 border border-gray-200 rounded-md">
             No data available for map visualization
@@ -42,7 +42,7 @@ if (import.meta.env.DEV) {
       }
     </details>
     <TabulatorTable
-      client:only="react"
+      client:only="svelte"
       data={tableData}
       columns={columns}
       tableId="manuscripts-table"

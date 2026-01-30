@@ -1,7 +1,7 @@
 ---
 import PageLayout from "@/layouts/page-layout.astro";
 import TableHead from "@/components/table-head.astro";
-import TabulatorTable from "@/components/tabulator-table.jsx";
+import TabulatorTable from "@/components/tabulator-table.svelte";
 import { biblrefsTableConfig } from "@/lib/tabulator-table-configs.js";
 import biblical_referencesjson from "@/content/data/biblical_references.json";
 
@@ -16,7 +16,7 @@ const rowClickConfig = biblrefsTableConfig.getRowClickConfig;
 <PageLayout title="Biblical References">
   <TableHead title="Biblical References">
     <TabulatorTable
-      client:only="react"
+      client:only="svelte"
       data={tableData}
       columns={columns}
       tableId="biblical-references-table"

@@ -1,11 +1,11 @@
 ---
 import PageLayout from "@/layouts/page-layout.astro";
 import TableHead from "@/components/table-head.astro";
-import TabulatorTable from "@/components/tabulator-table.jsx";
+import TabulatorTable from "@/components/tabulator-table.svelte";
 import { authorsTableConfig } from "@/lib/tabulator-table-configs.js";
 import authorsjson from "@/content/data/authors.json";
 
-import LeafletMap from "@/components/map-leaflet.jsx";
+import LeafletMap from "@/components/map-leaflet.svelte";
 import { processAuthors } from "@/lib/make-geojson.js";
 const geoJsonData = processAuthors(authorsjson);
 
@@ -27,7 +27,7 @@ const rowClickConfig = authorsTableConfig.getRowClickConfig;
 
       {
         tableData && tableData.length > 0 ? (
-          <LeafletMap client:only="react" geoJsonData={geoJsonData} />
+          <LeafletMap client:only="svelte" geoJsonData={geoJsonData} />
         ) : (
           <div class="p-4 text-center text-gray-500 border border-gray-200 rounded-md">
             No data available for map visualization
@@ -36,7 +36,7 @@ const rowClickConfig = authorsTableConfig.getRowClickConfig;
       }
     </details>
     <TabulatorTable
-      client:only="react"
+      client:only="svelte"
       data={tableData}
       columns={columns}
       tableId="authors-table"

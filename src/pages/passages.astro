@@ -1,13 +1,13 @@
 ---
 import PageLayout from "@/layouts/page-layout.astro";
 import TableHead from "@/components/table-head.astro";
-import TabulatorTable from "@/components/tabulator-table.jsx";
+import TabulatorTable from "@/components/tabulator-table.svelte";
 import { passagesTableConfig } from "@/lib/tabulator-table-configs.js";
 import passagesjson from "@/content/data/passages.json";
 import authorsjson from "@/content/data/authors.json"
 import manuscriptsjson from "@/content/data/manuscripts.json"
 import PassagesTimeline from "@/components/passages-timeline.astro";
-import LeafletMap from "@/components/map-leaflet.jsx";
+import LeafletMap from "@/components/map-leaflet.svelte";
 import { processPassagesMap } from "@/lib/make-geojson.js";
 const geoJsonData = processPassagesMap(authorsjson, manuscriptsjson);
 
@@ -70,7 +70,7 @@ if (!columns || columns.length === 0) {
 
       {
         tableData && tableData.length > 0 ? (
-          <LeafletMap client:only="react" geoJsonData={geoJsonData} filterMode="dual"/>
+          <LeafletMap client:only="svelte" geoJsonData={geoJsonData} filterMode="dual"/>
         ) : (
           <div class="p-4 text-center text-gray-500 border border-gray-200 rounded-md">
             No data available for map visualization
@@ -82,7 +82,7 @@ if (!columns || columns.length === 0) {
     {
       tableData && tableData.length > 0 && columns && columns.length > 0 ? (
         <TabulatorTable
-          client:only="react"
+          client:only="svelte"
           data={tableData}
           columns={columns}
           tableId="passages-table"
