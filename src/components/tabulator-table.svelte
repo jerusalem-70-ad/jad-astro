@@ -64,15 +64,7 @@
   const defaultOptions = {
     layout: "fitColumns",
     headerFilterLiveFilterDelay: 600,
-    responsiveLayout: "collapse",
-    rowHeader: {
-      formatter: "responsiveCollapse",
-      width: 30,
-      minWidth: 30,
-      hozAlign: "center",
-      resizable: false,
-      headerSort: false,
-    },
+    responsiveLayout: "hide",   
     pagination: true,
     movableColumns: true,
     resizableRows: true,
@@ -308,5 +300,5 @@
     bind:this={tableEl}
     id={tableId}
     style="min-height: 100px; width: 100%;"
-  />
+  ></div>
 </div>

@@ -57,8 +57,9 @@
 /******************************************/
 /********* css for TABULATOR.js ***********/
 /********************************************/
+
 .tabulator-responsive-collapse td {
-  @apply break-words whitespace-normal max-w-full;
+  @apply wrap-break-word whitespace-normal max-w-full;
   @apply align-top;
   @apply text-xs;
 }
@@ -85,12 +86,6 @@
 /* sorting arrow color */
 .tabulator .tabulator-col-sorter .tabulator-arrow {
   @apply text-brand-800;
-}
-
-/* Tabulator cell set max-height and make scrollable */
-.tabulator .tabulator-row .tabulator-cell {
-  max-height: 100px;
-  overflow-y: scroll;
 }
 
 @media (min-width: 640px) {

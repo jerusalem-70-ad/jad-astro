@@ -157,16 +157,16 @@ export const authorsTableConfig = {
       {
         title: "Name",
         field: "aut_name",
-        responsive: 1,
         widthGrow: 1,
         minWidth: 200,
+        responsive: 0,
       },
       {
         title: "Works",
         field: "works",
-        responsive: 0,
         widthGrow: 2,
         minWidth: 250,
+        responsive: 1,
       },
       {
         title: "Place",
@@ -312,33 +312,49 @@ export const manuscriptsTableConfig = {
       {
         title: "Settlement",
         field: "settlement",
-        width: 150,
+        widthGrow: 2,
+        minWidth: 100,
+        responsive: 0,
       },
       {
         title: "Shelfmark",
         field: "ms_name",
-        width: 150,
+        widthGrow: 2,
+        minWidth: 100,
+        responsive: 1,
       },
       {
         title: "Works",
         field: "related_works",
+        responsive: 2,
+        widthGrow: 3,
+        minWidth: 150,
       },
       {
         title: "Passages",
         field: "related_passages",
         minWidth: 300,
         formatter: "textarea",
+        responsive: 2,
+        widthGrow: 3,
+        minWidth: 150,
       },
       {
         title: "Institutional context",
         resizable: true,
         field: "institutional_context",
+        responsive: 2,
+        widthGrow: 2,
+        minWidth: 150,
       },
       {
         title: "Date",
         resizable: true,
         field: "origDate",
         headerFilterPlaceholder: "e.g. 1000, after 1001",
+        responsive: 2,
+        widthGrow: 2,
+        minWidth: 100,
       },
     ];
 
@@ -380,20 +396,21 @@ export const keywordsTableConfig = {
         field: "name",
         responsive: 1,
         widthGrow: 2,
+        minWidth: 150,
       },
       {
         title: "Info",
         resizable: true,
         field: "description",
-        responsive: 1,
-        widthGrow: 3,
+        responsive: 3,
+        widthGrow: 2,
         formatter: "textarea",
       },
       {
         title: "Occurrences",
         field: "relatedPassagesLength",
         headerFilter: "number",
-        responsive: 1,
+        responsive: 3,
         widthGrow: 1,
       },
 
@@ -403,6 +420,7 @@ export const keywordsTableConfig = {
         responsive: 2,
         widthGrow: 3,
         formatter: "textarea",
+        minWidth: 200,
       },
     ];
 
