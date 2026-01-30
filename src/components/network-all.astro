@@ -29,7 +29,7 @@
     passages.forEach((passage) => {
       if (passage.transmission_graph?.graph?.nodes) {
         passage.transmission_graph.graph.nodes
-          .filter((node) => node.date) // Only include nodes with a date
+          .filter((node) => node.dateNotBefore || node.dateNotAfter) // Only include nodes with a date
           .forEach((node) => {
             // Avoid duplicate nodes by checking existing IDs
             if (!graphData.nodes.find((n) => n.id === node.id)) {
