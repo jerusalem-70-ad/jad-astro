@@ -136,7 +136,6 @@
     });
 
     // Calculate appropriate force strengths based on data scale
-    const nodeRadius = 9;
     const nodePadding = 2;
     const collideStrength = 1.25;
     const xStrength = 0.1; // Weak horizontal centering
@@ -194,7 +193,7 @@
       if (count >= 10) return "#6f2009"; // Dark red for highly connected
       if (count >= 1)
         return "#a92d03"; // red-orange for moderately connected
-      else return "#d5c6b3"; //neutral for less connected
+      else return "#bf873f"; //neutral for less connected
     }
 
     const echartNodes = simulationData.map((node) => ({
@@ -303,17 +302,17 @@
           coordinateSystem: "cartesian2d",
           data: echartNodes,
 
-          links: links,
+           links: links.map(l => ({
+            ...l,
+            lineStyle: {
+              color: "#e0c467",
+              width: 2,
+              opacity: 0.6,
+              curveness: 0.1,
+            }
+          })),
           edgeSymbol: ["none", "arrow"],
           edgeSymbolSize: [0, 6],
-
-          lineStyle: {
-            color: "#7f8c8d",
-            width: 2,
-            opacity: 0.6,
-            curveness: 0.1, 
-          },
-
 
           emphasis: {
             focus: "adjacency",
