@@ -364,6 +364,16 @@ const usedBy = Object.values(passages).filter((item) =>
                 : "N/A"
             }
           </dd>
+           {
+              passage.explicit_contemp_ref
+                ?  
+                (<dt class="font-semibold text-brand-800 border-r border-neutral-300 p-2">
+                  Contemporary Reference:
+                </dt>
+                <dd class="pl-5 p-2">
+                {passage.explicit_contemp_ref}
+                </dd>) 
+                : "" }
           <dt
             class="font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
           >
