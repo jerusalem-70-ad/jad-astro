@@ -18,7 +18,8 @@ export function createNetworkData(passagesArray) {
     const work = passage.work?.[0] || {};
     const author = work.author?.[0]?.name || "Unknown Author";
     const workTitle = work.name || "Unknown Work";
-    const date = work.date?.[0]?.not_before || work.date?.[0]?.not_after || 0;
+    const dateNotBefore = work.date?.[0]?.not_before || 0;
+    const dateNotAfter = work.date?.[0]?.not_after || 0;
     const angle = (index * 2 * Math.PI) / passagesArray.length;
     const radius = 150;
 
@@ -28,8 +29,9 @@ export function createNetworkData(passagesArray) {
       passage: passage.passage,
       author: author,
       work: workTitle,
-      date: date,
-      century: getCenturyByDate(date),
+      dateNotBefore: dateNotBefore,
+      dateNotAfter: dateNotAfter,
+      century: getCenturyByDate(dateNotBefore),
       // Initial position in a circle
       x: Math.cos(angle) * radius + radius,
       y: Math.sin(angle) * radius + radius,
@@ -45,7 +47,7 @@ export function createNetworkData(passagesArray) {
           (p) =>
             p.id === source.id ||
             p.passage === source.value ||
-            p.jad_id === source.jad_id
+            p.jad_id === source.jad_id,
         );
 
         if (sourcePassage) {
@@ -97,7 +99,7 @@ export function createNetworkOption(networkData) {
         if (params.dataType === "node") {
           return `
             <strong>${params.data.name}</strong><br/>
-            Date: ${params.data.date}<br/>
+            Date: ${params.data.dateNotBefore} - ${params.data.dateNotAfter}<br/>
             <div style="max-width: 300px; word-wrap: break-word;">
               <em>"${params.data.passage}"</em>
             </div>
