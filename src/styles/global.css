@@ -54,8 +54,9 @@
 :root {
   --brand-600: #953c04;
 }
-
-/* css for tabulator.js */
+/******************************************/
+/********* css for TABULATOR.js ***********/
+/********************************************/
 .tabulator-responsive-collapse td {
   @apply break-words whitespace-normal max-w-full;
   @apply align-top;
@@ -107,8 +108,9 @@
     @apply font-semibold text-brand-800 bg-brand-50;
   }
 }
-
-/* Algolia */
+/*******************************************/
+/**************** Algolia ******************/
+/*******************************************/
 
 .ais-Panel-header {
   cursor: pointer;
@@ -205,4 +207,22 @@
 }
 .kwic {
   @apply font-bold text-brand-500;
+}
+
+/******************/
+/***** leaflet *******/
+/******************/
+
+/* Authors → red checkbox */
+.leaflet-control-layers
+  label:has(.layer-authors)
+  .leaflet-control-layers-selector {
+  accent-color: #b33a3a; /* red-600 */
+}
+
+/* Manuscripts → green checkbox */
+.leaflet-control-layers
+  label:has(.layer-manuscripts)
+  .leaflet-control-layers-selector {
+  accent-color: #407955; /* green-600 */
 }

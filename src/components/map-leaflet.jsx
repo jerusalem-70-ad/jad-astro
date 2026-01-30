@@ -9,7 +9,7 @@ import { withBasePath } from "@/lib/withBasePath";
 // Create custom icon
 const pinGreen = new URL(
   "@/icons/map-pin-green.png",
-  import.meta.url
+  import.meta.url,
 ).toString();
 const pinRed = new URL("@/icons/map-pin-red.png", import.meta.url).toString();
 const pin = new URL("@/icons/map-pin.png", import.meta.url).toString();
@@ -72,7 +72,7 @@ export default function LeafletMap({
         filteredIds.slice(0, 5),
         "... (total:",
         filteredIds.length,
-        ")"
+        ")",
       );
 
       // Filter the geoJsonData to only include features with matching jad_ids or dual ids
@@ -132,16 +132,16 @@ export default function LeafletMap({
 
     // DEBUG: Count features by type
     const authorCount = dataToShow.features.filter(
-      (f) => f.properties?.type === "author"
+      (f) => f.properties?.type === "author",
     ).length;
     const libraryCount = dataToShow.features.filter(
-      (f) => f.properties?.type === "library"
+      (f) => f.properties?.type === "library",
     ).length;
     console.log(
       "Features to plot - Authors:",
       authorCount,
       "Libraries:",
-      libraryCount
+      libraryCount,
     );
 
     // Add markers for filtered data
@@ -161,18 +161,18 @@ export default function LeafletMap({
           [geometry.coordinates[1], geometry.coordinates[0]],
           {
             icon: properties.type === "author" ? authorIcon : libraryIcon,
-          }
+          },
         );
         if (properties) {
           const url = withBasePath(properties.url || "");
           const popupContent = `
                         <div class="map-popup">
                             <h3><a href=${url} class="font-semibold text-base underline decoration-dotted underline-offset-2">${
-            properties.title || ""
-          } </a><br/></h3>
+                              properties.title || ""
+                            } </a><br/></h3>
                             <p>Place: ${properties.place || ""} (${
-            properties.description
-          }) <br/>														
+                              properties.description
+                            }) <br/>														
 							${properties.author ? `Author: ${properties.author} <br/>` : ""}	
                              ${
                                properties.work
@@ -226,7 +226,7 @@ export default function LeafletMap({
           attribution:
             '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
           maxZoom: 19,
-        }
+        },
       ).addTo(map);
 
       const authorLayer = L.markerClusterGroup({
@@ -277,10 +277,10 @@ export default function LeafletMap({
 
       // Check if there are features with defined types
       const hasAuthorType = geoJsonData.features.some(
-        (f) => f.properties?.type === "author"
+        (f) => f.properties?.type === "author",
       );
       const hasLibraryType = geoJsonData.features.some(
-        (f) => f.properties?.type === "library"
+        (f) => f.properties?.type === "library",
       );
 
       // Only add layer control if we have both types
@@ -289,10 +289,11 @@ export default function LeafletMap({
           .layers(
             {},
             {
-              Authors: authorLayer,
-              Manuscripts: libraryLayer,
+              '<span class="layer-authors">Authors</span>': authorLayer,
+              '<span class="layer-manuscripts">Manuscripts</span>':
+                libraryLayer,
             },
-            { collapsed: false }
+            { collapsed: false },
           )
           .addTo(map);
       }
