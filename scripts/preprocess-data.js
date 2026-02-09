@@ -573,6 +573,7 @@ const passagesPlusWorks = passagesPlus.map((p) => {
         date: w.date,
         edition: w.edition,
         link_digital_editions: w.link_digital_editions,
+        genre: w.genre,
       };
     });
   return {

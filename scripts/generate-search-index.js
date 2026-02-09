@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const loadJSON = (file) =>
   JSON.parse(
-    readFileSync(join(__dirname, "../src/content/data", file), "utf8")
+    readFileSync(join(__dirname, "../src/content/data", file), "utf8"),
   );
 
 const data = Object.values(loadJSON("passages.json"));
@@ -22,6 +22,7 @@ const normalizeText = (text) => {
     .replace(/ae/g, "e")
     .replace(/oe/g, "e")
     .replace(/j/g, "i")
+    .replace(/y/g, "i")
     .replace(/v/g, "u")
     .replace(/\u00A0/g, " ") // replace non-breaking space
     .replace(/\s+/g, " ") // collapse all whitespace
@@ -38,7 +39,7 @@ async function generate() {
     // Check if the collection exists
     const collections = await client.collections().retrieve();
     const collectionExists = collections.some(
-      (collection) => collection.name === collectionName
+      (collection) => collection.name === collectionName,
     );
 
     if (collectionExists) {
@@ -129,7 +130,7 @@ async function generate() {
         title: value.passage,
         full_text: `${value.passage} ${value.text_paragraph}`,
         search_text: `${normalizeText(value.passage ?? "")} ${normalizeText(
-          value.text_paragraph ?? ""
+          value.text_paragraph ?? "",
         )}`,
         manuscripts: value.mss_occurrences || [],
         work: value.work || [],

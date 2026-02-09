@@ -102,6 +102,7 @@ const centuryComparator = (a, b) => {
 // refinements list in panel function
 const refinementListAuthor = wrapInPanel("Autor");
 const refinementListWork = wrapInPanel("Work");
+const refinementListGenre = wrapInPanel("Genre");
 const refinementListManuscript = wrapInPanel("Manuscripts");
 const refinementListWorkCentury = wrapInPanel("Century of work");
 const refinementListliturgical = wrapInPanel("Liturgical references");
@@ -398,6 +399,16 @@ search.addWidgets([
     showMoreLimit: 50,
     limit: 10,
     searchablePlaceholder: "e.g. Epistolae",
+  }),
+
+  refinementListGenre({
+    container: "#refinement-list-genre",
+    attribute: "work.genre",
+    searchable: true,
+    showMore: true,
+    showMoreLimit: 50,
+    limit: 10,
+    searchablePlaceholder: "e.g. Sermon",
   }),
 
   refinementListWorkCentury({

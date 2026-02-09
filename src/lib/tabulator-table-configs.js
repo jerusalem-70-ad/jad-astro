@@ -1,7 +1,5 @@
 // Configuration for Tabulator tables for passages
 
-import { max } from "d3-array";
-
 export const passagesTableConfig = {
   transformData: (passages) => {
     return passages.map((passage) => {

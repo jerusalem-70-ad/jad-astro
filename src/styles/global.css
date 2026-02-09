@@ -187,10 +187,15 @@
   @apply text-brand-50 hover:font-bold;
 }
 
+.ais-Panel-body .ais-RefinementList-showMore {
+  @apply mb-2;
+  @apply focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-brand-300;
+}
+
 .ais-RefinementList .ais-SearchBox-input,
 .ais-HierarchicalMenu .ais-SearchBox-input {
   @apply w-full px-3 py-2 border border-gray-300 rounded-md text-sm;
-  @apply focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-transparent;
+  @apply focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-brand-300;
 }
 
 /* 1. Remove Algolia’s default arrow (they use borders) */
