@@ -1,0 +1,118 @@
+
+<div class="m-1 w-full">
+  <div
+    id="genre-piechart"
+    class="w-full"
+    style={`height: 900px; width: 100%;`}
+  >
+  </div>
+</div>
+
+<script>
+  import * as echarts from "echarts";
+  import { withBasePath } from "../lib/withBasePath";
+  import passages from "@/content/data/passages.json";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const chartElement = document.getElementById("genre-piechart");
+    if (!chartElement) {
+      console.log("No container for graph found");
+      return;
+    }
+
+    // Prepare graphData from passages.json
+   
+const genreCounts = new Map();
+
+passages.forEach((passage) => {
+  const genre = passage.work?.[0]?.genre;
+  if (!genre) return;
+
+  genreCounts.set(genre, (genreCounts.get(genre) || 0) + 1);
+});
+
+const pieData = Array.from(genreCounts, ([name, value]) => ({ name, value }));
+
+
+    const config = {
+      showLegend: true,
+      enableZoom: true,
+      enableNavigation: true,
+    };
+
+   
+   
+
+        const option = {
+        tooltip: {
+            trigger: "item",
+            textStyle: { fontSize: 12 },
+            formatter: function (params: any) {
+            return `<strong>${params.data.name}</strong><br/>
+                    <span>Count: ${params.data.value}</span>`;
+            },
+        },
+
+      legend: {
+  orient: "vertical",
+  left: 10,
+  top: 20,
+  bottom: 20,
+  formatter: function (name) {
+    // find the corresponding value in pieData
+    const item = pieData.find(d => d.name === name);
+    return item ? `${name} (${item.value})` : name;
+  }
+},
+    
+        series: [
+            {
+            type: "pie",
+            radius: "50%",
+            data: pieData,
+            emphasis: {
+                itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: "rgba(0, 0, 0, 0.5)",
+                },
+            },
+            },
+        ],
+    
+        animation: false,
+    
+        toolbox: {
+            show: true,
+            orient: "vertical",
+            right: 20,
+            top: 20,
+            itemSize: 20,
+            itemGap: 20,
+            feature: {
+            saveAsImage: {
+                show: true,
+                title: "Download as PNG",
+                type: "png",
+                pixelRatio: 2,
+                backgroundColor: "#fff",
+            },
+            },
+        },
+        };
+
+    const chart = echarts.init(chartElement);
+    chart.setOption(option);
+
+    window.addEventListener("resize", () => chart.resize());
+
+    // Add click handler for nodes
+    chart.on("click", function (params: any) {
+      if (params.data) {
+        window.location.href = withBasePath(
+          `/passages/jad_occurrence__${params.data.id}`
+        );
+      }
+    });
+  });
+</script>
