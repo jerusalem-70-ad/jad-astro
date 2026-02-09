@@ -1,5 +1,7 @@
 // Configuration for Tabulator tables for passages
 
+import { max } from "d3-array";
+
 export const passagesTableConfig = {
   transformData: (passages) => {
     return passages.map((passage) => {
@@ -453,16 +455,15 @@ export const biblrefsTableConfig = {
         ).values(),
       ];
       const worksList =
-        works.length === 0
-          ? "N/A"
-          : works
+        works.length > 0
+          ? `<ul>${works
               .map(
                 (w) =>
-                  `${w.author?.[0]?.name ? w.author[0].name + ": " : ""}${
-                    w.title
-                  }`,
+                  `<li>${w.author?.[0]?.name ? w.author[0].name + ": " : ""}${w.title}</li>`,
               )
-              .join("\n");
+              .join("")}</ul>`
+          : "";
+
       const book = ref.name?.includes(".")
         ? ref.name?.split(".")?.[0] || ""
         : ref.name?.split(" ")?.[0] || "";
@@ -520,10 +521,11 @@ export const biblrefsTableConfig = {
       {
         title: "Works",
         field: "works",
-        minWidth: 150,
-        widthGrow: 3,
         responsive: 2,
-        formatter: "textarea",
+        widthGrow: 3,
+        formatter: "html",
+        cssClass: "scroll-cell",
+        minWidth: 200,
       },
 
       {

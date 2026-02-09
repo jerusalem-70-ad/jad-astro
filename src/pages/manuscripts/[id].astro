@@ -20,23 +20,7 @@ export async function getStaticPaths() {
 
 const { data: manuscript } = Astro.props;
 
-// get related passages to each manuscript
 
- /*  const related_passages = passages
-    .filter((passage) =>
-      passage.mss_occurrences.some(
-        (m) => m.manuscript_jad_id === manuscript.jad_id,
-      ),
-    )
-    .map((passage) => ({
-      id: passage.id,
-      jad_id: passage.jad_id,
-      passage: passage.passage,
-      work: passage.work[0]?.title,
-      author: passage.work[0].author[0]?.name,
-      place: passage.position_in_work,
-      author_certainty: passage.work[0].author_certainty,
-    })); */
 ---
 
 <PageLayout title=`${manuscript.name[0].value}`>
@@ -62,7 +46,7 @@ const { data: manuscript } = Astro.props;
           manuscript.catalog_url && (
             <div class="flex">
               <NavLink target="_blank"
-                href={manuscript.digi_url}
+                href={manuscript.catalog_url}
                 class="bg-brand-500 font-semibold text-brand-50 inline-flex hover:bg-brand-600 px-4 py-2 rounded-md mb-4"
               >
                 <span>Catalog entry</span>
