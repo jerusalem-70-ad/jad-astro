@@ -61,7 +61,7 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
       .filter((node) => node.depth === 0) // A. Marx want only immediate nodes
       .map((node: any) => ({
         ...node,
-        value: [node.x, Number(node.date) || 0],
+        value: [node.x, Number(node.dateNotBefore) || 0],
         symbolSize: node.nodeType === "current" ? 30 : 18,
         itemStyle: {
           color:
