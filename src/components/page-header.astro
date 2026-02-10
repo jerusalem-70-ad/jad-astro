@@ -2,6 +2,7 @@
 import NavLink from "./nav-link.astro";
 import logo from "../../public/assets/images/logo.svg";
 import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 ---
 
 <header class="sticky top-0 bg-brand-800 min-w-full z-50">
@@ -49,38 +50,61 @@ import { Image } from "astro:assets";
     <nav
       class="hidden lg:flex items-center gap-x-2 text-brand-50 text-lg font-semibold"
     >
-      <NavLink
+    <ul class="flex items-start gap-x-8">
+     <li> <NavLink
         class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/passages">Passages</NavLink
-      >
-      <NavLink
+        href="/passages">Passages</NavLink>
+      </li>
+     <li> <NavLink
         class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/works">Works</NavLink
-      >
-      <NavLink
+        href="/works">Works</NavLink>
+      </li>
+     <li> <NavLink
         class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/manuscripts">Manuscripts</NavLink
-      >
-      <NavLink
+        href="/manuscripts">Manuscripts</NavLink>
+      </li>
+     <li> <NavLink
         class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/authors">Authors</NavLink
-      >
-      <NavLink
+        href="/authors">Authors</NavLink>
+      </li>
+     <li> <NavLink
         class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/biblical-refs">Biblical References</NavLink
-      >
-      <NavLink
+        href="/biblical-refs">Biblical References</NavLink>
+      </li>
+     <li> <NavLink
         class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/keywords">Keywords</NavLink
-      >
-      <NavLink
-        class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/about">About</NavLink
-      >
-      <NavLink
-        class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/advanced-search">Advanced Search</NavLink
-      >
+        href="/keywords">Keywords</NavLink>
+      </li>
+     
+       
+      <li class="relative group">
+        <button class="flex gap-0.5 items-center" aria-haspopup="true"
+          aria-expanded="false">Project  
+          <Icon aria-hidden="true" class="size-4.5 transition-transform group-hover:rotate-180" name="lucide:chevron-down" />
+        </button>
+ 
+        <div class="absolute left-0 top-full hidden w-48 bg-brand-800 rounded-md p-3 group-hover:grid">
+          <NavLink
+          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+          href="/explore">Patterns</NavLink
+        >
+        <NavLink
+          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+          href="/about">About the project</NavLink
+        >
+        <NavLink
+          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+          href="/passages-network-2">Chronological Timeline</NavLink
+        >
+        </div>
+      </li>
+      
+      <li>
+        <NavLink
+          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+          href="/advanced-search">Advanced Search</NavLink>
+      </li>
+    </ul>
     </nav>
   </div>
   <div id="nav-links" class="hidden rounded-xs grid grid-cols-1 p-5">
@@ -109,6 +133,9 @@ import { Image } from "astro:assets";
     >
     <NavLink class="py-1 px-3 hover:text-brand-200 text-brand-50" href="/about"
       >About</NavLink
+    >
+    <NavLink class="py-1 px-3 hover:text-brand-200 text-brand-50" href="/explore"
+      >Patterns</NavLink
     >
     <NavLink
       class="py-1 px-3 hover:text-brand-200 text-brand-50"

@@ -1,11 +1,31 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 100 100"
+  width="100"
+  height="100"
+>
+  <!-- Background -->
+  <rect
+    x="5"
+    y="5"
+    width="90"
+    height="90"
+    rx="18"
+    ry="18"
+    fill="#581908"
+  />
 
-<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="256" cy="256" r="256" fill="#581908" />
-
-  <!-- Tall, centered J -->
-  <text x="130" y="435"
-        font-family="Georgia, serif"
-        font-size="480"
-        fill="#FAF4EF"
-        font-weight="normal">J</text> 
+  <!-- Letter J -->
+  <text
+    x="50"
+    y="60"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    font-family="Times New Roman, Times, serif"
+    font-size="90"
+    font-weight="600"
+    fill="#faf7f3"
+  >
+    J
+  </text>
 </svg>
