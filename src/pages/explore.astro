@@ -2,20 +2,24 @@
 import PageLayout from "@/layouts/page-layout.astro";
 import NavLink from "@/components/nav-link.astro";
 import GenrePieChart from "@/components/genre-piechart.astro";
+import GenreWorkPiechart from "@/components/genre-work-piechart.astro";
+import BiblGraph from "@/components/bibl-ref-graph.astro"
 import ChronologicalGraph from "@/components/network-all.astro";
 import PassageNetwork from "@/components/chronological-tree-all-passages.astro";
 ---
 
 <PageLayout title="Patterns">
   <div class="m-auto w-full lg:px-16 py-8">
-    <div class="lg:max-w-4/5 px-3 lg:px-0 m-auto">
-      <h1 class="text-4xl font-semibold text-brand-800 py-8">
+    <div class="lg:max-w-4/5 px-3 lg:px-0 m-auto grid gap-5 md:py-8 py-2">
+      <h1 class="text-4xl font-semibold text-brand-800">
         Explore patterns in the data
       </h1>
       <p class="max-w-full prose">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta maximus nunc, id vestibulum odio. Phasellus pharetra tortor ut dolor finibus condimentum nec mattis diam. Suspendisse lacus lorem, porttitor id commodo id, fermentum sit amet tortor. In quis imperdiet justo, nec dictum massa. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus efficitur at tortor eu imperdiet. Donec aliquam iaculis tortor, in sagittis ante pellentesque gravida. </p>
-      <h1 class="text-2xl font-semibold text-brand-800 py-8">Visualisations</h1>
+      <h1 class="text-2xl font-semibold text-brand-800">Visualisations</h1>
+      <GenreWorkPiechart/>
       <GenrePieChart />
+      <!-- <BiblGraph/> -->
       <!-- <ChronologicalGraph />
       <PassageNetwork /> -->
       <NavLink

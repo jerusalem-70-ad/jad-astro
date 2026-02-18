@@ -1,18 +1,16 @@
 
 <div class="lg:grid grid-cols-[1fr_4fr] gap-3 lg:p-10 p-3 border rounded-lg bg-brand-50 shadow-2xl">
   <div class="text-brand-700 prose">
-    <h2 class="text-2xl font-semibold mb-4 text-brand-950">Genre Distribution accross Passages</h2>
-    <p>This pie chart visualizes the distribution of genres across all recorded passages 
-        in the database. Each passage is linked to a specific work, and every work is assigned 
-        to a genre, allowing the chart to aggregate passages by their generic classification. 
-        The relative size of each segment reflects the number of passages associated with 
+    <h2 class="text-2xl font-semibold mb-4 text-brand-950">Genre Distribution accross Works</h2>
+    <p>This pie chart visualizes the distribution of genres across works. 
+        The relative size of each segment reflects the number of works associated with 
         that genre. </p>
     <p>Selecting a segment in the pie chart acts as an interactive filter: 
         clicking on a genre takes you directly to the advanced search results, where all 
         passages belonging to the chosen genre are displayed.</p>
   </div>
     <div
-        id="genre-piechart"
+        id="genre-work-piechart"
         class="w-full"
         style={`height: 900px; width: 100%;`}
     >
@@ -22,10 +20,10 @@
 <script>
   import * as echarts from "echarts";
   import { withBasePath } from "../lib/withBasePath";
-  import passages from "@/content/data/passages.json";
+  import works from "@/content/data/works.json";
 
   document.addEventListener("DOMContentLoaded", () => {
-    const chartElement = document.getElementById("genre-piechart");
+    const chartElement = document.getElementById("genre-work-piechart");
     if (!chartElement) {
       console.log("No container for graph found");
       return;
@@ -35,8 +33,8 @@
    
 const genreCounts = new Map();
 
-passages.forEach((passage) => {
-  const genre = passage.work?.[0]?.genre;
+works.forEach((work) => {
+  const genre = work.genre;
   if (!genre) return;
 
   genreCounts.set(genre, (genreCounts.get(genre) || 0) + 1);
@@ -45,7 +43,7 @@ passages.forEach((passage) => {
     const pieData = Array.from(genreCounts, ([name, value]) => ({ name, value })).sort((a, b) => a.name.localeCompare(b.name));
     const option = {
         title: {
-            text: "Genre Distribution accross Passages",
+            text: "Genre Distribution accross Works",
             left: "center",
             top: 20,
             textStyle: {
@@ -60,7 +58,7 @@ passages.forEach((passage) => {
             textStyle: { fontSize: 12 },
             formatter: function (params: any) {
             return `<strong>${params.data.name}</strong><br/>
-                    <span>Passages: ${params.data.value}</span>`;
+                    <span>Works: ${params.data.value}</span>`;
             },
         },
 
