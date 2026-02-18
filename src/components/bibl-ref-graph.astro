@@ -1,0 +1,142 @@
+
+<div class="lg:grid grid-cols-[1fr_4fr] gap-3 lg:p-10 p-3 border rounded-lg bg-brand-50 shadow-2xl">
+  <div class="text-brand-700 prose">
+    <h2 class="text-2xl font-semibold mb-4 text-brand-950">Biblical References Network</h2>
+    <p>Lorem ipsum dolor sit amet ...</p>
+  </div>
+    <div
+        id="bibl-graph"
+        class="w-full"
+        style={`height: 900px; width: 100%;`}
+    >
+  </div>
+</div>
+
+<script>
+  import * as echarts from "echarts";
+  import { withBasePath } from "../lib/withBasePath";
+  import passages from "@/content/data/passages.json";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const chartElement = document.getElementById("genre-piechart");
+    if (!chartElement) {
+      console.log("No container for graph found");
+      return;
+    }
+
+    // Prepare chartdata from passages.json
+   
+const genreCounts = new Map();
+
+passages.forEach((passage) => {
+  const genre = passage.work?.[0]?.genre;
+  if (!genre) return;
+
+  genreCounts.set(genre, (genreCounts.get(genre) || 0) + 1);
+});
+
+    const pieData = Array.from(genreCounts, ([name, value]) => ({ name, value })).sort((a, b) => a.name.localeCompare(b.name));
+    const option = {
+        title: {
+            text: "Genre Distribution",
+            left: "center",
+            top: 20,
+            textStyle: {
+                fontSize: 24,
+                fontWeight: "bold",
+                color: "#333",
+            },
+        },
+        
+        tooltip: {
+            trigger: "item",
+            textStyle: { fontSize: 12 },
+            formatter: function (params: any) {
+            return `<strong>${params.data.name}</strong><br/>
+                    <span>Count: ${params.data.value}</span>`;
+            },
+        },
+
+        legend: {
+            orient: "vertical",
+            //type: "scroll",
+            right: 10,
+            top: "center",
+            formatter: function (name : string) {
+                // find the corresponding value in pieData
+                const item = pieData.find(d => d.name === name);
+                return item ? `${name} (${item.value})` : name;
+            }
+        },
+    
+        series: [
+            {
+            type: "pie",
+            radius: "60%",
+            data: pieData,
+            emphasis: {
+                itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: "rgba(0, 0, 0, 0.5)",
+                },
+            },
+            },
+        ],
+// Responsive settings for smaller screens
+         media: [
+            {
+            query: {
+                maxWidth: 600, 
+            },
+            option: {
+                legend: {
+                    orient: "horizontal",
+                    left: "center",
+                    top: "bottom",
+                },
+                series: [
+                    {
+                        radius: "50%",
+                    }
+                ]
+            }
+            }
+        ],
+            
+        animation: false,
+    
+        toolbox: {
+            show: true,
+            orient: "vertical",
+            right: 30,
+            top: 20,
+            itemSize: 20,
+            itemGap: 20,
+            feature: {
+            saveAsImage: {
+                show: true,
+                title: "Download as PNG",
+                type: "png",
+                pixelRatio: 2,
+                backgroundColor: "#fff",
+            },
+            },
+        },
+        };
+
+    const chart = echarts.init(chartElement);
+    chart.setOption(option);
+
+    window.addEventListener("resize", () => chart.resize());
+
+    // Add click handler to link to search results for the genre
+    chart.on("click", function (params: any) {
+      if (params.data) {
+        window.location.href = withBasePath(
+          `/advanced-search?JAD-temp[refinementList][work.genre][0]=${params.data.name}`
+        );
+      }
+    });
+  });
+</script>
