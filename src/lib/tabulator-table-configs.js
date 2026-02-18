@@ -454,10 +454,17 @@ export const biblrefsTableConfig = {
       ];
       const worksList =
         works.length > 0
-          ? `<ul>${works
+          ? `<ul>${[...works]
+              .sort((a, b) => {
+                const authorA = a.author?.[0]?.name || "";
+                const authorB = b.author?.[0]?.name || "";
+                return authorA.localeCompare(authorB);
+              })
               .map(
                 (w) =>
-                  `<li>${w.author?.[0]?.name ? w.author[0].name + ": " : ""}${w.title}</li>`,
+                  `<li>${
+                    w.author?.[0]?.name ? w.author[0].name + ": " : ""
+                  }${w.title}</li>`,
               )
               .join("")}</ul>`
           : "";
