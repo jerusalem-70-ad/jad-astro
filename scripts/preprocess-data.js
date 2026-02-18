@@ -650,6 +650,7 @@ const biblicalRefWithPassages = Object.values(biblicalRef)
           id: w.id,
           jad_id: w.jad_id,
           title: w.title,
+          genre: w.genre,
           author: w.author.map((a) => ({
             jad_id: a.jad_id,
             name: a.name,
