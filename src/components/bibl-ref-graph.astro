@@ -1,13 +1,12 @@
 
-<div class="lg:grid grid-cols-[1fr_4fr] gap-3 lg:p-10 p-3 border rounded-lg bg-brand-50 shadow-2xl">
+<div class="lgrid gap-3 lg:p-10 p-3 border rounded-lg bg-brand-50 shadow-2xl">
   <div class="text-brand-700 prose">
     <h2 class="text-2xl font-semibold mb-4 text-brand-950">Biblical References Network</h2>
     <p>Lorem ipsum dolor sit amet ...</p>
   </div>
     <div
         id="bibl-graph"
-        class="w-full"
-        style={`height: 900px; width: 100%;`}
+        class="w-full h-svh"
     >
   </div>
 </div>
@@ -69,14 +68,62 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+const width = chart.getWidth();
+const height = chart.getHeight();
+
+const centerX = width / 2;
+const centerY = height / 2;
+const radius = Math.min(width, height) * 0.42;
+
+const refNodes = [];
+const workNodes = [];
+
+for (const node of nodes.values()) {
+  if (node.category === "Biblical reference") {
+    refNodes.push(node);
+  } else {
+    workNodes.push(node);
+  }
+}
+
+// --- REFERENCES ON OUTER RING ---
+refNodes.forEach((node, i) => {
+  const angle = (2 * Math.PI * i) / refNodes.length;
+
+  node.x = centerX + radius * Math.cos(angle);
+  node.y = centerY + radius * Math.sin(angle);
+  node.symbolSize = 14;
+  node.label = { show: false };
+});
+
+// --- WORKS INSIDE CIRCLE ---
+workNodes.forEach(node => {
+  const r = radius * 0.85 * Math.sqrt(Math.random());
+  const theta = Math.random() * 2 * Math.PI;
+
+  node.x = centerX + r * Math.cos(theta);
+  node.y = centerY + r * Math.sin(theta);
+  node.symbolSize = 8;
+  node.label = { show: false };
+});
+
+
   // -------------------------
   // PREPARE CATEGORIES using genres
   // -------------------------
-
-  const categories = [
-    { name: "Biblical reference" },
-    ...Array.from(genres).map(g => ({ name: g }))
-  ];
+const genreArray = Array.from(genres);
+ const categories = [
+  {
+    name: "Biblical reference",
+    itemStyle: { color: "#333333" } // fixed color
+  },
+  ...genreArray.map((genre, index) => ({
+    name: genre,
+    itemStyle: {
+      color: generateColor(index, genreArray.length)
+    }
+  }))
+];
 
   chart.hideLoading();
 
@@ -85,54 +132,102 @@ document.addEventListener("DOMContentLoaded", () => {
   // -------------------------
 
   const option = {
-    title: {
-      text: "Biblical References Network",
-      left: "center"
+  backgroundColor: "#f5f3f0",
+
+  tooltip: {
+    trigger: "item"
+  },
+
+  legend: {
+    type: "scroll",
+    bottom: 10,
+    data: categories.map(c => c.name)
+  },
+
+  series: [{
+    type: "graph",
+    layout: "none",
+
+    roam: true,
+    draggable: false,
+
+    data: [...refNodes, ...workNodes],
+    links: links,
+    categories: categories,
+
+    edgeSymbol: ["none", "none"],
+
+    lineStyle: {
+      color: "#999",
+      width: 0.8,
+      opacity: 0.25,
+      curveness: 0.15
     },
-     tooltip: {
-            trigger: "item",
-            textStyle: { fontSize: 12 ,
-                fontWeight: 'bold'
-            },
-            
-            formatter: function (params: any) {
-                return params.data.name;
-                },
-        },
-    legend: [
-      {
-        data: categories.map(c => c.name)
+
+    emphasis: {
+      focus: "adjacency",
+      scale: true,
+      lineStyle: {
+        opacity: 0.8,
+        width: 1.5
+      },
+      label: {
+        show: true
       }
-    ],
-    series: [
-      {
-        type: "graph",
-        layout: "force",
-        roam: true,
-        force: {
-          repulsion: 200,
-          edgeLength: 120
-        },
-        data: Array.from(nodes.values()),
-        links: links,
-        categories: categories,
-        label: {
-          show: true,
-          position: "right"
-        },
-        lineStyle: {
-          width: 1,
-          curveness: 0.2
-        },
-        emphasis: {
-          focus: "adjacency"
-        }
-      }
-    ]
-  };
+    },
+
+    label: {
+      show: false,
+      position: "right",
+      fontSize: 11
+    }
+  }]
+};
+
+chart.setOption(option);
+
+  chart.on("mouseover", function (params) {
+  if (params.dataType !== "node") return;
+
+  const option = chart.getOption() as any;
+  const nodes = option.series[0].data;
+  const links = option.series[0].links;
+
+  const nodeId = typeof params.data === "string" ? params.data : (params.data as any).id;
+  const connected = new Set();
+  connected.add(nodeId);
+
+  links.forEach((link: any) => {
+    if (link.source === nodeId) connected.add(link.target);
+    if (link.target === nodeId) connected.add(link.source);
+  });
+
+  nodes.forEach((node : any) => {
+    node.label = {
+      show: connected.has(node.id)
+    };
+  });
 
   chart.setOption(option);
+});
+
+chart.on("mouseout", function () {
+  const option = chart.getOption() as any;
+  const nodes = option.series[0].data;
+
+  nodes.forEach((node: any) => {
+    node.label = { show: false };
+  });
+
+  chart.setOption(option);
+});
 
   window.addEventListener("resize", () => chart.resize());
 });
+
+function generateColor(index : number, total: number) {
+  const hue = Math.round((360 / total) * index);
+  return `hsl(${hue}, 55%, 60%)`;
+}
+
 </script>
