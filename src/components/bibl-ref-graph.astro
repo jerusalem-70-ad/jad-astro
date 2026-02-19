@@ -14,6 +14,7 @@
 <script>
   import * as echarts from "echarts";
   import { withBasePath } from "../lib/withBasePath";
+  import { generateBiblicalSortKey, extractBookAbbreviation } from "scripts/sort-bibl-ref.js";
   import biblref from "@/content/data/biblical_references.json";
 
 
@@ -24,22 +25,36 @@ document.addEventListener("DOMContentLoaded", () => {
   const chart = echarts.init(chartElement);
   chart.showLoading();
 
+  
+
   const worksMap = new Map();
   const nodes = new Map();
   const links: any[] = [];
+  // collect genres when looping over works, for legend and colors
   const genres = new Set<string>();
+// to collect book of the bible for assigning them color later
+    const uniqueBooks: any[] = [];
+   
 
   // -------------------------
   // BUILD DATA
   // -------------------------
 
   for (const ref of biblref) {
+    const sort_id = generateBiblicalSortKey(ref.name)
+    const book = extractBookAbbreviation(ref.name)
+     if (!uniqueBooks.includes(book)) {
+    uniqueBooks.push(book);
+  }
     nodes.set(ref.jad_id, {
       id: ref.jad_id,
+      sort_id: sort_id,
       name: ref.name,
-      category: "Biblical reference",
+      book: book,
+      type: 'ref',
       symbolSize: 40,
-      value: ref.name
+      value: ref.name,
+      category: "Biblical reference",
     });
 
     for (const passage of ref.related_passages ?? []) {
@@ -56,18 +71,36 @@ document.addEventListener("DOMContentLoaded", () => {
             name: `${work.author[0].name}: ${work.title}`,
             category: genre,
             symbolSize: 20,
-            value: work.title
+            value: work.title,
+            type: 'work',
           });
         }
 
         links.push({
           source: ref.jad_id,
-          target: work.jad_id
+          target: work.jad_id,
+          name: `${ref.name} -> ${work.author[0].name}: ${work.title}`
         });
       }
     }
   }
-
+  const refNodes = [];
+  const workNodes = [];
+  for (const node of nodes.values()) {
+    if (node.type === "ref") {
+      refNodes.push(node);
+    } else {
+      workNodes.push(node);
+    }
+  }
+// custom coloring for single bible books
+const bookColorMap = new Map();
+uniqueBooks.forEach((book, index) => {
+  const lightness = 15 + Math.round((45 / uniqueBooks.length) * index); // range 35–65%
+  bookColorMap.set(book, `hsl(13, 83.3%, ${lightness}%)`); // cool grey-blue
+});
+      
+// postitioning. make a circle
 const width = chart.getWidth();
 const height = chart.getHeight();
 
@@ -75,28 +108,26 @@ const centerX = width / 2;
 const centerY = height / 2;
 const radius = Math.min(width, height) * 0.42;
 
-const refNodes = [];
-const workNodes = [];
 
-for (const node of nodes.values()) {
-  if (node.category === "Biblical reference") {
-    refNodes.push(node);
-  } else {
-    workNodes.push(node);
-  }
-}
 
-// --- REFERENCES ON OUTER RING ---
-refNodes.forEach((node, i) => {
+//  position the ref nodes on the perifery
+refNodes
+.sort(function(a,b,) {
+    return parseFloat(a.sort_id) - parseFloat(b.sort_id)
+})
+.forEach((node, i) => {
   const angle = (2 * Math.PI * i) / refNodes.length;
 
   node.x = centerX + radius * Math.cos(angle);
   node.y = centerY + radius * Math.sin(angle);
   node.symbolSize = 14;
   node.label = { show: false };
+  node.itemStyle = {
+  color: bookColorMap.get(node.book)
+};
 });
 
-// --- WORKS INSIDE CIRCLE ---
+// position works inside the circle spread ---
 workNodes.forEach(node => {
   const r = radius * 0.85 * Math.sqrt(Math.random());
   const theta = Math.random() * 2 * Math.PI;
@@ -108,40 +139,66 @@ workNodes.forEach(node => {
 });
 
 
-  // -------------------------
-  // PREPARE CATEGORIES using genres
-  // -------------------------
+  
+  //  genres categories for legend
+  
 const genreArray = Array.from(genres);
  const categories = [
-  {
-    name: "Biblical reference",
-    itemStyle: { color: "#333333" } // fixed color
-  },
-  ...genreArray.map((genre, index) => ({
+  { name: "Biblical reference" },
+ ...genreArray.map((genre, index) => ({
     name: genre,
     itemStyle: {
       color: generateColor(index, genreArray.length)
     }
   }))
 ];
+const categoryIndexMap = new Map();
+categories.forEach((c, i) => {
+  categoryIndexMap.set(c.name, i);
+});
+
+
+
+for (const node of nodes.values()) {
+  const idx = categoryIndexMap.get(node.category);
+  if (idx === undefined) {
+    console.log("Missing category for:", node.name);
+  } else {
+    node.category = idx;
+  }
+}
 
   chart.hideLoading();
 
-  // -------------------------
-  // OPTION
-  // -------------------------
+  // set the echart options
 
   const option = {
+    title: {
+      text: "Biblical References and Works",
+            left: "center",
+            top: 20,
+            textStyle: {
+                fontSize: 24,
+                fontWeight: "bold",
+                color: "#333",
+            }, 
+    },
+    tooltip: {
+      trigger: "item",
+            textStyle: { fontSize: 12 },
+            formatter: function (params: any) {
+            return `<strong>${params.data.name}</strong><br/>
+                    `;
+            },
+    },
   backgroundColor: "#f5f3f0",
-
-  tooltip: {
-    trigger: "item"
-  },
+  
 
   legend: {
-    type: "scroll",
+    
     bottom: 10,
-    data: categories.map(c => c.name)
+     data: genreArray,
+    selectedMode: 'multiple'
   },
 
   series: [{
@@ -175,22 +232,41 @@ const genreArray = Array.from(genres);
         show: true
       }
     },
-
     label: {
       show: false,
       position: "right",
       fontSize: 11
-    }
-  }]
+    },
+    
+  }],
+    toolbox: {
+            show: true,
+            orient: "vertical",
+            right: 30,
+            top: 20,
+            itemSize: 20,
+            itemGap: 20,
+            feature: {
+            saveAsImage: {
+                show: true,
+                title: "Download as PNG",
+                type: "png",
+                pixelRatio: 2,
+                backgroundColor: "#fff",
+            },
+            },
+        },
 };
 
 chart.setOption(option);
 
-  chart.on("mouseover", function (params) {
+// custom event listener for hover
+
+chart.on("mouseover", function (params) {
   if (params.dataType !== "node") return;
 
   const option = chart.getOption() as any;
-  const nodes = option.series[0].data;
+  const nodes = (option.series as any)[0].data;
   const links = option.series[0].links;
 
   const nodeId = typeof params.data === "string" ? params.data : (params.data as any).id;
@@ -213,7 +289,7 @@ chart.setOption(option);
 
 chart.on("mouseout", function () {
   const option = chart.getOption() as any;
-  const nodes = option.series[0].data;
+  const nodes = (option.series as any)[0].data;
 
   nodes.forEach((node: any) => {
     node.label = { show: false };
@@ -222,12 +298,70 @@ chart.on("mouseout", function () {
   chart.setOption(option);
 });
 
+// control legend behavior, on click
+let activeCategory: any = null; // track which category is highlighted
+
+chart.on("legendselectchanged", function (params: any) {
+  const clickedCategory = params.name;
+
+  // Re-select the legend item so ECharts doesn't hide the nodes
+  chart.dispatchAction({
+    type: "legendSelect",
+    name: clickedCategory
+  });
+
+  // Toggle: clicking the same category again clears the highlight
+  if (activeCategory === clickedCategory) {
+    activeCategory = null;
+  } else {
+    activeCategory = clickedCategory;
+  }
+
+  setTimeout(() => {
+    const option: any = chart.getOption();
+    const nodes = option.series[0].data;
+
+    nodes.forEach((node: any) => {
+      const categoryName = categories[node.category]?.name;
+
+      if (activeCategory === null) {
+        // Nothing selected — hide all labels
+        node.label = { show: false };
+         node.itemStyle = { opacity: 1 };
+      } else {
+        // Show labels only for nodes in the active category
+        node.label = { show: categoryName === activeCategory };
+      }
+    });
+
+    chart.setOption(option);
+  }, 0);
+});
+
+
   window.addEventListener("resize", () => chart.resize());
+
+  // Add click handler to link to search results for the genre
+    chart.on("click", function (params: any) {
+      if (params.data.type === 'ref') {
+        window.location.href = withBasePath(
+          `/biblical-refs/${params.data.id}`
+        );
+      }
+      if (params.data.type === 'work'){
+        window.location.href = withBasePath(
+          `/works/${params.data.id}`
+        );
+      }
+    });
 });
 
 function generateColor(index : number, total: number) {
   const hue = Math.round((360 / total) * index);
-  return `hsl(${hue}, 55%, 60%)`;
+  return `hsl(${hue}, 55%, 40%)`;
 }
+
+
+
 
 </script>

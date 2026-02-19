@@ -264,7 +264,7 @@ export function calculateSortPosition(positionInWork) {
 
 // Extracts the book abbreviation from a biblical reference
 
-function extractBookAbbreviation(referenceValue) {
+export function extractBookAbbreviation(referenceValue) {
   if (referenceValue) {
     const cleanRef = referenceValue.trim();
 
@@ -317,7 +317,7 @@ export function generateBiblicalSortKey(referenceValue) {
 
   if (bookOrder === undefined) {
     console.warn(
-      `Unknown book abbreviation: ${bookAbbrev} in reference: ${referenceValue}`
+      `Unknown book abbreviation: ${bookAbbrev} in reference: ${referenceValue}`,
     );
     return 999999999; // Put unknown references at the end
   }
