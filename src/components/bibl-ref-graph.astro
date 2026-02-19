@@ -2,7 +2,7 @@
 <div class="lgrid gap-3 lg:p-10 p-3 border rounded-lg bg-brand-50 shadow-2xl">
   <div class="text-brand-700 prose">
     <h2 class="text-2xl font-semibold mb-4 text-brand-950">Biblical References Network</h2>
-    <p>Lorem ipsum dolor sit amet ...</p>
+    <p>This network visualises the connections between Biblical references — arranged in canonical order along the outer perimeter — and the medieval works — positioned inside the circle — in which these passages are cited. Works are classified by literary genre; clicking a genre in the legend highlights the corresponding nodes. Selecting a node navigates to the detail page of the respective work or Biblical passage.</p>
   </div>
     <div
         id="bibl-graph"
@@ -141,7 +141,6 @@ workNodes.forEach(node => {
 
   
   //  genres categories for legend
-  
 const genreArray = Array.from(genres);
  const categories = [
   { name: "Biblical reference" },
@@ -198,7 +197,8 @@ for (const node of nodes.values()) {
     
     bottom: 10,
      data: genreArray,
-    selectedMode: 'multiple'
+    selectedMode: 'multiple',
+    hoverLink: false
   },
 
   series: [{
@@ -219,19 +219,7 @@ for (const node of nodes.values()) {
       width: 0.8,
       opacity: 0.25,
       curveness: 0.15
-    },
-
-    emphasis: {
-      focus: "adjacency",
-      scale: true,
-      lineStyle: {
-        opacity: 0.8,
-        width: 1.5
-      },
-      label: {
-        show: true
-      }
-    },
+    },    
     label: {
       show: false,
       position: "right",
@@ -259,17 +247,17 @@ for (const node of nodes.values()) {
 };
 
 chart.setOption(option);
-
+// hover and emphasis doenst work properly with legend 
 // custom event listener for hover
 
 chart.on("mouseover", function (params) {
   if (params.dataType !== "node") return;
 
   const option = chart.getOption() as any;
-  const nodes = (option.series as any)[0].data;
+  const nodes = option.series[0].data;
   const links = option.series[0].links;
 
-  const nodeId = typeof params.data === "string" ? params.data : (params.data as any).id;
+  const nodeId = (params.data as any).id;
   const connected = new Set();
   connected.add(nodeId);
 
@@ -278,10 +266,15 @@ chart.on("mouseover", function (params) {
     if (link.target === nodeId) connected.add(link.source);
   });
 
-  nodes.forEach((node : any) => {
-    node.label = {
-      show: connected.has(node.id)
-    };
+  nodes.forEach((node: any) => {
+    const isConnected = connected.has(node.id);
+    node.label = { show: isConnected };
+    node.itemStyle = { ...node.itemStyle, opacity: isConnected ? 1 : 0.2 };
+  });
+
+  links.forEach((link: any) => {
+    const isConnected = link.source === nodeId || link.target === nodeId;
+    link.lineStyle = { ...link.lineStyle, opacity: isConnected ? 0.8 : 0.05 };
   });
 
   chart.setOption(option);
@@ -289,10 +282,16 @@ chart.on("mouseover", function (params) {
 
 chart.on("mouseout", function () {
   const option = chart.getOption() as any;
-  const nodes = (option.series as any)[0].data;
+  const nodes = option.series[0].data;
+  const links = option.series[0].links;
 
   nodes.forEach((node: any) => {
     node.label = { show: false };
+    node.itemStyle = { ...node.itemStyle, opacity: 1 };
+  });
+
+  links.forEach((link: any) => {
+    link.lineStyle = { ...link.lineStyle, opacity: 0.25 };
   });
 
   chart.setOption(option);
@@ -327,11 +326,13 @@ chart.on("legendselectchanged", function (params: any) {
       if (activeCategory === null) {
         // Nothing selected — hide all labels
         node.label = { show: false };
-         node.itemStyle = { opacity: 1 };
+         node.itemStyle = { ...node.itemStyle, opacity: 1 }; 
       } else {
         // Show labels only for nodes in the active category
-        node.label = { show: categoryName === activeCategory };
-      }
+        const isActive = categoryName === activeCategory;
+    node.label = { show: isActive };
+    node.itemStyle = { ...node.itemStyle, opacity: isActive ? 1 : 0.5 }; // preserve color
+  }
     });
 
     chart.setOption(option);
@@ -354,6 +355,8 @@ chart.on("legendselectchanged", function (params: any) {
         );
       }
     });
+
+    
 });
 
 function generateColor(index : number, total: number) {
