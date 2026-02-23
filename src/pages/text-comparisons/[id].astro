@@ -1,10 +1,7 @@
 ---
 import PageLayout from "@/layouts/page-layout.astro";
 import passages from "@/content/data/passages.json";
-import { Icon } from "astro-icon/components";
-import NavLink from "@/components/nav-link.astro";
 import Article from "@/components/article-wide.astro";
-import "instantsearch.css/themes/satellite.css";
 import type { Passage } from "@/types";
 import PassageCard from "@/components/passage-card.astro";
 
@@ -44,16 +41,15 @@ const shortTitle = passage.work?.[0]?.author?.length > 0
   class="grid grid-cols-[minmax(0,300px)_1fr] 
          md:gap-2"
 >
-  <div>
-     
-       <aside
+  <div>     
+    <aside
       class="border-r border-neutral-400 min-h-full bg-white"
       >
           <div id="searchbox" data-hit-base-path="/text-comparisons" class="py-3 px-4"></div>
           <section>
             <div id="hits" class="px-4 overflow-y-auto"></div>
           </section>
-        </aside>
+    </aside>
   </div>
     <Article mainTitle= {`Text Comparisons for Passage ${shortTitle}`}>
     <h1 class="text-2xl font-bold text-brand-800 text-center"></h1>
@@ -71,4 +67,4 @@ const shortTitle = passage.work?.[0]?.author?.length > 0
     </div>
     </Article>
 </PageLayout>
-<script src="@/lib/advanced-search-aside.js"></script>
+<script src="@/lib/aside-search.js"></script>
