@@ -4,11 +4,11 @@ import authors from "@/content/data/authors.json";
 import { Icon } from "astro-icon/components";
 import NavLink from "@/components/nav-link.astro";
 import Article from "@/components/article.astro";
-import type { Author } from "@/types/index";
+import type { AuthorFull } from "@/types/index";
 export async function getStaticPaths() {
   const paths = Object.values(authors).map((author) => ({
     params: { id: author.jad_id },
-    props: { data: author as Author },
+    props: { data: author as AuthorFull },
   }));
   return paths;
 }

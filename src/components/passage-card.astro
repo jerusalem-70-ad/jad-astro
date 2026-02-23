@@ -1,0 +1,44 @@
+---
+import NavLink from "./nav-link.astro";
+
+export interface Props {
+  passage: any;
+  type?: "main" | "source" | "derivative";
+}
+
+const { passage, type = "main" } = Astro.props;
+
+// Styling based on type
+const bgColor = type === "main" ? "bg-orange-100" : "bg-brand-50";
+const borderColor = type === "main" ? "border-2 border-brand-650" : "border border-brand-650";
+const label =
+  type === "source" ? "[Source]" :
+  type === "derivative" ? "[Derivative]" :
+  "";
+---
+
+<div class={`grid gap-4 ${borderColor} rounded-md ${bgColor}`}>
+  <h2 class="text-lg text-brand-50 bg-brand-650 p-4 flex justify-between">
+    <NavLink
+      href={`/text-comparisons/${passage.jad_id}`}
+      class="font-semibold underline underline-offset-4 hover:text-brand-200 transition"
+    >
+      (#{passage.id})
+      {passage.work?.[0]?.author?.length > 0
+        ? `${passage.work[0].author[0].name}: ${passage.work[0].title}`
+        : passage.work?.[0]?.title || "N/A"}
+    </NavLink>
+    {label && <span>{label}</span>}
+  </h2>
+
+  <div class="text-brand-700 italic p-4 max-h-[500px] overflow-y-auto">
+    {passage.text_paragraph}
+  </div>
+
+  <NavLink
+    href={`/passages/${passage.jad_id}`}
+    class="text-brand-600 underline underline-offset-4 decoration-dotted pb-3 pr-3 justify-self-end font-small hover:text-brand-950  transition"
+  >
+    See passage details
+  </NavLink>
+</div>

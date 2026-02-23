@@ -51,9 +51,23 @@ import { Icon } from "astro-icon/components";
       class="hidden lg:flex items-center gap-x-2 text-brand-50 text-lg font-semibold"
     >
     <ul class="flex items-start gap-x-8">
-     <li> <NavLink
+    
+       <li class="relative group">
+        <button class="flex gap-0.5 items-center" aria-haspopup="true"
+          aria-expanded="false">Passages  
+          <Icon aria-hidden="true" class="size-4.5 transition-transform group-hover:rotate-180" name="lucide:chevron-down" />
+        </button>
+ 
+        <div class="absolute left-0 top-full hidden w-48 bg-brand-800 rounded-md p-3 group-hover:grid">
+          <NavLink
         class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/passages">Passages</NavLink>
+        href="/passages">View all Passages</NavLink>
+        <NavLink
+          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+          href="/text-comparisons/jad_occurrence__1">Text comparison</NavLink
+        >
+       
+        </div>
       </li>
      <li> <NavLink
         class="hover:underline underline-offset-4 hover:text-brand-200 p-2"

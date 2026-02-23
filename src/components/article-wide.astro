@@ -1,0 +1,65 @@
+---
+import NavLink from "./nav-link.astro";
+import { Icon } from "astro-icon/components";
+const { prevLink, nextLink, mainLink, mainTitle } = Astro.props;
+---
+
+<article
+  class="mx-auto my-2 mr-2 p-3 bg-white md:border border-neutral-300 rounded-md grid grid-rows-[auto_1fr_auto]"
+>
+  <div
+    class="flex justify-between gap-3 text-brand-800 md:text-3xl text-xl p-5 border-b-2 border-neutral-300"
+  >
+    {
+      prevLink && (
+        <NavLink href={prevLink} class="flex items-center">
+          <Icon
+            class="md:size-12 size-8"
+            aria-hidden="true"
+            name="lucide:circle-chevron-left"
+          />
+          <span class="sr-only">to previous item</span>
+        </NavLink>
+      )
+    }
+    <h1 class="font-semibold text-brand-800 text-lg md:text-2xl">
+      {mainLink ? <NavLink href={mainLink}>{mainTitle}</NavLink> : mainTitle}
+    </h1>
+    {
+      nextLink && (
+        <NavLink href={nextLink} class="flex items-center">
+          <Icon
+            class="md:size-12 size-8"
+            aria-hidden="true"
+            name="lucide:circle-chevron-right"
+          />
+          <span class="sr-only">to next item</span>
+        </NavLink>
+      )
+    }
+  </div>
+  <div class="p-5 bg-white text-base md:leading-7 md:text-base">
+    <slot />
+  </div>
+  <div
+    class="border-t border-neutral-300 py-5 space-y-2 text-brand-900 p-4 md:px-0"
+  >
+    <p class="text-brand-700 font-semibold">How to cite this item:</p>
+    <p>
+      Alexander Marx, "{mainTitle}", <span class="italic"
+        >Medieval Reception of the Roman Conquest of Jerusalem</span
+      > (2025). URL: <span id="pathname-placeholder"></span>.
+    </p>
+  </div>
+</article>
+<script>
+  if (typeof window !== "undefined") {
+    // Get the full URL including protocol, domain, path, and query parameters
+    const fullUrl = window.location.href;
+    // Insert the full URL into the <span> element
+    const placeholder = document.querySelector("#pathname-placeholder");
+    if (placeholder) {
+      placeholder.textContent = fullUrl;
+    }
+  }
+</script>

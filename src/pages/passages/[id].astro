@@ -21,9 +21,21 @@ const { data: passage } = Astro.props;
 
 
 // passage as source (look where one passage is used as source for another)
-const usedBy = Object.values(passages).filter((item) =>
-  item.source_passage.some((source) => source.id === passage.id)
-);
+
+
+const usedBy = passage.transmission_graph.graph.nodes
+.filter((node) => node.nodeType === "descendant" && node.depth === 0)
+.map((node) => {
+  return {
+    jad_id: node.jad_id,
+    id: node.id,
+    passage: node.passage,
+    work: node.work,
+    author: node.author
+  }
+})
+
+
 ---
 
 <PageLayout title=`passage #${passage.id.toString()}`>
@@ -268,13 +280,13 @@ const usedBy = Object.values(passages).filter((item) =>
       <ul class="list-disc list-inside" id="usedByList">
         {usedBy.slice(0, 4).map((passage) => (
           <li>
-            {passage.work?.[0].author.length > 0 ? (
+            {passage.author ? (
               <span>
-                {passage.work[0].author[0].name} -{" "}
-                <span class="italic">{passage.work[0].title}</span>
+                {passage.author} -{" "}
+                <span class="italic">{passage.work}</span>
               </span>
             ) : (
-              <span class="italic">{passage.work[0].title}</span>
+              <span class="italic">{passage.work}</span>
             )}
             <Icon
               name="lucide:arrow-right"
@@ -289,13 +301,13 @@ const usedBy = Object.values(passages).filter((item) =>
         {/* hidden extra items */}
         {usedBy.slice(4).map((passage) => (
           <li class="hidden extra-item">
-            {passage.work?.[0].author.length > 0 ? (
+             {passage.author ? (
               <span>
-                {passage.work[0].author[0].name} -{" "}
-                <span class="italic">{passage.work[0].title}</span>
+                {passage.author} -{" "}
+                <span class="italic">{passage.work}</span>
               </span>
             ) : (
-              <span class="italic">{passage.work[0].title}</span>
+              <span class="italic">{passage.work}</span>
             )}
             <Icon
               name="lucide:arrow-right"
@@ -311,12 +323,19 @@ const usedBy = Object.values(passages).filter((item) =>
       "N/A"
     )
   }
-<!-- button for showing extra items -->
-  {usedBy.length > 4 && (
+<div class="flex mt-2 justify-between">
+  <!-- button for showing extra items -->
+    {usedBy.length > 4 && (
     <button id="toggleUsedBy" class="text-brand-800 underline mt-2 cursor-pointer">
-      Show more
-    </button>
-  )}
+        Show more
+      </button>
+    )}
+  
+    <!-- button for comparison tool -->
+      <NavLink href={`/text-comparisons/${passage.jad_id}`} class="py-2 px-5 bg-brand-400 hover:bg-brand-700 text-brand-50 border border-brand-600 rounded-md cursor-pointer">
+        Compare texts
+      </NavLink>
+</div>
 </dd>
               {passage.source_passage.length > 0 || usedBy.length > 0 ? (
             <dt

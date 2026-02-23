@@ -1,0 +1,74 @@
+---
+import PageLayout from "@/layouts/page-layout.astro";
+import passages from "@/content/data/passages.json";
+import { Icon } from "astro-icon/components";
+import NavLink from "@/components/nav-link.astro";
+import Article from "@/components/article-wide.astro";
+import "instantsearch.css/themes/satellite.css";
+import type { Passage } from "@/types";
+import PassageCard from "@/components/passage-card.astro";
+
+export async function getStaticPaths() {
+  const paths = Object.values(passages).map((passage) => ({
+    params: { id: passage.jad_id.toString() },
+    props: { data: passage as Passage },
+  }));
+  return paths;
+}
+
+const { data: passage } = Astro.props;
+
+
+// pull full passage sources and derivatives
+
+const sources = passages.filter((p) => passage.source_passage?.some((source) => source.id === p.id))
+.map((p) => ({
+  id: p.id,
+  jad_id: p.jad_id,
+  text_paragraph: p.text_paragraph,
+  work: p.work,}));
+
+const usedBy = Object.values(passages).filter((item) =>
+  item.source_passage.some((source) => source.id === passage.id)
+);
+
+const shortTitle = passage.work?.[0]?.author?.length > 0
+                        ? `(#${passage.id}) ${passage.work?.[0]?.author[0]?.name}: ${passage.work?.[0]?.title}`
+                        : `(#${passage.id}) ${passage.work?.[0]?.title || "N/A"}`;
+
+---
+
+<PageLayout title=`passage #${passage.id.toString()}`>
+     
+<div
+  class="grid grid-cols-[minmax(0,300px)_1fr] 
+         md:gap-2"
+>
+  <div>
+     
+       <aside
+      class="border-r border-neutral-400 min-h-full bg-white"
+      >
+          <div id="searchbox" data-hit-base-path="/text-comparisons" class="py-3 px-4"></div>
+          <section>
+            <div id="hits" class="px-4 overflow-y-auto"></div>
+          </section>
+        </aside>
+  </div>
+    <Article mainTitle= {`Text Comparisons for Passage ${shortTitle}`}>
+    <h1 class="text-2xl font-bold text-brand-800 text-center"></h1>
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-3 items-start">
+        {sources.length > 0 && (
+            sources.map((sourceP) => (
+            <PassageCard passage={sourceP} type="source" />
+        )))}
+        <PassageCard passage={passage} type="main" />
+        {usedBy.length > 0 && (
+            usedBy.map((usedP) => (
+                <PassageCard passage={usedP} type="derivative" />
+            ))           
+        )}
+    </div>
+    </Article>
+</PageLayout>
+<script src="@/lib/advanced-search-aside.js"></script>

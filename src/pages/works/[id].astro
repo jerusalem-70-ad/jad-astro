@@ -4,11 +4,12 @@ import Article from "@/components/article.astro";
 import works from "@/content/data/works.json";
 import NavLink from "@/components/nav-link.astro";
 import { Icon } from "astro-icon/components";
+import type { WorkFull } from "@/types";
 
 export async function getStaticPaths() {
     const paths = Object.values(works).map((work) => ({
         params: { id: work.jad_id },
-        props: { data: work },
+        props: { data: work as WorkFull },
     }));
     return paths;
 }

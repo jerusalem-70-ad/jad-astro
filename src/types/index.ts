@@ -48,7 +48,7 @@ export interface Language {
 // Reference interfaces
 export interface Reference {
   id: number;
-  name: string;
+  name?: string;
   order?: number;
   jad_id?: string;
   value?: string;
@@ -74,9 +74,13 @@ interface ReferenceAuthor {
 
 // Author interface
 export interface Author {
-  id: number;
-  name: string;
   jad_id: string;
+  name: string;
+  alt_name?: string | null;
+  place: Place[];
+}
+
+export interface AuthorFull extends Author {
   gnd_url?: string;
   notes?: string | null;
   lebensdaten?: string | null;
@@ -84,9 +88,9 @@ export interface Author {
   date_of_death?: string | null;
   rawDates?: OrigDate[] | null;
   origDates: string;
-  place: Place[];
+  id: number;
+  works: Work[];
   alt_name?: string | null;
-  works?: any[]; // This appears to be empty in the sample
   prev?: Navigation;
   next?: Navigation;
 }
@@ -142,27 +146,46 @@ export interface ReferenceWork {
 // Work interface
 export interface Work {
   id: number;
-  name?: string;
   jad_id: string;
-  author: Author[];
-  manuscripts: any[]; // This appears to be empty in the sample
   title: string;
-  genre: string;
-  notes: string | null;
-  notes__author: string | null;
-  institutional_context: any[]; // This appears to be empty in the sample
-  published_edition: any[];
-  date_certainty: boolean;
-  date: DateItem[];
-  link_digital_editions?: string | null;
+  author: Author[];
   author_certainty: boolean;
+  date: DateItem[];
+  genre: string | null;
+  link_digital_editions?: string | null;
   incipit?: string | null;
-  volume_edition_or_individual_editor?: string | null;
-  other_editions?: string | null;
   edition: string;
-  related__passages: any[];
-  view_label?: string;
+}
+
+export interface WorkFull extends Work {
+  date_certainty: boolean;
+  manuscripts?: any[];
+  name?: string;
+  other_editions?: string | null;
+  related__passages: RelPassage[];
   edition_link?: string | null;
+  view_label?: string;
+  volume_edition_or_individual_editor?: string | null;
+  published_edition: any[];
+  notes?: string | null;
+  notes__author: string | null;
+  institutional_context: any[];
+  prev?: Navigation;
+  next?: Navigation;
+}
+
+interface RelPassage {
+  position_in_work: string;
+  sort_position?: number;
+  passages: PassageRef[];
+}
+
+interface PassageRef {
+  id: number;
+  jad_id: string;
+  passage: string;
+  page?: string;
+  occurrence_found_in: string[];
 }
 
 // Value-only interface (used for multiple fields)
@@ -199,22 +222,22 @@ export interface ReferencePassage {
 // Passage interface
 export interface Passage {
   id: number;
-  passage: string;
   jad_id: string;
+  passage: string;
+  work: Work[];
   position_in_work: string | null;
   pages: string | null;
-  text_paragraph: string | null;
   note: string | null;
   explicit_contemp_ref: string | null;
   biblical_references: Reference[];
-  work: Work[];
-  keywords: any[]; // This appears to be empty in the sample
-  part_of_cluster: any[]; // This appears to be empty in the sample
+  keywords: Ref[] | null;
+  part_of_cluster: Ref[] | null;
   authority_discourse?: number;
-  liturgical_references: any[]; // This appears to be empty in the sample
+  liturgical_references: Ref[]; // This appears to be empty in the sample
   occurrence_found_in: ValueItem[];
   edition_link?: string | null;
   source_passage: SourcePass[];
+  text_paragraph: string | null;
   mss_occurrences: Mss_occurrences[] | null;
   incipit: string | null;
   view_label?: string;
@@ -228,8 +251,15 @@ export interface Passage {
 export interface Mss_occurrences {
   manuscript: string;
   manuscript_jad_id: string;
+  lib_place: Place[];
   position_in_ms: string;
   main_ms: boolean;
   facsimile_position: string;
   ms_locus: string;
+}
+
+export interface Ref {
+  id: number;
+  value: string;
+  order: string;
 }
