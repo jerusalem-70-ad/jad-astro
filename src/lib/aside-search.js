@@ -9,7 +9,8 @@ export function initSearch() {
   const root = document.querySelector("#searchbox");
   const hitBasePath = root?.dataset.hitBasePath || "/passages";
 
-  const main_search_field = "work";
+  const main_search_field = "full_text";
+  const secondary_field = "search_text";
 
   const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
     server: {
@@ -23,7 +24,8 @@ export function initSearch() {
       ],
     },
     additionalSearchParameters: {
-      query_by: main_search_field,
+      query_by: `${main_search_field}, ${secondary_field}`,
+      query_by_weights: "2,1",
       sort_by: "sort_id:asc",
       per_page: 20,
     },
@@ -40,7 +42,7 @@ export function initSearch() {
     searchBox({
       container: "#searchbox",
       autofocus: true,
-      placeholder: "Search author or title",
+      placeholder: "Search in all passages ...",
     }),
     infiniteHits({
       container: "#hits",

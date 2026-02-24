@@ -200,7 +200,8 @@
   @apply w-full text-sm py-1.5 p-2 border border-gray-300 rounded-sm;
 }
 
-.ais-SearchBox-submit {
+.ais-SearchBox-submit,
+.ais-SearchBox-reset {
   @apply p-2 text-gray-600 rounded-md border border-brand-400 hover:bg-brand-300 transition-colors duration-200;
 }
 
@@ -210,7 +211,11 @@
 }
 
 .ais-InfiniteHits-loadMore {
-  @apply bg-brand-600 text-white px-4 py-2 rounded-md hover:bg-brand-700;
+  @apply block mx-auto bg-brand-600 text-white px-2 py-1 mb-2 text-sm rounded-md hover:bg-brand-700;
+}
+
+.ais-InfiniteHits-loadMore:disabled {
+  @apply hidden;
 }
 
 .ais-SearchBox-form {
