@@ -1,7 +1,13 @@
 import instantsearch from "instantsearch.js";
 import TypesenseInstantsearchAdapter from "typesense-instantsearch-adapter";
-import { searchBox, infiniteHits } from "instantsearch.js/es/widgets";
+import {
+  searchBox,
+  infiniteHits,
+  panel,
+  refinementList,
+} from "instantsearch.js/es/widgets";
 import { withBasePath } from "./withBasePath";
+import authorLookupMap from "@/content/data/authors_map.json";
 
 export function initSearch() {
   const project_collection_name = "JAD-temp";
@@ -27,7 +33,7 @@ export function initSearch() {
       query_by: `${main_search_field}, ${secondary_field}`,
       query_by_weights: "2,1",
       sort_by: "sort_id:asc",
-      per_page: 20,
+      per_page: 10,
     },
   });
 
@@ -42,7 +48,74 @@ export function initSearch() {
     searchBox({
       container: "#searchbox",
       autofocus: true,
-      placeholder: "Search in all passages ...",
+      placeholder: "Search in text of passages",
+      cssClasses: {
+        root: "w-full  px-2 bg-white",
+        form: "w-full",
+        input: "border-3 border-red-800 rounded-sm",
+      },
+    }),
+    refinementList({
+      container: "#refinement-list-author",
+      attribute: "author_search", // searching in the normalized field lower case no dashes
+      searchable: true,
+      showMore: true,
+      showMoreLimit: 10,
+      searchablePlaceholder: "",
+      limit: 5,
+      sortBy: ["name:asc"],
+      // customized template to get the original names using authorLookupMap
+      templates: {
+        item: (item) => {
+          const displayName = authorLookupMap[item.label] || item.label;
+          const isRefined = item.isRefined ? "checked" : "";
+
+          return `
+            <label class="ais-RefinementList-label">
+              <input
+                type="checkbox"
+                class="ais-RefinementList-checkbox"
+                value="${item.value}"
+                ${isRefined}
+              />
+              <span class="ais-RefinementList-labelText ml-1 text-sm">${displayName}</span>
+            </label>
+          `;
+        },
+      },
+      cssClasses: {
+        label: "flex items-center space-x-2",
+        list: "text-sm text-neutral-700 m-1",
+        showMore:
+          "w-full text-sm text-brand-700 p-1 border border-brand-700 rounded mt-2 bg-orange-100 hover:bg-brand-700 hover:text-white transition",
+        disableShowMore: "hidden",
+        searchableInput:
+          "w-full bg-white text-sm text-brand-700 p-1 border border-neutral-300 rounded",
+        searchableSubmit: "bg-white",
+      },
+    }),
+
+    refinementList({
+      container: "#refinement-list-work",
+      attribute: "work.title",
+      searchable: true,
+      showMore: true,
+      showMoreLimit: 10,
+      limit: 5,
+      searchablePlaceholder: "",
+      cssClasses: {
+        label: "flex items-center space-x-2",
+        searchableRoot: "w-full",
+        list: "text-sm text-neutral-700 mt-1",
+        labelText: "text-sm text-neutral-700",
+        count: "hidden",
+        showMore:
+          "w-full text-sm text-brand-700 p-1 border border-brand-700 rounded mt-2 bg-orange-100 hover:bg-brand-700 hover:text-white transition",
+        disableShowMore: "hidden",
+        searchableInput:
+          "w-full bg-white text-sm text-brand-700 p-1 border border-neutral-300 rounded",
+        searchableSubmit: "bg-white",
+      },
     }),
     infiniteHits({
       container: "#hits",
@@ -54,7 +127,7 @@ export function initSearch() {
 
         item(hit, { html }) {
           return html`
-            <li class="list-none px-0 py-2">
+            <li class="list-none py-2 ml-1.5">
               <a
                 href="${withBasePath(`${hitBasePath}/${hit.id}`)}"
                 class="underline text-sm font-medium text-brand-700 hover:text-brand-500 transition"
@@ -73,6 +146,7 @@ export function initSearch() {
 
   search.start();
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   initSearch();
 });

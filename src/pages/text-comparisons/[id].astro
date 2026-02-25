@@ -38,22 +38,34 @@ const shortTitle = passage.work?.[0]?.author?.length > 0
 <PageLayout title=`passage #${passage.id.toString()}`>
      
 <div
-  class="grid grid-cols-[minmax(0,300px)_1fr] 
+  class="grid grid-cols-[minmax(300px,300px)_1fr] 
          md:gap-2"
 >
   <div>     
     <aside
-      class="border-r border-neutral-400 min-h-full bg-white"
+      class="min-h-full "
       >
-          <div id="searchbox" data-hit-base-path="/text-comparisons" class="py-3 px-4"></div>
+      <h2 class="text-xl font-bold text-brand-800 text-center py-2">Select passage</h2>
+          <div id="searchbox" data-hit-base-path="/text-comparisons" aria-label="Search in the text of all passages" class="py-3"></div>
+          <section id="refinements-section">
+            <section class="px-3 py-2 border border-neutral-300 rounded m-2 bg-white">
+              <h3 class="text-base text-brand-800 px-2 py-1">Search for authors</h2>
+              <div id="refinement-list-author"></div>
+            </section>
+             
+             <section class="px-3 py-2 border border-neutral-300 rounded m-2 bg-white">
+              <h3 class="text-base text-brand-800 px-2 py-1">Search for works</h2>
+              <div id="refinement-list-work" class="px-1"></div>
+            </section>
+          </section>
           <section>
             <div id="hits" class="px-4 overflow-y-auto"></div>
           </section>
     </aside>
   </div>
     <Article mainTitle= {`Text Comparisons for Passage ${shortTitle}`}>
-    <h1 class="text-2xl font-bold text-brand-800 text-center"></h1>
-    <div class="grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-3 items-start">
+      <p class="text-sm text-neutral-700 mb-4">This page shows the text of a passage and its sources and derivatives, as recorded in the database. In the left sidebar, you can search for passages by author or work title. </p>
+    <div class="w-full grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-3 items-start">
         {sources.length > 0 && (
             sources.map((sourceP) => (
             <PassageCard passage={sourceP} type="source" />
