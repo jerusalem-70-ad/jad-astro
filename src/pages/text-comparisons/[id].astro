@@ -4,6 +4,7 @@ import passages from "@/content/data/passages.json";
 import Article from "@/components/article-wide.astro";
 import type { Passage } from "@/types";
 import PassageCard from "@/components/passage-card.astro";
+import CompareCard from "@/components/compare-card.svelte";
 
 export async function getStaticPaths() {
   const paths = Object.values(passages).map((passage) => ({
@@ -77,6 +78,7 @@ const shortTitle = passage.work?.[0]?.author?.length > 0
             ))           
         )}
     </div>
+    <CompareCard client:only="svelte"/>
     </Article>
 </PageLayout>
 <script src="@/lib/aside-search.js"></script>

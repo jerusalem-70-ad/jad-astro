@@ -8,6 +8,14 @@ export interface Props {
 
 const { passage, type = "main" } = Astro.props;
 
+const title = passage.position_in_work
+  ? `${passage.work[0].title} (${passage.position_in_work})`
+  : passage.work?.[0]?.title || "N/A";
+
+const passageTitle = passage.work?.[0]?.author?.length > 0
+  ? `${passage.work[0].author[0].name}: ${title}`
+  : title || "N/A";
+
 // Styling based on type
 const bgColor = type === "main" ? "bg-orange-100" : "bg-brand-50";
 const borderColor = type === "main" ? "border-2 border-brand-650" : "border border-brand-650";
@@ -24,15 +32,13 @@ const label =
       class="font-semibold underline underline-offset-4 hover:text-brand-200 transition"
     >
       (#{passage.id})
-      {passage.work?.[0]?.author?.length > 0
-        ? `${passage.work[0].author[0].name}: ${passage.work[0].title}`
-        : passage.work?.[0]?.title || "N/A"}
+      {passageTitle}
     </NavLink>
     {label && <span>{label}</span>}
   </h2>
 
   <div class="text-brand-700 italic p-4 max-h-[500px] overflow-y-auto">
-    {passage.text_paragraph}
+    {passage.text_paragraph || "No text available."}
   </div>
 
   <NavLink

@@ -69,6 +69,12 @@ async function generate() {
         facet: true,
         optional: true,
       },
+      {
+        name: "position_in_work",
+        type: "string",
+        sort: false,
+        optional: true,
+      },
       { name: "author_search", type: "string[]", facet: true, optional: true },
 
       {
@@ -134,6 +140,7 @@ async function generate() {
         )}`,
         manuscripts: value.mss_occurrences || [],
         work: value.work || [],
+        position_in_work: value.position_in_work || "",
         // normalized values for filtering
         author_search: authors.map((name) => normalizeAuthor(name)),
         cluster: value.part_of_cluster || [],

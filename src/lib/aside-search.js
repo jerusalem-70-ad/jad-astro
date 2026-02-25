@@ -126,16 +126,21 @@ export function initSearch() {
         },
 
         item(hit, { html }) {
+          const title = hit.position_in_work
+            ? `${hit.work[0].title} (${hit.position_in_work})`
+            : hit.work?.[0]?.title || "N/A";
+
+          const passageTitle =
+            hit.work?.[0]?.author?.length > 0
+              ? `${hit.work[0].author[0].name}: ${title}`
+              : title || "N/A";
           return html`
             <li class="list-none py-2 ml-1.5">
               <a
                 href="${withBasePath(`${hitBasePath}/${hit.id}`)}"
                 class="underline text-sm font-medium text-brand-700 hover:text-brand-500 transition"
               >
-                (#${hit.id.substr(16)})
-                ${hit.work?.[0]?.author?.length > 0
-                  ? ` ${hit.work?.[0]?.author[0].name}: ${hit.work?.[0]?.title}`
-                  : hit.work?.[0]?.title || "N/A"}
+                (#${hit.id.substr(16)}) ${passageTitle}
               </a>
             </li>
           `;
