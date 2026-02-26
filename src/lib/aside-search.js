@@ -3,7 +3,6 @@ import TypesenseInstantsearchAdapter from "typesense-instantsearch-adapter";
 import {
   searchBox,
   infiniteHits,
-  panel,
   refinementList,
 } from "instantsearch.js/es/widgets";
 import { withBasePath } from "./withBasePath";

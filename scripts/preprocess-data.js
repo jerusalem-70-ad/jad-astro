@@ -784,6 +784,29 @@ writeFileSync(
 );
 
 console.log("keywords.json file enriched successfully.");
+
+console.log("Generrating passage list");
+const passageList = new Map();
+passagesPlusFinal.forEach((p) => {
+  const title = p.work[0]?.title || "";
+  const author = p.work[0]?.author?.[0]?.name || "";
+  const position_in_work = p.position_in_work;
+  passageList.set(p.jad_id, {
+    id: p.id,
+    full_title:
+      author && position_in_work
+        ? `${author}: ${title} (${position_in_work})`
+        : author
+          ? `${author}: ${title}`
+          : title,
+  });
+});
+const passageListObject = Object.fromEntries(passageList);
+writeFileSync(
+  join(folderPath, "passage_list.json"),
+  JSON.stringify(passageListObject, null, 2),
+  { encoding: "utf-8" },
+);
 /* console.log("Generating network data...");
 const networkData = createNetworkData(enrichedPassages);
 
