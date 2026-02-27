@@ -43,7 +43,7 @@ const shortTitle = passage.work?.[0]?.author?.length > 0
   class="grid grid-cols-[minmax(300px,300px)_1fr] 
          md:gap-2"
 >
-    <AsideSearch client:only="svelte" />
+    <AsideSearch client:only="svelte" comparison={true} />
     <Article mainTitle= {`Text Comparisons for Passage ${shortTitle}`}>
       <p class="text-sm text-neutral-700 mb-4">This page shows the text of a passage and its sources and derivatives, as recorded in the database. In the left sidebar, you can search for passages by author or work title. </p>
     <div class="w-full grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-3 items-start">
@@ -61,4 +61,3 @@ const shortTitle = passage.work?.[0]?.author?.length > 0
     <CompareCard client:only="svelte"/>
     </Article>
 </PageLayout>
-<script src="@/lib/aside-search.js"></script>

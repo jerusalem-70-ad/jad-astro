@@ -14,7 +14,7 @@
   import { selectedJadId } from '@/lib/stores/jad_store';
 
   export let enableGraph = false; 
-
+export let comparison = false; 
   // set elements for the search,bind them later for reactivity
   let container;
   let searchbox;
@@ -149,10 +149,23 @@ let hits;
               `;
             }
 
+              if (comparison) {
+              return html`
+                <li class="py-1 ">
+                   <a
+                href="${withBasePath(`${hit.id}`)}"
+                class="underline text-sm font-medium text-brand-700 hover:text-brand-500 transition"
+              >
+                (#${hit.id.substr(16)}) ${passageTitle}
+              </a>
+                </li>
+              `;
+            }
+
             return html`
               <li class="list-none py-2 ml-1.5">
               <a
-                href="${withBasePath(`${hitBasePath}/${hit.id}`)}"
+                href="${withBasePath(`passages/${hit.id}`)}"
                 class="underline text-sm font-medium text-brand-700 hover:text-brand-500 transition"
               >
                 (#${hit.id.substr(16)}) ${passageTitle}
