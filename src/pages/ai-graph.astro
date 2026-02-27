@@ -22,8 +22,8 @@ import { Icon } from 'astro-icon/components';
                         </summary>
                         <ul class="list-disc list-inside space-y-1 pt-2">
                             <li><strong>Passage number:</strong> Enter the passage number you want to compare. You can check the number using the side search.</li>
-                            <li><strong>Number of passages:</strong> Optional. Set how many passages each sentence should be compared with. Default is <strong>3</strong>.</li>
-                            <li><strong>Distance:</strong> Optional. Controls how “far” to fetch similarities. The smaller the number, the more similar the results. Default is <strong>0.1</strong> (min 0.01 | max 0.5).</li>
+                            <li><strong>Number of passages:</strong> Optional. Set how many passages each sentence should be compared with. Default is <strong>3</strong> meaning: you will see up to three similarity matches for each sentence.</li>
+                            <li><strong>Distance:</strong> Optional. Controls how “far” fetched the similarities are. The smaller the number, the more similar the results. Default is <strong>0.1</strong> (min 0.01 | max 0.5).</li>
                             <li><strong>Collection:</strong>
                             <ul class="list-disc list-inside ml-4">
                                 <li><strong>JAD sentences [default]:</strong> Compares the selected passage sentence by sentence with other passages in the JAD database. </li>

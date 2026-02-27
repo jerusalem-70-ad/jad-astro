@@ -14,7 +14,13 @@
   import { selectedJadId } from '@/lib/stores/jad_store';
 
   export let enableGraph = false; 
+
+  // set elements for the search,bind them later for reactivity
   let container;
+  let searchbox;
+let refinementsAuthors;
+let refinementsWorks;
+let hits;
 
   function initSearch() {
     const typesenseInstantsearchAdapter =
@@ -44,14 +50,18 @@
       indexName: "JAD-temp",
     });
 
+
+  const root = document.querySelector("#searchbox");
+  const hitBasePath = root?.dataset.hitBasePath || "/passages";
+
     search.addWidgets([
       searchBox({
-        container: container.querySelector("#searchbox"),
+        container: searchbox,
         placeholder: "Search in texts",
       }),
 
     refinementList({
-      container: "#refinementsAuthors",
+      container: refinementsAuthors,
       attribute: "author_search", // searching in the normalized field lower case no dashes
       searchable: true,
       showMore: true,
@@ -91,7 +101,7 @@
     }),
 
     refinementList({
-      container: "#refinementsWorks",
+      container: refinementsWorks,
       attribute: "work.title",
       searchable: true,
       showMore: true,
@@ -140,14 +150,14 @@
             }
 
             return html`
-              <li class="py-2">
-                <a
-                  href="${withBasePath(`/passages/${hit.id}`)}"
-                  class="underline text-sm text-brand-700 hover:text-brand-500"
-                >
-                  (#${hit.id.substr(16)}) ${passageTitle}
-                </a>
-              </li>
+              <li class="list-none py-2 ml-1.5">
+              <a
+                href="${withBasePath(`${hitBasePath}/${hit.id}`)}"
+                class="underline text-sm font-medium text-brand-700 hover:text-brand-500 transition"
+              >
+                (#${hit.id.substr(16)}) ${passageTitle}
+              </a>
+            </li>
             `;
           },
         },
@@ -158,20 +168,14 @@
 
     //  only active when graph mode is on
     if (enableGraph) {
-      container.addEventListener("click", (e) => {
-        const btn = e.target.closest("[data-id]");
-        if (!btn) return;
+       container.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-id]");
+      if (!btn) return;
 
-        const id = btn.dataset.id;
-        function handleClick(id) {
-            selectedJadId.set(id);
-        }
-
-                handleClick(id);
-            });
-            }
-        }
-
+      selectedJadId.set(btn.dataset.id);
+      console.log("Selected Jad ID for graph:", btn.dataset.id);
+    });}
+  }
   onMount(() => {
     initSearch();
   });

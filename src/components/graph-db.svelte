@@ -2,6 +2,7 @@
 import passageList from '@/content/data/passage_list.json';
 import { withBasePath } from '@/lib/withBasePath.js';
 import {exportTableToCSV} from '@/lib/download-table.js';
+import { selectedJadId } from "@/lib/stores/jad_store.js";
 
   let jadId = '';
   let amount = 4;
@@ -18,11 +19,11 @@ import {exportTableToCSV} from '@/lib/download-table.js';
     results = null;
 
     const params = new URLSearchParams({
-  amount: amount.toString(),
-  collection,
-  'jad-id': `jad_occurrence__${jadId}`,
-  'max-distance': maxDistance.toString()
-});
+      amount: amount.toString(),
+      collection,
+      'jad-id': `jad_occurrence__${jadId}`,
+      'max-distance': maxDistance.toString()
+    });
 
     console.log('Fetching similarity with params:', { jadId, amount, collection, maxDistance });
     try {
@@ -39,7 +40,12 @@ import {exportTableToCSV} from '@/lib/download-table.js';
     } finally {
       loading = false;
     }
+
   }
+  $: if ($selectedJadId) {
+    jadId = $selectedJadId.split('__')[1] //update the jadID with that from the store
+ fetchSimilarity();
+}
 </script>
 <div class="grid h-full content-center gap-6">
   <div class="bg-white border border-neutral-200 rounded-lg p-6">
