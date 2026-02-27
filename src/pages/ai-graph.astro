@@ -3,37 +3,38 @@ import PageLayout from '../layouts/page-layout.astro';
 import GraphDb from '@/components/graph-db.svelte'
 import ArticleWide from '@/components/article-wide.astro';
 import AsideSearch from '@/components/aside-search.svelte';
+import { Icon } from 'astro-icon/components';
 ---
 <PageLayout title="AI Graph">
-    <div
-  class="grid grid-cols-[minmax(300px,300px)_1fr] 
-         md:gap-2"
->
-    <AsideSearch client:only="svelte" enableGraph={true}/>
-    <ArticleWide mainTitle= {'AI generated comparisons'}>
-  <div class="mx-auto grid gap-2 p-8">
-      <p>This page is under construction. </p>
-      <div class="bg-neutral-50 border border-neutral-200 rounded-md p-4 mb-4 text-sm text-neutral-800">
-  <details>
-      <summary class="font-semibold mb-2 cursor-pointer">How to use the comparison form:</summary>
-      <ul class="list-disc list-inside space-y-1">
-        <li><strong>Passage number:</strong> Enter the passage number you want to compare. You can check the number using the side search.</li>
-        <li><strong>Number of passages:</strong> Optional. Set how many passages each sentence should be compared with. Default is <strong>3</strong>.</li>
-        <li><strong>Distance:</strong> Optional. Controls how “far” to fetch similarities. The smaller the number, the more similar the results. Default is <strong>0.2</strong> (max 0.5).</li>
-        <li><strong>Collection:</strong>
-          <ul class="list-disc list-inside ml-4">
-            <li><strong>JAD sentences [default]:</strong> Compares the selected passage sentence by sentence with other passages in the JAD database. </li>
-            <li><strong>Vulgata:</strong> Compares the selected passage with the text of the Vulgata.</li>
-          </ul>
-        </li>
-      </ul>
-  </details>
-</div>
-      <div >
-        <GraphDb client:only="svelte"/>         
-        </div>
-    </div>
-    </ArticleWide>
+    <div class="grid grid-cols-[minmax(300px,300px)_1fr] md:gap-2">
+        <AsideSearch client:only="svelte" enableGraph={true}/>
+        <ArticleWide mainTitle= {'AI-generated text similarity search'}>
+            <div class="mx-auto grid gap-2 p-8">
+                <div class="bg-neutral-50 border border-neutral-200 rounded-md p-4 text-sm text-neutral-800">
+                    <details class="group">
+                        <summary class="flex gap-2 font-semibold cursor-pointer uppercase">
+                            <span>How to use the search</span>
+                            <Icon
+                                class="transition-transform duration-200 group-open:rotate-90 inline-flex size-5"
+                                aria-hidden="true"
+                                name="lucide:circle-chevron-right"
+                            />
+                        </summary>
+                        <ul class="list-disc list-inside space-y-1 pt-2">
+                            <li><strong>Passage number:</strong> Enter the passage number you want to compare. You can check the number using the side search.</li>
+                            <li><strong>Number of passages:</strong> Optional. Set how many passages each sentence should be compared with. Default is <strong>3</strong> meaning: you will see up to three similarity matches for each sentence.</li>
+                            <li><strong>Distance:</strong> Optional. Controls how “far” fetched the similarities are. The smaller the number, the more similar the results. Default is <strong>0.1</strong> (min 0.01 | max 0.5).</li>
+                            <li><strong>Collection:</strong>
+                            <ul class="list-disc list-inside ml-4">
+                                <li><strong>JAD sentences [default]:</strong> Compares the selected passage sentence by sentence with other passages in the JAD database. </li>
+                                <li><strong>Vulgata:</strong> Compares the selected passage with the text of the Vulgata.</li>
+                            </ul>
+                            </li>
+                        </ul>
+                    </details>
+                </div>
+                <GraphDb client:only="svelte"/>   
+            </div>
+        </ArticleWide>
     </div>
 </PageLayout>
-<script src="@/lib/aside-search.js"></script>
