@@ -3,7 +3,7 @@ import PageLayout from "@/layouts/page-layout.astro";
 import passages from "@/content/data/passages.json";
 import { Icon } from "astro-icon/components";
 import NavLink from "@/components/nav-link.astro";
-import Article from "@/components/article-wide.astro";
+import Article from "@/components/article.astro";
 import type { Passage } from "@/types";
 import ChronologicalTree from "@/components/chronological-tree.astro";
 import {addItalics} from "@/lib/utils.js";
@@ -39,11 +39,37 @@ const usedBy = passage.transmission_graph.graph.nodes
 ---
 
 <PageLayout title=`passage #${passage.id.toString()}`>
-  <div
-  class="grid grid-cols-[1fr_5fr] 
-         md:gap-2"
+  <div id="main-container"
+  class="grid grid-cols-[16rem_1fr] 
+         md:gap-2 transition-all duration-300"
 >
-    <AsideSearch client:only="svelte" />
+ <div class="grid gap-2">
+    <button
+      id="sidebar-toggle"
+      class="flex justify-between gap-2 mt-3 ml-3 font-semibold text-lg 
+             bg-brand-700 text-white px-3 py-2 rounded-md 
+             hover:bg-brand-500 transition"
+    >
+      <span id="toggle-text">Hide search</span>
+
+      <svg id="toggle-icon"
+           xmlns="http://www.w3.org/2000/svg"
+           class="w-6 h-6"
+           fill="none"
+           viewBox="0 0 24 24"
+           stroke="currentColor">
+        <path stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+
+    <div id="aside-wrapper" class="border-r border-b border-neutral-300">
+      <AsideSearch client:only="svelte" />
+    </div>
+  </div>
+   
     <Article
       prevLink={`/passages/${passage.prev.id}`}
       nextLink={`/passages/${passage.next.id}`}
@@ -451,6 +477,62 @@ const usedBy = passage.transmission_graph.graph.nodes
 
       extraItems.forEach(li => li.classList.toggle("hidden"));
       toggleBtn.textContent = isHidden ? "Show less" : "Show more";
+    });
+  });
+</script>
+<script>
+
+   document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("main-container");
+    const button = document.getElementById("sidebar-toggle");
+    const text = document.getElementById("toggle-text");
+    const icon = document.getElementById("toggle-icon");
+    const aside = document.getElementById("aside-wrapper");
+    
+    if (!container || !button || !text || !icon || !aside) return;
+  document
+    .getElementById("sidebar-toggle")
+    ?.addEventListener("click", () => {
+const isOpen = container.classList.contains("grid-cols-[16rem_1fr]");
+
+if (isOpen) {
+  // Collapse layout
+  container.classList.remove("grid-cols-[16rem_1fr]", "md:gap-2");
+  container.classList.add("grid-cols-[3rem_1fr]");
+
+  // Hide aside
+  aside.classList.add("hidden");
+
+  // Button layout
+  button.classList.remove("flex", "justify-between", "px-3");
+  button.classList.add("grid", "place-items-center", "w-10", "p-2");
+
+  // Vertical text
+  text.textContent = "Show search";
+  text.className =
+    "[writing-mode:vertical-rl] rotate-180 whitespace-nowrap leading-none";
+
+  // Change icon direction
+  icon.querySelector("path").setAttribute("d", "M9 5l7 7-7 7");
+} else {
+  // Expand layout
+  container.classList.remove("grid-cols-[3rem_1fr]");
+  container.classList.add("grid-cols-[16rem_1fr]", "md:gap-2");
+
+  // Show aside
+  aside.classList.remove("hidden");
+
+  // Button layout
+  button.classList.remove("grid", "place-items-center", "w-10", "p-2");
+  button.classList.add("flex", "justify-between", "px-3");
+
+  // Horizontal text
+  text.textContent = "Hide search";
+  text.className = "";
+
+  // Change icon direction
+  icon.querySelector("path").setAttribute("d", "M15 19l-7-7 7-7");
+}
     });
   });
 </script>

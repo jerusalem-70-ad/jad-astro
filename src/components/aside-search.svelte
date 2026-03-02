@@ -57,7 +57,7 @@ let hits;
     search.addWidgets([
       searchBox({
         container: searchbox,
-        placeholder: "Search in texts",
+        placeholder: "",
       }),
 
     refinementList({
@@ -194,22 +194,25 @@ let hits;
   });
 </script>
 
-<div bind:this={container} >     
+<div id="aside-search-container" bind:this={container} class="w-11/12 mx-auto md:w-64">     
     <aside
       class="min-h-full "
       >
       <h2 class="text-xl font-bold text-brand-800 text-center py-2">Select passage</h2>
-          <div bind:this={searchbox} id="searchbox" data-hit-base-path="/text-comparisons" aria-label="Search in the text of all passages" class="py-3 px-2"></div>
+          <section aria-label="Search in the text of all passages" class="px-3 py-2 border border-neutral-300 rounded m-2 bg-white">
+            <h3 class="text-base text-brand-800 px-2 py-1">Search in texts</h3>
+            <div bind:this={searchbox} id="searchbox" data-hit-base-path="/text-comparisons" ></div>
+        </section>
           <section  id="refinements-section">
-            <section class="px-3 py-2 border border-neutral-300 rounded m-2 bg-white">
+            <div class="px-3 py-2 border border-neutral-300 rounded m-2 bg-white">
               <h3 class="text-base text-brand-800 px-2 py-1">Search for authors</h3>
               <div bind:this={refinementsAuthors} id="refinementsAuthors"></div>
-            </section>
+            </div>
              
-             <section class="px-3 py-2 border border-neutral-300 rounded m-2 bg-white">
+             <div class="px-3 py-2 border border-neutral-300 rounded m-2 bg-white">
               <h3 class="text-base text-brand-800 px-2 py-1">Search for works</h3>
               <div bind:this={refinementsWorks} id="refinementsWorks" class="px-1"></div>
-            </section>
+            </div>
           </section>
           <section>
             <div bind:this={hits} id="hits" class="px-4 overflow-y-auto"></div>
