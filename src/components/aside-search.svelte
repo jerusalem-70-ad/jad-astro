@@ -194,7 +194,7 @@ let hits;
   });
 </script>
 
-<div id="aside-search-container" bind:this={container} class="w-64">     
+<div id="aside-search-container" bind:this={container} class="w-11/12 mx-auto md:w-64">     
     <aside
       class="min-h-full "
       >

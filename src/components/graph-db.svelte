@@ -196,17 +196,21 @@
     
     {#if results}
     
-    <div class="w-full bg-white  p-6 mt-6 grid gap-4">
+    <div class="w-full bg-white md:p-6 mt-6 grid gap-4">
       <h2 class="text-xl font-bold mb-2 text-brand-800">(#{results['jad-id'].split('__')[1]})
         {passageList[results['jad-id']]?.full_title || results['jad-id']}
         <a href={withBasePath(`/passage/${results['jad-id']}`)} class="text-sm text-brand-650 hover:text-brand-400 underline underline-offset-4 decoration-dotted ml-2">View passage</a></h2>
       <details>
         <summary class="cursor-pointer text-brand-700 mb-4">
-          {#if passageList[results.similar_passages[0]]}
+          {#if results.similar_passages.length > 0}
+            {#if passageList[results.similar_passages[0]]}
                   Similar Passages
-                {:else}
+                {:else} 
                   Biblical quotations
-                {/if} : {results.similar_passages.length} [Distance {maxDistance} and lower]
+              {/if} : {results.similar_passages.length} [Distance {maxDistance} and lower]
+          {:else}
+            No similar passages found.
+          {/if}
           </summary>
         <ul class="list-decimal list-inside space-y-1 pl-3">
           {#each results.similar_passages as simPassage}
