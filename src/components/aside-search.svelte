@@ -149,23 +149,11 @@ let hits;
               `;
             }
 
-              if (comparison) {
-              return html`
-                <li class="py-1 ">
-                   <a
-                href="${withBasePath(`${hit.id}`)}"
-                class="underline text-sm font-medium text-brand-700 hover:text-brand-500 transition"
-              >
-                (#${hit.id.substr(16)}) ${passageTitle}
-              </a>
-                </li>
-              `;
-            }
-
+            
             return html`
               <li class="list-none py-2 ml-1.5">
               <a
-                href="${withBasePath(`passages/${hit.id}`)}"
+                href="${withBasePath(`${hit.id}`)}"
                 class="underline text-sm font-medium text-brand-700 hover:text-brand-500 transition"
               >
                 (#${hit.id.substr(16)}) ${passageTitle}
