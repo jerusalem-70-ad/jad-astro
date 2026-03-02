@@ -1,4 +1,6 @@
 ---
+import { ClientRouter } from 'astro:transitions';
+
 import PageFooter from "@/components/page-footer.astro";
 import PageHeader from "@/components/page-header.astro";
 import ScrollToTop from "@/components/scroll-to-top.astro";
@@ -28,6 +30,7 @@ const { title = "Medieval Reception of the Roman Conquest of Jerusalem" } =
       href="/jad-astro/assets/images/favicon.svg"
     />
     <title>J·AD 70 · {title}</title>
+    <ClientRouter />
   </head>
   <body class="min-h-screen grid grid-rows-[auto_1fr_auto_auto] bg-brand-50">
     <PageHeader />

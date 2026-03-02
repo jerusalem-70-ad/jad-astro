@@ -45,7 +45,7 @@
   <div class="grid content-start gap-2">
     <button
       onclick={() => (showAside = !showAside)}  
-      class="flex justify-between gap-2 mt-3 m-3 font-semibold text-lg 
+      class="self-start flex justify-between gap-2 mt-3 m-3 font-semibold text-lg 
              bg-brand-650 text-white px-3 py-2 rounded-md 
              hover:bg-brand-500 transition"
       class:w-10={!showAside && !mobile}
@@ -53,7 +53,7 @@
       class:pr-5={!showAside}
     >
       {#if showAside}
-        Hide search
+        <span>Hide search</span>
         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
