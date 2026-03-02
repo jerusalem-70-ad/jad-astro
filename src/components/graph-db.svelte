@@ -1,11 +1,19 @@
 <script>
-import passageList from '@/content/data/passage_list.json';
-import { withBasePath } from '@/lib/withBasePath.js';
-import {exportTableToCSV} from '@/lib/download-table.js';
-import { selectedJadId } from "@/lib/stores/jad_store.js";
+  import { onMount } from "svelte";
+  import passageList from '@/content/data/passage_list.json';
+  import { withBasePath } from '@/lib/withBasePath.js';
+  import { exportTableToCSV } from '@/lib/download-table.js';
+  import { selectedJadId } from "@/lib/stores/jad_store.js";
 
+  // reactive search parameters
+  import { writable } from "svelte/store";
+  const amountStore = writable(3);
+  const collectionStore = writable('JAD sentences');
+  const maxDistanceStore = writable(0.1);
+
+  // local reactive variables
   let jadId = '';
-  let amount = 4;
+  let amount = 3;
   let collection = 'JAD sentences';
   let maxDistance = 0.1;
 
@@ -13,7 +21,19 @@ import { selectedJadId } from "@/lib/stores/jad_store.js";
   let loading = false;
   let error = null;
 
+  /** helper: update URL query string */
+  function updateUrl() {
+    const params = new URLSearchParams({
+      jadId,
+      amount,
+      collection,
+      maxDistance
+    });
+    history.replaceState(null, '', `${window.location.pathname}?${params}`);
+  }
+
   async function fetchSimilarity() {
+    if (!jadId) return;
     loading = true;
     error = null;
     results = null;
@@ -25,27 +45,45 @@ import { selectedJadId } from "@/lib/stores/jad_store.js";
       'max-distance': maxDistance.toString()
     });
 
-    console.log('Fetching similarity with params:', { jadId, amount, collection, maxDistance });
+    updateUrl(); // sync URL with current params
+
     try {
       const response = await fetch(
         `https://jad-graph-db.acdh-dev.oeaw.ac.at/jad/q?${params}`
       );
-      if (!response.ok) {
-        throw new Error('API request failed');
-      }
-
+      if (!response.ok) throw new Error('API request failed');
       results = await response.json();
     } catch (err) {
       error = err.message;
     } finally {
       loading = false;
     }
-
   }
+
+  // react to selection from aside
   $: if ($selectedJadId) {
-    jadId = $selectedJadId.split('__')[1] //update the jadID with that from the store
- fetchSimilarity();
-}
+    jadId = $selectedJadId.split('__')[1]; // extract number
+    fetchSimilarity();
+  }
+
+  // react to parameter changes (amount, collection, maxDistance)
+  $: fetchSimilarity();
+
+  onMount(() => {
+    // initialize from URL query string
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('jadId')) jadId = params.get('jadId');
+    if (params.has('amount')) amount = parseInt(params.get('amount'));
+    if (params.has('collection')) collection = params.get('collection');
+    if (params.has('maxDistance')) maxDistance = parseFloat(params.get('maxDistance'));
+
+    // initialize stores
+    amountStore.set(amount);
+    collectionStore.set(collection);
+    maxDistanceStore.set(maxDistance);
+
+    if (jadId) fetchSimilarity();
+  });
 </script>
 <div class="mx-auto w-full grid gap-2 p-4">
     <section class="bg-neutral-50 border border-neutral-200 rounded-md p-4 text-sm text-neutral-800">
@@ -170,7 +208,7 @@ import { selectedJadId } from "@/lib/stores/jad_store.js";
                   Biblical quotations
                 {/if} : {results.similar_passages.length} [Distance {maxDistance} and lower]
           </summary>
-        <ul class="list-decimal list-inside space-y-1">
+        <ul class="list-decimal list-inside space-y-1 pl-3">
           {#each results.similar_passages as simPassage}
             <li>
               {passageList[simPassage]?.full_title || simPassage}
