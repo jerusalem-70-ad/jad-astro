@@ -39,13 +39,13 @@ const shortTitle = passage.work?.[0]?.author?.length > 0
 
 <PageLayout title=`passage #${passage.id.toString()}`>
      
-<div class="grid grid-cols-[16rem_1fr]  md:gap-2">
+<div class="grid grid-cols-[16rem_1fr] md:gap-2">
     <div class="hidden md:block">
       <AsideSearch client:only="svelte" comparison={true} />
     </div>
     <Article mainTitle= {`Text Comparisons for Passage ${shortTitle}`}>
       <p class="text-sm text-neutral-700 mb-4">This page shows the text of a passage and its sources and derivatives, as recorded in the database. In the left sidebar, you can search for passages by author or work title. </p>
-    <div class="w-full grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-3 items-start">
+    <div class="w-full mx-auto grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-3 items-start">
         {sources.length > 0 && (
             sources.map((sourceP) => (
             <PassageCard passage={sourceP} type="source" />
