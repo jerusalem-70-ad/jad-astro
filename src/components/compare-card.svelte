@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import {withBasePath} from "@/lib/withBasePath.js";
 
   
@@ -8,7 +8,7 @@
   let selected = null;
   let loading = false;
   let error = null;
-
+  let statusMessage = ""
   
 
 async function findPassageById(id: string) {
@@ -40,13 +40,25 @@ async function findPassageById(id: string) {
   const foundPassage = await findPassageById(inputIdTrimmed);
     if (foundPassage) {
       selectedPassages = [...selectedPassages, foundPassage];
+      statusMessage = `Passage ${foundPassage.id} added.`;
+       await tick(); //  wait for DOM update
+     const card = document.getElementById(`card-${foundPassage.id}`);
+const link = card?.querySelector("h2 a");
+
+link?.focus();
       inputId = "";
       error = null;
     } else {
       error = "Passage not found.";
+      statusMessage = `Passage ${inputIdTrimmed} not found.`;
     }
     loading = false;
   };  
+
+  function removePassage(id: string) {
+    selectedPassages = selectedPassages.filter(p => p.id !== id);
+    statusMessage = `Passage ${id} removed.`;
+  }
 
 </script>
 
@@ -54,6 +66,7 @@ async function findPassageById(id: string) {
 <form onsubmit={loadPassage} class="my-4 flex gap-2">
   <label for="passageId" class="sr-only">Passage ID:</label>
   <input
+    id="passageId"
     bind:value={inputId}
     placeholder="Enter passage ID"
     class="border border-neutral-300 rounded-md p-2"
@@ -68,11 +81,14 @@ async function findPassageById(id: string) {
 </form>
 
   {#if error}
-    <p>{error}</p>
+    <p class="text-brand-600 font-bold">{error}</p>
   {/if}
+  <p class="sr-only" aria-live="polite">
+  {statusMessage}
+</p>
  <div class="w-full grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-3 items-start">
-      {#each selectedPassages as passage}
-      <div id="card-{passage.id}" class={`grid gap-4 border border-neutral-300 rounded-md bg-brand-50`}>
+      {#each selectedPassages as passage}    
+      <div id="card-{passage.id}" class={`grid gap-4 border border-neutral-300 rounded-md bg-brand-50`} >
         <h2 class="text-lg text-brand-50 bg-brand-650 p-4 flex justify-between">
             <a
             href={`${withBasePath(`/text-comparisons/${passage.jad_id}`)}`}
@@ -83,10 +99,9 @@ async function findPassageById(id: string) {
                 ? `${passage.work[0].author}: ${passage.work[0].title} (${passage.position_in_work})`
                 : passage.work?.[0]?.title || "N/A"}
             </a>
-            <button onclick={() => {
-                selectedPassages = selectedPassages.filter(p => p.id !== passage.id)}}
-                class="text-sm text-white cursor-pointer">
-              Remove
+            <button onclick={() => removePassage(passage.id)}
+                class="font-bold cursor-pointer">
+              <span>✕</span><span class="sr-only">Remove passage</span>
             </button>
         </h2>
     
