@@ -104,6 +104,9 @@ async function findPassageById(id: string) {
     {/each}
 </div>
 
-{#if loading}
-  <p>Loading data...</p>
-{/if}
+ {#if loading}
+      <div class="flex items-center justify-center gap-2 ">
+        <span class="text-brand-650">Loading ... </span>
+        <span class="loader"></span>
+      </div>
+    {/if}

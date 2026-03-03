@@ -199,7 +199,7 @@
     <div class="w-full bg-white md:p-6 mt-6 grid gap-4">
       <h2 class="text-xl font-bold mb-2 text-brand-800">(#{results['jad-id'].split('__')[1]})
         {passageList[results['jad-id']]?.full_title || results['jad-id']}
-        <a href={withBasePath(`/passage/${results['jad-id']}`)} class="text-sm text-brand-650 hover:text-brand-400 underline underline-offset-4 decoration-dotted ml-2">View passage</a></h2>
+        <a href={withBasePath(`/passages/${results['jad-id']}`)} class="text-sm text-brand-650 hover:text-brand-400 underline underline-offset-4 decoration-dotted ml-2">View passage</a></h2>
       <details>
         <summary class="cursor-pointer text-brand-700 mb-4">
           {#if results.similar_passages.length > 0}
@@ -217,7 +217,7 @@
             <li>
               {passageList[simPassage]?.full_title || simPassage}
               {#if passageList[simPassage]}
-                <a href={withBasePath(`/passage/${simPassage}`)}
+                <a href={withBasePath(`/passages/${simPassage}`)}
                 class="text-sm text-brand-650 hover:text-brand-400 underline underline-offset-4 decoration-dotted ml-2">View passage</a>
               {/if}
             </li>
@@ -258,7 +258,7 @@
                 
                 {#if passageList[sim.id.split('-')[0]]}
                   <strong> (# {sim.id.split('-')[1]}) {passageList[sim.id.split('-')[0]]?.full_title || sim.id}</strong>
-                  <a href={withBasePath(`/passage/${sim.id}`)} class="text-sm text-brand-650
+                  <a href={withBasePath(`/passages/${sim.id}`)} class="text-sm text-brand-650
                 hover:text-brand-400 underline underline-offset-4 decoration-dotted">View passage</a>
                 {:else}
                   <strong>{sim.id}</strong>
