@@ -13,6 +13,7 @@ import {
   calculateSortPosition,
 } from "./sort-bibl-ref.js";
 import { createNetworkData } from "./create-network-data.js";
+import { title } from "process";
 
 const loadJSON = (file) =>
   JSON.parse(
@@ -582,6 +583,31 @@ const passagesPlusWorks = passagesPlus.map((p) => {
     //transmission_graph: graph[p.id],
   };
 });
+// store each passage min info in public for compare component add additional passage tool
+// store in public to fetch in the compare component without having to fetch the whole passages.json
+const publicPath = join(process.cwd(), "public", "data", "passages");
+mkdirSync(publicPath, { recursive: true });
+
+const passagesForCompare = passagesPlusWorks.map((p) => {
+  return {
+    id: p.id,
+    jad_id: p.jad_id,
+    work: p.work.map((w) => ({
+      title: w.title,
+      author: w.author?.map((a) => a.name).join(", ") || "",
+    })),
+    position_in_work: p.position_in_work,
+    text_paragraph: p.text_paragraph,
+  };
+});
+passagesForCompare.forEach((p) => {
+  writeFileSync(
+    join(publicPath, `${p.jad_id}.json`),
+    JSON.stringify(p, null, 2),
+    { encoding: "utf-8" },
+  );
+});
+
 // enrich passages with data from passagesPlus and worksPlus for the source_passages
 const passagesPlusPlus = passagesPlusWorks.map((p) => {
   const source_passages = p.source_passage.map((sp) => {

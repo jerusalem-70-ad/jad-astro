@@ -1,44 +1,58 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte";
   import {withBasePath} from "@/lib/withBasePath.js";
 
-  let passages = [];
+  
   let selectedPassages = [];
   let inputId = "";
   let selected = null;
-  let loading = true;
+  let loading = false;
   let error = null;
 
-  onMount(async () => {
-    try {
-      const res = await fetch(withBasePath("/data/passages.json"));
-      passages = await res.json();
-    } catch (e) {
-      error = "Failed to load passages.";
-    } finally {
-      loading = false;
+  
+
+async function findPassageById(id: string) {
+  try {
+    const response = await fetch(withBasePath(`/data/passages/jad_occurrence__${id}.json`));
+    if (!response.ok) {
+      throw new Error("Passage not found");
     }
-  });
-
- function loadPassage() {
-  const found = passages.find(
-    (p) => String(p.id) === inputId
-  );
-
-  if (found) {
-    selectedPassages = [...selectedPassages, found];
-    inputId = "";
-    error = null;
-  } else {
-    error = "Passage not found.";
+    return await response.json();
+  } 
+  catch (error) {
+    console.error("Error fetching passage:", error);
+    return null;  
   }
 }
+
+
+ async function loadPassage(event: SubmitEvent & { currentTarget: EventTarget & HTMLFormElement}) {
+		event.preventDefault(); 
+  loading = true;
+  error = null;
+  const inputIdTrimmed = inputId.trim();
+  if (!inputIdTrimmed) {
+    error = "Please enter a passage ID.";
+    loading = false;
+    return;
+  }
+
+  const foundPassage = await findPassageById(inputIdTrimmed);
+    if (foundPassage) {
+      selectedPassages = [...selectedPassages, foundPassage];
+      inputId = "";
+      error = null;
+    } else {
+      error = "Passage not found.";
+    }
+    loading = false;
+  };  
+
 </script>
 
-{#if loading}
-  <p>Loading data...</p>
-{:else}
-<form on:submit|preventDefault={loadPassage} class="my-4 flex gap-2">
+
+<form onsubmit={loadPassage} class="my-4 flex gap-2">
+  <label for="passageId" class="sr-only">Passage ID:</label>
   <input
     bind:value={inputId}
     placeholder="Enter passage ID"
@@ -58,17 +72,22 @@
   {/if}
  <div class="w-full grid grid-cols-[repeat(auto-fit,minmax(400px,1fr))] gap-3 items-start">
       {#each selectedPassages as passage}
-      <div class={`grid gap-4 border border-neutral-300 rounded-md bg-brand-50`}>
+      <div id="card-{passage.id}" class={`grid gap-4 border border-neutral-300 rounded-md bg-brand-50`}>
         <h2 class="text-lg text-brand-50 bg-brand-650 p-4 flex justify-between">
             <a
             href={`${withBasePath(`/text-comparisons/${passage.jad_id}`)}`}
             class="font-semibold underline underline-offset-4 hover:text-brand-200 transition"
             >
             (#{passage.id})
-            {passage.work?.[0]?.author?.length > 0
-                ? `${passage.work[0].author[0].name}: ${passage.work[0].title} (${passage.position_in_work})`
+            {passage.work?.[0]?.author
+                ? `${passage.work[0].author}: ${passage.work[0].title} (${passage.position_in_work})`
                 : passage.work?.[0]?.title || "N/A"}
             </a>
+            <button onclick={() => {
+                selectedPassages = selectedPassages.filter(p => p.id !== passage.id)}}
+                class="text-sm text-white cursor-pointer">
+              Remove
+            </button>
         </h2>
     
         <div class="text-brand-700 italic p-4 max-h-[500px] overflow-y-auto">
@@ -85,4 +104,6 @@
     {/each}
 </div>
 
+{#if loading}
+  <p>Loading data...</p>
 {/if}
