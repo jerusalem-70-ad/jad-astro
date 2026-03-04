@@ -68,21 +68,29 @@ const search = instantsearch({
   routing: {
     stateMapping: simple(),
     createURL: (state) => {
-      const { query, refinementList, page } = state;
-      // Modify the structure here to avoid square brackets
+      const { query, refinementList, page, from, to } = state;
+
       const queryParam = query ? `JAD-query=${query}` : "";
       const filters = refinementList
         ? `filters=${JSON.stringify(refinementList)}`
         : "";
       const pageParam = page ? `page=${page}` : "";
-      return `/?${[queryParam, filters, pageParam].filter(Boolean).join("&")}`;
+      const fromParam = from ? `from=${from}` : "";
+      const toParam = to ? `to=${to}` : "";
+
+      return `/?${[queryParam, filters, pageParam, fromParam, toParam]
+        .filter(Boolean)
+        .join("&")}`;
     },
     parseURL: (url) => {
       const urlParams = new URLSearchParams(url);
+
       return {
         query: urlParams.get("JAD-query") || "",
         refinementList: JSON.parse(urlParams.get("filters") || "{}"),
         page: parseInt(urlParams.get("page") || "1", 10),
+        from: urlParams.get("from"),
+        to: urlParams.get("to"),
       };
     },
   },
@@ -117,10 +125,11 @@ const hierarchicalMenuBibl = wrapHierarcicalMenuInPanel("Biblical references");
 // 2. add event listeners to the form
 // 3. use the helper to add the filter to the search, clear the old refinements
 // 4. add real-time validation to the inputs
-// 5. add getWidgetRenderState() to allow the currentRefinements widget to "see" this refinement
 const customDateRangeWidget = (containerId) => {
+  let activeFrom = null;
+  let activeTo = null;
   return {
-    init({ helper, state, createURL }) {
+    init({ helper }) {
       // Create the HTML structure for the date range widget with two inputs and apply button
       const container = document.querySelector(containerId);
       container.innerHTML = `
@@ -136,8 +145,10 @@ const customDateRangeWidget = (containerId) => {
           <div class="ais-Panel-body">
             <div class="ais-RangeInput">
               <form class="ais-RangeInput-form">
-                <input class="ais-RangeInput-input" type="number" id="date-from-year" min="70" max="1600" placeholder="From year">
-                <input class="ais-RangeInput-input" type="number" id="date-to-year" min="70" max="1600" placeholder="To year">
+                <label for="date-from-year" class="sr-only">From year</label>
+                <input class="ais-RangeInput-input" type="number" id="date-from-year" min="70" max="1600" placeholder="800">
+                <label for="date-to-year" class="sr-only">To year</label>
+                <input class="ais-RangeInput-input" type="number" id="date-to-year" min="70" max="1600" placeholder="1200">
                 <button type="submit" class="ais-RangeInput-submit">Apply</button>
               </form>
             </div>
@@ -149,13 +160,22 @@ const customDateRangeWidget = (containerId) => {
       const fromInput = container.querySelector("#date-from-year");
       const toInput = container.querySelector("#date-to-year");
 
+      // Initialize from URL (only once)
+      const urlParams = new URLSearchParams(window.location.search);
+      const fromURL = parseInt(urlParams.get("from"), 10);
+      const toURL = parseInt(urlParams.get("to"), 10);
+
+      if (!isNaN(fromURL) && !isNaN(toURL)) {
+        fromInput.value = fromURL;
+        toInput.value = toURL;
+
+        helper.setQueryParameter("filters", buildDateFilter(fromURL, toURL));
+
+        helper.search();
+      }
       // add event listeners to the inputs
       form.addEventListener("submit", (e) => {
         e.preventDefault();
-
-        // Clear old refinements
-        helper.clearRefinements("work_date_not_before");
-        helper.clearRefinements("work_date_not_after");
 
         const from = parseInt(fromInput.value, 10);
         const to = parseInt(toInput.value, 10);
@@ -170,16 +190,60 @@ const customDateRangeWidget = (containerId) => {
           toInput.setCustomValidity(""); // Reset the error message if valid
         }
 
-        // Proceed if both values are valid numbers;
-        // helper.addNummericRefinemnt - standard Algolia method to add a numeric filter
-        if (!isNaN(from)) {
-          helper.addNumericRefinement("work_date_not_before", ">=", from);
-        }
-        if (!isNaN(to)) {
-          helper.addNumericRefinement("work_date_not_after", "<=", to);
+        // Validate only if BOTH exist
+        if (!isNaN(from) && !isNaN(to) && from >= to) {
+          toInput.setCustomValidity(
+            "The 'To year' must be greater than the 'From year'.",
+          );
+          toInput.reportValidity();
+          return;
         }
 
-        // Perform the search after validation
+        toInput.setCustomValidity("");
+
+        let dateFilter = "";
+
+        // case 1: both values are valid numbers;
+        if (!isNaN(from) && !isNaN(to)) {
+          dateFilter = `
+            (
+              (
+                work_date_not_before:>=${from}
+                &&
+                work_date_not_before:<=${to}
+              )
+              ||
+              (
+                work_date_not_after:>=${from}
+                &&
+                work_date_not_after:<=${to}
+              )
+            )
+          `.replace(/\s+/g, " ");
+        }
+        // case 2: only 'From year' is valid
+        else if (!isNaN(from)) {
+          dateFilter = `
+            (
+              work_date_not_before:>=${from}
+              &&
+              work_date_not_after:>=${from}
+            )
+          `.replace(/\s+/g, " ");
+        }
+        // case 3: only 'To year' is valid
+        else if (!isNaN(to)) {
+          dateFilter = `
+            (
+              work_date_not_before:<=${to}
+              &&
+              work_date_not_after:<=${to}
+            )
+          `.replace(/\s+/g, " ");
+        }
+
+        helper.setQueryParameter("filters", dateFilter);
+
         helper.search();
       });
       // Add real-time validation reset to allow resubmission after correcting the input
@@ -204,40 +268,43 @@ const customDateRangeWidget = (containerId) => {
         toInput.reportValidity(); // Show the validity message (if any)
       });
     },
+  };
+};
+// refinments doenst know of filter (date range) so must tailor a custom refinement widget
+// mimicing the structure and taking the classes of algolia
+const customDateCurrentRefinement = (containerId) => {
+  return {
+    render({ helper }) {
+      const container = document.querySelector(containerId);
+      const list = container.querySelector(".ais-CurrentRefinements-list");
 
-    getWidgetRenderState({ helper }) {
-      // Required so currentRefinements widget can "see" this refinement
-      const refinements = [];
+      if (!list) return;
 
-      const from = helper.getNumericRefinements("work_date_not_before");
-      if (from["≥"]) {
-        refinements.push({
-          attribute: "work_date_not_before",
-          type: "numeric",
-          value: () => {
-            helper.removeNumericRefinement("work_date_not_before", ">=");
-            helper.search();
-          },
-          label: `From ${from["≥"][0]}`,
-        });
-      }
+      // Remove old custom refinement if it exists
+      const existing = list.querySelector(".custom-date-refinement");
+      if (existing) existing.remove();
 
-      const to = helper.getNumericRefinements("work_date_not_after");
-      if (to["≤"]) {
-        refinements.push({
-          attribute: "work_date_not_after",
-          type: "numeric",
-          value: () => {
-            helper.removeNumericRefinement("work_date_not_after", "<=");
-            helper.search();
-          },
-          label: `To ${to["≤"][0]}`,
-        });
-      }
+      const filters = helper.state.filters;
+      if (!filters) return;
 
-      return {
-        refinements,
-      };
+      const refItem = document.createElement("li");
+      refItem.className = "ais-CurrentRefinements-item custom-date-refinement";
+
+      refItem.innerHTML = `
+        <span class="ais-CurrentRefinements-label">
+          Year range active
+        </span>
+        <button class="ais-CurrentRefinements-delete" type="button">
+          ✕
+        </button>
+      `;
+
+      refItem.querySelector("button").addEventListener("click", () => {
+        helper.setQueryParameter("filters", "");
+        helper.search();
+      });
+
+      list.appendChild(refItem);
     },
   };
 };
@@ -500,28 +567,27 @@ search.addWidgets([
               ? "Author"
               : item.attribute === "work.title"
                 ? "Work"
-                : item.attribute === "manuscripts.value"
-                  ? "Manuscript"
-                  : item.attribute === "work.date.century"
-                    ? "Century"
-                    : item.attribute === "work.institutional_context.value"
-                      ? "Institution"
-                      : item.attribute === "cluster.value"
-                        ? "Cluster"
-                        : item.attribute === "keywords.value"
-                          ? "Keyword"
-                          : item.attribute === "Liturgical_references.value"
-                            ? "Liturgy"
-                            : item.attribute === "sources.author"
-                              ? "Source"
-                              : item.attribute === "work_date_not_before"
-                                ? "Date"
-                                : item.attribute === "work_date_not_after"
-                                  ? "Date"
-                                  : item.attribute,
+                : item.attribute === "work.genre"
+                  ? "Genre"
+                  : item.attribute === "manuscripts.value"
+                    ? "Manuscript"
+                    : item.attribute === "work.date.century"
+                      ? "Century"
+                      : item.attribute === "work.institutional_context.value"
+                        ? "Institution"
+                        : item.attribute === "cluster.value"
+                          ? "Cluster"
+                          : item.attribute === "keywords.value"
+                            ? "Keyword"
+                            : item.attribute === "Liturgical_references.value"
+                              ? "Liturgy"
+                              : item.attribute === "sources.author"
+                                ? "Source"
+                                : item.attribute,
       }));
     },
   }),
+  customDateCurrentRefinement("#current-refinements"),
 
   clearRefinements({
     container: "#clear-refinements",
