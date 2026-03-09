@@ -22,7 +22,7 @@
   import { withBasePath } from "@/lib/withBasePath";
   import works from "@/content/data/works.json";
 
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("astro:page-load", () => {
     const chartElement = document.getElementById("genre-work-piechart");
     if (!chartElement) {
       console.log("No container for graph found");

@@ -18,7 +18,7 @@
   import biblref from "@/content/data/biblical_references.json";
 
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("astro:page-load", () => {
   const chartElement = document.getElementById("bibl-graph");
   if (!chartElement) return;
 

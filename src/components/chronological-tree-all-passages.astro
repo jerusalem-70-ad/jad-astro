@@ -14,7 +14,7 @@
   import { withBasePath } from "../lib/withBasePath";
   import passages from "@/content/data/passages.json";
   import { forceSimulation, forceCollide, forceX, forceY } from "d3-force";
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("astro:page-load", () => {
     // Get data from global variables
     const chartElement = document.getElementById("chronological-tree");
     if (!chartElement) {
@@ -217,7 +217,7 @@
       source: idToIndex.get(link.source),
       target: idToIndex.get(link.target),
       lineStyle: {
-        color: "#7f8c8d",
+        color: "#827e74",
         width: 2,
         opacity: 0.6,
         curveness: 0.1,
@@ -305,8 +305,8 @@
            links: links.map(l => ({
             ...l,
             lineStyle: {
-              color: "#e0c467",
-              width: 2,
+              color: "#827e74",
+              width: 1,
               opacity: 0.6,
               curveness: 0.1,
             }

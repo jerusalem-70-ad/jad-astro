@@ -20,7 +20,7 @@
   import passages from "@/content/data/passages.json";
   import {NOVA_VULGATA_ORDER} from "scripts/sort-bibl-ref.js"
 
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("astro:page-load", () => {
     const chartElement = document.getElementById("bible-piechart");
     if (!chartElement) {
       console.log("No container for graph found");

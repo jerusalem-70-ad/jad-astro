@@ -34,11 +34,11 @@ const { height = 400 } = Astro.props;
       updateTimelineColors?: (filteredData: any[]) => void;
     }
   }
-  console.log("📡 Initial window check:", !!window.passagesTimelineData);
+  console.log("Initial window check:", !!window.passagesTimelineData);
 
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("astro:page-load", () => {
     console.log("Timeline component loaded");
-    console.log("📡 Window data at DOMContentLoaded:", {
+    console.log(" Window data at DOMContentLoaded:", {
       exists: !!window.passagesTimelineData,
       length: window.passagesTimelineData?.length,
     });

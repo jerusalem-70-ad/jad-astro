@@ -18,7 +18,7 @@
   import { withBasePath } from "@/lib/withBasePath";
   import passages from "@/content/data/passages.json";
 
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("astro:page-load", () => {
     const chartElement = document.getElementById("liturgical-piechart");
     if (!chartElement) {
       console.log("No container for graph found");

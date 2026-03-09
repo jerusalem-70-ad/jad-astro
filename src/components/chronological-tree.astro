@@ -30,15 +30,14 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
     enableNavigation: enableNavigationProp,
   };
 
-  // Enable debug mode for troubleshooting
-  window.debugGraphRendering = true;
+
 </script>
 
 <script>
   import * as echarts from "echarts";
   import { withBasePath } from "../lib/withBasePath";
 
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("astro:page-load", () => {
     // Get data from global variables
     const graphData = window.passageGraphData;
     const config = {

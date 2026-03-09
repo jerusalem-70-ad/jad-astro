@@ -13,7 +13,7 @@
   import { withBasePath } from "../lib/withBasePath";
   import passages from "@/content/data/passages.json";
 
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("astro:page-load", () => {
     const chartElement = document.getElementById("network-all");
     if (!chartElement) {
       console.log("No container for graph found");
@@ -95,7 +95,7 @@
       source: idToIndex.get(link.source),
       target: idToIndex.get(link.target),
       lineStyle: {
-        color: "#7f8c8d",
+        color: "#a39e91",
         width: 2,
         opacity: 0.6,
         curveness: 0.1,
@@ -149,7 +149,7 @@
           edgeSymbolSize: [0, 6],
 
           lineStyle: {
-            color: "#7f8c8d",
+            color: "#a39e91",
             width: 2,
             opacity: 0.6,
             curveness: 0.1,

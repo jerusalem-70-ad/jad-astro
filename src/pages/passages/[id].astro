@@ -363,9 +363,12 @@ const steps = [1, 2, 3];
     )}
   
     <!-- button for comparison tool -->
+      {passage.source_passage.length > 0 || usedBy.length > 0 
+      ? (
       <NavLink href={`/text-comparisons/${passage.jad_id}`} class="py-2 px-5 bg-brand-400 hover:bg-brand-700 text-brand-50 border border-brand-600 rounded-md cursor-pointer">
         Compare texts
-      </NavLink>
+      </NavLink>)
+      : ""}
 </div>
 </dd>
               {passage.source_passage.length > 0 || usedBy.length > 0 ? (
