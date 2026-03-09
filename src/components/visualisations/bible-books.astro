@@ -1,18 +1,13 @@
 
 <div class="lg:grid grid-cols-[1fr_4fr] gap-3 lg:p-10 p-3 border rounded-lg bg-brand-50 shadow-2xl">
   <div class="text-brand-700 prose">
-    <h2 class="text-2xl font-semibold mb-4 text-brand-950">Genre Distribution accross Passages</h2>
-    <p>This pie chart visualizes the distribution of genres across all recorded passages 
-        in the database. Each passage is linked to a specific work, and every work is assigned 
-        to a genre, allowing the chart to aggregate passages by their generic classification. 
-        The relative size of each segment reflects the number of passages associated with 
-        that genre. </p>
-    <p>Selecting a segment in the pie chart acts as an interactive filter: 
-        clicking on a genre takes you directly to the advanced search results, where all 
-        passages belonging to the chosen genre are displayed.</p>
+    <h2 class="text-2xl font-semibold mb-4 text-brand-950">Bible books references</h2>
+    <p>The pie chart shows how frequently individual books of the Bible are cited across the passages, measured by the number of passages that reference a given book. Multiple references to the same biblical book within a single passage are counted as one. </p>
+    <p>Selecting a segment in the pie chart acts as an interactive filter leading  you directly to the advanced search results, where all 
+        passages citing this Bible book are displayed.</p>
   </div>
     <div
-        id="genre-piechart"
+        id="bible-piechart"
         class="w-full"
         style={`height: 900px; width: 100%;`}
     >
@@ -21,11 +16,12 @@
 
 <script>
   import * as echarts from "echarts";
-  import { withBasePath } from "../lib/withBasePath";
+  import { withBasePath } from "@/lib/withBasePath";
   import passages from "@/content/data/passages.json";
+  import {NOVA_VULGATA_ORDER} from "scripts/sort-bibl-ref.js"
 
   document.addEventListener("DOMContentLoaded", () => {
-    const chartElement = document.getElementById("genre-piechart");
+    const chartElement = document.getElementById("bible-piechart");
     if (!chartElement) {
       console.log("No container for graph found");
       return;
@@ -33,19 +29,26 @@
 
     // Prepare chartdata from passages.json
    
-const genreCounts = new Map();
+const booksCounts = new Map();
 
 passages.forEach((passage) => {
-  const genre = passage.work?.[0]?.genre;
-  if (!genre) return;
+  const books = [...new Set(passage.biblical_ref_lvl0)];
+  if (books.length === 0) return;
 
-  genreCounts.set(genre, (genreCounts.get(genre) || 0) + 1);
+  books.forEach((book) => {
+    booksCounts.set(book, (booksCounts.get(book) || 0) + 1)
+  });
 });
 
-    const pieData = Array.from(genreCounts, ([name, value]) => ({ name, value })).sort((a, b) => a.name.localeCompare(b.name));
+    const pieData = Array.from(booksCounts, ([name, value]) => ({ name, value })).sort((a, b) => {
+        return (
+            (NOVA_VULGATA_ORDER[a.name as keyof typeof NOVA_VULGATA_ORDER] || Infinity) - 
+            (NOVA_VULGATA_ORDER[b.name as keyof typeof NOVA_VULGATA_ORDER] || Infinity)
+        );
+    });
     const option = {
         title: {
-            text: "Genre Distribution accross Passages",
+            text: "Bible books accross Passages",
             left: "center",
             top: 20,
             textStyle: {
@@ -65,10 +68,10 @@ passages.forEach((passage) => {
         },
 
         legend: {
-            orient: "vertical",
+            orient: "horizontal",
             //type: "scroll",
             right: 10,
-            top: "center",
+            top: "bottom",
             formatter: function (name : string) {
                 // find the corresponding value in pieData
                 const item = pieData.find(d => d.name === name);
@@ -88,6 +91,7 @@ passages.forEach((passage) => {
                 shadowColor: "rgba(0, 0, 0, 0.5)",
                 },
             },
+            
             },
         ],
 // Responsive settings for smaller screens
@@ -141,7 +145,7 @@ passages.forEach((passage) => {
     chart.on("click", function (params: any) {
       if (params.data) {
         window.location.href = withBasePath(
-          `/advanced-search?JAD-temp[refinementList][work.genre][0]=${params.data.name}`
+          `/advanced-search?JAD-temp[hierarchicalMenu][biblical_ref_lvl0][0]=${params.data.name}`
         );
       }
     });

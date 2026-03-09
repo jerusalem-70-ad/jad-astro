@@ -420,7 +420,9 @@ const passagesPlus = passages
       biblical_references: passage.biblical_references,
       keywords: passage.keywords,
       part_of_cluster: passage.part_of_cluster,
-      liturgical_references: passage.liturgical_references,
+      liturgical_references: passage.liturgical_references.map(
+        ({ order, ...rest }) => rest,
+      ),
       occurrence_found_in: passage.occurrence_found_in.map(
         ({ order, ...rest }) => rest,
       ),

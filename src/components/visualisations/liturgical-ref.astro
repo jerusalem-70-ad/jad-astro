@@ -1,0 +1,147 @@
+
+<div class="lg:grid grid-cols-[1fr_4fr] gap-3 lg:p-10 p-3 border rounded-lg bg-brand-50 shadow-2xl">
+  <div class="text-brand-700 prose">
+    <h2 class="text-2xl font-semibold mb-4 text-brand-950">Liturgical references</h2>
+    <p>The pie chart illustrate the frequency of liturgical references across the passages. Multiple references to the same liturgical occassion within a single passage are counted as one. </p>
+    <p>Selecting a segment in the pie chart acts as an interactive filter leading  you directly to the advanced search results.</p>
+  </div>
+    <div
+        id="liturgical-piechart"
+        class="w-full"
+        style={`height: 900px; width: 100%;`}
+    >
+  </div>
+</div>
+
+<script>
+  import * as echarts from "echarts";
+  import { withBasePath } from "@/lib/withBasePath";
+  import passages from "@/content/data/passages.json";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const chartElement = document.getElementById("liturgical-piechart");
+    if (!chartElement) {
+      console.log("No container for graph found");
+      return;
+    }
+
+    // Prepare chartdata from passages.json
+   
+const liturgicalCounts = new Map();
+
+passages.forEach((passage) => {
+  const refs = [...new Set((passage.liturgical_references ?? []).map(r => r.value))];
+
+  if (refs.length === 0) return;
+
+  refs.forEach((ref) => {
+    liturgicalCounts.set(ref, (liturgicalCounts.get(ref) || 0) + 1);
+  });
+});
+
+    const pieData = Array.from(liturgicalCounts, ([name, value]) => ({ name, value })).sort((a,b) => a.value - b.value);
+    const option = {
+        title: {
+            text: "Liturgical References accross Passages",
+            left: "center",
+            top: 20,
+            textStyle: {
+                fontSize: 24,
+                fontWeight: "bold",
+                color: "#333",
+            },
+        },
+        
+        tooltip: {
+            trigger: "item",
+            textStyle: { fontSize: 12 },
+            formatter: function (params: any) {
+            return `<strong>${params.data.name}</strong><br/>
+                    <span>Passages: ${params.data.value}</span>`;
+            },
+        },
+
+        legend: {
+            orient: "horizontal",
+            //type: "scroll",
+            right: 10,
+            top: "bottom",
+            formatter: function (name : string) {
+                // find the corresponding value in pieData
+                const item = pieData.find(d => d.name === name);
+                return item ? `${name} (${item.value})` : name;
+            }
+        },
+    
+        series: [
+            {
+            type: "pie",
+            radius: "60%",
+            data: pieData,
+            emphasis: {
+                itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: "rgba(0, 0, 0, 0.5)",
+                },
+            },
+            
+            },
+        ],
+// Responsive settings for smaller screens
+         media: [
+            {
+            query: {
+                maxWidth: 600, 
+            },
+            option: {
+                legend: {
+                    orient: "horizontal",
+                    left: "center",
+                    top: "bottom",
+                },
+                series: [
+                    {
+                        radius: "50%",
+                    }
+                ]
+            }
+            }
+        ],
+            
+        animation: false,
+    
+        toolbox: {
+            show: true,
+            orient: "vertical",
+            right: 30,
+            top: 20,
+            itemSize: 20,
+            itemGap: 20,
+            feature: {
+            saveAsImage: {
+                show: true,
+                title: "Download as PNG",
+                type: "png",
+                pixelRatio: 2,
+                backgroundColor: "#fff",
+            },
+            },
+        },
+        };
+
+    const chart = echarts.init(chartElement);
+    chart.setOption(option);
+
+    window.addEventListener("resize", () => chart.resize());
+
+    // Add click handler to link to search results for the genre
+    chart.on("click", function (params: any) {
+      if (params.data) {
+        window.location.href = withBasePath(
+          `/advanced-search?JAD-temp[refinementList][liturgical_references.value][0]=${params.data.name}`
+        );
+      }
+    });
+  });
+</script>

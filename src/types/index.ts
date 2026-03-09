@@ -233,7 +233,7 @@ export interface Passage {
   keywords: Ref[] | null;
   part_of_cluster: Ref[] | null;
   authority_discourse?: number;
-  liturgical_references: Ref[]; // This appears to be empty in the sample
+  liturgical_references: Ref[];
   occurrence_found_in: ValueItem[];
   edition_link?: string | null;
   source_passage: SourcePass[];
