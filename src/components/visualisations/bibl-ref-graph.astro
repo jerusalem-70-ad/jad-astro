@@ -2,7 +2,9 @@
 <div class="lgrid gap-3 lg:p-10 p-3 border rounded-lg bg-brand-50 shadow-2xl">
   <div class="text-brand-700 prose">
     <h2 class="text-2xl font-semibold mb-4 text-brand-950">Biblical References Network</h2>
-    <p>This network visualises the connections between Biblical references — arranged in canonical order along the outer perimeter — and the medieval works — positioned inside the circle — in which these passages are cited. Works are classified by literary genre; clicking a genre in the legend highlights the corresponding nodes. Selecting a node navigates to the detail page of the respective work or Biblical passage.</p>
+    <p>This network visualises the connections between Biblical references — arranged in canonical order along the outer perimeter — and the medieval works — positioned inside the circle — in which these passages are cited. Presented are only works with biblical reference.
+      </p> 
+      <p></p>Works are classified by literary genre; clicking a genre in the legend highlights the corresponding nodes. Selecting a node navigates to the detail page of the respective work or Biblical passage.</p>
   </div>
     <div
         id="bibl-graph"
@@ -173,7 +175,7 @@ for (const node of nodes.values()) {
 
   const option = {
     title: {
-      text: "Biblical References and Works",
+      text: `Biblical References (${refNodes.length}) and Works (${workNodes.length})`,
             left: "center",
             top: 20,
             textStyle: {
@@ -251,6 +253,7 @@ chart.setOption(option);
 // custom event listener for hover
 
 chart.on("mouseover", function (params) {
+   if (activeCategory !== null) return;
   if (params.dataType !== "node") return;
 
   const option = chart.getOption() as any;
@@ -281,6 +284,7 @@ chart.on("mouseover", function (params) {
 });
 
 chart.on("mouseout", function () {
+  if (activeCategory !== null) return; 
   const option = chart.getOption() as any;
   const nodes = option.series[0].data;
   const links = option.series[0].links;
@@ -316,27 +320,47 @@ chart.on("legendselectchanged", function (params: any) {
     activeCategory = clickedCategory;
   }
 
-  setTimeout(() => {
-    const option: any = chart.getOption();
-    const nodes = option.series[0].data;
+ setTimeout(() => {
+  const option: any = chart.getOption();
+  const nodes = option.series[0].data;
+  const links = option.series[0].links;
 
-    nodes.forEach((node: any) => {
-      const categoryName = categories[node.category]?.name;
+  const activeNodeIds = new Set();
 
-      if (activeCategory === null) {
-        // Nothing selected — hide all labels
-        node.label = { show: false };
-         node.itemStyle = { ...node.itemStyle, opacity: 1 }; 
-      } else {
-        // Show labels only for nodes in the active category
-        const isActive = categoryName === activeCategory;
-    node.label = { show: isActive };
-    node.itemStyle = { ...node.itemStyle, opacity: isActive ? 1 : 0.5 }; // preserve color
-  }
-    });
+  nodes.forEach((node: any) => {
+    const categoryName = categories[node.category]?.name;
 
-    chart.setOption(option);
-  }, 0);
+    if (activeCategory === null) {
+      // reset nodes
+      node.label = { show: false };
+      node.itemStyle = { ...node.itemStyle, opacity: 1 };
+    } else {
+      const isActive = categoryName === activeCategory;
+
+      node.label = { show: isActive };
+      node.itemStyle = { ...node.itemStyle, opacity: isActive ? 1 : 0.5 };
+
+      if (isActive) activeNodeIds.add(node.id);
+    }
+  });
+
+  links.forEach((link: any) => {
+    if (activeCategory === null) {
+      // reset edges
+      link.lineStyle = { ...link.lineStyle, opacity: 0.25 };
+    } else {
+      const connected =
+        activeNodeIds.has(link.source) || activeNodeIds.has(link.target);
+
+      link.lineStyle = {
+        ...link.lineStyle,
+        opacity: connected ? 0.9 : 0.05
+      };
+    }
+  });
+
+  chart.setOption(option);
+}, 0);
 });
 
 
