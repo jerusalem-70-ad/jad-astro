@@ -35,6 +35,26 @@ const usedBy = passage.transmission_graph.graph.nodes
   }
 })
 
+const statusConfig = {
+  recorded: {
+    label: "Recorded",
+    level: 1,
+    color: "bg-gray-500"
+  },
+  'edited in detail': {
+    label: "Critically Edited",
+    level: 2,
+    color: "bg-amber-500"
+  },
+  'fully analysed': {
+    label: "Fully Analysed",
+    level: 3,
+    color: "bg-green-600"
+  }
+} as const;
+
+const status = statusConfig[passage.status as keyof typeof statusConfig];
+const steps = [1, 2, 3];
 
 ---
 
@@ -202,7 +222,26 @@ const usedBy = passage.transmission_graph.graph.nodes
                 : "N/A"
             }
           </dd>
-          
+           <dt
+            class="font-semibold text-brand-800 bg-brand-50 border-r border-neutral-300 p-2"
+          >
+            Status:
+          </dt>
+          <dd class="pl-5 p-2 bg-brand-50">
+            {status ? (
+              <div class="inline-flex items-center gap-2 text-sm">
+                {steps.map((step) => (
+                  <span
+                    class={`w-4 h-4 rounded-full border border-neutral-400 ${
+                      step === status.level ? status.color : "bg-white"
+                    }`}
+                  ></span>
+                ))}
+
+                <span class="ml-1">{status.label}</span>
+              </div>
+            ) : "N/A"}
+          </dd>
       </dl>
         
           <dl class="grid grid-cols-[1fr_5fr] text-sm md:text-base md:leading-5 border border-neutral-300">
