@@ -424,6 +424,9 @@ const passagesPlus = passages
       occurrence_found_in: passage.occurrence_found_in.map(
         ({ order, ...rest }) => rest,
       ),
+      text_taken_from: passage.text_taken_from.map(
+        ({ order, ...rest }) => rest,
+      ),
       source_passage: passage.source_passage,
       text_paragraph: normalizeText(passage.text_paragraph), // normalize whitespace
       mss_occurrences: msOccurrence,
@@ -432,6 +435,7 @@ const passagesPlus = passages
       biblical_ref_lvl2: lvl2,
       edition_link: passage.edition_link || "",
       incipit: passage.incipit,
+      status: passage.status.value || "",
       prev: passage.prev,
       next: passage.next,
     };

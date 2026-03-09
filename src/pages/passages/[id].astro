@@ -408,6 +408,17 @@ const usedBy = passage.transmission_graph.graph.nodes
             {passage.note && (<span set:html={addItalics(passage.note)}></span>)}
             
           </dd>
+           <dt
+            class="font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
+          >
+            Text taken from:
+          </dt>
+          <dd class="pl-5 p-2 bg-brand-50">
+            {
+              passage.text_taken_from?.length > 0 && passage.text_taken_from.map(tx => tx.value).join(", ")
+               
+            }   
+          </dd>
           <dt
             class="font-semibold text-brand-800 border-r border-neutral-300 p-2"
           >

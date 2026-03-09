@@ -243,6 +243,8 @@ export interface Passage {
   view_label?: string;
   prev: Navigation;
   next: Navigation;
+  status: string;
+  text_taken_from: Ref[] | null;
   biblical_ref_lvl0: string[];
   biblical_ref_lvl1: string[];
   biblical_ref_lvl2: string[];
@@ -261,5 +263,5 @@ export interface Mss_occurrences {
 export interface Ref {
   id: number;
   value: string;
-  order: string;
+  order?: string;
 }
