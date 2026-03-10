@@ -52,6 +52,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.19",
+    "@types/d3": "^7.4.3",
     "@types/d3-array": "^3.2.2",
     "@types/d3-force": "^3.0.10",
     "@types/node": "^20.19.26",

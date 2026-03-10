@@ -1,0 +1,223 @@
+<div class="m-1 w-full">
+  <h1>D3 test</h1>
+  <div id="graph-container"></div>
+</div>
+
+<script >
+import * as d3 from "d3";
+import { max } from "d3-array";
+import passages from "@/content/data/passages.json";
+import { withBasePath } from "@/lib/withBasePath";
+
+const graphData = { nodes: [], links: [] };
+
+// --- build nodes and links ---
+passages.forEach((passage) => {
+  const nodes = passage.transmission_graph?.graph?.nodes ?? [];
+  nodes.filter(n => n.dateNotBefore || n.dateNotAfter)
+    .forEach(node => {
+      if (!graphData.nodes.find(n => n.id === node.id)) {
+        graphData.nodes.push({
+          ...node,
+          sourcePassage: passage.passage,
+          jad_id: passage.jad_id
+        });
+      }
+    });
+
+  (passage.transmission_graph?.graph?.links ?? []).forEach(link => {
+    graphData.links.push({
+      source: link.source,
+      target: link.target
+    });
+  });
+});
+
+// filter links to existing nodes
+const nodeById = new Map(graphData.nodes.map(d => [d.id, d]));
+graphData.links = graphData.links.filter(l => nodeById.has(l.source) && nodeById.has(l.target));
+
+// degree/radius
+const neighborSet = new Map();
+
+// initialize
+graphData.nodes.forEach(d => neighborSet.set(d.id, new Set()));
+
+// populate neighbors
+graphData.links.forEach(l => {
+  neighborSet.get(l.source).add(l.target);
+  neighborSet.get(l.target).add(l.source);
+});
+
+// degree = number of unique neighbors
+graphData.nodes.forEach(d => {
+  d.degree = neighborSet.get(d.id).size;
+});
+
+const width = 1200;
+const height = 1000;
+
+const rScale = d3.scaleSqrt()
+  .domain([0, max(graphData.nodes, d => d.degree) ?? 0])
+  .range([4, 14]);
+
+const yScale = d3.scaleLinear().domain([50,1600]).range([height,0]);
+const yAxis = d3.axisRight(yScale);
+
+// --- neighbor map ---
+const neighborMap = new Map();
+graphData.nodes.forEach(d => neighborMap.set(d.id, new Set()));
+graphData.links.forEach(l => {
+  neighborMap.get(l.source).add(l.target);
+  neighborMap.get(l.target).add(l.source);
+});
+
+// --- tooltip ---
+const tooltip = d3.select("#graph-container").append("div")
+  .style("position","absolute")
+  .style("background","white")
+  .style("border","1px solid #999")
+  .style("padding","4px 6px")
+  .style("font-size","12px")
+  .style("pointer-events","none")
+  .style("visibility","hidden");
+
+// --- SVG ---
+const svg = d3.select("#graph-container").append("svg")
+  .attr("width", width)
+  .attr("height", height)
+  .style("outline","thin solid red");
+
+svg.append("g").call(yAxis);
+
+const canvas = svg.append("g").attr("class","canvas").attr("transform","translate(60,0)");
+const linksGroup = canvas.append("g").attr("class","links");
+const nodesGroup = canvas.append("g").attr("class","nodes");
+const labelsGroup = canvas.append("g").attr("class","labels")
+  .style("pointer-events","none"); // <- important
+
+// initial x,y
+graphData.nodes.forEach(d => {
+  d.x = Math.random() * width;
+  const avgYear = (d.dateNotBefore + d.dateNotAfter)/2;
+  d.targetY = yScale(avgYear);
+});
+
+// --- draw links ---
+const links = linksGroup.selectAll("path")
+  .data(graphData.links)
+  .enter().append("path")
+  .attr("fill","none")
+  .attr("stroke","grey")
+  .attr("stroke-width",1);
+
+// --- draw nodes ---
+const nodes = nodesGroup.selectAll("circle")
+  .data(graphData.nodes)
+  .enter().append("circle")
+  .attr("r", d => rScale(d.degree))
+  .attr("fill","#6f2009")
+  .attr("cx", d => d.x)
+  .attr("cy", d => d.y);
+
+// --- draw labels ---
+const labels = labelsGroup.selectAll("text")
+  .data(graphData.nodes)
+  .enter().append("text")
+  .attr("x", d => d.x)
+  .attr("y", d => d.y)
+  .text(d => d.name ?? d.id)
+  .attr("font-size",10)
+  .attr("fill","black")
+  .attr("opacity",0);
+
+// --- hover ---
+nodes.on("mouseover", function(event,d){
+  highlightNode(d);
+  bringToFront(d3.select(this));
+
+  const neighbors = neighborMap.get(d.id) || new Set();
+  labels
+    .attr("opacity", n => n.id === d.id || neighbors.has(n.id) ? 1 : 0)
+    .each(function(n){
+      if(n.id === d.id || neighbors.has(n.id)) this.parentNode.appendChild(this);
+    });
+
+  tooltip.style("visibility","visible")
+    .html(`<strong>#${d.id} ${d.name ?? ""}</strong><br/>
+           <span>Year: ${d.dateNotBefore} - ${d.dateNotAfter}</span><br/>
+                    <span>Related passages: ${d.degree || 0}</span>`);
+})
+.on("mousemove", event => {
+  tooltip.style("left",(event.pageX+10)+"px").style("top",(event.pageY+10)+"px");
+})
+.on("mouseout", () => {
+  resetHighlight();
+  tooltip.style("visibility","hidden");
+  labels.attr("opacity",0);
+})
+.on("click", function(event, d) {
+  if (d) {
+    // navigate to the passage page
+    window.location.href = withBasePath(`/passages/jad_occurrence__${d.id}`);
+    console.log("Clicked on node:", d);
+  }
+});
+
+// --- force simulation ---
+const simulation = d3.forceSimulation(graphData.nodes)
+  .force("x", d3.forceX(width/2).strength(0.03))
+  .force("y", d3.forceY(d => d.targetY).strength(0.2))
+  .force("collide", d3.forceCollide(d => rScale(d.degree)+4))
+  .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(40))
+  .on("tick", ticked);
+
+function ticked() {
+  const yearMargin = 40;
+  const pixelMargin = Math.abs(yScale(0)-yScale(yearMargin));
+  nodes
+    .attr("cx", d => d.x)
+    .attr("cy", d => {
+      const minY = d.targetY - pixelMargin;
+      const maxY = d.targetY + pixelMargin;
+      d.y = Math.max(minY, Math.min(maxY,d.y));
+      return d.y;
+    });
+
+  links.attr("d", d => {
+    const x1=d.source.x,y1=d.source.y,x2=d.target.x,y2=d.target.y;
+    const dx=x2-x1, dy=y2-y1;
+    const dr=Math.sqrt(dx*dx+dy*dy)*0.6;
+    const sweep = x1<x2 ? 1:0;
+    return `M${x1},${y1} A${dr},${dr} 0 0,${sweep} ${x2},${y2}`;
+  });
+
+  labels.attr("x", d => d.x+5).attr("y", d => d.y-5);
+}
+
+// --- zoom ---
+const zoom = d3.zoom().scaleExtent([0.5,8]).on("zoom", event => {
+  canvas.attr("transform", event.transform);
+});
+svg.call(zoom);
+
+// --- helpers ---
+function highlightNode(d){
+  const neighbors = neighborMap.get(d.id);
+  nodes.attr("fill", n => n.id===d.id || neighbors.has(n.id) ? "red":"#ccc")
+       .attr("r", n => n.id===d.id ? rScale(n.degree)*1.5 : rScale(n.degree));
+  links.attr("stroke", l => l.source.id===d.id || l.target.id===d.id ? "green":"#ccc")
+       .attr("stroke-opacity", l => l.source.id===d.id || l.target.id===d.id ? 1:0.2);
+}
+function resetHighlight(){
+  nodes.attr("fill","#87260c").attr("r",d=>rScale(d.degree));
+  links.attr("stroke","#86705f").attr("stroke-opacity",1);
+}
+function bringToFront(selection){
+  selection.each(function(){ this.parentNode.appendChild(this); });
+}
+
+function onClick(d){
+
+}
+</script>
