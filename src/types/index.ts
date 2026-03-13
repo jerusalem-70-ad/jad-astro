@@ -3,28 +3,37 @@ export type NodeType = "current" | "ancestor" | "descendant" | "regular";
 
 // Basic node information
 export interface GraphNode {
-  id: string | number;
+  id: number;
   name: string;
   work: string;
   author: string;
+  dateNotBefore: number;
+  dateNotAfter: number;
   passage: string;
   jad_id: string;
   depth: number;
-  nodeType: NodeType;
+  nodeType: string;
   x: number;
-  dateNotBefore: number;
-  dateNotAfter: number;
+  y?: number;
+  sourcePassage?: string;
+  degree?: number;
+  targetY?: number;
 }
 
 // Link between nodes
 export interface GraphLink {
-  source: string | number;
-  target: string | number;
-  depth: number;
+  source: number;
+  target: number;
+  depth?: number;
   type?: string;
 }
 
-// Complete graph structure
+export interface Graph {
+  nodes: GraphNode[];
+  links: GraphLink[];
+}
+
+// Complete graph structure for passages.json
 export interface TransmissionGraph {
   id: string | number;
   graph: {

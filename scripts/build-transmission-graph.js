@@ -80,8 +80,8 @@ export function buildTransmissionGraph(passages) {
 
         // Add link to graphLinks - for ancestors, the source should be the older text
         graphLinks.push({
-          source: sourceNode.id, // Older text (the source being referenced)
-          target: node.id, // Newer text (the one doing the referencing)
+          source: sourceNode.jad_id, // Older text (the source being referenced)
+          target: node.jad_id, // Newer text (the one doing the referencing)
           depth: depth,
           type: "ancestor", // Mark the link type for styling if needed
         });

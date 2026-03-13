@@ -84,7 +84,8 @@ console.log("liturgical_references.json file written successfully.");
 // enrich places with geonames_url, jad_id, lat, long from places.json
 // used in authors.json and manuscripts.json
 
-// create map for authros to use in instant search to match the search normalized field and use the normal name for display
+// create map for authros to use in instant search to match the search normalized field
+// and use the normal name for display
 
 const authorMapObject = {};
 authors.forEach((aut) => {
@@ -94,6 +95,13 @@ authors.forEach((aut) => {
     .replace(",", "");
   authorMapObject[normalizedKey] = aut.name;
 });
+
+// Write as JSON file
+writeFileSync(
+  join(folderPath, "authors_map.json"),
+  JSON.stringify(authorMapObject, null, 2),
+);
+
 // enrich authors with places and transform dates
 //helper function to remove leading zeros from date ranges and month days
 
@@ -162,12 +170,6 @@ writeFileSync(
 );
 
 console.log("authors.json file enriched successfully.");
-
-// Write as JSON file
-writeFileSync(
-  join(folderPath, "authors_map.json"),
-  JSON.stringify(authorMapObject, null, 2),
-);
 
 // sort biblical references according to nova vulgarta order
 const biblicalRefSorted = {};
@@ -650,6 +652,50 @@ const enrichedPassages = passagesPlusPlus.map((p) => ({
   transmission_graph: graph[p.id],
 }));
 
+// store graphData for graph load
+const graphData = { nodes: [], links: [] };
+
+// --- build nodes and links ---
+enrichedPassages.forEach((passage) => {
+  const nodes = passage.transmission_graph?.graph?.nodes ?? [];
+  const links = passage.transmission_graph?.graph?.links ?? [];
+
+  const datedNodes = nodes.filter((n) => n.dateNotBefore || n.dateNotAfter);
+
+  const nodeById = new Map(datedNodes.map((n) => [n.id, n]));
+
+  datedNodes.forEach((node) => {
+    if (!graphData.nodes.some((n) => n.id === node.id)) {
+      graphData.nodes.push({
+        ...node,
+        sourcePassage: passage.passage,
+        jad_id: passage.jad_id,
+      });
+    }
+  });
+
+  links
+    .filter((l) => nodeById.has(l.source) && nodeById.has(l.target))
+    .forEach((link) => {
+      if (
+        !graphData.links.some(
+          (l) => l.source === link.source && l.target === link.target,
+        )
+      ) {
+        graphData.links.push({
+          source: link.source,
+          target: link.target,
+        });
+      }
+    });
+});
+
+writeFileSync(
+  join(folderPath, "passage-graph.json"),
+  JSON.stringify(graphData, null, 2),
+  { encoding: "utf-8" },
+);
+
 // add prev and next to passages.json
 const passagesPlusFinal = addPrevNextToItems(
   enrichedPassages,
@@ -839,14 +885,3 @@ writeFileSync(
   JSON.stringify(passageListObject, null, 2),
   { encoding: "utf-8" },
 );
-/* console.log("Generating network data...");
-const networkData = createNetworkData(enrichedPassages);
-
-// Save the network data
-writeFileSync(
-  join(folderPath, "network_data.json"),
-  JSON.stringify(networkData, null, 2),
-  { encoding: "utf-8" }
-);
-
-console.log("Network data generated successfully."); */

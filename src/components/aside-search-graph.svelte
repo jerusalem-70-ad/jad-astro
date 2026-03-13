@@ -7,20 +7,65 @@
     infiniteHits,
     refinementList,
   } from "instantsearch.js/es/widgets";
+  import { connectHits } from "instantsearch.js/es/connectors";
 
   import authorLookupMap from "@/content/data/authors_map.json";
   import { withBasePath } from "@/lib/withBasePath";
 // svelte store to write the selected Jad id for the graph db to read and trigger the similarity search
   import { selectedJadId } from '@/stores/jad_store';
 
+  
   export let enableGraph = false; 
-  export let comparison = false; 
   // set elements for the search,bind them later for reactivity
   let container;
   let searchbox;
-let refinementsAuthors;
-let refinementsWorks;
-let hits;
+  let refinementsAuthors;
+  let refinementsWorks;
+  let hits;
+
+function createTypesenseUserClient() {
+  const client = new Client({
+    nodes: [
+      {
+        host: process.env.PUBLIC_TYPESENSE_API_HOST,
+        port: process.env.PUBLIC_TYPESENSE_API_PORT,
+        protocol: process.env.PUBLIC_TYPESENSE_API_PROTOCOL,
+      },
+    ],
+    apiKey: "IA6BWzRrMo7yX3eFqgcFelJzhWkIl64W",
+    connectionTimeoutSeconds: 2,
+  });
+
+  return client;
+}
+
+  async function fetchAllFilteredIds(filter_by) {
+
+    const allIds = [];
+    let page = 1;
+    let found = 0;
+
+    do {
+      const res = await createTypesenseUserClient
+        .collections("JAD-temp")
+        .documents()
+        .search({
+          q: "*",
+          query_by: "full_text",
+          filter_by,
+          page,
+          per_page: 250
+        });
+
+      res.hits.forEach(h => allIds.push(h.document.id));
+
+      found += res.hits.length;
+      page++;
+
+    } while(found < res.found);
+
+    return allIds;
+  }
 
   function initSearch() {
     const typesenseInstantsearchAdapter =
@@ -50,6 +95,25 @@ let hits;
       indexName: "JAD-temp",
     });
 
+   const customHits = connectHits((renderOptions, isFirstRender) => {
+      const { hits, results, widgetParams } = renderOptions;
+      const { container } = widgetParams;
+
+     
+
+      if (isFirstRender) return;
+
+      container.innerHTML = hits.map(hit => `
+        <li class="py-1">
+          <button
+            class="text-start underline text-sm text-brand-700 hover:text-brand-500"
+            data-id="${hit.id}"
+          >
+            (#${hit.id.substr(16)}) ${hit.work?.[0]?.title || "N/A"}
+          </button>
+        </li>
+      `).join("");
+    });
 
 
     search.addWidgets([
@@ -120,63 +184,47 @@ let hits;
         searchableSubmit: "bg-white",
       },
     }),
-
-      infiniteHits({
-        container: container.querySelector("#hits"),
-        templates: {
-          item(hit, { html }) {
-             const title = hit.position_in_work
-            ? `${hit.work[0].title} (${hit.position_in_work})`
-            : hit.work?.[0]?.title || "N/A";
-
-          const passageTitle =
-            hit.work?.[0]?.author?.length > 0
-              ? `${hit.work[0].author[0].name}: ${title}`
-              : title || "N/A";
-
-            if (enableGraph) {
-              return html`
-                <li class="py-1 ">
-                  <button
-                    class="text-start underline text-sm text-brand-700 hover:text-brand-500"
-                    data-id="${hit.id}"
-                  >
-                    (#${hit.id.substr(16)}) ${passageTitle}
-                  </button>
-                </li>
-              `;
-            }
-
-             if (comparison) {
-              return html`
-                <li class="py-1 ">
-                 <a
-                href="${withBasePath(`/text-comparisons/${hit.id}`)}"
-                class="underline text-sm font-medium text-brand-700 hover:text-brand-500 transition"
-              >
-                (#${hit.id.substr(16)}) ${passageTitle}
-              </a>
-                </li>
-              `;
-            }
-            
-            return html`
-              <li class="list-none py-2 ml-1.5">
-              <a
-                href="${withBasePath(`/passages/${hit.id}`)}"
-                class="underline text-sm font-medium text-brand-700 hover:text-brand-500 transition"
-              >
-                (#${hit.id.substr(16)}) ${passageTitle}
-              </a>
-            </li>
-            `;
-          },
-        },
-      }),
+ customHits({
+    container: container.querySelector("#hits"),
+  })
+      
     ]);
+search.on("render", async () => {
 
+  if (!enableGraph) return;
+
+  const helper = search.helper;
+
+  const authors = helper.state.disjunctiveFacetsRefinements.author_search || [];
+  const works = helper.state.disjunctiveFacetsRefinements["work.title"] || [];
+
+  if (!authors.length && !works.length) {
+    selectedJadId.set([]);
+    return;
+  }
+
+  const filters = [];
+
+  if (authors.length) {
+    filters.push(`author_search:=[${authors.join(",")}]`);
+  }
+
+  if (works.length) {
+    filters.push(`work.title:=[${works.join(",")}]`);
+  }
+
+  const filter_by = filters.join(" && ");
+
+  console.log("Typesense filter:", filter_by);
+
+  const ids = await fetchAllFilteredIds(filter_by);
+
+  selectedJadId.set(ids);
+
+  console.log("Graph highlight ids:", ids.length);
+
+});
     search.start();
-
     //  only active when graph mode is on
     if (enableGraph) {
        container.addEventListener("click", (e) => {
@@ -190,6 +238,8 @@ let hits;
   onMount(() => {
     initSearch();
   });
+
+  
 </script>
 
 <div id="aside-search-container" bind:this={container} class="w-11/12 mx-auto md:w-64">

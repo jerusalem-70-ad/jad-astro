@@ -1,7 +1,22 @@
 ---
 import PassageTreeD3 from "@/components/visualisations/passage-tree-d3.astro"
 import PageLayout from "@/layouts/page-layout.astro"
+import AsideSearch from "@/components/aside-search-graph.svelte"
+import Article from "@/components/article-wide.astro"
+import PassageCard from "@/components/passage-card.svelte"
 ---
-<PageLayout>
-<PassageTreeD3/>
+
+<PageLayout title=`Tree graph`>
+     
+  <div class="grid grid-cols-[16rem_1fr]  md:gap-2">
+      <div class="hidden md:block">
+        <AsideSearch client:only="svelte" enableGraph={true} />
+      </div>
+      <Article mainTitle= {`Chronological graph`}>
+        <div class="grid grid-cols-2">
+            <PassageTreeD3/>
+            <!-- <PassageCard client:only="svelte"> -->
+        </div>
+      </Article>
+  </div>
 </PageLayout>

@@ -3,7 +3,7 @@
   import passageList from '@/content/data/passage_list.json';
   import { withBasePath } from '@/lib/withBasePath.js';
   import { exportTableToCSV } from '@/lib/download-table.js';
-  import { selectedJadId } from "@/lib/stores/jad_store.js";
+  import { selectedJadId } from "@/stores/jad_store.js";
 
   // reactive search parameters
   import { writable } from "svelte/store";

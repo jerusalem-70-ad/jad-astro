@@ -1,77 +1,49 @@
 <div class="m-1 w-full">
-  <h1>D3 test</h1>
   <div id="graph-container"></div>
 </div>
 
-<script >
+<script>
 import * as d3 from "d3";
-import { max } from "d3-array";
-import passages from "@/content/data/passages.json";
-import { withBasePath } from "@/lib/withBasePath";
+import passageGraph from "@/content/data/passage-graph.json";
+import { filteredIds } from "@/stores/jad_store";
+import type { Graph } from "@/types/index"
 
-const graphData = { nodes: [], links: [] };
 
-// --- build nodes and links ---
-passages.forEach((passage) => {
-  const nodes = passage.transmission_graph?.graph?.nodes ?? [];
-  nodes.filter(n => n.dateNotBefore || n.dateNotAfter)
-    .forEach(node => {
-      if (!graphData.nodes.find(n => n.id === node.id)) {
-        graphData.nodes.push({
-          ...node,
-          sourcePassage: passage.passage,
-          jad_id: passage.jad_id
-        });
-      }
-    });
+const graphData: Graph = passageGraph 
+let activeFilterIds: Set<string> | null = null;
 
-  (passage.transmission_graph?.graph?.links ?? []).forEach(link => {
-    graphData.links.push({
-      source: link.source,
-      target: link.target
-    });
-  });
-});
 
-// filter links to existing nodes
-const nodeById = new Map(graphData.nodes.map(d => [d.id, d]));
-graphData.links = graphData.links.filter(l => nodeById.has(l.source) && nodeById.has(l.target));
+// a new Map for storing degree for radius and neighbours highlighting functions etc.
+// --- neighbor map ---
+const neighborMap = new Map();
 
-// degree/radius
-const neighborSet = new Map();
+graphData.nodes.forEach(d => neighborMap.set(d.id, new Set()));
 
-// initialize
-graphData.nodes.forEach(d => neighborSet.set(d.id, new Set()));
-
-// populate neighbors
 graphData.links.forEach(l => {
-  neighborSet.get(l.source).add(l.target);
-  neighborSet.get(l.target).add(l.source);
+  const sourceId = typeof l.source === "object" ? getSourceNode(l) : l.source;
+  const targetId = typeof l.target === "object" ? getTargetNode(l) : l.target;
+
+  neighborMap.get(sourceId).add(targetId);
+  neighborMap.get(targetId).add(sourceId);
 });
 
 // degree = number of unique neighbors
 graphData.nodes.forEach(d => {
-  d.degree = neighborSet.get(d.id).size;
+  d.degree = neighborMap.get(d.id).size;
 });
 
 const width = 1200;
 const height = 1000;
 
 const rScale = d3.scaleSqrt()
-  .domain([0, max(graphData.nodes, d => d.degree) ?? 0])
+  .domain([0, d3.max(graphData.nodes, (d: Graph["nodes"][number]) => d.degree) ?? 0])
   .range([4, 14]);
 
 const yScale = d3.scaleLinear().domain([50,1600]).range([height,0]);
 const yAxis = d3.axisRight(yScale);
 
-// --- neighbor map ---
-const neighborMap = new Map();
-graphData.nodes.forEach(d => neighborMap.set(d.id, new Set()));
-graphData.links.forEach(l => {
-  neighborMap.get(l.source).add(l.target);
-  neighborMap.get(l.target).add(l.source);
-});
 
+// start drawing
 // --- tooltip ---
 const tooltip = d3.select("#graph-container").append("div")
   .style("position","absolute")
@@ -96,7 +68,7 @@ const nodesGroup = canvas.append("g").attr("class","nodes");
 const labelsGroup = canvas.append("g").attr("class","labels")
   .style("pointer-events","none"); // <- important
 
-// initial x,y
+// initial x is random,y is average based on years
 graphData.nodes.forEach(d => {
   d.x = Math.random() * width;
   const avgYear = (d.dateNotBefore + d.dateNotAfter)/2;
@@ -129,18 +101,20 @@ const labels = labelsGroup.selectAll("text")
   .text(d => d.name ?? d.id)
   .attr("font-size",10)
   .attr("fill","black")
+  .attr("pointer-events", "none")
   .attr("opacity",0);
 
 // --- hover ---
 nodes.on("mouseover", function(event,d){
+
   highlightNode(d);
   bringToFront(d3.select(this));
 
   const neighbors = neighborMap.get(d.id) || new Set();
   labels
-    .attr("opacity", n => n.id === d.id || neighbors.has(n.id) ? 1 : 0)
+    .attr("opacity", n => neighbors.has(n.id) ? 1 : 0)
     .each(function(n){
-      if(n.id === d.id || neighbors.has(n.id)) this.parentNode.appendChild(this);
+      if(neighbors.has(n.id)) this.parentNode.appendChild(this);
     });
 
   tooltip.style("visibility","visible")
@@ -156,20 +130,20 @@ nodes.on("mouseover", function(event,d){
   tooltip.style("visibility","hidden");
   labels.attr("opacity",0);
 })
-.on("click", function(event, d) {
-  if (d) {
-    // navigate to the passage page
-    window.location.href = withBasePath(`/passages/jad_occurrence__${d.id}`);
-    console.log("Clicked on node:", d);
-  }
-});
+// .on("click", function (event, d) {
+//   event.stopPropagation();
+//   bringToFront(d3.select(this));
+//   const nodeId = typeof d === "object" ? d.id : d;
+//   console.log("Clicked node:", d);
+//   selectedJadId.set(d.jad_id);
+// });
 
 // --- force simulation ---
 const simulation = d3.forceSimulation(graphData.nodes)
   .force("x", d3.forceX(width/2).strength(0.03))
   .force("y", d3.forceY(d => d.targetY).strength(0.2))
   .force("collide", d3.forceCollide(d => rScale(d.degree)+4))
-  .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(40))
+  .force("link", d3.forceLink(graphData.links).id((d: Graph["nodes"][number]) => d.id).distance(40))
   .on("tick", ticked);
 
 function ticked() {
@@ -201,23 +175,88 @@ const zoom = d3.zoom().scaleExtent([0.5,8]).on("zoom", event => {
 });
 svg.call(zoom);
 
+// connect to store for filteredID
+
+filteredIds.subscribe((ids) => {
+
+  if (!ids || ids.size === 0 || ids.size === graphData.nodes.length) {
+    activeFilterIds = null;
+    resetHighlight();
+    return;
+  }
+
+  activeFilterIds = ids;
+  console.log("Graph received ids:", ids);
+  highlightNodesByIds(ids);
+});
+
+
 // --- helpers ---
 function highlightNode(d){
   const neighbors = neighborMap.get(d.id);
-  nodes.attr("fill", n => n.id===d.id || neighbors.has(n.id) ? "red":"#ccc")
+  nodes.attr("fill", n => n.id===d.id 
+                  ? "red"
+                  : neighbors.has(n.id) ? "blue" : "#ccc")
        .attr("r", n => n.id===d.id ? rScale(n.degree)*1.5 : rScale(n.degree));
-  links.attr("stroke", l => l.source.id===d.id || l.target.id===d.id ? "green":"#ccc")
-       .attr("stroke-opacity", l => l.source.id===d.id || l.target.id===d.id ? 1:0.2);
+  links.attr("stroke", l => getSourceNode(l) ===d.id || getTargetNode(l)===d.id ? "green":"#ccc")
+       .attr("stroke-opacity", l => getSourceNode(l) ===d.id || getTargetNode(l)===d.id ? 1:0.2);
 }
 function resetHighlight(){
-  nodes.attr("fill","#87260c").attr("r",d=>rScale(d.degree));
-  links.attr("stroke","#86705f").attr("stroke-opacity",1);
+ 
+  nodes
+    .attr("fill","#87260c")
+    .attr("opacity",1)
+    .attr("r", d => rScale(d.degree));
+
+  links
+    .attr("stroke","#86705f")
+    .attr("stroke-opacity",1);
+  if (activeFilterIds) {
+    highlightNodesByIds(activeFilterIds);
+  }
 }
-function bringToFront(selection){
+function bringToFront(selection: d3.Selection<SVGCircleElement, any, any, any>){
   selection.each(function(){ this.parentNode.appendChild(this); });
 }
 
-function onClick(d){
 
+function highlightNodesByIds(ids: Set<string>) {
+
+  nodes
+  .attr("fill", d => ids.has(d.jad_id) ? "red" : "#87260c")
+  .attr("opacity", d => ids.has(d.jad_id) ? 1 : 0.15)
+ .each(function(this: SVGCircleElement, d: Graph["nodes"][number], i, nodes) {
+  if (ids.has(d.jad_id)) {
+    console.log("Highlight node:", d.jad_id);
+  }
+});
+  links
+    .attr("stroke", l => {
+      const s = getSourceNode(l);
+      const t = getTargetNode(l);
+      return ids.has(s.jad_id) && ids.has(t.jad_id) ? "green" : "#ccc";
+    })
+    .attr("stroke-opacity", l => {
+      const s = getSourceNode(l);
+      const t = getTargetNode(l);
+      return ids.has(s.jad_id) && ids.has(t.jad_id) ? 1 : 0.1;
+    });
+}
+//helpers to refer to link which becomes objects after simulation but should be string | Node
+// after simulation { source: 1, target: 550} ->  {source: { id: 1, jad_id: "jad_occurrence__1", ... }
+const nodeById = new Map(
+  graphData.nodes.map(n => [n.id, n])
+);
+
+function getSourceNode(l) {
+  return typeof l.source === "object"
+    ? l.source
+    : nodeById.get(l.source);
+}
+
+function getTargetNode(l) {
+  return typeof l.target === "object"
+    ? l.target
+    : nodeById.get(l.target);
 }
 </script>
