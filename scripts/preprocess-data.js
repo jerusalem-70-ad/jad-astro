@@ -588,7 +588,6 @@ const passagesPlusWorks = passagesPlus.map((p) => {
   return {
     ...p,
     work: related_works,
-    //transmission_graph: graph[p.id],
   };
 });
 // store each passage min info in public for compare component add additional passage tool
@@ -640,7 +639,6 @@ const passagesPlusPlus = passagesPlusWorks.map((p) => {
   return {
     ...p,
     source_passage: source_passages,
-    //transmission_graph: graph[p.id],
   };
 });
 // use imported function to build the transmission graph
@@ -668,8 +666,8 @@ enrichedPassages.forEach((passage) => {
     if (!graphData.nodes.some((n) => n.id === node.id)) {
       graphData.nodes.push({
         ...node,
-        sourcePassage: passage.passage,
-        jad_id: passage.jad_id,
+        sourcePassage: node.passage,
+        jad_id: node.jad_id,
       });
     }
   });
@@ -683,8 +681,8 @@ enrichedPassages.forEach((passage) => {
         )
       ) {
         graphData.links.push({
-          source: link.source,
-          target: link.target,
+          source: `jad_occurrence__${link.source}`,
+          target: `jad_occurrence__${link.target}`,
         });
       }
     });

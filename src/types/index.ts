@@ -28,9 +28,14 @@ export interface GraphLink {
   type?: string;
 }
 
+export interface GLink {
+  source: string;
+  target: string;
+}
+
 export interface Graph {
   nodes: GraphNode[];
-  links: GraphLink[];
+  links: GLink[];
 }
 
 // Complete graph structure for passages.json
