@@ -18,13 +18,13 @@ let activeFilterIds: Set<string> | null = null;
 const nodeById = new Map(
   graphData.nodes.map(n => [n.jad_id, n])
 );
-function getSourceNodeJadId(l) {
+function getSourceNodeJadId(l: { source: { jad_id: string } | string }) {
   return typeof l.source === "object"
     ? l.source.jad_id
     : l.source;
 }
 
-function getTargetNodeJadId(l) {
+function getTargetNodeJadId(l: { target: { jad_id: string } | string }) {
   return typeof l.target === "object"
     ? l.target.jad_id
     : l.target;
@@ -74,7 +74,7 @@ const tooltip = d3.select("#graph-container").append("div")
   .style("visibility","hidden");
 
 // --- SVG ---
-const svg = d3.select("#graph-container").append("svg")
+const svg: d3.Selection<SVGSVGElement, unknown, HTMLElement, any> = d3.select("#graph-container").append("svg")
   .attr("width", width)
   .attr("height", height)
   .style("outline","thin solid red");
@@ -158,11 +158,11 @@ nodes.on("mouseover", function(event,d){
 // });
 
 // --- force simulation ---
-const simulation = d3.forceSimulation(graphData.nodes)
+const simulation = d3.forceSimulation<Graph["nodes"][number]>(graphData.nodes)
   .force("x", d3.forceX(width/2).strength(0.03))
-  .force("y", d3.forceY(d => d.targetY).strength(0.2))
-  .force("collide", d3.forceCollide(d => rScale(d.degree)+4))
-  .force("link", d3.forceLink(graphData.links).id((d: Graph["nodes"][number]) => d.jad_id).distance(40))
+  .force("y", d3.forceY((d: Graph["nodes"][number]) => d.targetY).strength(0.2))
+  .force("collide", d3.forceCollide((d: Graph["nodes"][number]) => rScale(d.degree)+4))
+  .force("link", d3.forceLink(graphData.links).id((d: d3.SimulationNodeDatum) => (d as Graph["nodes"][number]).jad_id).distance(40))
   .on("tick", ticked);
 
 function ticked() {
@@ -178,10 +178,12 @@ function ticked() {
     });
 
   links.attr("d", d => {
-    const x1=d.source.x,y1=d.source.y,x2=d.target.x,y2=d.target.y;
-    const dx=x2-x1, dy=y2-y1;
-    const dr=Math.sqrt(dx*dx+dy*dy)*0.6;
-    const sweep = x1<x2 ? 1:0;
+    const source = typeof d.source === "object" ? d.source : nodeById.get(d.source);
+    const target = typeof d.target === "object" ? d.target : nodeById.get(d.target);
+    const x1 = source?.x ?? 0, y1 = source?.y ?? 0, x2 = target?.x ?? 0, y2 = target?.y ?? 0;
+    const dx = x2 - x1, dy = y2 - y1;
+    const dr = Math.sqrt(dx * dx + dy * dy) * 0.6;
+    const sweep = x1 < x2 ? 1 : 0;
     return `M${x1},${y1} A${dr},${dr} 0 0,${sweep} ${x2},${y2}`;
   });
 
@@ -192,7 +194,7 @@ function ticked() {
 const zoom = d3.zoom().scaleExtent([0.5,8]).on("zoom", event => {
   canvas.attr("transform", event.transform);
 });
-svg.call(zoom);
+svg.call(zoom as any);
 
 // connect to store for filteredID
 
@@ -210,7 +212,7 @@ filteredIds.subscribe((ids) => {
 
 // --- helpers ---
 //highlight on mouse over
-function highlightNode(d){
+function highlightNode(d: Graph["nodes"][number]){
   const neighbors = neighborMap.get(d.jad_id);
   nodes.attr("fill", n => n.id===d.id 
                   ? "red"
@@ -245,8 +247,8 @@ function highlightNodesByIds(ids: Set<string>) {
   .attr("opacity", d => ids.has(d.jad_id) ? 1 : 0.15)
 
   links
-    .attr("stroke", "#ccc")
-    .attr("stroke-opacity", 0.1);
+    .attr("stroke", l => ids.has(getSourceNodeJadId(l)) ? "green" : "#ccc")
+    .attr("stroke-opacity", l => ids.has(getSourceNodeJadId(l)) ? 0.5 : 0.1);
 }
 //helpers to refer to link which becomes objects after simulation but should be string | Node
 // after simulation { source: 1, target: 550} ->  {source: { id: 1, jad_id: "jad_occurrence__1", ... }
