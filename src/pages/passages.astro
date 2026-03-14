@@ -6,7 +6,6 @@ import { passagesTableConfig } from "@/lib/tabulator-table-configs.js";
 import passagesjson from "@/content/data/passages.json";
 import authorsjson from "@/content/data/authors.json"
 import manuscriptsjson from "@/content/data/manuscripts.json"
-import PassagesTimeline from "@/components/visualisations/passages-timeline.astro";
 import LeafletMap from "@/components/map-leaflet.svelte";
 import { processPassagesMap } from "@/lib/make-geojson.js";
 const geoJsonData = processPassagesMap(authorsjson, manuscriptsjson);
@@ -44,23 +43,7 @@ if (!columns || columns.length === 0) {
 
 <PageLayout title="passages">
   <TableHead title="Passages">
-    <details name="extraPanel">
-      <summary
-        class="rounded-md py-2 px-4 bg-brand-400 text-brand-100 hover:bg-brand-700 hover:text-brand-50 transition cursor-pointer mb-4 select-none"
-      >
-        Passages Timeline Graph
-      </summary>
-
-      {
-        tableData && tableData.length > 0 ? (
-          <PassagesTimeline />
-        ) : (
-          <div class="p-4 text-center text-gray-500 border border-gray-200 rounded-md">
-            No data available for timeline visualization
-          </div>
-        )
-      }
-    </details>
+    
     <details name="extraPanel">
       <summary
         class="rounded-md py-2 px-4 bg-brand-400 text-brand-100 hover:bg-brand-700 hover:text-brand-50 transition cursor-pointer mb-4 select-none"
