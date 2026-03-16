@@ -54,6 +54,21 @@
 :root {
   --brand-600: #953c04;
 }
+
+dialog:not([open]) {
+  display: none;
+}
+
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5); /* optional: dark overlay */
+}
 /******************************************/
 /********* css for TABULATOR.js ***********/
 /********************************************/

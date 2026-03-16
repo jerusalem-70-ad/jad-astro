@@ -172,13 +172,18 @@ nodes.on("mouseover", function(event,d){
   tooltip.style("visibility","hidden");
   labels.attr("opacity",0);
 })
-// .on("click", function (event, d) {
-//   event.stopPropagation();
-//   bringToFront(d3.select(this));
-//   console.log("Clicked node:", d);
-//   selectedJadId.subscribe()
-//   selectedJadId.set(d.jad_id);
-// });
+.on("click", function (event, d) {
+  event.stopPropagation();
+  bringToFront(d3.select(this));
+  console.log("Clicked node:", d);
+  selectedJadId.set(d.jad_id);
+   
+ 
+});
+
+svg.on("click", () => {
+  selectedJadId.set(null);
+});
 
 // --- force simulation ---
 const simulation = d3.forceSimulation<Graph["nodes"][number]>(graphData.nodes)

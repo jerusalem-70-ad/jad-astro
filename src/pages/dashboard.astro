@@ -2,10 +2,12 @@
 import SearchPanel from "@/components/search/search-panel.svelte"
 import PageLayout from "@/layouts/page-layout.astro"
 import Graph from "@/components/visualisations/passage-tree-d3.astro"
+import Dialog from "@/components/visualisations/dialog-card.svelte"
 ---
 <PageLayout title="Dashboard">
-    <div class="grid grid-cols-[1fr_6fr]">
+    <div class="grid grid-cols-[1fr_7fr_6fr]">
         <SearchPanel client:only="svelte"></SearchPanel>
-        <Graph></Graph>
+        <Graph></Graph> 
+        <Dialog client:only="svelte"/>       
     </div>
 </PageLayout>
