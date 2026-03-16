@@ -6,13 +6,15 @@ export let items: { name: string; count?: number }[];
 export let field: string;   // which filter field to update
 
 let query = "";
+let visibleCount = 5;
 $: currentFilters = $filters;
 $: filteredItems = items
   .filter(a =>
     a.name.toLowerCase().includes(query.toLowerCase()) ||
     currentFilters[field].includes(a.name.toLowerCase())  // keep selected facet in the itemlist
-  )
-  .slice(0, 5);
+  );
+
+$: visibleItems = filteredItems.slice(0, visibleCount)
 
 function toggle(name: string) {
 
@@ -29,21 +31,36 @@ function toggle(name: string) {
   };
 });
 }
+
+function showMore() {
+  visibleCount += 5;
+}
 </script>
 
-<div class="filter">
-  <h3 class="font-semibold mb-2">{title}</h3>
-  
+<div class="border border-neutral-200 shadow-xs rounded-md p-2">
+<details>
+  <summary class="flex gap-2 font-semibold cursor-pointer uppercase">
+    <h3 class="font-semibold mb-2">{title}</h3>
+    <svg
+        class="w-4 h-4 text-neutral-500 group-open:rotate-180 transition-transform"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"                >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+    </svg>
+  </summary>
+  <div class="max-h-72 overflow-y-auto pr-1">
  <input
     type="search"
     aria-label={`Search ${title}`}
     bind:value={query}
     placeholder={`Search ${title.toLowerCase()}...`}
-    class="p-2 border border-neutral-300 rounded-md w-full"
+    class="p-2 border border-neutral-300 rounded-md w-full bg-white"
   />
 
   <ul class="mt-2 space-y-1">
-    {#each filteredItems as item}
+    {#each visibleItems as item}
       <li>
         <label for={`${field}-${item.name}`} class="flex items-center gap-2">
          <input
@@ -62,4 +79,15 @@ function toggle(name: string) {
       </li>
     {/each}
   </ul>
+   {#if visibleCount < filteredItems.length}
+      <button
+        type="button"
+        on:click={showMore}
+        class="mt-2 text-sm text-brand-700 cursor-pointer underline underline-offset-2 hover:to-brand-500"
+      >
+        Show more
+      </button>
+    {/if}
+  </div>
+</details>
 </div>

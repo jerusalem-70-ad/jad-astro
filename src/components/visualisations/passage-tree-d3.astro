@@ -11,6 +11,10 @@ import type { Graph } from "@/types/index"
 
 const graphData: Graph = passageGraph 
 let activeFilterIds: Set<string> | null = null;
+const nodeColor: string = "#6f2009"
+const highlightNodeColor : string = "#a92d03"
+const neighborNode : string = "#e5894a"
+const linkColor: string = "#0b331b"
 
 
 //a new Map for storing degree for radius and neighbours highlighting functions etc.
@@ -58,9 +62,13 @@ const rScale = d3.scaleSqrt()
   .domain([0, d3.max(graphData.nodes, (d: Graph["nodes"][number]) => d.degree) ?? 0])
   .range([4, 14]);
 
-const yScale = d3.scaleLinear().domain([50,1600]).range([height,0]);
-const yAxis = d3.axisRight(yScale);
+const yScale = d3.scaleLinear()
+  .domain([50,1600])
+  .range([height - 5, 0]);
 
+const yAxis = d3.axisRight(yScale)
+  .ticks(10)
+  .tickFormat(d3.format("d")) // remove commas 1200 instead of 1,200
 
 // start drawing
 // --- tooltip ---
@@ -79,9 +87,7 @@ const svg: d3.Selection<SVGSVGElement, unknown, HTMLElement, any> = d3.select("#
   .attr("height", height)
   .style("outline","thin solid red");
 
-svg.append("g").call(yAxis);
-
-const canvas = svg.append("g").attr("class","canvas").attr("transform","translate(60,0)");
+const canvas = svg.append("g").attr("class","canvas").attr("transform","translate(40,0)");
 const linksGroup = canvas.append("g").attr("class","links");
 const nodesGroup = canvas.append("g").attr("class","nodes");
 const labelsGroup = canvas.append("g").attr("class","labels")
@@ -107,22 +113,39 @@ const nodes = nodesGroup.selectAll("circle")
   .data(graphData.nodes)
   .enter().append("circle")
   .attr("r", d => rScale(d.degree))
-  .attr("fill","#6f2009")
+  .attr("fill", nodeColor)
   .attr("cx", d => d.x)
   .attr("cy", d => d.y);
+
 
 // --- draw labels ---
 const labels = labelsGroup.selectAll("text")
   .data(graphData.nodes)
-  .enter().append("text")
+  .enter()
+  .append("text")
   .attr("x", d => d.x)
   .attr("y", d => d.y)
   .text(d => d.name ?? d.id)
-  .attr("font-size",10)
-  .attr("fill","black")
+  .attr("font-size", 10)
+  .attr("fill", "black")
   .attr("pointer-events", "none")
-  .attr("opacity",0);
+  .attr("opacity", 0)
+  .attr("paint-order", "stroke")
+  .attr("stroke", "white")
+  .attr("stroke-width", 3)
+  .attr("stroke-linejoin", "round");
 
+  // -- draw yaxis with year after nodes to be on top visible
+const yAxisGroup = svg.append("g")
+  .attr("transform","translate(10,0)")
+  .call(yAxis);
+
+yAxisGroup.selectAll(".tick text")
+  .clone(true)
+  .lower()
+  .attr("style", "background-color: green")
+  .attr("stroke", "white")
+  .attr("stroke-width", 3);
 // --- hover ---
 nodes.on("mouseover", function(event,d){
 
@@ -160,20 +183,22 @@ nodes.on("mouseover", function(event,d){
 // --- force simulation ---
 const simulation = d3.forceSimulation<Graph["nodes"][number]>(graphData.nodes)
   .force("x", d3.forceX(width/2).strength(0.03))
-  .force("y", d3.forceY((d: Graph["nodes"][number]) => d.targetY).strength(0.2))
-  .force("collide", d3.forceCollide((d: Graph["nodes"][number]) => rScale(d.degree)+4))
+  .force("y", d3.forceY((d: Graph["nodes"][number]) => d.targetY).strength(0.1))
+  .force("collide", d3.forceCollide((d: Graph["nodes"][number]) => rScale(d.degree)+4).iterations(3))
   .force("link", d3.forceLink(graphData.links).id((d: d3.SimulationNodeDatum) => (d as Graph["nodes"][number]).jad_id).distance(40))
   .on("tick", ticked);
 
 function ticked() {
   const yearMargin = 40;
   const pixelMargin = Math.abs(yScale(0)-yScale(yearMargin));
+  
   nodes
     .attr("cx", d => d.x)
     .attr("cy", d => {
       const minY = d.targetY - pixelMargin;
       const maxY = d.targetY + pixelMargin;
-      d.y = Math.max(minY, Math.min(maxY,d.y));
+      if (d.y < minY) d.y += (minY - d.y) * 0.2;
+      if (d.y > maxY) d.y -= (d.y - maxY) * 0.2;
       return d.y;
     });
 
@@ -192,7 +217,14 @@ function ticked() {
 
 // --- zoom ---
 const zoom = d3.zoom().scaleExtent([0.5,8]).on("zoom", event => {
-  canvas.attr("transform", event.transform);
+  canvas.attr("transform", event.transform); //redraws nodes and links
+  const newY = event.transform.rescaleY(yScale); // get new value for the scale on the y axis
+
+      yAxisGroup.call(
+        d3.axisRight(newY)
+          .ticks(10)
+          .tickFormat((domainValue) => typeof domainValue === "number" ? d3.format("d")(domainValue) : String(domainValue))
+      ); //redraws axis with ticks 
 });
 svg.call(zoom as any);
 
@@ -213,23 +245,38 @@ filteredIds.subscribe((ids) => {
 // --- helpers ---
 //highlight on mouse over
 function highlightNode(d: Graph["nodes"][number]){
-  const neighbors = neighborMap.get(d.jad_id);
-  nodes.attr("fill", n => n.id===d.id 
-                  ? "red"
-                  : neighbors.has(n.jad_id) ? "blue" : "#ccc")
-       .attr("r", n => n.id===d.id ? rScale(n.degree)*1.5 : rScale(n.degree));
-  links.attr("stroke", l => getSourceNodeJadId(l) ===d.jad_id || getTargetNodeJadId(l)===d.jad_id ? "green":"#ccc")
+  const neighbors = neighborMap.get(d.jad_id) ?? new Set();
+   nodes
+    .attr("fill", n => {
+      if (n.id === d.id) return highlightNodeColor;
+      if (neighbors.has(n.jad_id)) return neighborNode;
+
+      if (activeFilterIds) {
+        return activeFilterIds.has(n.jad_id) ? nodeColor : "#ccc";
+      }
+
+      return "#ccc";
+    })
+    .attr("opacity", n => {
+      if (n.id === d.id || neighbors.has(n.jad_id)) return 1;
+      if (activeFilterIds) return activeFilterIds.has(n.jad_id) ? 1 : 0.15;
+      return 0.2;
+    })
+    .attr("r", n =>
+      n.id === d.id ? rScale(n.degree) * 1.5 : rScale(n.degree)
+    );
+  links.attr("stroke", l => getSourceNodeJadId(l) ===d.jad_id || getTargetNodeJadId(l)===d.jad_id ? linkColor : "#ccc")
        .attr("stroke-opacity", l => getSourceNodeJadId(l) ===d.jad_id || getTargetNodeJadId(l)===d.jad_id ? 1:0.2);
 }
 function resetHighlight(){
  
   nodes
-    .attr("fill","#87260c")
+    .attr("fill", nodeColor)
     .attr("opacity",1)
     .attr("r", d => rScale(d.degree));
 
   links
-    .attr("stroke","#86705f")
+    .attr("stroke", linkColor)
     .attr("stroke-opacity",1);
   if (activeFilterIds) {
     highlightNodesByIds(activeFilterIds);
@@ -243,12 +290,20 @@ function bringToFront(selection: d3.Selection<SVGCircleElement, any, any, any>){
 function highlightNodesByIds(ids: Set<string>) {
 
   nodes
-  .attr("fill", d => ids.has(d.jad_id) ? "red" : "#87260c")
-  .attr("opacity", d => ids.has(d.jad_id) ? 1 : 0.15)
-
+    .attr("fill", d => ids.has(d.jad_id) ? highlightNodeColor : nodeColor)
+    .attr("opacity", d => ids.has(d.jad_id) ? 1 : 0.15);
+// highlight only links which have both source and target in the ids set
   links
-    .attr("stroke", l => ids.has(getSourceNodeJadId(l)) ? "green" : "#ccc")
-    .attr("stroke-opacity", l => ids.has(getSourceNodeJadId(l)) ? 0.5 : 0.1);
+    .attr("stroke", l =>
+      ids.has(getTargetNodeJadId(l)) && ids.has(getSourceNodeJadId(l))
+        ? linkColor
+        : "#ccc"
+    )
+    .attr("stroke-opacity", l =>
+      ids.has(getTargetNodeJadId(l)) && ids.has(getSourceNodeJadId(l))
+        ? 0.5
+        : 0.1
+    );
 }
 //helpers to refer to link which becomes objects after simulation but should be string | Node
 // after simulation { source: 1, target: 550} ->  {source: { id: 1, jad_id: "jad_occurrence__1", ... }

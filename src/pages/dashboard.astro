@@ -4,7 +4,7 @@ import PageLayout from "@/layouts/page-layout.astro"
 import Graph from "@/components/visualisations/passage-tree-d3.astro"
 ---
 <PageLayout title="Dashboard">
-    <div class="grid grid-cols-[1fr_4fr]">
+    <div class="grid grid-cols-[1fr_6fr]">
         <SearchPanel client:only="svelte"></SearchPanel>
         <Graph></Graph>
     </div>
