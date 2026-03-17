@@ -1,12 +1,14 @@
-<div class="m-1 w-full">
-  <div id="graph-container"></div>
-</div>
-
-<script>
+<script lang="ts">
+import { onMount } from "svelte";
 import * as d3 from "d3";
 import passageGraph from "@/content/data/passage-graph.json";
 import { filteredIds, selectedJadId } from "@/stores/jad_store";
 import type { Graph } from "@/types/index"
+
+let container: HTMLDivElement;
+
+onMount(() => {
+
 
 
 const graphData: Graph = passageGraph 
@@ -71,9 +73,14 @@ const yAxis = d3.axisRight(yScale)
   .tickFormat(d3.format("d")) // remove commas 1200 instead of 1,200
 
 // start drawing
+
+const root = d3.select(container); 
+const svg = root.append("svg")
+    .attr("width", 1200)
+    .attr("height", 1000);
 // --- tooltip ---
-const tooltip = d3.select("#graph-container").append("div")
-  .style("position","absolute")
+const tooltip = root.append("div")
+  .style("position","fixed")
   .style("background","white")
   .style("border","1px solid #999")
   .style("padding","4px 6px")
@@ -81,11 +88,6 @@ const tooltip = d3.select("#graph-container").append("div")
   .style("pointer-events","none")
   .style("visibility","hidden");
 
-// --- SVG ---
-const svg: d3.Selection<SVGSVGElement, unknown, HTMLElement, any> = d3.select("#graph-container").append("svg")
-  .attr("width", width)
-  .attr("height", height)
-  .style("outline","thin solid red");
 
 const canvas = svg.append("g").attr("class","canvas").attr("transform","translate(40,0)");
 const linksGroup = canvas.append("g").attr("class","links");
@@ -146,11 +148,21 @@ yAxisGroup.selectAll(".tick text")
   .attr("style", "background-color: green")
   .attr("stroke", "white")
   .attr("stroke-width", 3);
-// --- hover ---
-nodes.on("mouseover", function(event,d){
 
+// --- hover ---
+
+let tooltipEl;
+
+nodes.on("mouseenter", function(event,d){
+ tooltip.style("visibility","visible")
+   .html(`<strong>#${d.id} ${d.name ?? ""}</strong><br/>
+          <span>Year: ${d.dateNotBefore} - ${d.dateNotAfter}</span><br/>
+                   <span>Related passages: ${d.degree || 0}</span>`);
+
+  tooltipEl = this;
+  updateTooltipPosition();
   highlightNode(d);
-  bringToFront(d3.select(this));
+  
 
   const neighbors = neighborMap.get(d.jad_id) || new Set();
   labels
@@ -159,66 +171,72 @@ nodes.on("mouseover", function(event,d){
       if(neighbors.has(n.jad_id)) this.parentNode.appendChild(this);
     });
 
-  tooltip.style("visibility","visible")
-    .html(`<strong>#${d.id} ${d.name ?? ""}</strong><br/>
-           <span>Year: ${d.dateNotBefore} - ${d.dateNotAfter}</span><br/>
-                    <span>Related passages: ${d.degree || 0}</span>`);
 })
-.on("mousemove", event => {
-  tooltip.style("left",(event.pageX+10)+"px").style("top",(event.pageY+10)+"px");
-})
-.on("mouseout", () => {
+
+
+.on("mouseleave", () => {
   resetHighlight();
-  tooltip.style("visibility","hidden");
+   tooltip.style("visibility", "hidden");
   labels.attr("opacity",0);
 })
-.on("click", function (event, d) {
-  event.stopPropagation();
-  bringToFront(d3.select(this));
-  console.log("Clicked node:", d);
-  selectedJadId.set(d.jad_id);
-   
- 
-});
+//not using on click, cause of stupid chrome 
+// nodes are moving? not the same pixel during click
+// better use pointerdown, but with delay so that one can drag the graph without accidental clicks
+let downTime = 0;
 
-svg.on("click", () => {
-  selectedJadId.set(null);
-});
+nodes
+  .on("pointerdown", function (event, d) {
+    downTime = Date.now();
+  })
+  .on("pointerup", function (event, d) {
+    if (Date.now() - downTime < 200) {
+      console.log("Click-like interaction", d);
+      selectedJadId.set(d.jad_id);
+    }
+  });
+
+svg.on("pointerdown", () => {
+  selectedJadId.set(null),
+  resetHighlight();
+})
+
 
 // --- force simulation ---
 const simulation = d3.forceSimulation<Graph["nodes"][number]>(graphData.nodes)
-  .force("x", d3.forceX(width/2).strength(0.03))
+  .force("x", d3.forceX(width/2).strength(0.01))
   .force("y", d3.forceY((d: Graph["nodes"][number]) => d.targetY).strength(0.1))
   .force("collide", d3.forceCollide((d: Graph["nodes"][number]) => rScale(d.degree)+4).iterations(3))
-  .force("link", d3.forceLink(graphData.links).id((d: d3.SimulationNodeDatum) => (d as Graph["nodes"][number]).jad_id).distance(40))
-  .on("tick", ticked);
+  .force("link", d3.forceLink(graphData.links).id((d: d3.SimulationNodeDatum) => (d as Graph["nodes"][number]).jad_id).distance(40)) 
+  .on("tick", () => {
+    const yearMargin = 40;
+    const pixelMargin = Math.abs(yScale(0)-yScale(yearMargin));
+    nodes
+      .attr("cx", d => d.x)
+      .attr("cy", d => {
+        const minY = d.targetY - pixelMargin;
+        const maxY = d.targetY + pixelMargin;
+        if (d.y < minY) d.y += (minY - d.y) * 0.2;
+        if (d.y > maxY) d.y -= (d.y - maxY) * 0.2;
+        return d.y;
+      });
 
-function ticked() {
-  const yearMargin = 40;
-  const pixelMargin = Math.abs(yScale(0)-yScale(yearMargin));
-  
-  nodes
-    .attr("cx", d => d.x)
-    .attr("cy", d => {
-      const minY = d.targetY - pixelMargin;
-      const maxY = d.targetY + pixelMargin;
-      if (d.y < minY) d.y += (minY - d.y) * 0.2;
-      if (d.y > maxY) d.y -= (d.y - maxY) * 0.2;
-      return d.y;
+    links.attr("d", d => {
+      const source = typeof d.source === "object" ? d.source : nodeById.get(d.source);
+      const target = typeof d.target === "object" ? d.target : nodeById.get(d.target);
+      const x1 = source?.x ?? 0, y1 = source?.y ?? 0, x2 = target?.x ?? 0, y2 = target?.y ?? 0;
+      const dx = x2 - x1, dy = y2 - y1;
+      const dr = Math.sqrt(dx * dx + dy * dy) * 0.6;
+      const sweep = x1 < x2 ? 1 : 0;
+      return `M${x1},${y1} A${dr},${dr} 0 0,${sweep} ${x2},${y2}`;
     });
 
-  links.attr("d", d => {
-    const source = typeof d.source === "object" ? d.source : nodeById.get(d.source);
-    const target = typeof d.target === "object" ? d.target : nodeById.get(d.target);
-    const x1 = source?.x ?? 0, y1 = source?.y ?? 0, x2 = target?.x ?? 0, y2 = target?.y ?? 0;
-    const dx = x2 - x1, dy = y2 - y1;
-    const dr = Math.sqrt(dx * dx + dy * dy) * 0.6;
-    const sweep = x1 < x2 ? 1 : 0;
-    return `M${x1},${y1} A${dr},${dr} 0 0,${sweep} ${x2},${y2}`;
-  });
+    labels.attr("x", d => d.x+5).attr("y", d => d.y-5);
 
-  labels.attr("x", d => d.x+5).attr("y", d => d.y-5);
-}
+      // fast-forward simulation
+      simulation.tick(10);
+    });
+
+
 
 // --- zoom ---
 const zoom = d3.zoom().scaleExtent([0.5,8]).on("zoom", event => {
@@ -231,6 +249,7 @@ const zoom = d3.zoom().scaleExtent([0.5,8]).on("zoom", event => {
           .tickFormat((domainValue) => typeof domainValue === "number" ? d3.format("d")(domainValue) : String(domainValue))
       ); //redraws axis with ticks 
 });
+
 svg.call(zoom as any);
 
 // connect to store for filteredID
@@ -287,10 +306,6 @@ function resetHighlight(){
     highlightNodesByIds(activeFilterIds);
   }
 }
-function bringToFront(selection: d3.Selection<SVGCircleElement, any, any, any>){
-  selection.each(function(){ this.parentNode.appendChild(this); });
-}
-
 
 function highlightNodesByIds(ids: Set<string>) {
 
@@ -310,9 +325,21 @@ function highlightNodesByIds(ids: Set<string>) {
         : 0.1
     );
 }
-//helpers to refer to link which becomes objects after simulation but should be string | Node
-// after simulation { source: 1, target: 550} ->  {source: { id: 1, jad_id: "jad_occurrence__1", ... }
+// need to get the position based on node
+function updateTooltipPosition() {
+  if (!tooltipEl) return;
 
+  const rect = tooltipEl.getBoundingClientRect();
 
+  tooltip
+    .style("left", rect.x + rect.width / 2 + 5 + "px")
+    .style("top", rect.y + "px");
+}
 
+});
 </script>
+
+
+<div class="m-1 w-full">
+  <div id="graph-container" bind:this={container}></div>
+</div>
