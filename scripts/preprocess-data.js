@@ -615,6 +615,35 @@ passagesForCompare.forEach((p) => {
   );
 });
 
+const passagesForGraphs = passagesPlusWorks.map((p) => {
+  const workTitle = p.work.map((w) => w.title).join(", ");
+  const author = p.work[0].author?.map((a) => a.name).join(", ");
+  const position = p.position_in_work;
+  const title =
+    position && author
+      ? `${author}: ${workTitle} (${position})`
+      : author
+        ? `${author}: ${workTitle}`
+        : workTitle;
+  return {
+    id: p.id,
+    jad_id: p.jad_id,
+    title: title,
+    place: p.work[0].author[0]?.place.map((p) => p.value),
+    date: p.work[0].date[0]?.value,
+    genre: p.work[0].genre,
+    passage: p.passage,
+    liturgical_references: p.liturgical_references,
+    biblical_ref_lvl0: p.biblical_ref_lvl0,
+  };
+});
+
+writeFileSync(
+  join(folderPath, "passagesForGraphs.json"),
+  JSON.stringify(passagesForGraphs, null, 2),
+  { encoding: "utf-8" },
+);
+
 // enrich passages with data from passagesPlus and worksPlus for the source_passages
 const passagesPlusPlus = passagesPlusWorks.map((p) => {
   const source_passages = p.source_passage.map((sp) => {
@@ -666,7 +695,6 @@ enrichedPassages.forEach((passage) => {
     if (!graphData.nodes.some((n) => n.id === node.id)) {
       graphData.nodes.push({
         ...node,
-        sourcePassage: node.passage,
         jad_id: node.jad_id,
       });
     }

@@ -4,14 +4,16 @@ import * as d3 from "d3";
 import passageGraph from "@/content/data/passage-graph.json";
 import { filteredIds, selectedJadId } from "@/stores/jad_store";
 import type { Graph } from "@/types/index"
+import {dataPassagesGraph} from "@/stores/jad_store";
 
 let container: HTMLDivElement;
 
 onMount(() => {
 
+const graphData: Graph = passageGraph; 
 
+$dataPassagesGraph = graphData;
 
-const graphData: Graph = passageGraph 
 let activeFilterIds: Set<string> | null = null;
 const nodeColor: string = "#6f2009"
 const highlightNodeColor : string = "#a92d03"
@@ -57,7 +59,7 @@ graphData.nodes.forEach(d => {
   d.degree = neighborMap.get(d.jad_id).size;
 });
 
-const width = 1200;
+const width = 1000;
 const height = 1000;
 
 const rScale = d3.scaleSqrt()
@@ -76,8 +78,8 @@ const yAxis = d3.axisRight(yScale)
 
 const root = d3.select(container); 
 const svg = root.append("svg")
-    .attr("width", 1200)
-    .attr("height", 1000);
+    .attr("width", width)
+    .attr("height", height);
 // --- tooltip ---
 const tooltip = root.append("div")
   .style("position","fixed")
@@ -203,7 +205,7 @@ svg.on("pointerdown", () => {
 
 // --- force simulation ---
 const simulation = d3.forceSimulation<Graph["nodes"][number]>(graphData.nodes)
-  .force("x", d3.forceX(width/2).strength(0.01))
+  .force("x", d3.forceX(width/2).strength(0.03))
   .force("y", d3.forceY((d: Graph["nodes"][number]) => d.targetY).strength(0.1))
   .force("collide", d3.forceCollide((d: Graph["nodes"][number]) => rScale(d.degree)+4).iterations(3))
   .force("link", d3.forceLink(graphData.links).id((d: d3.SimulationNodeDatum) => (d as Graph["nodes"][number]).jad_id).distance(40)) 
@@ -340,6 +342,7 @@ function updateTooltipPosition() {
 </script>
 
 
-<div class="m-1 w-full">
+<div class=" p-3 border ">
+ <h2 class="text-2xl font-bold mb-4 text-brand-950">Chronological graph</h2>
   <div id="graph-container" bind:this={container}></div>
 </div>

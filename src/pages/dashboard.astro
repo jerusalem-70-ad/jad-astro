@@ -3,11 +3,19 @@ import SearchPanel from "@/components/search/search-panel.svelte"
 import PageLayout from "@/layouts/page-layout.astro"
 import Graph from "@/components/visualisations/passage-tree-d3.svelte"
 import Dialog from "@/components/visualisations/dialog-card.svelte"
+import GenrePieChart from "@/components/visualisations/genre-piechart.svelte";
+import BiblBookGraph from "@/components/visualisations/bible-books.svelte"
 ---
 <PageLayout title="Dashboard">
-    <div class="grid grid-cols-[1fr_7fr_6fr]">
-        <SearchPanel client:only="svelte"></SearchPanel>
-        <Graph client:only="svelte"/>
-        <Dialog client:only="svelte"/>       
+    <div class="flex h-screen">
+        <aside class="sticky top-0 self-start w-80">
+            <SearchPanel client:only="svelte"></SearchPanel>
+        </aside>
+        <div class="grid gap-3 grid-cols-[repeat(auto-fit,minmax(1000px,1fr))] overflow-auto">
+            <Graph client:only="svelte"/>
+            <GenrePieChart client:only="svelte" />
+            <BiblBookGraph client:only="svelte"/>
+        </div>
     </div>
+    <Dialog client:only="svelte"/>       
 </PageLayout>

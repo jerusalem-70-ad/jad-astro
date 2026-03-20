@@ -12,3 +12,8 @@ export const filters = writable({
 });
 
 export const filteredIds = writable(new Set());
+
+export const dataPassagesGraph = writable({
+  nodes: [],
+  links: [],
+});

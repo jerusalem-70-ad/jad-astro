@@ -1,7 +1,7 @@
 ---
 import PageLayout from "@/layouts/page-layout.astro";
 import NavLink from "@/components/nav-link.astro";
-import GenrePieChart from "@/components/visualisations/genre-piechart.astro";
+import GenrePieChart from "@/components/visualisations/genre-piechart.svelte";
 import GenreWorkPiechart from "@/components/visualisations/genre-work-piechart.astro";
 import BiblGraph from "@/components/visualisations/bibl-ref-graph.astro"
 import BibleBooks from "@/components/visualisations/bible-books.astro";
@@ -15,15 +15,18 @@ import LiturgicalRefs from "@/components/visualisations/liturgical-ref.astro"
         Explore patterns in the data
       </h1>
       <p class="max-w-full prose">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta maximus nunc, id vestibulum odio. Phasellus pharetra tortor ut dolor finibus condimentum nec mattis diam. Suspendisse lacus lorem, porttitor id commodo id, fermentum sit amet tortor. In quis imperdiet justo, nec dictum massa. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus efficitur at tortor eu imperdiet. Donec aliquam iaculis tortor, in sagittis ante pellentesque gravida. </p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta maximus nunc, id 
+        vestibulum odio. Phasellus pharetra tortor ut dolor finibus condimentum nec mattis diam. 
+        Suspendisse lacus lorem, porttitor id commodo id, fermentum sit amet tortor. In quis 
+        imperdiet justo, nec dictum massa. Orci varius natoque penatibus et magnis dis parturient 
+        montes, nascetur ridiculus mus. Phasellus efficitur at tortor eu imperdiet. Donec aliquam 
+        iaculis tortor, in sagittis ante pellentesque gravida. </p>
       
       <GenreWorkPiechart/>
-      <GenrePieChart />
+      <GenrePieChart client:only="svelte"/>
       <BibleBooks/>
       <BiblGraph/>
       <LiturgicalRefs/>
-      <!-- <ChronologicalGraph />
-      <PassageNetwork /> -->
       <NavLink
         href="/passages-network"
         class="underline underline-offset-4 hover:text-brand-800 transition"

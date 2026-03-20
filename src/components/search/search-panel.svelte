@@ -3,15 +3,15 @@ import FilterList from "@/components/search/filter.svelte";
 import { filters } from "@/stores/jad_store.js";
 import { runSearch } from "@/lib/search/typsense-search.js";
 
-let authors = [];
-let works = [];
-let genres = [];
-let keywords = [];
-let place = [];
+let authors : Array<{name: string, count: number}> = [];
+let works : Array<{name: string, count: number}> = [];
+let genres : Array<{name: string, count: number}> = [];
+let keywords : Array<{name: string, count: number}> = [];
+let place : Array<{name: string, count: number}> = [];
 
 let searchToken = 0;
 // async function to start typsense query
-async function updateSearch(currentFilters) {
+async function updateSearch(currentFilters: any) {
 
   const token = ++searchToken;  // to avoid queries overlapping
 
@@ -21,7 +21,7 @@ async function updateSearch(currentFilters) {
   if (token !== searchToken || !res) return; // if this is not the most recent query, abort
 
   const facets = res.facet_counts ?? []; // take the facets list and counts from typsense
-  const getFacet = (name) =>
+  const getFacet = (name: string) =>
   facets.find(f => f.field_name === name)?.counts ?? [];
   //prepare the data for filter list from the typsense response on facets
   authors = getFacet("work.author.name").map(c => ({
@@ -58,7 +58,9 @@ $: updateSearch($filters);
   
 </script>
 
-<div class="search-panel space-y-4 px-8 py-5">
+<div class="search-panel space-y-4 p-4 bg-brand-200/10 border-r">
+
+            <h2 class="text-lg font-bold">Filters</h2>
   
    <FilterList
     title="Authors"

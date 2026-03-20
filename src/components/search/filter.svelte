@@ -37,10 +37,10 @@ function showMore() {
 }
 </script>
 
-<div class="border border-neutral-200 shadow-xs rounded-md p-2">
+<div class="text-xs border border-neutral-200 shadow-xs rounded-md p-2">
 <details>
-  <summary class="flex gap-2 font-semibold cursor-pointer uppercase">
-    <h3 class="font-semibold mb-2">{title}</h3>
+  <summary class="flex justify-between gap-2 font-semibold cursor-pointer uppercase">
+    <h3 class="font-semibold ">{title}</h3>
     <svg
         class="w-4 h-4 text-neutral-500 group-open:rotate-180 transition-transform"
         fill="none"
@@ -56,7 +56,7 @@ function showMore() {
     aria-label={`Search ${title}`}
     bind:value={query}
     placeholder={`Search ${title.toLowerCase()}...`}
-    class="p-2 border border-neutral-300 rounded-md w-full bg-white"
+    class="mt-2 p-2 border border-neutral-300 rounded-md w-full bg-white"
   />
 
   <ul class="mt-2 space-y-1">
@@ -69,7 +69,7 @@ function showMore() {
             checked={currentFilters[field].includes(item.name.toLowerCase())}
             on:change={() => toggle(item.name)}
             />
-          <span class="text-sm">
+          <span>
             {item.name}
             {#if item.count}
                 <span class="text-neutral-700">({item.count})</span>
@@ -83,7 +83,7 @@ function showMore() {
       <button
         type="button"
         on:click={showMore}
-        class="mt-2 text-sm text-brand-700 cursor-pointer underline underline-offset-2 hover:to-brand-500"
+        class="mt-2 text-brand-700 cursor-pointer underline underline-offset-2 hover:to-brand-500"
       >
         Show more
       </button>
