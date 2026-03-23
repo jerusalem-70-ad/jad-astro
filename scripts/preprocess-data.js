@@ -801,6 +801,7 @@ const manuscriptPlusPlus = manuscriptsPlus.map((ms) => {
         name: w.author[0]?.name || "",
       },
       author_certainty: w.author_certainty,
+      genre: w.genre,
     }));
   const related_occurrences = msOccurrences
     .filter((occur) => occur.manuscript.length > 0)

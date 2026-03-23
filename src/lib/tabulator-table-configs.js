@@ -286,22 +286,19 @@ export const manuscriptsTableConfig = {
                 )
                 .join("")}</ul>`
             : "";
-
+        const related_works =
+          ms.related_works
+            .map((w) => (w.author ? `${w.author.name}: ${w.title}` : w.title))
+            .join(" | ") || "";
+        const related_genres = ms.related_works.map((w) => w.genre).join(", ");
         return {
           id: ms.id || "",
           ms_name: ms.name[0].value || "",
           settlement: ms.library[0]?.place[0].value || "",
-          related_works:
-            ms.related_works
-              .map((w) => (w.author ? `${w.author.name}: ${w.title}` : w.title))
-              .join(" | ") || "",
+          related_works: related_works,
           related_passages: passages,
-
           jad_id: ms.jad_id || "",
-          institutional_context:
-            ms.institutional_context
-              .map((context) => context.value)
-              .join(" | ") || "",
+          genre: related_genres,
           origDate: ms.date_written || "",
         };
       });
@@ -340,9 +337,9 @@ export const manuscriptsTableConfig = {
         minWidth: 150,
       },
       {
-        title: "Institutional context",
+        title: "Genre",
         resizable: true,
-        field: "institutional_context",
+        field: "genre",
         responsive: 2,
         widthGrow: 2,
         minWidth: 150,
