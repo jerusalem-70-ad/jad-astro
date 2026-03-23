@@ -77,6 +77,24 @@ export interface BiblicalReference extends Reference {
   prev?: Navigation;
   next?: Navigation;
 }
+export interface LiturgicalReference {
+  id: number;
+  jad_id: string;
+  name: string;
+  description: string | null;
+  related_passages: [
+    {
+      id: number;
+      jad_id: string;
+      label: string;
+      work: string;
+      author: string;
+      position_in_work: string;
+    },
+  ];
+  prev: Navigation;
+  next: Navigation;
+}
 
 interface ReferenceAuthor {
   id?: number;

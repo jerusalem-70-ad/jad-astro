@@ -1,0 +1,70 @@
+---
+import PageLayout from "@/layouts/page-layout.astro";
+import liturgicalrefs from "@/content/data/liturgical_references.json";
+import { Icon } from "astro-icon/components";
+import NavLink from "@/components/nav-link.astro";
+import Article from "@/components/article.astro";
+import type { LiturgicalReference } from "@/types/index";
+import TabulatorTable from "@/components/tabulator-table.svelte";
+import { liturgicalrefTableConfig } from "@/lib/tabulator-table-configs.js";
+
+export async function getStaticPaths() {
+  const paths = Object.values(liturgicalrefs).map((ref) => ({
+    params: { id: ref.jad_id },
+    props: { data: ref as LiturgicalReference },
+  }));
+  return paths;
+}
+
+const { data: ref} = Astro.props;
+
+// Transform data and prepare columns for Tabulator Table
+const tableData = liturgicalrefTableConfig.transformData(ref.related_passages ?? []);
+const columns = liturgicalrefTableConfig.getColumns();
+const rowClickConfig = liturgicalrefTableConfig.getRowClickConfig;
+---
+
+<PageLayout title={ref.name}>
+  <Article
+    prevLink={`/liturgical-refs/${ref.prev.id}`}
+    nextLink={`/liturgical-refs/${ref.next.id}`}
+    mainTitle={ref.name} 
+  >
+    <dl class="grid grid-cols-[1fr_6fr] text-sm md:leading-7 md:text-base">
+      <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
+        Liturgical day:
+      </dt>
+      <dd class="pl-5">{ref.name}</dd>
+        {ref.description && (
+            <>
+            <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
+                Description:
+            </dt>
+            <dd class="pl-5">{ref.description}</dd>
+            </>
+        )}
+        {ref.related_passages.length > 0 && (
+            
+            <dt class="font-semibold text-brand-900 ">
+                Passages:
+            </dt>
+            <dd></dd>
+        )}
+     
+     
+      </dl>
+      {tableData.length > 0 && (
+    <TabulatorTable
+      client:only="svelte"
+      data={tableData}
+      columns={columns}
+      tableId="liturgical-references-table"
+      options={{
+        paginationSize: 25,
+        responsiveLayout: "collapse",
+      }}
+      downloadTitle="jad_liturgical_references"
+      rowClickConfig={rowClickConfig}
+    /> )}
+  </Article>
+  </PageLayout>

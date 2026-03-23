@@ -621,3 +621,148 @@ export const biblrefTableConfig = {
     target: "_self",
   },
 };
+
+export const liturgicalrefsTableConfig = {
+  transformData: (refs) => {
+    return refs.map((ref) => {
+      const related_works = [
+        ...new Set(
+          ref.related_passages.map(
+            (p) => `${p.author ? `${p.author}: ${p.work}` : p.work}`,
+          ),
+        ),
+      ];
+      const related_passages = [
+        ...new Set(ref.related_passages.map((p) => `(${p.id}) ${p.label}`)),
+      ];
+      const worksList =
+        related_works.length > 0
+          ? `<ul>${[...related_works]
+              .sort((a, b) => {
+                return a.localeCompare(b);
+              })
+              .map((w) => `<li>${w}</li>`)
+              .join("")}</ul>`
+          : "";
+      const passagesList =
+        related_passages.length > 0
+          ? `<ul>${[...related_passages]
+              .sort((a, b) => {
+                return a.localeCompare(b);
+              })
+              .map((w) => `<li>${w}</li>`)
+              .join("")}</ul>`
+          : "";
+      return {
+        id: ref.id || "",
+        jad_id: ref.jad_id || "",
+        label: ref.name || "",
+        text: ref.text || "",
+        works: worksList,
+        related_passages: passagesList,
+      };
+    });
+  },
+
+  getColumns() {
+    const columns = [
+      {
+        title: "Name",
+        field: "label",
+        responsive: 1,
+        widthGrow: 1,
+        minWidth: 30,
+      },
+
+      {
+        title: "Works",
+        field: "works",
+        responsive: 2,
+        widthGrow: 3,
+        formatter: "html",
+        cssClass: "scroll-cell",
+        minWidth: 200,
+      },
+
+      {
+        title: "Passages",
+        field: "related_passages",
+        minWidth: 200,
+        responsive: 3,
+        widthGrow: 3,
+      },
+    ];
+    return addHeaderFilters(columns);
+  },
+  // Row click configuration for work-mss-transmission table
+  getRowClickConfig: {
+    urlPattern: "/liturgical-refs/{id}",
+    idField: "jad_id",
+    target: "_self",
+  },
+};
+
+// Configuration for Tabulator tables in liturgical references detail view page
+export const liturgicalrefTableConfig = {
+  transformData: (passages) => {
+    return passages.map((passage) => {
+      return {
+        id: passage.id,
+        jad_id: passage.jad_id,
+        title_work: passage.work,
+        passage: passage.label,
+        aut_name: passage.author,
+        position: passage.position_in_work,
+      };
+    });
+  },
+
+  getColumns() {
+    const columns = [
+      {
+        title: "#",
+        field: "id",
+        responsive: 1,
+        widthGrow: 1,
+        maxWidth: 40,
+      },
+      {
+        title: "Passage",
+        field: "passage",
+        responsive: 1,
+        widthGrow: 3,
+        minWidth: 150,
+      },
+
+      {
+        title: "Author",
+        field: "aut_name",
+        minWidth: 100,
+        widthGrow: 2,
+        responsive: 2,
+        formatter: "textarea",
+      },
+      {
+        title: "Work",
+        field: "title_work",
+        minWidth: 100,
+        widthGrow: 2,
+        responsive: 1,
+      },
+
+      {
+        title: "Position in Work",
+        field: "position",
+        minWidth: 50,
+        responsive: 2,
+      },
+    ];
+    return addHeaderFilters(columns);
+  },
+  // Row click configuration for work-mss-transmission table
+  getRowClickConfig: {
+    urlPattern: "/passages/{id}",
+    idField: "jad_id",
+    target: "_self",
+  },
+};

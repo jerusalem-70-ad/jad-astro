@@ -71,16 +71,6 @@ writeFileSync(
 );
 console.log("institutional_context.json file written successfully.");
 
-const liturgicalRefClean = liturgical_references
-  .filter((ref) => ref.name)
-  .map(({ order, ...rest }) => rest);
-writeFileSync(
-  join(folderPath, "liturgical_references.json"),
-  JSON.stringify(liturgicalRefClean, null, 2),
-  { encoding: "utf-8" },
-);
-console.log("liturgical_references.json file written successfully.");
-
 // enrich places with geonames_url, jad_id, lat, long from places.json
 // used in authors.json and manuscripts.json
 
@@ -889,6 +879,45 @@ writeFileSync(
 );
 
 console.log("keywords.json file enriched successfully.");
+
+const liturgicalRefClean = liturgical_references
+  .filter((ref) => ref.name)
+  .map((ref) => {
+    const related_passages = passagesPlusWorks
+      .filter((p) =>
+        p.liturgical_references.some((p_ref) => p_ref.id === ref.id),
+      )
+      .map((p) => {
+        return {
+          id: p.id,
+          jad_id: p.jad_id,
+          label: p.passage,
+          work: p.work[0]?.title,
+          author: p.work[0]?.author[0]?.name || "",
+          position_in_work: p.position_in_work,
+        };
+      });
+
+    return {
+      id: ref.id,
+      jad_id: ref.jad_id,
+      name: ref.name,
+      description: ref.description,
+      related_passages: related_passages,
+    };
+  });
+
+const liturgicalPlusFinal = addPrevNextToItems(
+  liturgicalRefClean,
+  "jad_id",
+  "name",
+);
+writeFileSync(
+  join(folderPath, "liturgical_references.json"),
+  JSON.stringify(liturgicalPlusFinal, null, 2),
+  { encoding: "utf-8" },
+);
+console.log("liturgical_references.json file written successfully.");
 
 console.log("Generrating passage list");
 const passageList = new Map();

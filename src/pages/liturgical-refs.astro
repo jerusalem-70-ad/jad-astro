@@ -1,0 +1,33 @@
+---
+import PageLayout from "@/layouts/page-layout.astro";
+import TableHead from "@/components/table-head.astro";
+import TabulatorTable from "@/components/tabulator-table.svelte";
+import { liturgicalrefsTableConfig } from "@/lib/tabulator-table-configs.js";
+import lit_references from "@/content/data/liturgical_references.json";
+
+
+// Transform data and prepare columns for Tabulator Table
+const liturgical_references = Object.values(lit_references);
+const tableData = liturgicalrefsTableConfig.transformData(liturgical_references);
+const columns = liturgicalrefsTableConfig.getColumns();
+const rowClickConfig = liturgicalrefsTableConfig.getRowClickConfig;
+---
+
+<PageLayout title="liturgical-refs">
+  <TableHead title="Liturgical References">
+    <TabulatorTable
+      client:only="svelte"
+      data={tableData}
+      columns={columns}
+      tableId="liturgical-references-table"
+      options={{
+        paginationSize: 25,
+      }}
+      downloadTitle="jad_liturgical_references"
+      rowClickConfig={rowClickConfig}
+    />
+  </TableHead>
+</PageLayout>
+
+
+
