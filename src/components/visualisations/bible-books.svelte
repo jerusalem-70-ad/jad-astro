@@ -166,17 +166,16 @@ let pieData: { name: string; value: number }[] = [];
     });
   }
 </script>
-<div class="lg:grid grid-cols-[1fr_4fr] gap-3 lg:p-10 p-3 border rounded-lg bg-brand-50 shadow-2xl">
-  <div class="text-brand-700 prose">
-    <h2 class="text-2xl font-semibold mb-4 text-brand-950">Bible books references</h2>
-    <p>The pie chart shows how frequently individual books of the Bible are cited across the passages, measured by the number of passages that reference a given book. Multiple references to the same biblical book within a single passage are counted as one. </p>
-    <p>Selecting a segment in the pie chart acts as an interactive filter leading  you directly to the advanced search results, where all 
-        passages citing this Bible book are displayed.</p>
-  </div>
-    <div
+<div class="grid gap-2 p-3">
+  <h2 class="text-2xl font-semibold mb-4 text-brand-950">Bible books references</h2>
+  <div
         id="bible-piechart" bind:this={container}
         class="w-full"
         style={`height: 900px; width: 100%;`}
     >
+  </div>
+  <div class="text-brand-700 text-sm rounded-md bg-neutral-100 w-3/4 grid mx-auto p-3 border border-neutral-300">
+    <p>The pie chart shows how frequently individual books of the Bible are cited across the passages, measured by the number of passages that reference a given book. Multiple references to the same biblical book within a single passage are counted as one. </p>
+    <p><b>Joined referenicing</b>: one passage can have references to multiple Bible books. Hence using filter 'Biblical references = Lk', for instance, will show passages with Lk references, and the number of references to other books found as well in these passages.</p>
   </div>
 </div>

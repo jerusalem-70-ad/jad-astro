@@ -8,6 +8,9 @@ let works : Array<{name: string, count: number}> = [];
 let genres : Array<{name: string, count: number}> = [];
 let keywords : Array<{name: string, count: number}> = [];
 let place : Array<{name: string, count: number}> = [];
+let century : Array<{name: string, count: number}> = [];
+let lit_ref : Array<{name: string, count: number}> = [];
+let bibl_ref : Array<{name: string, count: number}> = [];
 
 let searchToken = 0;
 // async function to start typsense query
@@ -45,6 +48,18 @@ async function updateSearch(currentFilters: any) {
     }))
 
     place = getFacet("work.author.place.value").map(c => ({
+        name: c.value,
+        count: c.count
+    }))
+    century = getFacet("work.date.century").map(c => ({
+        name: c.value,
+        count: c.count
+    }))
+    lit_ref = getFacet("liturgical_references.value").map(c => ({
+        name: c.value,
+        count: c.count
+    }))
+    bibl_ref = getFacet("biblical_ref_lvl0").map(c => ({
         name: c.value,
         count: c.count
     }))
@@ -88,5 +103,20 @@ $: updateSearch($filters);
         title="Place"
         items={place}
         field="place"
+    />
+    <FilterList
+        title="Century"
+        items={century}
+        field="century"
+    />
+    <FilterList
+        title="Liturgical References"
+        items={lit_ref}
+        field="lit_ref"
+    />
+    <FilterList
+        title="Biblical References"
+        items={bibl_ref}
+        field="bibl_ref"
     />
 </div>

@@ -48,6 +48,7 @@ function closePassage() {
         (#{passage.id})
         {passage.passage || "No text available."}
       </a>
+        
     </h2>
      <dl class="grid grid-cols-[1fr_6fr] text-sm md:leading-7 px-4">
       <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">Author:</dt>

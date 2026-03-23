@@ -11,10 +11,16 @@ import BiblBookGraph from "@/components/visualisations/bible-books.svelte"
         <aside class="sticky top-0 self-start w-80">
             <SearchPanel client:only="svelte"></SearchPanel>
         </aside>
-        <div class="grid gap-3 grid-cols-[repeat(auto-fit,minmax(1000px,1fr))] overflow-auto">
-            <Graph client:only="svelte"/>
-            <GenrePieChart client:only="svelte" />
-            <BiblBookGraph client:only="svelte"/>
+        <div class="grid grid-cols-5 gap-5 overflow-auto p-4">
+            <div class="col-span-3 flex justify-center" >
+                <Graph client:only="svelte"/>
+            </div>
+            <div class="col-span-2">
+                <GenrePieChart client:only="svelte" />
+            </div>
+            <div class="col-span-2">
+                <BiblBookGraph client:only="svelte"/>
+            </div>
         </div>
     </div>
     <Dialog client:only="svelte"/>       

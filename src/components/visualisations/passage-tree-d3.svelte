@@ -342,7 +342,7 @@ function updateTooltipPosition() {
 </script>
 
 
-<div class=" p-3 border ">
+<div class="grid gap-2 p-3 ">
  <h2 class="text-2xl font-bold mb-4 text-brand-950">Chronological graph</h2>
   <div id="graph-container" bind:this={container}></div>
 </div>

@@ -15,6 +15,11 @@ export async function runSearch(f) {
       f.genres.length ? `work.genre:=[${f.genres.join(",")}]` : null,
       f.keywords.length ? `keywords.value:=[${f.keywords.join(",")}]` : null,
       f.place.length ? `work.author.place.value:=[${f.place.join(",")}]` : null,
+      f.century.length ? `work.date.century:=[${f.century.join(",")}]` : null,
+      f.lit_ref.length
+        ? `liturgical_references.value:=[${f.lit_ref.join(",")}]`
+        : null,
+      f.bibl_ref.length ? `biblical_ref_lvl0:=[${f.bibl_ref.join(",")}]` : null,
     ].filter(Boolean);
 
     const filter_by = filterParts.length ? filterParts.join(" && ") : undefined;
@@ -30,7 +35,7 @@ export async function runSearch(f) {
         query_by: "search_text",
         filter_by,
         facet_by:
-          "work.author.name, work.title, work.genre, keywords.value, work.author.place.value",
+          "work.author.name, work.title, work.genre, keywords.value, work.author.place.value, work.date.century, biblical_ref_lvl0, liturgical_references.value",
         max_facet_values: 500,
         per_page: 250,
         page,

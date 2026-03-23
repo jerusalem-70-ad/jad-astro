@@ -165,8 +165,15 @@ $: if (chart) {
     });
   }
 </script>
-<div class=" p-3 ">
-  <!-- <div class="text-brand-700 prose">
+<div class="grid gap-2 p-3 ">
+  <h2 class="text-2xl font-bold mb-4 text-brand-950">Genre Distribution accross Passages</h2>
+  <div
+        id="genre-piechart" bind:this={container}
+        class="w-full"
+        style={`height: 900px; width: 100%;`}
+    >
+  </div>
+   <div class="text-brand-700 text-sm rounded-md bg-neutral-100 w-3/4 grid mx-auto p-3 border border-neutral-300">
     <p>This pie chart visualizes the distribution of genres across all recorded passages 
         in the database. Each passage is linked to a specific work, and every work is assigned 
         to a genre, allowing the chart to aggregate passages by their generic classification. 
@@ -175,12 +182,5 @@ $: if (chart) {
         <p>Selecting a segment in the pie chart acts as an interactive filter: 
             clicking on a genre takes you directly to the advanced search results, where all 
             passages belonging to the chosen genre are displayed.</p>
-            </div> -->
-            <h2 class="text-2xl font-bold mb-4 text-brand-950">Genre Distribution accross Passages</h2>
-            <div
-        id="genre-piechart" bind:this={container}
-        class="w-full"
-        style={`height: 900px; width: 100%;`}
-    >
-  </div>
+    </div>
 </div>

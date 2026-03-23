@@ -8,6 +8,9 @@ export const filters = writable({
   genres: [],
   keywords: [],
   place: [],
+  century: [],
+  lit_ref: [],
+  bibl_ref: [],
   query: "",
 });
 
