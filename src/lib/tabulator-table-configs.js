@@ -431,6 +431,71 @@ export const keywordsTableConfig = {
   },
 };
 
+// Configuration for Tabulator tables in keywords detail view page
+export const keywordsdetailTableConfig = {
+  transformData: (passages) => {
+    return passages.map((passage) => {
+      return {
+        id: passage.id,
+        jad_id: passage.jad_id,
+        title_work: passage.work.title,
+        passage: passage.passage,
+        aut_name: passage.author,
+        position: passage.position_in_work,
+      };
+    });
+  },
+
+  getColumns() {
+    const columns = [
+      {
+        title: "#",
+        field: "id",
+        responsive: 1,
+        widthGrow: 1,
+        maxWidth: 40,
+      },
+      {
+        title: "Passage",
+        field: "passage",
+        responsive: 1,
+        widthGrow: 3,
+        minWidth: 150,
+      },
+
+      {
+        title: "Author",
+        field: "aut_name",
+        minWidth: 100,
+        widthGrow: 2,
+        responsive: 2,
+        formatter: "textarea",
+      },
+      {
+        title: "Work",
+        field: "title_work",
+        minWidth: 100,
+        widthGrow: 2,
+        responsive: 1,
+      },
+
+      {
+        title: "Position in Work",
+        field: "position",
+        minWidth: 50,
+        responsive: 2,
+      },
+    ];
+    return addHeaderFilters(columns);
+  },
+  // Row click configuration for work-mss-transmission table
+  getRowClickConfig: {
+    urlPattern: "/keywords/{id}",
+    idField: "jad_id",
+    target: "_self",
+  },
+};
+
 // Helper function to add header filters to columns
 function addHeaderFilters(columns) {
   return columns.map((column) => ({

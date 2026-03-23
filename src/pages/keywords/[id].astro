@@ -4,6 +4,9 @@ import keywords from "@/content/data/keywords.json";
 import NavLink from "@/components/nav-link.astro";
 import Article from "@/components/article.astro";
 
+import TabulatorTable from "@/components/tabulator-table.svelte";
+import { keywordsdetailTableConfig } from "@/lib/tabulator-table-configs.js";
+
 export async function getStaticPaths() {
   const paths = Object.values(keywords).map((keyword) => ({
     params: { id: keyword.jad_id },
@@ -13,6 +16,10 @@ export async function getStaticPaths() {
 }
 
 const { data: keyword } = Astro.props;
+// Transform data and prepare columns for Tabulator Table
+const tableData = keywordsdetailTableConfig.transformData(keyword.passages ?? []);
+const columns = keywordsdetailTableConfig.getColumns();
+const rowClickConfig = keywordsdetailTableConfig.getRowClickConfig;
 ---
 
 <PageLayout title={keyword.name}>
@@ -21,56 +28,24 @@ const { data: keyword } = Astro.props;
     nextLink={`/keywords/${keyword.next.id}`}
     mainTitle={keyword.name}
   >
-    <dl class="grid grid-cols-[1fr_12fr] text-sm md:text-base md:leading-7">
-      <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">
+    <dl class="grid grid-cols-[1fr_11fr] text-sm md:text-base md:leading-7">
+     {keyword.description && (
+       <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">
         About:
       </dt>
       <dd class="pl-5">{keyword.description}</dd>
+     )}
 
+     
+      {keyword.part_of.length > 0 && ( 
       <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">
-        Passages:
-      </dt>
-      <dd class="pl-5">
-        {
-          keyword.passages.length > 0 ? (
-            <ul class="space-y-2 border-neutral-300 p-2">
-              {keyword.passages.map((passage) => (
-                <li class="border-b border-neutral-300 pb-2">
-                  <NavLink href={`/passages/${passage.jad_id}`}>
-                    <span>({passage.id})</span>
-                    <span class="italic">
-                      {passage.passage.slice(0, 150)} ...
-                    </span>
-                  </NavLink>
-                  <div class="mt-1 pl-4 text-sm">
-                    <span>
-                      <span class="font-semibold">Author:</span>{" "}
-                      {passage.author || "Unknown"}
-                    </span>
-                    <br />
-                    <span>
-                      <span class="font-semibold">Work:</span>{" "}
-                      <span class="italic">
-                        {passage.work.title || "Unknown"}
-                      </span>
-                    </span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            "N/A"
-          )
-        }
-      </dd>
-      <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">
-        Related:
+        Related keywords:
       </dt>
       <dd class="pl-5">
         <ul>
           {
             keyword.part_of.map((part) => (
-              <li class="list-disc">
+              <li>
                 <NavLink href={`/keywords/jad_keyword__${part.id}`}>{part.value}</NavLink>
               </li>
             ))
@@ -81,7 +56,7 @@ const { data: keyword } = Astro.props;
                 kword.part_of.some((part) => part.id === keyword.id)
               )
               .map((kword) => (
-                <li class="list-disc">
+                <li>
                   <NavLink href={`/keywords/${kword.jad_id}`}>
                     {kword.name}
                   </NavLink>
@@ -90,6 +65,26 @@ const { data: keyword } = Astro.props;
           }
         </ul>
       </dd>
+      )}
+      {keyword.passages.length > 0 && (
+        <dt class="font-semibold text-brand-900">
+        Passages:
+      </dt>
+      <dd></dd> 
+      )}
     </dl>
+     {tableData.length > 0 && (
+    <TabulatorTable
+      client:only="svelte"
+      data={tableData}
+      columns={columns}
+      tableId="biblical-references-table"
+      options={{
+        paginationSize: 25,
+        responsiveLayout: "collapse",
+      }}
+      downloadTitle="jad_biblical_references"
+      rowClickConfig={rowClickConfig}
+    /> )}
   </Article>
 </PageLayout>
