@@ -1,7 +1,6 @@
 ---
 import PageLayout from "@/layouts/page-layout.astro";
 import NavLink from "@/components/nav-link.astro";
-import GenrePieChart from "@/components/visualisations/genre-piechart.svelte";
 import GenreWorkPiechart from "@/components/visualisations/genre-work-piechart.astro";
 import BiblGraph from "@/components/visualisations/bibl-ref-graph.astro"
 import BibleBooks from "@/components/visualisations/bible-books.astro";
@@ -23,7 +22,6 @@ import LiturgicalRefs from "@/components/visualisations/liturgical-ref.astro"
         iaculis tortor, in sagittis ante pellentesque gravida. </p>
       
       <GenreWorkPiechart/>
-      <GenrePieChart client:only="svelte"/>
       <BibleBooks/>
       <BiblGraph/>
       <LiturgicalRefs/>
@@ -33,11 +31,7 @@ import LiturgicalRefs from "@/components/visualisations/liturgical-ref.astro"
         >Passages Network</NavLink
       >
       <br />
-      <NavLink
-        href="/dashboard"
-        class="underline underline-offset-4 hover:text-brand-800 transition"
-        >Chronological Timeline</NavLink
-      >
+    
     </div>
   </div>
 </PageLayout>

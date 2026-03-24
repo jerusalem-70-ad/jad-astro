@@ -1,45 +1,41 @@
 <script lang="ts">
-import { onMount} from "svelte";
+import {onMount} from "svelte";
   import * as echarts from "echarts";
   import { withBasePath } from "@/lib/withBasePath";
   import passages from "@/content/data/passagesForGraphs.json";
-  import {NOVA_VULGATA_ORDER} from "scripts/sort-bibl-ref.js";
 import { filteredIds } from "@/stores/jad_store";
+
 import GraphTitle from "@/components/visualisations/graph-title.svelte"
 
 let container: HTMLDivElement; 
 let chart: echarts.ECharts | null = null;
 let pieData: { name: string; value: number }[] = [];
 
-    // Prepare chartdata from passages slim version.json
- $: {
-    const passagesJson =
+    // Prepare chartdata check if filteredIDs else use passages
+$: {
+  const passagesJson =
     $filteredIds && $filteredIds.size > 0
       ? passages.filter(p => $filteredIds.has(p.jad_id))
       : passages;
-
-    const booksCounts = new Map();
+    const liturgicalCounts = new Map();
 
     passagesJson.forEach((passage) => {
-    const books = [...new Set(passage.biblical_ref_lvl0)];
-    if (books.length === 0) return;
+    const refs = [...new Set((passage.liturgical_references ?? []).map(r => r.value))];
 
-    books.forEach((book) => {
-        booksCounts.set(book, (booksCounts.get(book) || 0) + 1)
+    if (refs.length === 0) return;
+
+    refs.forEach((ref) => {
+        liturgicalCounts.set(ref, (liturgicalCounts.get(ref) || 0) + 1);
     });
-    }); 
+    });
 
-    pieData = Array.from(booksCounts, ([name, value]) => ({ name, value })).sort((a, b) => {
-            return (
-                (NOVA_VULGATA_ORDER[a.name as keyof typeof NOVA_VULGATA_ORDER] || Infinity) - 
-                (NOVA_VULGATA_ORDER[b.name as keyof typeof NOVA_VULGATA_ORDER] || Infinity)
-            );
-        });
-    }
-
+    pieData = Array.from(liturgicalCounts, ([name, value]) => ({ name, value })).sort((a,b) => a.value - b.value);
+}
+   
+// echart options STATIC ones 
     function getOption() {
         return {
-                
+              
         tooltip: {
             trigger: "item",
             textStyle: { fontSize: 12 },
@@ -118,18 +114,33 @@ let pieData: { name: string; value: number }[] = [];
         },
         };
     }
+onMount(() => {
+  chart = echarts.init(container);
+  chart.setOption(getOption());
+
+  return () => chart.dispose();
+});
+
+$: if (chart) {
+  chart.setOption({
+    series: [{ data: pieData }]
+  });
+}
+
+// use onMount to make sure DOm exist before initiating echarts
+
 
     onMount(() => {
     chart = echarts.init(container);
     chart.setOption(getOption());
 
-    chart.on("click", (params: any) => {
-      if (params.data) {
-       window.location.href = withBasePath(
-          `/advanced-search?JAD-temp[hierarchicalMenu][biblical_ref_lvl0][0]=${params.data.name}`
-        );
-      }
-    });
+    chart.on("click", function (params: any) {
+        if (params.data) {
+            window.location.href = withBasePath(
+            `/advanced-search?JAD-temp[refinementList][liturgical_references.value][0]=${params.data.name}`
+            );
+        }
+        });
 
     const resizeHandler = () => chart?.resize();
     window.addEventListener("resize", resizeHandler);
@@ -139,8 +150,8 @@ let pieData: { name: string; value: number }[] = [];
       chart?.dispose();
     };
   });
-
-  // Update chart when data changes
+   
+ // Update chart when data changes
   $: if (chart) {
     chart.setOption({
       legend: {
@@ -156,19 +167,18 @@ let pieData: { name: string; value: number }[] = [];
       ]
     });
   }
+
 </script>
-<div class="grid gap-2 p-3">
-<GraphTitle title="Bible books references" definition = "The pie chart shows how frequently individual 
-books of the Bible are cited across the passages, measured by the number of passages that reference 
-a given book. Multiple references to the same biblical book within a single passage are counted as one. 
-Joined referenicing: one passage can have references to multiple Bible books. 
-Hence using filter 'Biblical references = Lk', for instance, will show passages with Lk references, 
-and the number of references to other books found as well in these passages."/>
- 
-  <div
-        id="bible-piechart" bind:this={container}
+
+<div class="grid gap-2 p-3 ">
+
+<GraphTitle title="Liturgical references" definition = "The pie chart illustrate the frequency of liturgical references 
+across the passages. Multiple references to the same liturgical occassion within a single passage are counted as one.
+Selecting a segment in the pie chart acts as an interactive filter leading  you directly to the advanced search results."/>
+   
+    <div
+        id="liturgical-piechart" bind:this={container}
         class="w-full h-[900px]"
     >
   </div>
- 
 </div>

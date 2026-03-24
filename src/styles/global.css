@@ -31,6 +31,8 @@
   --color-neutral-950: #1f1813;
 
   --background-image-jerusalem: url("title-image.png");
+
+  --breakpoint-3xl: 120rem;
 }
 
 /*

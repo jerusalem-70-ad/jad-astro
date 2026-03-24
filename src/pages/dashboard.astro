@@ -5,23 +5,28 @@ import Graph from "@/components/visualisations/passage-tree-d3.svelte"
 import Dialog from "@/components/visualisations/dialog-card.svelte"
 import GenrePieChart from "@/components/visualisations/genre-piechart.svelte";
 import BiblBookGraph from "@/components/visualisations/bible-books.svelte"
+import LiturgicalGraph from "@/components/visualisations/liturgical-ref.svelte"
 ---
 <PageLayout title="Dashboard">
-    <div class="flex h-screen">
-        <aside class="sticky top-0 self-start w-80">
-            <SearchPanel client:only="svelte"></SearchPanel>
-        </aside>
-        <div class="grid grid-cols-5 gap-5 overflow-auto p-4">
-            <div class="col-span-3 flex justify-center" >
-                <Graph client:only="svelte"/>
+    <div class="flex h-screen w-full"> 
+        <aside class="sticky top-0 self-start w-80"> 
+            <SearchPanel client:only="svelte">
+                </SearchPanel> 
+        </aside> 
+        <div class="grid gap-3 grid-cols-6 overflow-auto w-full mx-auto"> 
+            <div class="col-span-6 3xl:col-span-3 ">
+                <Graph client:only="svelte"/> 
             </div>
-            <div class="col-span-2">
+            <div class="col-span-3 ">
                 <GenrePieChart client:only="svelte" />
-            </div>
-            <div class="col-span-2">
+            </div> 
+            <div class="col-span-3">
                 <BiblBookGraph client:only="svelte"/>
+            </div> 
+            <div class="col-span-3">
+                <LiturgicalGraph client:only="svelte"/>
             </div>
-        </div>
+        </div> 
     </div>
     <Dialog client:only="svelte"/>       
 </PageLayout>

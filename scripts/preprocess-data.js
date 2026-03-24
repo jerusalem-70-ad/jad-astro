@@ -686,6 +686,16 @@ enrichedPassages.forEach((passage) => {
       graphData.nodes.push({
         ...node,
         jad_id: node.jad_id,
+        liturgical_references: passages
+          .filter((p) => p.jad_id === node.jad_id)
+          .flatMap((p) =>
+            p.liturgical_references.map((ref) => {
+              return {
+                id: ref.id,
+                value: ref.value,
+              };
+            }),
+          ),
       });
     }
   });
