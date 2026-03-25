@@ -1,4 +1,4 @@
-import { withBasePath } from "./withBasePath";
+import { withBasePath } from "../withBasePath";
 export function setupTableActions(table, title) {
   const tableTitle = title.toLowerCase();
   const projectAbbr = "jad";

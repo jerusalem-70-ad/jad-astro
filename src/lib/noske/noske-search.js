@@ -1,5 +1,4 @@
-import CustomNoskeSearch from "@/lib/noske-custom-search.js";
-import tsNoskeSearch from "@/lib/ts-search-noske.js";
+import CustomNoskeSearch from "@/lib/noske/noske-custom-search.js";
 
 const search = new CustomNoskeSearch({
   baseUrl: "https://corpus-search.acdh.oeaw.ac.at",

@@ -2,10 +2,10 @@
 import PageLayout from "@/layouts/page-layout.astro";
 import TableHead from "@/components/table-head.astro";
 import TabulatorTable from "@/components/tabulator-table.svelte";
-import { keywordsTableConfig } from "@/lib/tabulator-table-configs.js";
+import { keywordsTableConfig } from "@/lib/tabulator/tabulator-table-configs.js";
 import keywordsjson from "@/content/data/keywords.json";
 
-import Chart from "@/components/chart-keywords.astro";
+import Chart from "@/components/visualisations/chart-keywords.astro";
 // Transform data and prepare columns for Tabulator Table
 const keywords = Object.values(keywordsjson);
 const tableData = keywordsTableConfig.transformData(keywords);

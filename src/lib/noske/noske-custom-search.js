@@ -1,6 +1,6 @@
 // Custom NoSketch Engine Search Implementation
 // Based on: https://raw.githubusercontent.com/acdh-oeaw/noske-ubi9/main/openapi/openapi.yaml
-import tsNoskeSearch from "@/lib/ts-search-noske.js";
+import tsNoskeSearch from "@/lib/noske/ts-search-noske.js";
 
 class CustomNoskeSearch {
   constructor(config) {

@@ -2,7 +2,7 @@ import { readFileSync } from "fs";
 import { join } from "path";
 const loadJSON = (file) =>
   JSON.parse(
-    readFileSync(join(process.cwd(), "src/content/row", file), "utf8")
+    readFileSync(join(process.cwd(), "src/content/row", file), "utf8"),
   );
 const places = Object.values(loadJSON("places.json"));
 
@@ -24,7 +24,7 @@ export function enrichLibraries(librariesArray, libraries) {
 export function addPrevNextToItems(
   item,
   idField = "jad_id",
-  labelField = "view_label"
+  labelField = "view_label",
 ) {
   // Sort item by their keys or any specific field (if needed)
   const sorteditem = [...item].sort((a, b) => a[idField] - b[idField]);
@@ -109,6 +109,7 @@ export function getCentury(year) {
 
   return `${century}${getSuffix(century)} cen.`;
 }
+
 /* 
 // helper function to get variant names from lobid API
 

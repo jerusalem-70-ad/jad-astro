@@ -5,7 +5,8 @@ import { onMount} from "svelte";
   import passages from "@/content/data/passagesForGraphs.json";
   import {NOVA_VULGATA_ORDER} from "scripts/sort-bibl-ref.js";
 import { filteredIds } from "@/stores/jad_store";
-import GraphTitle from "@/components/visualisations/graph-title.svelte"
+import GraphTitle from "@/components/visualisations/graph-title.svelte";
+import {getPieChartOption} from "@/components/visualisations/helpers.ts"
 
 let container: HTMLDivElement; 
 let chart: echarts.ECharts | null = null;
@@ -36,92 +37,10 @@ let pieData: { name: string; value: number }[] = [];
             );
         });
     }
-
-    function getOption() {
-        return {
-                
-        tooltip: {
-            trigger: "item",
-            textStyle: { fontSize: 12 },
-            formatter: function (params: any) {
-            return `<strong>${params.data.name}</strong><br/>
-                    <span>Passages: ${params.data.value}</span>`;
-            },
-        },
-
-        legend: {
-            orient: "horizontal",
-            //type: "scroll",
-            right: 10,
-            top: "bottom",
-            formatter: function (name : string) {
-                // find the corresponding value in pieData
-                const item = pieData.find(d => d.name === name);
-                return item ? `${name} (${item.value})` : name;
-            }
-        },
-    
-        series: [
-            {
-            type: "pie",
-            radius: "60%",
-            data: pieData,
-            emphasis: {
-                itemStyle: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)",
-                },
-            },
-            
-            },
-        ],
-// Responsive settings for smaller screens
-         media: [
-            {
-            query: {
-                maxWidth: 600, 
-            },
-            option: {
-                legend: {
-                    orient: "horizontal",
-                    left: "center",
-                    top: "bottom",
-                },
-                series: [
-                    {
-                        radius: "50%",
-                    }
-                ]
-            }
-            }
-        ],
-            
-        animation: false,
-    
-        toolbox: {
-            show: true,
-            orient: "vertical",
-            right: 30,
-            top: 20,
-            itemSize: 20,
-            itemGap: 20,
-            feature: {
-            saveAsImage: {
-                show: true,
-                title: "Download as PNG",
-                type: "png",
-                pixelRatio: 2,
-                backgroundColor: "#fff",
-            },
-            },
-        },
-        };
-    }
-
+   
     onMount(() => {
     chart = echarts.init(container);
-    chart.setOption(getOption());
+    chart.setOption(getPieChartOption(pieData));
 
     chart.on("click", (params: any) => {
       if (params.data) {

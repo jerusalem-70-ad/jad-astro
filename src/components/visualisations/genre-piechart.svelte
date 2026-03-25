@@ -7,6 +7,7 @@ import { onMount } from "svelte";
 import { filteredIds } from "@/stores/jad_store";
 
 import GraphTitle from "@/components/visualisations/graph-title.svelte"
+import {getPieChartOption} from "@/components/visualisations/helpers.ts"
 
 let container: HTMLDivElement; 
 let chart: echarts.ECharts | null = null;
@@ -19,7 +20,7 @@ $: {
       ? passages.filter(p => $filteredIds.has(p.jad_id))
       : passages;
 
-  const counts = new Map();
+  const counts = new Map<string, number>();
 
   passagesJson.forEach((p) => {
     const genre = p.genre;
@@ -33,139 +34,45 @@ $: {
   })).sort((a, b) => a.name.localeCompare(b.name));
 }
 
-// echart options STATIC ones
-function getOption() {
-    return {
-    //   title: {
-    //     text: "Genre Distribution across Passages",
-    //     left: "center",
-    //     top: 20,
-    //     textStyle: {
-    //       fontSize: 24,
-    //       fontWeight: "bold",
-    //       color: "#333",
-    //     },
-    //   },
-
-      tooltip: {
-        trigger: "item",
-        formatter: (params: any) => {
-          return `<strong>${params.data.name}</strong><br/>
-                  <span>Passages: ${params.data.value}</span>`;
-        },
-      },
-
-      legend: {
-        orient: "horizontal",
-        right: 10,
-        top: "bottom",
-        formatter: (name: string) => {
-          const item = pieData.find(d => d.name === name);
-          return item ? `${name} (${item.value})` : name;
-        }
-      },
-
-      series: [
-        {
-          type: "pie",
-          radius: "60%",
-          data: pieData,
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: "rgba(0, 0, 0, 0.5)",
-            },
-          },
-        },
-      ],
-
-      media: [
-        {
-          query: { maxWidth: 600 },
-          option: {
-            legend: {
-              orient: "horizontal",
-              left: "center",
-              top: "bottom",
-            },
-            series: [{ radius: "50%" }]
-          }
-        }
-      ],
-
-      animation: false,
-
-      toolbox: {
-        show: true,
-        orient: "vertical",
-        right: 30,
-        top: 20,
-        feature: {
-          saveAsImage: {
-            title: "Download as PNG",
-            type: "png",
-            pixelRatio: 2,
-            backgroundColor: "#fff",
-          },
-        },
-      },
-    };
-  }
 
 onMount(() => {
   chart = echarts.init(container);
-  chart.setOption(getOption());
+  chart.setOption(getPieChartOption([]));
+  
+  const resize = () => chart?.resize();
+  window.addEventListener("resize", resize);
+  
+  chart.on("click", (params: any) => {
+    if (params.data) {
+      window.location.href = withBasePath(
+        `/advanced-search?JAD-temp[refinementList][work.genre][0]=${params.data.name}`
+      );
+    }
+  });
 
-  return () => chart.dispose();
+   return () => {
+    window.removeEventListener("resize", resize);
+    chart?.dispose();
+  };
 });
 
 $: if (chart) {
   chart.setOption({
-    series: [{ data: pieData }]
+    legend: {
+      formatter: (name: string) => {
+        const item = pieData.find(d => d.name === name);
+        return item ? `${name} (${item.value})` : name;
+      }
+    },
+    series: [
+      {
+        data: pieData
+      }
+    ]
   });
 }
 
-// use onMount to make sure DOm exist before initiating echarts
 
-
-    onMount(() => {
-    chart = echarts.init(container);
-    chart.setOption(getOption());
-
-    chart.on("click", (params: any) => {
-      if (params.data) {
-        window.location.href = withBasePath(
-          `/advanced-search?JAD-temp[refinementList][work.genre][0]=${params.data.name}`
-        );
-      }
-    });
-
-    const resizeHandler = () => chart?.resize();
-    window.addEventListener("resize", resizeHandler);
-
-    return () => {
-      window.removeEventListener("resize", resizeHandler);
-      chart?.dispose();
-    };
-  });
-
-  // Update chart when data changes
-  $: if (chart) {
-    chart.setOption({
-      legend: {
-        formatter: (name: string) => {
-          const item = pieData.find(d => d.name === name);
-          return item ? `${name} (${item.value})` : name;
-        }
-      },
-      series: [
-        {
-          data: pieData
-        }
-      ]
-    });
-  }
 </script>
 <div class="grid gap-2 p-3 ">
 

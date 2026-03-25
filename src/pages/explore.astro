@@ -4,7 +4,8 @@ import NavLink from "@/components/nav-link.astro";
 import GenreWorkPiechart from "@/components/visualisations/genre-work-piechart.astro";
 import BiblGraph from "@/components/visualisations/bibl-ref-graph.astro"
 import BibleBooks from "@/components/visualisations/bible-books.astro";
-import LiturgicalRefs from "@/components/visualisations/liturgical-ref.astro"
+import LiturgicalRefs from "@/components/visualisations/liturgical-ref.astro";
+import NetworkAll from "@/components/visualisations/network-all.astro";
 ---
 
 <PageLayout title="Patterns">
@@ -25,12 +26,7 @@ import LiturgicalRefs from "@/components/visualisations/liturgical-ref.astro"
       <BibleBooks/>
       <BiblGraph/>
       <LiturgicalRefs/>
-      <NavLink
-        href="/passages-network"
-        class="underline underline-offset-4 hover:text-brand-800 transition"
-        >Passages Network</NavLink
-      >
-      <br />
+     <NetworkAll />
     
     </div>
   </div>

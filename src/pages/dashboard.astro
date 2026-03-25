@@ -4,8 +4,9 @@ import PageLayout from "@/layouts/page-layout.astro"
 import Graph from "@/components/visualisations/passage-tree-d3.svelte"
 import Dialog from "@/components/visualisations/dialog-card.svelte"
 import GenrePieChart from "@/components/visualisations/genre-piechart.svelte";
-import BiblBookGraph from "@/components/visualisations/bible-books.svelte"
-import LiturgicalGraph from "@/components/visualisations/liturgical-ref.svelte"
+import BiblBookGraph from "@/components/visualisations/bible-books.svelte";
+import LiturgicalGraph from "@/components/visualisations/liturgical-ref.svelte";
+import KeywordsHeatmap from "@/components/visualisations/keywords-heatmap.svelte";
 ---
 <PageLayout title="Dashboard">
     <div class="flex h-screen w-full"> 
@@ -25,6 +26,9 @@ import LiturgicalGraph from "@/components/visualisations/liturgical-ref.svelte"
             </div> 
             <div class="col-span-3">
                 <LiturgicalGraph client:only="svelte"/>
+            </div>
+            <div class="col-span-6 ">
+                <KeywordsHeatmap client:only="svelte"/>
             </div>
         </div> 
     </div>

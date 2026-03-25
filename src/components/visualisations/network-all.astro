@@ -1,16 +1,20 @@
 
-<div class="m-1 w-full">
+<div class="lg:grid grid-cols-[1fr_4fr] gap-3 lg:p-10 p-3 border rounded-lg bg-brand-50 shadow-2xl">
+  <div class="text-brand-700 prose">
+    <h2 class="text-2xl font-semibold mb-4 text-brand-950">Passage network</h2>
+    <p>Lorem ipsum dolor sit amet ...</p>
+  </div>
   <div
     id="network-all"
     class="w-full"
-    style={`height: 900px; width: 100%;`}
+    style={`height: 1000px; width: 100%;`}
   >
   </div>
 </div>
 
 <script>
   import * as echarts from "echarts";
-  import { withBasePath } from "../lib/withBasePath";
+  import { withBasePath } from "@/lib/withBasePath";
   import passages from "@/content/data/passages.json";
 
   document.addEventListener("astro:page-load", () => {

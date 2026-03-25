@@ -6,7 +6,7 @@ import NavLink from "@/components/nav-link.astro";
 import Article from "@/components/article.astro";
 import type { BiblicalReference } from "@/types/index";
 import TabulatorTable from "@/components/tabulator-table.svelte";
-import { biblrefTableConfig } from "@/lib/tabulator-table-configs.js";
+import { biblrefTableConfig } from "@/lib/tabulator/tabulator-table-configs.js";
 
 export async function getStaticPaths() {
   const paths = Object.values(biblrefs).map((ref) => ({

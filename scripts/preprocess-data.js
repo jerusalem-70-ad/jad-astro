@@ -615,15 +615,18 @@ const passagesForGraphs = passagesPlusWorks.map((p) => {
       : author
         ? `${author}: ${workTitle}`
         : workTitle;
+
   return {
     id: p.id,
     jad_id: p.jad_id,
     title: title,
     place: p.work[0].author[0]?.place.map((p) => p.value),
     date: p.work[0].date[0]?.value,
+    century: p.work[0].date[0]?.century,
     genre: p.work[0].genre,
     passage: p.passage,
-    liturgical_references: p.liturgical_references,
+    liturgical_references: p.liturgical_references.map((ref) => ref.value),
+    keywords: p.keywords.map((k) => k.value),
     biblical_ref_lvl0: p.biblical_ref_lvl0,
   };
 });
@@ -686,16 +689,6 @@ enrichedPassages.forEach((passage) => {
       graphData.nodes.push({
         ...node,
         jad_id: node.jad_id,
-        liturgical_references: passages
-          .filter((p) => p.jad_id === node.jad_id)
-          .flatMap((p) =>
-            p.liturgical_references.map((ref) => {
-              return {
-                id: ref.id,
-                value: ref.value,
-              };
-            }),
-          ),
       });
     }
   });

@@ -1,5 +1,5 @@
 import Typesense from "typesense";
-import { withBasePath } from "./withBasePath";
+import { withBasePath } from "../withBasePath";
 
 export default async function tsNoskeSearch(query, container) {
   if (!container) container = document.querySelector(".ts-details");
@@ -55,7 +55,7 @@ export default async function tsNoskeSearch(query, container) {
          <div class="flex items-end">
             <a class="button-custom" href="${h.url}">View Passage</a>
         </div>
-    `
+    `,
       )
       .join("");
   } catch (error) {

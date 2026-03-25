@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import instantsearch from "instantsearch.js";
   import TypesenseInstantsearchAdapter from "typesense-instantsearch-adapter";
+  import {createTypesenseClient} from "@/lib/search/create-typsense-client.js"
   import {
     searchBox,
     infiniteHits,
@@ -23,21 +24,6 @@
   let refinementsWorks;
   let hits;
 
-function createTypesenseUserClient() {
-  const client = new Client({
-    nodes: [
-      {
-        host: process.env.PUBLIC_TYPESENSE_API_HOST,
-        port: process.env.PUBLIC_TYPESENSE_API_PORT,
-        protocol: process.env.PUBLIC_TYPESENSE_API_PROTOCOL,
-      },
-    ],
-    apiKey: "IA6BWzRrMo7yX3eFqgcFelJzhWkIl64W",
-    connectionTimeoutSeconds: 2,
-  });
-
-  return client;
-}
 
   async function fetchAllFilteredIds(filter_by) {
 
@@ -46,7 +32,7 @@ function createTypesenseUserClient() {
     let found = 0;
 
     do {
-      const res = await createTypesenseUserClient
+      const res = await createTypesenseClient
         .collections("JAD-temp")
         .documents()
         .search({

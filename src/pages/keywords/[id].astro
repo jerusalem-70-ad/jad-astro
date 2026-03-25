@@ -5,7 +5,7 @@ import NavLink from "@/components/nav-link.astro";
 import Article from "@/components/article.astro";
 
 import TabulatorTable from "@/components/tabulator-table.svelte";
-import { keywordsdetailTableConfig } from "@/lib/tabulator-table-configs.js";
+import { keywordsdetailTableConfig } from "@/lib/tabulator/tabulator-table-configs.js";
 
 export async function getStaticPaths() {
   const paths = Object.values(keywords).map((keyword) => ({

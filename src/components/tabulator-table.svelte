@@ -10,7 +10,7 @@
     dateRangeFilter,
     customNameFilter,
     scrollableCellFormatter,
-  } from "@/lib/tabulator-utils.js";
+  } from "@/lib/tabulator/tabulator-utils.js";
 
   /* ---------- props ---------- */
   export let data = [];

@@ -6,7 +6,7 @@ import NavLink from "@/components/nav-link.astro";
 import Article from "@/components/article.astro";
 import type { LiturgicalReference } from "@/types/index";
 import TabulatorTable from "@/components/tabulator-table.svelte";
-import { liturgicalrefTableConfig } from "@/lib/tabulator-table-configs.js";
+import { liturgicalrefTableConfig } from "@/lib/tabulator/tabulator-table-configs.js";
 
 export async function getStaticPaths() {
   const paths = Object.values(liturgicalrefs).map((ref) => ({
