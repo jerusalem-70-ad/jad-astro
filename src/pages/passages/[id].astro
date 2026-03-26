@@ -42,7 +42,7 @@ const statusConfig = {
     color: "bg-gray-500"
   },
   'edited in detail': {
-    label: "Critically Edited",
+    label: "Edited",
     level: 2,
     color: "bg-amber-500"
   },
@@ -482,9 +482,17 @@ const steps = [1, 2, 3];
           >
             Full text:
           </dt>
-          <dd class="pl-5 p-2 italic bg-brand-50">
-            {passage.text_paragraph || "N/A"}
-          </dd>        
+         <dd class="pl-5 p-2 italic bg-brand-50">
+          <!-- // check if there is a // should be rendered as zeilenmbruch -->
+            {passage.text_paragraph
+              ? passage.text_paragraph.split(" // ").map((part, i) => (
+                  <>
+                    {i > 0 && <br />}
+                    {part}
+                  </>
+                ))
+              : "N/A"}
+          </dd>     
         </dl> 
         <NavLink href=`/tei/passages/${passage.jad_id}.xml` class="button-custom justify-self-end">See the TEI-XML</NavLink>
       </div>
