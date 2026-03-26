@@ -175,8 +175,9 @@ async function generate() {
   await client
     .collections(collectionName)
     .synonyms()
-    .upsert("jerusalem-synonyms", jerusalem_synonym);
-  upsert("vesp-synonyms", vesp_synonym).upsert("titus-synonyms", titus_synonym);
+    .upsert("jerusalem-synonyms", jerusalem_synonym)
+    .upsert("vesp-synonyms", vesp_synonym)
+    .upsert("titus-synonyms", titus_synonym);
   log.success("Created synonyms for Jerusalem");
 }
 
