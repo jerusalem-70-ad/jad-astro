@@ -160,25 +160,29 @@ async function generate() {
   log.success("All imported");
 
   // create synonyms
-  const jerusalem_synonym = {
-    synonyms: ["jerusalem", "ierusalem", "hierusalem"],
-  };
+  const synonyms = [
+    {
+      id: "jerusalem-synonyms",
+      synonyms: ["jerusalem", "ierusalem", "hierusalem"],
+    },
+    {
+      id: "vesp-synonyms",
+      synonyms: ["vaspasian", "vespasian"],
+    },
+    {
+      id: "titus-synonyms",
+      synonyms: ["titus", "tytus"],
+    },
+  ];
 
-  const titus_synonym = {
-    synonyms: ["titus", "tytus"],
-  };
+  for (const syn of synonyms) {
+    await client
+      .collections(collectionName)
+      .synonyms()
+      .upsert(syn.id, { synonyms: syn.synonyms });
+  }
 
-  const vesp_synonym = {
-    synonyms: ["vaspasian", "vespasian"],
-  };
-
-  await client
-    .collections(collectionName)
-    .synonyms()
-    .upsert("jerusalem-synonyms", jerusalem_synonym)
-    .upsert("vesp-synonyms", vesp_synonym)
-    .upsert("titus-synonyms", titus_synonym);
-  log.success("Created synonyms for Jerusalem");
+  log.success("Created synonyms");
 }
 
 generate()
