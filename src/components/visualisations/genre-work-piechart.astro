@@ -63,10 +63,10 @@ works.forEach((work) => {
         },
 
         legend: {
-            orient: "vertical",
+            orient: "horizontal",
             //type: "scroll",
             right: 10,
-            top: "center",
+            top: "bottom",
             formatter: function (name : string) {
                 // find the corresponding value in pieData
                 const item = pieData.find(d => d.name === name);

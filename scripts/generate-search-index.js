@@ -164,10 +164,19 @@ async function generate() {
     synonyms: ["jerusalem", "ierusalem", "hierusalem"],
   };
 
+  const titus_synonym = {
+    synonyms: ["titus", "tytus"],
+  };
+
+  const vesp_synonym = {
+    synonyms: ["vaspasian", "vespasian"],
+  };
+
   await client
     .collections(collectionName)
     .synonyms()
     .upsert("jerusalem-synonyms", jerusalem_synonym);
+  upsert("vesp-synonyms", vesp_synonym).upsert("titus-synonyms", titus_synonym);
   log.success("Created synonyms for Jerusalem");
 }
 
