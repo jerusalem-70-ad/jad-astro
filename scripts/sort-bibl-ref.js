@@ -232,7 +232,19 @@ export function calculateSortPosition(positionInWork) {
     aestiva: 3,
     autumnalis: 4,
   };
+
+  // Pattern 4b: X Sunday, Sermo 2
+  const sundayMatch = position.match(/\b([IVXLCDM]+)\s+Sunday\b/i);
   const sermoMatch = position.match(/\bSermo\s+(\d+)\b/i);
+
+  if (sundayMatch && sermoMatch) {
+    const sundayNum = romanToInt(sundayMatch[1]);
+    const sermonNum = parseInt(sermoMatch[1], 10);
+
+    return 300000 + sundayNum * 1000 + sermonNum;
+  }
+
+  //const sermoMatch = position.match(/\bSermo\s+(\d+)\b/i);
   if (parsMatch && sermoMatch) {
     const parsName = parsMatch[1].toLowerCase();
     const parsRank = PARS_ORDER[parsName] ?? 9; // fallback for unknown pars
@@ -330,4 +342,20 @@ export function generateBiblicalSortKey(referenceValue) {
   const verseNum = verse ? parseInt(verse.split("-")[0]) : 0; // Handle verse ranges
 
   return bookOrder * 1000000 + chapterNum * 1000 + verseNum;
+}
+
+function romanToInt(str) {
+  const map = { I: 1, V: 5, X: 10, L: 50, C: 100 };
+  let total = 0,
+    prev = 0;
+
+  str = str.toUpperCase();
+
+  for (let i = str.length - 1; i >= 0; i--) {
+    const curr = map[str[i]] || 0;
+    total += curr < prev ? -curr : curr;
+    prev = curr;
+  }
+
+  return total;
 }
