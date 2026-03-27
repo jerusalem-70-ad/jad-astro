@@ -35,7 +35,7 @@ export const passagesTableConfig = {
         mss_occurrences: passage.mss_occurrences
           .map((ms) => ms.manuscript)
           .join(" | "),
-        keywords: passage.keywords.map((kw) => kw.value).join(" | ") || "",
+        keywords: passage.keywords.map((kw) => kw.value).join(" / ") || "",
         origDate: passage.work[0].date || "",
         transmission_graph:
           passage.transmission_graph.graph.nodes.length - 1 || 0,

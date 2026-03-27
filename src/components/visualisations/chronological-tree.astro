@@ -53,12 +53,12 @@ const filteredNodes = graphData.nodes.filter(
 const groups = new Map<number, GraphNode[]>();;
 
 filteredNodes.forEach((node) => {
-  const x = Number(node.dateNotBefore) || 0;
+  const x = (node.dateNotBefore + node.dateNotAfter) / 2 || 0;
   if (!groups.has(x)) groups.set(x, []);
   groups.get(x).push(node);
 });
 
-// Step 3: assign x positions
+// Step 3: assign y positions
 groups.forEach((groupNodes) => {
   const spacing = 10 / (groupNodes.length + 1);
 
@@ -73,7 +73,7 @@ const positionedNodes = Array.from(groups.values()).flat();
 // Step 5: map to ECharts format
 const nodes = positionedNodes.map((node) => ({
   ...node,
-        value: [ Number(node.dateNotBefore) || 0, node.x],
+        value: [ (node.dateNotBefore + node.dateNotAfter) / 2 , node.x],
         symbolSize: node.nodeType === "current" ? 30 : 18,
         itemStyle: {
           color:
@@ -129,7 +129,9 @@ const nodes = positionedNodes.map((node) => ({
         formatter: function (params: any) {
           if (params.dataType === "node") {
             const node = params.data;
-            return `<strong>#${node.id} ${node.name}</strong><br/><span class="italic">${node.passage}</span>`;
+            return `<strong>#${node.id} ${node.name}</strong><br/>
+            <span class="italic">${node.passage}</span><br/>
+            <span>${node.dateNotBefore}-${node.dateNotAfter}</span>`;
           } else if (params.dataType === "edge") {
             return "";
           }

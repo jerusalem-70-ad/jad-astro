@@ -13,11 +13,8 @@ export interface GraphNode {
   jad_id: string;
   depth: number;
   nodeType: string;
-  x: number;
   y?: number;
-  sourcePassage?: string;
-  degree?: number;
-  targetY?: number;
+  x?: number;
 }
 
 // Link between nodes

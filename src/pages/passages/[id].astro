@@ -106,15 +106,17 @@ const steps = [1, 2, 3];
                     </>
                   ))
                 : "N/A"
-            }
+            } 
+               {passage.position_in_work ? `(${passage.position_in_work})` : ""}
+            
           </dd>
           <dt
             class="font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
           >
-            Position in work
+            Date:
           </dt>
           <dd class="pl-5 p-2 bg-brand-50">
-            {passage.position_in_work || "N/A"}
+            {passage.work[0]?.date[0]?.value || "N/A"}
           </dd>
           <dt
             class="font-semibold text-brand-800 border-r border-neutral-300 p-2"
@@ -379,8 +381,8 @@ const steps = [1, 2, 3];
           </dt>
           <dd class="hidden sm:block pl-5 p-2">
             {passage.transmission_graph && (
-              <details open>
-              <summary class="cursor-pointer p-2  bg-brand-800/90 hover:bg-brand-700 text-brand-50 w-60 rounded-md">See visualization graph</summary>
+              <details>
+              <summary class="cursor-pointer p-2  bg-brand-800/90 hover:bg-brand-700 text-brand-50 w-60 rounded-md">Transmission graph</summary>
               <div>               
                   <ChronologicalTree
         transmissionGraph={passage.transmission_graph}/>
