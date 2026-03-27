@@ -5,7 +5,7 @@ import { Icon } from "astro-icon/components";
 import NavLink from "@/components/nav-link.astro";
 import Article from "@/components/article.astro";
 import type { Passage } from "@/types";
-import ChronologicalTree from "@/components/chronological-tree.astro";
+import ChronologicalTree from "@/components/visualisations/chronological-tree.astro";
 import {addItalics} from "@/lib/utils.js";
 import AsideSearch from "@/components/aside-search.svelte";
 
@@ -379,7 +379,7 @@ const steps = [1, 2, 3];
           </dt>
           <dd class="hidden sm:block pl-5 p-2">
             {passage.transmission_graph && (
-              <details>
+              <details open>
               <summary class="cursor-pointer p-2  bg-brand-800/90 hover:bg-brand-700 text-brand-50 w-60 rounded-md">See visualization graph</summary>
               <div>               
                   <ChronologicalTree

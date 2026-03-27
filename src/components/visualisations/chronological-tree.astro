@@ -1,5 +1,5 @@
 ---
-import type { TransmissionGraph } from "../types";
+import type { TransmissionGraph } from "@/types";
 
 export interface Props {
   transmissionGraph: TransmissionGraph;
@@ -11,55 +11,62 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
 ---
 
 <div class="chronological-tree-container">
-  <div id="chronological-tree" style={`height: ${height}px; width: 100%;`}>
-  </div>
+ <div
+  id="chronological-tree"
+  style={`height: ${height}px; width: 100%;`}
+  data-graph={JSON.stringify(transmissionGraph.graph)}
+></div>
 </div>
-
-<script
-  is:inline
-  define:vars={{
-    graph: transmissionGraph.graph,
-    enableZoomProp: enableZoom,
-  }}
->
-  // Store configuration in global variables
-  window.passageGraphData = graph;
-  window.passageGraphConfig = {
-    showLegend: showLegendProp,
-    enableZoom: enableZoomProp,
-    enableNavigation: enableNavigationProp,
-  };
-
-
-</script>
 
 <script>
   import * as echarts from "echarts";
-  import { withBasePath } from "../lib/withBasePath";
+  import { withBasePath } from "@/lib/withBasePath";
 
   document.addEventListener("astro:page-load", () => {
-    // Get data from global variables
-    const graphData = window.passageGraphData;
     const config = {
       showLegend: true,
-      enableZoom: true,
       enableNavigation: true,
-      ...window.passageGraphConfig,
     };
 
+    const chartElement = document.getElementById("chronological-tree");
+    if (!chartElement) return;
+    const graphData = JSON.parse(chartElement.dataset.graph);
     if (!graphData || !graphData.nodes || graphData.nodes.length === 0) {
       console.error("No graph data available for chronological tree.");
       return;
     }
 
-    const chartElement = document.getElementById("chronological-tree");
-    if (!chartElement) return;
 
-    // Prepare nodes: y = date, x-spread accross branches
-    const nodes = graphData.nodes
-      .filter((node) => node.depth === 0) // A. Marx want only immediate nodes
-      .map((node: any) => ({
-        ...node,
+// Prepare nodes: y = date, x-spread accross 
+// Step 1: filter nodes
+const filteredNodes = graphData.nodes.filter(
+  (node) => node.depth === 0
+);
+
+// Step 2: group by year (y)
+const groups = new Map();
+
+filteredNodes.forEach((node) => {
+  const y = Number(node.dateNotBefore) || 0;
+  if (!groups.has(y)) groups.set(y, []);
+  groups.get(y).push(node);
+});
+
+// Step 3: assign x positions
+groups.forEach((groupNodes) => {
+  const spacing = 10 / (groupNodes.length + 1);
+
+  groupNodes.forEach((node, i) => {
+    node.x = (i + 1) * spacing;
+  });
+});
+
+// Step 4: flatten groups back into array
+const positionedNodes = Array.from(groups.values()).flat();
+
+// Step 5: map to ECharts format
+const nodes = positionedNodes.map((node) => ({
+  ...node,
         value: [node.x, Number(node.dateNotBefore) || 0],
         symbolSize: node.nodeType === "current" ? 30 : 18,
         itemStyle: {
@@ -101,7 +108,7 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
           color: "#7f8c8d",
           width: 2,
           opacity: 0.8,
-          curveness: 0,
+          curveness: 0.3,
         },
       }));
 
@@ -224,7 +231,7 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
 
     // Add click handler for nodes
     if (config.enableNavigation !== false) {
-      chart.on("click", function (params: any) {
+      chart.on("click", function (params) {
         if (params.dataType === "node") {
           // Navigate to the clicked passage
           window.location.href = withBasePath(

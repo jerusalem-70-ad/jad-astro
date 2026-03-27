@@ -40,7 +40,7 @@ export interface Graph {
 
 // Complete graph structure for passages.json
 export interface TransmissionGraph {
-  id: string | number;
+  id: number;
   graph: {
     nodes: GraphNode[];
     links: GraphLink[];
