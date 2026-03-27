@@ -5,7 +5,7 @@ import passageGraph from "@/content/data/passage-graph.json";
 import { filteredIds, selectedJadId } from "@/stores/jad_store";
 import type { Graph } from "@/types/index"
 import {dataPassagesGraph} from "@/stores/jad_store";
-import GraphTitle from "@/components/visualisations/graph-title.svelte"
+import GraphTitle from "@/components/visualisations/graph-title.svelte";
 
 let container: HTMLDivElement;
 
@@ -20,6 +20,9 @@ const nodeColor: string = "#6f2009"
 const highlightNodeColor : string = "#a92d03"
 const neighborNode : string = "#e5894a"
 const linkColor: string = "#0b331b"
+
+// state for nodes when clicked to introduce a freeze state
+let lockedNode = null;
 
 
 //a new Map for storing degree for radius and neighbours highlighting functions etc.
@@ -156,52 +159,56 @@ yAxisGroup.selectAll(".tick text")
 
 let tooltipEl;
 
-nodes.on("mouseenter", function(event,d){
- tooltip.style("visibility","visible")
-   .html(`<strong>#${d.id} ${d.name ?? ""}</strong><br/>
-          <span>Year: ${d.dateNotBefore} - ${d.dateNotAfter}</span><br/>
-                   <span>Related passages: ${d.degree || 0}</span>`);
+nodes
+  .on("mouseenter", function(event, d) {
+    if (lockedNode) return;   // prevent hover override
+    showNodeDetails(d, this);
+  })
+  .on("mouseleave", () => {
+    if (lockedNode) return;   // prevent reset when locked
 
-  tooltipEl = this;
-  updateTooltipPosition();
-  highlightNode(d);
-  
-
-  const neighbors = neighborMap.get(d.jad_id) || new Set();
-  labels
-    .attr("opacity", n => neighbors.has(n.jad_id) ? 1 : 0)
-    .each(function(n){
-      if(neighbors.has(n.jad_id)) this.parentNode.appendChild(this);
-    });
-
-})
-
-
-.on("mouseleave", () => {
-  resetHighlight();
-   tooltip.style("visibility", "hidden");
-  labels.attr("opacity",0);
-})
+    resetHighlight();
+    tooltip.style("visibility", "hidden");
+    labels.attr("opacity", 0);
+  });
 //not using on click, cause of stupid chrome 
 // nodes are moving? not the same pixel during click
 // better use pointerdown, but with delay so that one can drag the graph without accidental clicks
 let downTime = 0;
 
 nodes
-  .on("pointerdown", function (event, d) {
+  .on("pointerdown", () => {
+    event.stopPropagation();
     downTime = Date.now();
   })
-  .on("pointerup", function (event, d) {
-    if (Date.now() - downTime < 200) {
-      console.log("Click-like interaction", d);
+  .on("pointerup", function(event, d) {
+  event.stopPropagation();
+
+  if (Date.now() - downTime < 200) {
+    if (!lockedNode) {
+      // first click → lock
+      lockedNode = d;
+      showNodeDetails(d, this);
+
+    } else if (lockedNode.jad_id === d.jad_id) {
+      // second click on SAME node → open dialog
       selectedJadId.set(d.jad_id);
+
+    } else {
+      // clicked a DIFFERENT node → switch lock
+      lockedNode = d;
+      showNodeDetails(d, this);
     }
-  });
+  }
+});
 
 svg.on("pointerdown", () => {
-  selectedJadId.set(null),
+  lockedNode = null;   //  unlock
+
   resetHighlight();
-})
+  tooltip.style("visibility", "hidden");
+  labels.attr("opacity", 0);
+});
 
 
 // --- force simulation ---
@@ -338,8 +345,30 @@ function updateTooltipPosition() {
     .style("left", rect.x + rect.width / 2 + 5 + "px")
     .style("top", rect.y + "px");
 }
+// show tooltip on hover, click, neighbours and links remain
+function showNodeDetails(d, el) {
+  tooltip
+    .style("visibility", "visible")
+    .html(`<strong>#${d.id} ${d.name ?? ""}</strong><br/>
+           <span>Year: ${d.dateNotBefore} - ${d.dateNotAfter}</span><br/>
+           <span>Related passages: ${d.degree || 0}</span>`);
+
+  tooltipEl = el;
+  updateTooltipPosition();
+  highlightNode(d);
+
+  const neighbors = neighborMap.get(d.jad_id) || new Set();
+
+  labels
+    .attr("opacity", n => neighbors.has(n.jad_id) ? 1 : 0)
+    .each(function(n){
+      if (neighbors.has(n.jad_id)) this.parentNode.appendChild(this);
+    });
+}
 
 });
+
+// shared 
 </script>
 
 
