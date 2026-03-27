@@ -7,7 +7,7 @@ export interface Props {
   enableZoom?: boolean;
 }
 
-const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
+const { transmissionGraph, height = 500} = Astro.props;
 ---
 
 <div class="chronological-tree-container">
@@ -21,6 +21,12 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
 <script>
   import * as echarts from "echarts";
   import { withBasePath } from "@/lib/withBasePath";
+  import type { GraphNode, GraphLink } from "@/types";
+
+  interface GraphData {
+  nodes: GraphNode[];
+  links: GraphLink[];
+}
 
   document.addEventListener("astro:page-load", () => {
     const config = {
@@ -30,7 +36,7 @@ const { transmissionGraph, height = 500, enableZoom = true } = Astro.props;
 
     const chartElement = document.getElementById("chronological-tree");
     if (!chartElement) return;
-    const graphData = JSON.parse(chartElement.dataset.graph);
+    const graphData: GraphData = JSON.parse(chartElement.dataset.graph);
     if (!graphData || !graphData.nodes || graphData.nodes.length === 0) {
       console.error("No graph data available for chronological tree.");
       return;
@@ -43,13 +49,13 @@ const filteredNodes = graphData.nodes.filter(
   (node) => node.depth === 0
 );
 
-// Step 2: group by year (y)
-const groups = new Map();
+// Step 2: group by year (x)
+const groups = new Map<number, GraphNode[]>();;
 
 filteredNodes.forEach((node) => {
-  const y = Number(node.dateNotBefore) || 0;
-  if (!groups.has(y)) groups.set(y, []);
-  groups.get(y).push(node);
+  const x = Number(node.dateNotBefore) || 0;
+  if (!groups.has(x)) groups.set(x, []);
+  groups.get(x).push(node);
 });
 
 // Step 3: assign x positions
@@ -57,7 +63,7 @@ groups.forEach((groupNodes) => {
   const spacing = 10 / (groupNodes.length + 1);
 
   groupNodes.forEach((node, i) => {
-    node.x = (i + 1) * spacing;
+    node.y = (i + 1) * spacing;
   });
 });
 
@@ -67,7 +73,7 @@ const positionedNodes = Array.from(groups.values()).flat();
 // Step 5: map to ECharts format
 const nodes = positionedNodes.map((node) => ({
   ...node,
-        value: [node.x, Number(node.dateNotBefore) || 0],
+        value: [ Number(node.dateNotBefore) || 0, node.x],
         symbolSize: node.nodeType === "current" ? 30 : 18,
         itemStyle: {
           color:
@@ -130,9 +136,9 @@ const nodes = positionedNodes.map((node) => ({
           return "";
         },
       },
-      yAxis: {
+      xAxis: {
         type: "value",
-        inverse: true, // A. Marx want earliest dates at top
+        inverse: false, // A. Marx want earliest dates at top
         name: "Year",
         min: (value: { min: number; max: number }) =>
           Math.floor(value.min / 50) * 50, // round down to nearest 50
@@ -148,7 +154,7 @@ const nodes = positionedNodes.map((node) => ({
         },
         splitNumber: 10, // Suggest around 10 major ticks
       },
-      xAxis: {
+      yAxis: {
         type: "value",
         name: "Branch (random)",
         show: false,
@@ -157,16 +163,14 @@ const nodes = positionedNodes.map((node) => ({
       dataZoom: [
         {
           type: "slider",
-          yAxisIndex: 0,
+          xAxisIndex: 0,
           filterMode: "weakFilter",
           show: true,
-          left: "left",
-          top: 50,
-          bottom: 50,
+          bottom: 10,
         },
         {
           type: "inside",
-          yAxisIndex: 0,
+          xAxisIndex: 0,
           filterMode: "weakFilter",
         },
       ],
@@ -213,7 +217,7 @@ const nodes = positionedNodes.map((node) => ({
             backgroundColor: "#fff",
           },
           dataZoom: {
-            show: config.enableZoom,
+            show: true,
             title: {
               zoom: "Zoom",
               back: "Reset Zoom",
@@ -233,9 +237,10 @@ const nodes = positionedNodes.map((node) => ({
     if (config.enableNavigation !== false) {
       chart.on("click", function (params) {
         if (params.dataType === "node") {
+          const node = params.data as GraphNode;
           // Navigate to the clicked passage
           window.location.href = withBasePath(
-            `/passages/${params.data.jad_id}`
+            `/passages/${node.jad_id}`
           );
         }
       });
