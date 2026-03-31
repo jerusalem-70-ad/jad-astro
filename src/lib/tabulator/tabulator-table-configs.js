@@ -490,7 +490,7 @@ export const keywordsdetailTableConfig = {
   },
   // Row click configuration for work-mss-transmission table
   getRowClickConfig: {
-    urlPattern: "/keywords/{id}",
+    urlPattern: "/passages/{id}",
     idField: "jad_id",
     target: "_self",
   },

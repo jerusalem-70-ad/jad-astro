@@ -105,18 +105,18 @@ const steps = [1, 2, 3];
                       {index < passage.work.length - 1 && ", "}
                     </>
                   ))
-                : "N/A"
-            } 
-               {passage.position_in_work ? `(${passage.position_in_work})` : ""}
+                  : "N/A"
+                }                
+            {passage.work[0]?.date[0]?.value ? `(${passage.work[0]?.date[0]?.value })` : ""}
             
           </dd>
           <dt
             class="font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
           >
-            Date:
+            Position in work:
           </dt>
           <dd class="pl-5 p-2 bg-brand-50">
-            {passage.work[0]?.date[0]?.value || "N/A"}
+            {passage.position_in_work ? passage.position_in_work : "N/A"}
           </dd>
           <dt
             class="font-semibold text-brand-800 border-r border-neutral-300 p-2"
@@ -219,8 +219,14 @@ const steps = [1, 2, 3];
             {
               passage.liturgical_references.length > 0
                 ? passage.liturgical_references
-                    .map((reference) => reference.value)
-                    .join(", ")
+                    .map((reference, index) => (
+                   <>
+                    <NavLink href={`/liturgical-refs/jad_liturgical_reference__${reference.id}`}>
+                      {reference.value}
+                      </NavLink>
+                      {index < passage.liturgical_references.length - 1 && ", "}
+                   </>
+                      ))
                 : "N/A"
             }
           </dd>
@@ -423,7 +429,7 @@ const steps = [1, 2, 3];
                       </NavLink>
                     ))
                     .reduce((prev, curr, idx) =>
-                      idx === 0 ? [curr] : [prev, ", ", curr]
+                      idx === 0 ? [curr] : [prev, " / ", curr]
                     )
                 : "N/A"
             }
@@ -486,14 +492,20 @@ const steps = [1, 2, 3];
           </dt>
          <dd class="pl-5 p-2 italic bg-brand-50">
           <!-- // check if there is a // should be rendered as zeilenmbruch -->
-            {passage.text_paragraph
+           {passage.text_paragraph
               ? passage.text_paragraph.split(" // ").map((part, i) => (
-                  <>
-                    {i > 0 && <br />}
-                    {part}
-                  </>
-                ))
-              : "N/A"}
+                    <>
+                      {i > 0 && (
+                        <>
+                          {" // "}
+                          <br />
+                        </>
+                      )}
+                      {part}
+                    </>
+                  ))
+                : "N/A"
+            }
           </dd>     
         </dl> 
         <NavLink href=`/tei/passages/${passage.jad_id}.xml` class="button-custom justify-self-end">See the TEI-XML</NavLink>
