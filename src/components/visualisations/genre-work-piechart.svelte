@@ -13,27 +13,44 @@ let container: HTMLDivElement;
 let chart: echarts.ECharts | null = null;
 let pieData: { name: string; value: number }[] = [];
 
-//prepare data reactively using sotered filteredIds
+
+//prepare data reactively using sorted filteredIds
 $: {
   const passagesJson =
     $filteredIds && $filteredIds.size > 0
       ? passages.filter(p => $filteredIds.has(p.jad_id))
       : passages;
 
-  const counts = new Map<string, number>();
+  // prepare works Map from all passages
 
-  passagesJson.forEach((p) => {
-    const genre = p.genre;
-    if (!genre) return;
-    counts.set(genre, (counts.get(genre) || 0) + 1);
-  });
+// need first to group by work-title
+const worksMap = new Map();
 
-  pieData = Array.from(counts, ([name, value]) => ({
-    name,
-    value
-  })).sort((a, b) => a.name.localeCompare(b.name));
+passagesJson.forEach((p) => {
+  const work = p.title.split("(")[0].trim();
+  if (!work) return;
+
+  const genre = p.genre || "Unknown Genre";
+ 
+  if (!worksMap.has(work)) {
+    worksMap.set(work, genre);
+  }
+});
+
+const genreCounts = new Map();
+
+worksMap.forEach((genre) => {
+  genreCounts.set(genre, (genreCounts.get(genre) || 0) + 1);
+});
+
+pieData = Array.from(genreCounts, ([name, value]) => ({
+  name,
+  value
+}))
+console.log("worksMap", worksMap);
+console.log("genreCounts", genreCounts);
+console.log("pieData", pieData);
 }
-
 
 onMount(() => {
   chart = echarts.init(container);
@@ -74,16 +91,11 @@ $: if (chart) {
 
 
 </script>
-<div class="grid gap-2 p-3 ">
-<GraphContainer>
-<GraphTitle title="Genre Distribution accross Passages" definition = "This pie chart visualizes the 
-distribution of genres across all recorded passages 
-        in the database. Each passage is linked to a specific work, and every work is assigned 
-        to a genre, allowing the chart to aggregate passages by their generic classification. 
-        The relative size of each segment reflects the number of passages associated with 
-        that genre.Selecting a segment in the pie chart acts as an interactive filter: 
-            clicking on a genre takes you directly to the advanced search results, where all 
-            passages belonging to the chosen genre are displayed."/>
+<div class="grid gap-2 p-3">
+ <GraphContainer>
+  <GraphTitle title="Genre Distribution accross Works" definition = "This pie chart visualizes the 
+  distribution of genres across works. Selecting a segment in the pie chart acts as an interactive 
+  filter for the advanced search results."/>
   <div
         id="genre-piechart" bind:this={container}
         class="w-full h-[900px]"

@@ -3,7 +3,7 @@
 import { onMount } from "svelte";
   import * as echarts from "echarts";
   import { withBasePath } from "@/lib/withBasePath";
-  import passages from "@/content/data/passagesForGraphs.json";
+import passages from "@/content/data/passagesForGraphs.json";
 import { filteredIds } from "@/stores/jad_store";
 import GraphContainer from "@/components/visualisations/graph-container.svelte"
 import GraphTitle from "@/components/visualisations/graph-title.svelte"
@@ -13,7 +13,22 @@ let container: HTMLDivElement;
 let chart: echarts.ECharts | null = null;
 let pieData: { name: string; value: number }[] = [];
 
-//prepare data reactively using sotered filteredIds
+
+// prepare keywords Map from all passages
+const keywordCounts = new Map();
+
+passages.forEach((p) => {
+  p.keywords.forEach((k) => {
+    const current = keywordCounts.get(k) ?? 0;
+    keywordCounts.set(k, current + 1);
+  });
+});
+// filter out keywords with less than 10 (A. Marx wish)
+
+const filteredKeywordCounts = new Map(
+[...keywordCounts].filter(([key, count]) => count >= 10)
+);
+//prepare data reactively using sorted filteredIds
 $: {
   const passagesJson =
     $filteredIds && $filteredIds.size > 0
@@ -23,10 +38,13 @@ $: {
   const counts = new Map<string, number>();
 
   passagesJson.forEach((p) => {
-    const genre = p.genre;
-    if (!genre) return;
-    counts.set(genre, (counts.get(genre) || 0) + 1);
-  });
+    const keywords = p.keywords || [];
+    if (!keywords.length) return;
+    keywords.forEach(k => {
+      if(filteredKeywordCounts.has(k)){
+      counts.set(k, (counts.get(k) || 0) + 1);}
+    }
+  )});
 
   pieData = Array.from(counts, ([name, value]) => ({
     name,
@@ -45,7 +63,7 @@ onMount(() => {
   chart.on("click", (params: any) => {
     if (params.data) {
       window.location.href = withBasePath(
-        `/advanced-search?JAD-temp[refinementList][work.genre][0]=${params.data.name}`
+        `/advanced-search?JAD-temp[refinementList][keywords.value][0]=${params.data.name}`
       );
     }
   });
@@ -75,19 +93,15 @@ $: if (chart) {
 
 </script>
 <div class="grid gap-2 p-3 ">
-<GraphContainer>
-<GraphTitle title="Genre Distribution accross Passages" definition = "This pie chart visualizes the 
-distribution of genres across all recorded passages 
-        in the database. Each passage is linked to a specific work, and every work is assigned 
-        to a genre, allowing the chart to aggregate passages by their generic classification. 
-        The relative size of each segment reflects the number of passages associated with 
-        that genre.Selecting a segment in the pie chart acts as an interactive filter: 
-            clicking on a genre takes you directly to the advanced search results, where all 
-            passages belonging to the chosen genre are displayed."/>
-  <div
-        id="genre-piechart" bind:this={container}
+  <GraphContainer>
+    <GraphTitle title="Keywords accross Passages" definition = "This pie chart visualizes the 
+    distribution of keywords across all recorded passages 
+            in the database. Selecting a segment in the pie chart acts as an interactive filter for 
+            the advanced search."/>
+      <div
+        id="keywords-piechart"
+        bind:this={container}
         class="w-full h-[900px]"
-    >
-  </div>
-  </GraphContainer>
+      ></div>
+  </GraphContainer>  
 </div>

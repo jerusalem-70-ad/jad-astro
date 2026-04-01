@@ -24,7 +24,7 @@ export function getPieChartOption(pieData: PieDataItem[]): EChartsOption {
 
     legend: {
       orient: "horizontal",
-      //type: "scroll",
+      type: "scroll",
       right: 10,
       top: "bottom",
       formatter: function (name: string) {

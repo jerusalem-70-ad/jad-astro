@@ -2,7 +2,7 @@
 let {title, definition} : { title: string, definition: string} = $props();
 </script>
 
-<div class="flex items-start gap-2">
+<div class="flex items-start gap-2 ">
     <h2 class="text-2xl font-semibold mb-4 text-brand-950">
       {title}
     </h2>

@@ -6,6 +6,7 @@ import { onMount} from "svelte";
   import {NOVA_VULGATA_ORDER} from "scripts/sort-bibl-ref.js";
 import { filteredIds } from "@/stores/jad_store";
 import GraphTitle from "@/components/visualisations/graph-title.svelte";
+import GraphContainer from "@/components/visualisations/graph-container.svelte"
 import {getPieChartOption} from "@/components/visualisations/helpers.ts"
 
 let container: HTMLDivElement; 
@@ -77,6 +78,7 @@ let pieData: { name: string; value: number }[] = [];
   }
 </script>
 <div class="grid gap-2 p-3">
+<GraphContainer>
 <GraphTitle title="Bible books references" definition = "The pie chart shows how frequently individual 
 books of the Bible are cited across the passages, measured by the number of passages that reference 
 a given book. Multiple references to the same biblical book within a single passage are counted as one. 
@@ -89,5 +91,5 @@ and the number of references to other books found as well in these passages."/>
         class="w-full h-[900px]"
     >
   </div>
- 
+ </GraphContainer>
 </div>

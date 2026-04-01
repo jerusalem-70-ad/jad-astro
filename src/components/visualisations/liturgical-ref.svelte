@@ -4,7 +4,7 @@ import {onMount} from "svelte";
   import { withBasePath } from "@/lib/withBasePath";
   import passages from "@/content/data/passagesForGraphs.json";
 import { filteredIds } from "@/stores/jad_store";
-
+import GraphContainer from "@/components/visualisations/graph-container.svelte"
 import GraphTitle from "@/components/visualisations/graph-title.svelte";
 import {getPieChartOption} from "@/components/visualisations/helpers.ts"
 
@@ -75,7 +75,7 @@ $: if (chart) {
 </script>
 
 <div class="grid gap-2 p-3 ">
-
+<GraphContainer>
 <GraphTitle title="Liturgical references" definition = "The pie chart illustrate the frequency of liturgical references 
 across the passages. Multiple references to the same liturgical occassion within a single passage are counted as one.
 Selecting a segment in the pie chart acts as an interactive filter leading  you directly to the advanced search results."/>
@@ -85,4 +85,5 @@ Selecting a segment in the pie chart acts as an interactive filter leading  you 
         class="w-full h-[900px]"
     >
   </div>
+  </GraphContainer>
 </div>

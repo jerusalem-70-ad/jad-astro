@@ -6,6 +6,7 @@ import { filteredIds, selectedJadId } from "@/stores/jad_store";
 import type { Graph } from "@/types/index"
 import {dataPassagesGraph} from "@/stores/jad_store";
 import GraphTitle from "@/components/visualisations/graph-title.svelte";
+import GraphContainer from "@/components/visualisations/graph-container.svelte"
 
 let container: HTMLDivElement;
 
@@ -373,10 +374,11 @@ function showNodeDetails(d, el) {
 
 
 <div class="grid gap-2 p-3 ">
-
+<GraphContainer>
 <GraphTitle title="Chronological graph" definition = "This graph displays all passages in 
 chronological order. Node size reflects the level of connectedness, while links indicate source 
 relationships and derivative passages."/>
  
   <div id="graph-container" bind:this={container}></div>
+  </GraphContainer>
 </div>

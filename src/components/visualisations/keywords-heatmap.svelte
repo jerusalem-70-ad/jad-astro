@@ -5,7 +5,7 @@ import passages from "@/content/data/passagesForGraphs.json";
 import { filteredIds } from "@/stores/jad_store";
 
   import { withBasePath } from "@/lib/withBasePath";
-
+import GraphContainer from "@/components/visualisations/graph-container.svelte"
 import GraphTitle from "@/components/visualisations/graph-title.svelte";
 import { getHeatMapOption } from "@/components/visualisations/helpers.ts";
 
@@ -14,7 +14,7 @@ let chart: echarts.ECharts | null = null;
 
 // final structured data for chart
 let heatmapData = {
-  centuries: [],
+  centuries:[],
   keywords: [],
   values: []
 };
@@ -115,10 +115,15 @@ function handleClick(params: any) {
 </script>
 
 <div class="grid gap-2 p-3">
-  <GraphTitle title="Keywords Heat Map" definition="Lorem ipsum." />
+<GraphContainer>
+  <GraphTitle title="Keywords Heat Map" definition="This heat map visualizes the distribution 
+  of keywords across centuries, allowing patterns and trends in their usage to be easily 
+  identified over time. The color intensity represents frequency, while the numbers indicate 
+  the count of passages in which each keyword appears." />
 
   <div
     bind:this={container}
     class="w-full h-[900px]"
   ></div>
+  </GraphContainer>
 </div>

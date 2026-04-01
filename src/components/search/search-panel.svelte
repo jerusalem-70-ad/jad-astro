@@ -73,7 +73,7 @@ $: updateSearch($filters);
   
 </script>
 
-<div class="search-panel space-y-4 p-4 bg-brand-200/10 border-r">
+<div class="search-panel space-y-4  ">
 
             <h2 class="text-lg font-bold">Filters</h2>
   
