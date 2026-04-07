@@ -18,7 +18,8 @@ export function getPieChartOption(pieData: PieDataItem[]): EChartsOption {
       textStyle: { fontSize: 12 },
       formatter: function (params: any) {
         return `<strong>${params.data.name}</strong><br/>
-                        <span>Passages: ${params.data.value}</span>`;
+                        <span>Passages: ${params.data.value}</span>
+                        <span> (${params.percent}%)</span>`;
       },
     },
 
