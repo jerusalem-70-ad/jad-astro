@@ -64,6 +64,26 @@ graphData.nodes.forEach(d => {
   d.degree = neighborMap.get(d.jad_id).size;
 });
 
+// prepare all relatives maps for quick access during hover (including indirect connections)
+const descendantsMap = new Map(); // parent → children
+const ancestorsMap = new Map();   // child → parents
+
+// initialize
+graphData.nodes.forEach(d => {
+  descendantsMap.set(d.jad_id, new Set());
+  ancestorsMap.set(d.jad_id, new Set());
+});
+
+graphData.links.forEach(l => {
+  const sourceId = getSourceNodeJadId(l); // parent
+  const targetId = getTargetNodeJadId(l); // child
+
+  if (!sourceId || !targetId) return;
+
+  descendantsMap.get(sourceId).add(targetId);
+  ancestorsMap.get(targetId).add(sourceId);
+});
+// *****
 const width = 1000;
 const height = 1000;
 
@@ -78,6 +98,10 @@ const yScale = d3.scaleLinear()
 const yAxis = d3.axisRight(yScale)
   .ticks(10)
   .tickFormat(d3.format("d")) // remove commas 1200 instead of 1,200
+
+const yAxisLeft = d3.axisLeft(yScale)
+  .ticks(10)
+  .tickFormat(d3.format("d")) 
 
 // start drawing
 
@@ -104,9 +128,16 @@ const labelsGroup = canvas.append("g").attr("class","labels")
 
 // initial x is random,y is average based on years
 graphData.nodes.forEach(d => {
+  const y1 = yScale(d.dateNotBefore);
+  const y2 = yScale(d.dateNotAfter);
+
+  const span = Math.max(1, y2 - y1); // avoid 0-height bands
+
   d.x = Math.random() * width;
-  const avgYear = (d.dateNotBefore + d.dateNotAfter)/2;
-  d.targetY = yScale(avgYear);
+  d.y = y1 + Math.random() * span;
+
+  // optional: store center for weak attraction
+  d.targetY = (y1 + y2) / 2;
 });
 
 // --- draw links ---
@@ -147,7 +178,7 @@ const labels = labelsGroup.selectAll("text")
   // -- draw yaxis with year after nodes to be on top visible
 const yAxisGroup = svg.append("g")
   .attr("transform","translate(10,0)")
-  .call(yAxis);
+  .call(yAxis)
 
 yAxisGroup.selectAll(".tick text")
   .clone(true)
@@ -163,7 +194,7 @@ let tooltipEl;
 nodes
   .on("mouseenter", function(event, d) {
     if (lockedNode) return;   // prevent hover override
-    showNodeDetails(d, this);
+    showNodeTooltip(d, this);
   })
   .on("mouseleave", () => {
     if (lockedNode) return;   // prevent reset when locked
@@ -214,22 +245,18 @@ svg.on("pointerdown", () => {
 
 // --- force simulation ---
 const simulation = d3.forceSimulation<Graph["nodes"][number]>(graphData.nodes)
-  .force("x", d3.forceX(width/2).strength(0.03))
-  .force("y", d3.forceY((d: Graph["nodes"][number]) => d.targetY).strength(0.1))
-  .force("collide", d3.forceCollide((d: Graph["nodes"][number]) => rScale(d.degree)+4).iterations(3))
-  .force("link", d3.forceLink(graphData.links).id((d: d3.SimulationNodeDatum) => (d as Graph["nodes"][number]).jad_id).distance(40)) 
+  .force("x", d3.forceX(width/2).strength(0.01))
+  .force("y", d3.forceY((d: Graph["nodes"][number]) => d.targetY).strength(0.05))
+  .force("yBound", forceYBounded(yScale))
+  .force("collide", d3.forceCollide((d: Graph["nodes"][number]) => rScale(d.degree)+1).iterations(4))
+  // .force("link", d3.forceLink(graphData.links)
+  //   .id(d => d.jad_id)
+  //   .strength(0.01)
+  //   .iterations(1) )
   .on("tick", () => {
-    const yearMargin = 40;
-    const pixelMargin = Math.abs(yScale(0)-yScale(yearMargin));
     nodes
       .attr("cx", d => d.x)
-      .attr("cy", d => {
-        const minY = d.targetY - pixelMargin;
-        const maxY = d.targetY + pixelMargin;
-        if (d.y < minY) d.y += (minY - d.y) * 0.2;
-        if (d.y > maxY) d.y -= (d.y - maxY) * 0.2;
-        return d.y;
-      });
+      .attr("cy", d => d.y)
 
     links.attr("d", d => {
       const source = typeof d.source === "object" ? d.source : nodeById.get(d.source);
@@ -280,11 +307,11 @@ filteredIds.subscribe((ids) => {
 // --- helpers ---
 //highlight on mouse over
 function highlightNode(d: Graph["nodes"][number]){
-  const neighbors = neighborMap.get(d.jad_id) ?? new Set();
+  const allRelatives = getLineageSet(d.jad_id, ancestorsMap, descendantsMap);
    nodes
     .attr("fill", n => {
       if (n.id === d.id) return highlightNodeColor;
-      if (neighbors.has(n.jad_id)) return neighborNode;
+      if (allRelatives.has(n.jad_id)) return neighborNode;
 
       if (activeFilterIds) {
         return activeFilterIds.has(n.jad_id) ? nodeColor : "#ccc";
@@ -293,15 +320,30 @@ function highlightNode(d: Graph["nodes"][number]){
       return "#ccc";
     })
     .attr("opacity", n => {
-      if (n.id === d.id || neighbors.has(n.jad_id)) return 1;
+      if (n.id === d.id || allRelatives.has(n.jad_id)) return 1;
       if (activeFilterIds) return activeFilterIds.has(n.jad_id) ? 1 : 0.15;
       return 0.2;
     })
     .attr("r", n =>
       n.id === d.id ? rScale(n.degree) * 1.5 : rScale(n.degree)
     );
-  links.attr("stroke", l => getSourceNodeJadId(l) ===d.jad_id || getTargetNodeJadId(l)===d.jad_id ? linkColor : "#ccc")
-       .attr("stroke-opacity", l => getSourceNodeJadId(l) ===d.jad_id || getTargetNodeJadId(l)===d.jad_id ? 1:0.2);
+  links
+  .attr("stroke", l => {
+    const s = getSourceNodeJadId(l);
+    const t = getTargetNodeJadId(l);
+
+    return allRelatives.has(s) && allRelatives.has(t)
+      ? linkColor
+      : "#ccc";
+  })
+  .attr("stroke-opacity", l => {
+    const s = getSourceNodeJadId(l);
+    const t = getTargetNodeJadId(l);
+
+    return allRelatives.has(s) && allRelatives.has(t)
+      ? 1
+      : 0.2;
+  });
 }
 function resetHighlight(){
  
@@ -347,7 +389,7 @@ function updateTooltipPosition() {
     .style("top", rect.y + "px");
 }
 // show tooltip on hover, click, neighbours and links remain
-function showNodeDetails(d, el) {
+function showNodeTooltip(d, el) {
   tooltip
     .style("visibility", "visible")
     .html(`<strong>#${d.id} ${d.name ?? ""}</strong><br/>
@@ -365,6 +407,72 @@ function showNodeDetails(d, el) {
     .each(function(n){
       if (neighbors.has(n.jad_id)) this.parentNode.appendChild(this);
     });
+}
+
+function showNodeDetails(d, el) {
+  tooltip.style("visibility", "hidden");
+  highlightNode(d);
+
+  const neighbors = getLineageSet(d.jad_id, ancestorsMap, descendantsMap);
+
+  labels
+  .attr("opacity", n => {
+    const isNeighbor = neighbors.has(n.jad_id);
+    const isSelf = n.jad_id === d.jad_id;
+    return (isNeighbor || isSelf) ? 1 : 0;
+  })
+  .each(function(n){
+    if (neighbors.has(n.jad_id) || n.jad_id === d.jad_id) {
+      this.parentNode.appendChild(this);
+    }
+  });
+}
+// custom force to keep nodes within the dates bound on the y axis
+function forceYBounded(yScale) {
+  return function(alpha) {
+    for (const d of graphData.nodes) {
+      const minY = yScale(d.dateNotAfter);
+      const maxY = yScale(d.dateNotBefore);
+
+      if (d.y < minY) d.vy += (minY - d.y) * 0.2 * alpha;
+      if (d.y > maxY) d.vy -= (d.y - maxY) * 0.2 * alpha;
+    }
+  };
+}
+
+// get all related nodes
+function getLineageSet(startId, ancestorsMap, descendantsMap) {
+  const result = new Set([startId]);
+
+  // upstream
+  const stackUp = [startId];
+  while (stackUp.length) {
+    const current = stackUp.pop();
+    const parents = ancestorsMap.get(current) || [];
+
+    parents.forEach(p => {
+      if (!result.has(p)) {
+        result.add(p);
+        stackUp.push(p);
+      }
+    });
+  }
+
+  // downstream
+  const stackDown = [startId];
+  while (stackDown.length) {
+    const current = stackDown.pop();
+    const children = descendantsMap.get(current) || [];
+
+    children.forEach(c => {
+      if (!result.has(c)) {
+        result.add(c);
+        stackDown.push(c);
+      }
+    });
+  }
+
+  return result;
 }
 
 });
