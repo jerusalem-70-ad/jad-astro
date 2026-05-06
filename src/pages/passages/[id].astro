@@ -218,15 +218,23 @@ const steps = [1, 2, 3];
           <dd class="pl-5 p-2">
             {
               passage.liturgical_references.length > 0
-                ? passage.liturgical_references
+                ? <ul class="sm:flex sm:flex-wrap sm:gap-2">
+                    {/* map through biblical_references and create a span for each reference */}
+                  {passage.liturgical_references                          
                     .map((reference, index) => (
-                   <>
+                   <li class="group relative">
                     <NavLink href={`/liturgical-refs/jad_liturgical_reference__${reference.id}`}>
-                      {reference.value}
+                      {reference.value}                        
                       </NavLink>
                       {index < passage.liturgical_references.length - 1 && ", "}
-                   </>
-                      ))
+                       
+                       {reference.description && (
+                        <span class="hidden sm:block italic invisible group-hover:visible absolute z-10 w-[300px] top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
+                          {reference.description}
+                        </span>)}
+                   </li>
+                      ))}
+                      </ul>
                 : "N/A"
             }
           </dd>
@@ -422,15 +430,26 @@ const steps = [1, 2, 3];
           <dd class="pl-5 p-2">
             {
               passage.keywords?.length > 0
-                ? passage.keywords
-                    .map((keyword) => (
+              ?
+              <ul class="sm:flex sm:flex-wrap sm:gap-2">
+                 {passage.keywords.map((keyword) => (
+                    <li class="group relative">
                       <NavLink href={`/keywords/jad_keyword__${keyword.id}`}>
                         {keyword.value}
                       </NavLink>
-                    ))
+                       {keyword.description && (
+                        <span class="hidden sm:block italic invisible group-hover:visible absolute z-10 w-[300px] top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
+                          {keyword.description}
+                        </span>)}
+                    </li>
+                    
+                  ))
                     .reduce((prev, curr, idx) =>
-                      idx === 0 ? [curr] : [prev, " / ", curr]
-                    )
+                    idx === 0
+                      ? [curr]
+                      : [prev, <span class="hidden sm:block mx-1">|</span>, curr]
+                  )}
+              </ul>               
                 : "N/A"
             }
           </dd>

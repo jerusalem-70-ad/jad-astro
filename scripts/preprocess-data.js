@@ -410,7 +410,7 @@ const passagesPlus = passages
       note: passage.note,
       explicit_contemp_ref: passage.explicit_contemp_ref,
       biblical_references: passage.biblical_references,
-      keywords: passage.keywords,
+      keywords: passage.keywords.map(({ order, ...rest }) => rest),
       part_of_cluster: passage.part_of_cluster,
       liturgical_references: passage.liturgical_references.map(
         ({ order, ...rest }) => rest,
@@ -715,20 +715,6 @@ writeFileSync(
   { encoding: "utf-8" },
 );
 
-// add prev and next to passages.json
-const passagesPlusFinal = addPrevNextToItems(
-  enrichedPassages,
-  "jad_id",
-  "name",
-);
-
-writeFileSync(
-  join(folderPath, "passages.json"),
-  JSON.stringify(passagesPlusFinal, null, 2),
-  { encoding: "utf-8" },
-);
-console.log("passages.json file enriched successfully.");
-
 // add passages to biblical references
 const biblicalRefWithPassages = Object.values(biblicalRef)
   .filter((ref) => ref.name) // filter out empty names
@@ -736,7 +722,7 @@ const biblicalRefWithPassages = Object.values(biblicalRef)
   .map((ref) => {
     let processedPassages = [];
 
-    const related__passages = passagesPlusPlus
+    const related__passages = enrichedPassages
       .filter((p) => p.biblical_references.some((b_ref) => b_ref.id === ref.id))
       .map((p) => ({
         id: p.id,
@@ -800,7 +786,7 @@ const manuscriptPlusPlus = manuscriptsPlus.map((ms) => {
     .filter((occur) => occur.manuscript.length > 0)
     .filter((occur) => occur.manuscript[0].id === ms.id)
     .map((occurr) => {
-      const passage = passagesPlusPlus
+      const passage = enrichedPassages
         .filter((p) => p.id === occurr.occurrence[0]?.id)
         .map((p) => {
           return {
@@ -855,7 +841,7 @@ const keywordsPlus = keywords
       name: kw.name,
       description: kw.short_description || "",
       notes: kw.notes || "",
-      passages: passagesPlusFinal
+      passages: enrichedPassages
         .filter((p) => p.keywords.some((k) => k.id === kw.id))
         .map((p) => {
           return {
@@ -921,6 +907,44 @@ writeFileSync(
   { encoding: "utf-8" },
 );
 console.log("liturgical_references.json file written successfully.");
+
+const PassagesLiturgicalEnriched = enrichedPassages.map((p) => {
+  const related_liturgical_refs = liturgical_references
+    .filter((ref) =>
+      p.liturgical_references.some((p_ref) => p_ref.id === ref.id),
+    )
+    .map((ref) => ({
+      id: ref.id,
+      jad_id: ref.jad_id,
+      value: ref.name,
+      description: ref.description,
+    }));
+  const related_keywords = keywords
+    .filter((kw) => p.keywords.some((p_kw) => p_kw.id === kw.id))
+    .map((kw) => ({
+      id: kw.id,
+      value: kw.name,
+      description: kw.short_description,
+    }));
+  return {
+    ...p,
+    liturgical_references: related_liturgical_refs,
+    keywords: related_keywords,
+  };
+});
+// add prev and next to passages.json
+const passagesPlusFinal = addPrevNextToItems(
+  PassagesLiturgicalEnriched,
+  "jad_id",
+  "name",
+);
+
+writeFileSync(
+  join(folderPath, "passages.json"),
+  JSON.stringify(passagesPlusFinal, null, 2),
+  { encoding: "utf-8" },
+);
+console.log("passages.json file enriched successfully.");
 
 console.log("Generrating passage list");
 const passageList = new Map();

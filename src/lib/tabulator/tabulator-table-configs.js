@@ -247,12 +247,7 @@ export const worksTableConfig = {
         minWidth: 100,
         responsive: 2,
       },
-      {
-        title: "Context",
-        field: "institutional_context",
-        minWidth: 150,
-        responsive: 2,
-      },
+
       {
         title: "Date",
         field: "origDate",

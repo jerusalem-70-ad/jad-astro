@@ -291,6 +291,8 @@ export interface Mss_occurrences {
 
 export interface Ref {
   id: number;
+  jad_id?: string;
   value: string;
   order?: string;
+  description?: string;
 }
