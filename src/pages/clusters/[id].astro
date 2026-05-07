@@ -1,0 +1,70 @@
+---
+import PageLayout from "@/layouts/page-layout.astro";
+import clusters from "@/content/data/clusters.json";
+import { Icon } from "astro-icon/components";
+import NavLink from "@/components/nav-link.astro";
+import Article from "@/components/article.astro";
+import type { LiturgicalReference } from "@/types/index";
+import TabulatorTable from "@/components/tabulator-table.svelte";
+import { clustersdetailTableConfig } from "@/lib/tabulator/tabulator-table-configs.js";
+
+export async function getStaticPaths() {
+  const paths = Object.values(clusters).map((cluster) => ({
+    params: { id: cluster.jad_id },
+    props: { data: cluster as LiturgicalReference },
+  }));
+  return paths;
+}
+
+const { data: cluster} = Astro.props;
+
+// Transform data and prepare columns for Tabulator Table
+const tableData = clustersdetailTableConfig.transformData(cluster.related_passages ?? []);
+const columns = clustersdetailTableConfig.getColumns();
+const rowClickConfig = clustersdetailTableConfig.getRowClickConfig;
+---
+
+<PageLayout title={cluster.name}>
+  <Article
+    prevLink={`/clusters/${cluster.prev.id}`}
+    nextLink={`/clusters/${cluster.next.id}`}
+    mainTitle={cluster.name} 
+  >
+    <dl class="grid grid-cols-[1fr_6fr] text-sm md:leading-7 md:text-base">
+      <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
+        Cluster:
+      </dt>
+      <dd class="pl-5">{cluster.name}</dd>
+        {cluster.description && (
+            <>
+            <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
+                Description:
+            </dt>
+            <dd class="pl-5">{cluster.description}</dd>
+            </>
+        )}
+        {cluster.related_passages.length > 0 && (
+            
+            <dt class="font-semibold text-brand-900 ">
+                Passages:
+            </dt>
+            <dd></dd>
+        )}
+     
+     
+      </dl>
+      {tableData.length > 0 && (
+    <TabulatorTable
+      client:only="svelte"
+      data={tableData}
+      columns={columns}
+      tableId="liturgical-clustererences-table"
+      options={{
+        paginationSize: 25,
+        responsiveLayout: "collapse",
+      }}
+      downloadTitle="jad_liturgical_clustererences"
+      rowClickConfig={rowClickConfig}
+    /> )}
+  </Article>
+  </PageLayout>

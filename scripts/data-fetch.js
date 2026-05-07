@@ -35,7 +35,6 @@ async function fetchAllData() {
   const promises = fileNames.map(async (fileName) => {
     await fetchData(fileName, folderPath);
   });
-  log.success(`All files have been fetched and stored in ${folderPath}`);
 
   // since we are awaiting  promises is an array of promises. Use the method promise.all():
   // takes an iterable of promises as input and returns a single Promise. Returns an array of the fulfillment values.
@@ -51,8 +50,9 @@ async function fetchData(fileName, folderPath) {
     // save them in content/manuscripts.json 1) convert the data object into a json string (parameter 2 for indentation - make it readable)
     const mss = JSON.stringify(data, null, 2);
     writeFileSync(join(folderPath, fileName), mss, { encoding: "utf-8" });
+    log.success(`${fileName} has been fetched and stored in ${folderPath}`);
   } catch (error) {
-    log.error("Error while fetching data:\n", String(error));
+    log.error(`Error while fetching ${fileName} data:\n`, error);
   }
 }
 

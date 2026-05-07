@@ -41,16 +41,6 @@ const institutional_contexts = Object.values(
 const folderPath = join(process.cwd(), "src", "content", "data");
 mkdirSync(folderPath, { recursive: true });
 
-const clustersClean = clusters
-  .filter((cluster) => cluster.name)
-  .map(({ order, ...rest }) => rest);
-writeFileSync(
-  join(folderPath, "clusters.json"),
-  JSON.stringify(clustersClean, null, 2),
-  { encoding: "utf-8" },
-);
-console.log("clusters.json file written successfully.");
-
 const institutionalContextsClean = institutional_contexts
   .filter((context) => context.name)
   .map(({ order, ...rest }) => rest)
@@ -907,6 +897,36 @@ writeFileSync(
   { encoding: "utf-8" },
 );
 console.log("liturgical_references.json file written successfully.");
+
+const clustersClean = clusters
+  .filter((cluster) => cluster.name)
+  .map(({ order, ...rest }) => rest);
+const clustersPlus = clustersClean.map((cluster) => {
+  const related_passages = passagesPlusWorks
+    .filter((p) => p.part_of_cluster.some((c) => c.id === cluster.id))
+    .map((p) => {
+      return {
+        id: p.id,
+        jad_id: p.jad_id,
+        label: p.passage,
+        work: p.work[0].title,
+        author: p.work[0]?.author?.[0]?.name || "",
+        position_in_work: p.position_in_work,
+      };
+    });
+  return {
+    ...cluster,
+    related_passages: related_passages,
+  };
+});
+
+const clustersPlusFinal = addPrevNextToItems(clustersPlus, "jad_id", "name");
+writeFileSync(
+  join(folderPath, "clusters.json"),
+  JSON.stringify(clustersPlusFinal, null, 2),
+  { encoding: "utf-8" },
+);
+console.log("clusters.json file written successfully.");
 
 const PassagesLiturgicalEnriched = enrichedPassages.map((p) => {
   const related_liturgical_refs = liturgical_references

@@ -83,7 +83,8 @@ export interface LiturgicalReference {
     {
       id: number;
       jad_id: string;
-      label: string;
+      passage?: string;
+      label?: string;
       work: string;
       author: string;
       position_in_work: string;
@@ -239,13 +240,14 @@ export interface SourcePass {
 }
 
 export interface ReferencePassage {
-  id: number;
+  id?: number;
   jad_id: string;
   passage: string;
   position_in_work: string;
   sort_position?: number;
   page?: string;
   work: ReferenceWork[];
+  author?: string;
 }
 
 // Passage interface
@@ -295,4 +297,14 @@ export interface Ref {
   value: string;
   order?: string;
   description?: string;
+}
+
+export interface Cluster {
+  id: number;
+  name: string;
+  jad_id: string;
+  description?: null;
+  related_passages: ReferencePassage[];
+  prev?: Navigation;
+  next?: Navigation;
 }

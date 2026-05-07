@@ -1,0 +1,33 @@
+---
+import PageLayout from "@/layouts/page-layout.astro";
+import TableHead from "@/components/table-head.astro";
+import TabulatorTable from "@/components/tabulator-table.svelte";
+import { liturgicalrefsTableConfig } from "@/lib/tabulator/tabulator-table-configs.js";
+import clustersjson from "@/content/data/clusters.json";
+
+
+// Transform data and prepare columns for Tabulator Table
+const clusters = Object.values(clustersjson);
+const tableData = liturgicalrefsTableConfig.transformData(clusters);
+const columns = liturgicalrefsTableConfig.getColumns();
+const rowClickConfig = liturgicalrefsTableConfig.getRowClickConfig;
+---
+
+<PageLayout title="clusters">
+  <TableHead title="Clusters">
+   
+    <TabulatorTable
+      client:only="svelte"
+      data={tableData}
+      columns={columns}
+      tableId="clusters-table"
+      options={{
+        paginationSize: 25,
+        initialSort: [{ column: "aut_name", dir: "asc" }],
+      }}
+      downloadTitle="jad_clusters"
+      rowClickConfig={rowClickConfig}
+      updateMapOnFilter={true}
+    />
+  </TableHead>
+</PageLayout>

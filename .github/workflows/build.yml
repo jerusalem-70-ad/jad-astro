@@ -2,7 +2,7 @@ name: Fetch data, build website and deloy to github pages
 
 on:
   schedule:
-    - cron: "18 2 * * *"
+    - cron: "18 10 * * *"
 
   push:
     branches:

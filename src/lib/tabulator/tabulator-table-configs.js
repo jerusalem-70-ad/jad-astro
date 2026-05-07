@@ -748,7 +748,7 @@ export const liturgicalrefsTableConfig = {
         title: "Passages",
         field: "related_passages",
         minWidth: 200,
-        responsive: 3,
+        responsive: 4,
         widthGrow: 3,
       },
     ];
@@ -771,6 +771,70 @@ export const liturgicalrefTableConfig = {
         jad_id: passage.jad_id,
         title_work: passage.work,
         passage: passage.label,
+        aut_name: passage.author,
+        position: passage.position_in_work,
+      };
+    });
+  },
+
+  getColumns() {
+    const columns = [
+      {
+        title: "#",
+        field: "id",
+        responsive: 1,
+        widthGrow: 1,
+        maxWidth: 40,
+      },
+      {
+        title: "Passage",
+        field: "passage",
+        responsive: 1,
+        widthGrow: 3,
+        minWidth: 150,
+      },
+
+      {
+        title: "Author",
+        field: "aut_name",
+        minWidth: 100,
+        widthGrow: 2,
+        responsive: 2,
+        formatter: "textarea",
+      },
+      {
+        title: "Work",
+        field: "title_work",
+        minWidth: 100,
+        widthGrow: 2,
+        responsive: 1,
+      },
+
+      {
+        title: "Position in Work",
+        field: "position",
+        minWidth: 50,
+        responsive: 2,
+      },
+    ];
+    return addHeaderFilters(columns);
+  },
+  // Row click configuration for work-mss-transmission table
+  getRowClickConfig: {
+    urlPattern: "/passages/{id}",
+    idField: "jad_id",
+    target: "_self",
+  },
+};
+
+export const clustersdetailTableConfig = {
+  transformData: (passages) => {
+    return passages.map((passage) => {
+      return {
+        id: passage.id,
+        jad_id: passage.jad_id,
+        title_work: passage.work[0].title,
+        passage: passage.passage,
         aut_name: passage.author,
         position: passage.position_in_work,
       };
