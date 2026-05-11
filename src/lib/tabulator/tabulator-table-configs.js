@@ -282,9 +282,18 @@ export const manuscriptsTableConfig = {
                 .join("")}</ul>`
             : "";
         const related_works =
-          ms.related_works
-            .map((w) => (w.author ? `${w.author.name}: ${w.title}` : w.title))
-            .join(" | ") || "";
+          ms.related_passages?.length > 0
+            ? ms.related_passages
+                .flatMap((position) =>
+                  position.passage.map((p) =>
+                    p.work?.[0]?.author?.[0]?.name
+                      ? `${p.work[0].author[0].name}: ${p.work[0]?.title}`
+                      : p.work?.[0]?.title,
+                  ),
+                )
+                .join(" | ")
+            : "";
+
         const related_genres = ms.related_works.map((w) => w.genre).join(", ");
         return {
           id: ms.id || "",

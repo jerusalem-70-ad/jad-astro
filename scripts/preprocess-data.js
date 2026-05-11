@@ -455,7 +455,7 @@ const worksPlus = works
           grouped[key] = [];
         }
 
-        // Add only the fields you want from each passage
+        // Add only selected fields from each passage
         grouped[key].push({
           id: passage.id,
           jad_id: passage.jad_id,
@@ -468,7 +468,7 @@ const worksPlus = works
         return grouped;
       }, {});
 
-      // Then convert the grouped object into the array format you want
+      // convert the grouped object into the array
       processedPassages = Object.entries(groupedPassages).map(
         ([position, passages]) => ({
           position_in_work: position,
@@ -476,9 +476,27 @@ const worksPlus = works
           passages: passages,
         }),
       );
-      // Sort the processedPassages array by sort_position
+      // sort by sort_position
       processedPassages.sort((a, b) => a.sort_position - b.sort_position);
     }
+
+    const related_passages_set = [
+      ...new Set(related__passages.map((p) => p.id)),
+    ];
+    // get realted mss from ms_occurrences by filtering occ where there is a passage from the work
+    const related_manuscripts = msOccurrences
+      .filter((occ) =>
+        occ.occurrence.some((passage) =>
+          related_passages_set.includes(passage.id),
+        ),
+      )
+      // from these occ get only the manuscript data (there is only one ms in the array)
+      .map((occ) => {
+        return {
+          id: occ.manuscript[0]?.id || "",
+          name: occ.manuscript[0]?.value || "",
+        };
+      });
 
     const related_authors = authorsPlus.filter((aut) =>
       work.author.some((w_aut) => w_aut.id === aut.id),
@@ -503,14 +521,15 @@ const worksPlus = works
       title: work.title,
       author: related_authors.map(({ prev, next, works, ...rest }) => rest),
       author_certainty: work.author_certainty,
-      manuscripts: manuscriptsPlus
-        .filter((ms) => work.manuscripts.some((w_ms) => w_ms.id === ms.id))
-        .map((ms) => ({
-          id: ms.id,
-          jad_id: ms.jad_id,
-          name: `${ms.library[0].place[0]?.value}, ${ms.name[0].value}`,
-          place: ms.library[0].place,
-        })),
+      // manuscripts:manuscriptsPlus
+      //   .filter((ms) => work.manuscripts.some((w_ms) => w_ms.id === ms.id))
+      //   .map((ms) => ({
+      //     id: ms.id,
+      //     jad_id: ms.jad_id,
+      //     name: `${ms.library[0].place[0]?.value}, ${ms.name[0].value}`,
+      //     place: ms.library[0].place,
+      //   })),
+      manuscripts: related_manuscripts,
       genre: work.genre?.value || "",
       description: work.description,
       notes: work.notes || "",
