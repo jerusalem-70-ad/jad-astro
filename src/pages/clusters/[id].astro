@@ -6,7 +6,7 @@ import NavLink from "@/components/nav-link.astro";
 import Article from "@/components/article.astro";
 import type { LiturgicalReference } from "@/types/index";
 import TabulatorTable from "@/components/tabulator-table.svelte";
-import { clustersdetailTableConfig } from "@/lib/tabulator/tabulator-table-configs.js";
+import { liturgicalrefTableConfig } from "@/lib/tabulator/tabulator-table-configs.js";
 
 export async function getStaticPaths() {
   const paths = Object.values(clusters).map((cluster) => ({
@@ -19,9 +19,9 @@ export async function getStaticPaths() {
 const { data: cluster} = Astro.props;
 
 // Transform data and prepare columns for Tabulator Table
-const tableData = clustersdetailTableConfig.transformData(cluster.related_passages ?? []);
-const columns = clustersdetailTableConfig.getColumns();
-const rowClickConfig = clustersdetailTableConfig.getRowClickConfig;
+const tableData = liturgicalrefTableConfig.transformData(cluster.related_passages ?? []);
+const columns = liturgicalrefTableConfig.getColumns();
+const rowClickConfig = liturgicalrefTableConfig.getRowClickConfig;
 ---
 
 <PageLayout title={cluster.name}>

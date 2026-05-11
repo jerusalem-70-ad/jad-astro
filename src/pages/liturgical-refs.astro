@@ -10,7 +10,7 @@ import lit_references from "@/content/data/liturgical_references.json";
 const liturgical_references = Object.values(lit_references);
 const tableData = liturgicalrefsTableConfig.transformData(liturgical_references);
 const columns = liturgicalrefsTableConfig.getColumns();
-const rowClickConfig = liturgicalrefsTableConfig.getRowClickConfig;
+const rowClickConfig = liturgicalrefsTableConfig.getRowClickConfig("/liturgical-refs/{id}");
 ---
 
 <PageLayout title="liturgical-refs">

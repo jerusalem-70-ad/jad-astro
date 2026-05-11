@@ -416,9 +416,20 @@ const steps = [1, 2, 3];
           <dd class="pl-5 p-2 bg-brand-50">
             {
               passage.part_of_cluster?.length > 0
-                ? passage.part_of_cluster
-                    .map((cluster) => cluster.value)
-                    .join(", ")
+                ? 
+                <ul class="sm:flex sm:flex-wrap sm:gap-2">
+                  {passage.part_of_cluster.map((cluster) => (
+                    <li class="group relative">
+                      <NavLink href={`/clusters/${cluster.jad_id}`}>
+                        {cluster.value}
+                      </NavLink>
+                       {cluster.description && (
+                        <span class="hidden sm:block italic invisible group-hover:visible absolute z-10 w-[300px] top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
+                          {cluster.description}
+                        </span>)}
+                    </li>
+                  ))}
+                </ul>               
                 : "N/A"
             }
           </dd>

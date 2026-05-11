@@ -613,7 +613,7 @@ passagesForCompare.forEach((p) => {
     { encoding: "utf-8" },
   );
 });
-
+// minimal data for passages for the charts and graphs
 const passagesForGraphs = passagesPlusWorks.map((p) => {
   const workTitle = p.work.map((w) => w.title).join(", ");
   const author = p.work[0].author?.map((a) => a.name).join(", ");
@@ -972,8 +972,24 @@ const PassagesLiturgicalEnriched = enrichedPassages.map((p) => {
   };
 });
 // add prev and next to passages.json
+
+const PassagesClusterEnriched = PassagesLiturgicalEnriched.map((p) => {
+  const related_clusters = clusters
+    .filter((cluster) =>
+      p.part_of_cluster.some((p_cluster) => p_cluster.id === cluster.id),
+    )
+    .map((cluster) => ({
+      jad_id: cluster.jad_id,
+      value: cluster.name,
+      description: cluster.description,
+    }));
+  return {
+    ...p,
+    part_of_cluster: related_clusters,
+  };
+});
 const passagesPlusFinal = addPrevNextToItems(
-  PassagesLiturgicalEnriched,
+  PassagesClusterEnriched,
   "jad_id",
   "name",
 );

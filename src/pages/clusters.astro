@@ -10,7 +10,7 @@ import clustersjson from "@/content/data/clusters.json";
 const clusters = Object.values(clustersjson);
 const tableData = liturgicalrefsTableConfig.transformData(clusters);
 const columns = liturgicalrefsTableConfig.getColumns();
-const rowClickConfig = liturgicalrefsTableConfig.getRowClickConfig;
+const rowClickConfig = liturgicalrefsTableConfig.getRowClickConfig("/clusters/{id}");
 ---
 
 <PageLayout title="clusters">
