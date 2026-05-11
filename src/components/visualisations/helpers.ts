@@ -132,11 +132,16 @@ export function getHeatMapOption(heatMapData: HeatMapData): EChartsOption {
       top: 0,
       inRange: {
         color: [
-          "#faf7f3", // brand-50  (very light, near zero)
-          "#e6d5c3", // brand-200
-          "#e5894a", // brand-300 (nice mid highlight)
-          "#a92d03", // brand-500 (strong)
-          "#421305", // brand-900 (max intensity)
+          "#faf7f3",
+          "#f8d8c9",
+          "#f2b79b",
+          "#ea9670",
+          "#df7448",
+          "#c95b31",
+          "#a9441f",
+          "#843114",
+          "#5f1f0a",
+          "#421305",
         ],
       },
     },
