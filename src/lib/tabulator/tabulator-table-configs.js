@@ -25,7 +25,10 @@ export const passagesTableConfig = {
         jad_id: passage.jad_id || "",
         id: passage.id || "",
         passage: passage.passage || "",
-        aut_name: passage.work[0]?.author[0]?.name || "",
+
+        aut_name: `${passage.work[0].author.map((a) => a.name).join(", ")} ${passage.work[0].author_certainty === false ? "(?)" : ""}`,
+
+        //aut_name: passage.work[0]?.author[0]?.name || "",
         alt_name: passage.work[0]?.author[0]?.alt_name || "",
         aut_jad_id: passage.work[0]?.author[0]?.jad_id,
         ms_jad_ids:
@@ -198,7 +201,7 @@ export const worksTableConfig = {
         id: work.id || "",
         jad_id: work.jad_id || "",
         title: work.title || "",
-        aut_name: work.author.map((a) => a.name).join(", "),
+        aut_name: `${work.author.map((a) => a.name).join(", ")} ${work.author_certainty === false ? "(?)" : ""}`,
         alt_name: work.author[0].alt_name || "",
         genre: work.genre,
         ms_transmission: work.manuscripts.map((ms) => ms.name).join(" | "),
@@ -282,17 +285,19 @@ export const manuscriptsTableConfig = {
                 .join("")}</ul>`
             : "";
         const related_works =
-          ms.related_passages?.length > 0
-            ? ms.related_passages
-                .flatMap((position) =>
-                  position.passage.map((p) =>
-                    p.work?.[0]?.author?.[0]?.name
-                      ? `${p.work[0].author[0].name}: ${p.work[0]?.title}`
-                      : p.work?.[0]?.title,
-                  ),
-                )
-                .join(" | ")
-            : "";
+          [
+            ...new Set(
+              ms.related_passages?.length > 0
+                ? ms.related_passages.flatMap((position) =>
+                    position.passage.map((p) => {
+                      const aut = `${p.work?.[0]?.author?.[0]?.name || ""}${p.work?.[0]?.author_certainty === false ? " (?)" : ""}`;
+                      const title_aut = `${aut ? aut + ": " : ""}${p.work?.[0]?.title || ""}`;
+                      return title_aut;
+                    }),
+                  )
+                : "",
+            ),
+          ].join(", ") || "";
 
         const related_genres = ms.related_works.map((w) => w.genre).join(", ");
         return {
@@ -375,7 +380,7 @@ export const keywordsTableConfig = {
       const passages =
         (kw.passages.length > 0 &&
           `<ul>${kw.passages
-            .map((p) => `<li>(${p.id}) ${p.passage})</li>`)
+            .map((p) => `<li>(${p.id}) ${p.passage}</li>`)
             .join("")}</ul>`) ||
         [];
       return {
@@ -444,7 +449,7 @@ export const keywordsdetailTableConfig = {
         jad_id: passage.jad_id,
         title_work: passage.work.title,
         passage: passage.passage,
-        aut_name: passage.author,
+        aut_name: `${passage.author} ${passage.author_certainty === false ? "(?)" : ""}`,
         position: passage.position_in_work,
       };
     });
@@ -500,14 +505,6 @@ export const keywordsdetailTableConfig = {
   },
 };
 
-// Helper function to add header filters to columns
-function addHeaderFilters(columns) {
-  return columns.map((column) => ({
-    headerFilter: "input", // Default
-    headerFilterPlaceholder: "Search ...", // Default
-    ...column,
-  }));
-}
 // Configuration for Tabulator tables in biblical references
 export const biblrefsTableConfig = {
   transformData: (biblrefs) => {
@@ -526,12 +523,12 @@ export const biblrefsTableConfig = {
                 const authorB = b.author?.[0]?.name || "";
                 return authorA.localeCompare(authorB);
               })
-              .map(
-                (w) =>
-                  `<li>${
-                    w.author?.[0]?.name ? w.author[0].name + ": " : ""
-                  }${w.title}</li>`,
-              )
+              .map((w) => {
+                const author = w.author?.[0]?.name
+                  ? `${w.author[0].name}${w.author_certainty === false ? " (?)" : ""}`
+                  : "";
+                return `<li>${author ? author + ": " : ""}${w.title}</li>`;
+              })
               .join("")}</ul>`
           : "";
 
@@ -634,7 +631,7 @@ export const biblrefTableConfig = {
         jad_id: passage.jad_id,
         title_work: work_title,
         passage: passage.passage,
-        aut_name: passage.work[0].author.map((a) => a.name).join(", "),
+        aut_name: `${passage.work[0].author.map((a) => a.name).join(", ")} ${passage.work[0].author_certainty === false ? "(?)" : ""}`,
         alt_name: passage.work[0].author[0].alt_name || "",
         position: passage.position_in_work,
       };
@@ -696,9 +693,12 @@ export const liturgicalrefsTableConfig = {
     return refs.map((ref) => {
       const related_works = [
         ...new Set(
-          ref.related_passages.map(
-            (p) => `${p.author ? `${p.author}: ${p.work}` : p.work}`,
-          ),
+          ref.related_passages.map((p) => {
+            const aut = p.author
+              ? `${p.author}${p.author_certainty === false ? " (?)" : ""}: `
+              : "";
+            return aut + p.work;
+          }),
         ),
       ];
       const related_passages = [
@@ -780,7 +780,7 @@ export const liturgicalrefTableConfig = {
         jad_id: passage.jad_id,
         title_work: passage.work,
         passage: passage.label,
-        aut_name: passage.author,
+        aut_name: `${passage.author} ${passage.author_certainty === false ? "(?)" : ""}`,
         position: passage.position_in_work,
       };
     });
@@ -835,3 +835,12 @@ export const liturgicalrefTableConfig = {
     target: "_self",
   },
 };
+
+// Helper function to add header filters to columns
+function addHeaderFilters(columns) {
+  return columns.map((column) => ({
+    headerFilter: "input", // Default
+    headerFilterPlaceholder: "Search ...", // Default
+    ...column,
+  }));
+}

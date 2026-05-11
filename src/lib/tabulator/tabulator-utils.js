@@ -11,10 +11,18 @@ export function customNameFilter(headerValue, rowValue, rowData) {
   if (!headerValue) return true;
 
   const search = headerValue.toLowerCase();
-  const nameMatch = rowData.aut_name?.toLowerCase().includes(search);
+
+  // remove certainty marker before searching
+  const normalizedName = rowData.aut_name
+    ?.replace(/\s*\(\?\)/g, "")
+    .toLowerCase();
+
+  const nameMatch = normalizedName?.includes(search);
+
   const altNameMatch = rowData?.alt_name
     ? rowData.alt_name.toLowerCase().includes(search)
     : false;
+
   return nameMatch || altNameMatch;
 }
 
@@ -44,7 +52,7 @@ export function dateRangeFilter(
   rowValue,
   rowData,
   filterParams,
-  accessor
+  accessor,
 ) {
   // Allow all rows if the filter is empty or invalid
   if (
@@ -68,7 +76,7 @@ export function dateRangeFilter(
   if (!Array.isArray(processedRowValue)) {
     console.warn(
       "Unexpected non-array value in date filtering:",
-      processedRowValue
+      processedRowValue,
     );
     return false;
   }

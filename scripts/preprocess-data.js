@@ -864,6 +864,7 @@ const keywordsPlus = keywords
             },
             position_in_work: p.position_in_work,
             author: p.work[0]?.author?.[0]?.name || "",
+            author_certainty: p.work[0]?.author_certainty,
           };
         }),
       part_of: kw.part_of.map(({ order, ...rest }) => rest) || [],
@@ -892,6 +893,7 @@ const liturgicalRefClean = liturgical_references
           label: p.passage,
           work: p.work[0]?.title,
           author: p.work[0]?.author[0]?.name || "",
+          author_certainty: p.work[0]?.author_certainty,
           position_in_work: p.position_in_work,
         };
       });
@@ -937,6 +939,7 @@ const clustersPlus = clustersClean.map((cluster) => {
         label: p.passage,
         work: p.work[0].title,
         author: p.work[0]?.author?.[0]?.name || "",
+        author_certainty: p.work[0]?.author_certainty,
         position_in_work: p.position_in_work,
       };
     });

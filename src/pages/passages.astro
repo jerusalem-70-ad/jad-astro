@@ -16,20 +16,20 @@ const tableData = passagesTableConfig.transformData(passages);
 const columns = passagesTableConfig.getColumns();
 const rowClickConfig = passagesTableConfig.getRowClickConfig;
 
-// Debug information (only in development)
-if (import.meta.env.DEV) {
-  console.log("Passages data summary:", {
-    totalPassages: passages.length,
-    transformedData: tableData.length,
-    columns: columns.length,
-    sampleData: tableData[0],
-  });
-  console.log("Geojson data summary:", {
-    type: geoJsonData.type,
-    totalFeatures: geoJsonData.features.length,
-    sampleFeature: geoJsonData.features[2],
-  });
-}
+// // Debug information (only in development)
+// if (import.meta.env.DEV) {
+//   console.log("Passages data summary:", {
+//     totalPassages: passages.length,
+//     transformedData: tableData.length,
+//     columns: columns.length,
+//     sampleData: tableData[0],
+//   });
+//   console.log("Geojson data summary:", {
+//     type: geoJsonData.type,
+//     totalFeatures: geoJsonData.features.length,
+//     sampleFeature: geoJsonData.features[2],
+//   });
+// }
 
 // Validate data before proceeding
 if (!tableData || tableData.length === 0) {
@@ -73,7 +73,6 @@ if (!columns || columns.length === 0) {
             paginationSize: 25,
             responsiveLayout: "collapse",
             placeholder: "No matching passages found",
-            height: "600px",
           }}
           downloadTitle="jad_passages"
           rowClickConfig={rowClickConfig}

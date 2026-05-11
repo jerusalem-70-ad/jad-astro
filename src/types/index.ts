@@ -87,6 +87,7 @@ export interface LiturgicalReference {
       work: string;
       author: string;
       position_in_work: string;
+      author_certainty: boolean;
     },
   ];
   prev: Navigation;
@@ -312,6 +313,7 @@ export interface Cluster {
       work: string;
       author: string;
       position_in_work: string;
+      author_certainty: boolean;
     },
   ];
   prev: Navigation;
