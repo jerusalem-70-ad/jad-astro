@@ -919,7 +919,14 @@ console.log("liturgical_references.json file written successfully.");
 
 const clustersClean = clusters
   .filter((cluster) => cluster.name)
-  .map(({ order, ...rest }) => rest);
+  .map((cluster) => {
+    return {
+      id: cluster.id,
+      jad_id: cluster.jad_id,
+      name: cluster.name,
+      description: cluster.description || "",
+    };
+  });
 const clustersPlus = clustersClean.map((cluster) => {
   const related_passages = passagesPlusWorks
     .filter((p) => p.part_of_cluster.some((c) => c.id === cluster.id))

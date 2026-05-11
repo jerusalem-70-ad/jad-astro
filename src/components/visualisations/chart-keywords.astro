@@ -37,13 +37,19 @@ const chartData = {
 
   // Get the data passed from Astro component
   const chartDataElement = document.getElementById("chart-data");
-  const chartData = JSON.parse(chartDataElement.textContent);
+  if (!chartDataElement) {
+    throw new Error("Chart data element not found");
+  }
+  const chartData = JSON.parse(chartDataElement.textContent || "{}");
 
   // Initialize the chart
   const chartDom = document.getElementById("keywords-chart");
+  if (!chartDom) {
+    throw new Error("Keywords chart container not found");
+  }
   const myChart = echarts.init(chartDom);
   
-// Dynamically set chart height based on number of categories
+  // Dynamically set chart height based on number of categories
   const chartHeight = Math.max(800, chartData.categories.length * 18);
   chartDom.style.height = `${chartHeight}px`;
   myChart.resize();

@@ -1,22 +1,20 @@
 ---
 import PageLayout from "@/layouts/page-layout.astro";
 import clusters from "@/content/data/clusters.json";
-import { Icon } from "astro-icon/components";
-import NavLink from "@/components/nav-link.astro";
 import Article from "@/components/article.astro";
-import type { LiturgicalReference } from "@/types/index";
 import TabulatorTable from "@/components/tabulator-table.svelte";
 import { liturgicalrefTableConfig } from "@/lib/tabulator/tabulator-table-configs.js";
+import type {Cluster} from "@/types/index";
 
 export async function getStaticPaths() {
   const paths = Object.values(clusters).map((cluster) => ({
     params: { id: cluster.jad_id },
-    props: { data: cluster as LiturgicalReference },
+    props: { data: cluster as Cluster },
   }));
   return paths;
 }
 
-const { data: cluster} = Astro.props;
+const { data: cluster } = Astro.props;
 
 // Transform data and prepare columns for Tabulator Table
 const tableData = liturgicalrefTableConfig.transformData(cluster.related_passages ?? []);

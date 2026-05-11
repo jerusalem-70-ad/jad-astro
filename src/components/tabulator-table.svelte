@@ -19,7 +19,18 @@
   export let options = {};
   export let showDownloadButtons = true;
   export let downloadTitle = "data";
-  export let rowClickConfig = null;
+  
+  /**
+ * @typedef {{
+ *   urlPattern?: string,
+ *   idField?: string,
+ *   target?: string,
+ *   getUrl?: Function
+ * }} RowClickConfig
+ */
+
+/** @type {RowClickConfig | null} */
+export let rowClickConfig = null;
 
   // Map integration
   export let updateMapOnFilter = false;

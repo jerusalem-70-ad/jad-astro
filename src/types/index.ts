@@ -56,23 +56,22 @@ export interface Language {
   color: string;
 }
 
-// Reference interfaces
+// Reference interfaces for biblical refs in passages
 export interface Reference {
   id: number;
+  jad_id: string;
+  value: string;
   name?: string;
-  order?: number;
-  jad_id?: string;
-  value?: string;
-  nova_vulgata_url?: string;
-  text?: string;
-  key?: number;
-  description?: string | null;
+  text: string;
+  nova_vulgata_url: string;
+  key: number;
 }
 
 export interface BiblicalReference extends Reference {
   related_passages: ReferencePassage[];
-  prev?: Navigation;
-  next?: Navigation;
+  description: string | null;
+  prev: Navigation;
+  next: Navigation;
 }
 export interface LiturgicalReference {
   id: number;
@@ -111,7 +110,7 @@ export interface Author {
 }
 
 export interface AuthorFull extends Author {
-  gnd_url?: string;
+  gnd_url: string;
   notes?: string | null;
   lebensdaten?: string | null;
   date_of_birth?: string | null;
@@ -121,8 +120,8 @@ export interface AuthorFull extends Author {
   id: number;
   works: Work[];
   alt_name?: string | null;
-  prev?: Navigation;
-  next?: Navigation;
+  prev: Navigation;
+  next: Navigation;
 }
 
 interface OrigDate {
@@ -169,6 +168,7 @@ export interface ReferenceWork {
   id?: number;
   jad_id: string;
   title: string;
+  genre?: string;
   author: ReferenceAuthor[];
   author_certainty: boolean;
 }
@@ -189,7 +189,7 @@ export interface Work {
 
 export interface WorkFull extends Work {
   date_certainty: boolean;
-  manuscripts?: any[];
+  manuscripts: ShortRef[];
   name?: string;
   other_editions?: string | null;
   related__passages: RelPassage[];
@@ -200,8 +200,8 @@ export interface WorkFull extends Work {
   notes?: string | null;
   notes__author: string | null;
   institutional_context: any[];
-  prev?: Navigation;
-  next?: Navigation;
+  prev: Navigation;
+  next: Navigation;
 }
 
 interface RelPassage {
@@ -244,9 +244,9 @@ export interface ReferencePassage {
   jad_id: string;
   passage: string;
   position_in_work: string;
+  work: ReferenceWork[];
   sort_position?: number;
   page?: string;
-  work: ReferenceWork[];
   author?: string;
 }
 
@@ -256,30 +256,30 @@ export interface Passage {
   jad_id: string;
   passage: string;
   work: Work[];
-  position_in_work: string | null;
+  position_in_work: string;
   pages: string | null;
   note: string | null;
-  explicit_contemp_ref: string | null;
+  explicit_contemp_ref: string;
   biblical_references: Reference[];
-  keywords: Ref[] | null;
-  part_of_cluster: Ref[] | null;
+  keywords: Ref[];
+  part_of_cluster: Ref[];
   authority_discourse?: number;
   liturgical_references: Ref[];
   occurrence_found_in: ValueItem[];
   edition_link?: string | null;
   source_passage: SourcePass[];
   text_paragraph: string | null;
-  mss_occurrences: Mss_occurrences[] | null;
+  mss_occurrences: Mss_occurrences[];
   incipit: string | null;
   view_label?: string;
   prev: Navigation;
   next: Navigation;
   status: string;
-  text_taken_from: Ref[] | null;
+  text_taken_from: Ref[];
   biblical_ref_lvl0: string[];
   biblical_ref_lvl1: string[];
   biblical_ref_lvl2: string[];
-  transmission_graph?: TransmissionGraph;
+  transmission_graph: TransmissionGraph;
 }
 export interface Mss_occurrences {
   manuscript: string;
@@ -303,8 +303,22 @@ export interface Cluster {
   id: number;
   name: string;
   jad_id: string;
-  description?: null;
-  related_passages: ReferencePassage[];
-  prev?: Navigation;
-  next?: Navigation;
+  description: string;
+  related_passages: [
+    {
+      id: number;
+      jad_id: string;
+      label: string;
+      work: string;
+      author: string;
+      position_in_work: string;
+    },
+  ];
+  prev: Navigation;
+  next: Navigation;
+}
+
+interface ShortRef {
+  id: number;
+  name: string;
 }

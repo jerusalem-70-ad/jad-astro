@@ -36,7 +36,7 @@ const { transmissionGraph, height = 500} = Astro.props;
 
     const chartElement = document.getElementById("chronological-tree");
     if (!chartElement) return;
-    const graphData: GraphData = JSON.parse(chartElement.dataset.graph);
+    const graphData: GraphData = JSON.parse(chartElement.dataset.graph ?? '{}');
     if (!graphData || !graphData.nodes || graphData.nodes.length === 0) {
       console.error("No graph data available for chronological tree.");
       return;
@@ -54,8 +54,12 @@ const groups = new Map<number, GraphNode[]>();;
 
 filteredNodes.forEach((node) => {
   const x = (node.dateNotBefore + node.dateNotAfter) / 2 || 0;
-  if (!groups.has(x)) groups.set(x, []);
-  groups.get(x).push(node);
+  let group = groups.get(x);
+  if (!group) {
+    group = [];
+    groups.set(x, group);
+  }
+  group.push(node);
 });
 
 // Step 3: assign y positions

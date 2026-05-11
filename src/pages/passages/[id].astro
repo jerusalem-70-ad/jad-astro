@@ -12,7 +12,7 @@ import AsideSearch from "@/components/aside-search.svelte";
 export async function getStaticPaths() {
   const paths = Object.values(passages).map((passage) => ({
     params: { id: passage.jad_id.toString() },
-    props: { data: passage as unknown as Passage },
+    props: { data: passage as Passage },
   }));
   return paths;
 }
@@ -415,7 +415,7 @@ const steps = [1, 2, 3];
           </dt>
           <dd class="pl-5 p-2 bg-brand-50">
             {
-              passage.part_of_cluster?.length > 0
+              passage.part_of_cluster.length > 0
                 ? 
                 <ul class="sm:flex sm:flex-wrap sm:gap-2">
                   {passage.part_of_cluster.map((cluster) => (
@@ -440,7 +440,7 @@ const steps = [1, 2, 3];
           </dt>
           <dd class="pl-5 p-2">
             {
-              passage.keywords?.length > 0
+              passage.keywords.length > 0
               ?
               <ul class="sm:flex sm:flex-wrap sm:gap-2">
                  {passage.keywords.map((keyword) => (
