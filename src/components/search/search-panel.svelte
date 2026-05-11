@@ -11,6 +11,7 @@ let place : Array<{name: string, count: number}> = [];
 let century : Array<{name: string, count: number}> = [];
 let lit_ref : Array<{name: string, count: number}> = [];
 let bibl_ref : Array<{name: string, count: number}> = [];
+let manuscripts : Array<{name: string, count: number}> = [];
 
 let searchToken = 0;
 // async function to start typsense query
@@ -60,6 +61,10 @@ async function updateSearch(currentFilters: any) {
         count: c.count
     }))
     bibl_ref = getFacet("biblical_ref_lvl0").map(c => ({
+        name: c.value,
+        count: c.count
+    }))
+    manuscripts = getFacet("manuscripts.manuscript").map(c => ({
         name: c.value,
         count: c.count
     }))
@@ -118,5 +123,10 @@ $: updateSearch($filters);
         title="Biblical References"
         items={bibl_ref}
         field="bibl_ref"
+    />
+    <FilterList
+        title="Manuscripts"
+        items={manuscripts}
+        field="manuscripts"
     />
 </div>

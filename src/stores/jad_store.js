@@ -11,6 +11,7 @@ export const filters = writable({
   century: [],
   lit_ref: [],
   bibl_ref: [],
+  manuscripts: [],
   query: "",
 });
 
