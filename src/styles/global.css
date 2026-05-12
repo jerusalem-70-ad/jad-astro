@@ -242,11 +242,12 @@ dialog::backdrop {
 /* Noske Search KWIC view adjustments */
 
 .button-custom {
-  @apply bg-brand-600 text-white px-4 py-2 rounded-md hover:bg-brand-700;
+  @apply text-brand-600 hover:bg-brand-400 hover:text-brand-100 text-sm font-medium m-1 
+        py-1 px-2 border border-brand-900 rounded-sm;
 }
 
 .result-item {
-  @apply border-2 border-brand-600 hover:bg-brand-100 rounded-md shadow-xs p-4 mb-4;
+  @apply border-l-2 border-brand-600  hover:bg-brand-50 rounded-md shadow-sm p-4 mb-4;
 }
 .kwic {
   @apply font-bold text-brand-500;
