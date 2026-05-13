@@ -5,28 +5,39 @@ const client = createTypesenseClient();
 
 let currentSearchToken = 0;
 
+const FIELD_MAP = {
+  authors: "work.author.name",
+  works: "work.title",
+  genres: "work.genre",
+  keywords: "keywords.value",
+  place: "work.author.place.value",
+  century: "work.date.century",
+  lit_ref: "liturgical_references.value",
+  bibl_ref: "biblical_ref_lvl0",
+  manuscripts: "manuscripts.manuscript",
+};
 export async function runSearch(f) {
   const token = ++currentSearchToken;
 
   try {
-    const filterParts = [
-      f.authors.length ? `work.author.name:=[${f.authors.join(",")}]` : null,
-      f.works.length ? `work.title:=[${f.works.join(",")}]` : null,
-      f.genres.length ? `work.genre:=[${f.genres.join(",")}]` : null,
-      f.keywords.length ? `keywords.value:=[${f.keywords.join(",")}]` : null,
-      f.place.length ? `work.author.place.value:=[${f.place.join(",")}]` : null,
-      f.century.length ? `work.date.century:=[${f.century.join(",")}]` : null,
-      f.lit_ref.length
-        ? `liturgical_references.value:=[${f.lit_ref.join(",")}]`
-        : null,
-      f.bibl_ref.length ? `biblical_ref_lvl0:=[${f.bibl_ref.join(",")}]` : null,
-      f.manuscripts.length
-        ? `manuscripts.manuscript:=[${f.manuscripts.join(",")}]`
-        : null,
-    ].filter(Boolean);
+    // const filterParts = [
+    //   f.authors.length ? `work.author.name:=[${f.authors.join(",")}]` : null,
+    //   f.works.length ? `work.title:=[${f.works.join(",")}]` : null,
+    //   f.genres.length ? `work.genre:=[${f.genres.join(",")}]` : null,
+    //   f.keywords.length ? `keywords.value:=[${f.keywords.join(",")}]` : null,
+    //   f.place.length ? `work.author.place.value:=[${f.place.join(",")}]` : null,
+    //   f.century.length ? `work.date.century:=[${f.century.join(",")}]` : null,
+    //   f.lit_ref.length
+    //     ? `liturgical_references.value:=[${f.lit_ref.join(",")}]`
+    //     : null,
+    //   f.bibl_ref.length ? `biblical_ref_lvl0:=[${f.bibl_ref.join(",")}]` : null,
+    //   f.manuscripts.length
+    //     ? `manuscripts.manuscript:=[${f.manuscripts.join(",")}]`
+    //     : null,
+    // ].filter(Boolean);
 
-    const filter_by = filterParts.length ? filterParts.join(" && ") : undefined;
-
+    // const filter_by = filterParts.length ? filterParts.join(" && ") : undefined;
+    const filter_by = buildFilterBy(f);
     let page = 1;
     let allIds = [];
     let found = 0;
@@ -68,4 +79,35 @@ export async function runSearch(f) {
     console.error("Typesense search error:", err);
     return null;
   }
+}
+
+function escapeFilterValue(value) {
+  return `\`${String(value).replace(/`/g, "\\`")}\``;
+}
+
+function buildFilterBy(filters) {
+  const clauses = [];
+
+  for (const [key, fieldName] of Object.entries(FIELD_MAP)) {
+    const values = filters[key] ?? [];
+
+    if (!values.length) continue;
+
+    const operator = filters.operators?.[key] ?? "OR";
+
+    // OR
+    if (operator === "OR") {
+      clauses.push(
+        `${fieldName}:=[${values.map(escapeFilterValue).join(",")}]`,
+      );
+
+      // AND
+    } else {
+      clauses.push(
+        values.map((v) => `${fieldName}:=${escapeFilterValue(v)}`).join(" && "),
+      );
+    }
+  }
+
+  return clauses.length ? clauses.join(" && ") : undefined;
 }

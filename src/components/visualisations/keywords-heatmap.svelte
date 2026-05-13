@@ -4,7 +4,7 @@ import * as echarts from "echarts";
 import passages from "@/content/data/passagesForGraphs.json";
 import { filteredIds } from "@/stores/jad_store";
 
-  import { withBasePath } from "@/lib/withBasePath";
+import { withBasePath } from "@/lib/withBasePath";
 import GraphContainer from "@/components/visualisations/graph-container.svelte"
 import GraphTitle from "@/components/visualisations/graph-title.svelte";
 import { getHeatMapOption } from "@/components/visualisations/helpers.ts";
@@ -61,7 +61,16 @@ $: {
   const numB = parseInt(b);
   return numA - numB;
 });
-  const keywordsArray = Array.from(keywordSet);
+    // keep only keywords with total count >= 10
+  const keywordsArray = Array.from(keywordSet).filter(k => {
+    let total = 0;
+
+    centuriesArray.forEach(c => {
+      total += heatmap.get(c)?.get(k) ?? 0;
+    });
+
+    return total >= 10;
+  }).sort();
 
   const values: [number, number, number][] = []; // value has [X coordinates, Y coordinates, value to display]
 

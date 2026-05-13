@@ -3,15 +3,25 @@ import FilterList from "@/components/search/filter.svelte";
 import { filters } from "@/stores/jad_store.js";
 import { runSearch } from "@/lib/search/typsense-search.js";
 
-let authors : Array<{name: string, count: number}> = [];
-let works : Array<{name: string, count: number}> = [];
-let genres : Array<{name: string, count: number}> = [];
-let keywords : Array<{name: string, count: number}> = [];
-let place : Array<{name: string, count: number}> = [];
-let century : Array<{name: string, count: number}> = [];
-let lit_ref : Array<{name: string, count: number}> = [];
-let bibl_ref : Array<{name: string, count: number}> = [];
-let manuscripts : Array<{name: string, count: number}> = [];
+let allAuthors = [];
+let allWorks = [];
+let allGenres = [];
+let allKeywords = [];
+let allPlace = [];
+let allCentury = [];
+let allLitRef = [];
+let allBiblRef = [];
+let allManuscripts = [];
+
+let authorCounts = {};
+let workCounts = {};
+let genreCounts = {};
+let keywordCounts = {};
+let placeCounts = {};
+let centuryCounts = {};
+let litRefCounts = {};
+let biblRefCounts = {};
+let manuscriptCounts = {};
 
 let searchToken = 0;
 // async function to start typsense query
@@ -28,46 +38,85 @@ async function updateSearch(currentFilters: any) {
   const getFacet = (name: string) =>
   facets.find(f => f.field_name === name)?.counts ?? [];
   //prepare the data for filter list from the typsense response on facets
-  authors = getFacet("work.author.name").map(c => ({
-      name: c.value,
-      count: c.count
-    })).sort((a,b) => b.count - a.count);
-    
-    works = getFacet("work.title").map(c => ({
-        name: c.value,
-        count: c.count
-    })).sort((a,b) => b.count - a.count);
+function mapFacet(name) {
+  return getFacet(name).map(c => ({
+    name: c.value,
+    count: c.count
+  }));
+}
 
-    genres = getFacet("work.genre").map(c => ({
-        name: c.value,
-        count: c.count
-    }))
+function facetCounts(name) {
+  return Object.fromEntries(
+    getFacet(name).map(c => [c.value, c.count])
+  );
+}
+// ---------- MASTER LISTS (only once) ----------
 
-    keywords = getFacet("keywords.value").map(c => ({
-        name: c.value,
-        count: c.count
-    }))
+if (allAuthors.length === 0) {
+  allAuthors = mapFacet("work.author.name")
+    .sort((a,b) => b.count - a.count);
+}
 
-    place = getFacet("work.author.place.value").map(c => ({
-        name: c.value,
-        count: c.count
-    }))
-    century = getFacet("work.date.century").map(c => ({
-        name: c.value,
-        count: c.count
-    }))
-    lit_ref = getFacet("liturgical_references.value").map(c => ({
-        name: c.value,
-        count: c.count
-    }))
-    bibl_ref = getFacet("biblical_ref_lvl0").map(c => ({
-        name: c.value,
-        count: c.count
-    }))
-    manuscripts = getFacet("manuscripts.manuscript").map(c => ({
-        name: c.value,
-        count: c.count
-    }))
+if (allWorks.length === 0) {
+  allWorks = mapFacet("work.title")
+    .sort((a,b) => b.count - a.count);
+}
+
+if (allGenres.length === 0) {
+  allGenres = mapFacet("work.genre")
+    .sort((a,b) => b.count - a.count);
+}
+
+if (allKeywords.length === 0) {
+  allKeywords = mapFacet("keywords.value")
+    .sort((a,b) => b.count - a.count);
+}
+
+if (allPlace.length === 0) {
+  allPlace = mapFacet("work.author.place.value")
+    .sort((a,b) => b.count - a.count);
+}
+
+if (allCentury.length === 0) {
+  allCentury = mapFacet("work.date.century")
+    .sort((a,b) => b.count - a.count);
+}
+
+if (allLitRef.length === 0) {
+  allLitRef = mapFacet("liturgical_references.value")
+    .sort((a,b) => b.count - a.count);
+}
+
+if (allBiblRef.length === 0) {
+  allBiblRef = mapFacet("biblical_ref_lvl0")
+    .sort((a,b) => b.count - a.count);
+}
+
+if (allManuscripts.length === 0) {
+  allManuscripts = mapFacet("manuscripts.manuscript")
+    .sort((a,b) => b.count - a.count);
+}
+
+
+// ---------- DYNAMIC COUNTS ----------
+
+authorCounts = facetCounts("work.author.name");
+
+workCounts = facetCounts("work.title");
+
+genreCounts = facetCounts("work.genre");
+
+keywordCounts = facetCounts("keywords.value");
+
+placeCounts = facetCounts("work.author.place.value");
+
+centuryCounts = facetCounts("work.date.century");
+
+litRefCounts = facetCounts("liturgical_references.value");
+
+biblRefCounts = facetCounts("biblical_ref_lvl0");
+
+manuscriptCounts = facetCounts("manuscripts.manuscript");
 }
 
 
@@ -75,7 +124,7 @@ async function updateSearch(currentFilters: any) {
 // start a new typsense query
 $: updateSearch($filters);
 
-  
+
 </script>
 
 <div class="search-panel space-y-4  ">
@@ -85,48 +134,60 @@ $: updateSearch($filters);
    <FilterList
     title="Authors"
     field="authors"
-    items={authors}
+    items={allAuthors}
+    counts={authorCounts}
   />
 
   <FilterList
     title="Works"
     field="works"
-    items={works}
+    items={allWorks}
+    counts={workCounts}
   />
     <FilterList
         title="Genres"
         field="genres"
-        items={genres}
+        items={allGenres}
+        counts={genreCounts}
     />    
 
     <FilterList
         title="Keywords"
-        items={keywords}
+        items={allKeywords}
         field="keywords"
+        counts={keywordCounts}
     />
     <FilterList
         title="Place"
-        items={place}
+        items={allPlace}
         field="place"
+        counts={placeCounts}
     />
     <FilterList
         title="Century"
-        items={century}
+        items={allCentury}
         field="century"
+        counts={centuryCounts}
+        
     />
     <FilterList
         title="Liturgical References"
-        items={lit_ref}
+        items={allLitRef}
         field="lit_ref"
+        counts={litRefCounts}
     />
     <FilterList
         title="Biblical References"
-        items={bibl_ref}
+        items={allBiblRef}
         field="bibl_ref"
+        counts={biblRefCounts}
+
     />
     <FilterList
         title="Manuscripts"
-        items={manuscripts}
+        items={allManuscripts}
         field="manuscripts"
+        counts={manuscriptCounts}
+
     />
 </div>

@@ -13,6 +13,17 @@ export const filters = writable({
   bibl_ref: [],
   manuscripts: [],
   query: "",
+  operators: {
+    authors: "OR",
+    works: "OR",
+    genres: "OR",
+    keywords: "OR",
+    place: "OR",
+    century: "OR",
+    lit_ref: "OR",
+    bibl_ref: "OR",
+    manuscripts: "OR",
+  },
 });
 
 export const filteredIds = writable(new Set());
