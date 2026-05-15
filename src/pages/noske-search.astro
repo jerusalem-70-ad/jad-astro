@@ -48,10 +48,14 @@ import NavLink from "@/components/nav-link.astro";
                  <span class="font-medium">Search by word form:</strong> <code class="bg-white px-2 py-1 rounded text-xs">q[word="Jerusalem"]</code>
                  <br><span class="text-gray-600 text-xs">Finds exact word "Jerusalem"</span>
                  </li>
+                  <li>
+                 <span class="font-medium">Search by word case insensitive:</strong> <code class="bg-white px-2 py-1 rounded text-xs">q[lc="operatus"]</code>
+                 <br><span class="text-gray-600 text-xs">Finds "operatus" and "Operatus".</span>
+                 </li>
                  <li>
                  <span class="font-medium">Search by lemma (root form):</strong> <code class="bg-white px-2 py-1 rounded text-xs">q[lemma="cedo"]</code>
                  <br><span class="text-gray-600 text-xs">Finds "cessit", "cedentes", "cediderunt" etc.</span>
-                 </li>
+                 </li>                
                  <li>
                  <span class="font-medium">Combine with wildcards:</strong> <code class="bg-white px-2 py-1 rounded text-xs">q[word="indulg.*"]</code>
                  <br><span class="text-gray-600 text-xs">Finds words starting with "indulg"</span>
