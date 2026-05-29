@@ -46,7 +46,7 @@ const rowClickConfig = keywordsdetailTableConfig.getRowClickConfig;
           {
             keyword.part_of.map((part) => (
               <li>
-                <NavLink href={`/keywords/jad_keyword__${part.id}`}>{part.value}</NavLink>
+                <NavLink href={`/keywords/${part.jad_id}`}>{part.name}</NavLink>
               </li>
             ))
           }

@@ -173,6 +173,14 @@ async function generate() {
       id: "titus-synonyms",
       synonyms: ["titus", "tytus"],
     },
+    {
+      id: "iudeai-synonyms",
+      synonyms: ["iudeai", "judaei", "iudaei", "iudei"],
+    },
+    {
+      id: "josephus-synonyms",
+      synonyms: ["josephus", "iosephus", "josefus", "iosefus"],
+    },
   ];
 
   for (const syn of synonyms) {
