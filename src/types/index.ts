@@ -185,7 +185,6 @@ export interface Work {
   date: DateItem[];
   genre: string | null;
   link_digital_editions?: string | null;
-  incipit?: string | null;
   edition: string;
 }
 
@@ -272,7 +271,6 @@ export interface Passage {
   source_passage: SourcePass[];
   text_paragraph: string | null;
   mss_occurrences: Mss_occurrences[];
-  incipit: string | null;
   view_label?: string;
   prev: Navigation;
   next: Navigation;

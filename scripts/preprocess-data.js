@@ -419,7 +419,6 @@ const passagesPlus = passages
       biblical_ref_lvl1: lvl1,
       biblical_ref_lvl2: lvl2,
       edition_link: passage.edition_link || "",
-      incipit: passage.incipit,
       status: passage.status.value || "",
       prev: passage.prev,
       next: passage.next,
@@ -534,7 +533,6 @@ const worksPlus = works
       date: enrichDates(work.date, dates),
       date_certainty: work.date_certainty,
       link_digital_editions: work.link_digital_editions || "",
-      incipit: work.incipit || "",
       edition: edition || "",
       volume_edition_or_individual_editor:
         work.volume_edition_or_individual_editor || "",
