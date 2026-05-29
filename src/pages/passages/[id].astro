@@ -438,32 +438,53 @@ const steps = [1, 2, 3];
           >
             Keywords:
           </dt>
-          <dd class="pl-5 p-2">
-            {
-              passage.keywords.length > 0
-              ?
-              <ul class="sm:flex sm:flex-wrap sm:gap-2">
-                 {passage.keywords.map((keyword) => (
-                    <li class="group relative">
-                      <NavLink href={`/keywords/jad_keyword__${keyword.id}`}>
-                        {keyword.value}
-                      </NavLink>
-                       {keyword.description && (
-                        <span class="hidden sm:block italic invisible group-hover:visible absolute z-10 w-[300px] top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
-                          {keyword.description}
-                        </span>)}
-                    </li>
-                    
-                  ))
-                    .reduce((prev, curr, idx) =>
-                    idx === 0
-                      ? [curr]
-                      : [prev, <span class="hidden sm:block mx-1">|</span>, curr]
-                  )}
-              </ul>               
-                : "N/A"
-            }
-          </dd>
+         <dd class="pl-5 p-2">
+  {
+    passage.keywords.length > 0 ? (
+      <ul class="flex flex-wrap items-start gap-x-2 gap-y-2 text-base">
+        {passage.keywords.sort((a, b) => a.label.localeCompare(b.label))
+          .map((keyword) => (
+          <li class="border border-neutral-300 rounded-md px-2 py-1">
+            <span class="relative group ">
+              <NavLink class="text-sm underline-none"
+                href={`/keywords/${keyword.jad_id}`}
+              >
+                {keyword.label}
+              </NavLink>
+              {keyword.description && (
+                <span class="pointer-events-none hidden absolute left-0 top-full z-20 mt-2 w-max max-w-[320px] rounded border border-brand-700 bg-brand-50 p-2 text-sm italic text-brand-900 shadow-lg sm:group-hover:block">
+                  {keyword.description}
+                </span>            
+                )}
+            </span>
+            {keyword.subkeywords.length > 0 && (
+              <ul class="mt-1 flex flex-wrap gap-1">
+                {keyword.subkeywords.map((sb) => (
+                  <li class="relative group">
+                    <NavLink
+                      href={`/keywords/${sb.jad_id}`}
+                      class="rounded-full bg-brand-100 px-2 py-0.5 text-sm text-brand-800 hover:bg-brand-200"
+                    >
+                      {sb.label}
+                    </NavLink>
+
+                    {sb.description && (
+                      <span class="pointer-events-none hidden absolute left-0 top-full z-30 mt-2 w-max max-w-[320px] rounded border border-brand-700 bg-brand-50 p-2 text-sm italic text-brand-900 shadow-lg sm:group-hover:block">
+                        {sb.description}
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    ) : (
+      "N/A"
+    )
+  }
+</dd>
            {
               passage.explicit_contemp_ref
                 ?  

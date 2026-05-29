@@ -844,6 +844,21 @@ const keywords = Object.values(loadJSON("keywords.json"));
 const keywordsPlus = keywords
   .filter((kw) => kw.name)
   .map((kw) => {
+    const mainKwId = kw.part_of?.[0]?.id;
+
+    const main_keyword = mainKwId
+      ? keywords
+          .filter((k) => k.id === mainKwId)
+          .map((k) => {
+            return {
+              id: k.id,
+              jad_id: k.jad_id,
+              name: k.name,
+              description: k.short_description,
+            };
+          })
+      : [];
+
     return {
       id: kw.id,
       jad_id: kw.jad_id,
@@ -867,7 +882,7 @@ const keywordsPlus = keywords
             author_certainty: p.work[0]?.author_certainty,
           };
         }),
-      part_of: kw.part_of.map(({ order, ...rest }) => rest) || [],
+      part_of: main_keyword,
     };
   });
 const keywordsPlusFinal = addPrevNextToItems(keywordsPlus, "jad_id", "name");
@@ -968,13 +983,33 @@ const PassagesLiturgicalEnriched = enrichedPassages.map((p) => {
       value: ref.name,
       description: ref.description,
     }));
-  const related_keywords = keywords
+
+  const keywordsMap = new Map();
+  keywordsPlusFinal
     .filter((kw) => p.keywords.some((p_kw) => p_kw.id === kw.id))
-    .map((kw) => ({
-      id: kw.id,
-      value: kw.name,
-      description: kw.short_description,
-    }));
+    .forEach((kw) => {
+      const hasParent = kw.part_of.length > 0;
+      const parent = hasParent ? kw.part_of[0] : null;
+      const key = parent ? parent.id : kw.id;
+      if (!keywordsMap.has(key)) {
+        keywordsMap.set(key, {
+          label: parent ? parent.name : kw.name,
+          description: parent ? parent.description : kw.description,
+          jad_id: parent ? parent.jad_id : kw.jad_id,
+          subkeywords: [],
+        });
+      }
+
+      if (parent) {
+        keywordsMap.get(key).subkeywords.push({
+          label: kw.name,
+          description: kw.description,
+          jad_id: kw.jad_id,
+        });
+      }
+    });
+  const related_keywords = Array.from(keywordsMap.values());
+
   return {
     ...p,
     liturgical_references: related_liturgical_refs,

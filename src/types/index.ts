@@ -262,7 +262,7 @@ export interface Passage {
   note: string | null;
   explicit_contemp_ref: string;
   biblical_references: Reference[];
-  keywords: Ref[];
+  keywords: KeywordRef[];
   part_of_cluster: Ref[];
   authority_discourse?: number;
   liturgical_references: Ref[];
@@ -298,6 +298,13 @@ export interface Ref {
   value: string;
   order?: string;
   description?: string;
+}
+
+export interface KeywordRef {
+  jad_id?: string;
+  label: string;
+  description?: string;
+  subkeywords: { jad_id?: string; label: string; description?: string }[];
 }
 
 export interface Cluster {
