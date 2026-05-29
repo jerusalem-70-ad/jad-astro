@@ -196,11 +196,10 @@ export interface WorkFull extends Work {
   related__passages: RelPassage[];
   edition_link?: string | null;
   view_label?: string;
-  volume_edition_or_individual_editor?: string | null;
-  published_edition: any[];
+  institutional_context: any[];
+  published_edition: ValueItem[];
   notes?: string | null;
   notes__author: string | null;
-  institutional_context: any[];
   prev: Navigation;
   next: Navigation;
 }

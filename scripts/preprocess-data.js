@@ -538,8 +538,6 @@ const worksPlus = works
       date_certainty: work.date_certainty,
       link_digital_editions: work.link_digital_editions || "",
       edition: edition || "",
-      volume_edition_or_individual_editor:
-        work.volume_edition_or_individual_editor || "",
       other_editions: work.other_editions || "",
       related__passages: processedPassages, // Use the processed passages here
       view_label: work.view_label || "",

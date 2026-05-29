@@ -15,6 +15,9 @@ export async function getStaticPaths() {
 }
 const { data: work } = Astro.props;
 
+const edition = work.edition ?? "";
+const edition_html = edition.replace(/\*(.*?)\*/g, "<em>$1</em>")
+
 ---
 
 <PageLayout title={work.title}>
@@ -79,15 +82,13 @@ const { data: work } = Astro.props;
             <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
                 Edition:
             </dt>
-            <dd class="pl-5">
+            <dd class="pl-5"> 
+               
                 {
-                    work.published_edition.length > 0
-                        ? work.published_edition[0].value
-                                
-                        : "N/A"
+                edition && (
+                    <span set:html={edition_html}></span>
+                )
                 }
-                {work?.volume_edition_or_individual_editor &&
-                (<span>: {work.volume_edition_or_individual_editor}</span>)}
                 {work.link_digital_editions &&
                 (<NavLink href={work?.link_digital_editions}>
                     (Facsimile{" "}
