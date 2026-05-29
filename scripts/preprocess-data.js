@@ -484,19 +484,23 @@ const worksPlus = works
       ...new Set(related__passages.map((p) => p.id)),
     ];
     // get realted mss from ms_occurrences by filtering occ where there is a passage from the work
-    const related_manuscripts = msOccurrences
+    const related_manuscripts = new Map();
+    msOccurrences
       .filter((occ) =>
         occ.occurrence.some((passage) =>
           related_passages_set.includes(passage.id),
         ),
       )
-      // from these occ get only the manuscript data (there is only one ms in the array)
-      .map((occ) => {
-        return {
-          id: occ.manuscript[0]?.id || "",
-          name: occ.manuscript[0]?.value || "",
-        };
+      .forEach((occ) => {
+        if (!related_manuscripts.has(occ.manuscript[0]?.id)) {
+          related_manuscripts.set(occ.manuscript[0].id, {
+            id: occ.manuscript[0]?.id || "",
+            name: occ.manuscript[0]?.value || "",
+          });
+        }
       });
+    // convert map to array
+    const related_mss = Array.from(related_manuscripts.values());
 
     const related_authors = authorsPlus.filter((aut) =>
       work.author.some((w_aut) => w_aut.id === aut.id),
@@ -521,7 +525,7 @@ const worksPlus = works
       title: work.title,
       author: related_authors.map(({ prev, next, works, ...rest }) => rest),
       author_certainty: work.author_certainty,
-      manuscripts: related_manuscripts,
+      manuscripts: related_mss,
       genre: work.genre?.value || "",
       description: work.description,
       notes: work.notes || "",

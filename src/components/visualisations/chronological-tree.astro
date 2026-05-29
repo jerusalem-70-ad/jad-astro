@@ -53,7 +53,7 @@ const filteredNodes = graphData.nodes.filter(
 const groups = new Map<number, GraphNode[]>();;
 
 filteredNodes.forEach((node) => {
-  const x = (node.dateNotBefore + node.dateNotAfter) / 2 || 0;
+  const x = (node.dateNotBefore && node.dateNotAfter ? node.dateNotBefore + node.dateNotAfter : 0) / 2 || 0;
   let group = groups.get(x);
   if (!group) {
     group = [];
@@ -77,7 +77,7 @@ const positionedNodes = Array.from(groups.values()).flat();
 // Step 5: map to ECharts format
 const nodes = positionedNodes.map((node) => ({
   ...node,
-        value: [ (node.dateNotBefore + node.dateNotAfter) / 2 , node.x],
+        value: [ (node.dateNotBefore && node.dateNotAfter ? node.dateNotBefore + node.dateNotAfter : 0) / 2 , node.x],
         symbolSize: node.nodeType === "current" ? 30 : 18,
         itemStyle: {
           color:
@@ -115,9 +115,9 @@ const nodes = positionedNodes.map((node) => ({
         source: idToIndex.get(link.source),
         target: idToIndex.get(link.target),
         lineStyle: {
-          color: "#7f8c8d",
+          color: "#a08978",
           width: 2,
-          opacity: 0.8,
+          opacity: 0.6,
           curveness: 0.3,
         },
       }));
@@ -192,10 +192,10 @@ const nodes = positionedNodes.map((node) => ({
           edgeSymbol: ["none", "arrow"],
           edgeSymbolSize: [0, 10],
           label: { show: true, position: "top" },
-          lineStyle: { color: "#7f8c8d", width: 4, opacity: 0.9 },
+          lineStyle: { color: "#a08978", width: 2, opacity: 0.9 },
           emphasis: {
             focus: "adjacency",
-            lineStyle: { width: 4, color: "#444" },
+            lineStyle: { width: 2, color: "#a92d03", opacity: 0.7 },
             itemStyle: { borderWidth: 2, borderColor: "#fff" },
           },
           categories: [

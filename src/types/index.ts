@@ -7,8 +7,8 @@ export interface GraphNode {
   name: string;
   work: string;
   author: string;
-  dateNotBefore: number;
-  dateNotAfter: number;
+  dateNotBefore: number | null;
+  dateNotAfter: number | null;
   passage: string;
   jad_id: string;
   depth: number;
@@ -154,8 +154,8 @@ export interface DateItem {
   id: number;
   value: string;
   range: string | null;
-  not_before: number | null;
-  not_after: number | null;
+  not_before: number;
+  not_after: number;
   century?: string[] | null;
 }
 
