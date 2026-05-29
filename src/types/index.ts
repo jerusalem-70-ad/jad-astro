@@ -108,6 +108,7 @@ export interface Author {
   name: string;
   alt_name?: string | null;
   place: Place[];
+  occupation: string;
 }
 
 export interface AuthorFull extends Author {

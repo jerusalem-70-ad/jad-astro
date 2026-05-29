@@ -35,7 +35,7 @@ const dates = author.origDates;
        <dd class="pl-5">{dates.split(' — ')[1]}</dd>
       <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
         Place:
-      </dt>
+      </dt>     
       <dd class="pl-5">
         {
           author.place.length > 0 ? (
@@ -52,6 +52,12 @@ const dates = author.origDates;
           )
         }
       </dd>
+       {author.occupation && (
+        <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
+        Occupation:
+      </dt>
+       <dd class="pl-5">{author.occupation}</dd>
+      )}
       <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
         GND:
       </dt>

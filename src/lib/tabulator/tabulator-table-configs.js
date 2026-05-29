@@ -26,7 +26,7 @@ export const passagesTableConfig = {
         id: passage.id || "",
         passage: passage.passage || "",
 
-        aut_name: `${passage.work[0].author.map((a) => a.name).join(", ")} ${passage.work[0].author_certainty === false ? "(?)" : ""}`,
+        aut_name: `${passage.work[0].author.map((a) => (a.occupation ? `${a.name}, ${a.occupation}` : a.name)).join(", ")} ${passage.work[0].author_certainty === false ? "(?)" : ""}`,
 
         //aut_name: passage.work[0]?.author[0]?.name || "",
         alt_name: passage.work[0]?.author[0]?.alt_name || "",
@@ -38,7 +38,14 @@ export const passagesTableConfig = {
         mss_occurrences: passage.mss_occurrences
           .map((ms) => ms.manuscript)
           .join(" | "),
-        keywords: passage.keywords.map((kw) => kw.value).join(" / ") || "",
+        keywords: passage.keywords
+          .map((kw) => {
+            const subkeywords = kw.subkeywords
+              ? kw.subkeywords.map((sk) => sk.label)
+              : [];
+            return [kw.label, ...subkeywords].filter(Boolean).join(": ") || "";
+          })
+          .join(" / "),
         origDate: passage.work[0].date || "",
         transmission_graph:
           passage.transmission_graph.graph.nodes.length - 1 || 0,
@@ -151,6 +158,7 @@ export const authorsTableConfig = {
           works: aut.works.map((w) => w.title).join(" | ") || "",
           jad_id: aut.jad_id || "",
           place: aut.place.map((pl) => pl.value).join(" | ") || "",
+          occupation: aut.occupation || "",
         };
       });
   },
@@ -160,6 +168,13 @@ export const authorsTableConfig = {
       {
         title: "Name",
         field: "aut_name",
+        widthGrow: 1,
+        minWidth: 200,
+        responsive: 0,
+      },
+      {
+        title: "Occupation",
+        field: "occupation",
         widthGrow: 1,
         minWidth: 200,
         responsive: 0,
@@ -201,7 +216,7 @@ export const worksTableConfig = {
         id: work.id || "",
         jad_id: work.jad_id || "",
         title: work.title || "",
-        aut_name: `${work.author.map((a) => a.name).join(", ")} ${work.author_certainty === false ? "(?)" : ""}`,
+        aut_name: `${work.author.map((a) => (a.occupation ? `${a.name}, ${a.occupation}` : a.name)).join(", ")} ${work.author_certainty === false ? "(?)" : ""}`,
         alt_name: work.author[0].alt_name || "",
         genre: work.genre,
         ms_transmission: work.manuscripts.map((ms) => ms.name).join(" | "),
