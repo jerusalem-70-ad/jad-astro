@@ -83,6 +83,7 @@ const steps = [1, 2, 3];
               <NavLink href={`/authors/${passage.work[0].author[0].jad_id}`}>
                 {passage.work[0].author[0]?.name}{" "}
                 {passage.work[0].author_certainty === false && " (?)"}
+                {passage.work[0].author[0]?.occupation ? `(${passage.work[0].author[0].occupation})` : ""}
               </NavLink>
             ) : (
               "N/A"

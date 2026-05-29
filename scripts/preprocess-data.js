@@ -138,6 +138,7 @@ const authorsPlus = authors
       notes: aut.notes || "",
       gnd_url: aut.gnd_url || "",
       works: related_works,
+      occupation: aut.occupation || "",
     };
   });
 
@@ -521,14 +522,6 @@ const worksPlus = works
       title: work.title,
       author: related_authors.map(({ prev, next, works, ...rest }) => rest),
       author_certainty: work.author_certainty,
-      // manuscripts:manuscriptsPlus
-      //   .filter((ms) => work.manuscripts.some((w_ms) => w_ms.id === ms.id))
-      //   .map((ms) => ({
-      //     id: ms.id,
-      //     jad_id: ms.jad_id,
-      //     name: `${ms.library[0].place[0]?.value}, ${ms.name[0].value}`,
-      //     place: ms.library[0].place,
-      //   })),
       manuscripts: related_manuscripts,
       genre: work.genre?.value || "",
       description: work.description,
@@ -576,6 +569,7 @@ const passagesPlusWorks = passagesPlus.map((p) => {
           name: a.name,
           alt_name: a.alt_name,
           place: a.place,
+          occupation: a.occupation,
         })),
         author_certainty: w.author_certainty,
         date: w.date,
