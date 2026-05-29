@@ -25,10 +25,7 @@ export const passagesTableConfig = {
         jad_id: passage.jad_id || "",
         id: passage.id || "",
         passage: passage.passage || "",
-
         aut_name: `${passage.work[0].author.map((a) => (a.occupation ? `${a.name}, ${a.occupation}` : a.name)).join(", ")} ${passage.work[0].author_certainty === false ? "(?)" : ""}`,
-
-        //aut_name: passage.work[0]?.author[0]?.name || "",
         alt_name: passage.work[0]?.author[0]?.alt_name || "",
         aut_jad_id: passage.work[0]?.author[0]?.jad_id,
         ms_jad_ids:
@@ -46,7 +43,8 @@ export const passagesTableConfig = {
             return [kw.label, ...subkeywords].filter(Boolean).join(": ") || "";
           })
           .join(" / "),
-        origDate: passage.work[0].date || "",
+        tpq: passage.work[0].date[0]?.not_before || "",
+        taq: passage.work[0].date[0]?.not_after || "",
         transmission_graph:
           passage.transmission_graph.graph.nodes.length - 1 || 0,
       };
@@ -92,23 +90,6 @@ export const passagesTableConfig = {
         responsive: 3,
         minWidth: 200,
       },
-
-      /*  {
-        title: "Biblical Reference",
-        resizable: true,
-        field: "biblical_references",
-        responsive: 4,
-        widthGrow: 1,
-        minWidth: 100,
-      },
-      {
-        title: "Liturgical Reference",
-        resizable: true,
-        field: "liturgical_references",
-        responsive: 4,
-        widthGrow: 1,
-        minWidth: 100,
-      }, */
       {
         title: "Keywords",
         resizable: true,
@@ -118,12 +99,20 @@ export const passagesTableConfig = {
         minWidth: 150,
       },
       {
-        title: "Date",
-        field: "origDate",
-        headerFilterPlaceholder: "e.g. 1000, after 1001",
-        responsive: 2,
-        widthGrow: 2,
-        minWidth: 200,
+        title: "Date TPQ",
+        resizable: true,
+        field: "tpq",
+        responsive: 3,
+        widthGrow: 1,
+        minWidth: 80,
+      },
+      {
+        title: "Date TAQ",
+        resizable: true,
+        field: "taq",
+        responsive: 3,
+        widthGrow: 1,
+        minWidth: 80,
       },
       {
         title: "related passages",
@@ -159,6 +148,8 @@ export const authorsTableConfig = {
           jad_id: aut.jad_id || "",
           place: aut.place.map((pl) => pl.value).join(" | ") || "",
           occupation: aut.occupation || "",
+          tpq: aut.rawDates[0]?.not_before || "",
+          taq: aut.rawDates[0]?.not_after || "",
         };
       });
   },
@@ -193,6 +184,22 @@ export const authorsTableConfig = {
         widthGrow: 1,
         minWidth: 100,
       },
+      {
+        title: "Date TPQ",
+        resizable: true,
+        field: "tpq",
+        responsive: 3,
+        widthGrow: 1,
+        minWidth: 80,
+      },
+      {
+        title: "Date TAQ",
+        resizable: true,
+        field: "taq",
+        responsive: 3,
+        widthGrow: 1,
+        minWidth: 80,
+      },
     ];
 
     return addHeaderFilters(columns);
@@ -224,7 +231,8 @@ export const worksTableConfig = {
         institutional_context: (work.institutional_context || [])
           .map((context) => context.value)
           .join(" | "),
-        origDate: work.date,
+        tpq: work.date[0]?.not_before || "",
+        taq: work.date[0]?.not_after || "",
       };
     });
   },
@@ -267,11 +275,20 @@ export const worksTableConfig = {
       },
 
       {
-        title: "Date",
-        field: "origDate",
-        headerFilterPlaceholder: "e.g. 1000, after 1001",
-        minWidth: 150,
-        responsive: 2,
+        title: "Date TPQ",
+        resizable: true,
+        field: "tpq",
+        responsive: 3,
+        widthGrow: 1,
+        minWidth: 80,
+      },
+      {
+        title: "Date TAQ",
+        resizable: true,
+        field: "taq",
+        responsive: 3,
+        widthGrow: 1,
+        minWidth: 80,
       },
     ];
     return addHeaderFilters(columns);
@@ -324,6 +341,8 @@ export const manuscriptsTableConfig = {
           jad_id: ms.jad_id || "",
           genre: related_genres,
           origDate: ms.date_written || "",
+          tpq: ms.date_written ? parseInt(ms.date_written[0]?.not_before) : "",
+          taq: ms.date_written ? parseInt(ms.date_written[0]?.not_after) : "",
         };
       });
   },
@@ -369,13 +388,20 @@ export const manuscriptsTableConfig = {
         minWidth: 150,
       },
       {
-        title: "Date",
+        title: "Date TPQ",
         resizable: true,
-        field: "origDate",
-        headerFilterPlaceholder: "e.g. 1000, after 1001",
-        responsive: 2,
-        widthGrow: 2,
-        minWidth: 100,
+        field: "tpq",
+        responsive: 3,
+        widthGrow: 1,
+        minWidth: 80,
+      },
+      {
+        title: "Date TAQ",
+        resizable: true,
+        field: "taq",
+        responsive: 3,
+        widthGrow: 1,
+        minWidth: 80,
       },
     ];
 

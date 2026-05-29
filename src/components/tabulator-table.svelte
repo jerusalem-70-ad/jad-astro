@@ -10,6 +10,7 @@
     dateRangeFilter,
     customNameFilter,
     scrollableCellFormatter,
+    filterTPQ,
   } from "@/lib/tabulator/tabulator-utils.js";
 
   /* ---------- props ---------- */
@@ -67,6 +68,11 @@ export let rowClickConfig = null;
           formatterParams: { scrollable: true },
           minWidth: 150,
         };
+      case "tpq":
+        return {
+          ...column,
+          headerFilterFunc: filterTPQ,
+        }
       default:
         return column;
     }

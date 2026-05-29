@@ -107,32 +107,32 @@ export function sortByKey(value, data, type, params, component) {
   return sorted.map((ref) => ref.value).join(params.separator || "; ");
 }
 
-/* // function to filter numeric not_before and not_After date in separate columns (TPQ and TAQ) 
+// function to filter numeric not_before and not_After date in separate columns (TPQ and TAQ)
 // worked very good but was not welcomed by the user
 
-export function filterTPQ(headerValue, rowValue, rowData) {
-  if (!headerValue) return true; // Show all if no filter value
-  const filterValue = parseInt(headerValue); // Parse filter value as integer
-  if (isNaN(filterValue)) return true; // Show all if filter value is not a number
+export function filterTPQ(headerValue, rowValue) {
+  if (!headerValue) return true;
 
-  // rowValue is an array of dates, so check if ANY of them is greater than the filter value
-  return rowValue.some((date) => {
-    const dateValue = parseInt(date); // Parse date value as integer
-    return !isNaN(dateValue) && dateValue >= filterValue; // Compare only if date is a number
-  });
+  const filterValue = parseInt(headerValue, 10);
+  const dateValue = parseInt(rowValue, 10);
+
+  if (isNaN(filterValue)) return true;
+  if (isNaN(dateValue)) return false;
+
+  return dateValue >= filterValue;
 }
 
-export function filterTAQ(headerValue, rowValue, rowData) {
-  if (!headerValue) return true; // Show all if no filter value
-  const filterValue = parseInt(headerValue); // Parse filter value as integer
-  if (isNaN(filterValue)) return true; // Show all if filter value is not a number
+export function filterTAQ(headerValue, rowValue) {
+  if (!headerValue) return true;
 
-  // rowValue is an array of dates, so check if ANY of them is greater than the filter value
-  return rowValue.some((date) => {
-    const dateValue = parseInt(date); // Parse date value as integer
-    return !isNaN(dateValue) && dateValue <= filterValue; // Compare only if date is a number
-  });
-} */
+  const filterValue = parseInt(headerValue, 10);
+  const dateValue = parseInt(rowValue, 10);
+
+  if (isNaN(filterValue)) return true;
+  if (isNaN(dateValue)) return false;
+
+  return dateValue <= filterValue;
+}
 
 /* // To get the century of not_before not_after dates
 export function jsonpathGetCentury(value, data, type, params, component) {
