@@ -511,7 +511,7 @@ search.addWidgets([
 
   refinementListKeywords({
     container: "#refinement-list-keywords",
-    attribute: "keywords.value",
+    attribute: "keywords.label",
     searchable: true,
     showMore: true,
     showMoreLimit: 50,
@@ -577,7 +577,7 @@ search.addWidgets([
                         ? "Institution"
                         : item.attribute === "cluster.value"
                           ? "Cluster"
-                          : item.attribute === "keywords.value"
+                          : item.attribute === "keywords.label"
                             ? "Keyword"
                             : item.attribute === "Liturgical_references.value"
                               ? "Liturgy"

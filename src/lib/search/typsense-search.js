@@ -9,7 +9,7 @@ const FIELD_MAP = {
   authors: "work.author.name",
   works: "work.title",
   genres: "work.genre",
-  keywords: "keywords.value",
+  keywords: "keywords.label",
   place: "work.author.place.value",
   century: "work.date.century",
   lit_ref: "liturgical_references.value",
@@ -49,7 +49,7 @@ export async function runSearch(f) {
         query_by: "search_text",
         filter_by,
         facet_by:
-          "work.author.name, work.title, work.genre, keywords.value, work.author.place.value, work.date.century, biblical_ref_lvl0, liturgical_references.value, manuscripts.manuscript",
+          "work.author.name, work.title, work.genre, keywords.label, work.author.place.value, work.date.century, biblical_ref_lvl0, liturgical_references.value, manuscripts.manuscript",
         max_facet_values: 500,
         per_page: 250,
         page,

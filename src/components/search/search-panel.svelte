@@ -68,7 +68,7 @@ if (allGenres.length === 0) {
 }
 
 if (allKeywords.length === 0) {
-  allKeywords = mapFacet("keywords.value")
+  allKeywords = mapFacet("keywords.label")
     .sort((a,b) => b.count - a.count);
 }
 
@@ -106,7 +106,7 @@ workCounts = facetCounts("work.title");
 
 genreCounts = facetCounts("work.genre");
 
-keywordCounts = facetCounts("keywords.value");
+keywordCounts = facetCounts("keywords.label");
 
 placeCounts = facetCounts("work.author.place.value");
 
