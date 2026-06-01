@@ -219,7 +219,7 @@ dialog::backdrop {
 }
 
 .ais-SearchBox-form {
-  @apply flex gap-0;
+  @apply flex gap-1;
 }
 
 .ais-SearchBox-form::before {

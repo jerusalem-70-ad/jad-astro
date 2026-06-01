@@ -440,18 +440,32 @@ const steps = [1, 2, 3];
             Keywords:
           </dt>
          <dd class="pl-5 p-2">
-  {
-    passage.keywords.length > 0 ? (
-      <ul class="flex flex-wrap items-start gap-x-2 gap-y-2 text-base">
-        {passage.keywords.sort((a, b) => a.label.localeCompare(b.label))
-          .map((keyword) => (
-          <li class="border border-neutral-300 rounded-md px-2 py-1">
-            <span class="text-sm font-medium text-brand-800">            
-                {keyword.label}             
-            </span>
-            {keyword.subkeywords.length > 0 && (
-              <ul class="mt-1 flex flex-wrap gap-1">
-                {keyword.subkeywords.sort((a , b) => a.label.localeCompare(b.label)).map((sb) => (
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-2">
+            <div class="border border-neutral-300 rounded-md px-2 py-1">
+              <span id="elements-roman-conquest-heading" class="text-sm font-medium text-brand-800">Elements Roman conquest</span>
+              <ul aria-labelledby="elements-roman-conquest-heading" class="mt-1 flex flex-wrap gap-1">
+                {passage.keywords.find(keyword => keyword.label === "Elements Roman conquest")?.subkeywords.sort((a, b) => a.label.localeCompare(b.label)).map((sb) => (
+                  <li class="relative group ">
+                    <NavLink
+                      href={`/keywords/${sb.jad_id}`}
+                      class="rounded-full bg-amber-500/50 px-2 py-0.5 text-sm text-brand-950 hover:bg-brand-300 hover:text-white transition-colors"
+                    >
+                      {sb.label}
+                    </NavLink>
+
+                    {sb.description && (
+                      <span class="pointer-events-none hidden absolute left-0 top-full z-30 mt-2 w-max max-w-[320px] rounded border border-brand-700 bg-brand-50 p-2 text-sm italic text-brand-900 shadow-lg sm:group-hover:block">
+                        {sb.description}
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="border border-neutral-300 rounded-md px-2 py-1">
+              <span id="roman-empire-heading" class="text-sm font-medium text-brand-800">Roman Empire</span>
+              <ul aria-labelledby="roman-empire-heading" class="mt-1 flex flex-wrap gap-1">
+                {passage.keywords.find(keyword => keyword.label === "Roman Empire")?.subkeywords.sort((a, b) => a.label.localeCompare(b.label)).map((sb) => (
                   <li class="relative group">
                     <NavLink
                       href={`/keywords/${sb.jad_id}`}
@@ -468,15 +482,52 @@ const steps = [1, 2, 3];
                   </li>
                 ))}
               </ul>
-            )}
-          </li>
-        ))}
-      </ul>
-    ) : (
-      "N/A"
-    )
-  }
-</dd>
+            </div>
+            <div class="border border-neutral-300 rounded-md px-2 py-1">
+              <span id="biblical-elements-heading" class="text-sm font-medium text-brand-800">Biblical elements</span>
+              <ul aria-labelledby="biblical-elements-heading" class="mt-1 flex flex-wrap gap-1">
+                {passage.keywords.find(keyword => keyword.label === "Biblical elements")?.subkeywords.sort((a, b) => a.label.localeCompare(b.label)).map((sb) => (
+                  <li class="relative group">
+                    <NavLink
+                      href={`/keywords/${sb.jad_id}`}
+                      class="rounded-full bg-amber-500/50 px-2 py-0.5 text-sm text-brand-950 hover:bg-brand-300 hover:text-white transition-colors"
+                    >
+                      {sb.label}
+                    </NavLink>
+
+                    {sb.description && (
+                      <span class="pointer-events-none hidden absolute left-0 top-full z-30 mt-2 w-max max-w-[320px] rounded border border-brand-700 bg-brand-50 p-2 text-sm italic text-brand-900 shadow-lg sm:group-hover:block">
+                        {sb.description}
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div class="border border-neutral-300 rounded-md px-2 py-1">
+              <span id="contemporary-pertinence-heading" class="text-sm font-medium text-brand-800">Contemporary pertinence</span>
+              <ul aria-labelledby="contemporary-pertinence-heading" class="mt-1 flex flex-wrap gap-1">
+                {passage.keywords.find(keyword => keyword.label === "Contemporary pertinence")?.subkeywords.sort((a, b) => a.label.localeCompare(b.label)).map((sb) => (
+                  <li class="relative group">
+                    <NavLink
+                      href={`/keywords/${sb.jad_id}`}
+                      class="rounded-full bg-amber-500/50 px-2 py-0.5 text-sm text-brand-950 hover:bg-brand-300 hover:text-white transition-colors"
+                    >
+                      {sb.label}
+                    </NavLink>
+
+                    {sb.description && (
+                      <span class="pointer-events-none hidden absolute left-0 top-full z-30 mt-2 w-max max-w-[320px] rounded border border-brand-700 bg-brand-50 p-2 text-sm italic text-brand-900 shadow-lg sm:group-hover:block">
+                        {sb.description}
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+  
+        </dd>
            {
               passage.explicit_contemp_ref
                 ?  
