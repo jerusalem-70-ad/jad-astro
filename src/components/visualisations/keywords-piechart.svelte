@@ -63,7 +63,7 @@ onMount(() => {
   chart.on("click", (params: any) => {
     if (params.data) {
       window.location.href = withBasePath(
-        `/advanced-search?JAD-temp[refinementList][keywords.value][0]=${params.data.name}`
+        `/advanced-search?JAD-temp[refinementList][keywords.label][0]=${params.data.name}`
       );
     }
   });
@@ -94,10 +94,15 @@ $: if (chart) {
 </script>
 <div class="grid gap-2 p-3 ">
   <GraphContainer>
-    <GraphTitle title="Keywords accross Passages" definition = "This pie chart visualizes the 
+    <GraphTitle title="Keywords accross Passages" 
+    what = "This pie chart visualizes the 
     distribution of keywords across all recorded passages 
-            in the database. Selecting a segment in the pie chart acts as an interactive filter for 
-            the advanced search."/>
+            in the database."
+    how="Make a filtered selection of passages to see the discribution of keywords associated to them. 
+    Select a segment to see the advanced search results. NB: passages have usually multiple keywords, 
+    so filtering for keywords e.g. 'Martyrdom' AND 'Crusading' will show also other keywords attached to 
+    the filtered passages."
+    />
       <div
         id="keywords-piechart"
         bind:this={container}

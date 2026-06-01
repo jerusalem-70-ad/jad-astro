@@ -118,18 +118,20 @@ function handleClick(params: any) {
   if (!keyword) return;
 
   window.location.href = withBasePath(
-    `/advanced-search?JAD-temp[refinementList][work.keywords.value][0]=${keyword}`
+    `/advanced-search?JAD-temp[refinementList][keywords.label][0]=${keyword}`
 )
 };
 </script>
 
 <div class="grid gap-2 p-3">
 <GraphContainer>
-  <GraphTitle title="Keywords Heat Map" definition="This heat map visualizes the distribution 
-  of keywords across centuries, allowing patterns and trends in their usage to be easily 
-  identified over time. The color intensity represents frequency, while the numbers indicate 
-  the count of passages in which each keyword appears." />
-
+  <GraphTitle title="Keywords Heat Map" 
+  what="Distribution of keywords across centuries"
+  how="The color intensity represents frequency, while the numbers indicate 
+  the count of passages in which each keyword appears. NB: plotted are keywords referenced in at 
+  least 10 passages."
+  questions="When was Anti-Judaism most prominent?"
+  why="Allows patterns and trends to be easily identified over time." />
   <div
     bind:this={container}
     class="w-full h-[900px]"

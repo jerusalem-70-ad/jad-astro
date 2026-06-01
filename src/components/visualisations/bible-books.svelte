@@ -79,12 +79,15 @@ let pieData: { name: string; value: number }[] = [];
 </script>
 <div class="grid gap-2 p-3">
 <GraphContainer>
-<GraphTitle title="Bible books references" definition = "The pie chart shows how frequently individual 
-books of the Bible are cited across the passages, measured by the number of passages that reference 
-a given book. Multiple references to the same biblical book within a single passage are counted as one. 
-Joined referenicing: one passage can have references to multiple Bible books. 
-Hence using filter 'Biblical references = Lk', for instance, will show passages with Lk references, 
-and the number of references to other books found as well in these passages."/>
+<GraphTitle title="Bible books references" 
+what="Pie chart for distribution of bible references accross works."
+how = "Explore how frequently individual books of the Bible are cited across the passages. 
+NB: Multiple references to the same biblical book within a single passage are counted as one. 
+NB: One passage can have references to multiple Bible books. 
+Hence using filter 'Biblical references = Lk' will show passages with Lk references, 
+and the number of references to other books found as well in these passages."
+questions="Which bible books are cited most in Sermons / in particular work? Which bible books 
+cites a particular author?"/>
  
   <div
         id="bible-piechart" bind:this={container}

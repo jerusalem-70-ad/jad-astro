@@ -483,9 +483,15 @@ function getLineageSet(startId, ancestorsMap, descendantsMap) {
 
 <div class="grid gap-2 p-3 ">
 <GraphContainer>
-<GraphTitle title="Chronological graph" definition = "This graph displays all passages in 
-chronological order. Node size reflects the level of connectedness, while links indicate source 
-relationships and derivative passages."/>
+<GraphTitle title="Chronological graph" 
+what = "Displays all passages in chronological order. Node size reflects the level of connectedness, 
+while links indicate source relationships and derivative passages."
+how="Hover over a particular passage to highlight 
+its relations. Single click to freeze the graph. A second click brings you to the detailed view page 
+of the selected passage. Use the filter to make a selection of passages."
+why="Provides a bird's-eye view of the entire data set."
+questions="How widely used was passage X? "
+/>
  
   <div id="graph-container" bind:this={container}></div>
   </GraphContainer>

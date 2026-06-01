@@ -93,9 +93,15 @@ $: if (chart) {
 </script>
 <div class="grid gap-2 p-3">
  <GraphContainer>
-  <GraphTitle title="Genre Distribution accross Works" definition = "This pie chart visualizes the 
-  distribution of genres across works. Selecting a segment in the pie chart acts as an interactive 
-  filter for the advanced search results."/>
+  <GraphTitle title="Genre Distribution accross Works" 
+  what = "Pie chart for the 
+  distribution of genres across works."
+  how = "Use the filters to make a selection of passages. The chart shows the genres of the works for 
+  the filtered passages. Select a segment to see the results in the advanced search."
+  why = "Find patterns and corelations between genre - place - time."
+  questions = "What genres had the works written in Paris in the 12th c.? What genre have works 
+  where a particular keyword occurs?"
+  />
   <div
         id="genre-piechart" bind:this={container}
         class="w-full h-[900px]"

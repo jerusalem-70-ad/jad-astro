@@ -76,14 +76,13 @@ $: if (chart) {
 </script>
 <div class="grid gap-2 p-3 ">
 <GraphContainer>
-<GraphTitle title="Genre Distribution accross Passages" definition = "This pie chart visualizes the 
-distribution of genres across all recorded passages 
-        in the database. Each passage is linked to a specific work, and every work is assigned 
-        to a genre, allowing the chart to aggregate passages by their generic classification. 
-        The relative size of each segment reflects the number of passages associated with 
-        that genre.Selecting a segment in the pie chart acts as an interactive filter: 
-            clicking on a genre takes you directly to the advanced search results, where all 
-            passages belonging to the chosen genre are displayed."/>
+<GraphTitle title="Genre Distribution accross Passages" 
+ what = "Pie chart for the distribution of genres across passages."
+  how = "Use the filters to make a selection of passages. The chart shows the genres of 
+  the filtered passages. Select a segment to see the results in the advanced search."
+  why = "Find patterns and corelations between genre - place - time."
+  questions = "Which genres are more often related with a specific keyword, place or time of 
+  composition of the passage?"/>
   <div
         id="genre-piechart" bind:this={container}
         class="w-full h-[900px]"

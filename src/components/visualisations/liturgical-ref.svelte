@@ -76,9 +76,11 @@ $: if (chart) {
 
 <div class="grid gap-2 p-3 ">
 <GraphContainer>
-<GraphTitle title="Liturgical references" definition = "The pie chart illustrate the frequency of liturgical references 
-across the passages. Multiple references to the same liturgical occassion within a single passage are counted as one.
-Selecting a segment in the pie chart acts as an interactive filter leading  you directly to the advanced search results."/>
+<GraphTitle title="Liturgical references" what = "Explore the distribution of passages accross the liturgical year."
+how="Multiple references to the same liturgical occassion within a single passage are counted as one.
+Select a segment to see the results in the advanced search."
+why="Search for patterns and dependencies between liturgical occasions and keywords / authors / places ... "
+questions="When was a particular theme (e.g. keyword 'Martyrdom') discussed?"/>
    
     <div
         id="liturgical-piechart" bind:this={container}
