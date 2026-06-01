@@ -37,33 +37,12 @@ const rowClickConfig = keywordsdetailTableConfig.getRowClickConfig;
      )}
 
      
-      {keyword.part_of.length > 0 && ( 
+      {keyword.part_of && ( 
       <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-2">
-        Related keywords:
+        Main keyword:
       </dt>
       <dd class="pl-5">
-        <ul>
-          {
-            keyword.part_of.map((part) => (
-              <li>
-                <NavLink href={`/keywords/${part.jad_id}`}>{part.name}</NavLink>
-              </li>
-            ))
-          }
-          {
-            Object.values(keywords)
-              .filter((kword) =>
-                kword.part_of.some((part) => part.id === keyword.id)
-              )
-              .map((kword) => (
-                <li>
-                  <NavLink href={`/keywords/${kword.jad_id}`}>
-                    {kword.name}
-                  </NavLink>
-                </li>
-              ))
-          }
-        </ul>
+      {keyword.part_of}
       </dd>
       )}
       {keyword.passages.length > 0 && (

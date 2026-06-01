@@ -446,25 +446,16 @@ const steps = [1, 2, 3];
         {passage.keywords.sort((a, b) => a.label.localeCompare(b.label))
           .map((keyword) => (
           <li class="border border-neutral-300 rounded-md px-2 py-1">
-            <span class="relative group ">
-              <NavLink class="text-sm underline-none"
-                href={`/keywords/${keyword.jad_id}`}
-              >
-                {keyword.label}
-              </NavLink>
-              {keyword.description && (
-                <span class="pointer-events-none hidden absolute left-0 top-full z-20 mt-2 w-max max-w-[320px] rounded border border-brand-700 bg-brand-50 p-2 text-sm italic text-brand-900 shadow-lg sm:group-hover:block">
-                  {keyword.description}
-                </span>            
-                )}
+            <span class="text-sm font-medium text-brand-800">            
+                {keyword.label}             
             </span>
             {keyword.subkeywords.length > 0 && (
               <ul class="mt-1 flex flex-wrap gap-1">
-                {keyword.subkeywords.map((sb) => (
+                {keyword.subkeywords.sort((a , b) => a.label.localeCompare(b.label)).map((sb) => (
                   <li class="relative group">
                     <NavLink
                       href={`/keywords/${sb.jad_id}`}
-                      class="rounded-full bg-brand-100 px-2 py-0.5 text-sm text-brand-800 hover:bg-brand-200"
+                      class="rounded-full bg-amber-500/50 px-2 py-0.5 text-sm text-brand-950 hover:bg-brand-300 hover:text-white transition-colors"
                     >
                       {sb.label}
                     </NavLink>
