@@ -181,6 +181,10 @@ async function generate() {
       id: "josephus-synonyms",
       synonyms: ["josephus", "iosephus", "josefus", "iosefus"],
     },
+    {
+      id: "egypt-synonyms",
+      synonyms: ["egipto", "egypto", "aegipto", "aegypto"],
+    },
   ];
 
   for (const syn of synonyms) {
