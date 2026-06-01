@@ -11,6 +11,7 @@
     customNameFilter,
     scrollableCellFormatter,
     filterTPQ,
+    filterTAQ
   } from "@/lib/tabulator/tabulator-utils.js";
 
   /* ---------- props ---------- */
@@ -72,6 +73,11 @@ export let rowClickConfig = null;
         return {
           ...column,
           headerFilterFunc: filterTPQ,
+        };
+       case "taq":
+        return {
+          ...column,
+          headerFilterFunc: filterTAQ,
         }
       default:
         return column;

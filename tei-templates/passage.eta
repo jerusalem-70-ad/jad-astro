@@ -38,7 +38,14 @@
       </fileDesc>
      <encodingDesc>
         <projectDesc>
-           <p>Passages are collected, transcribed, and excerpted from electronic and printed sources by the principal investigator, Alexander Marx, as part of the project Medieval Reception of the Roman Conquest of Jerusalem. The project assembles, organises, and preserves textual evidence illustrating how medieval authors understood and reinterpreted the events of 70 CE. The ACDH team develops the data model, manages the dataset, and oversees the electronic publication and long-term archiving. The project is funded by the FWF and aims to provide a consistent, searchable, and accessible corpus of medieval interpretations of the Roman Conquest of Jerusalem.</p>
+           <p>Passages are collected, transcribed, and excerpted from electronic and printed sources 
+           by the principal investigator, Alexander Marx, as part of the project Medieval Reception 
+           of the Roman Conquest of Jerusalem. The project assembles, organises, and preserves 
+           textual evidence illustrating how medieval authors understood and reinterpreted the 
+           events of 70 CE. The ACDH team develops the data model, manages the dataset, and oversees 
+           the electronic publication and long-term archiving. The project is funded by the FWF and 
+           aims to provide a consistent, searchable, and accessible corpus of medieval interpretations 
+           of the Roman Conquest of Jerusalem.</p>
         </projectDesc>
      </encodingDesc>
   </teiHeader>

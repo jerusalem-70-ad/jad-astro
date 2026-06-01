@@ -20,6 +20,7 @@
   let map;
   let authorLayer;
   let libraryLayer;
+  let cleanupResize;
   	
   /* ---------- icons ---------- */
   const pinGreen = new URL("@/icons/map-pin-green.png", import.meta.url).toString();
