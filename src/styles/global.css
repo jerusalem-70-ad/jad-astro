@@ -210,11 +210,20 @@ dialog::backdrop {
 }
 
 .ais-RefinementList-searchBox .ais-SearchBox-input {
-  @apply w-full text-sm py-1.5 pl-8 pr-2 border border-gray-300 rounded-sm;
+  @apply w-full text-sm py-1.5 p-2 border border-gray-300 rounded-sm;
 }
 
 .ais-SearchBox-input {
   @apply w-full text-sm py-1.5 p-2 border border-gray-300 rounded-sm;
+  content: none !important;
+}
+
+.ais-SearchBox-form {
+  @apply flex gap-0;
+}
+
+.ais-SearchBox-form::before {
+  content: none !important;
 }
 
 .ais-SearchBox-submit,
@@ -233,10 +242,6 @@ dialog::backdrop {
 
 .ais-InfiniteHits-loadMore:disabled {
   @apply hidden;
-}
-
-.ais-SearchBox-form {
-  @apply flex gap-1;
 }
 
 /* Noske Search KWIC view adjustments */
