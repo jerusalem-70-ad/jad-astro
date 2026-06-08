@@ -18,6 +18,7 @@ $dataPassagesGraph = graphData;
 
 let activeFilterIds: Set<string> | null = null;
 const nodeColor: string = "#6f2009"
+const filteredColor: string ="#86705f"
 const highlightNodeColor : string = "#a92d03"
 const neighborNode : string = "#e5894a"
 const linkColor: string = "#0b331b"
@@ -179,14 +180,19 @@ const labels = labelsGroup.selectAll("text")
 const yAxisGroup = svg.append("g")
   .attr("transform","translate(10,0)")
   .call(yAxis)
+.style("font-size", "12px")
+.style("font-weight", "bold");
+
+
+
 
 yAxisGroup.selectAll(".tick text")
   .clone(true)
   .lower()
-  .attr("style", "background-color: green")
   .attr("stroke", "white")
-  .attr("stroke-width", 3);
+  .attr("stroke-width", 8)
 
+  
 // --- hover ---
 
 let tooltipEl;
@@ -314,7 +320,7 @@ function highlightNode(d: Graph["nodes"][number]){
       if (allRelatives.has(n.jad_id)) return neighborNode;
 
       if (activeFilterIds) {
-        return activeFilterIds.has(n.jad_id) ? nodeColor : "#ccc";
+        return activeFilterIds.has(n.jad_id) ? filteredColor : "#ccc";
       }
 
       return "#ccc";
@@ -477,7 +483,7 @@ function getLineageSet(startId, ancestorsMap, descendantsMap) {
 
 });
 
-// shared 
+
 </script>
 
 
