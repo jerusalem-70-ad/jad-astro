@@ -1,0 +1,14 @@
+---
+import PageLayout from "@/layouts/page-layout.astro"
+import Graph from "@/components/visualisations/ChonologicalGraph.svelte"
+
+---
+<PageLayout title="Dashboard">
+    <div class="flex h-screen w-full"> 
+        
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(1000px,1fr))] overflow-auto w-full mx-auto">
+            <Graph client:only="svelte"/> 
+           
+        </div>     
+    </div>
+</PageLayout>
