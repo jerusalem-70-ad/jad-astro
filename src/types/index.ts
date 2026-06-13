@@ -3,8 +3,8 @@ export type NodeType = "current" | "ancestor" | "descendant" | "regular";
 
 // Basic node information
 export interface GraphNode {
-  id: number;
   name: string;
+  id: number;
   work: string;
   author: string;
   dateNotBefore: number | null;
@@ -13,8 +13,7 @@ export interface GraphNode {
   jad_id: string;
   depth: number;
   nodeType: string;
-  y?: number;
-  x?: number;
+  x: number;
 }
 
 // Link between nodes
