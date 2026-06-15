@@ -47,9 +47,9 @@ pieData = Array.from(genreCounts, ([name, value]) => ({
   name,
   value
 }))
-console.log("worksMap", worksMap);
-console.log("genreCounts", genreCounts);
-console.log("pieData", pieData);
+// console.log("worksMap", worksMap);
+// console.log("genreCounts", genreCounts);
+// console.log("pieData", pieData);
 }
 
 onMount(() => {

@@ -18,7 +18,6 @@ $: if ($selectedJadId) {
   const found = $dataPassagesGraph?.nodes?.find(
     node => node.jad_id === $selectedJadId
   );
-
   if (found) {
     passage = found;
     statusMessage = `Passage ${found.id} loaded.`;
@@ -30,11 +29,6 @@ $: if ($selectedJadId) {
   loading = false;
 }
 
-
-function closePassage() {
-  passage = null;
-  selectedJadId.set(null);
-}
 </script>
 
 {#if passage}

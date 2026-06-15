@@ -1,14 +1,25 @@
 ---
 import PageLayout from "@/layouts/page-layout.astro"
-import Graph from "@/components/visualisations/ChonologicalGraph.svelte"
+import Graph from "@/components/visualisations/graph/ChronologicalGraph.svelte"
+import SearchPanel from "@/components/search/search-panel.svelte"
+import GenrePieChart from "@/components/visualisations/genre-piechart.svelte";
+import GenreWorkPieChart from "@/components/visualisations/genre-work-piechart.svelte";
+import Dialog from "@/components/visualisations/dialog-card.svelte"
 
 ---
 <PageLayout title="Dashboard">
     <div class="flex h-screen w-full"> 
-        
-        <div class="grid grid-cols-[repeat(auto-fit,minmax(1000px,1fr))] overflow-auto w-full mx-auto">
-            <Graph client:only="svelte"/> 
-           
-        </div>     
+        <div class="h-screen bg-brand-200/10 border-r w-80 p-3">
+            <aside class="sticky top-25 self-start">
+                <SearchPanel client:only="svelte">
+                    </SearchPanel>
+            </aside>
+        </div> 
+        <div class="grid md:grid-cols-[2fr_1fr] overflow-auto w-full mx-auto">
+                <Graph client:only="svelte"/> 
+                <GenreWorkPieChart client:only="svelte" />
+        </div>
     </div>
+
+    <Dialog client:only="svelte"/> 
 </PageLayout>

@@ -1,7 +1,43 @@
 import * as d3 from "d3";
 import type { LayoutNode } from "./initializeLayout";
+import { scaleSqrt } from "d3-scale";
 import { getSourceNodeJadId, getTargetNodeJadId } from "./prepareGraph";
 import type { Graph } from "@/types";
+
+import type { PreparedNode } from "./prepareGraph";
+
+interface UpdateGraphArgs {
+  nodeSelection: d3.Selection<
+    SVGCircleElement,
+    LayoutNode,
+    SVGGElement,
+    unknown
+  >;
+
+  linkSelection: d3.Selection<
+    SVGPathElement,
+    Graph["links"][number],
+    SVGGElement,
+    unknown
+  >;
+
+  labelSelection: d3.Selection<
+    SVGTextElement,
+    LayoutNode,
+    SVGGElement,
+    unknown
+  >;
+
+  yAxisGroup: d3.Selection<SVGGElement, unknown, null, undefined>;
+
+  nodes: LayoutNode[];
+
+  links: Graph["links"];
+
+  nodeById: Map<string, PreparedNode & { y: number }>;
+
+  yAxis: d3.Axis<number>;
+}
 
 export function renderGraph({
   svg,
@@ -15,7 +51,7 @@ export function renderGraph({
   nodes: LayoutNode[];
   links: Graph["links"];
   yAxis: d3.Axis<number>;
-  rScale: d3.ScaleSqrt<number, number>;
+  rScale: ReturnType<typeof scaleSqrt>;
   nodeColor: (d: LayoutNode) => string;
 }) {
   const canvas = svg
@@ -44,7 +80,7 @@ export function renderGraph({
     .data(nodes)
     .enter()
     .append("circle")
-    .attr("r", (d) => rScale(d.degree))
+    .attr("r", (d): number => rScale(d.degree))
     .attr("fill", nodeColor);
 
   const labelSelection = labelsGroup
@@ -76,6 +112,7 @@ export function renderGraph({
     .attr("stroke-width", 8);
 
   return {
+    canvas,
     nodeSelection,
     linkSelection,
     labelSelection,
@@ -92,7 +129,7 @@ export function updateGraph({
   links,
   nodeById,
   yAxis,
-}) {
+}: UpdateGraphArgs) {
   nodeSelection.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
 
   linkSelection.attr("d", (d) => {
