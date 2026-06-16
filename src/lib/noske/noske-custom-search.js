@@ -1,6 +1,10 @@
 // Custom NoSketch Engine Search Implementation
 // Based on: https://raw.githubusercontent.com/acdh-oeaw/noske-ubi9/main/openapi/openapi.yaml
-import tsNoskeSearch from "@/lib/noske/ts-search-noske.js";
+import { downloadCsv, downloadHtml } from "@/lib/noske/download-results";
+import { withBasePath } from "@/lib/withBasePath";
+import { fetchPassages } from "@/lib/noske/download-results";
+const uniqueJadIds = new Set();
+let currentQuery = "";
 
 class CustomNoskeSearch {
   constructor(config) {
@@ -55,7 +59,7 @@ class CustomNoskeSearch {
     try {
       const results = await this.search(query, page);
       this.currentResults = results;
-      this.displayResults(results);
+      await this.displayResults(results);
       this.displayStats(results);
       this.displayPagination(results);
     } catch (error) {
@@ -129,7 +133,7 @@ class CustomNoskeSearch {
     return data;
   }
 
-  displayResults(data) {
+  async displayResults(data) {
     const resultsContainer = document.getElementById(this.resultsId);
     if (!resultsContainer) return;
 
@@ -139,19 +143,31 @@ class CustomNoskeSearch {
     }
 
     let html = '<div class="search-results">';
+    html += `
+<div class="flex justify-end gap-3 py-3">
+  <button class="py-2 px-4 font-semibold bg-brand-600 hover:bg-brand-500 text-brand-50 rounded-md" 
+    id="download-csv">
+    Download results as CSV
+  </button>
+  <button class="py-2 px-4 font-semibold bg-brand-600 hover:bg-brand-500 text-brand-50 rounded-md" 
+    id="download-html">
+    Download results as HTML
+  </button>
+</div>
+`;
 
+    const results = [];
+    currentQuery = data.q || "";
     data.Lines.forEach((line, index) => {
       const leftText = this.buildText(line.Left);
       const kwicText = this.buildText(line.Kwic);
       const rightText = this.buildText(line.Right);
-      console.log(
-        line.Right,
-        line.Kwic.map((t) => [t.str, typeof t.str]),
-      );
+
       // Extract jad_id from landingPageURI
       const jad_id =
         line.Kwic[0].attr.split("passages/")[1].split(".html")[0] || "#";
-
+      results.push({ jad_id, leftText, kwicText, rightText });
+      uniqueJadIds.add(jad_id);
       html += `
         <div class="result-item">
           <div class="result-text">
@@ -164,13 +180,64 @@ class CustomNoskeSearch {
       `;
     });
 
+    const passages = await fetchPassages(results);
+    const passageMap = new Map(passages.map((p) => [p.jad_id, p]));
+
     html += "</div>";
     resultsContainer.innerHTML = html;
 
     resultsContainer.querySelectorAll(".ts-details").forEach((div) => {
-      const rec_id = div.getAttribute("data-id");
-      tsNoskeSearch(rec_id, div);
+      const jad_id = div.getAttribute("data-id");
+
+      const passage = passageMap.get(jad_id);
+
+      if (!passage) return;
+
+      const url = withBasePath(`/passages/${passage.jad_id}`);
+
+      div.innerHTML = `
+      <ul>
+        <li>
+          <strong>Author:</strong>
+          ${passage.work?.[0]?.author ?? ""}
+        </li>
+
+        <li>
+          <strong>Title:</strong>
+          ${passage.work?.[0]?.title ?? ""}
+        </li>
+
+        <li>
+          <strong>Position in Work:</strong>
+          ${passage.position_in_work ?? ""}
+        </li>
+
+        <li>
+          <strong>Passage ID:</strong>
+          ${passage.id}
+        </li>
+      </ul>
+
+      <div class="flex items-end">
+        <a
+          class="button-custom"
+          href="${url}"
+        >
+          View Passage
+        </a>
+      </div>
+    `;
     });
+    resultsContainer
+      .querySelector("#download-csv")
+      ?.addEventListener("click", () => {
+        downloadCsv(results).catch(console.error);
+      });
+    resultsContainer
+      .querySelector("#download-html")
+      ?.addEventListener("click", () => {
+        downloadHtml(results, currentQuery).catch(console.error);
+      });
   }
 
   buildText(tokenArray) {
@@ -191,7 +258,7 @@ class CustomNoskeSearch {
     const displayedHits = data.Lines ? data.Lines.length : 0;
     statsContainer.innerHTML = `
       <div class="stats">
-        <span>Showing <strong>${displayedHits}</strong> out of <strong>${totalHits}</strong> results</span>
+        <span>Showing <strong>${displayedHits}</strong> out of <strong>${totalHits}</strong> results (${uniqueJadIds.size} unique passages)</span>
       </div>
     `;
   }
