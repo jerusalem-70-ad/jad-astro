@@ -43,7 +43,7 @@ const { transmissionGraph, height = 500} = Astro.props;
     }
 
 
-// Prepare nodes: y = date, x-spread accross 
+// Prepare nodes: x = date, y-spread accross 
 // Step 1: filter nodes
 const filteredNodes = graphData.nodes.filter(
   (node) => node.depth === 0
@@ -144,8 +144,7 @@ const nodes = positionedNodes.map((node) => ({
       },
       xAxis: {
         type: "value",
-        inverse: false, // A. Marx want earliest dates at top
-        name: "Year",
+        inverse: false, 
         min: (value: { min: number; max: number }) =>
           Math.floor(value.min / 50) * 50, // round down to nearest 50
         max: (value: { min: number; max: number }) =>
@@ -162,7 +161,7 @@ const nodes = positionedNodes.map((node) => ({
       },
       yAxis: {
         type: "value",
-        name: "Branch (random)",
+        name: "(random)",
         show: false,
         max: 10,
       },

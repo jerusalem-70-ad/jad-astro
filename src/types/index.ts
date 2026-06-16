@@ -14,6 +14,7 @@ export interface GraphNode {
   depth: number;
   nodeType: string;
   x: number;
+  y?: number;
 }
 
 // Link between nodes

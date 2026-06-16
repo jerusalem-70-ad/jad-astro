@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 import type { LayoutNode } from "./initializeLayout";
-import { scaleSqrt } from "d3-scale";
+import type { ScalePower } from "d3-scale";
 import { getSourceNodeJadId, getTargetNodeJadId } from "./prepareGraph";
 import type { Graph } from "@/types";
 
@@ -51,8 +51,8 @@ export function renderGraph({
   nodes: LayoutNode[];
   links: Graph["links"];
   yAxis: d3.Axis<number>;
-  rScale: ReturnType<typeof scaleSqrt>;
-  nodeColor: (d: LayoutNode) => string;
+  rScale: ScalePower<number, number>;
+  nodeColor: string;
 }) {
   const canvas = svg
     .append("g")
@@ -80,7 +80,7 @@ export function renderGraph({
     .data(nodes)
     .enter()
     .append("circle")
-    .attr("r", (d): number => rScale(d.degree))
+    .attr("r", (d) => rScale(d.degree))
     .attr("fill", nodeColor);
 
   const labelSelection = labelsGroup
