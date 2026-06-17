@@ -1,7 +1,7 @@
 <script lang="ts">
 import GraphContainer from "@/components/visualisations/graph-container.svelte"
 import GraphTitle from "@/components/visualisations/graph-title.svelte";
-import { filteredIds, selectedJadId, dataPassagesGraph } from "@/stores/jad_store";
+import { filteredIds, selectedJadId, dataPassagesGraph } from "@/stores/jad_store.ts";
 
 import { onMount } from "svelte";
 import * as d3 from "d3";

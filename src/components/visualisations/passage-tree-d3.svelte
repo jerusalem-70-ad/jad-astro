@@ -2,9 +2,9 @@
 import { onMount } from "svelte";
 import * as d3 from "d3";
 import passageGraph from "@/content/data/passage-graph.json";
-import { filteredIds, selectedJadId } from "@/stores/jad_store";
+import { filteredIds, selectedJadId } from "@/stores/jad_store.ts";
 import type { Graph } from "@/types/index"
-import {dataPassagesGraph} from "@/stores/jad_store";
+import {dataPassagesGraph} from "@/stores/jad_store.ts";
 import GraphTitle from "@/components/visualisations/graph-title.svelte";
 import GraphContainer from "@/components/visualisations/graph-container.svelte"
 

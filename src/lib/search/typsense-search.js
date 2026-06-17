@@ -1,11 +1,11 @@
-import { filteredIds } from "@/stores/jad_store.js";
+import { filteredIds } from "@/stores/jad_store.ts";
 import { createTypesenseClient } from "@/lib/search/create-typesense-client.js";
 
 const client = createTypesenseClient();
 
 let currentSearchToken = 0;
 
-const FIELD_MAP = {
+export const FIELD_MAP = {
   authors: "work.author.name",
   works: "work.title",
   genres: "work.genre",
@@ -16,47 +16,52 @@ const FIELD_MAP = {
   bibl_ref: "biblical_ref_lvl0",
   manuscripts: "manuscripts.manuscript",
 };
-export async function runSearch(f) {
+
+const FACET_FIELDS =
+  "work.author.name, work.title, work.genre, keywords.label, work.author.place.value, work.date.century, biblical_ref_lvl0, liturgical_references.value, manuscripts.manuscript";
+
+/**
+ * Main search used for results + graph updates
+ */
+export async function runSearch(filters) {
+  const result = await searchTypesense(filters);
+
+  if (!result) return null;
+
+  filteredIds.set(new Set(result.ids));
+
+  return result.response;
+}
+
+/**
+ * Raw Typesense search.
+ * Does NOT update stores.
+ * Safe to use for facet calculations.
+ */
+export async function searchTypesense(filters) {
   const token = ++currentSearchToken;
 
   try {
-    // const filterParts = [
-    //   f.authors.length ? `work.author.name:=[${f.authors.join(",")}]` : null,
-    //   f.works.length ? `work.title:=[${f.works.join(",")}]` : null,
-    //   f.genres.length ? `work.genre:=[${f.genres.join(",")}]` : null,
-    //   f.keywords.length ? `keywords.value:=[${f.keywords.join(",")}]` : null,
-    //   f.place.length ? `work.author.place.value:=[${f.place.join(",")}]` : null,
-    //   f.century.length ? `work.date.century:=[${f.century.join(",")}]` : null,
-    //   f.lit_ref.length
-    //     ? `liturgical_references.value:=[${f.lit_ref.join(",")}]`
-    //     : null,
-    //   f.bibl_ref.length ? `biblical_ref_lvl0:=[${f.bibl_ref.join(",")}]` : null,
-    //   f.manuscripts.length
-    //     ? `manuscripts.manuscript:=[${f.manuscripts.join(",")}]`
-    //     : null,
-    // ].filter(Boolean);
+    const filter_by = buildFilterBy(filters);
 
-    // const filter_by = filterParts.length ? filterParts.join(" && ") : undefined;
-    const filter_by = buildFilterBy(f);
     let page = 1;
-    let allIds = [];
     let found = 0;
     let firstRes = null;
-    // need a loop - Typsense return max 250 hits per query, need more queries
+    let allIds = [];
+
     do {
       const res = await client.collections("JAD-temp").documents().search({
         q: "*",
         query_by: "search_text",
         filter_by,
-        facet_by:
-          "work.author.name, work.title, work.genre, keywords.label, work.author.place.value, work.date.century, biblical_ref_lvl0, liturgical_references.value, manuscripts.manuscript",
+        facet_by: FACET_FIELDS,
         max_facet_values: 500,
         per_page: 250,
         page,
         include_fields: "id",
       });
 
-      // cancel stale searches
+      // stale query protection
       if (token !== currentSearchToken) return null;
 
       if (page === 1) {
@@ -71,14 +76,25 @@ export async function runSearch(f) {
       page++;
     } while (allIds.length < found);
 
-    // write the filtered ids in the store for the graph to update
-    filteredIds.set(new Set(allIds));
-
-    return firstRes;
+    return {
+      response: firstRes,
+      ids: allIds,
+    };
   } catch (err) {
     console.error("Typesense search error:", err);
     return null;
   }
+}
+
+/**
+ * Remove a filter completely.
+ * Useful when computing OR-facet counts.
+ */
+export function removeFilter(filters, field) {
+  return {
+    ...filters,
+    [field]: [],
+  };
 }
 
 function escapeFilterValue(value) {
@@ -95,13 +111,10 @@ function buildFilterBy(filters) {
 
     const operator = filters.operators?.[key] ?? "OR";
 
-    // OR
     if (operator === "OR") {
       clauses.push(
         `${fieldName}:=[${values.map(escapeFilterValue).join(",")}]`,
       );
-
-      // AND
     } else {
       clauses.push(
         values.map((v) => `${fieldName}:=${escapeFilterValue(v)}`).join(" && "),

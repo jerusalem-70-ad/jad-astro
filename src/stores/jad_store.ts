@@ -1,8 +1,16 @@
 import { writable } from "svelte/store";
+import type { Filters } from "@/types/store";
 
 export const selectedJadId = writable(null);
 
-export const filters = writable({
+export const filteredIds = writable(new Set());
+
+export const dataPassagesGraph = writable({
+  nodes: [],
+  links: [],
+});
+
+export const defaultFilters: Filters = {
   authors: [],
   works: [],
   genres: [],
@@ -24,11 +32,6 @@ export const filters = writable({
     bibl_ref: "OR",
     manuscripts: "OR",
   },
-});
+};
 
-export const filteredIds = writable(new Set());
-
-export const dataPassagesGraph = writable({
-  nodes: [],
-  links: [],
-});
+export const filters = writable<Filters>(structuredClone(defaultFilters));

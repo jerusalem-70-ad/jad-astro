@@ -3,7 +3,7 @@ import {onMount} from "svelte";
   import * as echarts from "echarts";
   import { withBasePath } from "@/lib/withBasePath";
   import passages from "@/content/data/passagesForGraphs.json";
-import { filteredIds } from "@/stores/jad_store";
+import { filteredIds } from "@/stores/jad_store.ts";
 import GraphContainer from "@/components/visualisations/graph-container.svelte"
 import GraphTitle from "@/components/visualisations/graph-title.svelte";
 import {getPieChartOption} from "@/components/visualisations/helpers.ts"
