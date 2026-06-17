@@ -1,9 +1,9 @@
 <script lang="ts">
 import { onMount } from "svelte";
 import { withBasePath } from "@/lib/withBasePath.js";
-import { selectedJadId } from "@/stores/jad_store";
+import { selectedJadId } from "@/stores/jad_store.ts";
 
-import {dataPassagesGraph} from "@/stores/jad_store";
+import {dataPassagesGraph} from "@/stores/jad_store.ts";
 
 const data = $dataPassagesGraph.nodes
 

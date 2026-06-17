@@ -11,7 +11,7 @@
   import authorLookupMap from "@/content/data/authors_map.json";
   import { withBasePath } from "@/lib/withBasePath";
 // svelte store to write the selected Jad id for the graph db to read and trigger the similarity search
-  import { selectedJadId } from '@/stores/jad_store';
+  import { selectedJadId } from '@/stores/jad_store.ts';
 
   export let enableGraph = false; 
   export let comparison = false; 

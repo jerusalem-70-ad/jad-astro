@@ -1,5 +1,5 @@
 <script lang="ts">
-import { filters } from "@/stores/jad_store.js";
+import { filters } from "@/stores/jad_store.ts";
 
 export let title: string;
 export let items: { name: string}[];
@@ -13,10 +13,16 @@ $: operator = currentFilters.operators?.[field] ?? "OR";
 $: filteredItems = items
   .filter(a =>
     a.name.toLowerCase().includes(query.toLowerCase()) ||
-    (currentFilters[field] ?? []).includes(a.name.toLowerCase())  // keep selected facet in the itemlist
-  );
+    (currentFilters[field] ?? []).includes(a.name.toLowerCase())
+  )
+  .sort((a, b) => {
+    const countA = counts[a.name] ?? 0;
+    const countB = counts[b.name] ?? 0;
 
-$: visibleItems = filteredItems.slice(0, visibleCount)
+    return countB - countA;
+  });
+
+$: visibleItems = filteredItems.slice(0, visibleCount);
 $: selected = currentFilters[field] ?? [];
 
 function toggle(name: string) {
@@ -48,9 +54,15 @@ function setOperator(value: "AND" | "OR") {
 function showMore() {
   visibleCount += 5;
 }
+
+function showLess() {
+  if(visibleCount > 5) {
+    visibleCount -= 5;
+  };
+}
 </script>
 
-<div class="text-xs border border-neutral-200 shadow-xs rounded-md p-2">
+<div class="text-xs border border-neutral-200 shadow-xs bg-brand-100 rounded-md p-2">
 <details>
   <summary class="flex justify-between gap-2 font-semibold cursor-pointer uppercase">
     <h3 class="font-semibold ">{title}</h3>  
@@ -101,16 +113,27 @@ function showMore() {
       </li>
     {/each}
   </ul>
-   {#if visibleCount < filteredItems.length}
+   <div class="flex justify-between px-2 py-1">
+     {#if visibleCount < filteredItems.length}
+        <button
+          type="button"
+          on:click={showMore}
+          class="mt-2 text-brand-700 cursor-pointer underline underline-offset-2 hover:to-brand-500"
+        >
+          Show more
+        </button>
+      {/if}
+      {#if visibleCount > 5}
       <button
-        type="button"
-        on:click={showMore}
-        class="mt-2 text-brand-700 cursor-pointer underline underline-offset-2 hover:to-brand-500"
-      >
-        Show more
-      </button>
-    {/if}
-  <div class="flex gap-1 justify-center">
+          type="button"
+          on:click={showLess}
+          class="mt-2 text-brand-700 cursor-pointer underline underline-offset-2 hover:to-brand-500"
+        >
+          Show less
+        </button>
+      {/if}
+   </div>
+  <div class="flex gap-1 justify-end place-items-center">
     <span>Searching mode:</span>
     <button
     type="button"

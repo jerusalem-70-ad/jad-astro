@@ -1,6 +1,6 @@
 <script lang="ts">
 import { onMount } from "svelte";
-import { selectedJadId } from "@/stores/jad_store";
+import { selectedJadId } from "@/stores/jad_store.ts";
 import PassageCard from "@/components/passage-card.svelte";
 import { withBasePath } from "@/lib/withBasePath.js";
 

@@ -2,7 +2,7 @@
 import { onMount } from "svelte";
 import * as echarts from "echarts";
 import passages from "@/content/data/passagesForGraphs.json";
-import { filteredIds } from "@/stores/jad_store";
+import { filteredIds } from "@/stores/jad_store.ts";
 
 import { withBasePath } from "@/lib/withBasePath";
 import GraphContainer from "@/components/visualisations/graph-container.svelte"
