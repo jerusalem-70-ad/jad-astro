@@ -89,7 +89,15 @@ export async function downloadCsv(results: KwicResult[]) {
 
   const data = getExportData(passages, results);
 
-  const header = ["id", "author", "title", "position", "text"];
+  const header = [
+    "id",
+    "author",
+    "title",
+    "position",
+    "leftText",
+    "kwicText",
+    "rightText",
+  ];
 
   const rows = data.map((row) =>
     header
