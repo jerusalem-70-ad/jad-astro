@@ -13,11 +13,27 @@ let container: HTMLDivElement;
 let chart: echarts.ECharts | null = null;
 
 // final structured data for chart
-let heatmapData = {
+let heatmapData: {centuries: string[], keywords: string[], values: [number, number, number][]} = {
   centuries:[],
   keywords: [],
   values: []
 };
+
+// computed once: Marx wants only keywords with min 10 occurrences
+const allowedKeywords = (() => {
+  const counts = new Map<string, number>();
+
+  passages.forEach(p => {
+    p.keywords.forEach(k => {
+      counts.set(k, (counts.get(k) ?? 0) + 1);
+    });
+  });
+
+  return Array.from(counts.entries())
+    .filter(([_, count]) => count >= 10)
+    .map(([keyword]) => keyword)
+    .sort();
+})();
 
 //prepare data from reactive passages-graph
 $: {
@@ -41,7 +57,7 @@ $: {
   centurySet.forEach(c => {
     heatmap.set(c, new Map());
     keywordSet.forEach(k => {
-      heatmap.get(c).set(k, 0);
+      heatmap.get(c)?.set(k, 0);
     });
   });
 // now get the actual number by looping over passages
@@ -50,6 +66,7 @@ $: {
 
     centuries.forEach(c => {
       p.keywords.forEach(k => {
+         if (!allowedKeywords.includes(k)) return; //take only keywords with min 10 occurences
         const current = heatmap.get(c)?.get(k) ?? 0;
         heatmap.get(c)?.set(k, current + 1);
       });
@@ -61,22 +78,14 @@ $: {
   const numB = parseInt(b);
   return numA - numB;
 });
-    // keep only keywords with total count >= 10
-  const keywordsArray = Array.from(keywordSet).filter(k => {
-    let total = 0;
-
-    centuriesArray.forEach(c => {
-      total += heatmap.get(c)?.get(k) ?? 0;
-    });
-
-    return total >= 10;
-  }).sort();
+const keywordsArray = allowedKeywords
+  .sort();
 
   const values: [number, number, number][] = []; // value has [X coordinates, Y coordinates, value to display]
 
   centuriesArray.forEach((c, xIndex) => {
     keywordsArray.forEach((k, yIndex) => {
-      values.push([yIndex, xIndex, heatmap.get(c).get(k)]);
+      values.push([yIndex, xIndex, heatmap.get(c)?.get(k) ?? 0]);
     });
   });
 
@@ -106,7 +115,6 @@ onMount(() => {
 
 $: if (chart) {
   chart.setOption(getHeatMapOption(heatmapData), true);
-
 }
 
 function handleClick(params: any) {
@@ -128,8 +136,7 @@ function handleClick(params: any) {
   <GraphTitle title="Keywords Heat Map" 
   what="Distribution of keywords across centuries"
   how="The color intensity represents frequency, while the numbers indicate 
-  the count of passages in which each keyword appears. NB: plotted are keywords referenced in at 
-  least 10 passages."
+  the count of passages in which each keyword appears."
   questions="When was Anti-Judaism most prominent?"
   why="Allows patterns and trends to be easily identified over time." />
   <div

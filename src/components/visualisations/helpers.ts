@@ -6,7 +6,7 @@ type PieDataItem = {
   value: number;
 };
 type HeatMapData = {
-  centuries: number[];
+  centuries: string[];
   keywords: string[];
   values: [number, number, number][]; // [xIndex, yIndex, value]
 };
