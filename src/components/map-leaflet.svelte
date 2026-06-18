@@ -23,8 +23,8 @@
   let cleanupResize;
   	
   /* ---------- icons ---------- */
-  const pinGreen = new URL("@/icons/map-pin-green.png", import.meta.url).toString();
-  const pinRed = new URL("@/icons/map-pin-red.png", import.meta.url).toString();
+  const pinGreen = new URL("@/icons/map-pin-green.svg", import.meta.url).toString();
+  const pinRed = new URL("@/icons/map-pin-red.svg", import.meta.url).toString();
   const pin = new URL("@/icons/map-pin.png", import.meta.url).toString();
 
   const authorIcon = L.icon({
