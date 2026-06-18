@@ -149,7 +149,7 @@ async function generate() {
         liturgical_references: value.liturgical_references || [],
         biblical_ref_lvl0: value.biblical_ref_lvl0 || [],
         biblical_ref_lvl1: value.biblical_ref_lvl1 || [],
-        keywords: value.keywords || [],
+        keywords: value.keywords.map((k) => k.subkeywords) || [],
         work_date_not_before: workDate.not_before || 70,
         work_date_not_after: workDate.not_after || 1600,
       };
