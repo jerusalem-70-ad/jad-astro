@@ -292,15 +292,34 @@ svg.call(zoom as any);
   // on hover highlight node + related, show node's tooltip and relateds labels
 graph.nodeSelection
   .on("mouseenter", function(event, d) {
-    if (lockedNode) return;   // prevent hover override
+    if (lockedNode) {
+      const allowedNodes = Array.from(
+        getLineageSet(
+          lockedNode.jad_id,
+          prepared.ancestorsMap,
+          prepared.descendantsMap
+        )
+      );
+      if (allowedNodes.includes(d.jad_id)) {
+        showNodeTooltip(d, this);
+      } else {
+        showNodeTooltip(lockedNode, this);
+      }
+      return; // stop here when locked
+    }
+ // allow tooltip only for locked node and its relatives
     showNodeTooltip(d, this);
   })
   .on("mouseleave", () => {
-    if (lockedNode) return;   // prevent reset when locked
-
-    resetHighlight();
-    tooltip.style("visibility", "hidden");
-    graph.labelSelection.attr("opacity", 0);
+    if (lockedNode) {
+       showNodeDetails(lockedNode, this);;
+    }   // when locked return to locked nodes details and relatives
+else {
+      resetHighlight();
+      tooltip.style("visibility", "hidden");
+      graph.labelSelection.attr("opacity", 0);
+    }
+    
   });
 let downTime = 0;
 
@@ -393,10 +412,10 @@ let downTime = 0;
 what = "Displays all passages in chronological order. Node size reflects the level of connectedness, 
 while links indicate source relationships and derivative passages."
 how="Hover over a particular passage to highlight 
-its relations. Single click to freeze the graph. A second click brings you to the detailed view page 
-of the selected passage. Use the filter to make a selection of passages."
+its relations. Single click to freeze the graph. A second click brings you to the dialog for the detailed view page 
+of the selected passage. Combine the filters to make a selection of passages."
 why="Provides a bird's-eye view of the entire data set."
-questions="How widely used was passage X? "
+questions="How widely used was passage X?"
 />
  
   <div id="graph-container" bind:this={container}></div>

@@ -255,7 +255,6 @@ onDestroy(() => {
 
 <div class="flex flex-col w-full">
 	<div bind:this={mapEl} class={className} id="leaflet-map"></div>
-
 	<!-- Drag handle -->
 	<div
 		bind:this={resizeHandle}
@@ -272,4 +271,6 @@ onDestroy(() => {
 			<path d="m8 8 4-4 4 4"/>
 		</svg>
 	</div>
+  <div class="text-brand-800 italic text-sm text-end"><span class="font-bold">NB:</span> Only entries with geographic coordinates are displayed on the map.</div>
+
 </div>
