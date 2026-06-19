@@ -169,5 +169,22 @@ export function getHeatMapOption(heatMapData: HeatMapData): EChartsOption {
         },
       },
     ],
+    toolbox: {
+      show: true,
+      orient: "vertical",
+      right: 30,
+      top: 20,
+      itemSize: 20,
+      itemGap: 20,
+      feature: {
+        saveAsImage: {
+          show: true,
+          title: "Download as PNG",
+          type: "png",
+          pixelRatio: 2,
+          backgroundColor: "#fff",
+        },
+      },
+    },
   };
 }
