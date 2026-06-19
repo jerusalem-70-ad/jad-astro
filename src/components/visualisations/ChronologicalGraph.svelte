@@ -118,13 +118,19 @@ function updateTooltipPosition() {
 
 // show tooltip on hover, click, neighbours and links remain
 function showNodeTooltip(d, el) {
-
+const neighbors = getLineageSet(
+  d.jad_id,
+  prepared.ancestorsMap,
+  prepared.descendantsMap
+);
   tooltip
     .style("visibility", "visible")
     .html(`
       <strong>#${d.id} ${d.name ?? ""}</strong><br/>
       <span>Year: ${d.dateNotBefore} - ${d.dateNotAfter}</span><br/>
-      <span>Related passages: ${d.degree || 0}</span>
+      <span>Immediately related passages: ${d.degree || 0}</span><br/>
+      <span>All related passages: ${neighbors.size -1 || 0}</span>
+
     `);
 
   tooltipEl = el;
@@ -292,6 +298,7 @@ svg.call(zoom as any);
   // on hover highlight node + related, show node's tooltip and relateds labels
 graph.nodeSelection
   .on("mouseenter", function(event, d) {
+    // allow tooltip only for locked node and its relatives
     if (lockedNode) {
       const allowedNodes = Array.from(
         getLineageSet(
@@ -302,13 +309,11 @@ graph.nodeSelection
       );
       if (allowedNodes.includes(d.jad_id)) {
         showNodeTooltip(d, this);
-      } else {
-        showNodeTooltip(lockedNode, this);
-      }
+      
+      } 
       return; // stop here when locked
-    }
- // allow tooltip only for locked node and its relatives
-    showNodeTooltip(d, this);
+    } else {
+    showNodeTooltip(d, this);}
   })
   .on("mouseleave", () => {
     if (lockedNode) {
