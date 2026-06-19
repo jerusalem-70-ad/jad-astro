@@ -18,6 +18,7 @@ let heatmapData: {centuries: string[], keywords: string[], values: [number, numb
   keywords: [],
   values: []
 };
+let mode = "absolute";
 
 // computed once: Marx wants only keywords with min 10 occurrences
 const allowedKeywords = (() => {
@@ -44,20 +45,24 @@ $: {
 
   const centurySet = new Set<string>(); // Sets to store all the cenutire and keywords
   const keywordSet = new Set<string>();
+  const passagesPerCentury = new Map<string, number>(); // Map to store the total passages per century for relative frequency calculation
 
   passagesJson.forEach((p) => { //iterate over passages to fill the Sets
     const centuries = Array.isArray(p.century) ? p.century : [];
-    centuries.forEach(c => centurySet.add(c));
+    centuries.forEach(c => {
+      centurySet.add(c);
+      passagesPerCentury.set(c, (passagesPerCentury.get(c) ?? 0) + 1);
+    });
     p.keywords.length > 0 ?
     p.keywords.forEach(k => keywordSet.add(k)) : "";
   });
 
-  const heatmap = new Map<string, Map<string, number>>();
-// e.g. 12 {keyword22, 0} initially all keywords in all cenutries are have value 0
+  const heatmap = new Map<string, Map<string, {absolute: number, relative:number}>>();
+// e.g. 12 {keyword22, {absolute: 0, relative:0}} initially all keywords in all cenutries are have value 0
   centurySet.forEach(c => {
     heatmap.set(c, new Map());
     keywordSet.forEach(k => {
-      heatmap.get(c)?.set(k, 0);
+      heatmap.get(c)?.set(k, {absolute: 0, relative: 0});
     });
   });
 // now get the actual number by looping over passages
@@ -67,8 +72,18 @@ $: {
     centuries.forEach(c => {
       p.keywords.forEach(k => {
          if (!allowedKeywords.includes(k)) return; //take only keywords with min 10 occurences
-        const current = heatmap.get(c)?.get(k) ?? 0;
-        heatmap.get(c)?.set(k, current + 1);
+        const current = heatmap.get(c)?.get(k) ?? {absolute: 0, relative: 0};
+        heatmap.get(c)?.set(k, {absolute: current.absolute + 1, relative: current.relative});
+      });
+    });
+  });
+  // get the relative frequency by dividing the absolute count by the total passages in that century
+  heatmap.forEach((keywordMap, century) => {
+    const totalPassages = passagesPerCentury.get(century) ?? 1; // avoid division by zero
+    keywordMap.forEach((value, keyword) => {
+      heatmap.get(century)?.set(keyword, {
+        absolute: value.absolute,
+        relative: ( value.absolute / totalPassages) * 100 // relative frequency as percentage
       });
     });
   });
@@ -85,8 +100,15 @@ const keywordsArray = allowedKeywords
 
   centuriesArray.forEach((c, xIndex) => {
     keywordsArray.forEach((k, yIndex) => {
-      values.push([yIndex, xIndex, heatmap.get(c)?.get(k) ?? 0]);
-    });
+      const relative = heatmap.get(c)?.get(k)?.relative ?? 0; // calculated as percent from all passages per centuries
+      const absolute = heatmap.get(c)?.get(k)?.absolute ?? 0; // absolute number of passages
+      // read mode set by button
+      if (mode === "relative") {
+      values.push([yIndex, xIndex, parseFloat(relative.toFixed(1))]);}
+      else {
+        values.push([yIndex, xIndex, absolute]);
+      }
+    })
   });
 
   heatmapData = {
@@ -129,16 +151,27 @@ function handleClick(params: any) {
     `/advanced-search?JAD-temp[refinementList][keywords.label][0]=${keyword}`
 )
 };
+function changeMode() {
+  if (mode === "absolute") {
+    mode = "relative"
+  }
+  else mode = "absolute";
+}
 </script>
 
 <div class="grid gap-2 p-3">
 <GraphContainer>
   <GraphTitle title="Keywords Heat Map" 
-  what="Distribution of keywords across centuries"
-  how="The color intensity represents frequency, while the numbers indicate 
-  the count of passages in which each keyword appears."
+  what="Distribution of keywords across centuries."
+  how="The color intensity represents frequency. There are two counting modes: absolute shows the 
+  absolute number of passages in which each keyword appears; relative shows the percentage of all 
+  passages in the respective century where the keyword is detected. "
   questions="When was Anti-Judaism most prominent?"
   why="Allows patterns and trends to be easily identified over time." />
+  <!--  // change the mode between absolute and relative frequency -->
+  <button on:click={changeMode} class="px-2 py-0.5 bg-brand-600/90 text-white font-semibold hover:bg-brand-500 rounded-md shadow-sm block ml-auto">
+    {mode === "absolute" ? "Show relative numbers" : "Show absolute numbers"}
+  </button>
   <div
     bind:this={container}
     class="w-full h-[900px]"
