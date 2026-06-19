@@ -165,13 +165,36 @@ function changeMode() {
   what="Distribution of keywords across centuries."
   how="The color intensity represents frequency. There are two counting modes: absolute shows the 
   absolute number of passages in which each keyword appears; relative shows the percentage of all 
-  passages in the respective century where the keyword is detected. "
+  passages in the respective century where the keyword is detected. Taken into account are keywords with 
+  at least 10 occurrences in total."
   questions="When was Anti-Judaism most prominent?"
   why="Allows patterns and trends to be easily identified over time." />
   <!--  // change the mode between absolute and relative frequency -->
-  <button on:click={changeMode} class="px-2 py-0.5 bg-brand-600/90 text-white font-semibold hover:bg-brand-500 rounded-md shadow-sm block ml-auto">
-    {mode === "absolute" ? "Show relative numbers" : "Show absolute numbers"}
-  </button>
+  <div class="flex justify-end gap-3">
+    <div class="group inline-block relative">
+      <button on:click={changeMode} class="px-2 py-0.5 bg-brand-600/90 text-white font-semibold hover:bg-brand-500 rounded-md shadow-sm disabled:bg-neutral-400
+           disabled:cursor-not-allowed
+           disabled:hover:bg-neutral-400" disabled={mode === "absolute"}>
+        Show absolute numbers
+      </button>       
+        <span class="invisible group-hover:visible rounded-md p-3 text-xs md:text-sm
+         bg-brand-700/90 text-brand-50 w-[100px] z-50 absolute left-0 top-10">
+        Absolute numbers of all passages.
+        </span>
+    </div>
+    <div class="group inline-block relative">
+
+     <button on:click={changeMode} class="px-2 py-0.5 bg-brand-600/90 text-white font-semibold hover:bg-brand-500 rounded-md shadow-sm disabled:bg-neutral-400
+         disabled:cursor-not-allowed
+         disabled:hover:bg-neutral-400" disabled={mode === "relative"}>
+      Show relative numbers
+    </button>
+     <span class="invisible group-hover:visible rounded-md p-3 text-xs md:text-sm
+         bg-brand-700/90 text-brand-50 w-[100px] z-50 absolute left-0 top-10">
+    Percentage of passages per century.
+        </span>
+    </div>
+  </div>
   <div
     bind:this={container}
     class="w-full h-[900px]"
