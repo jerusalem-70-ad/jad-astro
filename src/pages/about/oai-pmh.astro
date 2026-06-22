@@ -1,0 +1,103 @@
+---
+import Layout from "@/layouts/page-layout.astro";
+import NavLink from "@/components/nav-link.astro";
+---
+
+<Layout title="oai-pmh">
+	<div class="mx-auto text-center px-3 md:px-15 py-8">
+		<h1 class="font-extrabold text-lg md:text-5xl text-brand-800 p-8">
+			OAI-PMH Schnittstelle
+			<br />
+			<span class="text-base md:text-lg"
+				>(Open Archives Initiative Protocol for Metadata Harvesting)</span
+			>
+		</h1>
+		<div class="grid gap-3 text-start w-full max-w-3xl mx-auto">
+				<div class="border rounded-md p-5 md:px-10 md:text-align">
+					<p>
+						The research data from <em>Medieval Reception of the Roman Conquest of Jerusalem</em> are made available via an OAI-PMH interface
+                        (Open Archives Initiative Protocol for Metadata Harvesting). Currently,
+                        the interface supports the following OAI-PMH verbs:
+					</p>
+					<ul class="list-disc list-inside py-4">
+						<li>
+							<NavLink
+								href="https://dse-static-oai-pmh.acdh-dev.oeaw.ac.at/jad/oai-pmh?verb=Identify"
+							>
+								Identify (Repository Information)
+							</NavLink>
+						</li>
+						<li>
+							<NavLink
+								href="https://dse-static-oai-pmh.acdh-dev.oeaw.ac.at/jad/oai-pmh?verb=ListMetadataFormats"
+							>
+								ListMetadataFormats (Available Metadata Formats)
+							</NavLink>
+						</li>
+						<li>
+							<NavLink
+								href="https://dse-static-oai-pmh.acdh-dev.oeaw.ac.at/jad/oai-pmh?verb=ListIdentifiers"
+							>
+								ListIdentifiers (Record Identifiers)
+							</NavLink>
+						</li>
+						<li>
+							<NavLink
+								href="https://dse-static-oai-pmh.acdh-dev.oeaw.ac.at/jad/oai-pmh?verb=ListRecords"
+							>
+								ListRecords (Complete Records)
+							</NavLink>
+						</li>
+					</ul>
+				</div>
+				
+				<div class="p-2 border rounded-md border-neutral-300 bg-brand-100">
+					<h2 class="py-3 text-center text-lg md:text-xl font-semibold text-brand-800">
+						About OAI-PMH
+					</h2>
+					<details open class="px-3 py-2 grid gap-2 text-justify">
+						<summary class="cursor-pointer">What is OAI-PMH ?</summary>
+						<p>
+							The <NavLink href="https://www.openarchives.org/pmh/"
+								>Open Archives Initiative Protocol for Metadata Harvesting (OAI-PMH)</NavLink
+							> is a widely used standard for sharing and collecting metadata between digital repositories.
+							It enables libraries, archives, research projects, and other digital collections to make structured
+							descriptions of their resources available in a machine-readable format.
+						</p>
+					</details>
+					<details class="px-3 py-2 grid gap-2 text-justify">
+						<summary class="cursor-pointer">Why use OAI-PMH ?</summary>
+						<p>
+							By providing an OAI-PMH endpoint, our project allows external services to harvest
+							metadata records of the manuscript descriptions and incorporate them into larger
+							discovery platforms, catalogues, and research infrastructures. This helps increase the
+							visibility, accessibility, and interoperability of our digital collection while allowing
+							institutions to maintain control over their own data and websites.
+						</p>
+					</details>
+					<details class="px-3 py-2 grid gap-2 text-justify">
+						<summary class="cursor-pointer">How it works ?</summary>
+						<p>
+							OAI-PMH operates through a set of standardized HTTP requests. A harvesting service sends
+							a request to the repository's OAI-PMH endpoint and specifies an operation, known as a
+							verb, using URL parameters. The repository then returns an XML response containing
+							metadata or information about the collection.
+						</p><p>
+							The protocol defines six verbs: Identify, ListMetadataFormats, ListSets,
+							ListIdentifiers, ListRecords, and GetRecord. These allow harvesters to discover
+							information about the repository, retrieve lists of available records, or request
+							individual metadata records. Because all OAI-PMH repositories use the same protocol,
+							aggregators and discovery services can harvest metadata from many different collections
+							in a consistent manner.
+						</p>
+						<p>
+							In this implementation, the XML responses corresponding to the OAI-PMH verbs are
+							generated during the website build process and made available as static resources. This
+							provides a lightweight OAI-PMH interface while maintaining compatibility with standard
+							harvesting workflows.
+						</p>
+					</details>
+				</div>
+		</div>
+	</div>
+</Layout>

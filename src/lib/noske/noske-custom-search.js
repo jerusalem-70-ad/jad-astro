@@ -193,7 +193,7 @@ class CustomNoskeSearch {
 
       if (!passage) return;
 
-      const url = withBasePath(`/passages/${passage.jad_id}`);
+      const url = withBasePath(`/data/passages/${passage.jad_id}`);
 
       div.innerHTML = `
       <ul>

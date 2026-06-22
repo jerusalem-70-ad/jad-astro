@@ -128,7 +128,7 @@ export const passagesTableConfig = {
   },
   // Row click configuration for passages table
   getRowClickConfig: {
-    urlPattern: "/passages/{id}",
+    urlPattern: "/data/passages/{id}",
     idField: "jad_id",
     target: "_self",
   },
@@ -206,7 +206,7 @@ export const authorsTableConfig = {
   },
   // Row click configuration for work-mss-transmission table
   getRowClickConfig: {
-    urlPattern: "/authors/{id}",
+    urlPattern: "/data/authors/{id}",
     idField: "jad_id",
     target: "_self",
   },
@@ -295,7 +295,7 @@ export const worksTableConfig = {
   },
   // Row click configuration for work-mss-transmission table
   getRowClickConfig: {
-    urlPattern: "/works/{id}",
+    urlPattern: "/data/works/{id}",
     idField: "jad_id",
     target: "_self",
   },
@@ -409,7 +409,7 @@ export const manuscriptsTableConfig = {
   },
   // Row click configuration for work-mss-transmission table
   getRowClickConfig: {
-    urlPattern: "/manuscripts/{id}",
+    urlPattern: "/data/manuscripts/{id}",
     idField: "jad_id",
     target: "_self",
   },
@@ -475,7 +475,7 @@ export const keywordsTableConfig = {
   },
   // Row click configuration for work-mss-transmission table
   getRowClickConfig: {
-    urlPattern: "/keywords/{id}",
+    urlPattern: "/data/keywords/{id}",
     idField: "jad_id",
     target: "_self",
   },
@@ -540,7 +540,7 @@ export const keywordsdetailTableConfig = {
   },
   // Row click configuration for work-mss-transmission table
   getRowClickConfig: {
-    urlPattern: "/passages/{id}",
+    urlPattern: "/data/passages/{id}",
     idField: "jad_id",
     target: "_self",
   },
@@ -648,7 +648,7 @@ export const biblrefsTableConfig = {
   },
   // Row click configuration for work-mss-transmission table
   getRowClickConfig: {
-    urlPattern: "/biblical-refs/{id}",
+    urlPattern: "/data/biblical-refs/{id}",
     idField: "jad_id",
     target: "_self",
   },
@@ -723,7 +723,7 @@ export const biblrefTableConfig = {
   },
   // Row click configuration for work-mss-transmission table
   getRowClickConfig: {
-    urlPattern: "/passages/{id}",
+    urlPattern: "/data/passages/{id}",
     idField: "jad_id",
     target: "_self",
   },
@@ -805,7 +805,7 @@ export const liturgicalrefsTableConfig = {
     return addHeaderFilters(columns);
   },
   // row click function to accept url pattern as argument
-  getRowClickConfig: (urlPattern = "/liturgical-refs/{id}") => ({
+  getRowClickConfig: (urlPattern = "/data/liturgical-refs/{id}") => ({
     urlPattern,
     idField: "jad_id",
     target: "_self",
@@ -871,7 +871,7 @@ export const liturgicalrefTableConfig = {
   },
   // Row click configuration for work-mss-transmission table
   getRowClickConfig: {
-    urlPattern: "/passages/{id}",
+    urlPattern: "/data/passages/{id}",
     idField: "jad_id",
     target: "_self",
   },

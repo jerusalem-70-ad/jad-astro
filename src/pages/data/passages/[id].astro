@@ -64,8 +64,8 @@ const steps = [1, 2, 3];
       <AsideSearch client:only="svelte"  />
     </div>
     <Article
-      prevLink={`/passages/${passage.prev.id}`}
-      nextLink={`/passages/${passage.next.id}`}
+      prevLink={`/data/passages/${passage.prev.id}`}
+      nextLink={`/data/passages/${passage.next.id}`}
       mainTitle=`Passage #${passage.id}: ${passage.passage} `
     >
     <div class="grid gap-4">
@@ -80,7 +80,7 @@ const steps = [1, 2, 3];
         <dd class="pl-5 p-2 bg-brand-50">
           {
             passage.work.length > 0 && passage.work[0].author.length > 0 ? (
-              <NavLink href={`/authors/${passage.work[0].author[0].jad_id}`}>
+              <NavLink href={`/data/authors/${passage.work[0].author[0].jad_id}`}>
                 {passage.work[0].author[0]?.name}{" "}
                 {passage.work[0].author_certainty === false && " (?)"}
                 {passage.work[0].author[0]?.occupation ? `(${passage.work[0].author[0].occupation})` : ""}
@@ -100,7 +100,7 @@ const steps = [1, 2, 3];
               passage.work.length > 0
                 ? passage.work.map((werk, index) => (
                     <>
-                      <NavLink href={`/works/${werk.jad_id}`}>
+                      <NavLink href={`/data/works/${werk.jad_id}`}>
                         {werk.title}
                       </NavLink>
                       {index < passage.work.length - 1 && ", "}
@@ -127,7 +127,7 @@ const steps = [1, 2, 3];
           <dd class="pl-5 p-2">
             {passage.mss_occurrences &&
               passage.mss_occurrences?.length > 0 ? (
-                <ul>
+                <ul id="mssList">
                   {passage.mss_occurrences
                   .sort((a, b) =>
                     a.manuscript
@@ -138,10 +138,10 @@ const steps = [1, 2, 3];
                         undefined,
                         { numeric: true }
                       )
-                  )
+                  ).slice(0, 4) // showing first 4 items                 
                   .map((ms) => (
                     <li class={ms.main_ms ? "font-semibold" : ""}>
-                      <NavLink href={`/manuscripts/${ms.manuscript_jad_id}`}>
+                      <NavLink href={`/data/manuscripts/${ms.manuscript_jad_id}`}>
                         {ms.manuscript}
                         </NavLink>
                       {/* add exact position preprocessed from json ms_occurences */}
@@ -160,12 +160,38 @@ const steps = [1, 2, 3];
                             </span>
                           }
                     </li>
-                  ))}
-                </ul>
-              ) : (
-                "N/A"
-              )
+                  ))} 
+                  {/* //hidden extra items */}
+                      {passage.mss_occurrences.slice(4).map((ms) => (
+                        <li  class="hidden extra-item">
+                      <NavLink href={`/data/manuscripts/${ms.manuscript_jad_id}`}>
+                        {ms.manuscript}
+                        </NavLink>
+                      {/* add exact position preprocessed from json ms_occurences */}
+                      {ms.position_in_ms &&        
+                            <span>
+                              (f. {ms.position_in_ms})
+                              {ms.facsimile_position && (
+                                <NavLink href={ms.facsimile_position}>
+                                  Facsimile{" "}
+                                  <Icon
+                                    name="lucide:external-link"
+                                    class="size-4 inline-flex"
+                                  />
+                                </NavLink>
+                              )}
+                            </span>
+                          }
+                    </li>))}
+
+              </ul>) : "N/A"
             }
+             {passage.mss_occurrences.length > 4 && (
+    <button  
+  data-target="mssList" class="toggleVisible text-brand-800 underline mt-2 cursor-pointer">
+      Show more
+    </button>
+  )}
           </dd>
           <dt
             class="font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
@@ -181,21 +207,13 @@ const steps = [1, 2, 3];
                   .sort((a, b) => a.key - b.key)
                     .map((reference) => (
                       <li class="group relative">
-                        {/* if reference.nova_vulgata_url is defined, use NavLink, otherwise just span */}
-                        {reference.nova_vulgata_url ? (
-                          <NavLink
-                            href={reference.nova_vulgata_url}
+                        <NavLink
+                            href={`/data/biblical-refs/${reference.jad_id}`}
                             class="flex underline underline-offset-4 decoration-dotted"
                           >
                             {reference.value}
-                            <Icon
-                              name="lucide:external-link"
-                              class="size-4 text-brand-800 inline-flex"
-                            />
+                           
                           </NavLink>
-                        ) : (
-                          <span>{reference.value}</span>
-                        )}
                        <span class="hidden sm:block italic invisible group-hover:visible absolute z-10 w-[300px] top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
                           {reference.text}
                         </span>
@@ -224,7 +242,7 @@ const steps = [1, 2, 3];
                   {passage.liturgical_references                          
                     .map((reference, index) => (
                    <li class="group relative">
-                    <NavLink href={`/liturgical-refs/jad_liturgical_reference__${reference.id}`}>
+                    <NavLink href={`/data/liturgical-refs/jad_liturgical_reference__${reference.id}`}>
                       {reference.value}                        
                       </NavLink>
                       {index < passage.liturgical_references.length - 1 && ", "}
@@ -270,7 +288,7 @@ const steps = [1, 2, 3];
             <dd class="pl-5 p-2  bg-brand-50">
               
                 {
-                  passage.source_passage.length > 0 ? (<ul class="list-disc list-inside">
+                  passage.source_passage.length > 0 ? (<ul class="list-disc list-inside" id="listSources">
                     {passage.source_passage.slice(0, 4).map((source) => (
                         <li>
                           {source.author ? (
@@ -285,7 +303,7 @@ const steps = [1, 2, 3];
                             name="lucide:arrow-right"
                             class="size-4 text-brand-800 inline-flex"
                           />
-                          <NavLink href={`/passages/${source.jad_id}`}>
+                          <NavLink href={`/data/passages/${source.jad_id}`}>
                             ({source.id}) {source.passage}
                           </NavLink>
                         </li>
@@ -306,7 +324,7 @@ const steps = [1, 2, 3];
                             name="lucide:arrow-right"
                             class="size-4 text-brand-800 inline-flex"
                           />
-                          <NavLink href={`/passages/${source.jad_id}`}>
+                          <NavLink href={`/data/passages/${source.jad_id}`}>
                             ({source.id}) {source.passage}
                           </NavLink>
                         </li>))}
@@ -314,7 +332,8 @@ const steps = [1, 2, 3];
               </ul>) : "N/A"
                 }
                  {passage.source_passage.length > 4 && (
-    <button id="toggleUsedBy" class="text-brand-800 underline mt-2 cursor-pointer">
+    <button
+  data-target="listSources" class="toggleVisible text-brand-800 underline mt-2 cursor-pointer">
       Show more
     </button>
   )}
@@ -340,7 +359,7 @@ const steps = [1, 2, 3];
               name="lucide:arrow-right"
               class="size-4 text-brand-800 inline-flex"
             />
-            <NavLink href={`/passages/${passage.jad_id}`}>
+            <NavLink href={`/data/passages/${passage.jad_id}`}>
               ({passage.id}) {passage.passage}
             </NavLink>
           </li>
@@ -361,7 +380,7 @@ const steps = [1, 2, 3];
               name="lucide:arrow-right"
               class="size-4 text-brand-800 inline-flex"
             />
-            <NavLink href={`/passages/${passage.jad_id}`}>
+            <NavLink href={`/data/passages/${passage.jad_id}`}>
               ({passage.id}) {passage.passage}
             </NavLink>
           </li>
@@ -374,7 +393,8 @@ const steps = [1, 2, 3];
 <div class="flex mt-2 justify-between">
   <!-- button for showing extra items -->
     {usedBy.length > 4 && (
-    <button id="toggleUsedBy" class="text-brand-800 underline mt-2 cursor-pointer">
+   <button
+  data-target="usedByList" class="toggleVisible text-brand-800 underline mt-2 cursor-pointer">
         Show more
       </button>
     )}
@@ -382,7 +402,7 @@ const steps = [1, 2, 3];
     <!-- button for comparison tool -->
       {passage.source_passage.length > 0 || usedBy.length > 0 
       ? (
-      <NavLink href={`/text-comparisons/${passage.jad_id}`} class="py-2 px-5 bg-brand-400 hover:bg-brand-700 text-brand-50 border border-brand-600 rounded-md cursor-pointer">
+      <NavLink href={`/data/text-comparisons/${passage.jad_id}`} class="py-2 px-5 bg-brand-400 hover:bg-brand-700 text-brand-50 border border-brand-600 rounded-md cursor-pointer">
         Compare texts
       </NavLink>)
       : ""}
@@ -421,7 +441,7 @@ const steps = [1, 2, 3];
                 <ul class="sm:flex sm:flex-wrap sm:gap-2">
                   {passage.part_of_cluster.map((cluster) => (
                     <li class="group relative">
-                      <NavLink href={`/clusters/${cluster.jad_id}`}>
+                      <NavLink href={`/data/clusters/${cluster.jad_id}`}>
                         {cluster.value}
                       </NavLink>
                        {cluster.description && (
@@ -447,7 +467,7 @@ const steps = [1, 2, 3];
                 {passage.keywords.find(keyword => keyword.label === "Elements Roman conquest")?.subkeywords.sort((a, b) => a.label.localeCompare(b.label)).map((sb) => (
                   <li class="relative group ">
                     <NavLink
-                      href={`/keywords/${sb.jad_id}`}
+                      href={`/data/keywords/${sb.jad_id}`}
                       class="rounded-full bg-amber-500/50 px-2 py-0.5 text-sm text-brand-950 hover:bg-brand-300 hover:text-white transition-colors"
                     >
                       {sb.label}
@@ -468,7 +488,7 @@ const steps = [1, 2, 3];
                 {passage.keywords.find(keyword => keyword.label === "Roman Empire")?.subkeywords.sort((a, b) => a.label.localeCompare(b.label)).map((sb) => (
                   <li class="relative group">
                     <NavLink
-                      href={`/keywords/${sb.jad_id}`}
+                      href={`/data/keywords/${sb.jad_id}`}
                       class="rounded-full bg-amber-500/50 px-2 py-0.5 text-sm text-brand-950 hover:bg-brand-300 hover:text-white transition-colors"
                     >
                       {sb.label}
@@ -489,7 +509,7 @@ const steps = [1, 2, 3];
                 {passage.keywords.find(keyword => keyword.label === "Biblical elements")?.subkeywords.sort((a, b) => a.label.localeCompare(b.label)).map((sb) => (
                   <li class="relative group">
                     <NavLink
-                      href={`/keywords/${sb.jad_id}`}
+                      href={`/data/keywords/${sb.jad_id}`}
                       class="rounded-full bg-amber-500/50 px-2 py-0.5 text-sm text-brand-950 hover:bg-brand-300 hover:text-white transition-colors"
                     >
                       {sb.label}
@@ -510,7 +530,7 @@ const steps = [1, 2, 3];
                 {passage.keywords.find(keyword => keyword.label === "Contemporary pertinence")?.subkeywords.sort((a, b) => a.label.localeCompare(b.label)).map((sb) => (
                   <li class="relative group">
                     <NavLink
-                      href={`/keywords/${sb.jad_id}`}
+                      href={`/data/keywords/${sb.jad_id}`}
                       class="rounded-full bg-amber-500/50 px-2 py-0.5 text-sm text-brand-950 hover:bg-brand-300 hover:text-white transition-colors"
                     >
                       {sb.label}
@@ -610,15 +630,23 @@ const steps = [1, 2, 3];
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const toggleBtn = document.getElementById("toggleUsedBy");
-    if (!toggleBtn) return;
+  document.querySelectorAll<HTMLElement>(".toggleVisible").forEach(button => {
+    button.addEventListener("click", () => {
+      const targetId = button.dataset.target;
+      const extraItems = document.querySelectorAll(
+        `#${targetId} .extra-item`
+      );
 
-    toggleBtn.addEventListener("click", () => {
-      const extraItems = document.querySelectorAll("#usedByList .extra-item");
+      if (!extraItems.length) return;
+
       const isHidden = extraItems[0].classList.contains("hidden");
 
-      extraItems.forEach(li => li.classList.toggle("hidden"));
-      toggleBtn.textContent = isHidden ? "Show less" : "Show more";
+      extraItems.forEach(item => {
+        item.classList.toggle("hidden");
+      });
+
+      button.textContent = isHidden ? "Show less" : "Show more";
     });
   });
+});
 </script>

@@ -1,0 +1,13 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<li class="flex items-start gap-2">
+  <Icon
+    name="lucide:circle-check"
+    class="size-4 text-brand-700 shrink-0 mt-1"
+  />
+   <div class="min-w-0">
+    <slot />
+  </div>
+</li>

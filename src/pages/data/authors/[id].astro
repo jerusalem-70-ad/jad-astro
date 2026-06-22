@@ -20,8 +20,8 @@ const dates = author.origDates;
 
 <PageLayout title={author.name}>
   <Article
-    prevLink={`/authors/${author.prev.id}`}
-    nextLink={`/authors/${author.next.id}`}
+    prevLink={`/data/authors/${author.prev.id}`}
+    nextLink={`/data/authors/${author.next.id}`}
     mainTitle={`${author.name} ${dates ? `(${dates})` : ""}`}
   >
     <dl class="grid grid-cols-[1fr_7fr] text-sm md:leading-7 md:text-base">

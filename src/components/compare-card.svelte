@@ -110,7 +110,7 @@ link?.focus();
         </div>
     
         <a
-            href={`${withBasePath(`/passages/${passage.jad_id}`)}`}
+            href={`${withBasePath(`/data/passages/${passage.jad_id}`)}`}
             class="text-brand-600 underline underline-offset-4 decoration-dotted pb-3 pr-3 justify-self-end font-small hover:text-brand-950  transition"
         >
             See passage details

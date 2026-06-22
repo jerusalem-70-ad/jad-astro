@@ -396,7 +396,7 @@ search.addWidgets([
         return `
     <article class="grid w-full">
       <h3 class="font-semibold text-base md:text-lg text-brand-800">
-        <a href="${withBasePath(`/passages/${hit.id}`)}" class="underline">
+        <a href="${withBasePath(`/data/passages/${hit.id}`)}" class="underline">
           (#${hit.id.substr(16)}) ${hit.title}
         </a>
       </h3>     

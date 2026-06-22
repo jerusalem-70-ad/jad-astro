@@ -1,0 +1,129 @@
+---
+import PageLayout from "@/layouts/page-layout.astro";
+import NavLink from "@/components/nav-link.astro";
+import CheckListItem from "@/components/ui/check-list-item.astro"
+---
+
+<PageLayout title="FAQs">
+	<div class="prose mx-auto w-full max-w-(--breakpoint-xl) px-3 md:px-16 py-10 grid gap-3">
+		<h1 class="text-2xl font-semibold text-brand-700">Frequently Asked Questions</h1>
+      <details open class="p-3 md:px-10 pb-5 bg-white shadow border border-neutral-300 rounded-md">
+			<summary class="pt-5 pb-1 font-semibold text-lg md:text-xl">What does the website offer?</summary>
+			<p>
+				The website provides access to the research data collected by the project 
+				<strong><em>Medieval Reception of the Roman Conquest of Jerusalem</em></strong>. 
+				Users can explore <NavLink href="/data/passages">passages</NavLink>, 
+				<NavLink href="/data/works">works</NavLink>, <NavLink href="/data/authors">authors</NavLink>,
+				<NavLink href="/data/manuscripts">manuscripts</NavLink>, 
+				<NavLink href="/data/keywords">keywords</NavLink>,
+				<NavLink href="/data/clusters">thematic clusters</NavLink>, 
+				<NavLink href="/data/biblical-refs">biblical references</NavLink>, and 
+				<NavLink href="/data/liturgical-refs">liturgical references</NavLink> through searchable and filterable data tables. 
+				Each record includes a detailed view page with additional information and links 
+				to related entities, allowing users to trace connections across the corpus and 
+				investigate the transmission and reception of texts.
+			</p>
+		</details>
+
+		<details class="px-5 md:px-10 pb-5 bg-white shadow border border-neutral-300 rounded-md">
+			<summary class="pt-5 pb-1 font-semibold text-lg md:text-xl"
+				>How is the database structured?</summary
+			>
+			<p>
+				The data model is based on a relational database. At its core are passages,
+                which are linked to works, authors, manuscripts, liturgical and biblical references, keywords and clusters.
+                In addition, authority data on individuals, works, places and institutions
+                are incorporated. A detailed description of the data model can be found on the page
+                <NavLink href="/about/technical">‘Technical Implementation’</NavLink>.
+			</p>
+		</details>
+
+		<details class="px-5 md:px-10 pb-5 bg-white shadow border border-neutral-300 rounded-md">
+			<summary class="pt-5 pb-1 font-semibold text-lg md:text-xl"
+				>How can I use the site?</summary
+			>
+			<p>
+				There are several ways to explore the data:
+				<ul class="grid gap-1">
+					<CheckListItem>
+						Browse and filter the data tables to discover <NavLink href="/data/passages">passages</NavLink>, 
+						<NavLink href="/data/works">works</NavLink>, <NavLink href="/data/manuscripts">manuscripts</NavLink>, <NavLink href="/data/keywords">keywords</NavLink>
+						and other entities of interest all listed in the <strong>Data</strong> navigation bar above.
+					</CheckListItem>
+					<CheckListItem>						
+						Open detailed record pages to examine metadata, references, and relationships between texts. Example: <NavLink href="/data/passages/jad_occurrence__45">Passage #45</NavLink>
+					</CheckListItem>
+					<CheckListItem>						
+						Use the <NavLink href="/advanced-search">faceted search</NavLink> to quickly refine results through multiple filters.
+					</CheckListItem>
+					<CheckListItem>						
+						Use the <NavLink href="/noske-search">linguistic search</NavLink> to search the corpus by words, lemmas, wildcards, and other linguistic criteria.
+					</CheckListItem>
+					<CheckListItem>						
+						Explore the <NavLink href="/tools/dashboard">visualisation dashboard</NavLink> to analyse patterns in the data, including textual relationships, chronological developments, and the distribution of keywords and references.
+					</CheckListItem>
+					<CheckListItem>						
+						Compare related passages using the <NavLink href="/tools/text-comparisons">text comparison tool</NavLink>.
+					</CheckListItem>
+					<CheckListItem>						
+						Investigate AI-assisted similarity suggestions through the <NavLink href="/tools/ai-graph">similarity graph interface</NavLink>.
+					</CheckListItem>
+				</ul>
+
+			</p>
+		</details>
+
+		<details class="px-5 md:px-10 pb-5 bg-white shadow border border-neutral-300 rounded-md">
+			<summary class="pt-5 pb-1 font-semibold text-lg md:text-xl"
+				>Which texts are included in the database?</summary
+			>
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit at enim vitae aliquam. Etiam non mi lobortis, imperdiet orci non, convallis ligula. Aliquam dui augue, dignissim ac fringilla eu, ullamcorper in arcu. Curabitur massa dui, aliquet egestas eros ac, imperdiet rutrum nulla. In lobortis lectus lobortis leo ultricies eleifend. Aenean commodo eget diam sit amet laoreet. Pellentesque felis tellus, tempus et pretium sit amet, faucibus vel sem. In venenatis magna sed sollicitudin vestibulum. Nullam mollis purus erat, sed pellentesque erat pulvinar vel. Aenean at placerat nulla. Donec malesuada sem tortor.
+			</p>
+			
+		</details>
+		
+
+		<details class="px-5 md:px-10 pb-5 bg-white shadow border border-neutral-300 rounded-md">
+			<summary class="pt-5 pb-1 font-semibold text-lg md:text-xl"
+				>Can I download the TEI data?</summary
+			>
+			<p>
+				Each passage can be downloaded as a TEI XML file
+                from the relevant detail views (see the 'TEI-XML' button at the bottom). 				
+			</p>
+			<p>
+				The raw data from the database is made available as JSON files in the public <NavLink
+                    href="https://github.com/jerusalem-70-ad/jad-baserow-dump"
+                    >GitHub repository</NavLink
+				> for the project. The processed datasets can be exported directly
+                from the table views as JSON, CSV and HTML files.
+			</p>
+		</details>
+
+		<details class="px-5 md:px-10 pb-5 bg-white shadow border border-neutral-300 rounded-md">
+			<summary class="pt-5 pb-1 font-semibold text-lg md:text-xl"
+				>Under which licence is the data available ?</summary
+			>
+			<p>
+				The scripts and software components developed as part of the project are published under the MIT Licence
+                . The datasets are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) licence, unless otherwise stated.
+			</p>
+		</details>
+
+		<details class="px-5 md:px-10 pb-5 bg-white shadow border border-neutral-300 rounded-md" id="citation-guide">
+			<summary class="pt-5 pb-1 font-semibold text-lg md:text-xl"
+				>How to cite this database ?</summary
+			>
+			<p>
+				A citation guide is provided for individual data sets in the detailed views. For
+                citing the entire data set, we recommend using the reference “A. Marx. Medieval Reception of the Roman Conquest of Jerusalem"
+                along with the year of publication, URL and date of access. Once the data has been archived in ARCHE,
+                persistent identifiers will also be available for citation purposes.
+			</p>
+		</details>
+
+     
+    </div>
+  </div>
+</PageLayout>

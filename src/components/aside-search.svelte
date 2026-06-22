@@ -151,7 +151,7 @@ let hits;
               return html`
                 <li class="py-1 ">
                  <a
-                href="${withBasePath(`/text-comparisons/${hit.id}`)}"
+                href="${withBasePath(`/data/text-comparisons/${hit.id}`)}"
                 class="underline text-sm font-medium text-brand-700 hover:text-brand-500 transition"
               >
                 (#${hit.id.substr(16)}) ${passageTitle}
@@ -163,7 +163,7 @@ let hits;
             return html`
               <li class="list-none py-2 ml-1.5">
               <a
-                href="${withBasePath(`/passages/${hit.id}`)}"
+                href="${withBasePath(`/data/passages/${hit.id}`)}"
                 class="underline text-sm font-medium text-brand-700 hover:text-brand-500 transition"
               >
                 (#${hit.id.substr(16)}) ${passageTitle}

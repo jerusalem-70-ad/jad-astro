@@ -25,8 +25,8 @@ const { data: manuscript } = Astro.props;
 
 <PageLayout title=`${manuscript.name[0].value}`>
   <Article
-  prevLink={`/manuscripts/${manuscript.prev.id}`}
-  nextLink={`/manuscripts/${manuscript.next.id}`}
+  prevLink={`/data/manuscripts/${manuscript.prev.id}`}
+  nextLink={`/data/manuscripts/${manuscript.next.id}`}
   mainTitle=`${manuscript.library[0]?.place[0]?.value}, ${manuscript.name[0]?.value}`
 >
 <div class="flex gap-2">
@@ -113,7 +113,7 @@ const { data: manuscript } = Astro.props;
               {
            manuscript.related_passages.map(p => p.passage.map((passage) => (
                   <li>
-                    <NavLink href={`/passages/${passage.jad_id}`}>
+                    <NavLink href={`/data/passages/${passage.jad_id}`}>
                       <span>({passage.id})</span>
                       <span class="italic">
                         {passage.passage.slice(0, 150)} ...

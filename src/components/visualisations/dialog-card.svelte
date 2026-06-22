@@ -29,7 +29,7 @@ $: console.log("store value:", $selectedJadId);
         <PassageCard/>
         <div class="flex justify-between">
            <a
-          href={withBasePath(`/passages/${$selectedJadId}`)}
+          href={withBasePath(`/data/passages/${$selectedJadId}`)}
          class="block mx-auto text-sm  px-3 py-1.5 border border-neutral-300 
               rounded-md font-bold  cursor-pointer text-brand-50 bg-brand-600 hover:bg-brand-500 transition">
        See details

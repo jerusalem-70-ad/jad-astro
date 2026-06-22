@@ -3,31 +3,31 @@ import PageLayout from "@/layouts/page-layout.astro";
 import TableHead from "@/components/table-head.astro";
 import TabulatorTable from "@/components/tabulator-table.svelte";
 import { liturgicalrefsTableConfig } from "@/lib/tabulator/tabulator-table-configs.js";
-import lit_references from "@/content/data/liturgical_references.json";
+import clustersjson from "@/content/data/clusters.json";
 
 
 // Transform data and prepare columns for Tabulator Table
-const liturgical_references = Object.values(lit_references);
-const tableData = liturgicalrefsTableConfig.transformData(liturgical_references);
+const clusters = Object.values(clustersjson);
+const tableData = liturgicalrefsTableConfig.transformData(clusters);
 const columns = liturgicalrefsTableConfig.getColumns();
-const rowClickConfig = liturgicalrefsTableConfig.getRowClickConfig("/liturgical-refs/{id}");
+const rowClickConfig = liturgicalrefsTableConfig.getRowClickConfig("/data/clusters/{id}");
 ---
 
-<PageLayout title="liturgical-refs">
-  <TableHead title="Liturgical References">
+<PageLayout title="clusters">
+  <TableHead title="Clusters">
+   
     <TabulatorTable
       client:only="svelte"
       data={tableData}
       columns={columns}
-      tableId="liturgical-references-table"
+      tableId="clusters-table"
       options={{
         paginationSize: 25,
+        initialSort: [{ column: "aut_name", dir: "asc" }],
       }}
-      downloadTitle="jad_liturgical_references"
+      downloadTitle="jad_clusters"
       rowClickConfig={rowClickConfig}
+      updateMapOnFilter={true}
     />
   </TableHead>
 </PageLayout>
-
-
-

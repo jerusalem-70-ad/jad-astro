@@ -61,37 +61,37 @@ import { Icon } from "astro-icon/components";
         <div class="absolute left-0 top-full hidden w-48 bg-brand-800 rounded-md p-3 group-hover:grid">
           <NavLink
         class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/passages">View all Passages</NavLink>
+        href="/data/passages">View all Passages</NavLink>
         <NavLink
           class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-          href="/text-comparisons">Text comparison</NavLink
+          href="/tools/text-comparisons">Text comparison</NavLink
         >
          <NavLink
           class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-          href="/ai-graph">AI text comparison</NavLink
+          href="/tools/ai-graph">AI text comparison</NavLink
         >
        
         </div>
       </li>
      <li> <NavLink
         class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/works">Works</NavLink>
+        href="/data/works">Works</NavLink>
       </li>
      <li> <NavLink
         class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/manuscripts">Manuscripts</NavLink>
+        href="/data/manuscripts">Manuscripts</NavLink>
       </li>
      <li> <NavLink
         class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/authors">Authors</NavLink>
+        href="/data/authors">Authors</NavLink>
       </li>
      <li> <NavLink
         class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/keywords">Keywords</NavLink>
+        href="/data/keywords">Keywords</NavLink>
       </li>
       <li> <NavLink
         class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/clusters">Clusters</NavLink>
+        href="/data/clusters">Clusters</NavLink>
       </li>
        <li class="relative group">
         <button class="flex gap-0.5 items-center" aria-haspopup="true"
@@ -102,36 +102,110 @@ import { Icon } from "astro-icon/components";
         <div class="absolute left-0 top-full hidden w-48 bg-brand-800 rounded-md p-3 group-hover:grid">
           <NavLink
         class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/liturgical-refs">Liturgical References</NavLink>
+        href="/data/liturgical-refs">Liturgical References</NavLink>
        <NavLink
         class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/biblical-refs">Biblical References</NavLink>
+        href="/data/biblical-refs">Biblical References</NavLink>
        
         </div>
       </li>
-     
-       
       <li class="relative group">
         <button class="flex gap-0.5 items-center" aria-haspopup="true"
-          aria-expanded="false">Project  
+          aria-expanded="false">Data  
           <Icon aria-hidden="true" class="size-4.5 transition-transform group-hover:rotate-180" name="lucide:chevron-down" />
         </button>
  
         <div class="absolute left-0 top-full hidden w-48 bg-brand-800 rounded-md p-3 group-hover:grid">
           <NavLink
           class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-          href="/explore">Patterns</NavLink
+          href="/data/passages">Passages</NavLink
         >
         <NavLink
           class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-          href="/about">About the project</NavLink
+          href="/data/works">Works</NavLink
+        >
+         <NavLink
+          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+          href="/data/authors">Authors</NavLink
         >
         <NavLink
           class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-          href="/dashboard">Dashboard</NavLink
+          href="/data/keywords">Keywords</NavLink
+        >
+         <NavLink
+          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+          href="/data/clusters">Clusters</NavLink
+        >
+        <NavLink
+          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+          href="/data/liturgical-refs">Liturgical references</NavLink
+        >
+        <NavLink
+          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+          href="/data/biblical-refs">Biblical references</NavLink
+        >
+         <NavLink
+          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+          href="/data/manuscripts">Manuscripts</NavLink
+        >
+        
+        </div>
+      </li>
+     <li class="relative group">
+        <button class="flex gap-0.5 items-center" aria-haspopup="true"
+          aria-expanded="false">Tools  
+          <Icon aria-hidden="true" class="size-4.5 transition-transform group-hover:rotate-180" name="lucide:chevron-down" />
+        </button>
+ 
+        <div class="absolute left-0 top-full hidden w-48 bg-brand-800 rounded-md p-3 group-hover:grid">
+          <NavLink
+          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+          href="/tools/explore">Patterns</NavLink
+        >
+        <NavLink
+          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+          href="/tools/dashboard">Dashboard</NavLink
+        >
+         <NavLink
+          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+          href="/tools/text-comparisons">Text comparison</NavLink
+        >
+         <NavLink
+          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+          href="/tools/ai-graph">AI text comparison</NavLink
+        >
+          <NavLink
+          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+          href="/noske-search">Linguistic search</NavLink
         >
         </div>
       </li>
+       <li class="relative group">
+        <button class="flex gap-0.5 items-center" aria-haspopup="true"
+          aria-expanded="false">About  
+          <Icon aria-hidden="true" class="size-4.5 transition-transform group-hover:rotate-180" name="lucide:chevron-down" />
+        </button>
+ 
+        <div class="absolute left-0 top-full hidden w-48 bg-brand-800 rounded-md p-3 group-hover:grid">
+          <NavLink
+            class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+            href="/about/project">About the project</NavLink
+          >
+          <NavLink
+            class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+            href="/about/technical">Technical realisation</NavLink
+          >
+          <NavLink
+            class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+            href="/about/oai-pmh">OAI-PMH Interface</NavLink
+          >
+           <NavLink
+            class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+            href="/about/faqs">FAQs</NavLink
+          >
+        </div>
+      </li>      
+      
       
       <li>
         <NavLink

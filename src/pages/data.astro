@@ -1,0 +1,36 @@
+---
+import PageLayout from "@/layouts/page-layout.astro";
+import NavLink from "@/components/nav-link.astro";
+import CheckListItem from "@/components/ui/check-list-item.astro"
+---
+<PageLayout title="Data">
+	<div class="prose mx-auto w-full max-w-(--breakpoint-xl) px-3 md:px-16 py-10 grid gap-3">
+		<h1 class="text-2xl font-semibold text-brand-700">Data</h1>
+        <ul>
+            <CheckListItem>
+                <NavLink href="/data/passages">Passages</NavLink>
+            </CheckListItem>
+            <CheckListItem>
+                <NavLink href="/data/works">Works</NavLink>
+            </CheckListItem>
+            <CheckListItem>
+                <NavLink href="/data/authors">Authors</NavLink>
+            </CheckListItem>
+            <CheckListItem>
+                <NavLink href="/data/keywords">Keywords</NavLink>
+            </CheckListItem>
+            <CheckListItem>
+                <NavLink href="/data/clusters">Clusters</NavLink>
+            </CheckListItem>
+            <CheckListItem>
+                <NavLink href="/data/liturgical-refs">Liturgical references</NavLink>
+            </CheckListItem>
+            <CheckListItem>
+                <NavLink href="/data/biblical-refs">Biblical references</NavLink>
+            </CheckListItem>
+            <CheckListItem>
+                <NavLink href="/data/manuscripts">Manuscripts</NavLink>
+            </CheckListItem>
+        </ul>
+    </div>
+</PageLayout>

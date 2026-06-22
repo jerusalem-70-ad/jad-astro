@@ -199,7 +199,7 @@
     <div class="w-full bg-white md:p-6 mt-6 grid gap-4">
       <h2 class="text-xl font-bold mb-2 text-brand-800">(#{results['jad-id'].split('__')[1]})
         {passageList[results['jad-id']]?.full_title || results['jad-id']}
-        <a href={withBasePath(`/passages/${results['jad-id']}`)} class="text-sm text-brand-650 hover:text-brand-400 underline underline-offset-4 decoration-dotted ml-2">View passage</a></h2>
+        <a href={withBasePath(`/data/passages/${results['jad-id']}`)} class="text-sm text-brand-650 hover:text-brand-400 underline underline-offset-4 decoration-dotted ml-2">View passage</a></h2>
       <details>
         <summary class="cursor-pointer text-brand-700 mb-4">
           {#if results.similar_passages.length > 0}
@@ -217,7 +217,7 @@
             <li>
               {passageList[simPassage]?.full_title || simPassage}
               {#if passageList[simPassage]}
-                <a href={withBasePath(`/passages/${simPassage}`)}
+                <a href={withBasePath(`/data/passages/${simPassage}`)}
                 class="text-sm text-brand-650 hover:text-brand-400 underline underline-offset-4 decoration-dotted ml-2">View passage</a>
               {/if}
             </li>
@@ -256,12 +256,12 @@
             {#each sentence.similar as sim}
               <li class="bg-neutral-50 rounded-md p-3 border border-neutral-200 shadow-sm">
                 
-                {#if passageList[sim.id.split('-')[0]]}
-                  <strong> (# {sim.id.split('-')[1]}) {passageList[sim.id.split('-')[0]]?.full_title || sim.id}</strong>
-                  <a href={withBasePath(`/passages/${sim.id}`)} class="text-sm text-brand-650
+                {#if passageList[sim.id.split('-')[0]]}                
+                  <strong> (# {sim.id.split('-')[1]}) {passageList[sim.id.split('-')[0]]?.full_title || sim.id.split('-')[0]}</strong>
+                  <a href={withBasePath(`/data/passages/${sim.id.split('-')[0]}`)} class="text-sm text-brand-650
                 hover:text-brand-400 underline underline-offset-4 decoration-dotted">View passage</a>
                 {:else}
-                  <strong>{sim.id}</strong>
+                  <strong>{sim.id.split('-')[0]}</strong>
                 {/if} 
                 <p class="text-base text-brand-800 italic">{sim.text} <span class="not-italic">[Distance: {sim.distance.toFixed(2)}]</span></p>
                 </li>

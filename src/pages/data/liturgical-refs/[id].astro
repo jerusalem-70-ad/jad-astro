@@ -1,8 +1,6 @@
 ---
 import PageLayout from "@/layouts/page-layout.astro";
 import liturgicalrefs from "@/content/data/liturgical_references.json";
-import { Icon } from "astro-icon/components";
-import NavLink from "@/components/nav-link.astro";
 import Article from "@/components/article.astro";
 import type { LiturgicalReference } from "@/types/index";
 import TabulatorTable from "@/components/tabulator-table.svelte";
@@ -26,8 +24,8 @@ const rowClickConfig = liturgicalrefTableConfig.getRowClickConfig;
 
 <PageLayout title={ref.name}>
   <Article
-    prevLink={`/liturgical-refs/${ref.prev.id}`}
-    nextLink={`/liturgical-refs/${ref.next.id}`}
+    prevLink={`/data/liturgical-refs/${ref.prev.id}`}
+    nextLink={`/data/liturgical-refs/${ref.next.id}`}
     mainTitle={ref.name} 
   >
     <dl class="grid grid-cols-[1fr_6fr] text-sm md:leading-7 md:text-base">

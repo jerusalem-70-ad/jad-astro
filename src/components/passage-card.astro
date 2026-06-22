@@ -28,7 +28,7 @@ const label =
 <div class={`grid gap-4 ${borderColor} rounded-md ${bgColor}`}>
   <h2 class="text-lg text-brand-50 bg-brand-650 p-4 flex justify-between">
     <NavLink
-      href={`/text-comparisons/${passage.jad_id}`}
+      href={`/data/text-comparisons/${passage.jad_id}`}
       class="font-semibold underline underline-offset-4 hover:text-brand-200 transition"
     >
       (#{passage.id})
@@ -42,7 +42,7 @@ const label =
   </div>
 
   <NavLink
-    href={`/passages/${passage.jad_id}`}
+    href={`/data/passages/${passage.jad_id}`}
     class="text-brand-600 underline underline-offset-4 decoration-dotted pb-3 pr-3 justify-self-end font-small hover:text-brand-950  transition"
   >
     See passage details

@@ -22,8 +22,8 @@ const edition_html = edition.replace(/\*(.*?)\*/g, "<em>$1</em>")
 
 <PageLayout title={work.title}>
     <Article
-        prevLink={`/works/${work.prev.id}`}
-        nextLink={`/works/${work.next.id}`}
+        prevLink={`/data/works/${work.prev.id}`}
+        nextLink={`/data/works/${work.next.id}`}
         mainTitle={work.author.length > 0
             ? work.author.map((item) => item.name).join(", ") +
               ": " +
@@ -41,7 +41,7 @@ const edition_html = edition.replace(/\*(.*?)\*/g, "<em>$1</em>")
             <dd class="pl-5">
                 {
                     work.author && work.author.length > 0 ? (
-                        <NavLink href={`/authors/${work.author[0].jad_id}`}>
+                        <NavLink href={`/data/authors/${work.author[0].jad_id}`}>
                             {work.author[0]?.name}
                             {work.author_certainty === false && " (?)"}
                         </NavLink>
@@ -61,7 +61,7 @@ const edition_html = edition.replace(/\*(.*?)\*/g, "<em>$1</em>")
                         ? work.manuscripts.map((ms,index,) => (
                                   <>
                                       <NavLink
-                                          href={`/manuscripts/jad_manuscript__${ms.id}`}
+                                          href={`/data/manuscripts/jad_manuscript__${ms.id}`}
                                       >
                                           {ms.name}
                                       </NavLink>
@@ -132,7 +132,7 @@ const edition_html = edition.replace(/\*(.*?)\*/g, "<em>$1</em>")
                                 })
                           .map((passage) => (
                             <li class="mb-2">
-                                <NavLink href={`/passages/${passage.jad_id}`}>
+                                <NavLink href={`/data/passages/${passage.jad_id}`}>
                                     #{passage.jad_id.substring(16)}
                                     <span class="italic">
                                         {passage.passage}

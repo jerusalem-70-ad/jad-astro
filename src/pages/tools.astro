@@ -1,0 +1,67 @@
+---
+import PageLayout from "@/layouts/page-layout.astro";
+import ToolsCard from "@/components/ui/ToolCard.astro";
+---
+
+<PageLayout title="Tools">
+	<div class="mx-auto w-full max-w-5xl p-2 md:px-10 md:py-16">
+		<div>
+			<div class="p-4 md:p-8 border-neutral-300 rounded-md bg-white shadow-lg">
+				<h1 class="text-2xl md:text-4xl font-semibold text-brand-900 pb-4">
+					Analysis, search and visualisation tools
+				</h1>
+				<p>
+					
+				</p>
+			</div>
+			<div class="grid gap-5 py-5">
+
+                <ToolsCard
+                    titleCard="Visualisation Dashboard"
+                    href="/tools/dashboard"
+                    icon="layout-dashboard"
+                    what="Explore the corpus through interactive charts and network visualisations."
+                    why="Reveal patterns, trends, and relationships that may be difficult to identify in tabular data."
+                    how="Apply filters and interact with timelines, graphs, heatmaps, and distribution charts."
+                    questions="How do passages relate to one another over time? Which themes, references, or genres dominate the corpus? How do keywords change across centuries?"
+                />
+                <ToolsCard
+                    titleCard="Text Comparison"
+                    href="/tools/text-comparisons"
+                    icon="git-compare-arrows"
+                    what="Compare related passages side by side."
+                    why="Examine textual reuse, adaptation, and transmission within the corpus."
+                    how="Search for a passage and display its source or derivative texts. Additional passages can be added for comparison."
+                    questions="How was a narrative adapted by later authors? Which passages share the same source?"
+                />
+                <ToolsCard
+                    titleCard="Similarity Graph"
+                    href="/tools/ai-graph"
+                    icon="bot"
+                    what="Explore AI-assisted similarity relationships between passages."
+                    why="Identify passages that may be textually or thematically related beyond manually established connections."
+                    how="Search for a passage identifier and inspect the pre-calculated similarity network."
+                    questions="Which passages are most similar to a given text? Are there previously unnoticed relationships?"
+                />
+				<ToolsCard
+                    titleCard="Faceted Search"
+                    href="/search"
+                    icon="search"
+                    what="Search and explore all project data through a unified interface."
+                    why="Quickly narrow large result sets using filters works, authors, manuscripts, keywords, and other metadata."
+                    how="Enter text to search and/or refine the results using the available filters. Use operator OR to display results matching one of the filter values. Use operator AND to display results matching all filter values. Results update instantly as filters are applied."
+                    questions="Which passages mention a particular theme? In which period is a particular keyword most frequent?"
+                />
+                <ToolsCard
+                    titleCard="Linguistic Search"
+                    href="/noske-search"
+                    icon="text-search"
+                    what="Perform advanced full-text searches across the textual corpus."
+                    why="Find linguistic patterns that cannot be discovered through metadata filters alone."
+                    how="Search by word forms, lemmas, wildcards, or combinations of terms, and define relationships such as word distance."
+                    questions="How is a particular concept expressed across different texts? Which passages contain related terminology?"
+                />
+			</div>
+		</div>
+	</div>
+</PageLayout>
