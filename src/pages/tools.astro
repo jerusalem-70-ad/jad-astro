@@ -4,14 +4,14 @@ import ToolsCard from "@/components/ui/ToolCard.astro";
 ---
 
 <PageLayout title="Tools">
-	<div class="mx-auto w-full max-w-5xl p-2 md:px-10 md:py-16">
+	<div class="mx-auto w-full max-w-(--breakpoint-lg) p-2 md:px-10 md:py-16">
 		<div>
 			<div class="p-4 md:p-8 border-neutral-300 rounded-md bg-white shadow-lg">
 				<h1 class="text-2xl md:text-4xl font-semibold text-brand-900 pb-4">
 					Analysis, search and visualisation tools
 				</h1>
 				<p>
-					
+					A range of tools for exploring, analysing, and visualising the data.
 				</p>
 			</div>
 			<div class="grid gap-5 py-5">
@@ -20,7 +20,7 @@ import ToolsCard from "@/components/ui/ToolCard.astro";
                     titleCard="Visualisation Dashboard"
                     href="/tools/dashboard"
                     icon="layout-dashboard"
-                    what="Explore the corpus through interactive charts and network visualisations."
+                    what="Explore the corpus through interactive charts and network."
                     why="Reveal patterns, trends, and relationships that may be difficult to identify in tabular data."
                     how="Apply filters and interact with timelines, graphs, heatmaps, and distribution charts."
                     questions="How do passages relate to one another over time? Which themes, references, or genres dominate the corpus? How do keywords change across centuries?"

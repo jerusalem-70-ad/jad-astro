@@ -50,68 +50,11 @@ import { Icon } from "astro-icon/components";
     <nav
       class="hidden lg:flex items-center gap-x-2 text-brand-50 text-lg font-semibold"
     >
-    <ul class="flex items-start gap-x-8">
-    
-       <li class="relative group">
-        <button class="flex gap-0.5 items-center" aria-haspopup="true"
-          aria-expanded="false">Passages  
-          <Icon aria-hidden="true" class="size-4.5 transition-transform group-hover:rotate-180" name="lucide:chevron-down" />
-        </button>
- 
-        <div class="absolute left-0 top-full hidden w-48 bg-brand-800 rounded-md p-3 group-hover:grid">
-          <NavLink
-        class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/data/passages">View all Passages</NavLink>
-        <NavLink
-          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-          href="/tools/text-comparisons">Text comparison</NavLink
-        >
-         <NavLink
-          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-          href="/tools/ai-graph">AI text comparison</NavLink
-        >
+    <ul class="flex items-start gap-x-8">  
        
-        </div>
-      </li>
-     <li> <NavLink
-        class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/data/works">Works</NavLink>
-      </li>
-     <li> <NavLink
-        class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/data/manuscripts">Manuscripts</NavLink>
-      </li>
-     <li> <NavLink
-        class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/data/authors">Authors</NavLink>
-      </li>
-     <li> <NavLink
-        class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/data/keywords">Keywords</NavLink>
-      </li>
-      <li> <NavLink
-        class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/data/clusters">Clusters</NavLink>
-      </li>
-       <li class="relative group">
-        <button class="flex gap-0.5 items-center" aria-haspopup="true"
-          aria-expanded="false">References  
-          <Icon aria-hidden="true" class="size-4.5 transition-transform group-hover:rotate-180" name="lucide:chevron-down" />
-        </button>
- 
-        <div class="absolute left-0 top-full hidden w-48 bg-brand-800 rounded-md p-3 group-hover:grid">
-          <NavLink
-        class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/data/liturgical-refs">Liturgical References</NavLink>
-       <NavLink
-        class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-        href="/data/biblical-refs">Biblical References</NavLink>
-       
-        </div>
-      </li>
       <li class="relative group">
         <button class="flex gap-0.5 items-center" aria-haspopup="true"
-          aria-expanded="false">Data  
+          aria-expanded="false"><NavLink href="/data" class="text-white">Data</NavLink>  
           <Icon aria-hidden="true" class="size-4.5 transition-transform group-hover:rotate-180" name="lucide:chevron-down" />
         </button>
  
@@ -153,7 +96,7 @@ import { Icon } from "astro-icon/components";
       </li>
      <li class="relative group">
         <button class="flex gap-0.5 items-center" aria-haspopup="true"
-          aria-expanded="false">Tools  
+          aria-expanded="false"><NavLink href="/tools" class="text-white">Tools </NavLink> 
           <Icon aria-hidden="true" class="size-4.5 transition-transform group-hover:rotate-180" name="lucide:chevron-down" />
         </button>
  

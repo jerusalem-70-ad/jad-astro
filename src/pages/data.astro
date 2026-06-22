@@ -4,9 +4,17 @@ import NavLink from "@/components/nav-link.astro";
 import CheckListItem from "@/components/ui/check-list-item.astro"
 ---
 <PageLayout title="Data">
-	<div class="prose mx-auto w-full max-w-(--breakpoint-xl) px-3 md:px-16 py-10 grid gap-3">
-		<h1 class="text-2xl font-semibold text-brand-700">Data</h1>
-        <ul>
+	<div class=" mx-auto w-full max-w-(--breakpoint-lg) px-3 md:px-16 py-10 grid gap-3">
+		<div class="p-4 md:p-8 border-neutral-300 rounded-md bg-white shadow-lg">
+				<h1 class="text-2xl md:text-4xl font-semibold text-brand-900 pb-4">
+					Dataset
+				</h1>
+				 <p>Each dataset is presented as an interactive table, allowing users 
+            to sort and filter data, customize the display, and export results for further analysis.</p>
+			</div>       
+<div class="grid lg:grid-cols-[180px_1fr] gap-6 border-neutral-300 rounded-md bg-white shadow-lg p-5">
+       
+        <ul class="space-y-2">
             <CheckListItem>
                 <NavLink href="/data/passages">Passages</NavLink>
             </CheckListItem>
@@ -32,5 +40,6 @@ import CheckListItem from "@/components/ui/check-list-item.astro"
                 <NavLink href="/data/manuscripts">Manuscripts</NavLink>
             </CheckListItem>
         </ul>
+        </div>
     </div>
 </PageLayout>
