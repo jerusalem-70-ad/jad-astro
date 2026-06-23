@@ -1,0 +1,80 @@
+---
+import PageLayout from "@/layouts/page-layout.astro";
+import NavLink from "@/components/nav-link.astro";
+import { Image } from "astro:assets";
+import titleImage from "/public/assets/images/title-image.png";
+---
+
+<PageLayout title="Home">
+  <div
+    class="mx-auto h-full lg:w-3/4 lg:grid grid-cols-2 lg:mt-10 gap-5 py-5 bg-[url('/jad-astro/assets/images/title-image.png')] bg-cover
+    lg:bg-none"
+  >
+    <div class="self-center grid gap-6 lg:gap-10">
+      <div class="grid gap-2">
+        <h2 class="grid gap-2 px-3 lg:px-0">
+          <span class="hidden lg:block text-4xl font-semibold text-brand-700"
+            >Medieval Reception of the Roman Conquest of Jerusalem</span
+          >
+          <span
+            class="text-2xl italic text-brand-100 lg:text-brand-500 lg:bg-inherit bg-brand-800/90 rounded-md p-2 lg:text-left text-center"
+          >
+            The Roman conquest of Jerusalem in 70 AD: Reception, use, and
+            interpretation in the Middle Ages (c.600-c.1200)
+          </span>
+        </h2>
+      </div>
+      <p class="hidden lg:block text-brand-100 lg:text-brand-800 px-3 lg:px-0">
+        The project explores the medieval reception and interpretation of the
+        Roman conquest of Jerusalem in 70 AD, examining its presence in
+        chronicles, anti-Jewish treatises, sermon collections, and biblical
+        commentaries.
+      </p>
+      <div class="grid gap-5 justify-items-center pb-3">
+       
+        <NavLink
+          href="/about/faqs#citation-guide"
+          class="w-5/6 lg:w-2/3 py-6 px-4 text-center text-xl font-semibold border border-black hover:bg-brand-600 transition bg-brand-800/90 text-brand-100 rounded-md"
+        >
+          How to cite this database
+        </NavLink>
+        <NavLink
+          href="/about/faqs"
+          class="w-5/6 lg:w-2/3 py-6 px-4 text-center text-xl font-semibold border border-brand-900 hover:bg-brand-600 transition bg-brand-800/90 text-brand-100 rounded-md"
+        >
+          How to use this database
+        </NavLink>
+        <NavLink
+          href="/about/project"
+          class="w-5/6 lg:w-2/3 py-6 px-4 text-center text-xl font-semibold border border-brand-900 hover:bg-brand-600 transition bg-brand-800/90 text-brand-100 rounded-md"
+        >
+          Results published from this database
+        </NavLink>
+        <NavLink
+          href="/about/faqs"
+          class="w-5/6 lg:w-2/3 py-6 px-4 text-center text-xl font-semibold border border-brand-900 hover:bg-brand-600 transition bg-brand-800/90 text-brand-100 rounded-md"
+        >
+          Contribute to this database
+        </NavLink>
+      </div>
+    </div>
+    <figure class="hidden lg:grid gap-2 content-start">
+      <Image
+        src={titleImage}
+        alt="(Venice) La distruzione del tempio di Gerusalemme -Francesco Hayez"
+        width={700}
+        height={500}
+        class="w-full h-auto object-contain"
+        loading="lazy"
+      />
+      <figcaption class="font-light text-xs">
+        La distruzione del tempio di Gerusalemme by Francesco Hayez (Gallerie
+        Accademia Venice; photograph by Didier Descouens - <NavLink
+          class="underline decoration-dotted"
+          href="https://commons.wikimedia.org/w/index.php?curid=132796743"
+          >Public Domain</NavLink
+        >
+      </figcaption>
+    </figure>
+  </div>
+</PageLayout>
