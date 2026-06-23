@@ -8,12 +8,15 @@
 
   import { withBasePath } from "@/lib/withBasePath";
 
+  import pinGreen from "@/icons/map-pin-green.svg"
+  import pinRed from "@/icons/map-pin-red.svg"
+  import pin from "@/icons/map-pin.png"
+
   /* ---------- props ---------- */
   export let geoJsonData;
   export let className = "w-full h-64 md:h-96 border rounded z-10";
   export let initialView = [50, 10];
   export let initialZoom = 3;
-  export let markerColor = "#B42222";
   export let filterMode = "single"; // "single" | "dual"
 
   let mapEl;
@@ -22,27 +25,24 @@
   let libraryLayer;
   let cleanupResize;
   	
-  /* ---------- icons ---------- */
-  const pinGreen = new URL("@/icons/map-pin-green.svg", import.meta.url).toString();
-  const pinRed = new URL("@/icons/map-pin-red.svg", import.meta.url).toString();
-  const pin = new URL("@/icons/map-pin.png", import.meta.url).toString();
+ 
 
   const authorIcon = L.icon({
-    iconUrl: pinRed,
+    iconUrl: pinRed.src,
     iconSize: [25, 25],
     iconAnchor: [12, 41],
     popupAnchor: [0, -41],
   });
 
   const libraryIcon = L.icon({
-    iconUrl: pinGreen,
+    iconUrl: pinGreen.src,
     iconSize: [25, 25],
     iconAnchor: [12, 41],
     popupAnchor: [0, -41],
   });
 
   const defaultIcon = L.icon({
-    iconUrl: pin,
+    iconUrl: pin.png,
     iconSize: [25, 25],
     iconAnchor: [12, 41],
     popupAnchor: [0, -41],

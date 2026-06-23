@@ -2,7 +2,7 @@
 import { Icon } from "astro-icon/components";
 
 import NavLink from "@/components/nav-link.astro";
-const { titleCard, what, why, how, questions, icon, href } = Astro.props as {
+interface Props {
 	titleCard: string;
 	what?: string;
 	why?: string;
@@ -10,7 +10,8 @@ const { titleCard, what, why, how, questions, icon, href } = Astro.props as {
 	questions?: string;
 	icon?: string;
     href: string
-};
+}
+const { titleCard, what, why, how, questions, icon, href } = Astro.props 
 ---
 
 <div class="grid lg:grid-cols-[180px_1fr] gap-6 border-neutral-300 rounded-md bg-white shadow-lg p-5">

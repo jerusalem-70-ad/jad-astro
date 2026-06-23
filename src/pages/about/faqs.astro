@@ -11,13 +11,15 @@ import CheckListItem from "@/components/ui/check-list-item.astro"
 			<summary class="pt-5 pb-1 font-semibold text-lg md:text-xl">What does the website offer?</summary>
 			<p>
 				The website provides access to the research data collected by the project 
-				<strong><em>Medieval Reception of the Roman Conquest of Jerusalem</em></strong>. 
-				Users can explore <NavLink href="/data/passages">passages</NavLink>, 
-				<NavLink href="/data/works">works</NavLink>, <NavLink href="/data/authors">authors</NavLink>,
-				<NavLink href="/data/manuscripts">manuscripts</NavLink>, 
-				<NavLink href="/data/keywords">keywords</NavLink>,
-				<NavLink href="/data/clusters">thematic clusters</NavLink>, 
-				<NavLink href="/data/biblical-refs">biblical references</NavLink>, and 
+				 {" "}<strong><em>Medieval Reception of the Roman Conquest of Jerusalem</em></strong>. 
+				Users can explore{" "}
+				<NavLink href="/data/passages">passages</NavLink>,{" "}
+				<NavLink href="/data/works">works</NavLink>,{" "}
+				<NavLink href="/data/authors">authors</NavLink>,{" "}
+				<NavLink href="/data/manuscripts">manuscripts</NavLink>,{" "}
+				<NavLink href="/data/keywords">keywords</NavLink>,{" "}
+				<NavLink href="/data/clusters">thematic clusters</NavLink>,{" "}
+				<NavLink href="/data/biblical-refs">biblical references</NavLink>, and{" "}
 				<NavLink href="/data/liturgical-refs">liturgical references</NavLink> through searchable and filterable data tables. 
 				Each record includes a detailed view page with additional information and links 
 				to related entities, allowing users to trace connections across the corpus and 
@@ -34,7 +36,7 @@ import CheckListItem from "@/components/ui/check-list-item.astro"
                 which are linked to works, authors, manuscripts, liturgical and biblical references, keywords and clusters.
                 In addition, authority data on individuals, works, places and institutions
                 are incorporated. A detailed description of the data model can be found on the page
-                <NavLink href="/about/technical">‘Technical Implementation’</NavLink>.
+                {" "}<NavLink href="/about/technical">‘Technical Implementation’</NavLink>.
 			</p>
 		</details>
 
@@ -97,7 +99,7 @@ import CheckListItem from "@/components/ui/check-list-item.astro"
                     href="https://github.com/jerusalem-70-ad/jad-baserow-dump"
                     >GitHub repository</NavLink
 				> for the project. The processed datasets can be exported directly
-                from the table views as JSON, CSV and HTML files.
+                from the <NavLink href="/data">table views</NavLink> as JSON, CSV and HTML files.
 			</p>
 		</details>
 
@@ -125,5 +127,4 @@ import CheckListItem from "@/components/ui/check-list-item.astro"
 
      
     </div>
-  </div>
 </PageLayout>
