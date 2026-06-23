@@ -43,25 +43,25 @@ import NavLink from "@/components/nav-link.astro";
          </li>
          <li>
              <span class="font-semibold text-brand-700 mb-2">Corpus Query Language (CQL): </span>
-             <ul class="space-y-2 ml-4">
+             <ul class="space-y-2 ml-4 font-medium">
                  <li>
-                 <span class="font-medium">Search by word form:</strong> <code class="bg-white px-2 py-1 rounded text-xs">q[word="Jerusalem"]</code>
+                 Search by word form: <code class="bg-white px-2 py-1 rounded text-xs">q[word="Jerusalem"]</code>
                  <br><span class="text-gray-600 text-xs">Finds exact word "Jerusalem"</span>
                  </li>
                   <li>
-                 <span class="font-medium">Search by word case insensitive:</strong> <code class="bg-white px-2 py-1 rounded text-xs">q[lc="operatus"]</code>
+                 Search by word case insensitive: <code class="bg-white px-2 py-1 rounded text-xs">q[lc="operatus"]</code>
                  <br><span class="text-gray-600 text-xs">Finds "operatus" and "Operatus".</span>
                  </li>
                  <li>
-                 <span class="font-medium">Search by lemma (root form):</strong> <code class="bg-white px-2 py-1 rounded text-xs">q[lemma="cedo"]</code>
+                 Search by lemma (root form): <code class="bg-white px-2 py-1 rounded text-xs">q[lemma="cedo"]</code>
                  <br><span class="text-gray-600 text-xs">Finds "cessit", "cedentes", "cediderunt" etc.</span>
                  </li>                
                  <li>
-                 <span class="font-medium">Combine with wildcards:</strong> <code class="bg-white px-2 py-1 rounded text-xs">q[word="indulg.*"]</code>
+                 Combine with wildcards: <code class="bg-white px-2 py-1 rounded text-xs">q[word="indulg.*"]</code>
                  <br><span class="text-gray-600 text-xs">Finds words starting with "indulg"</span>
                  </li>
                  <li>
-                 <span class="font-medium">Multiple options (OR):</strong> <code class="bg-white px-2 py-1 rounded text-xs">q[word="populus|civitatem"]</code>
+                 Multiple options (OR): <code class="bg-white px-2 py-1 rounded text-xs">q[word="populus|civitatem"]</code>
                  <br><span class="text-gray-600 text-xs">Finds "populus" OR "civitatem"</span>
                  </li>
              </ul>
