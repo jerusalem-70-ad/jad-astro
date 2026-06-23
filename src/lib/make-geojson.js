@@ -24,7 +24,7 @@ export function processData(input) {
               work: passage.work[0].title,
               place: pl.value,
               type: "author",
-              url: `/passages/${passage.jad_id}`,
+              url: `/data/passages/${passage.jad_id}`,
               jad_id: passage.jad_id, // to match the table filtering
               place_id: pl.id,
             },
@@ -45,11 +45,11 @@ export function processData(input) {
                   place: pl.value,
                   manuscript: occurr.manuscript || "N/A",
                   type: "library",
-                  url: `/passages/${passage.jad_id}`,
+                  url: `/data/passages/${passage.jad_id}`,
                   jad_id: passage.jad_id, // to match the table filtering
                   place_id: pl.id,
                 },
-              })) || []
+              })) || [],
           ) || []),
         ];
 
@@ -107,7 +107,7 @@ export function processWorks(input) {
               description: `Author's working place`,
               place: pl.value,
               type: "author",
-              url: `/works/${work.jad_id}`,
+              url: `/data/works/${work.jad_id}`,
               jad_id: work.jad_id, // to match the table filtering
               place_id: pl.id,
             },
@@ -144,11 +144,11 @@ export function processMss(input) {
                   description: `Repository`,
                   place: pl.value,
                   type: "library",
-                  url: `/manuscripts/${ms.jad_id}`,
+                  url: `/data/manuscripts/${ms.jad_id}`,
                   jad_id: ms.jad_id, // to match the table filtering
                   place_id: pl.id,
                 },
-              })) || []
+              })) || [],
           ) || []),
         ];
 
@@ -180,7 +180,7 @@ export function processAuthors(input) {
               description: "Authors place",
               place: pl.value,
               type: "author",
-              url: `/authors/${aut.jad_id}`,
+              url: `/data/authors/${aut.jad_id}`,
               jad_id: aut.jad_id, // to match the table filtering
               aut_jad_id: aut.jad_id,
               place_id: pl.id,

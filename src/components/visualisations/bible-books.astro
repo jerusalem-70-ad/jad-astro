@@ -18,7 +18,7 @@
   import * as echarts from "echarts";
   import { withBasePath } from "@/lib/withBasePath";
   import passages from "@/content/data/passages.json";
-  import {NOVA_VULGATA_ORDER} from "scripts/sort-bibl-ref.js"
+  import {NOVA_VULGATA_ORDER} from "@/lib/search/utils.js"
 
   document.addEventListener("astro:page-load", () => {
     const chartElement = document.getElementById("bible-piechart");

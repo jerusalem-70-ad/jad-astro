@@ -45,7 +45,7 @@
     "svelte": "^5.49.1",
     "tabulator": "^0.2.40",
     "tabulator-tables": "^6.3.1",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "typesense": "^3.0.6",
     "typesense-instantsearch-adapter": "^3.0.2"
   },

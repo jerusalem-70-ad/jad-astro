@@ -3,7 +3,7 @@ import { onMount} from "svelte";
   import * as echarts from "echarts";
   import { withBasePath } from "@/lib/withBasePath";
   import passages from "@/content/data/passagesForGraphs.json";
-  import {NOVA_VULGATA_ORDER} from "scripts/sort-bibl-ref.js";
+  import {NOVA_VULGATA_ORDER} from "@/lib/search/utils.js";
 import { filteredIds } from "@/stores/jad_store.ts";
 import GraphTitle from "@/components/visualisations/graph-title.svelte";
 import GraphContainer from "@/components/visualisations/graph-container.svelte"
