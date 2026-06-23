@@ -175,11 +175,11 @@ class CustomNoskeSearch {
             <span class="kwic">${kwicText}</span>
             ${rightText ? `<span class="right-context">${rightText}</span>` : ""}
           </div> 
-            <div class="ts-details flex justify-between mt-4" data-id="${jad_id}"></div>       
+          <div class="ts-details mt-4" data-id="${jad_id}"></div>       
         </div>
       `;
     });
-
+    //noske brings only the text; the metadata we fetch from public matching the jad_id
     const passages = await fetchPassages(results);
     const passageMap = new Map(passages.map((p) => [p.jad_id, p]));
 
@@ -196,36 +196,34 @@ class CustomNoskeSearch {
       const url = withBasePath(`/data/passages/${passage.jad_id}`);
 
       div.innerHTML = `
-      <ul>
-        <li>
-          <strong>Author:</strong>
-          ${passage.work?.[0]?.author ?? ""}
-        </li>
+      <div class="flex justify-between">
+        <dl class="grid grid-cols-2 gap-x-4">
+          <dt class="font-semibold">Author:</dt>
+          <dd>${passage.work?.[0]?.author ?? ""}</dd>
 
-        <li>
-          <strong>Title:</strong>
-          ${passage.work?.[0]?.title ?? ""}
-        </li>
+          <dt class="font-semibold">Title:</dt>
+          <dd>${passage.work?.[0]?.title ?? ""}</dd>
 
-        <li>
-          <strong>Position in Work:</strong>
-          ${passage.position_in_work ?? ""}
-        </li>
+          <dt class="font-semibold">Position in Work:</dt>
+          <dd>${passage.position_in_work ?? ""}</dd>
 
-        <li>
-          <strong>Passage ID:</strong>
-          ${passage.id}
-        </li>
-      </ul>
-
-      <div class="flex items-end">
+          <dt class="font-semibold">Passage ID:</dt>
+          <dd>${passage.id}</dd>
+        </dl>
+        
+        <div class="flex items-end">
         <a
-          class="button-custom"
-          href="${url}"
+        class="button-custom"
+        href="${url}"
         >
-          View Passage
+        View Passage
         </a>
+        </div>
       </div>
+      <details>
+      <summary class="cursor-pointer">See original spelling (text might be normalized to facilitate lemmatizing.</summary>
+      <div>${passage.text_paragraph}</div>
+      </details>
     `;
     });
     resultsContainer
