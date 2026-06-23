@@ -19,7 +19,7 @@ const { title, summary, url, icon, image } = Astro.props;
 		class="md:hidden my-2 border-t-[5px] border-brand-800 bg-white shadow-md rounded-md rounded-t-none"
 	>
 		<!-- Image -->
-		<Image src={image} alt="" class="h-46 w-full object-cover" />
+		<Image src={image} alt="" class="hidden sm:block h-46 w-full object-cover" />
 
 		<!-- Text content -->
 		<div class="grid gap-y-4 px-4 p-8 xs:px-8">

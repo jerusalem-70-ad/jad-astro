@@ -4,25 +4,24 @@ import IndexCard from "@/components/ui/index-card.astro"
 import NavLink from "@/components/nav-link.astro";
 import cardImage1 from "/public/assets/images/detail1.png";
 import cardImage2 from "/public/assets/images/detail2.png";
-import cardImage3 from "/public/assets/images/detail3.png";
+import cardImage3 from "/public/assets/images/detail5.png";
 import cardImage4 from "/public/assets/images/detail4.png";
 ---
 
 <PageLayout title="Home">
   <div
-    class="grid gap-4 mx-auto h-full py-8 lg:pt-25"
+    class="grid gap-4 mx-auto h-full py-8 lg:pt-25 px-5"
   >
-    <div class="max-w-5xl mx-auto hidden lg:grid text-center gap-6 lg:gap-10">     
-        <h1 class="text-4xl font-semibold text-brand-700">
-          Medieval Reception of the Roman Conquest of Jerusalem
-        </h1>
+    <div class="max-w-5xl mx-auto grid text-center gap-6 md:gap-10">     
+        <h1 class="grid gap-3 text-base sm:text-lg md:text-4xl font-semibold text-brand-700">
+          <span>Medieval Reception of the Roman Conquest of Jerusalem </span>     
           <span
-            class="text-2xl italic text-brand-500 text-center"
+            class="text-sm sm:text-base md:text-2xl italic text-brand-500 text-center"
           >
             The Roman conquest of Jerusalem in 70 AD: Reception, use, and
             interpretation in the Middle Ages (c.600-c.1200)
           </span>
-        
+        </h1>
           <p class="hidden lg:block text-brand-100 lg:text-brand-800 px-3 lg:px-0">
             The project explores the medieval reception and interpretation of the
             Roman conquest of Jerusalem in 70 AD, examining its presence in
@@ -30,35 +29,43 @@ import cardImage4 from "/public/assets/images/detail4.png";
             commentaries.
           </p>
     </div>
-    <div class="mx-auto max-w-9/12 grid 2xl:grid-cols-4 grid-cols-2 gap-5 justify-items-center pb-3">
-        <IndexCard 
-          image={cardImage1} 
-          title="Data" 
-          url={"/data"} 
-          icon="lucide:table"
-          summary="Explore, sort and filter each dataset in an interactive table."/>
-        <IndexCard 
-          image={cardImage2} 
-          title="Search" 
-          url={"/advanced-search"} 
-          icon="lucide:search"
-          summary="Use the faceted search to quickly refine results or use the the linguistic search .">
-        </IndexCard>
-         <IndexCard 
-          image={cardImage3} 
-          title="Tools" 
-          url={"/tools"} 
-          icon="lucide:hammer"
-          summary="Explore the data using a range of tools for analysis and visualisation.">
-        </IndexCard>
-         <IndexCard 
-          image={cardImage4} 
-          title="About" 
-          url={"/about/project"} 
-          icon="lucide:info"
-          summary="Read more about the project, its technical implementation or check the FAQs.">
-        </IndexCard>
-       
-    </div>   
+    <div>
+      <div class="mx-auto max-w-9/12 grid grid-cols-1 2xl:grid-cols-4 md:grid-cols-2 gap-5 justify-items-center pb-3">
+          <IndexCard
+            image={cardImage1}
+            title="Data"
+            url={"/data"}
+            icon="lucide:table"
+            summary="Explore, sort and filter each dataset in an interactive table."/>
+          <IndexCard
+            image={cardImage2}
+            title="Search"
+            url={"/advanced-search"}
+            icon="lucide:search"
+            summary="Use the faceted search to quickly refine results or use the the linguistic search .">
+          </IndexCard>
+           <IndexCard
+            image={cardImage3}
+            title="Tools"
+            url={"/tools"}
+            icon="lucide:hammer"
+            summary="Explore the data using a range of tools for analysis and visualisation.">
+          </IndexCard>
+           <IndexCard
+            image={cardImage4}
+            title="About"
+            url={"/about"}
+            icon="lucide:info"
+            summary="Read more about the project, its technical implementation or check the FAQs.">
+          </IndexCard>
+      
+        </div>
+      <p class="max-w-9/12 mx-auto text-xs text-neutral-800 text-end">* Images from the painting <em>La distruzione del tempio di Gerusalemme</em> by Francesco Hayez (Gallerie
+          Accademia Venice; photograph by Didier Descouens - <NavLink
+          class="underline decoration-dotted"
+          href="https://commons.wikimedia.org/w/index.php?curid=132796743"
+          >Public Domain</NavLink>
+      </p>
+    </div>
   </div>
 </PageLayout>
