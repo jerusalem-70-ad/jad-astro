@@ -104,6 +104,11 @@ async function generate() {
       { name: "work_date_not_before", type: "int32", facet: true, sort: true },
       { name: "work_date_not_after", type: "int32", facet: true, sort: true },
     ],
+    metadata: {
+      owners: ["Ivana Dobcheva"],
+      description: "index for the JAD project, indexing all passages",
+      service_ids: [23082],
+    },
     token_separators: ["-"],
     default_sorting_field: "sort_id",
   };
