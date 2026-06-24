@@ -221,7 +221,7 @@ class CustomNoskeSearch {
         </div>
       </div>
       <details>
-      <summary class="cursor-pointer">See original spelling (text might be normalized to facilitate lemmatizing.</summary>
+      <summary class="cursor-pointer">See original spelling (text might be normalized to facilitate lemmatizing).</summary>
       <div>${passage.text_paragraph}</div>
       </details>
     `;
