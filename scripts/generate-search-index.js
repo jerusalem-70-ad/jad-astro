@@ -25,7 +25,7 @@ const normalizeText = (text) => {
     .replace(/y/g, "i")
     .replace(/v/g, "u")
     .replace(/(?<=[aeiouy])u(?=[aeiouy])/g, "v") // replace u-> v surrounded by vowels
-    .replace(/bu(?=[aeiouy])/g, "v") // replace u->v at the beginning of word followed by a vowel
+    .replace(/\bu(?=[aeiou])/g, "v") // restore consonantal v at word start
     .replace(/\u00A0/g, " ") // replace non-breaking space
     .replace(/\s+/g, " ") // collapse all whitespace
     .trim(); // remove leading/trailing whitespace
