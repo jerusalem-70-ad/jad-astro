@@ -2,7 +2,7 @@ import { Eta } from "eta";
 import { join } from "path";
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { DOMParser } from "@xmldom/xmldom";
-import { XMLValidator } from "fast-xml-validator";
+import { SyntaxValidator } from "fast-xml-validator";
 
 /**
  * Fast well-formedness validation
@@ -15,13 +15,8 @@ function validateWellFormedness(xmlContent, filename) {
 
   try {
     // First check: fast-xml-parser (very fast)
-    const isValid = XMLValidator.validate(xmlContent, {
+    const isValid = SyntaxValidator.validate(xmlContent, {
       allowBooleanAttributes: true,
-      ignoreAttributes: false,
-      ignoreNameSpace: false,
-      parseAttributeValue: false,
-      parseTagValue: false,
-      trimValues: true,
     });
 
     if (isValid !== true) {

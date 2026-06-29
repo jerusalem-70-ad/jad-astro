@@ -146,7 +146,7 @@ async function generate() {
     },
     token_separators: ["-"],
     default_sorting_field: "sort_id",
-    synonymSet: ["JAD-synonyms"],
+    synonym_sets: ["JAD-synonyms"], //link collection to synonyms sets
   };
 
   await client.collections().create(schema);
