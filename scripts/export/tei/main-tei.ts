@@ -56,7 +56,7 @@ export default function mainTei(p: Passage) {
       </fileDesc>
      <encodingDesc>
         <projectDesc>
-           <p>Passages are collected, transcribed, and excerpted from electronic and printed sources 
+           <p>Passages are collected, transcribed, and excerpted from manuscripts and electronic and printed sources 
            by the principal investigator, Alexander Marx, as part of the project Medieval Reception 
            of the Roman Conquest of Jerusalem. The project assembles, organises, and preserves 
            textual evidence illustrating how medieval authors understood and reinterpreted the 
