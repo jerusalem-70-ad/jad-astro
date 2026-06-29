@@ -1,6 +1,7 @@
 ---
 import PageLayout from "@/layouts/page-layout.astro";
 import IndexCard from "@/components/ui/index-card.astro"
+import IndexSmCard from "@/components/ui/index-sm-card.astro"
 import NavLink from "@/components/nav-link.astro";
 import cardImage1 from "/public/assets/images/detail1.png";
 import cardImage2 from "/public/assets/images/detail2.png";
@@ -13,14 +14,8 @@ import cardImage4 from "/public/assets/images/detail4.png";
     class="grid gap-4 mx-auto h-full py-8 lg:pt-25 px-5"
   >
     <div class="max-w-5xl mx-auto grid text-center gap-6 md:gap-10">     
-        <h1 class="grid gap-3 text-base sm:text-lg md:text-4xl font-semibold text-brand-700">
-          <span>Medieval Reception of the Roman Conquest of Jerusalem </span>     
-          <span
-            class="text-sm sm:text-base md:text-2xl italic text-brand-500 text-center"
-          >
-            The Roman conquest of Jerusalem in 70 AD: Reception, use, and
-            interpretation in the Middle Ages (c.600-c.1200)
-          </span>
+        <h1 class="grid gap-3 text-base sm:text-lg/10 md:text-4xl/15 font-semibold text-brand-700">
+          The Roman Conquest of Jerusalem (70 CE) in Medieval Latin Texts (c.400-c.1300)
         </h1>
           <p class="hidden lg:block text-brand-100 lg:text-brand-800 px-3 lg:px-0">
             The project explores the medieval reception and interpretation of the
@@ -29,8 +24,8 @@ import cardImage4 from "/public/assets/images/detail4.png";
             commentaries.
           </p>
     </div>
-    <div>
-      <div class="mx-auto max-w-9/12 grid grid-cols-1 2xl:grid-cols-4 md:grid-cols-2 gap-5 justify-items-center pb-3">
+    <div class="grid gap-4">
+      <div class="mx-auto max-w-9/12 grid grid-cols-1 2xl:grid-cols-4 md:grid-cols-2 gap-5 pb-3">
           <IndexCard
             image={cardImage1}
             title="Data"
@@ -57,8 +52,34 @@ import cardImage4 from "/public/assets/images/detail4.png";
             url={"/about"}
             icon="lucide:info"
             summary="Read more about the project, its technical implementation or check the FAQs.">
-          </IndexCard>
-      
+          </IndexCard>      
+        </div>
+      <div class="mx-auto max-w-9/12 grid grid-cols-1 2xl:grid-cols-4 md:grid-cols-2 gap-5 pb-3">
+        <IndexSmCard
+          image={cardImage1}
+          title="How to cite this database"
+          url={"/about/faqs#citation-guide"}
+          icon="lucide:quote">
+        </IndexSmCard>
+         <IndexSmCard
+          image={cardImage2}
+          title="How to use this database"
+          url={"/about/faqs"}
+          icon="lucide:signpost">
+        </IndexSmCard>
+         <IndexSmCard
+          image={cardImage3}
+          title="Results published from this database"
+          url={"/about/project"}
+          icon="lucide:rss">
+        </IndexSmCard>
+         <IndexSmCard
+          image={cardImage4}
+          title="Contribute to this database"
+          url={"/about/faqs"}
+          icon="lucide:message-circle-plus">
+        </IndexSmCard>
+
         </div>
       <p class="max-w-9/12 mx-auto text-xs text-neutral-800 text-end">* Images from the painting <em>La distruzione del tempio di Gerusalemme</em> by Francesco Hayez (Gallerie
           Accademia Venice; photograph by Didier Descouens - <NavLink

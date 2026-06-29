@@ -13,8 +13,7 @@ export default function mainTei(p: Passage) {
   if (position && titleAuthor) {
     titleAuthor += ` (${position})`;
   }
-  return `
-  <?xml version="1.0" encoding="UTF-8"?>
+  return `<?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml"
 	schematypens="http://purl.oclc.org/dsdl/schematron"?>
@@ -69,6 +68,7 @@ export default function mainTei(p: Passage) {
      </encodingDesc>
   </teiHeader>
   <text>
+    <body>
        <div type="original_spelling">
       <head>
          <title>${title}</title>
@@ -84,6 +84,7 @@ export default function mainTei(p: Passage) {
    <div type="normalized_spelling">
      <p>${normalizeText(p.text_paragraph ?? "")}</p>
    </div>
+   </body>
   </text>
 </TEI>
     `;

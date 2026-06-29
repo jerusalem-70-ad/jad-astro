@@ -2,8 +2,7 @@ import { Eta } from "eta";
 import { join } from "path";
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { DOMParser } from "@xmldom/xmldom";
-import { XMLValidator } from "fast-xml-parser";
-import { enrichDates } from "./utils.js";
+import { XMLValidator } from "fast-xml-validator";
 
 /**
  * Fast well-formedness validation
@@ -29,7 +28,7 @@ function validateWellFormedness(xmlContent, filename) {
       errors.push(
         `XML Parser: ${isValid.err?.msg || "Invalid XML"} at line ${
           isValid.err?.line || "unknown"
-        }`
+        }`,
       );
     }
 
@@ -79,7 +78,7 @@ function validateWellFormedness(xmlContent, filename) {
 // Function to load JSON files from the data directory
 const loadJSON = (file) =>
   JSON.parse(
-    readFileSync(join(process.cwd(), "src/content/data", file), "utf8")
+    readFileSync(join(process.cwd(), "src/content/data", file), "utf8"),
   );
 
 // Main execution
@@ -92,7 +91,7 @@ async function main() {
   const keywords = Object.values(loadJSON("keywords.json"));
   const clusters = Object.values(loadJSON("clusters.json"));
   const liturgical_references = Object.values(
-    loadJSON("liturgical_references.json")
+    loadJSON("liturgical_references.json"),
   );
 
   //create xml files for passages - for noske indexing (no enrichment needed)
@@ -112,7 +111,7 @@ async function main() {
     } catch (error) {
       console.error(
         `Failed to process passage ${passage.jad_id}:`,
-        error.message
+        error.message,
       );
     }
   });
@@ -121,7 +120,7 @@ async function main() {
 
   // create xml files for works with well-formedness validation and enrichment for archival purposes
   console.log(
-    "🏗️  Starting TEI works generation with well-formedness validation..."
+    "🏗️  Starting TEI works generation with well-formedness validation...",
   );
 
   // Create lookup maps
@@ -150,7 +149,7 @@ async function main() {
   const eta = new Eta({ views: join(process.cwd(), "tei-templates") });
 
   console.log(
-    `🏭 Generating and validating TEI for ${works.length} works...\n`
+    `🏭 Generating and validating TEI for ${works.length} works...\n`,
   );
 
   // Performance tracking
@@ -189,7 +188,7 @@ async function main() {
 
       if (!wellFormedness.success) {
         console.log(
-          `❌ [${index + 1}/${works.length}] ${filename} - Validation failed:`
+          `❌ [${index + 1}/${works.length}] ${filename} - Validation failed:`,
         );
         wellFormedness.errors.forEach((error) => {
           console.log(`   ${error}`);
@@ -208,7 +207,7 @@ async function main() {
     } catch (error) {
       console.log(
         `💥 [${index + 1}/${works.length}] Error processing work:`,
-        error.message
+        error.message,
       );
       wellFormednessErrors++;
       validationResults.push({
@@ -237,7 +236,7 @@ async function main() {
       validationTime /
       Math.max(successCount, 1) /
       1000
-    ).toFixed(3)}s`
+    ).toFixed(3)}s`,
   );
 
   if (validationResults.length > 0) {
@@ -253,7 +252,7 @@ async function main() {
     process.exit(1);
   } else {
     console.log(
-      "\n🎉 All TEI files generated successfully and are well-formed!"
+      "\n🎉 All TEI files generated successfully and are well-formed!",
     );
   }
 }

@@ -65,6 +65,9 @@ importers:
       fast-xml-parser:
         specifier: ^5.3.2
         version: 5.9.3
+      fast-xml-validator:
+        specifier: ^1.1.1
+        version: 1.1.1
       instantsearch.css:
         specifier: ^8.18.0
         version: 8.18.0
@@ -2012,6 +2015,9 @@ packages:
   destr@2.0.5:
     resolution: {integrity: sha512-ugFTXCtDZunbzasqBxrK93Ik/DRYsO6S/fedkWEMKqt04xZ4csmnmwGDBAb07QWNaGMAmnTIemsYZCksjATwsA==}
 
+  detailed-xml-validator@2.1.0:
+    resolution: {integrity: sha512-BhnTxmkOhDXS5V6yQFxTYItZa9Fk4gKKQNNDNXWLNolnsIdP/7wuyL0vlrfNqjgKbH8hsq+QFlFL6tpHvRNiAw==}
+
   detect-libc@2.1.2:
     resolution: {integrity: sha512-Btj2BOOO83o3WyH59e8MgXsxEQVcarkUOpEYrubB0urwnN10yQ364rsiByU11nZlqWYZm05i/of7io4mzihBtQ==}
     engines: {node: '>=8'}
@@ -2190,6 +2196,9 @@ packages:
   fast-xml-parser@5.9.3:
     resolution: {integrity: sha512-brCNCeScma/kqa54J4PIDriSSSLssRkuYaUCpvHJulGc3HGI/xxKUCTDcYkAdqJsyb//ydpbxecjC3hB9+tb/g==}
     hasBin: true
+
+  fast-xml-validator@1.1.1:
+    resolution: {integrity: sha512-mNDDFp+Fz212Q3ckFewWCfFTaDG0HMkg21RauFXVJUkSjfYzkAof/8YhcPfabp04OHewbFyjQ4yCvxuAAvbCLg==}
 
   fd-slicer@1.1.0:
     resolution: {integrity: sha512-cE1qsB/VwyQozZ+q1dGxR8LBYNZeofhEdUNGSMbQD3Gw2lAzX9Zb3uIU6Ebc/Fmyjo9AWWfnn0AUCHqtevs/8g==}
@@ -5522,6 +5531,10 @@ snapshots:
 
   destr@2.0.5: {}
 
+  detailed-xml-validator@2.1.0:
+    dependencies:
+      fast-xml-parser: 5.9.3
+
   detect-libc@2.1.2: {}
 
   devalue@5.8.1: {}
@@ -5714,6 +5727,11 @@ snapshots:
       is-unsafe: 1.0.1
       path-expression-matcher: 1.6.0
       strnum: 2.4.1
+      xml-naming: 0.1.0
+
+  fast-xml-validator@1.1.1:
+    dependencies:
+      detailed-xml-validator: 2.1.0
       xml-naming: 0.1.0
 
   fd-slicer@1.1.0:

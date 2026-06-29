@@ -3,27 +3,41 @@ import { join } from "path";
 import type { Passage } from "@/types";
 import main from "./main-tei";
 
-const outputDir = join(process.cwd(), "public", "download", "tei");
+const outputDir = join(process.cwd(), "public", "download", "tei", "passages");
+const outputJSONDir = join(
+  process.cwd(),
+  "public",
+  "download",
+  "json",
+  "passages",
+);
 const donwloadDir = join(process.cwd(), "public", "download");
 
 mkdirSync(outputDir, { recursive: true });
+mkdirSync(outputJSONDir, { recursive: true });
 mkdirSync(donwloadDir, { recursive: true });
-async function writeXMLFile(filename: string, content: string) {
+function writeXMLFile(filename: string, content: string) {
   const filepath = join(outputDir, filename);
   writeFileSync(filepath, content, "utf8");
   console.log(`✓ Generated: ${filename} ${filepath}`);
 }
 
-async function generatePassagesTei() {
+function writeJSON(filename: string, passage: Passage) {
+  const filepath = join(outputJSONDir, filename);
+  writeFileSync(filepath, JSON.stringify(passage, null, 2), "utf-8");
+}
+
+function generatePassagesDownloads() {
   const passages: Passage[] = JSON.parse(
     readFileSync("src/content/data/passages.json", "utf-8"),
   );
 
   for (const passage of passages) {
     const xml = main(passage);
-    await writeXMLFile(`${passage.jad_id}.xml`, xml);
+    writeXMLFile(`${passage.jad_id}.xml`, xml);
+    writeJSON(`${passage.jad_id}.json`, passage);
   }
-  console.log(passages.length, " TEI-XML generated");
+  console.log(passages.length, " TEI-XML and JSON generated");
 
   const rows = passages
     .map((p) => {
@@ -47,8 +61,8 @@ async function generatePassagesTei() {
       <tr>
         <td>${p.jad_id ?? ""}</td>
         <td>${titleAuthor ?? ""}</td>
-        <td><a href="./tei/${teiFilename}" download="${teiFilename}">${teiFilename}</a></td>
-        <td><a href="./json/${jsonFilename}" download="${jsonFilename}">${jsonFilename}</a></td>
+        <td><a href="./tei/passages/${teiFilename}" download="${teiFilename}">${teiFilename}</a></td>
+        <td><a href="./json/passages/${jsonFilename}" download="${jsonFilename}">${jsonFilename}</a></td>
       </tr>
     `;
     })
@@ -106,4 +120,4 @@ async function generatePassagesTei() {
   console.log("Generated download index.html");
 }
 
-generatePassagesTei();
+generatePassagesDownloads();
