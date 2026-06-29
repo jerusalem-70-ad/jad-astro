@@ -35,6 +35,41 @@ async function generate() {
   // instantiate typesense client using helpers function
   const client = createTypesenseAdminClient();
 
+  // create synonyms Sets (Multi-way synonyms)
+
+  const synonymSet = {
+    items: [
+      {
+        id: "jerusalem-synonyms",
+        synonyms: ["jerusalem", "ierusalem", "hierusalem"],
+      },
+      {
+        id: "vesp-synonyms",
+        synonyms: ["vaspasian", "vespasian"],
+      },
+      {
+        id: "titus-synonyms",
+        synonyms: ["titus", "tytus"],
+      },
+      {
+        id: "iudeai-synonyms",
+        synonyms: ["iudeai", "judaei", "iudaei", "iudei"],
+      },
+      {
+        id: "josephus-synonyms",
+        synonyms: ["josephus", "iosephus", "josefus", "iosefus"],
+      },
+      {
+        id: "egypt-synonyms",
+        synonyms: ["egipto", "egypto", "aegipto", "aegypto"],
+      },
+    ],
+  };
+
+  await client.synonymSets("JAD-synonyms").upsert(synonymSet);
+
+  log.success("Created synonyms");
+
   // check if the collection exist if so delete and write anew
 
   try {
@@ -111,6 +146,7 @@ async function generate() {
     },
     token_separators: ["-"],
     default_sorting_field: "sort_id",
+    synonymSet: ["JAD-synonyms"],
   };
 
   await client.collections().create(schema);
@@ -165,43 +201,6 @@ async function generate() {
 
   await client.collections(collectionName).documents().import(records);
   log.success("All imported");
-
-  // create synonyms
-  const synonyms = [
-    {
-      id: "jerusalem-synonyms",
-      synonyms: ["jerusalem", "ierusalem", "hierusalem"],
-    },
-    {
-      id: "vesp-synonyms",
-      synonyms: ["vaspasian", "vespasian"],
-    },
-    {
-      id: "titus-synonyms",
-      synonyms: ["titus", "tytus"],
-    },
-    {
-      id: "iudeai-synonyms",
-      synonyms: ["iudeai", "judaei", "iudaei", "iudei"],
-    },
-    {
-      id: "josephus-synonyms",
-      synonyms: ["josephus", "iosephus", "josefus", "iosefus"],
-    },
-    {
-      id: "egypt-synonyms",
-      synonyms: ["egipto", "egypto", "aegipto", "aegypto"],
-    },
-  ];
-
-  for (const syn of synonyms) {
-    await client
-      .collections(collectionName)
-      .synonyms()
-      .upsert(syn.id, { synonyms: syn.synonyms });
-  }
-
-  log.success("Created synonyms");
 }
 
 generate()
