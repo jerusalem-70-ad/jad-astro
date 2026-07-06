@@ -1,5 +1,13 @@
 import type { Passage } from "@/types";
 import normalizeText from "./normalize-text";
+import {
+  makeMsIndex,
+  makeBiblRefIndex,
+  makeLiturgRefIndex,
+  makeListSources,
+  makeListDerivatives,
+} from "./partials/makeIndex";
+
 export default function mainTei(p: Passage) {
   const author = p.work[0]?.author.length > 0 ? p.work[0]?.author[0].name : ``;
   const title = p.work[0]?.title ?? "";
@@ -13,6 +21,7 @@ export default function mainTei(p: Passage) {
   if (position && titleAuthor) {
     titleAuthor += ` (${position})`;
   }
+
   return `<?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml"
@@ -51,8 +60,12 @@ export default function mainTei(p: Passage) {
             <p>Publication Information</p>
          </publicationStmt>
          <sourceDesc>
-            ${makeIndex(p.work)}
-         </sourceDesc>
+         ${makeLiturgRefIndex(p.liturgical_references)}
+         ${makeBiblRefIndex(p.biblical_references)}
+        ${makeMsIndex(p.mss_occurrences)}
+        ${makeListSources(p.source_passage)}
+        ${makeListDerivatives(p.transmission_graph)}
+        </sourceDesc>
       </fileDesc>
      <encodingDesc>
         <projectDesc>
