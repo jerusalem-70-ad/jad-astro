@@ -7,6 +7,9 @@ import {
   makeListSources,
   makeListDerivatives,
 } from "./partials/makeIndex";
+import { makeKeywordsTaxonomy } from "../skos/taxonomies";
+import keywords from "@/content/data/keywords.json";
+import type { Keyword } from "@/types";
 
 export default function mainTei(p: Passage) {
   const author = p.work[0]?.author.length > 0 ? p.work[0]?.author[0].name : ``;
@@ -78,6 +81,9 @@ export default function mainTei(p: Passage) {
            aims to provide a consistent, searchable, and accessible corpus of medieval interpretations 
            of the Roman Conquest of Jerusalem.</p>
         </projectDesc>
+         <classDecl>
+           ${makeKeywordsTaxonomy(Object.values(keywords) as Keyword[])}
+        </classDecl>
      </encodingDesc>
   </teiHeader>
   <text>

@@ -63,6 +63,7 @@ export function makeMsIndex(mss: Passage["mss_occurrences"]) {
 
 // collect biblical refs in sourceDesc listBibl
 export function makeBiblRefIndex(biblrefs: Passage["biblical_references"]) {
+  if (!biblrefs.length) return "";
   let xml = '<listBibl type="biblicalRefs">';
   for (let ref of biblrefs)
     xml += `<bibl key="${ref.jad_id}">
@@ -75,6 +76,7 @@ export function makeBiblRefIndex(biblrefs: Passage["biblical_references"]) {
 
 // collect liturgical refs in sourceDesc listBibl
 export function makeLiturgRefIndex(refs: Passage["liturgical_references"]) {
+  if (!refs.length) return "";
   let xml = "<listEvent>";
   for (let ref of refs)
     xml += `<event key="${ref.jad_id}">
@@ -87,19 +89,18 @@ export function makeLiturgRefIndex(refs: Passage["liturgical_references"]) {
 // collect sources for the passage
 
 export function makeListSources(sources: Passage["source_passage"]) {
-  if (!sources) return;
-  else {
-    let xml = '<listBibl type="sources">';
-    for (let source of sources)
-      xml += `
+  if (!sources.length) return "";
+
+  let xml = '<listBibl type="sources">';
+  for (let source of sources)
+    xml += `
             <bibl>
                   <author>${source.author}</author>
                   <title>${source.title}</title>
                   <ptr target="${source.jad_id}"/>
                </bibl>
     `;
-    return (xml += "</listBibl>");
-  }
+  return (xml += "</listBibl>");
 }
 
 // collect derivatives
@@ -110,17 +111,28 @@ export function makeListDerivatives(
   const deriv = derivatives.graph.nodes.filter(
     (d) => d.nodeType === "descendant",
   );
-  if (!deriv) return;
-  else {
-    let xml = '<listBibl type="derivative">';
-    for (let der of deriv)
-      xml += `
+  if (!deriv.length) return "";
+  let xml = '<listBibl type="derivative">';
+  for (let der of deriv)
+    xml += `
             <bibl>
                   <author>${der.author}</author>
                   <title>${der.work}</title>
                   <ptr target="${der.jad_id}"/>
                </bibl>
         `;
-    return (xml += "</bibl>");
-  }
+  return (xml += "</listBibl>");
+}
+
+//list of keywords
+export function makeKeywordsIndex(keywords: Passage["keywords"]) {
+  if (!keywords.length) return "";
+  let xml = '<list type="keywords">';
+  for (let k of keywords)
+    xml += `
+                 <item id="${k.jad_id}">
+                  <label>${k.label}</label>
+                  <desc>${k.description}</desc>
+               </item>
+        `;
 }

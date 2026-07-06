@@ -329,3 +329,25 @@ interface ShortRef {
   id: number;
   name: string;
 }
+
+export interface Keyword {
+  id: number;
+  jad_id: string;
+  name: string;
+  description: string;
+  notes: string;
+  passages: [
+    {
+      id: number;
+      jad_id: string;
+      passage: string;
+      work: { id: number; title: string; jad_id: string };
+      author: string;
+      position_in_work: string;
+      author_certainty: boolean;
+    },
+  ];
+  part_of: string;
+  prev: Navigation;
+  next: Navigation;
+}

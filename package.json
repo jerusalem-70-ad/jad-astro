@@ -9,6 +9,7 @@
     "get-data": "node ./scripts/data-fetch.js",
     "generate-tei": "node ./scripts/generate-tei.js",
     "generate-xml": "pnpm tsx ./scripts/export/tei/generate-tei.ts",
+    "generate-skos": "pnpm tsx ./scripts/export/skos/generate-skos.ts",
     "generate-search-index": "node ./scripts/generate-search-index.js",
     "start": "astro preview",
     "check": "tsc --noEmit && astro check",
