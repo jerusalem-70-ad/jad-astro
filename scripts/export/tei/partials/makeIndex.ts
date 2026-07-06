@@ -19,7 +19,7 @@ export function makeMsIndex(mss: Passage["mss_occurrences"]) {
     const date = manuscript?.date_written[0];
     xml += `
         <witness>
-            <msDesc>
+            <msDesc xml:id="${manuscript?.jad_id}">
                 <msIdentifier>
                     <settlement ref="#${ms.lib_place[0].jad_id}">${ms.lib_place[0].value}</settlement>
                     <repository>${manuscript?.library[0].full_name}</repository>
@@ -66,7 +66,7 @@ export function makeBiblRefIndex(biblrefs: Passage["biblical_references"]) {
   if (!biblrefs.length) return "";
   let xml = '<listBibl type="biblicalRefs">';
   for (let ref of biblrefs)
-    xml += `<bibl key="${ref.jad_id}">
+    xml += `<bibl xml:id="${ref.jad_id}">
                   <title>${ref.value}</title>
                   ${ref.nova_vulgata_url ? `<ptr target="${ref.nova_vulgata_url}"/>` : ""}
                   <quote>${ref.text}</quote>
@@ -79,7 +79,7 @@ export function makeLiturgRefIndex(refs: Passage["liturgical_references"]) {
   if (!refs.length) return "";
   let xml = "<listEvent>";
   for (let ref of refs)
-    xml += `<event key="${ref.jad_id}">
+    xml += `<event xml:id="${ref.jad_id}">
                   <label>${ref.value}</label>                 
                   <desc>${ref.description || ""}</desc>
                </event>`;
@@ -97,7 +97,7 @@ export function makeListSources(sources: Passage["source_passage"]) {
             <bibl>
                   <author>${source.author}</author>
                   <title>${source.title}</title>
-                  <ptr target="${source.jad_id}"/>
+                  <ptr target="#${source.jad_id}"/>
                </bibl>
     `;
   return (xml += "</listBibl>");
@@ -118,7 +118,7 @@ export function makeListDerivatives(
             <bibl>
                   <author>${der.author}</author>
                   <title>${der.work}</title>
-                  <ptr target="${der.jad_id}"/>
+                  <ptr target="#${der.jad_id}"/>
                </bibl>
         `;
   return (xml += "</listBibl>");
@@ -128,11 +128,27 @@ export function makeListDerivatives(
 export function makeKeywordsIndex(keywords: Passage["keywords"]) {
   if (!keywords.length) return "";
   let xml = '<list type="keywords">';
-  for (let k of keywords)
-    xml += `
-                 <item id="${k.jad_id}">
-                  <label>${k.label}</label>
-                  <desc>${k.description}</desc>
-               </item>
-        `;
+  keywords.map((groups) =>
+    groups.subkeywords.map((k) => {
+      return (xml += `<item>
+                    <ref target="#${k.jad_id}">
+                        <label>${k.label}</label>
+                  </ref>
+               </item>`);
+    }),
+  );
+
+  return (xml += "</list>");
+}
+
+// list of clusters
+export function makeCluterIndex(clusters: Passage["part_of_cluster"]) {
+  if (!clusters.length) return "";
+  let xml = '<list type="cluster">';
+  for (let cluster of clusters)
+    xml += `<item xml:id="${cluster.jad_id}">
+                <label>${cluster.value}</label>
+                <desc>${cluster.description}</desc>
+                </item>`;
+  return (xml += "</list>");
 }

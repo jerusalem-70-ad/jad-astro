@@ -6,6 +6,8 @@ import {
   makeLiturgRefIndex,
   makeListSources,
   makeListDerivatives,
+  makeKeywordsIndex,
+  makeCluterIndex,
 } from "./partials/makeIndex";
 import { makeKeywordsTaxonomy } from "../skos/taxonomies";
 import keywords from "@/content/data/keywords.json";
@@ -68,6 +70,8 @@ export default function mainTei(p: Passage) {
         ${makeMsIndex(p.mss_occurrences)}
         ${makeListSources(p.source_passage)}
         ${makeListDerivatives(p.transmission_graph)}
+        ${makeKeywordsIndex(p.keywords)}
+        ${makeCluterIndex(p.part_of_cluster)}
         </sourceDesc>
       </fileDesc>
      <encodingDesc>
@@ -81,9 +85,7 @@ export default function mainTei(p: Passage) {
            aims to provide a consistent, searchable, and accessible corpus of medieval interpretations 
            of the Roman Conquest of Jerusalem.</p>
         </projectDesc>
-         <classDecl>
-           ${makeKeywordsTaxonomy(Object.values(keywords) as Keyword[])}
-        </classDecl>
+        
      </encodingDesc>
   </teiHeader>
   <text>
