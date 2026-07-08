@@ -91,8 +91,9 @@ link?.focus();
       <div id="card-{passage.id}" class={`grid gap-4 border border-neutral-300 rounded-md bg-brand-50`} >
         <h2 class="text-lg text-brand-50 bg-brand-650 p-4 flex justify-between">
             <a
-            href={`${withBasePath(`/text-comparisons/${passage.jad_id}`)}`}
+            href={`${withBasePath(`/tools/text-comparisons/${passage.jad_id}`)}`}
             class="font-semibold underline underline-offset-4 hover:text-brand-200 transition"
+            title="Show comparison for this passage"
             >
             (#{passage.id})
             {passage.work?.[0]?.author

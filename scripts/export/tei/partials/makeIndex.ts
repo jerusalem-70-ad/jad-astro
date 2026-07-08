@@ -1,4 +1,4 @@
-import type { Author, Work } from "@/types";
+import type { Author, Work, WorkFull } from "@/types";
 import type { Passage } from "@/types";
 import manuscripts from "@/content/data/manuscripts.json";
 import authors from "@/content/data/authors.json";
@@ -12,19 +12,35 @@ export function makeIndex(work: Work) {
 }
 
 // for the sourceDesc
-export function makeMsIndex(mss: Passage["mss_occurrences"]) {
+export function makeMsIndex(
+  mss: Passage["mss_occurrences"] | WorkFull["manuscripts"],
+) {
   if (!mss.length) return "";
-  let xml = `<listWit>`;
+  let xml = "";
+
   for (let ms of mss) {
     const manuscript = manuscripts.find(
-      (manuscript) => manuscript.jad_id === ms.manuscript_jad_id,
+      (manuscript) => manuscript.jad_id === ms.jad_id,
     );
     const date = manuscript?.date_written[0];
+    let msContents = "";
+
+    if ("position_in_ms" in ms) {
+      msContents = `
+        <msContents>
+        <p>Position of the passage:
+            ${
+              ms.facsimile_position
+                ? `<ref facs="${ms.facsimile_position}">${ms.position_in_ms}</ref>`
+                : ms.position_in_ms
+            }
+        </p>
+        </msContents>`;
+    }
     xml += `
-        <witness>
             <msDesc xml:id="${manuscript?.jad_id}">
                 <msIdentifier>
-                    <settlement ref="#${ms.lib_place[0].jad_id}">${ms.lib_place[0].value}</settlement>
+                    <settlement ref="#${manuscript?.library[0].place[0].jad_id}">${manuscript?.library[0].place[0].value}</settlement>
                     <repository>${manuscript?.library[0].full_name}</repository>
                     <idno>${manuscript?.idno}</idno>                                
                 </msIdentifier>
@@ -42,15 +58,7 @@ export function makeMsIndex(mss: Passage["mss_occurrences"]) {
                             </physDesc>`
                     : ""
                 }
-                 <msContents>
-                        <p>Position of the passage: 
-                            ${
-                              ms.facsimile_position
-                                ? `<ref facs="${ms.facsimile_position}">${ms.position_in_ms}</ref>`
-                                : `${ms.position_in_ms}`
-                            }
-                        </p>
-                     </msContents>
+                ${msContents}
                 <additional>
                     <surrogates>
                         ${manuscript?.catalog_url && `<ref type="catalogue" target="${escapeSpecialCharacters(manuscript.catalog_url)}"></ref>`}
@@ -58,10 +66,9 @@ export function makeMsIndex(mss: Passage["mss_occurrences"]) {
                     </surrogates>
                 </additional>
             </msDesc>
-        </witness>
         `;
   }
-  return (xml += `</listWit>`);
+  return xml;
 }
 
 export function makeBiblEdition(work: Passage["work"]) {
@@ -97,8 +104,10 @@ export function makeLiturgRefIndex(refs: Passage["liturgical_references"]) {
 
 // collect related texts (sources and derivatives) for the passage
 
-export function makeTextList(transmission: Passage["transmission_graph"]) {
-  const texts = transmission.graph.nodes.filter((n) => n.nodeType != "current");
+export function makeTextList(
+  nodes: Passage["transmission_graph"]["graph"]["nodes"],
+) {
+  const texts = nodes.filter((n) => n.nodeType != "current");
   if (!texts.length) return "";
   let xml = `<listBibl>
             <desc>Related passages - derivative and source.</desc>`;

@@ -89,15 +89,13 @@
 
       if (isFirstRender) return;
 
-      container.innerHTML = hits.map(hit => `
-        <li class="py-1">
+      container.innerHTML = hits.map(hit => `       
           <button
             class="text-start underline text-sm text-brand-700 hover:text-brand-500"
             data-id="${hit.id}"
           >
             (#${hit.id.substr(16)}) ${hit.work?.[0]?.title || "N/A"}
           </button>
-        </li>
       `).join("");
     });
 
