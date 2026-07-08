@@ -1,17 +1,23 @@
 import type { Passage } from "@/types";
 import normalizeText from "./normalize-text";
 import {
+  listKeywords,
+  listDerivativeWorks,
+  listSourceWorks,
+  listClusters,
+  listBiblicalRefs,
+  listLiturgicalBiblicalRefs,
+} from "./partials/metadata";
+import {
   makeMsIndex,
   makeBiblRefIndex,
   makeLiturgRefIndex,
-  makeListSources,
-  makeListDerivatives,
-  makeKeywordsIndex,
+  makeListPerson,
   makeCluterIndex,
+  makePlaceIndex,
+  makeTextList,
+  makeBiblEdition,
 } from "./partials/makeIndex";
-import { makeKeywordsTaxonomy } from "../skos/taxonomies";
-import keywords from "@/content/data/keywords.json";
-import type { Keyword } from "@/types";
 
 export default function mainTei(p: Passage) {
   const author = p.work[0]?.author.length > 0 ? p.work[0]?.author[0].name : ``;
@@ -26,6 +32,13 @@ export default function mainTei(p: Passage) {
   if (position && titleAuthor) {
     titleAuthor += ` (${position})`;
   }
+  let editionStmt = p.occurrence_found_in.length
+    ? `Passage found in ${p.occurrence_found_in[0].value}. `
+    : "";
+  if (p.text_taken_from.length)
+    editionStmt += `Text taken from ${p.text_taken_from[0].value}. `;
+  if (p.edition_link)
+    editionStmt += `Link to online edition: <ptr target="${p.edition_link}"/>.`;
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
@@ -53,7 +66,16 @@ export default function mainTei(p: Passage) {
          </funder>
          </titleStmt>
          <editionStmt>
-            <edition>Born digital edition according to the TEI P5 guidelines.</edition>
+            <edition>
+            The passages were either transcribed during in situ manuscript research or 
+               reproduced from printed and electronic sources. The source of each passage is 
+               documented in the &lt;sourceDesc&gt;. The accompanying metadata—including keywords, 
+               biblical and liturgical references, transmission history (identifying source and 
+               derivative passages), clusters, manuscript descriptions, and authority data for 
+               works, authors, and places (including GND and GeoNames identifiers)—was compiled 
+               by the principal investigator, Alexander Marx.
+               ${editionStmt}.
+            </edition>
             <respStmt>
                <resp>TEI-P5 encodng performed with template script</resp>
                <name type="person">Ivana Dobcheva</name>
@@ -64,14 +86,9 @@ export default function mainTei(p: Passage) {
          <publicationStmt>
             <p>Publication Information</p>
          </publicationStmt>
-         <sourceDesc>
-         ${makeLiturgRefIndex(p.liturgical_references)}
-         ${makeBiblRefIndex(p.biblical_references)}
+         <sourceDesc>         
         ${makeMsIndex(p.mss_occurrences)}
-        ${makeListSources(p.source_passage)}
-        ${makeListDerivatives(p.transmission_graph)}
-        ${makeKeywordsIndex(p.keywords)}
-        ${makeCluterIndex(p.part_of_cluster)}
+        ${makeBiblEdition(p.work)}
         </sourceDesc>
       </fileDesc>
      <encodingDesc>
@@ -84,13 +101,12 @@ export default function mainTei(p: Passage) {
            the electronic publication and long-term archiving. The project is funded by the FWF and 
            aims to provide a consistent, searchable, and accessible corpus of medieval interpretations 
            of the Roman Conquest of Jerusalem.</p>
-        </projectDesc>
-        
+        </projectDesc>        
      </encodingDesc>
   </teiHeader>
   <text>
     <body>
-       <div type="original_spelling">
+       
       <head>
          <title>${title}</title>
          <rs type="jad_id" ref="#${p.jad_id}">${p.jad_id}</rs>
@@ -99,14 +115,39 @@ export default function mainTei(p: Passage) {
             <author ref="#${p.work[0]?.author[0]?.jad_id}">${p.work[0]?.author[0]?.name}</author>
             <biblScope>${position}</biblScope>
          </bibl>            
-      </head>
-      <p>${p.text_paragraph}</p>
-   </div>
-   <div type="normalized_spelling">
-     <p>${normalizeText(p.text_paragraph ?? "")}</p>
-   </div>
+      </head>     
+      <div type="original_spelling">
+         <div>
+            <head>Short text:</head>
+            <p>${p.passage}</p>
+         </div>
+         <div>
+            <head>Full text:</head>
+            <p>${p.text_paragraph}</p>
+         </div>
+      </div>
+      
+      <div type="normalized_spelling">
+      <p>${normalizeText(p.text_paragraph ?? "")}</p>
+      </div>
+      <div type="metadata">
+         ${listKeywords(p.keywords)}
+         ${listSourceWorks(p.transmission_graph)}
+         ${listDerivativeWorks(p.transmission_graph)}
+         ${listClusters(p.part_of_cluster)}
+         ${listBiblicalRefs(p.biblical_references)}
+         ${listLiturgicalBiblicalRefs(p.liturgical_references)}
+      </div>
    </body>
   </text>
+  <standOff>
+  ${makePlaceIndex(p.work, p.mss_occurrences, p.transmission_graph)}
+  ${makeListPerson(p.transmission_graph)}
+  ${makeLiturgRefIndex(p.liturgical_references)}
+  ${makeBiblRefIndex(p.biblical_references)}       
+  ${makeTextList(p.transmission_graph)}
+  ${makeCluterIndex(p.part_of_cluster)}
+  </standOff>
 </TEI>
     `;
 }
