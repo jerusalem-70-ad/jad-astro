@@ -3,7 +3,6 @@ import { join } from "path";
 import type { Passage } from "@/types";
 import main from "./main-tei";
 import { log } from "@acdh-oeaw/lib";
-import { log } from "@acdh-oeaw/lib";
 
 const outputDir = join(process.cwd(), "public", "download", "tei", "passages");
 const outputJSONDir = join(
