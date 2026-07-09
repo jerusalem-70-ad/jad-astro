@@ -56,8 +56,14 @@ jobs:
         with:
           enablement: true
 
-      - name: generate tei
-        run: pnpm run generate-tei
+      - name: generate tei for passages, download index page
+        run: pnpm run generate-tei-passages
+
+      - name: generate tei for works, download index page
+        run: pnpm run generate-tei-works
+
+      - name: generate SKOS for keywords
+        run: pnpm run generate-skos
 
       - name: generate oai-pmh
         run: pnpm run generate-oai-pmh

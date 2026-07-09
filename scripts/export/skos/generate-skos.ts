@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
 import type { Keyword } from "@/types";
+import { log } from "@acdh-oeaw/lib";
 
 import { makeKeywordSkos } from "./taxonomies";
 
@@ -17,3 +18,4 @@ writeFileSync(
   makeKeywordSkos(keywords),
   "utf8",
 );
+log.success("Generated SKOS for keywords saved in ", taxonomyDir);
