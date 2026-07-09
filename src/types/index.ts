@@ -282,7 +282,7 @@ export interface Passage {
 }
 export interface Mss_occurrences {
   manuscript: string;
-  manuscript_jad_id: string;
+  jad_id: string;
   lib_place: Place[];
   position_in_ms: string;
   main_ms: boolean;
@@ -299,10 +299,8 @@ export interface Ref {
 }
 
 export interface KeywordRef {
-  jad_id?: string;
   label: string;
-  description?: string;
-  subkeywords: { jad_id?: string; label: string; description?: string }[];
+  subkeywords: { jad_id: string; label: string; description?: string }[];
 }
 
 export interface Cluster {
@@ -327,5 +325,28 @@ export interface Cluster {
 
 interface ShortRef {
   id: number;
+  jad_id: string;
   name: string;
+}
+
+export interface Keyword {
+  id: number;
+  jad_id: string;
+  name: string;
+  description: string;
+  notes: string;
+  passages: [
+    {
+      id: number;
+      jad_id: string;
+      passage: string;
+      work: { id: number; title: string; jad_id: string };
+      author: string;
+      position_in_work: string;
+      author_certainty: boolean;
+    },
+  ];
+  part_of: string;
+  prev: Navigation;
+  next: Navigation;
 }

@@ -108,7 +108,7 @@ const steps = [1, 2, 3];
                   ))
                   : "N/A"
                 }                
-            {passage.work[0]?.date[0]?.value ? `(${passage.work[0]?.date[0]?.value })` : ""}
+            {passage.work[0]?.date[0]?.value ? ` (${passage.work[0]?.date[0]?.value })` : ""}
             
           </dd>
           <dt
@@ -141,7 +141,7 @@ const steps = [1, 2, 3];
                   ).slice(0, 4) // showing first 4 items                 
                   .map((ms) => (
                     <li class={ms.main_ms ? "font-semibold" : ""}>
-                      <NavLink href={`/data/manuscripts/${ms.manuscript_jad_id}`}>
+                      <NavLink href={`/data/manuscripts/${ms.jad_id}`}>
                         {ms.manuscript}
                         </NavLink>
                       {/* add exact position preprocessed from json ms_occurences */}
@@ -164,7 +164,7 @@ const steps = [1, 2, 3];
                   {/* //hidden extra items */}
                       {passage.mss_occurrences.slice(4).map((ms) => (
                         <li  class="hidden extra-item">
-                      <NavLink href={`/data/manuscripts/${ms.manuscript_jad_id}`}>
+                      <NavLink href={`/data/manuscripts/${ms.jad_id}`}>
                         {ms.manuscript}
                         </NavLink>
                       {/* add exact position preprocessed from json ms_occurences */}
@@ -402,7 +402,7 @@ const steps = [1, 2, 3];
     <!-- button for comparison tool -->
       {passage.source_passage.length > 0 || usedBy.length > 0 
       ? (
-      <NavLink href={`/data/text-comparisons/${passage.jad_id}`} class="py-2 px-5 bg-brand-400 hover:bg-brand-700 text-brand-50 border border-brand-600 rounded-md cursor-pointer">
+      <NavLink href={`/tools/text-comparisons/${passage.jad_id}`} class="py-2 px-5 bg-brand-400 hover:bg-brand-700 text-brand-50 border border-brand-600 rounded-md cursor-pointer">
         Compare texts
       </NavLink>)
       : ""}

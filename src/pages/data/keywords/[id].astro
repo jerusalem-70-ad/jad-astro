@@ -2,6 +2,7 @@
 import PageLayout from "@/layouts/page-layout.astro";
 import keywords from "@/content/data/keywords.json";
 import Article from "@/components/article.astro";
+import type {Keyword} from "@/types/index"
 
 import TabulatorTable from "@/components/tabulator-table.svelte";
 import { keywordsdetailTableConfig } from "@/lib/tabulator/tabulator-table-configs.js";
@@ -9,7 +10,7 @@ import { keywordsdetailTableConfig } from "@/lib/tabulator/tabulator-table-confi
 export async function getStaticPaths() {
   const paths = Object.values(keywords).map((keyword) => ({
     params: { id: keyword.jad_id },
-    props: { data: keyword },
+    props: { data: keyword as Keyword},
   }));
   return paths;
 }
