@@ -41,7 +41,7 @@ function generateWorksXML() {
       <tr>
         <td>${p.jad_id ?? ""}</td>
         <td>${titleAuthor ?? ""}</td>
-        <td><a href="./tei/passages/${teiFilename}" download="${teiFilename}">${teiFilename}</a></td>
+        <td><a href="./tei/works/${teiFilename}" download="${teiFilename}">${teiFilename}</a></td>
       </tr>
     `;
     })
