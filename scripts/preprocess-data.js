@@ -360,7 +360,7 @@ const passagesPlus = passages
           });
         return {
           manuscript: mss.map((ms) => ms.name).join(", ") || "TBD",
-          manuscript_jad_id: mss.map((ms) => ms.jad_id).join(", "),
+          jad_id: mss.map((ms) => ms.jad_id).join(", "),
           lib_place: mss.flatMap((ms) => ms.lib_place) || [],
           position_in_ms: item.position_in_ms,
           main_ms: item.main_ms,
@@ -493,6 +493,7 @@ const worksPlus = works
         if (!related_manuscripts.has(occ.manuscript[0]?.id)) {
           related_manuscripts.set(occ.manuscript[0].id, {
             id: occ.manuscript[0]?.id || "",
+            jad_id: `jad_manuscript__${occ.manuscript[0]?.id}` || "",
             name: occ.manuscript[0]?.value || "",
           });
         }

@@ -1,54 +1,53 @@
-import type { Passage } from "@/types";
-import normalizeText from "./normalize-text";
-import {
-  listKeywords,
-  listDerivativeWorks,
-  listSourceWorks,
-  listClusters,
-  listBiblicalRefs,
-  listLiturgicalBiblicalRefs,
-} from "./partials/metadata";
+import type { WorkFull, Passage } from "@/types";
+
 import {
   makeMsIndex,
   makeBiblRefIndex,
   makeLiturgRefIndex,
-  makeListPerson,
-  makeCluterIndex,
-  makePlaceIndex,
   makeTextList,
   makeBiblEdition,
 } from "./partials/makeIndex";
+import { makePassageList } from "./partials/makePassageList";
+import passagesJson from "@/content/data/passages.json";
+const passages = passagesJson as Passage[];
 
-export default function mainTei(p: Passage) {
-  const author = p.work[0]?.author.length > 0 ? p.work[0]?.author[0].name : ``;
-  const title = p.work[0]?.title ?? "";
-  const position = p.position_in_work ?? "";
+export default function mainTei(w: WorkFull) {
+  const author = w.author.length > 0 ? w.author[0].name : ``;
+  const title = w.title ?? "";
   let titleAuthor = title;
 
   if (author && title) {
     titleAuthor = `${author}: ${title}`;
   }
+  const setIdPass = new Set(
+    w.related__passages.flatMap((position) =>
+      position.passages.map((p) => p.jad_id),
+    ),
+  );
+  const relatedPassages = passages.filter((p) => setIdPass.has(p.jad_id));
+  const liturgicalRefs = relatedPassages.flatMap(
+    (p) => p.liturgical_references,
+  );
+  const biblicalRefs = relatedPassages.flatMap((p) => p.biblical_references);
+  const allNodes = relatedPassages.flatMap(
+    (p) => p.transmission_graph.graph.nodes,
+  );
 
-  if (position && titleAuthor) {
-    titleAuthor += ` (${position})`;
-  }
-  let editionStmt = p.occurrence_found_in.length
-    ? `Passage found in ${p.occurrence_found_in[0].value}. `
-    : "";
-  if (p.text_taken_from.length)
-    editionStmt += `Text taken from ${p.text_taken_from[0].value}. `;
-  if (p.edition_link)
-    editionStmt += `Link to online edition: <ptr target="${p.edition_link}"/>.`;
+  let editionStmt = "";
+  if (w.edition) editionStmt += `Edition of ${titleAuthor}: ${w.edition}. `;
+  if (w.link_digital_editions)
+    editionStmt += `Link to online edition: <ptr target="${w.link_digital_editions}"/>.`;
+  if (w.other_editions) editionStmt += `Other editions: ${w.other_editions}.`;
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
 <?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml"
 	schematypens="http://purl.oclc.org/dsdl/schematron"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="${p.jad_id}">
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="${w.jad_id}">
   <teiHeader>
       <fileDesc>
          <titleStmt>
-            <title>Passage: ${titleAuthor}</title>
+            <title>Passages from the work ${titleAuthor} collected within the Porject 'Medieval Reception of the Roman Conquest of Jerusalem'</title>
          <principal>
             <persName>Alexander Marx</persName>
             <name type="org">Austrian Academy of Sciences</name>
@@ -86,11 +85,9 @@ export default function mainTei(p: Passage) {
          <publicationStmt>
             <p>Publication Information</p>
          </publicationStmt>
-         <sourceDesc>
-         ${p.mss_occurrences.length ? "<listWit>" : ""}         
-        ${makeMsIndex(p.mss_occurrences)}
-         ${p.mss_occurrences.length ? "</listWit>" : ""}   
-        ${makeBiblEdition(p.work)}
+         <sourceDesc>         
+        ${makeMsIndex(w.manuscripts)}
+        ${makeBiblEdition([w])}
         </sourceDesc>
       </fileDesc>
      <encodingDesc>
@@ -110,45 +107,23 @@ export default function mainTei(p: Passage) {
     <body>
        
       <head>
-         <title>${title}</title>
-         <rs type="jad_id" ref="#${p.jad_id}">${p.jad_id}</rs>
+         <title>${titleAuthor}</title>
          <bibl>
-            <title ref="#${p.work[0]?.jad_id}">${title}</title>
-            <author ref="#${p.work[0]?.author[0]?.jad_id}">${p.work[0]?.author[0]?.name}</author>
-            <biblScope>${position}</biblScope>
+            <title>${title}</title>
+            <author ref="#${w.author[0]?.jad_id}">${w.author[0]?.name}</author>
          </bibl>            
       </head>     
-      <div type="original_spelling">
-         <div>
-            <head>Short text:</head>
-            <p>${p.passage}</p>
-         </div>
-         <div>
-            <head>Full text:</head>
-            <p>${p.text_paragraph}</p>
-         </div>
-      </div>
-      
-      <div type="normalized_spelling">
-      <p>${normalizeText(p.text_paragraph ?? "")}</p>
-      </div>
-      <div type="metadata">
-         ${listKeywords(p.keywords)}
-         ${listSourceWorks(p.transmission_graph)}
-         ${listDerivativeWorks(p.transmission_graph)}
-         ${listClusters(p.part_of_cluster)}
-         ${listBiblicalRefs(p.biblical_references)}
-         ${listLiturgicalBiblicalRefs(p.liturgical_references)}
-      </div>
+      <list type="passages">
+      <head>Passages from this work:</head>
+      ${relatedPassages.map((p) => makePassageList(p)).join("")}
+      </list>
+     
    </body>
   </text>
   <standOff>
-  ${makePlaceIndex(p.work, p.mss_occurrences, p.transmission_graph)}
-  ${makeListPerson(p.transmission_graph)}
-  ${makeLiturgRefIndex(p.liturgical_references)}
-  ${makeBiblRefIndex(p.biblical_references)}       
-  ${makeTextList(p.transmission_graph.graph.nodes)}
-  ${makeCluterIndex(p.part_of_cluster)}
+  ${makeLiturgRefIndex(liturgicalRefs)}
+  ${makeBiblRefIndex(biblicalRefs)}
+  ${makeTextList(allNodes)}
   </standOff>
 </TEI>
     `;
