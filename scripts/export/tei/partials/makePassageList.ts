@@ -8,8 +8,18 @@ import {
   listLiturgicalBiblicalRefs,
 } from "./metadata";
 
+//function to render the passages from one work as list
+// text of the passage +
+//incl. all info as metadata(keywods list, cluster ect.)
+// list of mss with exact fol. location (with ref # to the msDesc in the parent Work's sourceDesc)
 export function makePassageList(p: Passage) {
-  const keywords = p.keywords.flatMap((k) => k.subkeywords);
+  const mss = p.mss_occurrences
+    .map((ms) => {
+      return `<item>
+              <rs type="manuscript" ref="#${ms.jad_id}">${ms.manuscript}${ms.position_in_ms ? ` (${ms.position_in_ms})` : ""}</rs>
+            </item>`;
+    })
+    .join(`\n`);
   const metadata = `
            ${listKeywords(p.keywords)}
            ${listSourceWorks(p.transmission_graph)}
@@ -24,18 +34,14 @@ export function makePassageList(p: Passage) {
     xml += `    <note type="position">${p.position_in_work}</note>\n`;
   }
 
-  if (p.text_paragraph) {
-    xml += `<p>${p.text_paragraph}</p>\n`;
+  if (p.mss_occurrences.length) {
+    xml += `<list type="mss_occurrences">\n`;
+    xml += mss;
+    xml += `</list>\n`;
   }
 
-  if (keywords.length) {
-    xml += ` <list type="keywords">
-                  <head>Keywords</head>\n`;
-    for (let k of keywords)
-      xml += `<item>
-                <ref type="keyword" target="#${k.jad_id}">${k.label}</ref>
-            </item>\n`;
-    xml += `</list>\n`;
+  if (p.text_paragraph) {
+    xml += `<p>${p.text_paragraph}</p>\n`;
   }
   xml += metadata;
   return (xml += `</item>\n`);

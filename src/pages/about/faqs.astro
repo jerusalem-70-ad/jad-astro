@@ -77,7 +77,7 @@ import CheckListItem from "@/components/ui/check-list-item.astro"
 
 		<details class="px-5 md:px-10 pb-5 bg-white shadow border border-neutral-300 rounded-md">
 			<summary class="pt-5 pb-1 font-semibold text-lg md:text-xl"
-				>Which texts are included in the database?</summary
+				>Which texts are included in the database? <span class="text-red-800">[TBD!]</span></summary
 			>
 			<p>
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit at enim vitae aliquam. Etiam non mi lobortis, imperdiet orci non, convallis ligula. Aliquam dui augue, dignissim ac fringilla eu, ullamcorper in arcu. Curabitur massa dui, aliquet egestas eros ac, imperdiet rutrum nulla. In lobortis lectus lobortis leo ultricies eleifend. Aenean commodo eget diam sit amet laoreet. Pellentesque felis tellus, tempus et pretium sit amet, faucibus vel sem. In venenatis magna sed sollicitudin vestibulum. Nullam mollis purus erat, sed pellentesque erat pulvinar vel. Aenean at placerat nulla. Donec malesuada sem tortor.
@@ -92,7 +92,10 @@ import CheckListItem from "@/components/ui/check-list-item.astro"
 			>
 			<p>
 				Each passage can be downloaded as a TEI XML file
-                from the relevant detail views (see the 'TEI-XML' button at the bottom). 				
+                from the relevant detail views (see the 'TEI-XML' button at the bottom). 	
+			</p>
+			<p>In addition the TEI-XML and JSON files for all <strong>passages</strong> are also available in a table <NavLink href={"/download/passages.html"}>here</NavLink>.			
+				TEI-XML files for all <strong>works</strong> are also available in a table <NavLink href={"/download/works.html"}>here</NavLink>.			
 			</p>
 			<p>
 				The raw data from the database is made available as JSON files in the public <NavLink

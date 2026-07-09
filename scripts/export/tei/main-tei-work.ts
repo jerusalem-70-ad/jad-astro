@@ -4,9 +4,6 @@ import {
   makeMsIndex,
   makeBiblRefIndex,
   makeLiturgRefIndex,
-  makeListPerson,
-  makeCluterIndex,
-  makePlaceIndex,
   makeTextList,
   makeBiblEdition,
 } from "./partials/makeIndex";

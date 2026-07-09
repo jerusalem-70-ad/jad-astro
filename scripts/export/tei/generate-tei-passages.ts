@@ -2,6 +2,7 @@ import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
 import type { Passage } from "@/types";
 import main from "./main-tei";
+import { log } from "@acdh-oeaw/lib";
 
 const outputDir = join(process.cwd(), "public", "download", "tei", "passages");
 const outputJSONDir = join(
@@ -19,7 +20,7 @@ mkdirSync(donwloadDir, { recursive: true });
 function writeXMLFile(filename: string, content: string) {
   const filepath = join(outputDir, filename);
   writeFileSync(filepath, content, "utf8");
-  console.log(`✓ Generated: ${filename} ${filepath}`);
+  log.success(`Generated: ${filename} ${filepath}`);
 }
 
 function writeJSON(filename: string, passage: Passage) {
@@ -37,7 +38,7 @@ function generatePassagesDownloads() {
     writeXMLFile(`${passage.jad_id}.xml`, xml);
     writeJSON(`${passage.jad_id}.json`, passage);
   }
-  console.log(passages.length, " TEI-XML and JSON generated");
+  log.success(passages.length, " TEI-XML and JSON generated");
 
   const rows = passages
     .map((p) => {
@@ -72,7 +73,7 @@ function generatePassagesDownloads() {
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Download Files for Manuscripts</title>
+  <title>Download Files for Passages</title>
   <style>
     body {
       font-family: sans-serif;
@@ -115,9 +116,9 @@ function generatePassagesDownloads() {
 </body>
 </html>`;
 
-  writeFileSync(join(donwloadDir, "index.html"), indexHtml, "utf8");
+  writeFileSync(join(donwloadDir, "passages.html"), indexHtml, "utf8");
 
-  console.log("Generated download index.html");
+  console.log("Generated download html");
 }
 
 generatePassagesDownloads();

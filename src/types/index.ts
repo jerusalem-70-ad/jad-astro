@@ -299,9 +299,7 @@ export interface Ref {
 }
 
 export interface KeywordRef {
-  jad_id: string;
   label: string;
-  description?: string;
   subkeywords: { jad_id: string; label: string; description?: string }[];
 }
 
