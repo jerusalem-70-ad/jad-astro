@@ -33,7 +33,7 @@
     "d3-array": "^3.2.4",
     "d3-force": "^3.0.0",
     "d3-scale": "^4.0.2",
-    "echarts": "^5.6.0",
+    "echarts": "^6.1.0",
     "eta": "^3.5.0",
     "fast-xml-parser": "^5.3.2",
     "fast-xml-validator": "^1.1.1",

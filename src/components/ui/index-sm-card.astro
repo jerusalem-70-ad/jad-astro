@@ -19,7 +19,7 @@ const { title, summary, url, icon, image } = Astro.props;
 		class="md:hidden my-2 border-t-[5px] border-brand-800 bg-white shadow-md rounded-md rounded-t-none"
 	>		
 		<div class="grid gap-y-4 px-4 p-8 xs:px-8">
-			<h2 class="text-brand-800 text-2xl font-semibold capitalize">
+			<h2 class="text-brand-800 text-2xl font-semibold">
 				<NavLink href={url} class="no-underline">
 					{title}
 				</NavLink>
@@ -52,7 +52,7 @@ const { title, summary, url, icon, image } = Astro.props;
 				>
 					<header class="p-4 text-brand-50/80">
 						<Icon class="inline-flex w-6 h-6" aria-hidden="true" name={icon} />
-						<h2 class="text-xl font-semibold capitalize">
+						<h2 class="text-xl font-semibold">
 							<span class="no-underline">{title}</span>
 						</h2>
 					</header>

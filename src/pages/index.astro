@@ -5,8 +5,8 @@ import IndexSmCard from "@/components/ui/index-sm-card.astro"
 import NavLink from "@/components/nav-link.astro";
 import cardImage1 from "/public/assets/images/detail1.png";
 import cardImage2 from "/public/assets/images/detail2.png";
-import cardImage3 from "/public/assets/images/detail5.png";
 import cardImage4 from "/public/assets/images/detail4.png";
+import cardImage3 from "/public/assets/images/detail5.png";
 ---
 
 <PageLayout title="Home">
@@ -67,18 +67,19 @@ import cardImage4 from "/public/assets/images/detail4.png";
           url={"/about/faqs"}
           icon="lucide:signpost">
         </IndexSmCard>
-         <IndexSmCard
-          image={cardImage3}
-          title="Results published from this database"
-          url={"/about/project"}
-          icon="lucide:rss">
-        </IndexSmCard>
-         <IndexSmCard
+        <IndexSmCard
           image={cardImage4}
-          title="Contribute to this database"
+          title="Hot to contribute"
           url={"/about/faqs"}
           icon="lucide:message-circle-plus">
         </IndexSmCard>
+         <IndexSmCard
+          image={cardImage3}
+          title="Published results"
+          url={"/about/project"}
+          icon="lucide:rss">
+        </IndexSmCard>
+         
 
         </div>
       <p class="max-w-9/12 mx-auto text-xs text-neutral-800 text-end">* Images from the painting <em>La distruzione del tempio di Gerusalemme</em> by Francesco Hayez (Gallerie
