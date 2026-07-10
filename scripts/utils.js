@@ -16,7 +16,7 @@ export function enrichLibraries(librariesArray, libraries) {
       full_name: library.full_name ?? "",
       place: enrichPlaces(library.place, places) ?? "",
       jad_id: library.jad_id ?? "",
-      url: library.url ?? "",
+      url: library.gnd_url ?? "",
     };
   });
 }

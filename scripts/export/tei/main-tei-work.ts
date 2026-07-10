@@ -1,11 +1,13 @@
 import type { WorkFull, Passage } from "@/types";
-
 import {
   makeMsIndex,
   makeBiblRefIndex,
   makeLiturgRefIndex,
+  makeListPerson,
+  makeCluterIndex,
+  makeWorkPlaceIndex,
   makeTextList,
-  makeBiblEdition,
+  makeWorkEdition,
 } from "./partials/makeIndex";
 import { makePassageList } from "./partials/makePassageList";
 import passagesJson from "@/content/data/passages.json";
@@ -24,6 +26,7 @@ export default function mainTei(w: WorkFull) {
       position.passages.map((p) => p.jad_id),
     ),
   );
+  // collect from related passages for the standOff indices:
   const relatedPassages = passages.filter((p) => setIdPass.has(p.jad_id));
   const liturgicalRefs = relatedPassages.flatMap(
     (p) => p.liturgical_references,
@@ -32,6 +35,7 @@ export default function mainTei(w: WorkFull) {
   const allNodes = relatedPassages.flatMap(
     (p) => p.transmission_graph.graph.nodes,
   );
+  const clusters = relatedPassages.flatMap((p) => p.part_of_cluster);
 
   let editionStmt = "";
   if (w.edition) editionStmt += `Edition of ${titleAuthor}: ${w.edition}. `;
@@ -47,21 +51,13 @@ export default function mainTei(w: WorkFull) {
   <teiHeader>
       <fileDesc>
          <titleStmt>
-            <title>Passages from the work ${titleAuthor} collected within the Porject 'Medieval Reception of the Roman Conquest of Jerusalem'</title>
-         <principal>
-            <persName>Alexander Marx</persName>
-            <name type="org">Austrian Academy of Sciences</name>
-         </principal>
-         <funder>
+            <title type="main">Passages from the work ${titleAuthor}</title>
+            <title type="sub">Project Medieval Reception of the Roman Conquest of Jerusalem</title>
+            <principal ref="https://d-nb.info/gnd/1360631461">
+               Alexander Marx
+            </principal>
+         <funder ref="https://d-nb.info/gnd/2054142-9">
             <name>FWF - Der Wissenschaftsfonds</name>
-            <address>
-               <street>Sensengasse 1</street>
-               <postCode>1090 Vienna</postCode>
-               <placeName>
-                  <country>A</country>
-                  <settlement>Vienna</settlement>
-               </placeName>
-            </address>
          </funder>
          </titleStmt>
          <editionStmt>
@@ -77,17 +73,26 @@ export default function mainTei(w: WorkFull) {
             </edition>
             <respStmt>
                <resp>TEI-P5 encodng performed with template script</resp>
-               <name type="person">Ivana Dobcheva</name>
-               <name type="org">Austrian Center for Digital Humanities</name>
-               <name type="org">Austrian Academy of Sciences</name>
+               <name type="person" ref="https://orcid.org/0000-0003-2388-1114">Ivana Dobcheva</name>
             </respStmt>
          </editionStmt>
-         <publicationStmt>
-            <p>Publication Information</p>
+          <publicationStmt>
+            <publisher ref="gnd">Austrian Academy of Sciences</publisher>
+            <pubPlace>Vienna</pubPlace>
+            <date when="2026">2026</date>
+            <availability>
+               <licence target="https://creativecommons.org/licenses/by/4.0/deed.de">
+                  <p>Sie dürfen: Teilen – das Material in jedwedem Format oder Medium vervielfältigen und weiterverbreiten Bearbeiten – das Material remixen, verändern und darauf aufbauen und zwar für beliebige Zwecke, sogar kommerziell.</p>
+                  <p>Der Lizenzgeber kann diese Freiheiten nicht widerrufen solange Sie sich an die Lizenzbedingungen halten. Unter folgenden Bedingungen:</p>
+                  <p>Namensnennung – Sie müssen angemessene Urheber- und Rechteangaben machen, einen Link zur Lizenz beifügen und angeben, ob Änderungen vorgenommen wurden. Diese Angaben dürfen in jeder angemessenen Art und Weise gemacht werden, allerdings nicht so, dass der Eindruck entsteht, der Lizenzgeber unterstütze gerade Sie oder Ihre Nutzung besonders. Keine weiteren Einschränkungen – Sie dürfen keine zusätzlichen Klauseln oder technische Verfahren einsetzen, die anderen rechtlich irgendetwas untersagen, was die Lizenz erlaubt.</p>
+                  <p>Hinweise:</p>
+                  <p>Sie müssen sich nicht an diese Lizenz halten hinsichtlich solcher Teile des Materials, die gemeinfrei sind, oder soweit Ihre Nutzungshandlungen durch Ausnahmen und Schranken des Urheberrechts gedeckt sind. Es werden keine Garantien gegeben und auch keine Gewähr geleistet. Die Lizenz verschafft Ihnen möglicherweise nicht alle Erlaubnisse, die Sie für die jeweilige Nutzung brauchen. Es können beispielsweise andere Rechte wie Persönlichkeits- und Datenschutzrechte zu beachten sein, die Ihre Nutzung des Materials entsprechend beschränken.</p>
+               </licence>
+            </availability>
          </publicationStmt>
          <sourceDesc>         
         ${makeMsIndex(w.manuscripts)}
-        ${makeBiblEdition([w])}
+        ${makeWorkEdition(w)}
         </sourceDesc>
       </fileDesc>
      <encodingDesc>
@@ -121,9 +126,17 @@ export default function mainTei(w: WorkFull) {
    </body>
   </text>
   <standOff>
+  ${makeWorkPlaceIndex(
+    relatedPassages.flatMap((r) => r.mss_occurrences),
+    w.author,
+    relatedPassages.flatMap((r) => r.transmission_graph.graph.nodes),
+  )}
+  ${makeListPerson(relatedPassages.flatMap((r) => r.transmission_graph.graph.nodes))}
   ${makeLiturgRefIndex(liturgicalRefs)}
   ${makeBiblRefIndex(biblicalRefs)}
   ${makeTextList(allNodes)}
+  ${makeCluterIndex(clusters)}
+  
   </standOff>
 </TEI>
     `;

@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { join } from "path";
 import type { Passage } from "@/types";
-import main from "./main-tei";
+import main from "./main-tei-pasage";
 import { log } from "@acdh-oeaw/lib";
 
 const outputDir = join(process.cwd(), "public", "download", "tei", "passages");

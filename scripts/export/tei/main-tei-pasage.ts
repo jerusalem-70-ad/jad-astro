@@ -18,6 +18,7 @@ import {
   makeTextList,
   makeBiblEdition,
 } from "./partials/makeIndex";
+import { escapeSpecialCharacters } from "./partials/helpers";
 
 export default function mainTei(p: Passage) {
   const author = p.work[0]?.author.length > 0 ? p.work[0]?.author[0].name : ``;
@@ -125,7 +126,7 @@ export default function mainTei(p: Passage) {
          </div>
          <div>
             <head>Full text:</head>
-            <p>${p.text_paragraph}</p>
+            <p>${escapeSpecialCharacters(p.text_paragraph ?? "")}</p>
          </div>
       </div>
       
@@ -143,8 +144,8 @@ export default function mainTei(p: Passage) {
    </body>
   </text>
   <standOff>
-  ${makePlaceIndex(p.work, p.mss_occurrences, p.transmission_graph)}
-  ${makeListPerson(p.transmission_graph)}
+  ${makePlaceIndex(p.work[0], p.mss_occurrences, p.transmission_graph.graph.nodes)}
+  ${makeListPerson(p.transmission_graph.graph.nodes)}
   ${makeLiturgRefIndex(p.liturgical_references)}
   ${makeBiblRefIndex(p.biblical_references)}       
   ${makeTextList(p.transmission_graph.graph.nodes)}

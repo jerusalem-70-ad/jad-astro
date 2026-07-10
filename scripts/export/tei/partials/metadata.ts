@@ -1,11 +1,12 @@
-import type { Passage } from "@/types";
+import type { Passage, Work } from "@/types";
 
 export function listKeywords(keywords: Passage["keywords"]) {
   if (!keywords.length) return "";
+  let uri = "";
   let xml = '<list type="keywords">\n<head>Keywords:</head> ';
   for (let k of keywords)
-    for (let subk of k.subkeywords)
-      xml += `<item>\n<rs type="keyword" ref="#${subk.jad_id}">${subk.label}</rs>\n</item>\n`;
+    for (let subk of k.subkeywords) // refs to SKOS taxonomy
+      xml += `<item>\n<rs type="keyword" ref="https://jerusalem-70-ad.github.io/jad-astro/download/taxonomies/jad-keywords.xml#${subk.jad_id}">${subk.label}</rs>\n</item>\n`;
   return (xml += "</list>");
 }
 

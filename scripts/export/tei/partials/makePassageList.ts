@@ -7,6 +7,7 @@ import {
   listBiblicalRefs,
   listLiturgicalBiblicalRefs,
 } from "./metadata";
+import { escapeSpecialCharacters } from "./helpers";
 
 //function to render the passages from one work as list
 // text of the passage +
@@ -29,7 +30,7 @@ export function makePassageList(p: Passage) {
            ${listLiturgicalBiblicalRefs(p.liturgical_references)}
         `;
   let xml = `<item xml:id="${p.jad_id}">
-                <label>${p.passage}</label>\n`;
+                <label>${escapeSpecialCharacters(p.passage)}</label>\n`;
   if (p.position_in_work) {
     xml += `    <note type="position">${p.position_in_work}</note>\n`;
   }
@@ -41,7 +42,7 @@ export function makePassageList(p: Passage) {
   }
 
   if (p.text_paragraph) {
-    xml += `<p>${p.text_paragraph}</p>\n`;
+    xml += `<p>${escapeSpecialCharacters(p.text_paragraph)}</p>\n`;
   }
   xml += metadata;
   return (xml += `</item>\n`);

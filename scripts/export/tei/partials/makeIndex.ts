@@ -41,7 +41,7 @@ export function makeMsIndex(
             <msDesc xml:id="${manuscript?.jad_id}">
                 <msIdentifier>
                     <settlement ref="#${manuscript?.library[0].place[0].jad_id}">${manuscript?.library[0].place[0].value}</settlement>
-                    <repository>${manuscript?.library[0].full_name}</repository>
+                    <repository ref="${manuscript?.library[0].url ?? "none"}">${manuscript?.library[0].full_name}</repository>
                     <idno>${manuscript?.idno}</idno>                                
                 </msIdentifier>
                 <head>
@@ -77,11 +77,23 @@ export function makeBiblEdition(work: Passage["work"]) {
   return xml;
 }
 
+export function makeWorkEdition(work: WorkFull) {
+  if (!work.edition) return "";
+  let xml = `<bibl>${work.edition} ${work.link_digital_editions && `<ptr target="${work.link_digital_editions}"/>`}</bibl>`;
+  return xml;
+}
+
+// #########################################
+// ############ STAND-OFF ##################
+// #########################################
+
 // collect biblical refs in standOff listBibl
 export function makeBiblRefIndex(biblrefs: Passage["biblical_references"]) {
   if (!biblrefs.length) return "";
+  const refsMap = new Map();
+  for (let ref of biblrefs) refsMap.set(ref.jad_id, ref);
   let xml = '<listBibl type="biblicalRefs">';
-  for (let ref of biblrefs)
+  for (let ref of refsMap.values())
     xml += `<bibl xml:id="${ref.jad_id}">
                   <title>${ref.value}</title>
                   ${ref.nova_vulgata_url ? `<ptr target="${ref.nova_vulgata_url}"/>` : ""}
@@ -93,8 +105,11 @@ export function makeBiblRefIndex(biblrefs: Passage["biblical_references"]) {
 // collect liturgical refs in standOff listEvent
 export function makeLiturgRefIndex(refs: Passage["liturgical_references"]) {
   if (!refs.length) return "";
+  const refsMap = new Map();
+  for (let ref of refs) refsMap.set(ref.jad_id, ref);
+
   let xml = "<listEvent>";
-  for (let ref of refs)
+  for (let ref of refsMap.values())
     xml += `<event xml:id="${ref.jad_id}">
                   <label>${ref.value}</label>                 
                   <desc>${ref.description || ""}</desc>
@@ -119,7 +134,7 @@ export function makeTextList(
     xml += `
             <bibl xml:id="${text.jad_id}">
                   <author ref="#${authorJad}">${text.author}</author>
-                  <title ref="#${workJad}">${text.work}</title>
+                  <title ref="https://jerusalem-70-ad.github.io/jad-astro/download/tei/works/${workJad}.xml">${text.work}</title>
                </bibl>
         `;
   }
@@ -128,9 +143,11 @@ export function makeTextList(
 
 // list of clusters
 export function makeCluterIndex(clusters: Passage["part_of_cluster"]) {
-  if (!clusters.length) return "";
+  const clusterMap = new Map();
+  for (let cluster of clusters) clusterMap.set(cluster.jad_id, cluster);
+  if (!clusterMap.size) return "";
   let xml = '<list type="cluster">\n';
-  for (let cluster of clusters)
+  for (let cluster of clusterMap.values())
     xml += `    <item xml:id="${cluster.jad_id}">
                     <label>${cluster.value}</label>
                     <desc>${cluster.description}</desc>
@@ -140,30 +157,29 @@ export function makeCluterIndex(clusters: Passage["part_of_cluster"]) {
 
 // helper to get the authors mentioned in the transmission_graph
 export function getMentionedAuthors(
-  graph: Passage["transmission_graph"],
+  nodes: Passage["transmission_graph"]["graph"]["nodes"],
 ): Author[] {
-  const mentionedNames = new Set(graph.graph.nodes.map((node) => node.author));
+  const mentionedNames = new Set(nodes.map((node) => node.author));
 
   return authors.filter((author) => mentionedNames.has(author.name));
 }
 
-// list of places
+// list of places for passage.xml
 export function makePlaceIndex(
-  work: Passage["work"],
+  work: Passage["work"][number],
   lib: Passage["mss_occurrences"],
-  graph: Passage["transmission_graph"],
+  nodes: Passage["transmission_graph"]["graph"]["nodes"],
 ) {
-  if (!work.length && !lib.length) return "";
   const places = new Map();
   // library
   for (let libr of lib) places.set(libr.lib_place[0].jad_id, libr.lib_place[0]);
   // places in passage's own work author
-  const workPlace = work.flatMap((w) => w.author.flatMap((a) => a.place));
+  const workPlace = work.author.flatMap((a) => a.place);
   for (let pl of workPlace) places.set(pl.jad_id, pl);
 
   // places from related passages/works/authors
-  if (!graph) return "";
-  for (const author of getMentionedAuthors(graph)) {
+  if (!nodes) return "";
+  for (const author of getMentionedAuthors(nodes)) {
     for (const place of author.place) {
       places.set(place.jad_id, place);
     }
@@ -181,10 +197,48 @@ export function makePlaceIndex(
   return (xml += "</listPlace>");
 }
 
+// list of places for work.xml - only place from msDesc and author of the work
+export function makeWorkPlaceIndex(
+  mss: Passage["mss_occurrences"],
+  author: WorkFull["author"],
+  nodes: Passage["transmission_graph"]["graph"]["nodes"],
+) {
+  const places = new Map();
+  // library
+  for (let ms of mss)
+    for (let libr of ms.lib_place) places.set(libr.jad_id, libr);
+
+  // places from work's author
+  const workPlace = author.flatMap((a) => a.place);
+  for (let pl of workPlace) places.set(pl.jad_id, pl);
+
+  // places from related passages/works/authors
+  if (!nodes) return "";
+  for (const author of getMentionedAuthors(nodes)) {
+    for (const place of author.place) {
+      places.set(place.jad_id, place);
+    }
+  }
+
+  let xml = "<listPlace>\n";
+  for (const place of places.values()) {
+    xml += `<place xml:id="${place.jad_id}">
+    <placeName>${place.value}</placeName>
+    <location>
+      <geo>${place.lat} ${place.long}</geo>
+    </location>
+    ${place.geonames_url ? `<ptr target="${place.geonames_url}"/>` : ""}
+  </place>\n`;
+  }
+  return (xml += "</listPlace>");
+}
+
 // list of person
-export function makeListPerson(graph: Passage["transmission_graph"]) {
+export function makeListPerson(
+  nodes: Passage["transmission_graph"]["graph"]["nodes"],
+) {
   const people = new Map();
-  for (const author of getMentionedAuthors(graph)) {
+  for (const author of getMentionedAuthors(nodes)) {
     people.set(author.jad_id, author);
   }
 
