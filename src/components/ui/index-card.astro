@@ -14,16 +14,16 @@ const { title, summary, url, icon, image } = Astro.props;
 ---
 
 <article>
-	<!-- Mobile view -->
+	<!-- smaller screen -->
 	<div
-		class="md:hidden my-2 border-t-[5px] border-brand-800 bg-white shadow-md rounded-md rounded-t-none"
+		class="md:hidden my-2 border-t-[5px] border-brand-800 bg-white shadow-md rounded-md rounded-t-none h-full"
 	>
 		<!-- Image -->
 		<Image src={image} alt="" class="hidden sm:block h-46 w-full object-cover" />
 
 		<!-- Text content -->
-		<div class="grid gap-y-4 px-4 p-8 xs:px-8">
-			<h2 class="text-brand-800 text-2xl font-semibold capitalize">
+		<div class="flex flex-col gap-y-4 px-6 py-3">
+			<h2 class="text-brand-800 text-xl font-semibold capitalize">
 				<NavLink href={url} class="no-underline">
 					{title}
 				</NavLink>
@@ -33,7 +33,7 @@ const { title, summary, url, icon, image } = Astro.props;
 				{summary}
 			</p>
 
-			<NavLink href={url} class="no-underline py-2 px-4 bg-brand-800 text-white rounded-md w-fit">
+			<NavLink href={url} class="self-end no-underline py-2 px-4 bg-brand-800 text-white rounded-md w-fit ">
 				Read more
 			</NavLink>
 

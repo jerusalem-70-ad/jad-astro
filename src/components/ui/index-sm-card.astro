@@ -15,7 +15,7 @@ const { title, summary, url, icon, image } = Astro.props;
 
 <article>
 	<!-- Mobile view -->
-	<div
+	<!-- <div
 		class="md:hidden my-2 border-t-[5px] border-brand-800 bg-white shadow-md rounded-md rounded-t-none"
 	>		
 		<div class="grid gap-y-4 px-4 p-8 xs:px-8">
@@ -35,30 +35,19 @@ const { title, summary, url, icon, image } = Astro.props;
 
 			<slot />
 		</div>
-	</div>
+	</div> -->
 
 	<!-- Desktop view -->
-	<div class="hidden md:block">
+	<div >
 		<NavLink href={url} class="no-underline">
-			<article class="relative group overflow-hidden rounded-md shadow-md text-center">
-				<!-- Background image  -->
-				<div class="absolute inset-0">
-					<Image src={image} alt="" class="w-full h-full object-cover" />
-					<div class="absolute inset-0 bg-black opacity-25"></div>
-				</div>
-				<!-- Text content of the card -->
-				<div
-					class="z-10 h-full flex flex-col backdrop-blur-xs bg-black/40"
+			<div class="flex h-16 overflow-hidden rounded-md shadow-md text-center bg-brand-800/90 text-brand-50/80 p-2 transition-all duration-300 hover:bg-brand-900/95 justify-items-start gap-1"
 				>
-					<header class="p-4 text-brand-50/80">
-						<Icon class="inline-flex w-6 h-6" aria-hidden="true" name={icon} />
-						<h2 class="text-xl font-semibold">
-							<span class="no-underline">{title}</span>
-						</h2>
-					</header>
+				<Icon class="w-1/4 self-center inline-flex " aria-hidden="true" name={icon} />
+				<h2 class="w-3/4 self-center text-sm font-semibold">
+					<span class="no-underline">{title}</span>
+				</h2>
 					
-				</div>
-			</article>
+			</div>
 		</NavLink>
 	</div>
 </article>
