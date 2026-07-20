@@ -432,6 +432,14 @@ const worksPlus = works
   .filter((work) => work.title) // filter out works without title
   .map((work) => {
     let processedPassages = [];
+    const related_manuscripts = new Map();
+    for (const ms of work.manuscripts) {
+      related_manuscripts.set(ms.id, {
+        id: ms.id || "",
+        jad_id: `jad_manuscript__${ms.id}` || "",
+        name: ms.value || "",
+      });
+    }
     const related__passages = passages
       .filter((p) => p.work.some((w) => w.id === work.id))
       .map((p) => {
@@ -482,7 +490,6 @@ const worksPlus = works
       ...new Set(related__passages.map((p) => p.id)),
     ];
     // get realted mss from ms_occurrences by filtering occ where there is a passage from the work
-    const related_manuscripts = new Map();
     msOccurrences
       .filter((occ) =>
         occ.occurrence.some((passage) =>
@@ -498,6 +505,8 @@ const worksPlus = works
           });
         }
       });
+    // there are still some mss attached only to the work - baserow outdated field
+
     // convert map to array
     const related_mss = Array.from(related_manuscripts.values());
 

@@ -11,6 +11,8 @@ import {
 } from "./partials/makeIndex";
 import { makePassageList } from "./partials/makePassageList";
 import passagesJson from "@/content/data/passages.json";
+import { escapeSpecialCharacters } from "./partials/helpers";
+
 const passages = passagesJson as Passage[];
 
 export default function mainTei(w: WorkFull) {
@@ -22,9 +24,7 @@ export default function mainTei(w: WorkFull) {
     titleAuthor = `${author}: ${title}`;
   }
   const setIdPass = new Set(
-    w.related__passages.flatMap((position) =>
-      position.passages.map((p) => p.jad_id),
-    ),
+    w.related__passages.flatMap((p) => p.passages.map((p) => p.jad_id)),
   );
   // collect from related passages for the standOff indices:
   const relatedPassages = passages.filter((p) => setIdPass.has(p.jad_id));
@@ -32,6 +32,7 @@ export default function mainTei(w: WorkFull) {
     (p) => p.liturgical_references,
   );
   const biblicalRefs = relatedPassages.flatMap((p) => p.biblical_references);
+
   const allNodes = relatedPassages.flatMap(
     (p) => p.transmission_graph.graph.nodes,
   );
@@ -40,8 +41,9 @@ export default function mainTei(w: WorkFull) {
   let editionStmt = "";
   if (w.edition) editionStmt += `Edition of ${titleAuthor}: ${w.edition}. `;
   if (w.link_digital_editions)
-    editionStmt += `Link to online edition: <ptr target="${w.link_digital_editions}"/>.`;
-  if (w.other_editions) editionStmt += `Other editions: ${w.other_editions}.`;
+    editionStmt += `Link to online edition: <ptr target="${escapeSpecialCharacters(w.link_digital_editions)}"/>.`;
+  if (w.other_editions)
+    editionStmt += `Other editions: ${escapeSpecialCharacters(w.other_editions)}.`;
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
@@ -120,24 +122,33 @@ export default function mainTei(w: WorkFull) {
       </head>     
       <list type="passages">
       <head>Passages from this work:</head>
-      ${relatedPassages.map((p) => makePassageList(p)).join("")}
+      ${relatedPassages.length ? relatedPassages.map((p) => makePassageList(p)).join("") : "<item>N/A</item>"}
       </list>
      
    </body>
   </text>
+  ${
+    relatedPassages.length ||
+    liturgicalRefs.length ||
+    biblicalRefs.length ||
+    allNodes.length ||
+    clusters.length
+      ? `
   <standOff>
   ${makeWorkPlaceIndex(
     relatedPassages.flatMap((r) => r.mss_occurrences),
     w.author,
     relatedPassages.flatMap((r) => r.transmission_graph.graph.nodes),
   )}
-  ${makeListPerson(relatedPassages.flatMap((r) => r.transmission_graph.graph.nodes))}
+  ${relatedPassages.length ? makeListPerson(relatedPassages.flatMap((r) => r.transmission_graph.graph.nodes)) : ""}
   ${makeLiturgRefIndex(liturgicalRefs)}
   ${makeBiblRefIndex(biblicalRefs)}
   ${makeTextList(allNodes)}
   ${makeCluterIndex(clusters)}
   
-  </standOff>
+  </standOff>`
+      : ""
+  }
 </TEI>
     `;
 }

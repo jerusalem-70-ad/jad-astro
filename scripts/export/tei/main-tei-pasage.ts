@@ -34,12 +34,12 @@ export default function mainTei(p: Passage) {
     titleAuthor += ` (${position})`;
   }
   let editionStmt = p.occurrence_found_in.length
-    ? `Passage found in ${p.occurrence_found_in[0].value}. `
+    ? `Passage found in ${escapeSpecialCharacters(p.occurrence_found_in[0].value)}. `
     : "";
   if (p.text_taken_from.length)
-    editionStmt += `Text taken from ${p.text_taken_from[0].value}. `;
+    editionStmt += `Text taken from ${escapeSpecialCharacters(p.text_taken_from[0].value)}. `;
   if (p.edition_link)
-    editionStmt += `Link to online edition: <ptr target="${p.edition_link}"/>.`;
+    editionStmt += `Link to online edition: <ptr target="${escapeSpecialCharacters(p.edition_link)}"/>.`;
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
@@ -56,7 +56,6 @@ export default function mainTei(p: Passage) {
             </principal>
          <funder ref="https://d-nb.info/gnd/2054142-9">
             <name>FWF - Der Wissenschaftsfonds</name>
-         </funder>
          </funder>
          </titleStmt>
          <editionStmt>
@@ -90,9 +89,7 @@ export default function mainTei(p: Passage) {
             </availability>
          </publicationStmt>
          <sourceDesc>
-         ${p.mss_occurrences.length ? "<listWit>" : ""}         
         ${makeMsIndex(p.mss_occurrences)}
-         ${p.mss_occurrences.length ? "</listWit>" : ""}   
         ${makeBiblEdition(p.work)}
         </sourceDesc>
       </fileDesc>
@@ -124,7 +121,7 @@ export default function mainTei(p: Passage) {
       <div type="original_spelling">
          <div>
             <head>Short text:</head>
-            <p>${p.passage}</p>
+            <p>${escapeSpecialCharacters(p.passage)}</p>
          </div>
          <div>
             <head>Full text:</head>
@@ -133,7 +130,7 @@ export default function mainTei(p: Passage) {
       </div>
       
       <div type="normalized_spelling">
-      <p>${normalizeText(p.text_paragraph ?? "")}</p>
+      <p>${escapeSpecialCharacters(normalizeText(p.text_paragraph ?? ""))}</p>
       </div>
       <div type="metadata">
          ${listKeywords(p.keywords)}

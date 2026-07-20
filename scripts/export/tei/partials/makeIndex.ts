@@ -4,6 +4,7 @@ import manuscripts from "@/content/data/manuscripts.json";
 import authors from "@/content/data/authors.json";
 import works from "@/content/data/works.json";
 import { escapeSpecialCharacters, formatTeiYear } from "./helpers";
+import node from "astro/logger/node";
 
 export function makeIndex(work: Work) {
   const authors = work.author.map((a) => {
@@ -31,7 +32,7 @@ export function makeMsIndex(
         <p>Position of the passage:
             ${
               ms.facsimile_position
-                ? `<ref facs="${ms.facsimile_position}">${ms.position_in_ms}</ref>`
+                ? `<ref facs="${escapeSpecialCharacters(ms.facsimile_position)}">${ms.position_in_ms}</ref>`
                 : ms.position_in_ms
             }
         </p>
@@ -73,13 +74,13 @@ export function makeMsIndex(
 
 export function makeBiblEdition(work: Passage["work"]) {
   if (!work[0].edition) return "";
-  let xml = `<bibl>${work[0].edition} ${work[0].link_digital_editions && `<ptr target="${work[0].link_digital_editions}"/>`}</bibl>`;
+  let xml = `<bibl>${work[0].edition} ${work[0].link_digital_editions && `<ptr target="${escapeSpecialCharacters(work[0].link_digital_editions)}"/>`}</bibl>`;
   return xml;
 }
 
 export function makeWorkEdition(work: WorkFull) {
   if (!work.edition) return "";
-  let xml = `<bibl>${work.edition} ${work.link_digital_editions && `<ptr target="${work.link_digital_editions}"/>`}</bibl>`;
+  let xml = `<bibl>${work.edition} ${work.link_digital_editions && `<ptr target="${escapeSpecialCharacters(work.link_digital_editions)}"/>`}</bibl>`;
   return xml;
 }
 
@@ -96,7 +97,7 @@ export function makeBiblRefIndex(biblrefs: Passage["biblical_references"]) {
   for (let ref of refsMap.values())
     xml += `<bibl xml:id="${ref.jad_id}">
                   <title>${ref.value}</title>
-                  ${ref.nova_vulgata_url ? `<ptr target="${ref.nova_vulgata_url}"/>` : ""}
+                  ${ref.nova_vulgata_url ? `<ptr target="${escapeSpecialCharacters(ref.nova_vulgata_url)}"/>` : ""}
                   <quote>${ref.text}</quote>
                </bibl>`;
   return (xml += `</listBibl>`);
@@ -118,11 +119,22 @@ export function makeLiturgRefIndex(refs: Passage["liturgical_references"]) {
 }
 
 // collect related texts (sources and derivatives) for the passage
+// use the same function for work tei - so need a set of the passages to avoid duplicates
 
 export function makeTextList(
   nodes: Passage["transmission_graph"]["graph"]["nodes"],
 ) {
-  const texts = nodes.filter((n) => n.nodeType != "current");
+  const uniqueNodesMap = new Map<number, (typeof nodes)[number]>();
+  const currentNodes = new Set(
+    nodes.filter((n) => n.nodeType === "current").map((n) => n.id),
+  );
+  for (const node of nodes) {
+    if (!currentNodes.has(node.id)) {
+      uniqueNodesMap.set(node.id, node);
+    }
+  }
+  const uniqueNodes = [...uniqueNodesMap.values()];
+  const texts = uniqueNodes.filter((n) => n.nodeType != "current");
   if (!texts.length) return "";
   let xml = `<listBibl>
             <desc>Related passages - derivative and source.</desc>`;
@@ -184,6 +196,7 @@ export function makePlaceIndex(
       places.set(place.jad_id, place);
     }
   }
+  if (!places.size) return ""; //if no place return empty string
   let xml = "<listPlace>\n";
   for (const place of places.values()) {
     xml += `<place xml:id="${place.jad_id}">
@@ -219,7 +232,7 @@ export function makeWorkPlaceIndex(
       places.set(place.jad_id, place);
     }
   }
-
+  if (!places.size) return ""; //if no place return empty string
   let xml = "<listPlace>\n";
   for (const place of places.values()) {
     xml += `<place xml:id="${place.jad_id}">
