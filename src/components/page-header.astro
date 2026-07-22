@@ -160,51 +160,102 @@ import { Icon } from "astro-icon/components";
     </nav>
   </div>
   <div id="nav-links" class="hidden rounded-xs grid grid-cols-1 p-5">
-    <NavLink
-      class="py-1 px-3 hover:text-brand-200 text-brand-50"
-      href="/passages">Passages</NavLink
-    >    
-    <NavLink class="py-1 px-3 hover:text-brand-200 text-brand-50" href="/works"
-      >Works</NavLink
-    >
-    <NavLink
-      class="py-1 px-3 hover:text-brand-200 text-brand-50"
-      href="/manuscripts">Manuscripts</NavLink
-    >
-    <NavLink
-      class="py-1 px-3 hover:text-brand-200 text-brand-50"
-      href="/authors">Authors</NavLink
-    >
-     <NavLink
-      class="py-1 px-3 hover:text-brand-200 text-brand-50"
-      href="/biblical-refs">Biblical References</NavLink
-    >
-    <NavLink
-      class="py-1 px-3 hover:text-brand-200 text-brand-50"
-      href="/liturgical-refs">Liturgical References</NavLink
-    >
-    <NavLink
-      class="py-1 px-3 hover:text-brand-200 text-brand-50"
-      href="/keywords">Keywords</NavLink
-    >  
-    <NavLink
-      class="py-1 px-3 hover:text-brand-200 text-brand-50"
-      href="/clusters">Clusters</NavLink
-    >  
-    <NavLink
-      class="py-1 px-3 hover:text-brand-200 text-brand-50"
-      href="/ai-graph">AI text comparison</NavLink
-    >
-    <NavLink class="py-1 px-3 hover:text-brand-200 text-brand-50" href="/explore"
-    >Patterns</NavLink
-    >
-    <NavLink class="py-1 px-3 hover:text-brand-200 text-brand-50" href="/about"
-      >About</NavLink
-    >
-    <NavLink
-      class="py-1 px-3 hover:text-brand-200 text-brand-50"
-      href="/advanced-search" reload>Advanced Search</NavLink
-    >
+    <div class="space-y-1">
+      <ul class="space-y-2">
+        <header class="text-brand-300 font-semibold">Datasets</header>
+        <li>
+          <NavLink
+            class="px-3 text-brand-50"
+            href="/passages">Passages</NavLink
+          >
+        </li>    
+        <li>
+          <NavLink class="px-3 text-brand-50" href="/works"
+                >Works</NavLink
+              >
+        </li>
+        <li>
+          <NavLink
+            class="px-3 text-brand-50"
+            href="/manuscripts">Manuscripts</NavLink
+          >
+        </li>
+        <li>
+          <NavLink
+            class="px-3 text-brand-50"
+            href="/authors">Authors</NavLink
+          >
+        </li>
+        <li>
+          <NavLink
+            class="px-3 text-brand-50"
+            href="/biblical-refs">Biblical References</NavLink
+              >
+        </li>
+        <li>
+          <NavLink
+            class="px-3 text-brand-50"
+            href="/liturgical-refs">Liturgical References</NavLink
+          >
+        </li>
+        <li>
+          <NavLink
+            class="px-3 text-brand-50"
+            href="/keywords">Keywords</NavLink
+          >
+        </li>
+        <li>
+          <NavLink
+            class="px-3 text-brand-50"
+            href="/clusters">Clusters</NavLink
+          >
+        </li>
+      </ul>
+      <ul class="space-y-2">
+        <header class="text-brand-300 font-semibold">Tools</header>
+        <li>
+          <NavLink
+                class="px-3 text-brand-50"
+                href="/ai-graph">AI text comparison</NavLink
+              >
+        </li>
+    <li>
+      <NavLink class="px-3 text-brand-50" href="/explore"
+      >Patterns</NavLink
+      >
+    </li>
+    
+    <li>
+      <NavLink
+        class="px-3 text-brand-50"
+        href="/advanced-search" reload>Advanced Search</NavLink
+      >
+    </li>
+      </ul>
+      <ul class="space-y-2">
+        <header class="text-brand-300 font-semibold">About</header>
+        <li>
+           <NavLink class="px-3 text-brand-50" href="/about/project"
+              >Project</NavLink
+            >
+        </li>
+        <li>
+           <NavLink class="px-3 text-brand-50" href="/about/technical"
+              >Technical implementation</NavLink
+            >
+        </li>
+        <li>
+           <NavLink class="px-3 text-brand-50" href="/about/faqs"
+              >FAQs</NavLink
+            >
+        </li>
+    
+      </ul>
+    </div>
+    
+   
+   
+    
   </div>
 
   <script src="@/lib/menu.js"></script>
