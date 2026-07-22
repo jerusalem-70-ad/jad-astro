@@ -264,5 +264,17 @@ import { Icon } from "astro-icon/components";
     
   </div>
 
-  <script src="@/lib/menu.js"></script>
+  <script>
+ document.addEventListener("click", (event) => {
+	const target = event.target as HTMLElement;
+	const hamburger = target.closest("#hamburger");
+
+	if (!hamburger) return;
+
+	console.log("Hamburger clicked");
+
+	const navLinks = document.querySelector("#nav-links");
+	navLinks?.classList.toggle("hidden");
+});
+  </script>
 </header>
