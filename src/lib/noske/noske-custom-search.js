@@ -10,7 +10,7 @@ class CustomNoskeSearch {
   constructor(config) {
     this.baseUrl = config.baseUrl;
     this.corpname = config.corpname;
-    this.attrs = "word,lemma,pos,landingPageURI,orth,norm";
+    this.attrs = config.attrs || "word,lemma,pos,landingPageURI,orth,norm";
     this.refs = config.refs || "doc#";
     this.structs = config.structs || "doc,p";
     this.viewmode = config.viewmode || "sen";
@@ -107,8 +107,8 @@ class CustomNoskeSearch {
     const url = `${
       this.baseUrl
     }/bonito/run.cgi/concordance?${params.toString()}`;
-    console.log("=== SEARCH REQUEST ===");
-    console.log("URL:", url);
+    //console.log("=== SEARCH REQUEST ===");
+    // console.log("URL:", url);
 
     const response = await fetch(url);
     if (!response.ok) {
@@ -122,12 +122,12 @@ class CustomNoskeSearch {
       throw new Error("Invalid JSON received from NoSketch Engine");
     }
 
-    console.log("=== SEARCH RESPONSE ===");
-    console.log("Full response:", data);
+    //console.log("=== SEARCH RESPONSE ===");
+    //console.log("Full response:", data);
 
     if (data.Lines && data.Lines.length > 0) {
-      console.log("=== FIRST HIT ===");
-      console.log("Landing Page URI:", data.Lines[0].Kwic[0].attr);
+      //console.log("=== FIRST HIT ===");
+      //console.log("Landing Page URI:", data.Lines[0].Kwic[0].attr);
     }
 
     return data;
@@ -162,10 +162,14 @@ class CustomNoskeSearch {
       const leftText = this.buildText(line.Left);
       const kwicText = this.buildText(line.Kwic);
       const rightText = this.buildText(line.Right);
-
+      //console.log(line.Refs);
       // Extract jad_id from landingPageURI
+      const chapterUri = line.Refs.find((ref) =>
+        ref.startsWith("chapter.uri="),
+      );
+
       const jad_id =
-        line.Kwic[0].attr.split("passages/")[1].split(".html")[0] || "#";
+        chapterUri?.split("passages/")[1]?.replace(".html", "") ?? "#";
       results.push({ jad_id, leftText, kwicText, rightText });
       uniqueJadIds.add(jad_id);
       html += `

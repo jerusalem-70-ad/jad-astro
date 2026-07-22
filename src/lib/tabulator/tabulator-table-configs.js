@@ -100,6 +100,7 @@ export const passagesTableConfig = {
       },
       {
         title: "Date TPQ",
+        headerTooltip: "terminus post quem",
         resizable: true,
         field: "tpq",
         responsive: 3,
@@ -108,6 +109,7 @@ export const passagesTableConfig = {
       },
       {
         title: "Date TAQ",
+        headerTooltip: "Terminus ante quem",
         resizable: true,
         field: "taq",
         responsive: 3,
@@ -186,6 +188,7 @@ export const authorsTableConfig = {
       },
       {
         title: "Date TPQ",
+        headerTooltip: "terminus post quem",
         resizable: true,
         field: "tpq",
         responsive: 3,
@@ -194,6 +197,7 @@ export const authorsTableConfig = {
       },
       {
         title: "Date TAQ",
+        headerTooltip: "terminus ante quem",
         resizable: true,
         field: "taq",
         responsive: 3,
@@ -276,6 +280,7 @@ export const worksTableConfig = {
 
       {
         title: "Date TPQ",
+        headerTooltip: "terminus post quem",
         resizable: true,
         field: "tpq",
         responsive: 3,
@@ -284,6 +289,7 @@ export const worksTableConfig = {
       },
       {
         title: "Date TAQ",
+        headerTooltip: "terminus ante quem",
         resizable: true,
         field: "taq",
         responsive: 3,
@@ -389,6 +395,7 @@ export const manuscriptsTableConfig = {
       },
       {
         title: "Date TPQ",
+        headerTooltip: "terminus post quem",
         resizable: true,
         field: "tpq",
         responsive: 3,
@@ -397,6 +404,7 @@ export const manuscriptsTableConfig = {
       },
       {
         title: "Date TAQ",
+        headerTooltip: "terminus ante quem",
         resizable: true,
         field: "taq",
         responsive: 3,
