@@ -270,9 +270,7 @@ import { Icon } from "astro-icon/components";
 	const hamburger = target.closest("#hamburger");
 
 	if (!hamburger) return;
-
-	console.log("Hamburger clicked");
-
+	
 	const navLinks = document.querySelector("#nav-links");
 	navLinks?.classList.toggle("hidden");
 });
