@@ -117,9 +117,9 @@ export function filterTPQ(headerValue, rowValue) {
   const dateValue = parseInt(rowValue, 10);
 
   if (isNaN(filterValue)) return true;
-  if (isNaN(dateValue)) return false;
+  //if (isNaN(dateValue)) return false; // to allow for ? as date to be filtered
 
-  return dateValue >= filterValue;
+  return dateValue >= filterValue || rowValue == "?";
 }
 
 export function filterTAQ(headerValue, rowValue) {
@@ -129,9 +129,9 @@ export function filterTAQ(headerValue, rowValue) {
   const dateValue = parseInt(rowValue, 10);
 
   if (isNaN(filterValue)) return true;
-  if (isNaN(dateValue)) return false;
+  //if (isNaN(dateValue)) return false; // to allow for ? as date to be filtered
 
-  return dateValue <= filterValue;
+  return dateValue <= filterValue || rowValue == "?";
 }
 
 /* // To get the century of not_before not_after dates
