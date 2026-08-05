@@ -134,6 +134,7 @@ const edition_html = edition.replace(/\*(.*?)\*/g, "<em>$1</em>")
                             <li class="mb-2">
                                 <NavLink href={`/data/passages/${passage.jad_id}`}>
                                     #{passage.jad_id.substring(16)}
+                                    {" "}
                                     <span class="italic">
                                         {passage.passage}
                                     </span>
@@ -143,6 +144,7 @@ const edition_html = edition.replace(/\*(.*?)\*/g, "<em>$1</em>")
                                         </span>
                                     )}
                                 </NavLink>
+                                <span> </span>
                                 <span class="text-xs">
                                     Source:
                                     {passage.occurrence_found_in.length > 0 ? ` ${passage.occurrence_found_in}` : " N/A"}

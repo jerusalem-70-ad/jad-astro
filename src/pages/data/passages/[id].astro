@@ -124,10 +124,10 @@ const steps = [1, 2, 3];
           >
             Manuscripts:
           </dt>
-          <dd class="pl-5 p-2">
+          <dd class="pl-5 p-2 grid gap-1 justify-items-start">
             {passage.mss_occurrences &&
               passage.mss_occurrences?.length > 0 ? (
-                <ul id="mssList">
+                <ul id="mssList" class="space-y-1">
                   {passage.mss_occurrences
                   .sort((a, b) =>
                     a.manuscript
@@ -144,6 +144,7 @@ const steps = [1, 2, 3];
                       <NavLink href={`/data/manuscripts/${ms.jad_id}`}>
                         {ms.manuscript}
                         </NavLink>
+                        {" "}
                       {/* add exact position preprocessed from json ms_occurences */}
                       {ms.position_in_ms &&        
                             <span>
@@ -188,7 +189,7 @@ const steps = [1, 2, 3];
             }
              {passage.mss_occurrences.length > 4 && (
     <button  
-  data-target="mssList" class="toggleVisible text-brand-800 underline mt-2 cursor-pointer">
+  data-target="mssList" class="toggleVisible py-0.5 px-2 font-semibold bg-brand-400 hover:bg-brand-700 text-brand-50 border border-brand-600 rounded-md cursor-pointer">
       Show more
     </button>
   )}
@@ -285,7 +286,7 @@ const steps = [1, 2, 3];
             >
               Sources:
             </dt>
-            <dd class="pl-5 p-2  bg-brand-50">
+            <dd class="pl-5 p-2  bg-brand-50 grid gap-1 justify-items-start">
               
                 {
                   passage.source_passage.length > 0 ? (<ul class="list-disc list-inside" id="listSources">
@@ -333,7 +334,7 @@ const steps = [1, 2, 3];
                 }
                  {passage.source_passage.length > 4 && (
     <button
-  data-target="listSources" class="toggleVisible text-brand-800 underline mt-2 cursor-pointer">
+  data-target="listSources" class="toggleVisible py-0.5 px-2 font-semibold bg-brand-400 hover:bg-brand-700 text-brand-50 border border-brand-600 rounded-md cursor-pointer">
       Show more
     </button>
   )}
@@ -341,7 +342,7 @@ const steps = [1, 2, 3];
             <dt class="font-semibold text-brand-800 border-r border-neutral-300 p-2">
   Used by:
 </dt>
-<dd class="pl-5 p-2">
+<dd class="pl-5 p-2 grid gap-1 justify-items-start">
   {
     usedBy.length > 0 ? (
       <ul class="list-disc list-inside" id="usedByList">
@@ -390,40 +391,40 @@ const steps = [1, 2, 3];
       "N/A"
     )
   }
-<div class="flex mt-2 justify-between">
+<div class="flex w-full justify-between">
   <!-- button for showing extra items -->
     {usedBy.length > 4 && (
    <button
-  data-target="usedByList" class="toggleVisible text-brand-800 underline mt-2 cursor-pointer">
+  data-target="usedByList" class="toggleVisible py-0.5 px-2 font-semibold bg-brand-400 hover:bg-brand-700 text-brand-50 border border-brand-600 rounded-md cursor-pointer">
         Show more
       </button>
     )}
   
-    <!-- button for comparison tool -->
-      {passage.source_passage.length > 0 || usedBy.length > 0 
-      ? (
-      <NavLink href={`/tools/text-comparisons/${passage.jad_id}`} class="py-2 px-5 bg-brand-400 hover:bg-brand-700 text-brand-50 border border-brand-600 rounded-md cursor-pointer">
-        Compare texts
-      </NavLink>)
-      : ""}
+  
 </div>
 </dd>
               {passage.source_passage.length > 0 || usedBy.length > 0 ? (
             <dt
-            class="hidden sm:block font-semibold text-brand-800 border-r border-neutral-300 p-2"
+            class="hidden sm:block font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
           >
             Transmission:
           </dt>
-          <dd class="hidden sm:block pl-5 p-2">
+          <dd class="hidden sm:block pl-5 p-2 bg-brand-50">
             {passage.transmission_graph && (
-              <details>
-              <summary class="cursor-pointer p-2  bg-brand-800/90 hover:bg-brand-700 text-brand-50 w-60 rounded-md">Transmission graph</summary>
-              <div>               
-                  <ChronologicalTree
-        transmissionGraph={passage.transmission_graph}/>
-              </div></details>
+              <div class="grid gap-2">
+                <details>
+                <summary class="cursor-pointer p-2 font-semibold  bg-brand-800/90 hover:bg-brand-700 text-brand-50 w-60 rounded-md">Transmission graph</summary>
+                <div>
+                    <ChronologicalTree
+                        transmissionGraph={passage.transmission_graph}/>
+                </div></details>
+                 <NavLink href={`/tools/text-comparisons/${passage.jad_id}`} class="p-2 font-semibold bg-brand-400 hover:bg-brand-700 text-brand-50 border border-brand-600 rounded-md cursor-pointer justify-self-start">
+                  Compare texts
+                </NavLink>
+              </div>
               ) 
             }
+      
           </dd>
           )
           : ''}
@@ -460,7 +461,7 @@ const steps = [1, 2, 3];
             Keywords:
           </dt>
          <dd class="pl-5 p-2">
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-2">
+          <div class="grid grid-cols-2 2xl:grid-cols-4 gap-2">
             <div class="border border-neutral-300 rounded-md px-2 py-1">
               <span id="elements-roman-conquest-heading" class="text-sm font-medium text-brand-800">Elements Roman conquest</span>
               <ul aria-labelledby="elements-roman-conquest-heading" class="mt-1 flex flex-wrap gap-1">
@@ -632,24 +633,28 @@ const steps = [1, 2, 3];
 </PageLayout>
 
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll<HTMLElement>(".toggleVisible").forEach(button => {
-    button.addEventListener("click", () => {
-      const targetId = button.dataset.target;
-      const extraItems = document.querySelectorAll(
-        `#${targetId} .extra-item`
-      );
+document.addEventListener("click", (event) => {
+  const target = event.target;
+  if (!(target instanceof HTMLElement)) return;
 
-      if (!extraItems.length) return;
+  const button = target.closest(".toggleVisible");
+  if (!(button instanceof HTMLButtonElement)) return;
 
-      const isHidden = extraItems[0].classList.contains("hidden");
+  const targetId = button.dataset.target;
+  if (!targetId) return;
 
-      extraItems.forEach(item => {
-        item.classList.toggle("hidden");
-      });
+  const extraItems = document.querySelectorAll(
+    `#${targetId} .extra-item`
+  );
 
-      button.textContent = isHidden ? "Show less" : "Show more";
-    });
+  if (!extraItems.length) return;
+
+  const isHidden = extraItems[0].classList.contains("hidden");
+
+  extraItems.forEach(item => {
+    item.classList.toggle("hidden");
   });
+
+  button.textContent = isHidden ? "Show less" : "Show more";
 });
 </script>
