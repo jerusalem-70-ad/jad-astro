@@ -304,9 +304,24 @@ const passagesPlus = passages
     ) {
       passage.biblical_references.forEach((ref) => {
         let bookAbbrev, chapterVerse;
-        const specialCases = ["Joel", "Acts", "Job", "Osee", "Amos", "Ruth"];
-        if (specialCases.includes(ref.value.split(/[\s.,]/)[0])) {
-          bookAbbrev = ref.value.split(/[\s.,]/)[0];
+        const specialCases = [
+          "1 John",
+          "2 John",
+          "3 John",
+          "Joel",
+          "Acts",
+          "Job",
+          "Osee",
+          "Amos",
+          "Ruth",
+          "John",
+        ];
+        const specialCase = specialCases.find((book) =>
+          ref.value.startsWith(book),
+        );
+
+        if (specialCase) {
+          bookAbbrev = specialCase;
           chapterVerse = ref.value.substring(bookAbbrev.length).trim();
         } else {
           [bookAbbrev, chapterVerse] = ref.value.split(".");
