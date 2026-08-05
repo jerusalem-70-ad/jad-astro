@@ -72,8 +72,8 @@ importers:
         specifier: ^8.18.0
         version: 8.18.0
       instantsearch.js:
-        specifier: ^4.102.0
-        version: 4.102.0(algoliasearch@5.55.0)
+        specifier: ^4.106.0
+        version: 4.106.0(algoliasearch@5.55.0)
       jsonpath-plus:
         specifier: ^10.3.0
         version: 10.4.0
@@ -1598,8 +1598,8 @@ packages:
   ajv@8.20.0:
     resolution: {integrity: sha512-Thbli+OlOj+iMPYFBVBfJ3OmCAnaSyNn4M1vz9T6Gka5Jt9ba/HIR56joy65tY6kx/FCF5VXNB819Y7/GUrBGA==}
 
-  algoliasearch-helper@3.29.1:
-    resolution: {integrity: sha512-6ck2YFudF2Pje7szQoPBiRFTGfd+1I+0I/WfLPGn0bj1kvrFoOQmNyedNiDxTk3/r4IfSLDYk+RA4G7u8H6+yA==}
+  algoliasearch-helper@3.29.2:
+    resolution: {integrity: sha512-SaV+rZM3drExb0punEYYjT+sNcH74YFwN8ocjya7IDOyQvKWeQpEaSMVG3+IGTVos+feuatj7ljQ4BXlXdUp3w==}
     peerDependencies:
       algoliasearch: '>= 3.1 < 6'
 
@@ -2381,14 +2381,14 @@ packages:
     peerDependencies:
       postcss: ^8.1.0
 
-  instantsearch-ui-components@0.31.0:
-    resolution: {integrity: sha512-mdbxlzsCQKs4IygXEibO29LrA8uFtToBKQyHUHeQiHvPWOdZWxhBZ1ZE1C6GjmKnOBZWDnVAn/rwhNKTYhCFKw==}
+  instantsearch-ui-components@0.33.1:
+    resolution: {integrity: sha512-ZN25FlLwXx0UChsQtEwDuPQDTQXx3ztC2+Js0d/ztCgn/045WY1lrpccOoXccZFvo3rsW2ug4T1MdN+7g1TYeQ==}
 
   instantsearch.css@8.18.0:
     resolution: {integrity: sha512-7/WWu9fpPzQi5Z7Z//Lf9V4gmFU3TazneJkm7fJSApICOjLHhc3C65O84CilV+rkNIIaGuc9Kn5G1fHo3A08jQ==}
 
-  instantsearch.js@4.102.0:
-    resolution: {integrity: sha512-Ury18PgLVyQ7NFlWLJI/DvPGaM+tMW+AntjsEADA/2ZJ1MS+iX/END2ojLcHSWfp2oeHWAs6fG8x/hbcgm2g5Q==}
+  instantsearch.js@4.106.0:
+    resolution: {integrity: sha512-KdfEz3NP2DGLxgkTyfhiRw5tH8QWIIokgHXkfYEiuEgY3Je6l9/hOF9AlM203BBvqOF7lCiX9zwEIHj27KO3Rw==}
     peerDependencies:
       algoliasearch: '>= 3.1 < 6'
 
@@ -5029,7 +5029,7 @@ snapshots:
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
-  algoliasearch-helper@3.29.1(algoliasearch@5.55.0):
+  algoliasearch-helper@3.29.2(algoliasearch@5.55.0):
     dependencies:
       '@algolia/events': 4.0.1
       algoliasearch: 5.55.0
@@ -5959,7 +5959,7 @@ snapshots:
     dependencies:
       postcss: 8.5.15
 
-  instantsearch-ui-components@0.31.0(react@19.2.7):
+  instantsearch-ui-components@0.33.1(react@19.2.7):
     dependencies:
       '@swc/helpers': 0.5.18
       markdown-to-jsx: 7.7.17(react@19.2.7)
@@ -5970,7 +5970,7 @@ snapshots:
     dependencies:
       tweakpane: 4.0.5
 
-  instantsearch.js@4.102.0(algoliasearch@5.55.0):
+  instantsearch.js@4.106.0(algoliasearch@5.55.0):
     dependencies:
       '@algolia/events': 4.0.1
       '@swc/helpers': 0.5.18
@@ -5979,10 +5979,10 @@ snapshots:
       '@types/hogan.js': 3.0.5
       '@types/qs': 6.15.1
       algoliasearch: 5.55.0
-      algoliasearch-helper: 3.29.1(algoliasearch@5.55.0)
+      algoliasearch-helper: 3.29.2(algoliasearch@5.55.0)
       hogan.js: 3.0.2
       htm: 3.1.1
-      instantsearch-ui-components: 0.31.0(react@19.2.7)
+      instantsearch-ui-components: 0.33.1(react@19.2.7)
       preact: 10.29.2
       qs: 6.15.2
       react: 19.2.7
