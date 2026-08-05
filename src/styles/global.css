@@ -295,3 +295,11 @@ dialog::backdrop {
     transform: rotate(360deg);
   }
 }
+
+/* for the chronologicalGraph to make the years on the y axis more visible*/
+.tick text {
+  paint-order: stroke;
+  stroke: white;
+  stroke-width: 6px;
+  stroke-linejoin: round;
+}

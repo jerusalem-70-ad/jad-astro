@@ -222,9 +222,7 @@ const height = width;
     .domain([50, 1600])
     .range([height - 5, 0]);
 
-  const yAxis = d3.axisRight(yScale)
-    .ticks(10)
-    .tickFormat(d3.format("d"));
+  
 
   // --------------------
   // initialize layout
@@ -255,7 +253,8 @@ const height = width;
     svg,
     nodes: prepared.nodes,
     links: graphData.links,
-    yAxis,
+    width,
+    yScale,
     rScale,
     nodeColor: "#6f2009"
   });
@@ -272,11 +271,13 @@ const height = width;
     const newY =
       event.transform.rescaleY(yScale);
 
-    graph.yAxisGroup.call(
-      d3.axisRight(newY)
-        .ticks(10)
-        .tickFormat(d3.format("d"))
-    );
+    graph.leftAxisGroup.call(
+  d3.axisRight(newY)
+);
+
+graph.rightAxisGroup.call(
+  d3.axisLeft(newY)
+);
   });
 
 svg.call(zoom as any);
@@ -381,7 +382,7 @@ let downTime = 0;
       nodes: prepared.nodes,
       links: graphData.links,
       nodeById: prepared.nodeById,
-      yAxis
+      
     });
      updateTooltipPosition();
   });

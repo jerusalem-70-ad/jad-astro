@@ -43,15 +43,17 @@ export function renderGraph({
   svg,
   nodes,
   links,
-  yAxis,
+  width,
   rScale,
+  yScale,
   nodeColor,
 }: {
   svg: d3.Selection<SVGSVGElement, unknown, null, undefined>;
   nodes: LayoutNode[];
   links: Graph["links"];
-  yAxis: d3.Axis<number>;
+  width: number;
   rScale: ScalePower<number, number>;
+  yScale: d3.ScaleLinear<number, number>;
   nodeColor: string;
 }) {
   const canvas = svg
@@ -97,26 +99,26 @@ export function renderGraph({
     .attr("stroke-width", 3)
     .attr("stroke-linejoin", "round");
 
-  const yAxisGroup = svg
-    .append("g")
-    .attr("transform", "translate(10,0)")
-    .call(yAxis)
-    .style("font-size", "12px")
-    .style("font-weight", "bold");
+  const leftAxisGroup = svg.append("g").attr("transform", "translate(10,0)");
 
-  yAxisGroup
-    .selectAll(".tick text")
-    .clone(true)
-    .lower()
-    .attr("stroke", "white")
-    .attr("stroke-width", 8);
+  const rightAxisGroup = svg
+    .append("g")
+    .attr("transform", `translate(${width - 10},0)`);
+
+  const leftAxis = d3.axisRight(yScale).ticks(10).tickFormat(d3.format("d"));
+
+  const rightAxis = d3.axisLeft(yScale).ticks(10).tickFormat(d3.format("d"));
+
+  leftAxisGroup.call(leftAxis);
+  rightAxisGroup.call(rightAxis);
 
   return {
     canvas,
     nodeSelection,
     linkSelection,
     labelSelection,
-    yAxisGroup,
+    rightAxisGroup,
+    leftAxisGroup,
   };
 }
 
@@ -124,11 +126,7 @@ export function updateGraph({
   nodeSelection,
   linkSelection,
   labelSelection,
-  yAxisGroup,
-  nodes,
-  links,
   nodeById,
-  yAxis,
 }: UpdateGraphArgs) {
   nodeSelection.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
 
