@@ -158,6 +158,4 @@ export function updateGraph({
   });
 
   labelSelection.attr("x", (d) => d.x + 5).attr("y", (d) => d.y - 5);
-
-  yAxisGroup.call(yAxis);
 }

@@ -266,10 +266,9 @@ const height = width;
   .on("zoom", (event) => {
 
     graph.canvas.attr(
-      "transform",
-      event.transform
-    );
-
+    "transform",
+    `translate(40,0) ${event.transform}`
+);
     const newY =
       event.transform.rescaleY(yScale);
 
