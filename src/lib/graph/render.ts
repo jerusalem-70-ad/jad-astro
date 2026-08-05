@@ -109,8 +109,14 @@ export function renderGraph({
 
   const rightAxis = d3.axisLeft(yScale).ticks(10).tickFormat(d3.format("d"));
 
-  leftAxisGroup.call(leftAxis);
-  rightAxisGroup.call(rightAxis);
+  leftAxisGroup
+    .call(leftAxis)
+    .style("font-size", "10px")
+    .style("font-weight", "bold");
+  rightAxisGroup
+    .call(rightAxis)
+    .style("font-size", "10px")
+    .style("font-weight", "bold");
 
   return {
     canvas,

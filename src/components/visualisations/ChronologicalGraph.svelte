@@ -272,11 +272,11 @@ const height = width;
       event.transform.rescaleY(yScale);
 
     graph.leftAxisGroup.call(
-  d3.axisRight(newY)
+  d3.axisRight(newY).ticks(10).tickFormat(d3.format("d"))
 );
 
 graph.rightAxisGroup.call(
-  d3.axisLeft(newY)
+  d3.axisLeft(newY).ticks(10).tickFormat(d3.format("d"))
 );
   });
 
