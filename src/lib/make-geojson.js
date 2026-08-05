@@ -73,7 +73,7 @@ export function processPassagesMap(authorsData, manuscriptsData) {
     ...f,
     properties: {
       ...f.properties,
-      ms_jad_id: f.properties.jad_id, // Add explicit manuscript ID field
+      ms_jad_id: f.properties.jad_id, // Add explicit manuscript ID field for tabulator filtering
       type: "library", // Ensure type is set
     },
   }));
@@ -146,6 +146,7 @@ export function processMss(input) {
                   type: "library",
                   url: `/data/manuscripts/${ms.jad_id}`,
                   jad_id: ms.jad_id, // to match the table filtering
+                  ms_jad_id: ms.jad_id,
                   place_id: pl.id,
                 },
               })) || [],

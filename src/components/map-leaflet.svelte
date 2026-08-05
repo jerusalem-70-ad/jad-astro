@@ -8,7 +8,7 @@
 
   import { withBasePath } from "@/lib/withBasePath";
 
-  import pinGreen from "@/icons/map-pin-green.svg"
+  import pinGreen from "@/icons/map-pin-green.png"
   import pinRed from "@/icons/map-pin-red.svg"
   import pin from "@/icons/map-pin.png"
 
