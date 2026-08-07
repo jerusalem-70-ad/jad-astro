@@ -25,7 +25,6 @@
   let libraryLayer;
   let cleanupResize;
   	
- 
 
   const authorIcon = L.icon({
     iconUrl: pinRed.src,
@@ -48,7 +47,6 @@
     popupAnchor: [0, -41],
   });
 
-  L.Marker.prototype.options.icon = defaultIcon;
 
   /* ---------- marker updates ---------- */
   function updateMapMarkers(dataToShow) {
