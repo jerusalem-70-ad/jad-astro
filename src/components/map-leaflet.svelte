@@ -26,6 +26,7 @@
   let cleanupResize;
   	
 
+
   const authorIcon = L.icon({
     iconUrl: pinRed.src,
     iconSize: [25, 25],
@@ -50,6 +51,15 @@
 
   /* ---------- marker updates ---------- */
   function updateMapMarkers(dataToShow) {
+     console.trace("updateMapMarkers");
+
+  console.log(
+    dataToShow.features.map(f => ({
+      type: f.properties?.type,
+      id: f.properties?.aut_jad_id ?? f.properties?.ms_jad_id,
+    }))
+  );
+   
     if (!map || !dataToShow?.features) return;
 
     authorLayer.clearLayers();
@@ -63,7 +73,7 @@
         !isNaN(geometry.coordinates[0]) &&
         !isNaN(geometry.coordinates[1])
       ) {
-        const type = properties?.type || "author";
+        const type = properties?.type ;
 
         const marker = L.marker(
           [geometry.coordinates[1], geometry.coordinates[0]],

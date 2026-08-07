@@ -28,8 +28,7 @@ export const passagesTableConfig = {
         aut_name: `${passage.work[0].author.map((a) => (a.occupation ? `${a.name}, ${a.occupation}` : a.name)).join(", ")} ${passage.work[0].author_certainty === false ? "(?)" : ""}`,
         alt_name: passage.work[0]?.author[0]?.alt_name || "",
         aut_jad_id: passage.work[0]?.author[0]?.jad_id,
-        ms_jad_ids:
-          passage.mss_occurrences?.map((occ) => occ.manuscript_jad_id) || [],
+        ms_jad_ids: passage.mss_occurrences?.map((occ) => occ.jad_id) || [],
         work: passage.work[0]?.title || "",
         work_position: work_position || "",
         mss_occurrences: passage.mss_occurrences

@@ -231,7 +231,6 @@ export let rowClickConfig = null;
   function performInitialUpdates() {
     setTimeout(() => {
       const initialData = tabulator.getData();
-
       if (updateMapOnFilter && window.updateMapWithFilteredIds) {
         let ids = [];
 
@@ -239,6 +238,7 @@ export let rowClickConfig = null;
           const a = initialData.map((r) => r.aut_jad_id).filter(Boolean);
           const m = initialData.flatMap((r) => r.ms_jad_ids || []).filter(Boolean);
           ids = [...new Set([...a, ...m])];
+         
         } else {
           ids = initialData.map((r) => r[mapIdField]).filter(Boolean);
         }
