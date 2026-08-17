@@ -110,7 +110,7 @@ async function main() {
       );
     }
   });
-  console.log("✅ TEI-XML generation for passages completed.");
+  console.log(" TEI-XML generation for passages completed.");
   console.log("\n═══════════════════════════════════════");
 
   // create xml files for works with well-formedness validation and enrichment for archival purposes
@@ -119,7 +119,7 @@ async function main() {
   );
 
   // Create lookup maps
-  console.log("🔗 Creating lookup maps...");
+  console.log(" Creating lookup maps...");
   const passagesByWorkId = new Map();
   passages.forEach((passage) => {
     if (!passage.work || passage.work.length === 0) return;
@@ -143,9 +143,7 @@ async function main() {
   // Eta views path
   const eta = new Eta({ views: join(process.cwd(), "tei-templates") });
 
-  console.log(
-    `🏭 Generating and validating TEI for ${works.length} works...\n`,
-  );
+  console.log(` Generating and validating TEI for ${works.length} works...\n`);
 
   // Performance tracking
   const startTime = Date.now();
@@ -183,7 +181,7 @@ async function main() {
 
       if (!wellFormedness.success) {
         console.log(
-          `❌ [${index + 1}/${works.length}] ${filename} - Validation failed:`,
+          ` [${index + 1}/${works.length}] ${filename} - Validation failed:`,
         );
         wellFormedness.errors.forEach((error) => {
           console.log(`   ${error}`);
@@ -201,7 +199,7 @@ async function main() {
       successCount++;
     } catch (error) {
       console.log(
-        `💥 [${index + 1}/${works.length}] Error processing work:`,
+        `[${index + 1}/${works.length}] Error processing work:`,
         error.message,
       );
       wellFormednessErrors++;
@@ -218,24 +216,17 @@ async function main() {
 
   // Summary
   console.log("\n═══════════════════════════════════════");
-  console.log("🏁 GENERATION & VALIDATION SUMMARY");
+  console.log(" GENERATION & VALIDATION SUMMARY");
   console.log("═══════════════════════════════════════");
-  console.log(`📊 Total works: ${works.length}`);
-  console.log(`✅ Successfully generated: ${successCount}`);
-  console.log(`❌ Well-formedness errors: ${wellFormednessErrors}`);
-  console.log(`🔧 Validation method: fast well-formedness only`);
-  console.log(`⏱️  Total time: ${(totalTime / 1000).toFixed(1)}s`);
-  console.log(`⏱️  Validation time: ${(validationTime / 1000).toFixed(1)}s`);
-  console.log(
-    `⏱️  Average per file: ${(
-      validationTime /
-      Math.max(successCount, 1) /
-      1000
-    ).toFixed(3)}s`,
-  );
+  console.log(`Total works: ${works.length}`);
+  console.log(` Successfully generated: ${successCount}`);
+  console.log(` Well-formedness errors: ${wellFormednessErrors}`);
+  console.log(`Validation method: fast well-formedness only`);
+  console.log(`Total time: ${(totalTime / 1000).toFixed(1)}s`);
+  console.log(`Validation time: ${(validationTime / 1000).toFixed(1)}s`);
 
   if (validationResults.length > 0) {
-    console.log("\n📋 Files with issues:");
+    console.log("\n Files with issues:");
     validationResults.forEach((result) => {
       console.log(`   • ${result.filename} (${result.type})`);
     });
@@ -243,17 +234,15 @@ async function main() {
 
   // Exit codes for CI
   if (wellFormednessErrors > 0) {
-    console.log("\n💥 Well-formedness errors found - failing build");
+    console.log("\n Well-formedness errors found - failing build");
     process.exit(1);
   } else {
-    console.log(
-      "\n🎉 All TEI files generated successfully and are well-formed!",
-    );
+    console.log("\n All TEI files generated successfully and are well-formed!");
   }
 }
 
 // Run the main function
 main().catch((error) => {
-  console.error("💥 Fatal error:", error.message);
+  console.error(" Fatal error:", error.message);
   process.exit(1);
 });

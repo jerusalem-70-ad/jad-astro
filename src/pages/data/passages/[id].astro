@@ -69,6 +69,19 @@ const steps = [1, 2, 3];
       mainTitle=`Passage #${passage.id}: ${passage.passage} `
     >
     <div class="grid gap-4">
+      <div class="flex gap-3 justify-end">
+          <NavLink href=`/download/tei/passages/${passage.jad_id}.xml` class="button-custom justify-self-end">TEI-XML</NavLink>
+          <NavLink href=`/download/json/passages/${passage.jad_id}.json` class="button-custom justify-self-end">JSON</NavLink>
+          {passage.bibliography && (
+            <span class="relative group bg-brand-400 text-brand-100 text-sm font-medium m-1 
+            py-1 px-2 border border-brand-900 rounded-sm justify-self-end">
+            Bibliography
+                <span class="pointer-events-none hidden absolute left-0 top-full z-30 mt-2 w-max max-w-[320px] rounded border border-brand-700 bg-brand-50 p-2 text-sm italic text-brand-900 shadow-lg sm:group-hover:block">
+                  {passage.bibliography ? passage.bibliography : ""}
+                </span>
+            </span>
+          )}
+        </div>  
       <dl
         class="grid grid-cols-[1fr_5fr] text-sm md:text-base md:leading-5 border border-neutral-300"
       >
@@ -569,27 +582,27 @@ const steps = [1, 2, 3];
               passage.occurrence_found_in?.length > 0 && passage.occurrence_found_in[0]?.value != 'Secondary literature'
                 ? passage.occurrence_found_in.map((find) => find.value).join(", ")
                 : ""
-            }
+            }{" "}
             {passage.note && (<span set:html={addItalics(passage.note)}></span>)}
             
           </dd>
            <dt
-            class="font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
+            class="font-semibold text-brand-800 border-r border-neutral-300 p-2 "
           >
             Text taken from:
           </dt>
-          <dd class="pl-5 p-2 bg-brand-50">
+          <dd class="pl-5 p-2">
             {
               passage.text_taken_from?.length > 0 && passage.text_taken_from.map(tx => tx.value).join(", ")
                
             }   
           </dd>
           <dt
-            class="font-semibold text-brand-800 border-r border-neutral-300 p-2"
+            class="font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
           >
             Edition:
           </dt>
-          <dd class="pl-5 p-2">
+          <dd class="pl-5 p-2 bg-brand-50">
             {passage.work[0]?.edition != 'Other edition' 
               ? passage.work[0]?.edition
               : ''}
@@ -601,11 +614,11 @@ const steps = [1, 2, 3];
             }
           </dd>
             <dt
-            class="font-semibold text-brand-800 border-r border-neutral-300 p-2 bg-brand-50"
+            class="font-semibold text-brand-800 border-r border-neutral-300 p-2  "
           >
             Full text:
           </dt>
-         <dd class="pl-5 p-2 italic bg-brand-50">
+         <dd class="pl-5 p-2 italic ">
           <!-- // check if there is a // should be rendered as zeilenmbruch -->
            {passage.text_paragraph
               ? passage.text_paragraph.split(" // ").map((part, i) => (
@@ -623,10 +636,7 @@ const steps = [1, 2, 3];
             }
           </dd>     
         </dl> 
-        <div class="flex gap-3 justify-end">
-          <NavLink href=`/download/tei/passages/${passage.jad_id}.xml` class="button-custom justify-self-end">TEI-XML</NavLink>
-          <NavLink href=`/download/json/passages/${passage.jad_id}.json` class="button-custom justify-self-end">JSON</NavLink>
-        </div>  
+        
       </div>
     </Article>
   </div>

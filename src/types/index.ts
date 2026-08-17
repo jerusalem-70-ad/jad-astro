@@ -255,6 +255,7 @@ export interface Passage {
   id: number;
   jad_id: string;
   passage: string;
+  bibliography: string | null;
   work: Work[];
   position_in_work: string;
   pages: string | null;

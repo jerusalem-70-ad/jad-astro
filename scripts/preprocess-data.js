@@ -433,6 +433,7 @@ const passagesPlus = passages
       biblical_ref_lvl2: lvl2,
       edition_link: passage.edition_link || "",
       status: passage.status.value || "",
+      bibliography: passage.bibliography || "",
       prev: passage.prev,
       next: passage.next,
     };

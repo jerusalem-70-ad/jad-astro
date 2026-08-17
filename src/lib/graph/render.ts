@@ -111,11 +111,11 @@ export function renderGraph({
 
   leftAxisGroup
     .call(leftAxis)
-    .style("font-size", "10px")
+    .style("font-size", "15px")
     .style("font-weight", "bold");
   rightAxisGroup
     .call(rightAxis)
-    .style("font-size", "10px")
+    .style("font-size", "15px")
     .style("font-weight", "bold");
 
   return {
