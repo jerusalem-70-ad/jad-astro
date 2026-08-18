@@ -244,6 +244,15 @@ export function calculateSortPosition(positionInWork) {
     return 300000 + sundayNum * 1000 + sermonNum;
   }
 
+  // Patter 4c: X Sunday
+  const sunday_Match = position.match(/\b([IVXLCDM]+)\s+Sunday\b/i);
+
+  if (sunday_Match) {
+    const sundayNum = romanToInt(sunday_Match[1]);
+
+    return 300000 + sundayNum * 1000;
+  }
+
   //const sermoMatch = position.match(/\bSermo\s+(\d+)\b/i);
   if (parsMatch && sermoMatch) {
     const parsName = parsMatch[1].toLowerCase();
