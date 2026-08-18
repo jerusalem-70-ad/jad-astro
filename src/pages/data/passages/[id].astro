@@ -72,6 +72,7 @@ const steps = [1, 2, 3];
       <div class="flex gap-3 justify-end">
           <NavLink href=`/download/tei/passages/${passage.jad_id}.xml` class="button-custom justify-self-end">TEI-XML</NavLink>
           <NavLink href=`/download/json/passages/${passage.jad_id}.json` class="button-custom justify-self-end">JSON</NavLink>
+          <NavLink href="#citation-section" class="button-custom justify-self-end">How to cite</NavLink>
           {passage.bibliography && (
             <span class="relative group bg-brand-400 text-brand-100 text-sm font-medium m-1 
             py-1 px-2 border border-brand-900 rounded-sm justify-self-end">
