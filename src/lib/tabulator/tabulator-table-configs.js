@@ -42,6 +42,7 @@ export const passagesTableConfig = {
             return [kw.label, ...subkeywords].filter(Boolean).join(": ") || "";
           })
           .join(" / "),
+        genre: passage.work[0]?.genre || "",
         tpq: passage.work[0].date[0]?.not_before || "",
         taq: passage.work[0].date[0]?.not_after || "",
         transmission_graph:
@@ -80,6 +81,14 @@ export const passagesTableConfig = {
         responsive: 1,
         widthGrow: 2,
         minWidth: 200,
+      },
+      {
+        title: "Genre",
+        resizable: true,
+        field: "genre",
+        responsive: 1,
+        widthGrow: 2,
+        minWidth: 150,
       },
       {
         title: "Manuscript",
