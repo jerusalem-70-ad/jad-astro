@@ -245,7 +245,7 @@ const nodes = positionedNodes.map((node) => ({
           const node = params.data as GraphNode;
           // Navigate to the clicked passage
           window.location.href = withBasePath(
-            `/passages/${node.jad_id}`
+            `/data/passages/${node.jad_id}`
           );
         }
       });
