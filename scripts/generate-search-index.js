@@ -63,6 +63,10 @@ async function generate() {
         id: "egypt-synonyms",
         synonyms: ["egipto", "egypto", "aegipto", "aegypto"],
       },
+      {
+        id: "chaldei-synonyms",
+        synonyms: ["chaldei", "caldei"],
+      },
     ],
   };
 
