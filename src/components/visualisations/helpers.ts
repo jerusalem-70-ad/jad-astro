@@ -11,14 +11,17 @@ type HeatMapData = {
   values: [number, number, number][]; // [xIndex, yIndex, value]
 };
 
-export function getPieChartOption(pieData: PieDataItem[]): EChartsOption {
+export function getPieChartOption(
+  pieData: PieDataItem[],
+  valueWorks: boolean = false, // true only for piechar counting works
+): EChartsOption {
   return {
     tooltip: {
       trigger: "item",
       textStyle: { fontSize: 12 },
       formatter: function (params: any) {
         return `<strong>${params.data.name}</strong><br/>
-                        <span>Passages: ${params.data.value}</span>
+                        <span>${valueWorks ? "Works" : "Passages"}: ${params.data.value}</span>
                         <span> (${params.percent}%)</span>`;
       },
     },

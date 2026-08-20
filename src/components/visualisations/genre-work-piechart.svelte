@@ -54,7 +54,9 @@ pieData = Array.from(genreCounts, ([name, value]) => ({
 
 onMount(() => {
   chart = echarts.init(container);
-  chart.setOption(getPieChartOption([]));
+  let valueWorks = true; // counting the works not the passages to display in seeting 'Works'
+
+chart.setOption(getPieChartOption([], valueWorks));
   
   const resize = () => chart?.resize();
   window.addEventListener("resize", resize);
