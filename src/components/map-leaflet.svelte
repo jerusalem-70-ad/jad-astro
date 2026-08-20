@@ -51,14 +51,14 @@
 
   /* ---------- marker updates ---------- */
   function updateMapMarkers(dataToShow) {
-     console.trace("updateMapMarkers");
+  //    console.trace("updateMapMarkers");
 
-  console.log(
-    dataToShow.features.map(f => ({
-      type: f.properties?.type,
-      id: f.properties?.aut_jad_id ?? f.properties?.ms_jad_id,
-    }))
-  );
+  // console.log(
+  //   dataToShow.features.map(f => ({
+  //     type: f.properties?.type,
+  //     id: f.properties?.aut_jad_id ?? f.properties?.ms_jad_id,
+  //   }))
+  // );
    
     if (!map || !dataToShow?.features) return;
 
