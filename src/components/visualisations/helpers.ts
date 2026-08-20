@@ -11,17 +11,32 @@ type HeatMapData = {
   values: [number, number, number][]; // [xIndex, yIndex, value]
 };
 
+type PieChartValueType = "passages" | "works" | "instances";
+
 export function getPieChartOption(
   pieData: PieDataItem[],
-  valueWorks: boolean = false, // true only for piechar counting works
+  valueType: PieChartValueType = "passages",
 ): EChartsOption {
+  const total = pieData.reduce((sum, item) => sum + item.value, 0);
+
   return {
+    title: {
+      subtext: `Showing ${total} ${
+        valueType === "works"
+          ? "Works"
+          : valueType === "instances"
+            ? "Instances"
+            : "Passages"
+      }`,
+      left: "center",
+      textStyle: { fontSize: 14 },
+    },
     tooltip: {
       trigger: "item",
       textStyle: { fontSize: 12 },
       formatter: function (params: any) {
         return `<strong>${params.data.name}</strong><br/>
-                        <span>${valueWorks ? "Works" : "Passages"}: ${params.data.value}</span>
+                        <span>${valueType === "works" ? "Works" : "Passages"}: ${params.data.value}</span>
                         <span> (${params.percent}%)</span>`;
       },
     },
@@ -95,6 +110,7 @@ export function getPieChartOption(
 export function getHeatMapOption(heatMapData: HeatMapData): EChartsOption {
   const values = Array.isArray(heatMapData.values) ? heatMapData.values : [];
   const maxValue = Math.max(...values.map((v) => v[2]));
+
   return {
     tooltip: {
       position: "top",

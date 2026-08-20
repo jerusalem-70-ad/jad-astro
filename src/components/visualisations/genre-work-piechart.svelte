@@ -54,20 +54,20 @@ pieData = Array.from(genreCounts, ([name, value]) => ({
 
 onMount(() => {
   chart = echarts.init(container);
-  let valueWorks = true; // counting the works not the passages to display in seeting 'Works'
 
-chart.setOption(getPieChartOption([], valueWorks));
+chart.setOption(getPieChartOption([]));
   
-  const resize = () => chart?.resize();
-  window.addEventListener("resize", resize);
-  
-  chart.on("click", (params: any) => {
-    if (params.data) {
-      window.location.href = withBasePath(
-        `/advanced-search?JAD-temp[refinementList][work.genre][0]=${params.data.name}`
-      );
-    }
-  });
+
+chart.on("click", (params: any) => {
+  if (params.data) {
+    window.location.href = withBasePath(
+      `/advanced-search?JAD-temp[refinementList][work.genre][0]=${params.data.name}`
+    );
+  }
+});
+
+const resize = () => chart?.resize();
+window.addEventListener("resize", resize);
 
    return () => {
     window.removeEventListener("resize", resize);
@@ -76,19 +76,7 @@ chart.setOption(getPieChartOption([], valueWorks));
 });
 
 $: if (chart) {
-  chart.setOption({
-    legend: {
-      formatter: (name: string) => {
-        const item = pieData.find(d => d.name === name);
-        return item ? `${name} (${item.value})` : name;
-      }
-    },
-    series: [
-      {
-        data: pieData
-      }
-    ]
-  });
+  chart.setOption(getPieChartOption(pieData, "works"));
 }
 
 

@@ -75,20 +75,9 @@ onMount(() => {
 });
 
 $: if (chart) {
-  chart.setOption({
-    legend: {
-      formatter: (name: string) => {
-        const item = pieData.find(d => d.name === name);
-        return item ? `${name} (${item.value})` : name;
-      }
-    },
-    series: [
-      {
-        data: pieData
-      }
-    ]
-  });
+  chart.setOption(getPieChartOption(pieData, "instances"));
 }
+
 
 
 </script>

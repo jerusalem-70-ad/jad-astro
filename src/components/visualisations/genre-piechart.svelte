@@ -39,8 +39,7 @@ onMount(() => {
   chart = echarts.init(container);
   chart.setOption(getPieChartOption([]));
   
-  const resize = () => chart?.resize();
-  window.addEventListener("resize", resize);
+  
   
   chart.on("click", (params: any) => {
     if (params.data) {
@@ -50,26 +49,17 @@ onMount(() => {
     }
   });
 
-   return () => {
-    window.removeEventListener("resize", resize);
-    chart?.dispose();
-  };
+    const resizeHandler = () => chart?.resize();
+    window.addEventListener("resize", resizeHandler);
+
+    return () => {
+      window.removeEventListener("resize", resizeHandler);
+      chart?.dispose();
+    };
 });
 
 $: if (chart) {
-  chart.setOption({
-    legend: {
-      formatter: (name: string) => {
-        const item = pieData.find(d => d.name === name);
-        return item ? `${name} (${item.value})` : name;
-      }
-    },
-    series: [
-      {
-        data: pieData
-      }
-    ]
-  });
+  chart.setOption(getPieChartOption(pieData));
 }
 
 
