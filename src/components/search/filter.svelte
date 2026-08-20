@@ -62,7 +62,7 @@ function showLess() {
 }
 </script>
 
-<div class="text-xs border border-neutral-200 shadow-xs bg-brand-100 rounded-md p-2">
+<div class="text-xs border border-neutral-200 shadow-xs bg-brand-700/10 rounded-md p-2">
 <details>
   <summary class="flex justify-between gap-2 font-semibold cursor-pointer uppercase">
     <h3 class="font-semibold ">{title}</h3>  

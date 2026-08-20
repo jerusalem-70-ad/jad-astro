@@ -241,10 +241,27 @@ $: updateSearch($filters);
 
 </script>
 
-<div class="space-y-3  ">
+<div class="space-y-2  ">
 
-  <h2 class="text-lg font-bold">Filters</h2>
-  
+   {#if activeFilters.length}
+   <div class="text-xs border border-neutral-200 shadow-xs rounded-md p-2 bg-brand-400 text-white">
+    <h2 class="text-base font-semibold ">Current filters:</h2>
+    <ul class="space-y-1">
+      {#each activeFilters as [field, values]}
+        <li class="bg-white text-brand-900 rounded-md px-1 py-0.5">
+          <strong>{field}:</strong> {values.join(" || ")}
+        </li>
+      {/each}
+    </ul>   
+  </div>
+  <button id="reset-filters" 
+   class="cursor-pointer w-full bg-brand-600 hover:bg-brand-500 text-white font-bold border border-neutral-200 shadow-xs rounded-md p-1.5"
+   on:click={resetFilters}>Reset</button>
+<h2 class="sr-only">Filter lists</h2>
+{:else}
+<h2 class="text-lg font-bold border border-neutral-200 shadow-xs rounded-md p-2 bg-brand-400 text-white">Filters</h2>
+{/if}
+
    <div class="space-y-4">
      <FilterList
       title="Authors"
@@ -303,19 +320,5 @@ $: updateSearch($filters);
           counts={manuscriptCounts}
       />
    </div>
-   {#if activeFilters.length}
-   <div class="text-xs border border-neutral-200 shadow-xs rounded-md p-2 bg-brand-400 text-white">
-    <h2 class="text-base font-semibold ">Current filters:</h2>
-    <ul class="space-y-1">
-      {#each activeFilters as [field, values]}
-        <li class="bg-white text-brand-900 rounded-md px-1 py-0.5">
-          <strong>{field}:</strong> {values.join(" || ")}
-        </li>
-      {/each}
-    </ul>   
-  </div>
-  <button id="reset-filters" 
-   class="cursor-pointer w-full bg-brand-600 hover:bg-brand-500 text-white font-bold border border-neutral-200 shadow-xs rounded-md p-2"
-   on:click={resetFilters}>Reset</button>
-{/if}
+  
 </div>
