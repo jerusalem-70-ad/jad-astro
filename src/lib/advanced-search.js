@@ -133,10 +133,10 @@ const customDateRangeWidget = (containerId) => {
       // Create the HTML structure for the date range widget with two inputs and apply button
       const container = document.querySelector(containerId);
       container.innerHTML = `
-        <details class="ais-Panel border-b group">
-          <summary class="ais-Panel-header cursor-pointer relative z-10 flex items-center justify-between">
-            <span class="normal-case text-base font-normal">Year Range</span>
-            <span class="ais-Panel-collapseIcon transition-transform duration-300 group-open:rotate-90deg]">
+        <details class="ais-Panel group">
+          <summary class="ais-Panel-header">
+            <span class="normal-case text-base font-semibold">Year Range</span>
+            <span class="transition-transform duration-300 rotate-90 group-open:-rotate-90">
               <svg style="width: 1em; height: 1em;" viewBox="0 0 500 500">
                 <path d="M100 250l300-150v300z" fill="currentColor"></path>
               </svg>
@@ -688,7 +688,7 @@ function wrapInPanel(title) {
     },
     templates: {
       header: () =>
-        `<span class="normal-case text-base font-normal">${title}</span>`,
+        `<span class="normal-case text-base font-semibold">${title}</span>`,
     },
     cssClasses: {
       header: "relative z-10",
@@ -707,11 +707,11 @@ function wrapHierarcicalMenuInPanel(title) {
     },
     templates: {
       header: () => `
-        <span class="normal-case text-base font-normal">${title}</span>
+        <span class="normal-case text-base font-semibold">${title}</span>
       `,
     },
     cssClasses: {
-      header: "relative z-10",
+      header: "cursor-pointer relative z-10",
       collapseButton:
         "cursor-pointer absolute inset-0 z-20 flex flex-row-reverse",
       collapseIcon: "",

@@ -7,14 +7,26 @@ import NavLink from "@/components/nav-link.astro";
 
 <Layout title="Search">
   <div class="md:w-5/6 mx-auto md:p-6 p-2">
-   <div class="inline-flex items-center justify-start mb-4 border border-gray-200 rounded-2xl shadow bg-brand-100 p-1">
-      <h2 class="bg-brand-50 text-xl md:text-3xl font-semibold text-brand-600 rounded-2xl p-3">
-        Faceted Search
-      </h2>
+    <div class="grid grid-cols-[minmax(400px,auto)_1fr]">
+      <div class="inline-flex items-center justify-start mb-4 border border-gray-200 rounded-2xl shadow bg-brand-500/60 p-1">
+          <h2 class="bg-brand-50 text-xl md:text-3xl font-semibold text-brand-600 rounded-2xl p-3">
+            Faceted Search
+          </h2>
       
-        <NavLink href="/noske-search" class="text-xl md:text-3xl font-semibold p-3 text-brand-700 hover:text-brand-500">
-            Linguistic Search
-            </NavLink>
+            <NavLink
+                href="/noske-search"
+                class="group relative p-3 text-2xl font-semibold text-brand-200 hover:text-brand-50"
+              >
+                Linguistic Search
+                <span
+                  class="absolute left-full top-1/2 z-50 hidden -translate-y-1/2  ml-2 whitespace-nowrap rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-normal text-gray-800 shadow-md group-hover:block"
+                >
+                  Switch to linguistic search to apply more advanced linguistic queries like searching with wild cards, word distance, or lemmata.
+                </span>
+              </NavLink>
+        </div>
+        <p class="p-3 text-brand-800 font-normal 2xl:text-base text-sm">The <strong>faceted search</strong> allows you to search in the text and to explore the corpus using predefined metadata categories. Use the filters in the 
+          panel below to narrow down the passages by specific characteristics and combinations of metadata. </p>
     </div>
 
     <div class="md:space-y-6">
@@ -35,22 +47,52 @@ import NavLink from "@/components/nav-link.astro";
       <div class="grid md:grid-cols-[1fr_3fr] gap-6">
         <!-- Refinements Section -->
         <aside
-          class="bg-brand-50 p-4 rounded-lg shadow-xs md:block hidden min-w-0"
+          class="bg-brand-50 py-2 rounded-lg shadow-xs md:block hidden min-w-0"
           id="refinements-section"
         >
-          <div id="refinement-list-author"></div>
-          <div id="refinement-list-work"></div>
-          <div id="refinement-list-genre"></div>
-          <div id="refinement-list-clusters"></div>
-          <div id="date-range-widget"></div>
-          <div id="refinement-list-workdate"></div>
-          <div id="refinement-list-workcentury"></div>
-          <div id="refinement-list-manuscript"></div>
-          <div id="refinement-list-context"></div>
-          <div id="refinement-list-keywords"></div>
-          <div id="refinement-list-biblical"></div>
-          <div id="refinement-list-liturgical"></div>
-          <div id="refinement-list-sources"></div>
+        <div class="bg-brand-500/70 pb-2 px-3 rounded-lg shadow-xs md:block hidden min-w-0">
+          <div class="flex gap-2 justify-center items-center py-2">
+            <h3 class="text-xl text-white font-semibold text-center font-mono relative group">FILTERS
+            </h3>
+            <button id="filter-info">
+              <Icon name="lucide:info" class="size-5 text-white"/>
+            </button>
+          </div>
+         <dialog id="filter-info-dialog" class="p-5 border rounded-md max-w-1/2">
+          <div class="filter-info-content">
+            <p>
+             Filters within the same category are inclusive: selecting the authors Bede and 
+             Gregory, for example, will show passages by Bede <strong>OR</strong> Gregory. Selections across 
+             different filter categories are combined with <strong>AND</strong>: selecting the author Bede 
+             and the keyword Temple will show passages by Bede that also have the keyword Temple. 
+             Thus, selecting additional values within a category will expand the number of hits, 
+             while selecting values from different categories will further refine the results. </p>
+
+            <button
+              type="button"
+              id="filter-info-close"
+              aria-label="Close"
+              class="mt-4 cursor-pointer rounded-md bg-brand-600/80 px-4 py-2 text-lg text-white hover:bg-brand-500"
+            >
+              Close ×
+            </button>
+          </div>
+        </dialog>
+         
+            <div id="refinement-list-author"></div>
+            <div id="refinement-list-work"></div>
+            <div id="refinement-list-genre"></div>
+            <div id="refinement-list-clusters"></div>
+            <div id="date-range-widget"></div>
+            <div id="refinement-list-workdate"></div>
+            <div id="refinement-list-workcentury"></div>
+            <div id="refinement-list-manuscript"></div>
+            <div id="refinement-list-context"></div>
+            <div id="refinement-list-keywords"></div>
+            <div id="refinement-list-biblical"></div>
+            <div id="refinement-list-liturgical"></div>
+            <div id="refinement-list-sources"></div>
+        </div>
         </aside>
 
         <section class="space-y-4">
@@ -74,3 +116,28 @@ import NavLink from "@/components/nav-link.astro";
 </Layout>
 
 <script src="@/lib/advanced-search.js"></script>
+<script>
+  const infoButton = document.getElementById('filter-info');
+  const dialog = document.getElementById('filter-info-dialog');
+  const closeButton = document.getElementById('filter-info-close');
+
+  if (
+    infoButton instanceof HTMLButtonElement &&
+    dialog instanceof HTMLDialogElement &&
+    closeButton instanceof HTMLButtonElement
+  ) {
+    infoButton.addEventListener('click', () => {
+      dialog.showModal();
+    });
+
+    closeButton.addEventListener('click', () => {
+      dialog.close();
+    });
+
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) {
+        dialog.close();
+      }
+    });
+  }
+</script>

@@ -131,20 +131,57 @@ dialog::backdrop {
 /**************** Algolia ******************/
 /*******************************************/
 
+/* Main panel container */
+.ais-Panel {
+  margin-bottom: 0.5rem !important;
+  @apply md:mb-4 md:rounded-lg bg-white overflow-hidden;
+}
+
+/* Panel header */
 .ais-Panel-header {
-  cursor: pointer;
-  position: relative;
-  z-index: 10;
+  margin-bottom: 0 !important;
+  @apply px-4 py-2 md:bg-brand-50 flex justify-between items-center;
 }
 
+/* Panel header text */
+.ais-Panel-header span {
+  @apply text-brand-800 font-medium;
+}
+
+/* Collapse button */
 .ais-Panel-collapseButton {
-  z-index: 20;
-  inset: 0;
-  display: flex;
-  flex-direction: row;
-  justify-content: right;
+  @apply w-auto h-auto bg-transparent flex items-center cursor-pointer;
 }
 
+/* Collapse icon */
+.ais-Panel-collapseIcon {
+  @apply mr-3.5 transform transition-transform duration-300 text-brand-600;
+}
+
+/* Rotate icon when expanded */
+.ais-Panel--collapsed .ais-Panel-collapseIcon {
+  @apply rotate-90 text-brand-800;
+}
+
+/* Hide body when collapsed */
+.ais-Panel--collapsed .ais-Panel-body {
+  @apply hidden;
+}
+
+/* Panel body */
+.ais-Panel-body {
+  @apply px-4 py-2;
+}
+
+/* Refinement list */
+.ais-RefinementList-list {
+  @apply space-y-0.5 mt-2;
+}
+
+/* Refinement item */
+.ais-RefinementList-item {
+  @apply text-sm;
+}
 /* Hits */
 
 .ais-Hits-list {
@@ -204,11 +241,6 @@ dialog::backdrop {
   @apply text-brand-50 hover:font-bold;
 }
 
-.ais-Panel-body .ais-RefinementList-showMore {
-  @apply mb-2;
-  @apply focus:outline-none focus:ring-2 focus:ring-brand-400 focus:border-brand-300;
-}
-
 .ais-RefinementList-searchBox .ais-SearchBox-input {
   @apply w-full text-sm py-1.5 p-2 border border-gray-300 rounded-sm;
 }
@@ -243,8 +275,9 @@ dialog::backdrop {
 .ais-InfiniteHits-loadMore:disabled {
   @apply hidden;
 }
-
+/* ######################################### */
 /* Noske Search KWIC view adjustments */
+/* ######################################### */
 
 .button-custom {
   @apply text-brand-600 hover:bg-brand-400 hover:text-brand-100 text-sm font-medium m-1 
