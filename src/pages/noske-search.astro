@@ -14,124 +14,140 @@ import NavLink from "@/components/nav-link.astro";
       </h2>
     </div>
 
-  <div class="bg-white border border-gray-300 rounded-xl p-4 shadow-sm ">    
+  <div class="bg-white border border-gray-300 rounded-xl p-4 shadow-sm ">  
+      <!-- Intro note -->
     
-    <!-- Important Note -->
-     <div class="mb-4 p-4 bg-yellow-50 border border-yellow-300 rounded-lg">
-       <h3 class="font-semibold mb-2 text-yellow-800">⚠️ Note</h3>
-       <p class="text-sm text-gray-700">
-         The corpus is updated on a regular basis but not daily! For most up-to-date query use the <NavLink href="/advanced-search">faceted search</NavLink>.</p>
-     </div>
+    <!-- text normalisation Note -->       
+       <details  class="mb-4 p-4 bg-yellow-50 border border-yellow-300 rounded-lg">
+        <summary class="font-semibold text-yellow-800 cursor-pointer">Text normalisation</summary>
+        <div class="text-sm grid gap-1 pt-2">  
+          <p>To make linguistic searching more consistent across the corpus, we have normalised the spelling of all passages.  
+          The current normalisation applies the following transformations:
+          <ul class="list-disc list-inside space-y-1 text-sm text-gray-600">  
+            <li><strong>ae</strong> and <strong>oe</strong> are normalised to <strong>e</strong>;</li>
+            <li><strong>y</strong> and <strong>j</strong> are normalised to <strong>i</strong>;</li>
+            <li><strong>v</strong> is generally normalised to <strong>u</strong>, except when it occurs at the beginning of a word followed by a vowel, or mid-word between two vowels.</li>
+          </ul>
+        </p>
+        <p class="text-sm">
+          Users should keep these normalisations in mind when formulating linguistic searches, as the searchable text may differ from the spelling found in the original manuscript or edition. Example: you will find no matches when searching for 'ciuitas', since all instances of the word are normalised to 'civitas'.
+          For more details see the <NavLink href="/about/technical">technical implementation</NavLink>.
+        </p>
+        </div>
+      </details>
      <!-- Search Guide -->
-    <details class="mb-4 p-4 bg-brand-100 border border-brand-200 rounded-lg group">
+    <details open class="mb-4 p-4 bg-orange-50 border border-brand-200 rounded-lg group">
       <summary class="font-semibold text-lg cursor-pointer text-brand-700 hover:text-brand-800">
      How to use the linguistic search
       </summary>
       
-      <div class=" grid grid-cols-[repeat(auto-fit,minmax(14rem,1fr))] gap-4 text-sm">
+      <p class="p-3 text-brand-800 font-normal">The linguistic search provides a more flexible way to search the corpus of passages by querying the linguistic structure and wording of the texts. 
+        In contrast to the faceted search, which filters passages by predefined metadata categories, the linguistic search allows you to search for specific lemmas, phrases, or more complex linguistic 
+        patterns using Simple, Phrase, Lemma, and CQL search.
+ </p>
+      <div class=" grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-4 text-sm">
      <!-- Search Modes -->
      <div>
-       <ul class="pt-3 space-y-2 ml-4">
+      <p class=" text-base text-brand-800 py-2">Select one of the <span class="decoration underline underline-offset-2">four</span> search modes available in the drop down menu below:</p>
+       <ul class="pt-3 space-y-2 ml-4 list-decimal">
          <li>
            <span class="font-semibold text-brand-700 mb-2">Simple mode:</span> Search for a <strong>single</strong> word e.g. <code class="bg-white px-2 py-1 rounded text-xs">Jerusalem</code>
            or
            <code class="bg-white px-2 py-1 rounded text-xs">.*rusalem</code>
+          <br><span class="text-gray-600 text-xs">shows all occurrences of the word with the exact same spelling or with variations when using wild cards (see further below).</span>
+
          </li>
          <li>
-           <span class="font-semibold text-brand-700 mb-2">Lemma:</span> <code class="bg-white px-2 py-1 rounded text-xs">pes</code>
-           <span class="text-gray-600 text-xs">shows all forms of the word like 'pes', 'pedibus' etc.</span>
+           <span class="font-semibold text-brand-700 mb-2">Phrase:</span> Search for a whole phrase e.g. <code class="bg-white px-2 py-1 rounded text-xs">reliqua pedibus suis</code>
+          <br> <span class="text-gray-600 text-xs">shows all occurrences of the phrase in exactly this order and with the exact same spelling or with variants when using wild cards.</span>
+         </li>
+         <li>
+           <span class="font-semibold text-brand-700 mb-2">Lemma:</span> Search for a <strong>single</strong> lemma e.g. <code class="bg-white px-2 py-1 rounded text-xs">pes</code>
+           <br><span class="text-gray-600 text-xs">shows all forms of the word like 'pes', 'pedibus' etc.</span>
          </li>
          <li>
              <span class="font-semibold text-brand-700 mb-2">Corpus Query Language (CQL): </span>
-             <ul class="space-y-2 ml-4 font-medium">
-                 <li>
-                 Search by word form: <code class="bg-white px-2 py-1 rounded text-xs">q[word="Jerusalem"]</code>
-                 <br><span class="text-gray-600 text-xs">Finds exact word "Jerusalem"</span>
-                 </li>
+             <ul class="space-y-2 ml-4 font-medium list-disc pt-2">
+                 
                   <li>
                  Search by word case insensitive: <code class="bg-white px-2 py-1 rounded text-xs">q[lc="operatus"]</code>
-                 <br><span class="text-gray-600 text-xs">Finds "operatus" and "Operatus".</span>
+                 <br><span class="text-gray-600 text-xs">finds words "operatus" (lower case) and "Operatus" (upper case).</span>
+                 </li>                            
+               
+                 <li>
+                 Search for several words (OR): <code class="bg-white px-2 py-1 rounded text-xs">q[word="populus|civitatem"]</code>
+                 <br><span class="text-gray-600 text-xs">finds the words"populus" <strong>OR</strong> "civitatem"</span>
                  </li>
                  <li>
-                 Search by lemma (root form): <code class="bg-white px-2 py-1 rounded text-xs">q[lemma="cedo"]</code>
-                 <br><span class="text-gray-600 text-xs">Finds "cessit", "cedentes", "cediderunt" etc.</span>
-                 </li>                
-                 <li>
-                 Combine with wildcards: <code class="bg-white px-2 py-1 rounded text-xs">q[word="indulg.*"]</code>
-                 <br><span class="text-gray-600 text-xs">Finds words starting with "indulg"</span>
-                 </li>
-                 <li>
-                 Multiple options (OR): <code class="bg-white px-2 py-1 rounded text-xs">q[word="populus|civitatem"]</code>
-                 <br><span class="text-gray-600 text-xs">Finds "populus" OR "civitatem"</span>
+                  Search for several words (AND) | Searching with Word Distance
+                  <br><span class="text-gray-600 text-xs">find two words or two lemmata, or a word and a lemma within a certain distance from each other:</span>
+                  <ul class="space-y-2 ml-4 list-disc list-inside">
+                      <li>
+                        <code class="bg-white px-2 py-1 rounded text-xs">q[word="rege"][word="Francorum"]</code>
+                        <br><span class="text-gray-600 text-xs">finds "rege" immediately followed by "Francorum"</span>
+                      </li>
+                      <li>
+                          <code class="bg-white px-2 py-1 rounded text-xs">q[word="rege"][][word=".*ilippo"]</code>
+                          <br><span class="text-gray-600 text-xs">finds "rege" exactly 1 word away from words ending with "ilippo" (like "Phillipo", "philippo", "Filippo" etc.)</span>
+                      </li>
+                      <li>
+                        <code class="bg-white px-2 py-1 rounded text-xs">q[word="decem"][]&#123;0,15&#125;[word="tribu.*"]</code>
+                        <br><span class="text-gray-600 text-xs">finds the word "decem" within 0 to 15 words away from words starting with "tribu" (like "tribus" or "tribubus")</span>
+                      </li>
+                      <li>
+                        <code class="bg-white px-2 py-1 rounded text-xs">q[lemma="cedo"][]&#123;0,15&#125;[lc="roman.*"]</code>
+                        <br><span class="text-gray-600 text-xs">finds the lemma "cedo" within 0 to 15 words away from words (case-insensitive) starting with "roman" (like "romanus", "Romanus" or "romanorumque")</span>
+                      </li>
+                    </ul>
                  </li>
              </ul>
          </li>
-          <li>
-           <span class="font-semibold text-brand-700 mb-2">Phrase:</span> <code class="bg-white px-2 py-1 rounded text-xs">reliqua pedibus suis</code>
-           <span class="text-gray-600 text-xs">.</span>
-         </li>
+          
        </ul>
      </div>
-     <!-- Wildcards -->
-     <div>
-       <h3 class="font-semibold text-brand-700 mb-2">Using Wildcards</h3>
-       <ul class="space-y-2 ml-4">
-         <li>
-           <code class="bg-white px-2 py-1 rounded text-xs">.</code> (dot) = matches any <strong>single</strong> character
-           <br><span class="text-gray-600 text-xs">Example: <code>.erusalem</code> matches "Jerusalem" or "Ierusalem"</span>
-         </li>
-         <li>
-           <code class="bg-white px-2 py-1 rounded text-xs">.*</code> (dot-asterisk) = matches <strong>any number</strong> of characters (including zero)
-           <br><span class="text-gray-600 text-xs">Example: <code>.*erusalem</code> matches "Jerusalem", "Hierusalem", "Ierusalem"</span>
-         </li>
-         <li>
-           <code class="bg-white px-2 py-1 rounded text-xs">.?</code> (dot-question) = matches <strong>zero or one</strong> character
-           <br><span class="text-gray-600 text-xs">Example: <code>.?salem</code> matches "Hierusalem" or "Jerusalem"</span>
-         </li>
-       </ul>
-     </div>
-     <!-- Word Distance -->
-     <div>
-       <h3 class="font-semibold text-brand-700 mb-2">Searching with Word Distance (CQL only)</h3>
-       <p class="mb-2">Find words within a certain distance from each other:</p>
-       <ul class="space-y-2 ml-4">
-          <li>
-             <code class="bg-white px-2 py-1 rounded text-xs">q[word="rege"][word="Francorum"]</code>
-             <br><span class="text-gray-600 text-xs">Finds "rege" immediately followed by "Francorum"</span>
-         </li>
-         <li>
-             <code class="bg-white px-2 py-1 rounded text-xs">q[word="rege"][][word="Francorum"]</code>
-             <br><span class="text-gray-600 text-xs">Finds "rege" exactly 1 word away from "Francorum"</span>
-         </li>
-         <li>
-           <code class="bg-white px-2 py-1 rounded text-xs">q[word="Hieronymus"][]&#123;0,15&#125;[word="Josephus"]</code>
-           <br><span class="text-gray-600 text-xs">"Hieronymus" within 0 to 15 words of "Josephus"</span>
-         </li>
-       </ul>
-     </div>
-     <!-- Quick Examples -->
-     <div>
-       <h3 class="font-semibold text-brand-700 mb-2">Quick Examples</h3>
-       <div class="bg-white p-3 rounded border border-gray-200">
-         <ul class="space-y-1 text-xs font-mono">
-           <li>Simple: <code>Jerusalem</code></li>
-           <li>Simple with wildcard: <code>.*erusalem</code></li>
-           <li>Lemma: <code>altissimus</code></li>
-           <li>CQL exact match: <code>q[word="Jerusalem"]</code></li>
-           <li>CQL wildcard: <code>q[word=".*salem"]</code></li>
-           <li>CQL with distance: <code>q[lemma="sacerdos"][]&#123;0,15&#125; [word="sanguis"]</code></li>
-           <li>CQL multiple words: <code>q[word="templum|ecclesia|synagoga"]</code></li>
+     <div class="grid content-between">
+       <!-- Wildcards -->
+       <div>
+         <h3 class="font-semibold text-brand-700 mb-2">Using Wildcards with any of the four modes</h3>
+         <ul class="space-y-2 ml-4">
+           <li>
+             <code class="bg-white px-2 py-1 rounded text-xs">.</code> (dot) = matches any <strong>single</strong> character
+             <br><span class="text-gray-600 text-xs">Example: <code class="bg-white px-1 py-0.5 rounded text-xs">.erusalem</code> matches "Jerusalem" or "Ierusalem"</span>
+           </li>
+           <li>
+             <code class="bg-white px-2 py-1 rounded text-xs">.*</code> (dot-asterisk) = matches <strong>any number</strong> of characters (including zero)
+             <br><span class="text-gray-600 text-xs">Example: <code class="bg-white px-1 py-0.5 rounded text-xs">.*erusalem</code> matches "Jerusalem", "Hierusalem", "Ierusalem"</span>
+           </li>
+           <li>
+             <code class="bg-white px-2 py-1 rounded text-xs">.?</code> (dot-question) = matches <strong>zero or one</strong> character
+             <br><span class="text-gray-600 text-xs">Example: <code class="bg-white px-1 py-0.5 rounded text-xs">.?elio</code> matches "elio" or "helio"</span>
+           </li>
          </ul>
        </div>
+       <!-- Quick Examples -->
+       <div>
+         <h3 class="font-semibold text-brand-700 mb-2">Quick Examples</h3>
+         <div class="bg-white p-3 rounded border border-gray-200">
+           <ul class="space-y-1 text-xs">
+             <li>Simple: <code class="border bg-white px-1 py-0.5 text-xs  rounded-md">Jerusalem</code></li>
+             <li>Simple with wildcard: <code class="border bg-white px-1 py-0.5 rounded text-xs">.*erusalem</code></li>
+             <li>Phrase: <code class="border bg-white px-1 py-0.5 rounded text-xs">decem trib.*</code></li>
+             <li>Lemma: <code class="border bg-white px-1 py-0.5 rounded text-xs">altissimus</code></li>
+             <li>CQL multiple words: <code class="border bg-white px-1 py-0.5 rounded text-xs">q[word="templum|ecclesia|synagoga"]</code></li>
+             <li>CQL with distance: <code class="border bg-white px-1 py-0.5 rounded text-xs">q[lemma="sacerdos"][]&#123;0,15&#125; [word="sanguis"]</code></li>
+             <li>CQL with distance in combination with case-insensitive mode: <code class="border bg-white px-1 py-0.5 rounded text-xs">q[word="rege"][lc="Francorum"]</code></li>
+           </ul>
+         </div>
+       </div>
      </div>
-      </div>
+    </div>
     </details>
     <div class="grid grid-cols-[auto_1fr_auto] gap-2">
       <select id="search-type-select" class="border border-gray-300 rounded-lg p-2">
      <option value="simple">Simple</option>
+     <option value="phrase">Phrase</option>
      <option value="lemma">Lemma</option>
      <option value="cql">CQL</option>
-     <option value="phrase">Phrase</option>
       </select>
       <input type="text" id="search-input" class="w-full p-2 border border-gray-300 rounded-lg"/>
       <button id="search-button" class="button-custom rounded-lg">Search</button>

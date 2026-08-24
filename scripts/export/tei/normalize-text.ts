@@ -1,6 +1,5 @@
 export default function normalizeText(text: string) {
   const normalizeText = text
-    .toLowerCase()
     .replace(/ae/g, "e")
     .replace(/oe/g, "e")
     .replace(/j/g, "i")
