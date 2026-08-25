@@ -58,8 +58,8 @@ import NavLink from "@/components/nav-link.astro";
               <Icon name="lucide:info" class="size-5 text-white"/>
             </button>
           </div>
-         <dialog id="filter-info-dialog" class="p-5 border rounded-md max-w-1/2">
-          <div class="filter-info-content">
+         <dialog id="filter-info-dialog" class="p-5 border border-brand-600 rounded-md max-w-1/2">
+          <div class="filter-info-content prose">
             <p>
              Filters within the same category are inclusive: selecting the authors Bede and 
              Gregory, for example, will show passages by Bede <strong>OR</strong> Gregory. Selections across 
@@ -72,9 +72,9 @@ import NavLink from "@/components/nav-link.astro";
               type="button"
               id="filter-info-close"
               aria-label="Close"
-              class="mt-4 cursor-pointer rounded-md bg-brand-600/80 px-4 py-2 text-lg text-white hover:bg-brand-500"
+              class="inline-flex items-center mt-4 cursor-pointer rounded-md bg-brand-600/90 px-4 py-2 text-lg text-white hover:bg-brand-500"
             >
-              Close ×
+              Close <Icon aria-hidden="true" name="lucide:x" />
             </button>
           </div>
         </dialog>
@@ -116,6 +116,7 @@ import NavLink from "@/components/nav-link.astro";
 </Layout>
 
 <script src="@/lib/advanced-search.js"></script>
+
 <script>
   const infoButton = document.getElementById('filter-info');
   const dialog = document.getElementById('filter-info-dialog');

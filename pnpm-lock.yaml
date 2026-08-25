@@ -23,6 +23,9 @@ importers:
       '@iconify-json/lucide':
         specifier: ^1.2.80
         version: 1.2.114
+      '@lucide/svelte':
+        specifier: ^1.33.0
+        version: 1.33.0(svelte@5.56.3)
       '@tailwindcss/postcss':
         specifier: ^4.3.1
         version: 4.3.1
@@ -1020,6 +1023,11 @@ packages:
     peerDependencies:
       jsep: ^0.4.0||^1.0.0
 
+  '@lucide/svelte@1.33.0':
+    resolution: {integrity: sha512-b+osTYG2V4dge5Lr7tnaTaahhy/4vH7Xb8zcqVjmctjwgkpXS0NNOJPkGzHHZoxtw/OO+2YAU28omeMfYCaawg==}
+    peerDependencies:
+      svelte: ^5
+
   '@napi-rs/wasm-runtime@1.1.5':
     resolution: {integrity: sha512-AWPoBRJ9tsnVhor4sjO7rkni+7p+2IAEFj6cx06UgP10jkQHqay/36uRV/bFkgrh18D9vb4cr8Q0Pthskgzy+Q==}
     peerDependencies:
@@ -1540,6 +1548,7 @@ packages:
   '@xmldom/xmldom@0.9.10':
     resolution: {integrity: sha512-A9gOqLdi6cV4ibazAjcQufGj0B1y/vDqYrcuP6d/6x8P27gRS8643Dj9o1dEKtB6O7fwxb2FgBmJS2mX7gpvdw==}
     engines: {node: '>=14.6'}
+    deprecated: this version has critical issues, please update to the latest version
 
   '@xtuc/ieee754@1.2.0':
     resolution: {integrity: sha512-DX8nKgqcGwsc0eJSqYt5lwP4DH5FlHnmuWWBRy7X0NcaGR0ZtuyeESgMwTYVEtxmsNGY+qit4QYT/MIYTOTPeA==}
@@ -4421,6 +4430,10 @@ snapshots:
   '@jsep-plugin/regex@1.0.4(jsep@1.4.0)':
     dependencies:
       jsep: 1.4.0
+
+  '@lucide/svelte@1.33.0(svelte@5.56.3)':
+    dependencies:
+      svelte: 5.56.3
 
   '@napi-rs/wasm-runtime@1.1.5(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)':
     dependencies:

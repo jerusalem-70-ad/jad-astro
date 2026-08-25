@@ -74,13 +74,22 @@ const steps = [1, 2, 3];
           <NavLink href=`/download/json/passages/${passage.jad_id}.json` class="button-custom justify-self-end">JSON</NavLink>
           <NavLink href="#citation-section" class="button-custom justify-self-end">How to cite</NavLink>
           {passage.bibliography && (
-            <span class="relative group bg-brand-400 text-brand-100 text-sm font-medium m-1 
-            py-1 px-2 border border-brand-900 rounded-sm justify-self-end">
+            <button id="bibliography-info" class="bg-brand-400 text-brand-100 text-sm font-semibold m-1 
+            py-1 px-2 border border-brand-900 rounded-sm justify-self-end cursor-pointer">
             Bibliography
-                <span class="pointer-events-none hidden absolute left-0 top-full z-30 mt-2 w-max max-w-[320px] rounded border border-brand-700 bg-brand-50 p-2 text-sm italic text-brand-900 shadow-lg sm:group-hover:block">
-                  {passage.bibliography ? passage.bibliography : ""}
-                </span>
-            </span>
+            </button>
+            <dialog id="bibliography-dialog" class="p-5 border border-brand-600 rounded-md max-w-1/2">
+              <h1 class="text-lg font-semibold text-brand-800">Publications mentioning this passage:</h1>
+              <p class="prose">{passage.bibliography ? passage.bibliography : ""}</p>
+               <button
+              type="button"
+              id="bibliography-close"
+              aria-label="Close"
+              class="inline-flex items-center mt-4 cursor-pointer rounded-md bg-brand-600/90 px-4 py-2 text-lg text-white hover:bg-brand-500"
+            >
+              Close <Icon aria-hidden="true" name="lucide:x" />
+            </button>
+            </dialog>
           )}
         </div>  
       <dl
@@ -229,7 +238,7 @@ const steps = [1, 2, 3];
                             {reference.value}
                            
                           </NavLink>
-                       <span class="hidden sm:block italic invisible group-hover:visible absolute z-10 w-[300px] top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
+                       <span class="hidden sm:block italic invisible group-hover:visible absolute z-10 w-75 top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
                           {reference.text}
                         </span>
                       </li>
@@ -263,7 +272,7 @@ const steps = [1, 2, 3];
                       {index < passage.liturgical_references.length - 1 && ", "}
                        
                        {reference.description && (
-                        <span class="hidden sm:block italic invisible group-hover:visible absolute z-10 w-[300px] top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
+                        <span class="hidden sm:block italic invisible group-hover:visible absolute z-10 w-75 top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
                           {reference.description}
                         </span>)}
                    </li>
@@ -460,7 +469,7 @@ const steps = [1, 2, 3];
                         {cluster.value}
                       </NavLink>
                        {cluster.description && (
-                        <span class="hidden sm:block italic invisible group-hover:visible absolute z-10 w-[300px] top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
+                        <span class="hidden sm:block italic invisible group-hover:visible absolute z-10 w-75 top-8 left-0 border-brand-700 border text-brand-900 bg-brand-50 opacity-95 p-2 rounded-sm shadow-sm text-sm">
                           {cluster.description}
                         </span>)}
                     </li>
@@ -668,4 +677,30 @@ document.addEventListener("click", (event) => {
 
   button.textContent = isHidden ? "Show less" : "Show more";
 });
+
+
+// show dialog with bibliography
+ const infoButton = document.getElementById('bibliography-info');
+  const dialog = document.getElementById('bibliography-dialog');
+  const closeButton = document.getElementById('bibliography-close');
+
+  if (
+    infoButton instanceof HTMLButtonElement &&
+    dialog instanceof HTMLDialogElement &&
+    closeButton instanceof HTMLButtonElement
+  ) {
+    infoButton.addEventListener('click', () => {
+      dialog.showModal();
+    });
+
+    closeButton.addEventListener('click', () => {
+      dialog.close();
+    });
+
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) {
+        dialog.close();
+      }
+    });
+  }
 </script>

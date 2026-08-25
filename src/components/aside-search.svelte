@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte";
   import instantsearch from "instantsearch.js";
   import TypesenseInstantsearchAdapter from "typesense-instantsearch-adapter";
@@ -13,6 +13,8 @@
 // svelte store to write the selected Jad id for the graph db to read and trigger the similarity search
   import { selectedJadId } from '@/stores/jad_store.ts';
 
+  import Info from '@lucide/svelte/icons/info';
+  import X from '@lucide/svelte/icons/x';
   export let enableGraph = false; 
   export let comparison = false; 
   // set elements for the search,bind them later for reactivity
@@ -21,6 +23,8 @@
 let refinementsAuthors;
 let refinementsWorks;
 let hits;
+
+let dialog: HTMLDialogElement;
 
   function initSearch() {
     const typesenseInstantsearchAdapter =
@@ -185,30 +189,72 @@ let hits;
   onMount(() => {
     initSearch();
   });
+
+  // handle dialog
+   
+
+  function handleDialog() {
+    dialog.showModal();
+  }
+
+  function closeDialog() {
+    dialog.close();
+  }
+  function handleBackdropClick(event: MouseEvent) {
+    if (event.target === dialog) {
+      dialog.close();
+    }
+  }
 </script>
 
-<div id="aside-search-container" bind:this={container} class="w-11/12 mx-auto md:w-64">
+<div id="aside-search-container" bind:this={container} class="w-11/12 mx-auto md:w-64 h-full">
     <aside
-      class="min-h-full "
+      class="min-h-full bg-white border-r border-brand-200"
       >
-      <h2 class="text-xl font-bold text-brand-800 text-center py-2">Select passage</h2>
-          <section aria-label="Search in the text of all passages" class="px-3 py-2 border border-neutral-300 rounded m-2 bg-white">
-            <h3 class="text-base text-brand-800 px-2 py-1">Search in texts</h3>
-            <div bind:this={searchbox} id="searchbox" data-hit-base-path="/text-comparisons" ></div>
-        </section>
-          <section  id="refinements-section">
-            <div class="px-3 py-2 border border-neutral-300 rounded m-2 bg-white">
-              <h3 class="text-base text-brand-800 px-2 py-1">Search for authors</h3>
-              <div bind:this={refinementsAuthors} id="refinementsAuthors"></div>
-            </div>
-             
-             <div class="px-3 py-2 border border-neutral-300 rounded m-2 bg-white">
-              <h3 class="text-base text-brand-800 px-2 py-1">Search for works</h3>
-              <div bind:this={refinementsWorks} id="refinementsWorks" class="px-1"></div>
-            </div>
-          </section>
-          <section>
-            <div bind:this={hits} id="hits" class="px-4 overflow-y-auto"></div>
-          </section>
+      <div class="flex gap-2 justify-center items-center py-2">
+        <h2 class="text-xl font-bold text-brand-800 text-center pt-2 font-mono">Quick Search</h2>
+            <button id="filter-info" onclick={handleDialog}>
+              <Info class="text-brand-800 font-light cursor-pointer"></Info>
+            </button>
+          </div>
+         <dialog bind:this={dialog} onclick={handleBackdropClick} class="p-5 border border-brand-600 rounded-md max-w-1/2">
+          <div class="prose">
+            <p>
+             The Quick Search allows you to search the corpus without leaving the current passage view.
+              You can search the full text or quickly filter passages by <strong>author</strong> and 
+              <strong>work</strong>; the matching passages are displayed below the search fields.
+            </p>
+            <p>
+            Clicking a result opens its detailed passage view.
+            </p>
+            <button
+              type="button"
+              onclick={closeDialog}
+              aria-label="Close"
+              class="inline-flex items-center font-semibold mt-4 cursor-pointer rounded-md bg-brand-600/90 px-4 py-2 text-lg text-white hover:bg-brand-500"
+            >
+              Close <X></X>
+            </button>
+          </div>
+        </dialog>
+      <section aria-label="Search in the text of all passages" class="px-3 py-2 border border-neutral-300 rounded m-2 bg-white">
+          <h3 class="text-base text-brand-800 px-2 py-1 font-semibold ">Search in texts</h3>
+          <div bind:this={searchbox} id="searchbox" data-hit-base-path="/text-comparisons" ></div>
+      </section>
+      <section  id="refinements-section">
+        <div class="px-3 py-2 border border-neutral-300 rounded m-2 bg-white">
+          <h3 class="text-base text-brand-800 px-2 py-1 font-semibold ">Search for authors</h3>
+          <div bind:this={refinementsAuthors} id="refinementsAuthors"></div>
+        </div>
+          
+          <div class="px-3 py-2 border border-neutral-300 rounded m-2 bg-white">
+          <h3 class="text-base text-brand-800 px-2 py-1 font-semibold ">Search for works</h3>
+          <div bind:this={refinementsWorks} id="refinementsWorks" class="px-1"></div>
+        </div>
+      </section>
+      <section>
+        <h3 class="text-lg font-bold text-brand-800 text-center pt-2 font-mono text-shadow-brand-200 text-shadow-sm">Passages</h3>
+        <div bind:this={hits} id="hits" class="px-4 overflow-y-auto"></div>
+      </section>
     </aside>
   </div>
