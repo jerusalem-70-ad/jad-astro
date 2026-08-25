@@ -680,7 +680,8 @@ document.addEventListener("click", (event) => {
 
 
 // show dialog with bibliography
- const infoButton = document.getElementById('bibliography-info');
+ function setupBibliographyDialog() {
+  const infoButton = document.getElementById('bibliography-info');
   const dialog = document.getElementById('bibliography-dialog');
   const closeButton = document.getElementById('bibliography-close');
 
@@ -689,13 +690,13 @@ document.addEventListener("click", (event) => {
     dialog instanceof HTMLDialogElement &&
     closeButton instanceof HTMLButtonElement
   ) {
-    infoButton.addEventListener('click', () => {
-      dialog.showModal();
-    });
+    if (infoButton.dataset.dialogInitialized) return;
 
-    closeButton.addEventListener('click', () => {
-      dialog.close();
-    });
+    infoButton.dataset.dialogInitialized = 'true';
+
+    infoButton.addEventListener('click', () => dialog.showModal());
+
+    closeButton.addEventListener('click', () => dialog.close());
 
     dialog.addEventListener('click', (event) => {
       if (event.target === dialog) {
@@ -703,4 +704,7 @@ document.addEventListener("click", (event) => {
       }
     });
   }
+}
+
+document.addEventListener('astro:page-load', setupBibliographyDialog);
 </script>
