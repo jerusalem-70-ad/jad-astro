@@ -9,7 +9,7 @@ import NavLink from "@/components/nav-link.astro";
       <div class="inline-flex items-center justify-start mb-4 border border-gray-200 rounded-2xl shadow bg-brand-500/60 p-1">
     
         <NavLink reload href="/advanced-search" class="group relative text-xl md:text-2xl font-semibold p-3 text-brand-200 hover:text-brand-50">
-            Faceted Search
+            Advanced Search
              <span
                   class="absolute left-1/2 top-full z-50 hidden -translate-y-1/2  ml-2 whitespace-nowrap rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-normal text-gray-800 shadow-md group-hover:block"
                 >
@@ -17,9 +17,9 @@ import NavLink from "@/components/nav-link.astro";
         using predefined metadata categories.
                 </span>
             </NavLink>
-            <h2 class="bg-brand-50 text-xl md:text-3xl font-semibold text-brand-600 rounded-2xl p-3">
+            <h1 class="bg-brand-50 text-xl md:text-3xl font-semibold text-brand-600 rounded-2xl p-3">
         Linguistic Search
-      </h2>
+      </h1>
     </div>
   <p class="p-3 text-brand-800 font-normal 2xl:text-base text-sm">The <strong>linguistic search</strong> provides a more flexible way to search the 
     corpus of passages by querying the linguistic structure and wording of the texts. 
@@ -52,14 +52,14 @@ import NavLink from "@/components/nav-link.astro";
      How to use the linguistic search
       </summary>
       
-      <p class="p-3 text-brand-800 font-normal">In contrast to the faceted search, which filters 
+      <p class="p-3 text-brand-800 font-normal">In contrast to the advaced faceted search, which filters 
         passages by predefined metadata categories, the linguistic search allows you to search for specific lemmas, phrases, or more complex linguistic 
-        patterns using Simple, Phrase, Lemma, and CQL search.
+        patterns using Simple, Phrase, Lemma, and CQL search modes.
  </p>
       <div class=" grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-4 text-sm">
      <!-- Search Modes -->
      <div>
-      <p class=" text-base text-brand-800 py-2">Select one of the <span class="decoration underline underline-offset-2">four</span> search modes available in the drop down menu below:</p>
+      <p class="font-semibold text-brand-700 mb-2 decoration underline underline-offset-4 text-base">Select one of the <span class="font-bold">four</span> search modes available in the drop down menu below:</p>
        <ul class="pt-3 space-y-2 ml-4 list-decimal">
          <li>
            <span class="font-semibold text-brand-700 mb-2">Simple mode:</span> Search for a <strong>single</strong> word e.g. <code class="bg-white px-2 py-1 rounded text-xs">Jerusalem</code>
@@ -119,7 +119,7 @@ import NavLink from "@/components/nav-link.astro";
      <div class="grid content-between">
        <!-- Wildcards -->
        <div>
-         <h3 class="font-semibold text-brand-700 mb-2">Using Wildcards with any of the four modes</h3>
+         <h3 class="font-semibold text-brand-700 mb-2 decoration underline underline-offset-4 text-base">Opionally use wildcards with any of the four modes:</h3>
          <ul class="space-y-2 ml-4">
            <li>
              <code class="bg-white px-2 py-1 rounded text-xs">.</code> (dot) = matches any <strong>single</strong> character
