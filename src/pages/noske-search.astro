@@ -21,16 +21,25 @@ import NavLink from "@/components/nav-link.astro";
         Linguistic Search
       </h1>
     </div>
-  <p class="p-3 text-brand-800 font-normal 2xl:text-base text-sm">The <strong>linguistic search</strong> provides a more flexible way to search the 
-    corpus of passages by querying the linguistic structure and wording of the texts. 
+  <p class="p-3 text-brand-800 font-normal 2xl:text-base text-sm">The <strong>linguistic search</strong> allows you to search for specific lemmas, phrases, or more complex linguistic patterns using Simple, Phrase, Lemma, and CQL search modes. 
         </p>
     </div>
   <div class="bg-white border border-gray-300 rounded-xl p-4 shadow-sm ">  
       <!-- Intro note -->
     
     <!-- text normalisation Note -->       
-       <details  class="mb-4 p-4 bg-yellow-50 border border-yellow-300 rounded-lg">
-        <summary class="font-semibold text-yellow-800 cursor-pointer">Text normalisation</summary>
+       <details class="mb-4 p-4 bg-yellow-50 border border-yellow-300 rounded-lg text-sm/6 group">
+        <summary class="flex gap-2 items-center font-semibold text-yellow-800 cursor-pointer uppercase">
+          <span>Text normalisation</span>
+           <svg
+                class="w-4 h-4 text-neutral-500 group-open:rotate-180 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"                >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+        </summary>
         <div class="text-sm grid gap-1 pt-2">  
           <p>To make linguistic searching more consistent across the corpus, we have normalised the spelling of all passages.  
           The current normalisation applies the following transformations:
@@ -41,25 +50,29 @@ import NavLink from "@/components/nav-link.astro";
           </ul>
         </p>
         <p class="text-sm">
-          Users should keep these normalisations in mind when formulating linguistic searches, as the searchable text may differ from the spelling found in the original manuscript or edition. Example: you will find no matches when searching for 'ciuitas', since all instances of the word are normalised to 'civitas'.
+          Users should keep these normalisations in mind when formulating linguistic searches, as the searchable text may differ from the spelling found in the original manuscript or edition. <br/>Example: you will find no matches when searching for 'ciuitas', since all instances of the word are normalised to 'civitas'.
           For more details see the <NavLink href="/about/technical">technical implementation</NavLink>.
         </p>
         </div>
       </details>
      <!-- Search Guide -->
-    <details open class="mb-4 p-4 bg-orange-50 border border-brand-200 rounded-lg group">
-      <summary class="font-semibold text-lg cursor-pointer text-brand-700 hover:text-brand-800">
-     How to use the linguistic search
-      </summary>
-      
-      <p class="p-3 text-brand-800 font-normal">In contrast to the advaced faceted search, which filters 
-        passages by predefined metadata categories, the linguistic search allows you to search for specific lemmas, phrases, or more complex linguistic 
-        patterns using Simple, Phrase, Lemma, and CQL search modes.
- </p>
-      <div class=" grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-4 text-sm">
+    <details open class="mb-4 p-4 bg-neutral-50 border border-brand-200 rounded-lg group">
+      <summary class="flex gap-2 items-center font-semibold text-lg cursor-pointer text-neutral-800 uppercase">
+     <span>How to use the linguistic search</span>
+     <svg
+                    class="w-4 h-4 text-neutral-500 group-open:rotate-180 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"                >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+      </summary>     
+    
+      <div class=" grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-4 text-sm pt-3">
      <!-- Search Modes -->
      <div>
-      <p class="font-semibold text-brand-700 mb-2 decoration underline underline-offset-4 text-base">Select one of the <span class="font-bold">four</span> search modes available in the drop down menu below:</p>
+      <p class="font-semibold text-neutral-800 mb-2 decoration underline underline-offset-4 text-base">Select one of the <span class="font-bold">four</span> search modes available in the drop down menu below:</p>
        <ul class="pt-3 space-y-2 ml-4 list-decimal">
          <li>
            <span class="font-semibold text-brand-700 mb-2">Simple mode:</span> Search for a <strong>single</strong> word e.g. <code class="bg-white px-2 py-1 rounded text-xs">Jerusalem</code>
@@ -116,10 +129,10 @@ import NavLink from "@/components/nav-link.astro";
           
        </ul>
      </div>
-     <div class="grid content-between">
+     <div class="grid content-between justify-start">
        <!-- Wildcards -->
        <div>
-         <h3 class="font-semibold text-brand-700 mb-2 decoration underline underline-offset-4 text-base">Opionally use wildcards with any of the four modes:</h3>
+         <h3 class="font-semibold text-neutral-800 mb-2 decoration underline underline-offset-4 text-base">Opionally use wildcards with any of the four modes:</h3>
          <ul class="space-y-2 ml-4">
            <li>
              <code class="bg-white px-2 py-1 rounded text-xs">.</code> (dot) = matches any <strong>single</strong> character
@@ -137,7 +150,7 @@ import NavLink from "@/components/nav-link.astro";
        </div>
        <!-- Quick Examples -->
        <div>
-         <h3 class="font-semibold text-brand-700 mb-2">Quick Examples</h3>
+         <h3 class="font-semibold text-neutral-800 mb-2">Examples:</h3>
          <div class="bg-white p-3 rounded border border-gray-200">
            <ul class="space-y-1 text-xs">
              <li>Simple: <code class="border bg-white px-1 py-0.5 text-xs  rounded-md">Jerusalem</code></li>
@@ -153,12 +166,12 @@ import NavLink from "@/components/nav-link.astro";
      </div>
     </div>
     </details>
-    <div class="grid grid-cols-[auto_1fr_auto] gap-2">
+    <div class="grid grid-cols-[auto_1fr_auto] gap-2 items-stretch">
       <select id="search-type-select" class="border border-gray-300 rounded-lg p-2">
-     <option value="simple">Simple</option>
-     <option value="phrase">Phrase</option>
-     <option value="lemma">Lemma</option>
-     <option value="cql">CQL</option>
+        <option value="simple">Simple</option>
+        <option value="phrase">Phrase</option>
+        <option value="lemma">Lemma</option>
+        <option value="cql">CQL</option>
       </select>
       <input type="text" id="search-input" class="w-full p-2 border border-gray-300 rounded-lg"/>
       <button id="search-button" class="button-custom rounded-lg">Search</button>

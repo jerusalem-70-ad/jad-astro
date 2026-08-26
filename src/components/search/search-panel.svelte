@@ -9,6 +9,27 @@ import {
   FIELD_MAP
 } from "@/lib/search/typsense-search.js";
 
+import Info from '@lucide/svelte/icons/info';
+import X from '@lucide/svelte/icons/x';
+
+let dialog: HTMLDialogElement;
+
+// handle dialog
+   
+
+  function handleDialog() {
+    dialog.showModal();
+  }
+
+  function closeDialog() {
+    dialog.close();
+  }
+  function handleBackdropClick(event: MouseEvent) {
+    if (event.target === dialog) {
+      dialog.close();
+    }
+  }
+
 function resetFilters() {
   filters.set(structuredClone(defaultFilters));
 }
@@ -241,8 +262,41 @@ $: updateSearch($filters);
 
 </script>
 
-<div class="space-y-2  ">
+<div class="space-y-2">
+  <div class="flex gap-2 justify-center items-center py-2 text-lg font-bold border border-neutral-200 shadow-xs rounded-md p-2 bg-brand-400 text-white">
 
+    <h2>Filters</h2>
+    <button id="filter-info" onclick={handleDialog}>
+      <Info class="font-light cursor-pointer"></Info>
+    </button>
+  </div>
+  <dialog bind:this={dialog} onclick={handleBackdropClick} class="border border-brand-600 rounded-md max-w-1/2">
+    <h1 class="font-semibold text-lg bg-brand-600/90 text-white p-5 prose">How to use the filters?</h1>
+     <div class="prose p-5">
+      <p>Use the filters in the <strong>aside panel</strong> to refine the corpus and display only the passages matching your criteria.</p>  
+      <ul class="list-disc">
+        <li><strong>Combine filters</strong> to narrow your results.</li>
+        <li>In each filter panel you can select the <strong>search mode</strong> using the buttons:</li>
+        <ul>
+          <li><strong>OR</strong> - displays results matching one or more of the selected filter values.</li>
+          <li><strong>AND</strong> - displays results matching all selected filter values.</li>
+        </ul>
+        <p>Example: Under <strong>KEYWORDS</strong>, selecting <i>Anti-Judaism</i> and <i>Typology</i> with <strong>AND</strong> displays passages containing both keywords. 
+          Using <strong>OR</strong> displays passages containing either <i>Anti-Judaism</i> or <i>Typology</i>.</p>
+      </ul>      
+        <p>
+          The visualisations update instantly as filters are applied.
+        </p>          
+        <button
+          type="button"
+          onclick={closeDialog}
+          aria-label="Close"
+          class="inline-flex items-center font-semibold mt-4 cursor-pointer rounded-md bg-brand-600/90 px-4 py-2 text-lg text-white hover:bg-brand-500"
+        >
+          Close <X></X>
+        </button>
+      </div>
+    </dialog>
    {#if activeFilters.length}
    <div class="text-xs border border-neutral-200 shadow-xs rounded-md p-2 bg-brand-400 text-white">
     <h2 class="text-base font-semibold ">Current filters:</h2>
@@ -256,11 +310,9 @@ $: updateSearch($filters);
   </div>
   <button id="reset-filters" 
    class="cursor-pointer w-full bg-brand-600 hover:bg-brand-500 text-white font-bold border border-neutral-200 shadow-xs rounded-md p-1.5"
-   on:click={resetFilters}>Reset</button>
-<h2 class="sr-only">Filter lists</h2>
-{:else}
-<h2 class="text-lg font-bold border border-neutral-200 shadow-xs rounded-md p-2 bg-brand-400 text-white">Filters</h2>
+   onclick={resetFilters}>Reset</button>
 {/if}
+
 
    <div class="space-y-4">
      <FilterList

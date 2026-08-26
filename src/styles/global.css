@@ -280,7 +280,7 @@ dialog::backdrop {
 /* ######################################### */
 
 .button-custom {
-  @apply text-brand-600 hover:bg-brand-400 hover:text-brand-100 text-sm font-medium m-1 
+  @apply text-brand-600 hover:bg-brand-400 hover:text-brand-100 text-sm font-medium 
         py-1 px-2 border border-brand-900 rounded-sm;
 }
 
