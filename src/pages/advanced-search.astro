@@ -7,15 +7,15 @@ import NavLink from "@/components/nav-link.astro";
 
 <Layout title="Search">
   <div class="md:w-5/6 mx-auto md:p-6 p-2">
-    <div class="grid grid-cols-[minmax(400px,auto)_1fr]">
-      <div class="inline-flex items-center justify-start mb-4 border border-gray-200 rounded-2xl shadow bg-brand-500/60 p-1">
-          <h2 class="bg-brand-50 text-xl md:text-3xl font-semibold text-brand-600 rounded-2xl p-3">
+    <div class="grid grid-cols-[500px_1fr] py-3">
+      <div class="inline-flex items-stretch justify-stretch border border-gray-200 rounded-2xl shadow bg-brand-500/60 p-1">
+          <h2 class="bg-brand-50 text-xl p-3 md:text-3xl font-semibold text-brand-600 rounded-2xl">
             Advanced Search
           </h2>
       
             <NavLink
                 href="/noske-search"
-                class="group relative p-3 text-2xl font-semibold text-brand-200 hover:text-brand-50"
+                class="group relative p-3 text:lg md:text-2xl font-semibold text-brand-200 hover:text-brand-50"
               >
                 Linguistic Search
                 <span
@@ -25,7 +25,7 @@ import NavLink from "@/components/nav-link.astro";
                 </span>
               </NavLink>
         </div>
-        <p class="p-3 text-brand-800 font-normal 2xl:text-base text-sm">The advanced <strong>faceted search</strong> allows you to search in the text and to explore the corpus using predefined metadata categories. Use the filters in the 
+        <p class="hidden 2xl:block px-3 text-brand-800 font-normal 2xl:text-base text-sm">The advanced <strong>faceted search</strong> allows you to search in the text and to explore the corpus using predefined metadata categories. Use the filters in the 
           panel below to narrow down the passages by specific characteristics and combinations of metadata. </p>
     </div>
 
@@ -58,15 +58,23 @@ import NavLink from "@/components/nav-link.astro";
               <Icon name="lucide:info" class="size-5 text-white"/>
             </button>
           </div>
-         <dialog id="filter-info-dialog" class="p-5 border border-brand-600 rounded-md max-w-1/2">
-          <div class="filter-info-content prose">
+         <dialog id="filter-info-dialog" class="border border-brand-600 rounded-md max-w-1/2">
+    <h1 class="font-semibold text-lg bg-brand-600/90 text-white p-5 prose">How to use the filters?</h1>
+          
+          <div class="p-5 filter-info-content prose">
             <p>
-             Filters within the same category are inclusive: selecting the authors Bede and 
-             Gregory, for example, will show passages by Bede <strong>OR</strong> Gregory. Selections across 
-             different filter categories are combined with <strong>AND</strong>: selecting the author Bede 
-             and the keyword Temple will show passages by Bede that also have the keyword Temple. 
-             Thus, selecting additional values within a category will expand the number of hits, 
-             while selecting values from different categories will further refine the results. </p>
+            Use <strong>filters</strong> to refine the corpus by combining different search criteria.
+<ul>
+  <li>
+    <strong>Filters within the same category are inclusive:</strong> selecting <i>Bede</i> and <i>Gregory</i> under AUTHORS broadens the search to include passages by either author.
+  </li>
+  <li>
+    <strong>Filters across different categories are combined with AND:</strong> selecting the author <i>Bede</i> and the keyword <i>Temple</i> under KEYWORDS 
+    then narrows the results to passages by Bede that also contain the keyword <i>Temple</i>.
+  </li>
+ 
+</ul>
+</p>
 
             <button
               type="button"
