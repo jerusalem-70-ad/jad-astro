@@ -15,6 +15,7 @@
 
   import Info from '@lucide/svelte/icons/info';
   import X from '@lucide/svelte/icons/x';
+  
   export let enableGraph = false; 
   export let comparison = false; 
   // set elements for the search,bind them later for reactivity
@@ -225,7 +226,9 @@ let dialog: HTMLDialogElement;
               <strong>work</strong>; the matching passages are displayed below the search fields.
             </p>
             <p>
-            Clicking a result opens the page devoted to the selected passage.
+            Clicking a passage from the results {enableGraph ? 'displays the text-similarities' 
+            : comparison ? 'displays the textual relations' 
+            : 'opens the detailed view page'} for the selected passage.
             </p>
             <button
               type="button"
