@@ -220,12 +220,12 @@ let dialog: HTMLDialogElement;
          <dialog bind:this={dialog} onclick={handleBackdropClick} class="p-5 border border-brand-600 rounded-md max-w-1/2">
           <div class="prose">
             <p>
-             The Quick Search allows you to search the corpus without leaving the current passage view.
+             The Quick Search allows you to search the corpus without leaving the current page.
               You can search the full text or quickly filter passages by <strong>author</strong> and 
               <strong>work</strong>; the matching passages are displayed below the search fields.
             </p>
             <p>
-            Clicking a result opens its detailed passage view.
+            Clicking a result opens the page devoted to the selected passage.
             </p>
             <button
               type="button"

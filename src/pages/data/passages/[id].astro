@@ -80,7 +80,7 @@ const steps = [1, 2, 3];
             </button>
             <dialog id="bibliography-dialog" class="p-5 border border-brand-600 rounded-md max-w-1/2">
               <h1 class="text-lg font-semibold text-brand-800">Publications mentioning this passage:</h1>
-              <p class="prose">{passage.bibliography ? passage.bibliography : ""}</p>
+              <p class="prose">{passage.bibliography ? (<span set:html={addItalics(passage.bibliography)}></span>) : ""}</p>
                <button
               type="button"
               id="bibliography-close"
@@ -106,7 +106,7 @@ const steps = [1, 2, 3];
               <NavLink href={`/data/authors/${passage.work[0].author[0].jad_id}`}>
                 {passage.work[0].author[0]?.name}{" "}
                 {passage.work[0].author_certainty === false && " (?)"}
-                {passage.work[0].author[0]?.occupation ? `(${passage.work[0].author[0].occupation})` : ""}
+                {passage.work[0].author[0]?.occupation ? ` (${passage.work[0].author[0].occupation})` : ""}
               </NavLink>
             ) : (
               "N/A"
@@ -614,7 +614,7 @@ const steps = [1, 2, 3];
           </dt>
           <dd class="pl-5 p-2 bg-brand-50">
             {passage.work[0]?.edition != 'Other edition' 
-              ? passage.work[0]?.edition
+              ? (<span set:html={addItalics(passage.work[0]?.edition)}></span>)
               : ''}
              {passage?.work[0]?.link_digital_editions && 
             <NavLink href={passage.work[0]?.link_digital_editions}> Facsimile of the whole work <Icon name="lucide:external-link" class="size-4 text-brand-800 inline-flex"/></NavLink>
