@@ -67,6 +67,14 @@ async function generate() {
         id: "chaldei-synonyms",
         synonyms: ["chaldei", "caldei"],
       },
+      {
+        id: "helios-synonyms",
+        synonyms: ["helius", "elius"],
+      },
+      {
+        id: "hadrianus-synonyms",
+        synonyms: ["hadrianus", "adrianus"],
+      },
     ],
   };
 
