@@ -175,13 +175,16 @@ dialog::backdrop {
 
 /* Refinement list */
 .ais-RefinementList-list {
-  @apply space-y-0.5 mt-2;
+  @apply h-full;
 }
+
+.ais-CurrentRefinements
 
 /* Refinement item */
 .ais-RefinementList-item {
   @apply text-sm;
 }
+
 /* Hits */
 
 .ais-Hits-list {
@@ -233,8 +236,14 @@ dialog::backdrop {
 /*current refinements make more prominent */
 
 /* specify with the selector */
+.ais-CurrentRefinements-list {
+  display: flex !important;
+
+  @apply flex-wrap gap-y-0;
+}
+
 .ais-CurrentRefinements .ais-CurrentRefinements-item {
-  @apply bg-brand-500 text-brand-50 border border-brand-600 rounded-md;
+  @apply bg-brand-500 text-brand-50 border border-brand-600 rounded-md min-w-40;
 }
 
 .ais-CurrentRefinements-category .ais-CurrentRefinements-delete {

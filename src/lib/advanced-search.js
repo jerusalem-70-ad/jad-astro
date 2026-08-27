@@ -11,6 +11,7 @@ import {
   currentRefinements,
   hierarchicalMenu,
   configure,
+  sortBy,
 } from "instantsearch.js/es/widgets";
 import { simple } from "instantsearch.js/es/lib/stateMappings";
 
@@ -318,6 +319,39 @@ search.addWidgets([
     autofocus: true,
     placeholder: "Text search",
   }),
+  sortBy({
+    container: "#sort",
+    items: [
+      {
+        value: "JAD-temp/sort/author:asc",
+        label: "Author A-Z",
+      },
+      {
+        value: "JAD-temp/sort/author:desc",
+        label: "Author Z-A",
+      },
+      {
+        value: "JAD-temp/sort/title_work:asc",
+        label: "Title A-Z",
+      },
+      {
+        value: "JAD-temp/sort/title_work:desc",
+        label: "Title Z-A",
+      },
+      {
+        value: "JAD-temp/sort/work_date_not_before:asc",
+        label: "Date (earliest first)",
+      },
+      {
+        value: "JAD-temp/sort/work_date_not_before:desc",
+        label: "Date (latest first)",
+      },
+      {
+        value: "JAD-temp/sort/sort_id:asc",
+        label: "ID",
+      },
+    ],
+  }),
   customDateRangeWidget("#date-range-widget"),
   // Ensure InstantSearch uses the same hits-per-page as Typesense
   configure({ hitsPerPage: HITS_PER_PAGE }),
@@ -604,10 +638,11 @@ setTimeout(() => {
 
   // Create the select wrapper
   const wrapper = document.createElement("div");
-  wrapper.className = "hits-per-page-control inline-block ml-3 text-sm";
+  wrapper.className =
+    "hits-per-page-control inline-block text-sm border-l pl-3 text-sm";
   wrapper.innerHTML = `
-    <label class="mr-2">Results per page:</label>
-    <select id="hits-per-page-select" class="border rounded px-2 py-1">
+    <label class="text-sm">Results per page:</label>
+    <select id="hits-per-page-select" class="border bg-white rounded px-2 py-1 text-sm">
       <option value="10">10</option>
       <option value="25">25</option>
       <option value="50">50</option>

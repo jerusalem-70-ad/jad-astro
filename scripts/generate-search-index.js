@@ -109,6 +109,8 @@ async function generate() {
       { name: "sort_id", type: "int32", sort: true },
       { name: "rec_id", type: "string", sort: true },
       { name: "title", type: "string", sort: true, facet: true },
+      { name: "title_work", type: "string", sort: true, facet: true },
+      { name: "author", type: "string", sort: true, facet: true },
       { name: "full_text", type: "string", sort: true },
       { name: "search_text", type: "string", sort: true },
       { name: "manuscripts", type: "object[]", facet: true, optional: true },
@@ -124,7 +126,12 @@ async function generate() {
         sort: false,
         optional: true,
       },
-      { name: "author_search", type: "string[]", facet: true, optional: true },
+      {
+        name: "author_search",
+        type: "string[]",
+        facet: true,
+        optional: true,
+      },
 
       {
         name: "liturgical_references",
@@ -189,6 +196,7 @@ async function generate() {
         id: value.jad_id,
         rec_id: value.jad_id,
         title: value.passage,
+        title_work: value.work[0].title,
         full_text: `${value.passage} ${value.text_paragraph}`,
         search_text: `${normalizeText(value.passage ?? "")} ${normalizeText(
           value.text_paragraph ?? "",
@@ -198,6 +206,7 @@ async function generate() {
         position_in_work: value.position_in_work || "",
         // normalized values for filtering
         author_search: authors.map((name) => normalizeAuthor(name)),
+        author: authors.map((name) => normalizeAuthor(name)).join(","),
         cluster: value.part_of_cluster || [],
         liturgical_references: value.liturgical_references || [],
         biblical_ref_lvl0: value.biblical_ref_lvl0 || [],
