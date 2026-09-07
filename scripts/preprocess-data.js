@@ -450,6 +450,7 @@ const passagesPlus = passages
       edition_link: passage.edition_link || "",
       status: passage.status.value || "",
       bibliography: passage.bibliography || "",
+      image: passage.image || "",
       prev: passage.prev,
       next: passage.next,
     };

@@ -92,6 +92,25 @@ const steps = [1, 2, 3];
             </dialog>
           )}
         </div>  
+        {passage.image && (
+          <a
+            href="https://api.digitale-sammlungen.de/iiif/image/v2/bsb00161981_00380/full/full/0/default.jpg"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <figure>
+              <img
+                src="https://api.digitale-sammlungen.de/iiif/image/v2/bsb00161981_00380/full/744,/0/default.jpg"
+                alt="Manuscript page"
+                class="max-w-full pb-3"
+              />
+              <figcaption class="text-sm text-neutral-600">
+                Source: {passage.image} (click to view full image). 
+              </figcaption>
+            </figure>
+          </a>
+
+        )}
       <dl
         class="grid grid-cols-[1fr_5fr] text-sm md:text-base md:leading-5 border border-neutral-300"
       >

@@ -277,6 +277,7 @@ export interface Passage {
   next: Navigation;
   status: string;
   text_taken_from: Ref[];
+  image: string | null;
   biblical_ref_lvl0: string[];
   biblical_ref_lvl1: string[];
   biblical_ref_lvl2: string[];
