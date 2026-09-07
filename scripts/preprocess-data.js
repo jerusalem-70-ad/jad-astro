@@ -384,6 +384,22 @@ const passagesPlus = passages
         };
       });
 
+    // sort the mss occurrences first if there is a main true, then by library
+
+    const mssSorted = msOccurrence.sort((a, b) => {
+      if (a.main_ms && !b.main_ms) return -1;
+      if (!a.main_ms && b.main_ms) return 1;
+
+      return a.manuscript
+        .normalize("NFKD")
+        .replace(/\s+/g, " ")
+        .localeCompare(
+          b.manuscript.normalize("NFKD").replace(/\s+/g, " "),
+          undefined,
+          { numeric: true },
+        );
+    });
+
     //enrich biblical_references with sort key using the biblicalRefSorted
     if (passage.biblical_references && passage.biblical_references.length > 0) {
       passage.biblical_references = passage.biblical_references.map((ref) => {
@@ -427,7 +443,7 @@ const passagesPlus = passages
       ),
       source_passage: passage.source_passage,
       text_paragraph: normalizeText(passage.text_paragraph), // normalize whitespace
-      mss_occurrences: msOccurrence,
+      mss_occurrences: mssSorted,
       biblical_ref_lvl0: lvl0,
       biblical_ref_lvl1: lvl1,
       biblical_ref_lvl2: lvl2,

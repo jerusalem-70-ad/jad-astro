@@ -152,16 +152,7 @@ const steps = [1, 2, 3];
               passage.mss_occurrences?.length > 0 ? (
                 <ul id="mssList" class="space-y-1">
                   {passage.mss_occurrences
-                  .sort((a, b) =>
-                    a.manuscript
-                      .normalize("NFKD")
-                      .replace(/\s+/g, " ")
-                      .localeCompare(
-                        b.manuscript.normalize("NFKD").replace(/\s+/g, " "),
-                        undefined,
-                        { numeric: true }
-                      )
-                  ).slice(0, 4) // showing first 4 items                 
+                  .slice(0, 4) // showing first 4 items                 
                   .map((ms) => (
                     <li class={ms.main_ms ? "font-semibold" : ""}>
                       <NavLink href={`/data/manuscripts/${ms.jad_id}`}>
