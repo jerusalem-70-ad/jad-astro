@@ -103,6 +103,7 @@ function escapeFilterValue(value) {
   return `\`${String(value).replace(/`/g, "\\`")}\``;
 }
 
+// unlike the other fileds connectedness is a number
 const NUMERIC_FIELDS = new Set(["connectedness"]);
 
 function buildFilterBy(filters) {
