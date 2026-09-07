@@ -1,5 +1,7 @@
 <script lang="ts">
 import FilterList from "@/components/search/filter.svelte";
+import FilterListId from "@/components/search/filter-id.svelte";
+import FilterConnectedness from "@/components/search/filter-connectedness.svelte";
 import { filters, defaultFilters } from "@/stores/jad_store.js";
 
 import {
@@ -37,6 +39,7 @@ interface FacetItem {
   name: string;
   count: number;
 }
+
 
 let allAuthors: FacetItem[] = [];
 let allWorks: FacetItem[] = [];
@@ -143,6 +146,7 @@ for (const { field, response } of facetResults) {
 
   // ---------- MASTER LISTS ----------
 
+   
   if (allAuthors.length === 0) {
     allAuthors = mapFacet(
       res,
@@ -211,7 +215,7 @@ for (const { field, response } of facetResults) {
   authorCounts = facetCountsFrom(
     facetResponses.authors,
     "work.author.name"
-  );
+  ); 
 
   workCounts = facetCountsFrom(
     facetResponses.works,
@@ -315,6 +319,11 @@ $: updateSearch($filters);
 
 
    <div class="space-y-4">
+    <FilterListId
+      title="Passage ID"
+      field="rec_id"
+      
+       />
      <FilterList
       title="Authors"
       field="authors"
@@ -371,6 +380,9 @@ $: updateSearch($filters);
           field="manuscripts"
           counts={manuscriptCounts}
       />
+      <FilterConnectedness
+        title="Connectedness"
+        field="connectedness"/>
    </div>
   
 </div>

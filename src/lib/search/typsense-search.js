@@ -6,6 +6,8 @@ const client = createTypesenseClient();
 let currentSearchToken = 0;
 
 export const FIELD_MAP = {
+  rec_id: "rec_id",
+  connectedness: "connectedness",
   authors: "work.author.name",
   works: "work.title",
   genres: "work.genre",
@@ -18,7 +20,7 @@ export const FIELD_MAP = {
 };
 
 const FACET_FIELDS =
-  "work.author.name, work.title, work.genre, keywords.label, work.author.place.value, work.date.century, biblical_ref_lvl0, liturgical_references.value, manuscripts.manuscript";
+  "connectedness, rec_id, work.author.name, work.title, work.genre, keywords.label, work.author.place.value, work.date.century, biblical_ref_lvl0, liturgical_references.value, manuscripts.manuscript";
 
 /**
  * Main search used for results + graph updates
@@ -101,6 +103,8 @@ function escapeFilterValue(value) {
   return `\`${String(value).replace(/`/g, "\\`")}\``;
 }
 
+const NUMERIC_FIELDS = new Set(["connectedness"]);
+
 function buildFilterBy(filters) {
   const clauses = [];
 
@@ -109,16 +113,34 @@ function buildFilterBy(filters) {
 
     if (!values.length) continue;
 
-    const operator = filters.operators?.[key] ?? "OR";
+    if (key === "connectedness") {
+      clauses.push(`${fieldName}:>=${Number(values[0])}`);
+      continue;
+    }
 
-    if (operator === "OR") {
-      clauses.push(
-        `${fieldName}:=[${values.map(escapeFilterValue).join(",")}]`,
-      );
+    const operator = filters.operators?.[key] ?? "OR";
+    const isNumeric = NUMERIC_FIELDS.has(key);
+
+    if (isNumeric) {
+      if (operator === "OR") {
+        clauses.push(`${fieldName}:[${values.map(Number).join(",")}]`);
+      } else {
+        clauses.push(
+          values.map((v) => `${fieldName}:${Number(v)}`).join(" && "),
+        );
+      }
     } else {
-      clauses.push(
-        values.map((v) => `${fieldName}:=${escapeFilterValue(v)}`).join(" && "),
-      );
+      if (operator === "OR") {
+        clauses.push(
+          `${fieldName}:=[${values.map(escapeFilterValue).join(",")}]`,
+        );
+      } else {
+        clauses.push(
+          values
+            .map((v) => `${fieldName}:=${escapeFilterValue(v)}`)
+            .join(" && "),
+        );
+      }
     }
   }
 

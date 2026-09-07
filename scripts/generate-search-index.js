@@ -105,9 +105,9 @@ async function generate() {
     name: collectionName,
     enable_nested_fields: true,
     fields: [
-      { name: "id", type: "string", sort: true },
+      { name: "id", type: "string", sort: true, facet: true },
       { name: "sort_id", type: "int32", sort: true },
-      { name: "rec_id", type: "string", sort: true },
+      { name: "rec_id", type: "string", sort: true, facet: true },
       { name: "title", type: "string", sort: true, facet: true },
       { name: "title_work", type: "string", sort: true, facet: true },
       { name: "author", type: "string", sort: true, facet: true },
@@ -157,6 +157,7 @@ async function generate() {
       // get dates as separate numbers for filtering 'from -to' in the frontend
       { name: "work_date_not_before", type: "int32", facet: true, sort: true },
       { name: "work_date_not_after", type: "int32", facet: true, sort: true },
+      { name: "connectedness", type: "int32", facet: true, sort: true },
     ],
     metadata: {
       owners: ["Ivana Dobcheva"],
@@ -194,7 +195,7 @@ async function generate() {
       const item = {
         sort_id: value.id,
         id: value.jad_id,
-        rec_id: value.jad_id,
+        rec_id: value.jad_id.split("__")[1],
         title: value.passage,
         title_work: value.work[0].title,
         full_text: `${value.passage} ${value.text_paragraph}`,
@@ -214,6 +215,7 @@ async function generate() {
         keywords: value.keywords.map((k) => k.subkeywords) || [],
         work_date_not_before: workDate.not_before || 70,
         work_date_not_after: workDate.not_after || 1600,
+        connectedness: value.transmission_graph?.graph?.nodes?.length - 1 || 0,
       };
 
       records.push(item);
