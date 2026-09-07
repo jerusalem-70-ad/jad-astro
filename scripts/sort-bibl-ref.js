@@ -197,6 +197,21 @@ export function calculateSortPosition(positionInWork) {
     }
   }
 
+  // Pattern 1a: Biblical books with prologue (e.g., "Lam. Prologue")
+  const biblicalPrologueMatch = position.match(
+    /^([A-Za-z0-9\s]+)\.?\,?\s*Prologue$/,
+  );
+  if (biblicalPrologueMatch) {
+    const [, bookName] = biblicalPrologueMatch;
+    const cleanBookName = bookName.trim().replace(/\.$/, ""); // Remove trailing period
+    const biblicalOrder = NOVA_VULGATA_ORDER[cleanBookName];
+
+    if (biblicalOrder) {
+      // Biblical books: use book order * 1000 + chapter for proper sorting
+      return biblicalOrder * 1000 + 0; // Prologue is treated as chapter 0
+    }
+  }
+
   // Pattern 2: Biblical books with B notation (e.g., "Amos, B2")
   const biblicalBMatch = position.match(/^([A-Za-z0-9]+)\.?,?\s*B?(\d+)$/);
   if (biblicalBMatch) {
