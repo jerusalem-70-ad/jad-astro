@@ -613,6 +613,7 @@ const passagesPlusWorks = passagesPlus.map((p) => {
         })),
         author_certainty: w.author_certainty,
         date: w.date,
+        date_certainty: w.date_certainty,
         edition: w.edition,
         link_digital_editions: w.link_digital_editions,
         genre: w.genre,

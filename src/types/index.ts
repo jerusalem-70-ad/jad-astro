@@ -183,6 +183,7 @@ export interface Work {
   author: Author[];
   author_certainty: boolean;
   date: DateItem[];
+  date_certainty: boolean;
   genre: string | null;
   link_digital_editions?: string | null;
   edition: string;
