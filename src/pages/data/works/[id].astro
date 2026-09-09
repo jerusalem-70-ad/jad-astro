@@ -10,6 +10,7 @@ export async function getStaticPaths() {
     const paths = Object.values(works).map((work) => ({
         params: { id: work.jad_id },
         props: { data: work as WorkFull },
+        cacheKey: work.updated,
     }));
     return paths;
 }

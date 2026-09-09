@@ -9,6 +9,7 @@ export async function getStaticPaths() {
   const paths = Object.values(authors).map((author) => ({
     params: { id: author.jad_id },
     props: { data: author as AuthorFull },
+    cacheKey: author.updated,
   }));
   return paths;
 }

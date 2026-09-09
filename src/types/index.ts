@@ -72,6 +72,7 @@ export interface BiblicalReference extends Reference {
   description: string | null;
   prev: Navigation;
   next: Navigation;
+  updated: string;
 }
 export interface LiturgicalReference {
   id: number;
@@ -92,6 +93,7 @@ export interface LiturgicalReference {
   ];
   prev: Navigation;
   next: Navigation;
+  updated: string;
 }
 
 interface ReferenceAuthor {
@@ -124,6 +126,7 @@ export interface AuthorFull extends Author {
   alt_name?: string | null;
   prev: Navigation;
   next: Navigation;
+  updated: string;
 }
 
 interface OrigDate {
@@ -282,6 +285,7 @@ export interface Passage {
   biblical_ref_lvl1: string[];
   biblical_ref_lvl2: string[];
   transmission_graph: TransmissionGraph;
+  updated: string;
 }
 export interface Mss_occurrences {
   manuscript: string;

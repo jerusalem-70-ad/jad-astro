@@ -591,12 +591,12 @@ export const biblrefsTableConfig = {
               .join("")}</ul>`
           : "";
 
-      const book = ref.name?.includes(".")
-        ? ref.name?.split(".")?.[0] || ""
-        : ref.name?.split(" ")?.[0] || "";
-      const chapterVerse = ref.name?.includes(".")
-        ? ref.name?.split(".")?.[1] || ""
-        : ref.name?.split(" ")?.[1] || "";
+      const book = ref.value?.includes(".")
+        ? ref.value?.split(".")?.[0] || ""
+        : ref.value?.split(" ")?.[0] || "";
+      const chapterVerse = ref.value?.includes(".")
+        ? ref.value?.split(".")?.[1] || ""
+        : ref.value?.split(" ")?.[1] || "";
       const chapterVerseMatch = chapterVerse?.match(/(\d+)(?:,(\d+))?/);
       const chapter = chapterVerseMatch ? chapterVerseMatch[1] : "";
       const verse = chapterVerseMatch ? (chapterVerseMatch[2] ?? "") : "";
@@ -604,19 +604,26 @@ export const biblrefsTableConfig = {
       return {
         id: ref.id || "",
         jad_id: ref.jad_id || "",
-        title: ref.name || "",
+        title: ref.value || "",
         text: ref.text || "",
         works: worksList,
         related_passages: totalPassages,
         book: book,
         chapter: chapter,
         verse: verse,
+        key: ref.key,
       };
     });
   },
 
   getColumns() {
     const columns = [
+      {
+        title: "Key",
+        field: "key",
+        sorter: "number",
+        visible: false,
+      },
       {
         title: "Book",
         field: "book",

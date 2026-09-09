@@ -43,19 +43,19 @@ document.addEventListener("astro:page-load", () => {
   // -------------------------
 
   for (const ref of biblref) {
-    const sort_id = generateBiblicalSortKey(ref.name)
-    const book = extractBookAbbreviation(ref.name)
+    const sort_id = generateBiblicalSortKey(ref.value)
+    const book = extractBookAbbreviation(ref.value)
      if (!uniqueBooks.includes(book)) {
     uniqueBooks.push(book);
   }
     nodes.set(ref.jad_id, {
       id: ref.jad_id,
       sort_id: sort_id,
-      name: ref.name,
+      name: ref.value,
       book: book,
       type: 'ref',
       symbolSize: 40,
-      value: ref.name,
+      value: ref.value,
       category: "Biblical reference",
     });
 
@@ -81,7 +81,7 @@ document.addEventListener("astro:page-load", () => {
         links.push({
           source: ref.jad_id,
           target: work.jad_id,
-          name: `${ref.name} -> ${work.author[0].name}: ${work.title}`
+          name: `${ref.value} -> ${work.author[0].name}: ${work.title}`
         });
       }
     }

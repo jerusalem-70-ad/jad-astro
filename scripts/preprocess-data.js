@@ -137,6 +137,7 @@ const authorsPlus = authors
       gnd_url: aut.gnd_url || "",
       works: related_works,
       occupation: aut.occupation || "",
+      updated: aut.updated || new Date().toISOString(),
     };
   });
 
@@ -163,16 +164,10 @@ Object.values(biblicalRef).forEach((ref) => {
       text: ref.text || "",
       nova_vulgata_url: ref.nova_vulgata_url || "",
       key: sortKey,
+      updated: ref.updated,
     };
   }
 });
-
-// Write the enhanced biblical references back to file
-writeFileSync(
-  join(folderPath, "biblical_references.json"),
-  JSON.stringify(biblicalRefSorted, null, 2),
-);
-console.log("Biblical references enriched and written successfully.");
 
 const manuscriptsPlus = manuscripts
   .filter((ms) => ms.name[0]?.value)
@@ -308,7 +303,7 @@ const passagesPlus = passages
     //enrich biblical_references with sort key using the biblicalRefSorted
     if (passage.biblical_references && passage.biblical_references.length > 0) {
       passage.biblical_references = passage.biblical_references.map((ref) => {
-        // Find the enriched reference by id (as string, since biblicalRefSorted keys are likely strings)
+        // Find the enriched reference by id (as string, since biblicalRefSorted keys are strings)
         const enriched = biblicalRefSorted[String(ref.id)];
         return {
           ...(enriched || {}), // Merge in all properties from biblicalRefSorted if found
@@ -358,6 +353,7 @@ const passagesPlus = passages
       image: passage.image || "",
       prev: passage.prev,
       next: passage.next,
+      updated: passage.updated || new Date().toISOString(), // Add updated field with current timestamp if not present
     };
   });
 
@@ -489,6 +485,7 @@ const worksPlus = works
       view_label: work.view_label || "",
       next: work.next || {},
       prev: work.prev || {},
+      updated: work.updated || new Date().toISOString(), // Add updated field with current timestamp if not present
     };
   });
 const worksEnriched = addPrevNextToItems(worksPlus, "jad_id", "title");
@@ -666,38 +663,33 @@ writeFileSync(
 );
 
 // add passages to biblical references
-const biblicalRefWithPassages = Object.values(biblicalRef)
-  .filter((ref) => ref.name) // filter out empty names
-  .map(({ order, ...rest }) => rest)
-  .map((ref) => {
-    let processedPassages = [];
-
-    const related__passages = enrichedPassages
-      .filter((p) => p.biblical_references.some((b_ref) => b_ref.id === ref.id))
-      .map((p) => ({
-        id: p.id,
-        jad_id: p.jad_id,
-        passage: p.passage,
-        position_in_work: p.position_in_work,
-        work: p.work.map((w) => ({
-          id: w.id,
-          jad_id: w.jad_id,
-          title: w.title,
-          genre: w.genre,
-          author: w.author.map((a) => ({
-            jad_id: a.jad_id,
-            name: a.name,
-            alt_name: a.alt_name,
-          })),
-          author_certainty: w.author_certainty,
+const biblicalRefWithPassages = Object.values(biblicalRefSorted).map((ref) => {
+  const related__passages = enrichedPassages
+    .filter((p) => p.biblical_references.some((b_ref) => b_ref.id === ref.id))
+    .map((p) => ({
+      id: p.id,
+      jad_id: p.jad_id,
+      passage: p.passage,
+      position_in_work: p.position_in_work,
+      work: p.work.map((w) => ({
+        id: w.id,
+        jad_id: w.jad_id,
+        title: w.title,
+        genre: w.genre,
+        author: w.author.map((a) => ({
+          jad_id: a.jad_id,
+          name: a.name,
+          alt_name: a.alt_name,
         })),
-      }));
+        author_certainty: w.author_certainty,
+      })),
+    }));
 
-    return {
-      ...ref,
-      related_passages: related__passages,
-    };
-  });
+  return {
+    ...ref,
+    related_passages: related__passages,
+  };
+});
 
 //process biblical references to add prev and next
 

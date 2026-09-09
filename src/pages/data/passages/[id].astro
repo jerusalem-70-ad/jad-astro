@@ -13,6 +13,7 @@ export async function getStaticPaths() {
   const paths = Object.values(passages).map((passage) => ({
     params: { id: passage.jad_id.toString() },
     props: { data: passage as Passage },
+    cacheKey: passage.updated,
   }));
   return paths;
 }
@@ -665,6 +666,10 @@ const steps = [1, 2, 3];
 </PageLayout>
 
 <script>
+  import { setupBibliographyDialog } from "@/lib/utils.js";
+  document.addEventListener('astro:page-load', setupBibliographyDialog);
+
+  
 document.addEventListener("click", (event) => {
   const target = event.target;
   if (!(target instanceof HTMLElement)) return;
@@ -691,32 +696,6 @@ document.addEventListener("click", (event) => {
 });
 
 
-// show dialog with bibliography
- function setupBibliographyDialog() {
-  const infoButton = document.getElementById('bibliography-info');
-  const dialog = document.getElementById('bibliography-dialog');
-  const closeButton = document.getElementById('bibliography-close');
 
-  if (
-    infoButton instanceof HTMLButtonElement &&
-    dialog instanceof HTMLDialogElement &&
-    closeButton instanceof HTMLButtonElement
-  ) {
-    if (infoButton.dataset.dialogInitialized) return;
 
-    infoButton.dataset.dialogInitialized = 'true';
-
-    infoButton.addEventListener('click', () => dialog.showModal());
-
-    closeButton.addEventListener('click', () => dialog.close());
-
-    dialog.addEventListener('click', (event) => {
-      if (event.target === dialog) {
-        dialog.close();
-      }
-    });
-  }
-}
-
-document.addEventListener('astro:page-load', setupBibliographyDialog);
 </script>

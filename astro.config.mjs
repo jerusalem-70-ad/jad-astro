@@ -28,4 +28,7 @@ export default defineConfig({
       include: ["echarts"],
     },
   },
+  experimental: {
+    incrementalBuild: true,
+  },
 });

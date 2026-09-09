@@ -22,6 +22,7 @@ const rowClickConfig = biblrefsTableConfig.getRowClickConfig;
       tableId="biblical-references-table"
       options={{
         paginationSize: 25,
+        initialSort: [{column: columns[0].field, dir:"asc"}]
       }}
       downloadTitle="jad_biblical_references"
       rowClickConfig={rowClickConfig}

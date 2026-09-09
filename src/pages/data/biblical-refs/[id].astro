@@ -12,6 +12,7 @@ export async function getStaticPaths() {
   const paths = Object.values(biblrefs).map((ref) => ({
     params: { id: ref.jad_id },
     props: { data: ref as BiblicalReference },
+    cacheKey: ref.updated,
   }));
   return paths;
 }
