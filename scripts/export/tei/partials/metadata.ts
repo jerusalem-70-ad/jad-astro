@@ -1,8 +1,7 @@
-import type { Passage, Work } from "@/types";
+import type { Passage } from "@/types";
 
 export function listKeywords(keywords: Passage["keywords"]) {
   if (!keywords.length) return "";
-  let uri = "";
   let xml = '<list type="keywords">\n<head>Keywords:</head> ';
   for (let k of keywords)
     for (let subk of k.subkeywords) // refs to SKOS taxonomy

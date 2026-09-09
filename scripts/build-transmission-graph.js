@@ -171,7 +171,7 @@ export function buildTransmissionGraph(passages) {
     processNodeGroup(descendants, parentsMap, nodeMap, "descendant");
   }
 
-  function processNodeGroup(nodes, connectionMap, nodeMap, groupType) {
+  function processNodeGroup(nodes, connectionMap, nodeMap) {
     if (nodes.length === 0) return;
 
     // Group nodes by depth

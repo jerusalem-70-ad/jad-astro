@@ -64,6 +64,7 @@ const steps = [1, 2, 3];
       <AsideSearch client:only="svelte"  />
     </div>
     <Article
+      
       prevLink={`/data/passages/${passage.prev.id}`}
       nextLink={`/data/passages/${passage.next.id}`}
       mainTitle=`Passage #${passage.id}: ${passage.passage} `
@@ -74,7 +75,7 @@ const steps = [1, 2, 3];
           <NavLink href=`/download/json/passages/${passage.jad_id}.json` class="button-custom justify-self-end">JSON</NavLink>
           <NavLink href="#citation-section" class="button-custom justify-self-end">How to cite</NavLink>
           {passage.bibliography && (
-            <button id="bibliography-info" class="bg-brand-400 text-brand-100 text-sm font-semibold m-1 
+            <button id="bibliography-info" class="bg-brand-400 text-brand-100 text-sm font-semibold
             py-1 px-2 border border-brand-900 rounded-sm justify-self-end cursor-pointer">
             Bibliography
             </button>

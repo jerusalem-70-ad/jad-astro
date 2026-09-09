@@ -127,8 +127,6 @@ const hierarchicalMenuBibl = wrapHierarcicalMenuInPanel("Biblical references");
 // 3. use the helper to add the filter to the search, clear the old refinements
 // 4. add real-time validation to the inputs
 const customDateRangeWidget = (containerId) => {
-  let activeFrom = null;
-  let activeTo = null;
   return {
     init({ helper }) {
       // Create the HTML structure for the date range widget with two inputs and apply button
@@ -309,8 +307,6 @@ const customDateCurrentRefinement = (containerId) => {
     },
   };
 };
-
-let biblicalSearchTerm = "";
 
 // add widgets
 search.addWidgets([

@@ -1,3 +1,6 @@
+<!-- component for the major network visualisation in dashboard
+ uses store for communicating filtered jad_id of nodes (coming from thee filters in search panel) -->
+<!-- most of the render and simulation in lib/graph ; here the interaction functions, initialisation with svelte onMount  -->
 <script lang="ts">
 import GraphContainer from "@/components/visualisations/graph-container.svelte"
 import GraphTitle from "@/components/visualisations/graph-title.svelte";

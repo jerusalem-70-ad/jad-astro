@@ -194,18 +194,3 @@ export function processAuthors(input) {
       .filter((f) => f.geometry.coordinates.every((coord) => !isNaN(coord))), // Filter out invalid coordinates
   };
 }
-
-// helpers function
-function formatPeriod(prov) {
-  const fromDate = prov.from?.[0]?.value || "N/A";
-  const tillDate = prov.till?.[0]?.value || "N/A";
-
-  const fromUncertain = prov.uncertain_from ? " (?)" : "";
-  const tillUncertain = prov.uncertain_till ? " (?)" : "";
-
-  if (fromDate === "N/A" && tillDate === "N/A") {
-    return "N/A";
-  }
-
-  return `From: ${fromDate}${fromUncertain} to ${tillDate}${tillUncertain}`;
-}

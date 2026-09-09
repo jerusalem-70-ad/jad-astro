@@ -1,4 +1,8 @@
 ---
+// use in passage detail view page to show related passages in a graph 
+// use echart library
+// x axis is time, nodes are passages, edges are connections (ancestors and children).
+// a bit complicated way to spread the nodes on the y axis (no data - partly random partly in groups so they dont overlap)
 import type { TransmissionGraph } from "@/types";
 
 export interface Props {

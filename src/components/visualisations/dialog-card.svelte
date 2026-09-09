@@ -1,3 +1,5 @@
+<!-- dialog for the node in the ChronologicalGraph in the dashboard, onclick on a node 
+ set the jad_id in a store the dialog read from the store -->
 <script lang="ts">
 import { onMount } from "svelte";
 import { selectedJadId } from "@/stores/jad_store.ts";

@@ -4,13 +4,6 @@ import manuscripts from "@/content/data/manuscripts.json";
 import authors from "@/content/data/authors.json";
 import works from "@/content/data/works.json";
 import { escapeSpecialCharacters, formatTeiYear } from "./helpers";
-import node from "astro/logger/node";
-
-export function makeIndex(work: Work) {
-  const authors = work.author.map((a) => {
-    return `<person>`;
-  });
-}
 
 // for the sourceDesc
 export function makeMsIndex(

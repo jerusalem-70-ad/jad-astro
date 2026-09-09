@@ -1,6 +1,7 @@
 ---
 import Layout from "@/layouts/page-layout.astro";
 import NavLink from "@/components/nav-link.astro";
+import { Icon } from "astro-icon/components";
 ---
 
 <Layout title="Linguistic Search">
@@ -104,7 +105,8 @@ import NavLink from "@/components/nav-link.astro";
                  </li>
                  <li>
                   Search for several words (AND) | Searching with Word Distance
-                  <br><span class="text-gray-600 text-xs">find two words or two lemmata, or a word and a lemma within a certain distance from each other:</span>
+                  <br><span class="text-gray-600 text-xs">find two words or two lemmata, or a word and a lemma within a certain distance from each other.
+                  <br/>Empty square brackets [ ] stand for ‘any token’. Curly brackets { } are used for repetition of the preceding token.</span>
                   <ul class="space-y-2 ml-4 list-disc list-inside">
                       <li>
                         <code class="bg-white px-2 py-1 rounded text-xs">q[word="rege"][word="Francorum"]</code>
@@ -116,7 +118,7 @@ import NavLink from "@/components/nav-link.astro";
                       </li>
                       <li>
                         <code class="bg-white px-2 py-1 rounded text-xs">q[word="decem"][]&#123;0,15&#125;[word="tribu.*"]</code>
-                        <br><span class="text-gray-600 text-xs">finds the word "decem" within 0 to 15 words away from words starting with "tribu" (like "tribus" or "tribubus")</span>
+                        <br><span class="text-gray-600 text-xs">finds the word "decem" within 0 to 15 words away from words starting with "tribu" (like "tribus" or "tribubus") </span>
                       </li>
                       <li>
                         <code class="bg-white px-2 py-1 rounded text-xs">q[lemma="cedo"][]&#123;0,15&#125;[lc="roman.*"]</code>
@@ -146,8 +148,28 @@ import NavLink from "@/components/nav-link.astro";
              <code class="bg-white px-2 py-1 rounded text-xs">.?</code> (dot-question) = matches <strong>zero or one</strong> character
              <br><span class="text-gray-600 text-xs">Example: <code class="bg-white px-1 py-0.5 rounded text-xs">.?elio</code> matches "elio" or "helio"</span>
            </li>
+            <li>
+             <code class="bg-white px-2 py-1 rounded text-xs">[ab]</code> (letters in square brackets) = matches any of the characters
+             <br><span class="text-gray-600 text-xs">Example: <code class="bg-white px-1 py-0.5 rounded text-xs">[IJ]erusalem</code> matches "Ierusalem" and "Jerusalem"</span>
+           </li>
+           <li>
+             <code class="bg-white px-2 py-1 rounded text-xs">(?i)</code> at the beginning of the expression makes the whole expression case insensitive.
+             <br><span class="text-gray-600 text-xs">Example: <code class="bg-white px-1 py-0.5 rounded text-xs">(?i).*erusalem</code> matches "Ierusalem", "Iherusalem", "ierusalem", "Jerusalem", "jerusalem", "Hierusalem" ... </span>
+           </li>
          </ul>
-       </div>
+        </div>
+        <div class="py-3">
+          <h3 class="font-semibold text-neutral-800 decoration underline underline-offset-4">For full guideliness, please refer to:</h3>
+         <ul class="space-y-1 py-1 list-disc list-inside pl-3">
+           <li>Hannes Pirker (2024). Corpus Query Language im Austrian Media Corpus. Version 1.0.0. Edited by Elisabeth Königshofer. 
+             { } <NavLink href="https://hdl.handle.net/21.11159/019595c5-1253-733f-bcb4-2796713de09f" class="inline-flex items-center gap-1 text-cyan-900 underline underline-offset-2">DARIAH Campus [Training module].  
+             <Icon aria-hidden="true" name="lucide:external-link" /></NavLink>            
+             </li>  
+             <li>
+                <NavLink href="https://www.sketchengine.eu/documentation/cql-basics/" class="inline-flex items-center gap-1 text-cyan-900 underline underline-offset-2">Sketchengine User Guide<Icon aria-hidden="true" name="lucide:external-link" /></NavLink>
+             </li>
+         </ul> 
+        </div>
        <!-- Quick Examples -->
        <div>
          <h3 class="font-semibold text-neutral-800 mb-2">Examples:</h3>

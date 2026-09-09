@@ -178,7 +178,9 @@ export const NOVA_VULGATA_ORDER = {
   Apocalypse: 75,
   Rev: 75,
 };
-// function to sort passages based on their position_in_work
+// passages belong to one work and have property 'position_in_work'
+// in the frontend 'work' detail page passages should be ordered by this field
+// this field is very heterogenic - many patterns - hence complicated function to calculate a numeric value for sorting
 export function calculateSortPosition(positionInWork) {
   if (!positionInWork) return 999999; // Put undefined positions at the end
 

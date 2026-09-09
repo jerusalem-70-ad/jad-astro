@@ -2,7 +2,7 @@
 // Import the Nova Vulgata order from your existing file
 import { NOVA_VULGATA_ORDER } from "../../scripts/sort-bibl-ref.js";
 
-// Create a custom comparator for biblical references
+// Create a custom comparator for biblical references in the advanced search hierarchical facet
 export const biblicalComparator = (a, b) => {
   // Extract the book name from the hierarchical menu item
   // The item structure is either a string or an object with 'name' property
