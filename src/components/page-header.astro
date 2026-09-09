@@ -22,6 +22,7 @@ import { Icon } from "astro-icon/components";
         >
       </h1>
     </div>
+    <!-- Mobile menu button -->
     <nav-bar class="lg:hidden">
       <button
         id="hamburger"
@@ -50,57 +51,107 @@ import { Icon } from "astro-icon/components";
     <nav
       class="hidden lg:flex items-center gap-x-2 text-brand-50 text-lg font-semibold"
     >
-    <ul class="flex items-start gap-x-8">  
-       
-      <li class="relative group">
-        <button class="flex gap-0.5 items-center" aria-haspopup="true"
-          aria-expanded="false"><NavLink href="/data" class="text-white">Data</NavLink>  
-          <Icon aria-hidden="true" class="size-4.5 transition-transform group-hover:rotate-180" name="lucide:chevron-down" />
-        </button>
+   <ul class="flex items-center gap-x-8">
+  <li class="relative" data-dropdown>    
+    <button
+      type="button"
+      class="p-1 inline-flex items-center gap-0.5 cursor-pointer"
+      aria-label="Open Data menu"
+      aria-haspopup="true"
+      aria-expanded="false"
+      data-dropdown-button
+    >Data 
+      <Icon
+        aria-hidden="true"
+        class="size-4.5 transition-transform"
+        data-dropdown-icon
+        name="lucide:chevron-down"
+      />
+    </button>
+
+    <div
+      class="absolute left-0 top-full hidden w-48 rounded-md bg-brand-800 p-3 grid gap-1"
+      data-dropdown-menu
+    >
+      <NavLink
+        class="p-2 hover:text-brand-200 hover:underline underline-offset-4"
+        href="/data/passages"
+      >
+        Passages
+      </NavLink>
+
+      <NavLink
+        class="p-2 hover:text-brand-200 hover:underline underline-offset-4"
+        href="/data/works"
+      >
+        Works
+      </NavLink>
+
+      <NavLink
+        class="p-2 hover:text-brand-200 hover:underline underline-offset-4"
+        href="/data/authors"
+      >
+        Authors
+      </NavLink>
+
+      <NavLink
+        class="p-2 hover:text-brand-200 hover:underline underline-offset-4"
+        href="/data/manuscripts"
+      >
+        Manuscripts
+      </NavLink>
+
+      <NavLink
+        class="p-2 hover:text-brand-200 hover:underline underline-offset-4"
+        href="/data/keywords"
+      >
+        Keywords
+      </NavLink>
+
+      <NavLink
+        class="p-2 hover:text-brand-200 hover:underline underline-offset-4"
+        href="/data/clusters"
+      >
+        Clusters
+      </NavLink>
+
+      <NavLink
+        class="p-2 hover:text-brand-200 hover:underline underline-offset-4"
+        href="/data/liturgical-refs"
+      >
+        Liturgical references
+      </NavLink>
+
+      <NavLink
+        class="p-2 hover:text-brand-200 hover:underline underline-offset-4"
+        href="/data/biblical-refs"
+      >
+        Biblical references
+      </NavLink>
+    </div>
+  </li>
+
+     <li class="relative" data-dropdown>
+        <button
+      type="button"
+      class="p-1 inline-flex items-center gap-0.5 cursor-pointer"
+      aria-label="Open Data menu"
+      aria-haspopup="true"
+      aria-expanded="false"
+      data-dropdown-button
+    >Tools 
+      <Icon
+        aria-hidden="true"
+        class="size-4.5 transition-transform"
+        data-dropdown-icon
+        name="lucide:chevron-down"
+      />
+    </button>
  
-        <div class="absolute left-0 top-full hidden w-48 bg-brand-800 rounded-md p-3 group-hover:grid">
-          <NavLink
-          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-          href="/data/passages">Passages</NavLink
-        >
-        <NavLink
-          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-          href="/data/works">Works</NavLink
-        >
-         <NavLink
-          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-          href="/data/authors">Authors</NavLink
-        >
-        <NavLink
-         class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-         href="/data/manuscripts">Manuscripts</NavLink
-       >
-        <NavLink
-          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-          href="/data/keywords">Keywords</NavLink
-        >
-         <NavLink
-          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-          href="/data/clusters">Clusters</NavLink
-        >
-        <NavLink
-          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-          href="/data/liturgical-refs">Liturgical references</NavLink
-        >
-        <NavLink
-          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
-          href="/data/biblical-refs">Biblical references</NavLink
-        >
-        
-        </div>
-      </li>
-     <li class="relative group">
-        <button class="flex gap-0.5 items-center" aria-haspopup="true"
-          aria-expanded="false"><NavLink href="/tools" class="text-white">Tools </NavLink> 
-          <Icon aria-hidden="true" class="size-4.5 transition-transform group-hover:rotate-180" name="lucide:chevron-down" />
-        </button>
- 
-        <div class="absolute left-0 top-full hidden w-48 bg-brand-800 rounded-md p-3 group-hover:grid">
+        <div
+      class="absolute left-0 top-full hidden w-48 rounded-md bg-brand-800 p-3 grid gap-1"
+      data-dropdown-menu
+    >
         
         <NavLink
           class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
@@ -124,13 +175,27 @@ import { Icon } from "astro-icon/components";
         >
         </div>
       </li>
-       <li class="relative group">
-        <button class="flex gap-0.5 items-center" aria-haspopup="true"
-          aria-expanded="false">About  
-          <Icon aria-hidden="true" class="size-4.5 transition-transform group-hover:rotate-180" name="lucide:chevron-down" />
-        </button>
+       <li class="relative group" data-dropdown>
+        <button
+      type="button"
+      class="p-1 inline-flex items-center gap-0.5 cursor-pointer"
+      aria-label="Open Data menu"
+      aria-haspopup="true"
+      aria-expanded="false"
+      data-dropdown-button
+    >About 
+      <Icon
+        aria-hidden="true"
+        class="size-4.5 transition-transform"
+        data-dropdown-icon
+        name="lucide:chevron-down"
+      />
+    </button>
  
-        <div class="absolute left-0 top-full hidden w-48 bg-brand-800 rounded-md p-3 group-hover:grid">
+        <div
+      class="absolute left-0 top-full hidden w-48 rounded-md bg-brand-800 p-3 grid gap-1"
+      data-dropdown-menu
+    >
           <NavLink
             class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
             href="/about/project">About the project</NavLink
@@ -148,12 +213,11 @@ import { Icon } from "astro-icon/components";
             href="/about/faqs">FAQs</NavLink
           >
         </div>
-      </li>      
-      
+      </li> 
       
       <li>
         <NavLink
-          class="hover:underline underline-offset-4 hover:text-brand-200 p-2"
+          class="hover:underline underline-offset-4 hover:text-brand-200 p-1"
           href="/advanced-search" reload>Advanced Search</NavLink>
       </li>
     </ul>
@@ -275,4 +339,9 @@ import { Icon } from "astro-icon/components";
 	navLinks?.classList.toggle("hidden");
 });
   </script>
+
+<script>
+  import { initDropdowns } from "@/lib/utils";
+   document.addEventListener("astro:page-load", initDropdowns);
+</script>
 </header>
