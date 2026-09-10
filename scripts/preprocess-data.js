@@ -381,7 +381,7 @@ const worksPlus = works
           id: p.id,
           jad_id: p.jad_id,
           passage: p.passage,
-          position_in_work: p.position_in_work,
+          position_in_work: p.position_in_work || "without attribution",
           text_paragraph: p.text_paragraph,
           occurrence_found_in: p.occurrence_found_in,
         };
