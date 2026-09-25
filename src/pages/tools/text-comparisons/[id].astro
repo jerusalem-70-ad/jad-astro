@@ -11,7 +11,6 @@ export async function getStaticPaths() {
   const paths = Object.values(passages).map((passage) => ({
     params: { id: passage.jad_id.toString() },
     props: { data: passage as Passage },
-    cacheKey: passage.updated,
   }));
   return paths;
 }
