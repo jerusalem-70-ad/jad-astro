@@ -120,6 +120,7 @@ async function generate() {
         facet: true,
         optional: true,
       },
+
       {
         name: "position_in_work",
         type: "string",
@@ -147,6 +148,18 @@ async function generate() {
       },
       {
         name: "biblical_ref_lvl1",
+        type: "string[]",
+        facet: true,
+        optional: true,
+      },
+      {
+        name: "comm_bible_lvl0",
+        type: "string[]",
+        facet: true,
+        optional: true,
+      },
+      {
+        name: "comm_bible_lvl1",
         type: "string[]",
         facet: true,
         optional: true,
@@ -212,6 +225,8 @@ async function generate() {
         liturgical_references: value.liturgical_references || [],
         biblical_ref_lvl0: value.biblical_ref_lvl0 || [],
         biblical_ref_lvl1: value.biblical_ref_lvl1 || [],
+        comm_bible_lvl1: value.commented_bible_lvl1,
+        comm_bible_lvl0: value.commented_bible_lvl0,
         keywords: value.keywords.map((k) => k.subkeywords) || [],
         work_date_not_before: workDate.not_before || 70,
         work_date_not_after: workDate.not_after || 1600,

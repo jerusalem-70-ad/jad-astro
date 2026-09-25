@@ -118,6 +118,9 @@ const refinementListliturgical = wrapInPanel("Liturgical references");
 const refinementListClusters = wrapInPanel("Clusters");
 const refinementListKeywords = wrapInPanel("Keywords");
 const hierarchicalMenuBibl = wrapHierarcicalMenuInPanel("Biblical references");
+const hierarchicalMenuCommBibl = wrapHierarcicalMenuInPanel(
+  "Commented Bible Book",
+);
 
 // Initialize a custom Algolia widget to allow users to filter results by a range of years
 // filter input from and to to two different attributes in the schema (not possible with the default range input widget)
@@ -585,35 +588,64 @@ search.addWidgets([
     },
   }),
 
+  hierarchicalMenuCommBibl({
+    container: "#refinement-list-commented-bible",
+    attributes: ["comm_bible_lvl0", "comm_bible_lvl1"],
+    separator: " > ",
+    showMore: true,
+    showMoreLimit: 50,
+    limit: 40,
+    sortBy: biblicalComparator,
+
+    templates: {
+      item(item) {
+        let label = item.label;
+
+        if (label.includes("|")) {
+          label = label.split("|")[1];
+        }
+
+        return `
+        <a class="${item.isRefined ? "ais-HierarchicalMenu-link--selected" : "ais-HierarchicalMenu-link"}">
+          <span class="ais-HierarchicalMenu-label">${label}</span>
+          <span class="ais-HierarchicalMenu-count">${item.count}</span>
+        </a>
+      `;
+      },
+    },
+  }),
+
   currentRefinements({
     container: "#current-refinements",
     transformItems(items) {
       return items.map((item) => ({
         ...item,
         label:
-          item.attribute === "biblical_ref_lvl0"
-            ? "Bible book"
-            : item.attribute === "author_search"
-              ? "Author"
-              : item.attribute === "work.title"
-                ? "Work"
-                : item.attribute === "work.genre"
-                  ? "Genre"
-                  : item.attribute === "manuscripts.value"
-                    ? "Manuscript"
-                    : item.attribute === "work.date.century"
-                      ? "Century"
-                      : item.attribute === "work.institutional_context.value"
-                        ? "Institution"
-                        : item.attribute === "cluster.value"
-                          ? "Cluster"
-                          : item.attribute === "keywords.label"
-                            ? "Keyword"
-                            : item.attribute === "Liturgical_references.value"
-                              ? "Liturgy"
-                              : item.attribute === "sources.author"
-                                ? "Source"
-                                : item.attribute,
+          item.attribute === "comm_bible_lvl0"
+            ? "Commented Bible Book"
+            : item.attribute === "biblical_ref_lvl0"
+              ? "Bible book"
+              : item.attribute === "author_search"
+                ? "Author"
+                : item.attribute === "work.title"
+                  ? "Work"
+                  : item.attribute === "work.genre"
+                    ? "Genre"
+                    : item.attribute === "manuscripts.value"
+                      ? "Manuscript"
+                      : item.attribute === "work.date.century"
+                        ? "Century"
+                        : item.attribute === "work.institutional_context.value"
+                          ? "Institution"
+                          : item.attribute === "cluster.value"
+                            ? "Cluster"
+                            : item.attribute === "keywords.label"
+                              ? "Keyword"
+                              : item.attribute === "Liturgical_references.value"
+                                ? "Liturgy"
+                                : item.attribute === "sources.author"
+                                  ? "Source"
+                                  : item.attribute,
       }));
     },
   }),

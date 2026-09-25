@@ -7,6 +7,7 @@ import {
   enrichLibraries,
   addPrevNextToItems,
 } from "./utils.js";
+import { processBibleReference } from "./helpers.ts";
 import { buildTransmissionGraph } from "./build-transmission-graph.js";
 import {
   generateBiblicalSortKey,
@@ -137,7 +138,6 @@ const authorsPlus = authors
       gnd_url: aut.gnd_url || "",
       works: related_works,
       occupation: aut.occupation || "",
-      updated: aut.updated || new Date().toISOString(),
     };
   });
 
@@ -164,7 +164,6 @@ Object.values(biblicalRef).forEach((ref) => {
       text: ref.text || "",
       nova_vulgata_url: ref.nova_vulgata_url || "",
       key: sortKey,
-      updated: ref.updated,
     };
   }
 });
@@ -195,57 +194,22 @@ const passagesPlus = passages
     // level 0 for book (not any more using the bookMap above), lv 1 for chapter, and lv 2 for verse
     const lvl0 = [];
     const lvl1 = [];
-    const lvl2 = [];
 
-    if (
-      passage.biblical_references &&
-      passage.biblical_references.length > 0 &&
-      passage.biblical_references[0].value
-    ) {
-      passage.biblical_references.forEach((ref) => {
-        let bookAbbrev, chapterVerse;
-        const specialCases = [
-          "1 John",
-          "2 John",
-          "3 John",
-          "Joel",
-          "Acts",
-          "Job",
-          "Osee",
-          "Amos",
-          "Ruth",
-          "John",
-        ];
-        const specialCase = specialCases.find((book) =>
-          ref.value.startsWith(book),
-        );
+    const bible_comm_lvl0 = [];
+    const bible_comm_lvl1 = [];
 
-        if (specialCase) {
-          bookAbbrev = specialCase;
-          chapterVerse = ref.value.substring(bookAbbrev.length).trim();
-        } else {
-          [bookAbbrev, chapterVerse] = ref.value.split(".");
-        }
-        //const book = bookMap[bookAbbrev.trim()] || bookAbbrev;
-        const book = bookAbbrev;
+    for (const ref of passage.biblical_references ?? []) {
+      const result = processBibleReference(ref);
 
-        let chapter, verse;
-        if (chapterVerse?.includes(",")) {
-          [chapter, verse] = chapterVerse.split(",");
-        } else {
-          chapter = chapterVerse;
-          verse = "";
-        }
+      lvl0.push(result.lvl0);
+      lvl1.push(result.lvl1);
+    }
 
-        // Trim any accidental spaces
-        const chapterTrimmed = chapter?.trim();
-        const verseTrimmed = verse?.trim();
-        const chapterNum = String(chapterTrimmed).padStart(3, "0");
+    for (const ref of passage.bible_comm ?? []) {
+      const result = processBibleReference(ref);
 
-        lvl0.push(book);
-        lvl1.push(`${book} > ${chapterNum}|${chapterTrimmed}`);
-        lvl2.push(`${book} > ${chapterTrimmed} > ${verseTrimmed}`);
-      });
+      bible_comm_lvl0.push(result.lvl0);
+      bible_comm_lvl1.push(result.lvl1);
     }
     // enrich the date from dates.json using helper function
     if (passage.work.some((w) => w.date?.length > 0)) {
@@ -326,6 +290,8 @@ const passagesPlus = passages
       passage: passage.passage,
       work: workForPassage,
       position_in_work: passage.position_in_work,
+      commented_bible_lvl0: bible_comm_lvl0,
+      commented_bible_lvl1: bible_comm_lvl1,
       pages: passage.text_paragraph?.match(/p\. (\d+\w?)/)?.[1] || null,
       note: passage.note,
       explicit_contemp_ref: passage.explicit_contemp_ref,
@@ -346,14 +312,12 @@ const passagesPlus = passages
       mss_occurrences: mssSorted,
       biblical_ref_lvl0: lvl0,
       biblical_ref_lvl1: lvl1,
-      biblical_ref_lvl2: lvl2,
       edition_link: passage.edition_link || "",
       status: passage.status.value || "",
       bibliography: passage.bibliography || "",
       image: passage.image || "",
       prev: passage.prev,
       next: passage.next,
-      updated: passage.updated || new Date().toISOString(), // Add updated field with current timestamp if not present
     };
   });
 
@@ -485,7 +449,6 @@ const worksPlus = works
       view_label: work.view_label || "",
       next: work.next || {},
       prev: work.prev || {},
-      updated: work.updated || new Date().toISOString(), // Add updated field with current timestamp if not present
     };
   });
 const worksEnriched = addPrevNextToItems(worksPlus, "jad_id", "title");
