@@ -3,6 +3,7 @@
 import { downloadCsv, downloadHtml } from "@/lib/noske/download-results";
 import { withBasePath } from "@/lib/withBasePath";
 import { fetchPassages } from "@/lib/noske/download-results";
+import { searchTypesense } from "@/lib/search/typsense-search";
 const uniqueJadIds = new Set();
 let currentQuery = "";
 
@@ -56,16 +57,58 @@ class CustomNoskeSearch {
     }
     this.currentPage = page;
     this.showLoading();
+
+    const allowedIds = await this.searchIds(query);
+
+    console.log("ALLOWED IDS:", allowedIds);
+    console.log("NUMBER OF IDS:", allowedIds.length);
+
     try {
-      const results = await this.search(query, page);
-      this.currentResults = results;
-      await this.displayResults(results);
-      this.displayStats(results);
-      this.displayPagination(results);
+      const { data } = await this.search(query, page);
+      const tsResult = await searchTypesense(
+        { authors: ["Andrew of St Victor"] },
+        allowedIds,
+      );
+      if (!tsResult) return; // null = stale search or an error
+      console.log("Typesense ids:", tsResult.ids);
+      this.currentResults = data;
+      await this.displayResults(data);
+      this.displayStats(data, allowedIds);
+      this.displayPagination(data);
+      console.log("NoSketch allowed IDs:", allowedIds);
     } catch (error) {
       console.error("Search error:", error);
       this.showError(error.message);
     }
+  }
+
+  //separate quetry to get ids using fcrit
+  async searchIds(query) {
+    const queryParam = this.buildQueryParam(query);
+    // use sketch engine freqs method
+    const params = new URLSearchParams({
+      corpname: this.corpname,
+      q: queryParam,
+      fcrit: "chapter.uri 0", // group hits by this structural attribute
+      flimit: "0", // don't hide rare values
+      fmaxitems: "100000", // the default limit is small (around 50), so raise it
+      format: "json",
+    });
+
+    const url = `${this.baseUrl}/bonito/run.cgi/freqs?${params}`;
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+    const data = await response.json();
+    console.log("FREQS RESPONSE:", data); // look at the shape first!
+    const allowedIds = new Set();
+    // Typical shape: data.Blocks[0].Items[] where each item has Word[0].n = the value
+    const items = data.Blocks?.[0]?.Items ?? [];
+    for (const item of items) {
+      const jad_id = item.Word[0].n.split("passages/")[1].replace(".html", "");
+      allowedIds.add(jad_id);
+    }
+    return [...allowedIds];
   }
 
   async search(query, page = 1) {
@@ -122,15 +165,12 @@ class CustomNoskeSearch {
       throw new Error("Invalid JSON received from NoSketch Engine");
     }
 
-    //console.log("=== SEARCH RESPONSE ===");
-    //console.log("Full response:", data);
+    console.log("=== SEARCH RESPONSE ===");
+    console.log("Full response:", data);
 
-    if (data.Lines && data.Lines.length > 0) {
-      //console.log("=== FIRST HIT ===");
-      //console.log("Landing Page URI:", data.Lines[0].Kwic[0].attr);
-    }
-
-    return data;
+    return {
+      data,
+    };
   }
 
   async displayResults(data) {
@@ -242,6 +282,23 @@ class CustomNoskeSearch {
       });
   }
 
+  buildQueryParam(query) {
+    switch (this.searchType) {
+      case "cql":
+        return query.startsWith("q") ? query : `q${query}`;
+      case "lemma":
+        return `q[lemma="${query}"]`;
+      case "phrase": {
+        const words = query.trim().split(/\s+/);
+        return `q${words.map((w) => `[word="${w}"]`).join("")}`;
+      }
+      case "word":
+      case "simple":
+      default:
+        return `q[word="${query}"]`;
+    }
+  }
+
   buildText(tokenArray) {
     if (!Array.isArray(tokenArray)) return "";
 
@@ -253,14 +310,14 @@ class CustomNoskeSearch {
       .join(" ");
   }
 
-  displayStats(data) {
+  displayStats(data, allowedIds) {
     const statsContainer = document.getElementById(this.statsId);
     if (!statsContainer) return;
     const totalHits = data.fullsize || 0;
     const displayedHits = data.Lines ? data.Lines.length : 0;
     statsContainer.innerHTML = `
       <div class="stats">
-        <span>Showing <strong>${displayedHits}</strong> out of <strong>${totalHits}</strong> results (${uniqueJadIds.size} unique passages)</span>
+        <span>Showing <strong>${displayedHits}</strong> out of <strong>${totalHits}</strong> results (${allowedIds.length} unique passages)</span>
       </div>
     `;
   }
@@ -312,3 +369,23 @@ class CustomNoskeSearch {
 }
 
 export default CustomNoskeSearch;
+
+// for th typsense integration we need to collect jad_id from the results
+// later we run those in typsense and use for filters
+function extractJadIds(data) {
+  const allowedIds = new Set();
+
+  for (const line of data.Lines ?? []) {
+    const chapterUri = line.Refs.find((ref) => ref.startsWith("chapter.uri="));
+
+    if (!chapterUri) continue;
+
+    const jadId = chapterUri.split("passages/")[1]?.replace(".html", "");
+
+    if (jadId) {
+      allowedIds.add(jadId);
+    }
+  }
+
+  return allowedIds;
+}

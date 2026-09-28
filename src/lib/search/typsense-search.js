@@ -40,11 +40,11 @@ export async function runSearch(filters) {
  * Does NOT update stores.
  * Safe to use for facet calculations.
  */
-export async function searchTypesense(filters) {
+export async function searchTypesense(filters, allowedIds = []) {
   const token = ++currentSearchToken;
 
   try {
-    const filter_by = buildFilterBy(filters);
+    const filter_by = buildFilterBy(filters, allowedIds);
 
     let page = 1;
     let found = 0;
@@ -106,8 +106,11 @@ function escapeFilterValue(value) {
 // unlike the other fileds connectedness is a number
 const NUMERIC_FIELDS = new Set(["connectedness"]);
 
-function buildFilterBy(filters) {
+function buildFilterBy(filters, allowedIds = []) {
   const clauses = [];
+  if (allowedIds.length > 0) {
+    clauses.push(`id:=[${allowedIds.map(escapeFilterValue).join(",")}]`);
+  }
 
   for (const [key, fieldName] of Object.entries(FIELD_MAP)) {
     const values = filters[key] ?? [];
