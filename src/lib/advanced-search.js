@@ -355,10 +355,10 @@ search.addWidgets(
           },
         ],
       }),
-    // document.querySelector("#date-range-widget") &&
-    //   customDateRangeWidget("#date-range-widget"),
-    // // Ensure InstantSearch uses the same hits-per-page as Typesense
-    // configure({ hitsPerPage: HITS_PER_PAGE }),
+    document.querySelector("#date-range-widget") &&
+      customDateRangeWidget("#date-range-widget"),
+    // Ensure InstantSearch uses the same hits-per-page as Typesense
+    configure({ hitsPerPage: HITS_PER_PAGE }),
 
     document.querySelector("#hits") &&
       hits({
@@ -627,44 +627,45 @@ search.addWidgets(
       },
     }),
 
-    // document.querySelector("#current-refinements") &&
-    //   currentRefinements({
-    //     container: "#current-refinements",
-    //     transformItems(items) {
-    //       return items.map((item) => ({
-    //         ...item,
-    //         label:
-    //           item.attribute === "comm_bible_lvl0"
-    //             ? "Commented Bible Book"
-    //             : item.attribute === "biblical_ref_lvl0"
-    //               ? "Bible book"
-    //               : item.attribute === "author_search"
-    //                 ? "Author"
-    //                 : item.attribute === "work.title"
-    //                   ? "Work"
-    //                   : item.attribute === "work.genre"
-    //                     ? "Genre"
-    //                     : item.attribute === "manuscripts.value"
-    //                       ? "Manuscript"
-    //                       : item.attribute === "work.date.century"
-    //                         ? "Century"
-    //                         : item.attribute ===
-    //                             "work.institutional_context.value"
-    //                           ? "Institution"
-    //                           : item.attribute === "cluster.value"
-    //                             ? "Cluster"
-    //                             : item.attribute === "keywords.label"
-    //                               ? "Keyword"
-    //                               : item.attribute ===
-    //                                   "Liturgical_references.value"
-    //                                 ? "Liturgy"
-    //                                 : item.attribute === "sources.author"
-    //                                   ? "Source"
-    //                                   : item.attribute,
-    //       }));
-    //     },
-    //   }),
-    // customDateCurrentRefinement("#current-refinements"),
+    document.querySelector("#current-refinements") &&
+      currentRefinements({
+        container: "#current-refinements",
+        transformItems(items) {
+          return items.map((item) => ({
+            ...item,
+            label:
+              item.attribute === "comm_bible_lvl0"
+                ? "Commented Bible Book"
+                : item.attribute === "biblical_ref_lvl0"
+                  ? "Bible book"
+                  : item.attribute === "author_search"
+                    ? "Author"
+                    : item.attribute === "work.title"
+                      ? "Work"
+                      : item.attribute === "work.genre"
+                        ? "Genre"
+                        : item.attribute === "manuscripts.value"
+                          ? "Manuscript"
+                          : item.attribute === "work.date.century"
+                            ? "Century"
+                            : item.attribute ===
+                                "work.institutional_context.value"
+                              ? "Institution"
+                              : item.attribute === "cluster.value"
+                                ? "Cluster"
+                                : item.attribute === "keywords.label"
+                                  ? "Keyword"
+                                  : item.attribute ===
+                                      "Liturgical_references.value"
+                                    ? "Liturgy"
+                                    : item.attribute === "sources.author"
+                                      ? "Source"
+                                      : item.attribute,
+          }));
+        },
+      }),
+    document.querySelector("#current-refinements") &&
+      customDateCurrentRefinement("#current-refinements"),
 
     document.querySelector("#clear-refinements") &&
       clearRefinements({
@@ -680,14 +681,17 @@ let lastAppliedFilter = null;
 let suppressNextRender = false; // flag to avoid double run of the search
 
 export function restrictToIds(ids) {
-  const filter = Array.isArray(ids)
-    ? `id:=[${ids.map((id) => `\`${id}\``).join(",")}]`
-    : "";
+  let filter;
+  if (!Array.isArray(ids)) {
+    filter = ""; // no restriction at all (used by the dashboard page)
+  } else if (ids.length === 0) {
+    filter = "id:=[`__no_search_yet__`]"; // a value that can never match a real document
+  } else {
+    filter = `id:=[${ids.map((id) => `\`${id}\``).join(",")}]`;
+  }
 
   if (filter === lastAppliedFilter) return;
-
   lastAppliedFilter = filter;
-  suppressNextRender = true; // suppress since no user interaction
   search.helper.setQueryParameter("filters", filter);
   search.helper.search();
 }
@@ -701,6 +705,19 @@ function getRefinementsSnapshot(state) {
     hierarchicalFacetsRefinements: state.hierarchicalFacetsRefinements,
     numericRefinements: state.numericRefinements,
   });
+}
+
+export function resetFacetsForNewSearch() {
+  const helper = search.helper;
+  if (!helper) return;
+
+  helper.clearRefinements(); // unchecks every author/genre/etc. selection
+
+  // Mark this as already accounted for, so the render it causes
+  // isn't mistaken for a real user facet click
+  lastRefinementsSnapshot = getRefinementsSnapshot(helper.state);
+
+  helper.search();
 }
 
 export function onFilteredIdsChange(callback) {

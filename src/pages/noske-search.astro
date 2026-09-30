@@ -78,7 +78,7 @@ import SearchPanel from "@/components/search/filter-panel.astro";
       <p class="font-semibold text-neutral-800 mb-2 decoration underline underline-offset-4 text-base">Select one of the <span class="font-bold">four</span> search modes available in the drop down menu below:</p>
        <ul class="pt-3 space-y-2 ml-4 list-decimal">
          <li>
-           <span class="font-semibold text-brand-700 mb-2">Simple mode:</span> Search for a <strong>single</strong> word e.g. <code class="bg-white px-2 py-1 rounded text-xs">Jerusalem</code>
+           <span class="font-semibold text-brand-700 mb-2">Simple:</span> Search for a <strong>single</strong> word e.g. <code class="bg-white px-2 py-1 rounded text-xs">Jerusalem</code>
            or
            <code class="bg-white px-2 py-1 rounded text-xs">.*rusalem</code>
           <br><span class="text-gray-600 text-xs">shows all occurrences of the word with the exact same spelling or with variations when using wild cards (see further below).</span>
@@ -190,38 +190,28 @@ import SearchPanel from "@/components/search/filter-panel.astro";
      </div>
     </div>
     </details>
-    <div class="grid grid-cols-[auto_1fr_auto] gap-2 items-stretch">
-      <select id="search-type-select" class="border border-gray-300 rounded-lg p-2">
-        <option value="simple">Simple</option>
-        <option value="phrase">Phrase</option>
-        <option value="lemma">Lemma</option>
-        <option value="cql">CQL</option>
-      </select>
-      <input type="text" id="search-input" class="w-full p-2 border border-gray-300 rounded-lg"/>
-      <button id="search-button" class="button-custom rounded-lg">Search</button>
+    <div class="grid grid-cols-[1fr_3fr] gap-4 items-stretch">
+      <div class="border border-gray-300 rounded-lg px-2 py-1 flex items-center gap-1 bg-brand-500/70">
+        <label for="search-type-select" class="text-white font-semibold text-xl font-mono uppercase">Search Mode: </label>
+        <select id="search-type-select" class="flex-1 text-brand-700 text-lg font-mono font-semibold rounded-lg py-1 px-2 bg-brand-50">
+          <option value="simple">Simple</option>
+          <option value="phrase">Phrase</option>
+          <option value="lemma">Lemma</option>
+          <option value="cql">CQL</option>
+        </select>
+      </div>
+      <div class="flex gap-1">
+        <input type="text" id="search-input" class="w-full p-2 border border-gray-300 rounded-lg"/>
+        <button id="search-button" class="button-custom rounded-lg">Search</button>
+      </div>
     </div>
-     <div class="grid md:grid-cols-[1fr_3fr] gap-6">
-      <SearchPanel/>
+     <div class="grid md:grid-cols-[1fr_3fr] gap-4">
+      <SearchPanel noskeSearch = {true}/>
       <section class="space-y-3">
-        <div class="md:flex items-center space-y-2 md:space-y-0">
-          <div class="md:flex items-center space-y-2 md:space-y-0">
-            <!-- <div
-              id="stats-container"
-              class="flex items-center gap-2 text-sm font-medium text-neutral-700"
-            ></div>
-
-            <div class="flex items-center gap-3 border-l pl-3 min-w-0 text-sm ms-auto">
-              <h3 class="text-center font-semibold uppercase text-neutral-700">
-                Sort by:
-              </h3>
-              <div id="sort"></div>
-            </div> -->
-          </div>
-          <!-- current refinements and clear -->
-          <div class="grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-start gap-2">
-            <div id="current-refinements" class="min-w-0 text-sm text-gray-600"></div>
-            <div id="clear-refinements" class="flex items-center"></div>
-          </div>
+        <div id="current-refinements" class="hidden"/>
+        <div class="grid space-y-2 justify-items-center">    
+            <div id="stats" class="py-2 text-center"></div>      
+         
           <div id="results" class="bg-white"></div>
           <div id="pagination"></div>
         </div>

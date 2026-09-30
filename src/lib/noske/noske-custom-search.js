@@ -7,6 +7,7 @@ import {
   restrictToIds,
   onFilteredIdsChange,
   getAllFilteredIds,
+  resetFacetsForNewSearch,
 } from "@/lib/advanced-search.js";
 const uniqueJadIds = new Set();
 let currentQuery = "";
@@ -31,7 +32,9 @@ class CustomNoskeSearch {
     this.currentPage = 1;
     this.currentResults = null;
     this.hasSearched = false;
+    this.lastQuery = null;
     onFilteredIdsChange(() => this.handleFacetChange());
+    restrictToIds([]); // force facets empty until the first real NoSketch search
     this.init();
   }
 
@@ -56,7 +59,7 @@ class CustomNoskeSearch {
   }
 
   async executeSearch(page = 1) {
-    if (this.isSearching) return; // ignore calls while one is already in flight
+    if (this.isSearching) return;
     this.isSearching = true;
     try {
       const searchInput = document.getElementById(this.searchInputId);
@@ -65,7 +68,15 @@ class CustomNoskeSearch {
         console.warn("No search query provided");
         return;
       }
-      this.hasSearched = true; // mark the serch for typsense to start via handleFacetChange
+
+      const isNewQuery = query !== this.lastQuery;
+      if (isNewQuery) {
+        this.lastQuery = query;
+        this.facetFilteredIds = null; // drop the old search's facet restriction
+        resetFacetsForNewSearch(); // clear checkboxes left over from the previous search
+      }
+
+      this.hasSearched = true;
       this.currentPage = page;
       this.showLoading();
 
@@ -124,7 +135,7 @@ class CustomNoskeSearch {
   async search(query, page = 1) {
     let queryParam = this.buildDisplayQueryParam(query); // to get any facets from typsense
     console.log("DISPLAY QUERY PARAM:", queryParam);
-    const params = new URLSearchParams({
+    const body = new URLSearchParams({
       corpname: this.corpname,
       q: queryParam,
       attrs: this.attrs,
@@ -137,13 +148,14 @@ class CustomNoskeSearch {
       asyn: 0,
     });
 
-    const url = `${
-      this.baseUrl
-    }/bonito/run.cgi/concordance?${params.toString()}`;
-    //console.log("=== SEARCH REQUEST ===");
-    console.log("URL length:", url.length, url);
+    const url = `${this.baseUrl}/bonito/run.cgi/concordance`;
 
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body.toString(),
+    });
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -331,7 +343,7 @@ class CustomNoskeSearch {
     const displayedHits = data.Lines ? data.Lines.length : 0;
     statsContainer.innerHTML = `
       <div class="stats">
-        <span>Showing <strong>${displayedHits}</strong> out of <strong>${totalHits}</strong> results (${allowedIds.length} unique passages)</span>
+        <span>Showing <strong>${displayedHits}</strong> out of <strong>${totalHits}</strong> results (${this.facetFilteredIds?.length ? this.facetFilteredIds?.length : allowedIds.length} unique passages)</span>
       </div>
     `;
   }
