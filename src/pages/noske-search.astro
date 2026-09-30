@@ -2,6 +2,8 @@
 import Layout from "@/layouts/page-layout.astro";
 import NavLink from "@/components/nav-link.astro";
 import { Icon } from "astro-icon/components";
+import SearchPanel from "@/components/search/filter-panel.astro";
+
 ---
 
 <Layout title="Linguistic Search">
@@ -198,13 +200,37 @@ import { Icon } from "astro-icon/components";
       <input type="text" id="search-input" class="w-full p-2 border border-gray-300 rounded-lg"/>
       <button id="search-button" class="button-custom rounded-lg">Search</button>
     </div>
-    
-    <div id="stats" class="py-2 text-center"></div>
-    <div id="results" class="bg-white"></div>
-    <div id="pagination"></div>
+     <div class="grid md:grid-cols-[1fr_3fr] gap-6">
+      <SearchPanel/>
+      <section class="space-y-3">
+        <div class="md:flex items-center space-y-2 md:space-y-0">
+          <div class="md:flex items-center space-y-2 md:space-y-0">
+            <!-- <div
+              id="stats-container"
+              class="flex items-center gap-2 text-sm font-medium text-neutral-700"
+            ></div>
+
+            <div class="flex items-center gap-3 border-l pl-3 min-w-0 text-sm ms-auto">
+              <h3 class="text-center font-semibold uppercase text-neutral-700">
+                Sort by:
+              </h3>
+              <div id="sort"></div>
+            </div> -->
+          </div>
+          <!-- current refinements and clear -->
+          <div class="grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-start gap-2">
+            <div id="current-refinements" class="min-w-0 text-sm text-gray-600"></div>
+            <div id="clear-refinements" class="flex items-center"></div>
+          </div>
+          <div id="results" class="bg-white"></div>
+          <div id="pagination"></div>
+        </div>
+      </section>
+    </div>
   </div>
 </div>
     
 </Layout>
 
 <script src="@/lib/noske/noske-search.js"></script>
+<script src="@/lib/advanced-search.js"></script>

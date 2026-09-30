@@ -3,12 +3,17 @@
 import { downloadCsv, downloadHtml } from "@/lib/noske/download-results";
 import { withBasePath } from "@/lib/withBasePath";
 import { fetchPassages } from "@/lib/noske/download-results";
-import { searchTypesense } from "@/lib/search/typsense-search";
+import {
+  restrictToIds,
+  onFilteredIdsChange,
+  getAllFilteredIds,
+} from "@/lib/advanced-search.js";
 const uniqueJadIds = new Set();
 let currentQuery = "";
 
 class CustomNoskeSearch {
   constructor(config) {
+    console.log("CustomNoskeSearch constructed:", Math.random());
     this.baseUrl = config.baseUrl;
     this.corpname = config.corpname;
     this.attrs = config.attrs || "word,lemma,pos,landingPageURI,orth,norm";
@@ -25,6 +30,8 @@ class CustomNoskeSearch {
     this.paginationId = config.paginationId;
     this.currentPage = 1;
     this.currentResults = null;
+    this.hasSearched = false;
+    onFilteredIdsChange(() => this.handleFacetChange());
     this.init();
   }
 
@@ -49,49 +56,46 @@ class CustomNoskeSearch {
   }
 
   async executeSearch(page = 1) {
-    const searchInput = document.getElementById(this.searchInputId);
-    const query = searchInput ? searchInput.value : "";
-    if (!query) {
-      console.warn("No search query provided");
-      return;
-    }
-    this.currentPage = page;
-    this.showLoading();
-
-    const allowedIds = await this.searchIds(query);
-
-    console.log("ALLOWED IDS:", allowedIds);
-    console.log("NUMBER OF IDS:", allowedIds.length);
-
+    if (this.isSearching) return; // ignore calls while one is already in flight
+    this.isSearching = true;
     try {
-      const { data } = await this.search(query, page);
-      const tsResult = await searchTypesense(
-        { authors: ["Andrew of St Victor"] },
-        allowedIds,
-      );
-      if (!tsResult) return; // null = stale search or an error
-      console.log("Typesense ids:", tsResult.ids);
-      this.currentResults = data;
-      await this.displayResults(data);
-      this.displayStats(data, allowedIds);
-      this.displayPagination(data);
-      console.log("NoSketch allowed IDs:", allowedIds);
-    } catch (error) {
-      console.error("Search error:", error);
-      this.showError(error.message);
+      const searchInput = document.getElementById(this.searchInputId);
+      const query = searchInput ? searchInput.value : "";
+      if (!query) {
+        console.warn("No search query provided");
+        return;
+      }
+      this.hasSearched = true; // mark the serch for typsense to start via handleFacetChange
+      this.currentPage = page;
+      this.showLoading();
+
+      const allowedIds = await this.searchIds(query);
+      restrictToIds(allowedIds); // tells the facets: "only count within these ids"
+      console.log("Noske allows ids:", allowedIds);
+      try {
+        const { data } = await this.search(query, page);
+        this.currentResults = data;
+        await this.displayResults(data);
+        this.displayStats(data, allowedIds);
+        this.displayPagination(data);
+      } catch (error) {
+        console.error("Search error:", error);
+        this.showError(error.message);
+      }
+    } finally {
+      this.isSearching = false;
     }
   }
 
   //separate quetry to get ids using fcrit
   async searchIds(query) {
     const queryParam = this.buildQueryParam(query);
-    // use sketch engine freqs method
     const params = new URLSearchParams({
       corpname: this.corpname,
       q: queryParam,
-      fcrit: "chapter.uri 0", // group hits by this structural attribute
-      flimit: "0", // don't hide rare values
-      fmaxitems: "100000", // the default limit is small (around 50), so raise it
+      fcrit: "chapter.uri 0",
+      flimit: "0",
+      fmaxitems: "100000",
       format: "json",
     });
 
@@ -100,40 +104,26 @@ class CustomNoskeSearch {
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
     const data = await response.json();
-    console.log("FREQS RESPONSE:", data); // look at the shape first!
-    const allowedIds = new Set();
-    // Typical shape: data.Blocks[0].Items[] where each item has Word[0].n = the value
     const items = data.Blocks?.[0]?.Items ?? [];
+
+    const idToUri = new Map(); // jad_id -> the exact original chapter.uri
     for (const item of items) {
-      const jad_id = item.Word[0].n.split("passages/")[1].replace(".html", "");
-      allowedIds.add(jad_id);
+      const fullUri = item.Word?.[0]?.n ?? "";
+      const jad_id = fullUri.split("passages/")[1]?.replace(".html", "");
+      if (!jad_id) {
+        console.warn("Unexpected chapter.uri format:", fullUri);
+        continue;
+      }
+      idToUri.set(jad_id, fullUri); // keep the ORIGINAL, exact string for noske to send back
     }
-    return [...allowedIds];
+
+    this.idToUri = idToUri; // store on the instance so buildDisplayQueryParam can use it later
+    return [...idToUri.keys()]; // return plain ids, for Typesense
   }
 
   async search(query, page = 1) {
-    let queryParam;
-    switch (this.searchType) {
-      case "cql":
-        queryParam = query.startsWith("q") ? query : `q${query}`;
-        break;
-      case "lemma":
-        queryParam = `q[lemma="${query}"]`;
-        break;
-      case "phrase":
-        const words = query.trim().split(/\s+/);
-        const phraseQuery = words.map((word) => `[word="${word}"]`).join("");
-        queryParam = `q${phraseQuery}`;
-        break;
-      case "word":
-        queryParam = `q[word="${query}"]`;
-        break;
-      case "simple":
-      default:
-        queryParam = `q[word="${query}"]`;
-        break;
-    }
-
+    let queryParam = this.buildDisplayQueryParam(query); // to get any facets from typsense
+    console.log("DISPLAY QUERY PARAM:", queryParam);
     const params = new URLSearchParams({
       corpname: this.corpname,
       q: queryParam,
@@ -151,7 +141,7 @@ class CustomNoskeSearch {
       this.baseUrl
     }/bonito/run.cgi/concordance?${params.toString()}`;
     //console.log("=== SEARCH REQUEST ===");
-    // console.log("URL:", url);
+    console.log("URL length:", url.length, url);
 
     const response = await fetch(url);
     if (!response.ok) {
@@ -282,6 +272,14 @@ class CustomNoskeSearch {
       });
   }
 
+  async handleFacetChange() {
+    if (!this.hasSearched) return;
+    const filteredIds = await getAllFilteredIds();
+    console.log("FACET FILTERED IDS:", filteredIds.length, filteredIds); // add this
+    this.facetFilteredIds = filteredIds;
+    await this.executeSearch(this.currentPage);
+  }
+
   buildQueryParam(query) {
     switch (this.searchType) {
       case "cql":
@@ -297,6 +295,22 @@ class CustomNoskeSearch {
       default:
         return `q[word="${query}"]`;
     }
+  }
+
+  buildDisplayQueryParam(query) {
+    // used ONLY for the KWIC display call (this.search), adds facet restriction
+    let base = this.buildQueryParam(query);
+    if (this.facetFilteredIds?.length) {
+      const uris = this.facetFilteredIds
+        .map((id) => this.idToUri?.get(id))
+        .join("|");
+      base += ` within <chapter uri="${uris}"/>`;
+      const missing = this.facetFilteredIds.filter(
+        (id) => !this.idToUri?.has(id),
+      );
+      if (missing.length) console.warn("No URI found for these ids:", missing);
+    }
+    return base;
   }
 
   buildText(tokenArray) {
@@ -369,23 +383,3 @@ class CustomNoskeSearch {
 }
 
 export default CustomNoskeSearch;
-
-// for th typsense integration we need to collect jad_id from the results
-// later we run those in typsense and use for filters
-function extractJadIds(data) {
-  const allowedIds = new Set();
-
-  for (const line of data.Lines ?? []) {
-    const chapterUri = line.Refs.find((ref) => ref.startsWith("chapter.uri="));
-
-    if (!chapterUri) continue;
-
-    const jadId = chapterUri.split("passages/")[1]?.replace(".html", "");
-
-    if (jadId) {
-      allowedIds.add(jadId);
-    }
-  }
-
-  return allowedIds;
-}

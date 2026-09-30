@@ -1,3 +1,4 @@
+console.log("advanced-search.js loaded, instance:", Math.random());
 import instantsearch from "instantsearch.js";
 import TypesenseInstantsearchAdapter from "typesense-instantsearch-adapter";
 import {
@@ -312,121 +313,130 @@ const customDateCurrentRefinement = (containerId) => {
 };
 
 // add widgets
-search.addWidgets([
-  searchBox({
-    container: "#searchbox",
-    autofocus: true,
-    placeholder: "Text search",
-  }),
-  sortBy({
-    container: "#sort",
-    items: [
-      {
-        value: "JAD-temp/sort/author:asc",
-        label: "Author A-Z",
-      },
-      {
-        value: "JAD-temp/sort/author:desc",
-        label: "Author Z-A",
-      },
-      {
-        value: "JAD-temp/sort/title_work:asc",
-        label: "Title A-Z",
-      },
-      {
-        value: "JAD-temp/sort/title_work:desc",
-        label: "Title Z-A",
-      },
-      {
-        value: "JAD-temp/sort/work_date_not_before:asc",
-        label: "Date (earliest first)",
-      },
-      {
-        value: "JAD-temp/sort/work_date_not_before:desc",
-        label: "Date (latest first)",
-      },
-      {
-        value: "JAD-temp/sort/sort_id:asc",
-        label: "ID",
-      },
-    ],
-  }),
-  customDateRangeWidget("#date-range-widget"),
-  // Ensure InstantSearch uses the same hits-per-page as Typesense
-  configure({ hitsPerPage: HITS_PER_PAGE }),
-  hits({
-    container: "#hits",
-    transformItems(items) {
-      return items.map((item) => {
-        // Transform works (keeping your existing logic)
-        const transformedWorks = (item.work || []).map((work) => ({
-          title: work.title || "Unknown Title",
-          authors: (work.author || []).map(
-            (author) => author.name || "Unknown Author",
-          ),
-          date: (work.date.map((date) => date.value) || []).join(", "),
-        }));
+search.addWidgets(
+  [
+    document.querySelector("#searchbox") &&
+      searchBox({
+        container: "#searchbox",
+        autofocus: true,
+        placeholder: "Text search",
+      }),
+    document.querySelector("#sort") &&
+      sortBy({
+        container: "#sort",
+        items: [
+          {
+            value: "JAD-temp/sort/author:asc",
+            label: "Author A-Z",
+          },
+          {
+            value: "JAD-temp/sort/author:desc",
+            label: "Author Z-A",
+          },
+          {
+            value: "JAD-temp/sort/title_work:asc",
+            label: "Title A-Z",
+          },
+          {
+            value: "JAD-temp/sort/title_work:desc",
+            label: "Title Z-A",
+          },
+          {
+            value: "JAD-temp/sort/work_date_not_before:asc",
+            label: "Date (earliest first)",
+          },
+          {
+            value: "JAD-temp/sort/work_date_not_before:desc",
+            label: "Date (latest first)",
+          },
+          {
+            value: "JAD-temp/sort/sort_id:asc",
+            label: "ID",
+          },
+        ],
+      }),
+    // document.querySelector("#date-range-widget") &&
+    //   customDateRangeWidget("#date-range-widget"),
+    // // Ensure InstantSearch uses the same hits-per-page as Typesense
+    // configure({ hitsPerPage: HITS_PER_PAGE }),
 
-        // Extract snippet with highlights
-        const fullTextHighlight = item._highlightResult?.full_text?.value || "";
-        const searchTextHighlight =
-          item._highlightResult?.search_text?.value || "";
+    document.querySelector("#hits") &&
+      hits({
+        container: "#hits",
+        transformItems(items) {
+          return items.map((item) => {
+            // Transform works (keeping your existing logic)
+            const transformedWorks = (item.work || []).map((work) => ({
+              title: work.title || "Unknown Title",
+              authors: (work.author || []).map(
+                (author) => author.name || "Unknown Author",
+              ),
+              date: (work.date.map((date) => date.value) || []).join(", "),
+            }));
 
-        let snippet = "";
+            // Extract snippet with highlights
+            const fullTextHighlight =
+              item._highlightResult?.full_text?.value || "";
+            const searchTextHighlight =
+              item._highlightResult?.search_text?.value || "";
 
-        if (fullTextHighlight.includes("<mark>")) {
-          snippet = extractSnippetAroundHighlight(fullTextHighlight);
-        } else if (searchTextHighlight.includes("<mark>")) {
-          snippet = extractSnippetAroundHighlight(searchTextHighlight);
-        } else {
-          // Fallback and default in case no text query
-          snippet = item.full_text;
-        }
+            let snippet = "";
 
-        return {
-          ...item,
-          transformedWorks,
-          displaySnippet: snippet,
-        };
-      });
-    },
-    templates: {
-      empty: "No results for <q>{{ query }}</q>",
-      item(hit) {
-        // Generate HTML for each transformed work
-        const renderWorks = (works) => {
-          if (!works || works.length === 0) return "<p>No works available</p>";
+            if (fullTextHighlight.includes("<mark>")) {
+              snippet = extractSnippetAroundHighlight(fullTextHighlight);
+            } else if (searchTextHighlight.includes("<mark>")) {
+              snippet = extractSnippetAroundHighlight(searchTextHighlight);
+            } else {
+              // Fallback and default in case no text query
+              snippet = item.full_text;
+            }
 
-          return works
-            .map(
-              (work) => `
+            return {
+              ...item,
+              transformedWorks,
+              displaySnippet: snippet,
+            };
+          });
+        },
+        templates: {
+          empty: "No results for <q>{{ query }}</q>",
+          item(hit) {
+            // Generate HTML for each transformed work
+            const renderWorks = (works) => {
+              if (!works || works.length === 0)
+                return "<p>No works available</p>";
+
+              return works
+                .map(
+                  (work) => `
                 <div class="work-item">
                   <p><strong>Title:</strong> ${work.title}</p>
                   <p><strong>Author:</strong> ${work.authors.join(", ")}</p>
                   <p><strong>Date:</strong> ${work.date}</p>
                 </div>
               `,
-            )
-            .join("");
-        };
+                )
+                .join("");
+            };
 
-        // Determine best highlight (prefer full_text if it has a match)
-        const fullTextHighlight = hit._highlightResult?.full_text?.value || "";
-        const searchTextHighlight =
-          hit._highlightResult?.search_text?.value || "";
+            // Determine best highlight (prefer full_text if it has a match)
+            const fullTextHighlight =
+              hit._highlightResult?.full_text?.value || "";
+            const searchTextHighlight =
+              hit._highlightResult?.search_text?.value || "";
 
-        const highlightHTML = fullTextHighlight.includes("<mark>")
-          ? fullTextHighlight
-          : searchTextHighlight.includes("<mark>")
-            ? `${searchTextHighlight} <span class="text-xs text-brand-400">(normalized match)</span>
+            const highlightHTML = fullTextHighlight.includes("<mark>")
+              ? fullTextHighlight
+              : searchTextHighlight.includes("<mark>")
+                ? `${searchTextHighlight} <span class="text-xs text-brand-400">(normalized match)</span>
           <details class="m-1 px-3 py-2 text-sm">
             <summary class="cursor-pointer text-brand-400"><span class="font-semibold">NB!</span> This is the normalized match. Click here to see the original text </summary>
             <p class="mt-1 italic">${hit.full_text}</p>
           </details>`
-            : "";
+                : "";
 
-        // Generate the main HTML for the hit
-        return `
+            // Generate the main HTML for the hit
+            return `
     <article class="grid w-full">
       <h3 class="font-semibold text-base md:text-lg text-brand-800">
         <a href="${withBasePath(`/data/passages/${hit.id}`)}" class="underline">
@@ -449,33 +459,35 @@ search.addWidgets([
               
     </article>
   `;
-      },
-    },
-  }),
+          },
+        },
+      }),
 
-  pagination({
-    container: "#pagination",
-  }),
+    document.querySelector("#ts-pagination") &&
+      pagination({
+        container: "#ts-pagination",
+      }),
 
-  stats({
-    container: "#stats-container",
-  }),
+    document.querySelector("#stats-container") &&
+      stats({
+        container: "#stats-container",
+      }),
 
-  refinementListAuthor({
-    container: "#refinement-list-author",
-    attribute: "author_search", // searching in the normalized field lower case no dashes
-    searchable: true,
-    showMore: true,
-    showMoreLimit: 50,
-    limit: 10,
-    searchablePlaceholder: "e.g. Saint-Cher",
-    // customized template to get the original names using authorLookupMap
-    templates: {
-      item: (item) => {
-        const displayName = authorLookupMap[item.label] || item.label;
-        const isRefined = item.isRefined ? "checked" : "";
+    refinementListAuthor({
+      container: "#refinement-list-author",
+      attribute: "author_search", // searching in the normalized field lower case no dashes
+      searchable: true,
+      showMore: true,
+      showMoreLimit: 50,
+      limit: 10,
+      searchablePlaceholder: "e.g. Saint-Cher",
+      // customized template to get the original names using authorLookupMap
+      templates: {
+        item: (item) => {
+          const displayName = authorLookupMap[item.label] || item.label;
+          const isRefined = item.isRefined ? "checked" : "";
 
-        return `
+          return `
         <label class="ais-RefinementList-label">
           <input
             type="checkbox"
@@ -487,176 +499,227 @@ search.addWidgets([
           <span class="ais-RefinementList-count">${item.count}</span>
         </label>
       `;
+        },
       },
-    },
-  }),
+    }),
 
-  refinementListWork({
-    container: "#refinement-list-work",
-    attribute: "work.title",
-    searchable: true,
-    showMore: true,
-    showMoreLimit: 50,
-    limit: 10,
-    searchablePlaceholder: "e.g. Epistolae",
-  }),
+    refinementListWork({
+      container: "#refinement-list-work",
+      attribute: "work.title",
+      searchable: true,
+      showMore: true,
+      showMoreLimit: 50,
+      limit: 10,
+      searchablePlaceholder: "e.g. Epistolae",
+    }),
 
-  refinementListGenre({
-    container: "#refinement-list-genre",
-    attribute: "work.genre",
-    searchable: true,
-    showMore: true,
-    showMoreLimit: 50,
-    limit: 10,
-    searchablePlaceholder: "e.g. Sermon",
-  }),
+    refinementListGenre({
+      container: "#refinement-list-genre",
+      attribute: "work.genre",
+      searchable: true,
+      showMore: true,
+      showMoreLimit: 50,
+      limit: 10,
+      searchablePlaceholder: "e.g. Sermon",
+    }),
 
-  refinementListWorkCentury({
-    container: "#refinement-list-workcentury",
-    attribute: "work.date.century",
-    searchable: true,
-    sortBy: centuryComparator,
-    showMore: true,
-    showMoreLimit: 50,
-    limit: 10,
-    searchablePlaceholder: "e.g. 9th c.",
-  }),
+    refinementListWorkCentury({
+      container: "#refinement-list-workcentury",
+      attribute: "work.date.century",
+      searchable: true,
+      sortBy: centuryComparator,
+      showMore: true,
+      showMoreLimit: 50,
+      limit: 10,
+      searchablePlaceholder: "e.g. 9th c.",
+    }),
 
-  refinementListManuscript({
-    container: "#refinement-list-manuscript",
-    attribute: "manuscripts.manuscript",
-    searchable: true,
-    showMore: true,
-    showMoreLimit: 50,
-    limit: 10,
-    searchablePlaceholder: "e.g. MS 999",
-  }),
+    refinementListManuscript({
+      container: "#refinement-list-manuscript",
+      attribute: "manuscripts.manuscript",
+      searchable: true,
+      showMore: true,
+      showMoreLimit: 50,
+      limit: 10,
+      searchablePlaceholder: "e.g. MS 999",
+    }),
 
-  refinementListClusters({
-    container: "#refinement-list-clusters",
-    attribute: "cluster.value",
-    searchable: true,
-    showMore: true,
-    showMoreLimit: 50,
-    limit: 10,
-    searchablePlaceholder: "e.g. Crusade",
-  }),
+    refinementListClusters({
+      container: "#refinement-list-clusters",
+      attribute: "cluster.value",
+      searchable: true,
+      showMore: true,
+      showMoreLimit: 50,
+      limit: 10,
+      searchablePlaceholder: "e.g. Crusade",
+    }),
 
-  refinementListKeywords({
-    container: "#refinement-list-keywords",
-    attribute: "keywords.label",
-    searchable: true,
-    showMore: true,
-    showMoreLimit: 50,
-    limit: 10,
-    searchablePlaceholder: "e.g. Heresy",
-  }),
-  refinementListliturgical({
-    container: "#refinement-list-liturgical",
-    attribute: "liturgical_references.value",
-    searchable: true,
-    showMore: true,
-    showMoreLimit: 50,
-    limit: 10,
-    searchablePlaceholder: "e.g. Pentecost",
-  }),
+    refinementListKeywords({
+      container: "#refinement-list-keywords",
+      attribute: "keywords.label",
+      searchable: true,
+      showMore: true,
+      showMoreLimit: 50,
+      limit: 10,
+      searchablePlaceholder: "e.g. Heresy",
+    }),
+    refinementListliturgical({
+      container: "#refinement-list-liturgical",
+      attribute: "liturgical_references.value",
+      searchable: true,
+      showMore: true,
+      showMoreLimit: 50,
+      limit: 10,
+      searchablePlaceholder: "e.g. Pentecost",
+    }),
 
-  hierarchicalMenuBibl({
-    container: "#refinement-list-biblical",
-    attributes: ["biblical_ref_lvl0", "biblical_ref_lvl1"],
-    separator: " > ",
-    showMore: true,
-    showMoreLimit: 50,
-    limit: 40,
-    sortBy: biblicalComparator,
+    hierarchicalMenuBibl({
+      container: "#refinement-list-biblical",
+      attributes: ["biblical_ref_lvl0", "biblical_ref_lvl1"],
+      separator: " > ",
+      showMore: true,
+      showMoreLimit: 50,
+      limit: 40,
+      sortBy: biblicalComparator,
 
-    templates: {
-      item(item) {
-        let label = item.label;
+      templates: {
+        item(item) {
+          let label = item.label;
 
-        if (label.includes("|")) {
-          label = label.split("|")[1];
-        }
+          if (label.includes("|")) {
+            label = label.split("|")[1];
+          }
 
-        return `
+          return `
         <a class="${item.isRefined ? "ais-HierarchicalMenu-link--selected" : "ais-HierarchicalMenu-link"}">
           <span class="ais-HierarchicalMenu-label">${label}</span>
           <span class="ais-HierarchicalMenu-count">${item.count}</span>
         </a>
       `;
+        },
       },
-    },
-  }),
+    }),
 
-  hierarchicalMenuCommBibl({
-    container: "#refinement-list-commented-bible",
-    attributes: ["comm_bible_lvl0", "comm_bible_lvl1"],
-    separator: " > ",
-    showMore: true,
-    showMoreLimit: 50,
-    limit: 40,
-    sortBy: biblicalComparator,
+    hierarchicalMenuCommBibl({
+      container: "#refinement-list-commented-bible",
+      attributes: ["comm_bible_lvl0", "comm_bible_lvl1"],
+      separator: " > ",
+      showMore: true,
+      showMoreLimit: 50,
+      limit: 40,
+      sortBy: biblicalComparator,
 
-    templates: {
-      item(item) {
-        let label = item.label;
+      templates: {
+        item(item) {
+          let label = item.label;
 
-        if (label.includes("|")) {
-          label = label.split("|")[1];
-        }
+          if (label.includes("|")) {
+            label = label.split("|")[1];
+          }
 
-        return `
+          return `
         <a class="${item.isRefined ? "ais-HierarchicalMenu-link--selected" : "ais-HierarchicalMenu-link"}">
           <span class="ais-HierarchicalMenu-label">${label}</span>
           <span class="ais-HierarchicalMenu-count">${item.count}</span>
         </a>
       `;
+        },
       },
-    },
-  }),
+    }),
 
-  currentRefinements({
-    container: "#current-refinements",
-    transformItems(items) {
-      return items.map((item) => ({
-        ...item,
-        label:
-          item.attribute === "comm_bible_lvl0"
-            ? "Commented Bible Book"
-            : item.attribute === "biblical_ref_lvl0"
-              ? "Bible book"
-              : item.attribute === "author_search"
-                ? "Author"
-                : item.attribute === "work.title"
-                  ? "Work"
-                  : item.attribute === "work.genre"
-                    ? "Genre"
-                    : item.attribute === "manuscripts.value"
-                      ? "Manuscript"
-                      : item.attribute === "work.date.century"
-                        ? "Century"
-                        : item.attribute === "work.institutional_context.value"
-                          ? "Institution"
-                          : item.attribute === "cluster.value"
-                            ? "Cluster"
-                            : item.attribute === "keywords.label"
-                              ? "Keyword"
-                              : item.attribute === "Liturgical_references.value"
-                                ? "Liturgy"
-                                : item.attribute === "sources.author"
-                                  ? "Source"
-                                  : item.attribute,
-      }));
-    },
-  }),
-  customDateCurrentRefinement("#current-refinements"),
+    // document.querySelector("#current-refinements") &&
+    //   currentRefinements({
+    //     container: "#current-refinements",
+    //     transformItems(items) {
+    //       return items.map((item) => ({
+    //         ...item,
+    //         label:
+    //           item.attribute === "comm_bible_lvl0"
+    //             ? "Commented Bible Book"
+    //             : item.attribute === "biblical_ref_lvl0"
+    //               ? "Bible book"
+    //               : item.attribute === "author_search"
+    //                 ? "Author"
+    //                 : item.attribute === "work.title"
+    //                   ? "Work"
+    //                   : item.attribute === "work.genre"
+    //                     ? "Genre"
+    //                     : item.attribute === "manuscripts.value"
+    //                       ? "Manuscript"
+    //                       : item.attribute === "work.date.century"
+    //                         ? "Century"
+    //                         : item.attribute ===
+    //                             "work.institutional_context.value"
+    //                           ? "Institution"
+    //                           : item.attribute === "cluster.value"
+    //                             ? "Cluster"
+    //                             : item.attribute === "keywords.label"
+    //                               ? "Keyword"
+    //                               : item.attribute ===
+    //                                   "Liturgical_references.value"
+    //                                 ? "Liturgy"
+    //                                 : item.attribute === "sources.author"
+    //                                   ? "Source"
+    //                                   : item.attribute,
+    //       }));
+    //     },
+    //   }),
+    // customDateCurrentRefinement("#current-refinements"),
 
-  clearRefinements({
-    container: "#clear-refinements",
-  }),
-]);
+    document.querySelector("#clear-refinements") &&
+      clearRefinements({
+        container: "#clear-refinements",
+      }),
+  ].filter(Boolean),
+);
 
 search.start();
+// export jad_id of filtered results for noske-search to read
+// advanced-search.js
+let lastAppliedFilter = null;
+let suppressNextRender = false; // flag to avoid double run of the search
+
+export function restrictToIds(ids) {
+  const filter = Array.isArray(ids)
+    ? `id:=[${ids.map((id) => `\`${id}\``).join(",")}]`
+    : "";
+
+  if (filter === lastAppliedFilter) return;
+
+  lastAppliedFilter = filter;
+  suppressNextRender = true; // suppress since no user interaction
+  search.helper.setQueryParameter("filters", filter);
+  search.helper.search();
+}
+
+let lastRefinementsSnapshot = null;
+
+function getRefinementsSnapshot(state) {
+  return JSON.stringify({
+    disjunctiveFacetsRefinements: state.disjunctiveFacetsRefinements,
+    facetsRefinements: state.facetsRefinements,
+    hierarchicalFacetsRefinements: state.hierarchicalFacetsRefinements,
+    numericRefinements: state.numericRefinements,
+  });
+}
+
+export function onFilteredIdsChange(callback) {
+  search.on("render", () => {
+    const state = search.helper?.state;
+    if (!state) return;
+
+    const snapshot = getRefinementsSnapshot(state);
+    if (snapshot === lastRefinementsSnapshot) return; // our own id-restriction render — ignore
+
+    lastRefinementsSnapshot = snapshot;
+
+    const raw = search.helper?.lastResults?._rawResults?.[0];
+    if (!raw) return;
+
+    const ids = (raw.hits ?? []).map((h) => h?.id).filter(Boolean);
+    callback({ ids, found: raw.found ?? 0 });
+  });
+}
 
 // --- Hits-per-page UI control ---
 // Insert a small select control into the stats container so users can choose results/page
@@ -747,7 +810,7 @@ document.addEventListener("input", (e) => {
 function wrapInPanel(title) {
   return panel({
     collapsed: ({ state }) => {
-      return state.query.length === 0;
+      return (state.query ?? "").length === 0;
     },
     templates: {
       header: () =>
@@ -766,7 +829,7 @@ function wrapInPanel(title) {
 function wrapHierarcicalMenuInPanel(title) {
   return panel({
     collapsed: ({ state }) => {
-      return state.query.length === 0;
+      return (state.query ?? "").length === 0;
     },
     templates: {
       header: () => `
@@ -831,3 +894,35 @@ function extractSnippetAroundHighlight(text, maxLength = 400) {
 }
 // Function to toggle line-clamp-2
 initShowMoreButtons();
+
+const typesenseClient = typesenseInstantsearchAdapter.typesenseClient;
+export async function getAllFilteredIds() {
+  const helper = search.helper;
+  if (!helper) return [];
+
+  const lastResults = helper.lastResults;
+  if (!lastResults) return [];
+
+  // hitsPerPage from the last real InstantSearch response tells us total pages needed
+  const totalHits = lastResults.nbHits;
+  const hitsPerPage = 250;
+  const totalPages = Math.ceil(totalHits / hitsPerPage);
+
+  const ids = [];
+  for (let page = 0; page < totalPages; page++) {
+    const results = await searchClient.search([
+      {
+        indexName: project_collection_name,
+        params: {
+          ...helper.getQuery(), // the exact Algolia-shaped query InstantSearch is currently using
+          hitsPerPage,
+          page,
+          attributesToRetrieve: ["id"],
+        },
+      },
+    ]);
+    ids.push(...results.results[0].hits.map((h) => h.id));
+  }
+
+  return ids;
+}

@@ -3,6 +3,7 @@ import Layout from "@/layouts/page-layout.astro";
 import "instantsearch.css/themes/satellite.css";
 import { Icon } from "astro-icon/components";
 import NavLink from "@/components/nav-link.astro";
+import SearchPanel from "@/components/search/filter-panel.astro";
 ---
 
 <Layout title="Search">
@@ -45,67 +46,11 @@ import NavLink from "@/components/nav-link.astro";
       <!-- Refinements and Results -->
       <div class="grid md:grid-cols-[1fr_3fr] gap-6">
         <!-- Refinements Section -->
-        <aside
-        class="bg-brand-50 py-2 rounded-lg shadow-xs md:block space-y-3 hidden min-w-0"
-        id="refinements-section"
-        >        
-        <div class="bg-brand-500/70 pb-2 px-3 rounded-lg shadow-xs md:block hidden min-w-0">
-          <div class="flex gap-2 justify-center items-center py-2">
-            <h3 class="text-xl text-white font-semibold text-center font-mono relative group">FILTERS
-            </h3>
-            <button id="filter-info">
-              <Icon name="lucide:info" class="size-5 text-white"/>
-            </button>
-          </div>
-         <dialog id="filter-info-dialog" class="border border-brand-600 rounded-md max-w-1/2">
-    <h1 class="font-semibold text-lg bg-brand-600/90 text-white p-5 prose">How to use the filters?</h1>
-          
-          <div class="p-5 filter-info-content prose">
-            <p>
-              Use <strong>filters</strong> to refine the corpus by combining different search criteria.
-              <ul>
-                <li>
-                  <strong>Filters within the same category are inclusive:</strong> selecting <i>Bede</i> and <i>Gregory</i> under AUTHORS broadens the search to include passages by either author.
-                </li>
-                <li>
-                  <strong>Filters across different categories are combined with AND:</strong> selecting the author <i>Bede</i> and the keyword <i>Temple</i> under KEYWORDS 
-                  then narrows the results to passages by Bede that also contain the keyword <i>Temple</i>.
-                </li>
-              
-              </ul>
-              </p>
-
-            <button
-              type="button"
-              id="filter-info-close"
-              aria-label="Close"
-              class="inline-flex items-center mt-4 cursor-pointer rounded-md bg-brand-600/90 px-4 py-2 text-lg text-white hover:bg-brand-500"
-            >
-              Close <Icon aria-hidden="true" name="lucide:x" />
-            </button>
-          </div>
-        </dialog>
-         
-            <div id="refinement-list-author"></div>
-            <div id="refinement-list-work"></div>
-            <div id="refinement-list-genre"></div>
-            <div id="refinement-list-clusters"></div>
-            <div id="date-range-widget"></div>
-            <div id="refinement-list-workdate"></div>
-            <div id="refinement-list-workcentury"></div>
-            <div id="refinement-list-manuscript"></div>
-            <div id="refinement-list-context"></div>
-            <div id="refinement-list-keywords"></div>
-            <div id="refinement-list-commented-bible"></div>
-            <div id="refinement-list-biblical"></div>
-            <div id="refinement-list-liturgical"></div>
-            <div id="refinement-list-sources"></div>
-        </div>
-        </aside>
+         <SearchPanel/>      
 
        <section class="space-y-3">
 
-  <!-- Results Section -->
+  <!-- stats and sort Section -->
   <div class="md:flex items-center space-y-2 md:space-y-0">
 
     <div
@@ -121,15 +66,15 @@ import NavLink from "@/components/nav-link.astro";
     </div>
 
   </div>
-
+<!-- current refinements nd clear -->
  <div class="grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-start gap-2">
   <div id="current-refinements" class="min-w-0 text-sm text-gray-600"></div>
   <div id="clear-refinements" class="flex items-center"></div>
 </div>
-
+<!-- Hits -->
   <div id="hits" class="bg-white p-2 md:p-4 rounded-lg shadow-xs"></div>
-
-  <div id="pagination" class="flex md:justify-center"></div>
+<!-- Paginiation -->
+  <div id="ts-pagination" class="flex md:justify-center"></div>
 
 </section>
       </div>
