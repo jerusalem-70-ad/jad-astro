@@ -1,4 +1,3 @@
-console.log("advanced-search.js loaded, instance:", Math.random());
 import instantsearch from "instantsearch.js";
 import TypesenseInstantsearchAdapter from "typesense-instantsearch-adapter";
 import {

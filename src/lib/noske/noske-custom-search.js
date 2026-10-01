@@ -9,12 +9,10 @@ import {
   getAllFilteredIds,
   resetFacetsForNewSearch,
 } from "@/lib/advanced-search.js";
-const uniqueJadIds = new Set();
 let currentQuery = "";
 
 class CustomNoskeSearch {
   constructor(config) {
-    console.log("CustomNoskeSearch constructed:", Math.random());
     this.baseUrl = config.baseUrl;
     this.corpname = config.corpname;
     this.attrs = config.attrs || "word,lemma,pos,landingPageURI,orth,norm";
@@ -82,7 +80,7 @@ class CustomNoskeSearch {
 
       const allowedIds = await this.searchIds(query);
       restrictToIds(allowedIds); // tells the facets: "only count within these ids"
-      console.log("Noske allows ids:", allowedIds);
+      //console.log("Noske allows ids:", allowedIds);
       try {
         const { data } = await this.search(query, page);
         this.currentResults = data;
@@ -116,16 +114,16 @@ class CustomNoskeSearch {
 
     const data = await response.json();
     const items = data.Blocks?.[0]?.Items ?? [];
-
+    // need a Map, there might be several hits /items from one passage
     const idToUri = new Map(); // jad_id -> the exact original chapter.uri
     for (const item of items) {
       const fullUri = item.Word?.[0]?.n ?? "";
-      const jad_id = fullUri.split("passages/")[1]?.replace(".html", "");
+      const jad_id = fullUri.split("passages/")[1]?.replace(".html", ""); //jad_id for typsense
       if (!jad_id) {
         console.warn("Unexpected chapter.uri format:", fullUri);
         continue;
       }
-      idToUri.set(jad_id, fullUri); // keep the ORIGINAL, exact string for noske to send back
+      idToUri.set(jad_id, fullUri); // keep full uri for noske to send back
     }
 
     this.idToUri = idToUri; // store on the instance so buildDisplayQueryParam can use it later
@@ -134,7 +132,7 @@ class CustomNoskeSearch {
 
   async search(query, page = 1) {
     let queryParam = this.buildDisplayQueryParam(query); // to get any facets from typsense
-    console.log("DISPLAY QUERY PARAM:", queryParam);
+    //console.log("query params (incl typsense):", queryParam);
     const body = new URLSearchParams({
       corpname: this.corpname,
       q: queryParam,
@@ -167,14 +165,15 @@ class CustomNoskeSearch {
       throw new Error("Invalid JSON received from NoSketch Engine");
     }
 
-    console.log("=== SEARCH RESPONSE ===");
-    console.log("Full response:", data);
+    //console.log("Noske response:", data);
 
     return {
       data,
     };
   }
-
+  // function to display the results
+  // text kwic left rigth from noske
+  // metadata from mini passage.json stored in public
   async displayResults(data) {
     const resultsContainer = document.getElementById(this.resultsId);
     if (!resultsContainer) return;
@@ -186,17 +185,17 @@ class CustomNoskeSearch {
 
     let html = '<div class="search-results">';
     html += `
-<div class="flex justify-end gap-3 py-3">
-  <button class="py-2 px-4 font-semibold bg-brand-600 hover:bg-brand-500 text-brand-50 rounded-md" 
-    id="download-csv">
-    Download results as CSV
-  </button>
-  <button class="py-2 px-4 font-semibold bg-brand-600 hover:bg-brand-500 text-brand-50 rounded-md" 
-    id="download-html">
-    Download results as HTML
-  </button>
-</div>
-`;
+      <div class="flex justify-end gap-3 py-3">
+        <button class="py-2 px-4 font-semibold bg-brand-600 hover:bg-brand-500 text-brand-50 rounded-md" 
+          id="download-csv">
+          Download results as CSV
+        </button>
+        <button class="py-2 px-4 font-semibold bg-brand-600 hover:bg-brand-500 text-brand-50 rounded-md" 
+          id="download-html">
+          Download results as HTML
+        </button>
+      </div>
+      `;
 
     const results = [];
     currentQuery = data.q || "";
@@ -213,7 +212,6 @@ class CustomNoskeSearch {
       const jad_id =
         chapterUri?.split("passages/")[1]?.replace(".html", "") ?? "#";
       results.push({ jad_id, leftText, kwicText, rightText });
-      uniqueJadIds.add(jad_id);
       html += `
         <div class="result-item">
           <div class="result-text">
@@ -284,14 +282,17 @@ class CustomNoskeSearch {
       });
   }
 
+  //on typsense facets change collect filtered ids
+  // run a new noske search
   async handleFacetChange() {
     if (!this.hasSearched) return;
     const filteredIds = await getAllFilteredIds();
-    console.log("FACET FILTERED IDS:", filteredIds.length, filteredIds); // add this
+    // console.log("FACET FILTERED IDS:", filteredIds.length, filteredIds); // add this
     this.facetFilteredIds = filteredIds;
     await this.executeSearch(this.currentPage);
   }
 
+  //for noske need params
   buildQueryParam(query) {
     switch (this.searchType) {
       case "cql":
@@ -302,7 +303,7 @@ class CustomNoskeSearch {
         const words = query.trim().split(/\s+/);
         return `q${words.map((w) => `[word="${w}"]`).join("")}`;
       }
-      case "word":
+      // case "word":
       case "simple":
       default:
         return `q[word="${query}"]`;
@@ -310,7 +311,8 @@ class CustomNoskeSearch {
   }
 
   buildDisplayQueryParam(query) {
-    // used ONLY for the KWIC display call (this.search), adds facet restriction
+    // used ONLY for the results display
+    // call (this.search), adds facet restriction to base params
     let base = this.buildQueryParam(query);
     if (this.facetFilteredIds?.length) {
       const uris = this.facetFilteredIds
@@ -382,7 +384,10 @@ class CustomNoskeSearch {
   showLoading() {
     const resultsContainer = document.getElementById(this.resultsId);
     if (resultsContainer) {
-      resultsContainer.innerHTML = "<p>Loading...</p>";
+      resultsContainer.innerHTML = `<div class="flex items-center justify-center gap-2 ">
+        <span class="text-brand-650">Loading ... </span>
+        <span class="loader"></span>
+      </div>`;
     }
   }
 
