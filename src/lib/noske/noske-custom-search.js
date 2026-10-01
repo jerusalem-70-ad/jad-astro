@@ -3,7 +3,12 @@
 import { downloadCsv, downloadHtml } from "@/lib/noske/download-results";
 import { withBasePath } from "@/lib/withBasePath";
 import { fetchPassages } from "@/lib/noske/download-results";
-const uniqueJadIds = new Set();
+import {
+  restrictToIds,
+  onFilteredIdsChange,
+  getAllFilteredIds,
+  resetFacetsForNewSearch,
+} from "@/lib/advanced-search.js";
 let currentQuery = "";
 
 class CustomNoskeSearch {
@@ -24,6 +29,10 @@ class CustomNoskeSearch {
     this.paginationId = config.paginationId;
     this.currentPage = 1;
     this.currentResults = null;
+    this.hasSearched = false;
+    this.lastQuery = null;
+    onFilteredIdsChange(() => this.handleFacetChange());
+    restrictToIds([]); // force facets empty until the first real NoSketch search
     this.init();
   }
 
@@ -48,50 +57,83 @@ class CustomNoskeSearch {
   }
 
   async executeSearch(page = 1) {
-    const searchInput = document.getElementById(this.searchInputId);
-    const query = searchInput ? searchInput.value : "";
-    if (!query) {
-      console.warn("No search query provided");
-      return;
-    }
-    this.currentPage = page;
-    this.showLoading();
+    if (this.isSearching) return;
+    this.isSearching = true;
     try {
-      const results = await this.search(query, page);
-      this.currentResults = results;
-      await this.displayResults(results);
-      this.displayStats(results);
-      this.displayPagination(results);
-    } catch (error) {
-      console.error("Search error:", error);
-      this.showError(error.message);
+      const searchInput = document.getElementById(this.searchInputId);
+      const query = searchInput ? searchInput.value : "";
+      if (!query) {
+        console.warn("No search query provided");
+        return;
+      }
+
+      const isNewQuery = query !== this.lastQuery;
+      if (isNewQuery) {
+        this.lastQuery = query;
+        this.facetFilteredIds = null; // drop the old search's facet restriction
+        resetFacetsForNewSearch(); // clear checkboxes left over from the previous search
+      }
+
+      this.hasSearched = true;
+      this.currentPage = page;
+      this.showLoading();
+
+      const allowedIds = await this.searchIds(query);
+      restrictToIds(allowedIds); // tells the facets: "only count within these ids"
+      //console.log("Noske allows ids:", allowedIds);
+      try {
+        const { data } = await this.search(query, page);
+        this.currentResults = data;
+        await this.displayResults(data);
+        this.displayStats(data, allowedIds);
+        this.displayPagination(data);
+      } catch (error) {
+        console.error("Search error:", error);
+        this.showError(error.message);
+      }
+    } finally {
+      this.isSearching = false;
     }
   }
 
-  async search(query, page = 1) {
-    let queryParam;
-    switch (this.searchType) {
-      case "cql":
-        queryParam = query.startsWith("q") ? query : `q${query}`;
-        break;
-      case "lemma":
-        queryParam = `q[lemma="${query}"]`;
-        break;
-      case "phrase":
-        const words = query.trim().split(/\s+/);
-        const phraseQuery = words.map((word) => `[word="${word}"]`).join("");
-        queryParam = `q${phraseQuery}`;
-        break;
-      case "word":
-        queryParam = `q[word="${query}"]`;
-        break;
-      case "simple":
-      default:
-        queryParam = `q[word="${query}"]`;
-        break;
+  //separate quetry to get ids using fcrit
+  async searchIds(query) {
+    const queryParam = this.buildQueryParam(query);
+    const params = new URLSearchParams({
+      corpname: this.corpname,
+      q: queryParam,
+      fcrit: "chapter.uri 0",
+      flimit: "0",
+      fmaxitems: "100000",
+      format: "json",
+    });
+
+    const url = `${this.baseUrl}/bonito/run.cgi/freqs?${params}`;
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+    const data = await response.json();
+    const items = data.Blocks?.[0]?.Items ?? [];
+    // need a Map, there might be several hits /items from one passage
+    const idToUri = new Map(); // jad_id -> the exact original chapter.uri
+    for (const item of items) {
+      const fullUri = item.Word?.[0]?.n ?? "";
+      const jad_id = fullUri.split("passages/")[1]?.replace(".html", ""); //jad_id for typsense
+      if (!jad_id) {
+        console.warn("Unexpected chapter.uri format:", fullUri);
+        continue;
+      }
+      idToUri.set(jad_id, fullUri); // keep full uri for noske to send back
     }
 
-    const params = new URLSearchParams({
+    this.idToUri = idToUri; // store on the instance so buildDisplayQueryParam can use it later
+    return [...idToUri.keys()]; // return plain ids, for Typesense
+  }
+
+  async search(query, page = 1) {
+    let queryParam = this.buildDisplayQueryParam(query); // to get any facets from typsense
+    //console.log("query params (incl typsense):", queryParam);
+    const body = new URLSearchParams({
       corpname: this.corpname,
       q: queryParam,
       attrs: this.attrs,
@@ -104,13 +146,14 @@ class CustomNoskeSearch {
       asyn: 0,
     });
 
-    const url = `${
-      this.baseUrl
-    }/bonito/run.cgi/concordance?${params.toString()}`;
-    //console.log("=== SEARCH REQUEST ===");
-    // console.log("URL:", url);
+    const url = `${this.baseUrl}/bonito/run.cgi/concordance`;
 
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body.toString(),
+    });
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -122,17 +165,15 @@ class CustomNoskeSearch {
       throw new Error("Invalid JSON received from NoSketch Engine");
     }
 
-    //console.log("=== SEARCH RESPONSE ===");
-    //console.log("Full response:", data);
+    //console.log("Noske response:", data);
 
-    if (data.Lines && data.Lines.length > 0) {
-      //console.log("=== FIRST HIT ===");
-      //console.log("Landing Page URI:", data.Lines[0].Kwic[0].attr);
-    }
-
-    return data;
+    return {
+      data,
+    };
   }
-
+  // function to display the results
+  // text kwic left rigth from noske
+  // metadata from mini passage.json stored in public
   async displayResults(data) {
     const resultsContainer = document.getElementById(this.resultsId);
     if (!resultsContainer) return;
@@ -144,17 +185,17 @@ class CustomNoskeSearch {
 
     let html = '<div class="search-results">';
     html += `
-<div class="flex justify-end gap-3 py-3">
-  <button class="py-2 px-4 font-semibold bg-brand-600 hover:bg-brand-500 text-brand-50 rounded-md" 
-    id="download-csv">
-    Download results as CSV
-  </button>
-  <button class="py-2 px-4 font-semibold bg-brand-600 hover:bg-brand-500 text-brand-50 rounded-md" 
-    id="download-html">
-    Download results as HTML
-  </button>
-</div>
-`;
+      <div class="flex justify-end gap-3 py-3">
+        <button class="py-2 px-4 font-semibold bg-brand-600 hover:bg-brand-500 text-brand-50 rounded-md" 
+          id="download-csv">
+          Download results as CSV
+        </button>
+        <button class="py-2 px-4 font-semibold bg-brand-600 hover:bg-brand-500 text-brand-50 rounded-md" 
+          id="download-html">
+          Download results as HTML
+        </button>
+      </div>
+      `;
 
     const results = [];
     currentQuery = data.q || "";
@@ -171,7 +212,6 @@ class CustomNoskeSearch {
       const jad_id =
         chapterUri?.split("passages/")[1]?.replace(".html", "") ?? "#";
       results.push({ jad_id, leftText, kwicText, rightText });
-      uniqueJadIds.add(jad_id);
       html += `
         <div class="result-item">
           <div class="result-text">
@@ -242,6 +282,51 @@ class CustomNoskeSearch {
       });
   }
 
+  //on typsense facets change collect filtered ids
+  // run a new noske search
+  async handleFacetChange() {
+    if (!this.hasSearched) return;
+    const filteredIds = await getAllFilteredIds();
+    // console.log("FACET FILTERED IDS:", filteredIds.length, filteredIds); // add this
+    this.facetFilteredIds = filteredIds;
+    await this.executeSearch(this.currentPage);
+  }
+
+  //for noske need params
+  buildQueryParam(query) {
+    switch (this.searchType) {
+      case "cql":
+        return query.startsWith("q") ? query : `q${query}`;
+      case "lemma":
+        return `q[lemma="${query}"]`;
+      case "phrase": {
+        const words = query.trim().split(/\s+/);
+        return `q${words.map((w) => `[word="${w}"]`).join("")}`;
+      }
+      // case "word":
+      case "simple":
+      default:
+        return `q[word="${query}"]`;
+    }
+  }
+
+  buildDisplayQueryParam(query) {
+    // used ONLY for the results display
+    // call (this.search), adds facet restriction to base params
+    let base = this.buildQueryParam(query);
+    if (this.facetFilteredIds?.length) {
+      const uris = this.facetFilteredIds
+        .map((id) => this.idToUri?.get(id))
+        .join("|");
+      base += ` within <chapter uri="${uris}"/>`;
+      const missing = this.facetFilteredIds.filter(
+        (id) => !this.idToUri?.has(id),
+      );
+      if (missing.length) console.warn("No URI found for these ids:", missing);
+    }
+    return base;
+  }
+
   buildText(tokenArray) {
     if (!Array.isArray(tokenArray)) return "";
 
@@ -253,14 +338,14 @@ class CustomNoskeSearch {
       .join(" ");
   }
 
-  displayStats(data) {
+  displayStats(data, allowedIds) {
     const statsContainer = document.getElementById(this.statsId);
     if (!statsContainer) return;
     const totalHits = data.fullsize || 0;
     const displayedHits = data.Lines ? data.Lines.length : 0;
     statsContainer.innerHTML = `
       <div class="stats">
-        <span>Showing <strong>${displayedHits}</strong> out of <strong>${totalHits}</strong> results (${uniqueJadIds.size} unique passages)</span>
+        <span>Showing <strong>${displayedHits}</strong> out of <strong>${totalHits}</strong> results (${this.facetFilteredIds?.length ? this.facetFilteredIds?.length : allowedIds.length} unique passages)</span>
       </div>
     `;
   }
@@ -299,7 +384,10 @@ class CustomNoskeSearch {
   showLoading() {
     const resultsContainer = document.getElementById(this.resultsId);
     if (resultsContainer) {
-      resultsContainer.innerHTML = "<p>Loading...</p>";
+      resultsContainer.innerHTML = `<div class="flex items-center justify-center gap-2 ">
+        <span class="text-brand-650">Loading ... </span>
+        <span class="loader"></span>
+      </div>`;
     }
   }
 

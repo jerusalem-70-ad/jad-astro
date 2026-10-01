@@ -3,19 +3,20 @@ import Layout from "@/layouts/page-layout.astro";
 import "instantsearch.css/themes/satellite.css";
 import { Icon } from "astro-icon/components";
 import NavLink from "@/components/nav-link.astro";
+import SearchPanel from "@/components/search/filter-panel.astro";
 ---
 
 <Layout title="Search">
   <div class="md:w-5/6 mx-auto md:p-6 p-2">
-    <div class="grid grid-cols-[500px_1fr] py-3">
-      <div class="inline-flex items-stretch justify-stretch border border-gray-200 rounded-2xl shadow bg-brand-500/60 p-1">
-          <h2 class="bg-brand-50 text-xl p-3 md:text-3xl font-semibold text-brand-600 rounded-2xl">
+    <div class="grid grid-cols-[auto_1fr]">
+      <div class="grid grid-cols-[1fr_1fr] items-center justify-center mb-4 border border-gray-200 rounded-2xl shadow bg-brand-500/60 p-1">
+          <h1 class="bg-brand-50 text-xl p-3 md:text-3xl font-semibold text-brand-600 rounded-2xl">
             Advanced Search
-          </h2>
+          </h1>
       
-            <NavLink
+            <NavLink reload
                 href="/noske-search"
-                class="group relative p-3 text:lg md:text-2xl font-semibold text-brand-200 hover:text-brand-50"
+                class="justify-self-center group relative p-3 text:lg md:text-2xl font-semibold text-brand-200 hover:text-brand-50"
               >
                 Linguistic Search
                 <span
@@ -28,110 +29,55 @@ import NavLink from "@/components/nav-link.astro";
         <p class="hidden 2xl:block px-3 text-brand-800 font-normal 2xl:text-base text-sm">The advanced <strong>faceted search</strong> allows you to search in the text and to explore the corpus using predefined metadata categories. Use the filters in the 
           panel below to narrow down the passages by specific characteristics and combinations of metadata. </p>
     </div>
-
-    <div class="md:space-y-6">
-      <!-- Search Input and Stats -->
-      <div class="flex items-center gap-2">
-        <button
-          id="filter-button"
-          aria-label="filter"
-          class="md:hidden flex items-center justify-center rounded-lg border border-neutral-300 w-12 h-12"
-        >
-          <Icon aria-hidden="true" name="lucide:sliders-horizontal" />
-        </button>
-
-        <div id="searchbox" class="flex-1 p-1 rounded-md md:bg-brand-400"></div>
-      </div>
-      <!-- Refinements and Results -->
-      <div class="grid md:grid-cols-[1fr_3fr] gap-6">
-        <!-- Refinements Section -->
-        <aside
-        class="bg-brand-50 py-2 rounded-lg shadow-xs md:block space-y-3 hidden min-w-0"
-        id="refinements-section"
-        >        
-        <div class="bg-brand-500/70 pb-2 px-3 rounded-lg shadow-xs md:block hidden min-w-0">
-          <div class="flex gap-2 justify-center items-center py-2">
-            <h3 class="text-xl text-white font-semibold text-center font-mono relative group">FILTERS
-            </h3>
-            <button id="filter-info">
-              <Icon name="lucide:info" class="size-5 text-white"/>
-            </button>
-          </div>
-         <dialog id="filter-info-dialog" class="border border-brand-600 rounded-md max-w-1/2">
-    <h1 class="font-semibold text-lg bg-brand-600/90 text-white p-5 prose">How to use the filters?</h1>
-          
-          <div class="p-5 filter-info-content prose">
-            <p>
-              Use <strong>filters</strong> to refine the corpus by combining different search criteria.
-              <ul>
-                <li>
-                  <strong>Filters within the same category are inclusive:</strong> selecting <i>Bede</i> and <i>Gregory</i> under AUTHORS broadens the search to include passages by either author.
-                </li>
-                <li>
-                  <strong>Filters across different categories are combined with AND:</strong> selecting the author <i>Bede</i> and the keyword <i>Temple</i> under KEYWORDS 
-                  then narrows the results to passages by Bede that also contain the keyword <i>Temple</i>.
-                </li>
-              
-              </ul>
-              </p>
-
-            <button
-              type="button"
-              id="filter-info-close"
-              aria-label="Close"
-              class="inline-flex items-center mt-4 cursor-pointer rounded-md bg-brand-600/90 px-4 py-2 text-lg text-white hover:bg-brand-500"
-            >
-              Close <Icon aria-hidden="true" name="lucide:x" />
-            </button>
-          </div>
-        </dialog>
-         
-            <div id="refinement-list-author"></div>
-            <div id="refinement-list-work"></div>
-            <div id="refinement-list-genre"></div>
-            <div id="refinement-list-clusters"></div>
-            <div id="date-range-widget"></div>
-            <div id="refinement-list-workdate"></div>
-            <div id="refinement-list-workcentury"></div>
-            <div id="refinement-list-manuscript"></div>
-            <div id="refinement-list-context"></div>
-            <div id="refinement-list-keywords"></div>
-            <div id="refinement-list-commented-bible"></div>
-            <div id="refinement-list-biblical"></div>
-            <div id="refinement-list-liturgical"></div>
-            <div id="refinement-list-sources"></div>
+    <div class="bg-white border border-gray-300 rounded-xl p-4 shadow-sm ">  
+      <div class="grid grid-cols-[1fr_3fr] gap-4 items-stretch">
+        <!-- SORT -->
+        <div class="border border-gray-300 rounded-lg px-2 py-1 flex items-center gap-1 bg-brand-500/70">
+          <h2 class="text-white font-semibold text-xl font-mono uppercase">Sort: </h2>
+          <div
+            id="sort"
+            class="flex flex-1 rounded-lg border bg-brand-50 "
+          ></div>     
+        
         </div>
-        </aside>
+        
+        <!-- Search Input and Stats -->
+        <div class="flex items-center gap-2">
+          <button
+            id="filter-button"
+            aria-label="filter"
+            class="md:hidden flex items-center justify-center rounded-lg border border-neutral-300 w-12 h-12"
+          >
+            <Icon aria-hidden="true" name="lucide:sliders-horizontal" />
+          </button>
 
-       <section class="space-y-3">
+          <div id="searchbox" class="flex-1 p-1 rounded-md md:bg-brand-400"></div>
+        </div>
+        
+          <!-- Refinements Section -->
+        <SearchPanel/>      
 
-  <!-- Results Section -->
-  <div class="md:flex items-center space-y-2 md:space-y-0">
+        <section class="space-y-3">
 
-    <div
-      id="stats-container"
-      class="flex items-center gap-2 text-sm font-medium text-neutral-700"
-    ></div>
+            <!-- Stats -->
+            <div class="md:flex items-center space-y-2 md:space-y-0">
+              <div
+                id="stats-container"
+                class="flex items-center gap-2 text-sm font-medium text-neutral-700"
+              ></div>            
 
-    <div class="flex items-center gap-3 border-l pl-3 min-w-0 text-sm ms-auto">
-      <h3 class="text-center font-semibold uppercase text-neutral-700">
-        Sort by:
-      </h3>
-      <div id="sort"></div>
-    </div>
+            </div>
+          <!-- current refinements nd clear -->
+          <div class="grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-start gap-2">
+            <div id="current-refinements" class="min-w-0 text-sm text-gray-600"></div>
+            <div id="clear-refinements" class="flex items-center"></div>
+          </div>
+          <!-- Hits -->
+            <div id="hits" class="bg-white p-2 md:p-4 rounded-lg shadow-xs"></div>
+          <!-- Paginiation -->
+            <div id="ts-pagination" class="flex md:justify-center"></div>
 
-  </div>
-
- <div class="grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-start gap-2">
-  <div id="current-refinements" class="min-w-0 text-sm text-gray-600"></div>
-  <div id="clear-refinements" class="flex items-center"></div>
-</div>
-
-  <div id="hits" class="bg-white p-2 md:p-4 rounded-lg shadow-xs"></div>
-
-  <div id="pagination" class="flex md:justify-center"></div>
-
-</section>
+        </section>
       </div>
     </div>
   </div>

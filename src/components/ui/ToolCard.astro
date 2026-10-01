@@ -10,9 +10,10 @@ interface Props {
 	how?: string;
 	questions?: string;
 	icon?: string;
-    href: string
+    href: string;
+	datareload?: boolean;
 }
-const { titleCard, what, why, how, questions, icon, href } = Astro.props 
+const { titleCard, what, why, how, questions, icon, href, datareload } = Astro.props 
 ---
 
 <div class="grid lg:grid-cols-[180px_1fr] gap-6 border-neutral-300 rounded-md bg-white shadow-lg p-5">
@@ -43,6 +44,6 @@ const { titleCard, what, why, how, questions, icon, href } = Astro.props
 			    <dd>{questions}</dd>
             )}
 		</dl>
-        <NavLink href={href} class="place-self-end font-semibold bg-brand-600/90 hover:bg-brand-400 text-brand-50 hover:text-brand-950 py-2 px-4 rounded-md transition border border-neutral-300">Open</NavLink>
+        <NavLink reload={datareload} href={href} class="place-self-end font-semibold bg-brand-600/90 hover:bg-brand-400 text-brand-50 hover:text-brand-950 py-2 px-4 rounded-md transition border border-neutral-300">Open</NavLink>
 	</div>
 </div>

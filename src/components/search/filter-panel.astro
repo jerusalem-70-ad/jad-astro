@@ -1,0 +1,91 @@
+ ---
+import "instantsearch.css/themes/satellite.css";
+import { Icon } from "astro-icon/components";
+const { noskeSearch = false } = Astro.props;
+---
+<!-- Refinements Section used in the advaced (typsense) and the linguistic (noske-typsense) search-->
+ <!-- in dashboard its a diferent search panel with diy filters usin store (here we use algoli widgets), cause we needed to switch between AND/OR filtering) -->
+<aside
+    class="py-2 rounded-lg md:block space-y-3 hidden min-w-0"
+    id="refinements-section"
+    >        
+    <div class="bg-brand-500/70 pb-2 px-3 rounded-lg shadow-xs md:block hidden min-w-0">
+        <div class="flex gap-2 justify-center items-center py-2">
+            <h3 class="text-xl text-white font-semibold text-center font-mono relative group">FILTERS
+            </h3>
+            <button id="filter-info">
+                <Icon name="lucide:info" class="size-5 text-white"/>
+            </button>
+        </div>
+        <dialog id="filter-info-dialog" class="border border-brand-600 rounded-md max-w-1/2">
+        <h1 class="font-semibold text-lg bg-brand-600/90 text-white p-5 prose">How to use the filters?</h1>
+          
+          <div class="p-5 filter-info-content prose">
+            <p>
+              Use <strong>filters</strong> to refine the corpus by combining different search criteria.
+              <ul>
+                <li>
+                  <strong>Filters within the same category are inclusive:</strong> selecting <i>Bede</i> and <i>Gregory</i> under AUTHORS broadens the search to include passages by either author.
+                </li>
+                <li>
+                  <strong>Filters across different categories are combined with AND:</strong> selecting the author <i>Bede</i> and the keyword <i>Temple</i> under KEYWORDS 
+                  then narrows the results to passages by Bede that also contain the keyword <i>Temple</i>.
+                </li>              
+              </ul>              
+              </p>
+              {noskeSearch &&
+              <p class="text-brand-700  font-semibold">To use the filters <span class="uppercase decoration-double underline underline-offset-2">first</span> search for a word or a phrase!</p>}
+            <button
+              type="button"
+              id="filter-info-close"
+              aria-label="Close"
+              class="inline-flex items-center mt-4 cursor-pointer rounded-md bg-brand-600/90 px-4 py-2 text-lg text-white hover:bg-brand-500"
+            >
+              Close <Icon aria-hidden="true" name="lucide:x" />
+            </button>
+          </div>
+        </dialog>
+         
+        <div id="refinement-list-author"></div>
+        <div id="refinement-list-work"></div>
+        <div id="refinement-list-genre"></div>
+        <div id="refinement-list-clusters"></div>
+        {noskeSearch === false && 
+        <div id="date-range-widget"></div>}
+        <div id="refinement-list-workdate"></div>
+        <div id="refinement-list-workcentury"></div>
+        <div id="refinement-list-manuscript"></div>
+        <div id="refinement-list-context"></div>
+        <div id="refinement-list-keywords"></div>
+        <div id="refinement-list-commented-bible"></div>
+        <div id="refinement-list-biblical"></div>
+        <div id="refinement-list-liturgical"></div>
+        <div id="refinement-list-sources"></div>
+    </div>
+</aside>
+
+<script>
+  const infoButton = document.getElementById('filter-info');
+  const dialog = document.getElementById('filter-info-dialog');
+  const closeButton = document.getElementById('filter-info-close');
+
+  if (
+    infoButton instanceof HTMLButtonElement &&
+    dialog instanceof HTMLDialogElement &&
+    closeButton instanceof HTMLButtonElement
+  ) {
+    infoButton.addEventListener('click', () => {
+      dialog.showModal();
+    });
+
+    closeButton.addEventListener('click', () => {
+      dialog.close();
+    });
+
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) {
+        dialog.close();
+      }
+    });
+  }
+</script>
