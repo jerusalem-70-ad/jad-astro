@@ -674,15 +674,15 @@ search.addWidgets(
 );
 
 search.start();
-// export jad_id of filtered results for noske-search to read
+// functions used in the noske-typsense serch!!!
+//export jad_id of filtered results for noske-search to read
 // advanced-search.js
 let lastAppliedFilter = null;
-let suppressNextRender = false; // flag to avoid double run of the search
 
 export function restrictToIds(ids) {
   let filter;
   if (!Array.isArray(ids)) {
-    filter = ""; // no restriction at all (used by the dashboard page)
+    filter = ""; // no restriction at all (used by the advanced search page)
   } else if (ids.length === 0) {
     filter = "id:=[`__no_search_yet__`]"; // a value that can never match a real document
   } else {
@@ -696,7 +696,7 @@ export function restrictToIds(ids) {
 }
 
 let lastRefinementsSnapshot = null;
-
+//collect/read the search state
 function getRefinementsSnapshot(state) {
   return JSON.stringify({
     disjunctiveFacetsRefinements: state.disjunctiveFacetsRefinements,
@@ -705,7 +705,7 @@ function getRefinementsSnapshot(state) {
     numericRefinements: state.numericRefinements,
   });
 }
-
+// in noske b new search, reset typsense facets
 export function resetFacetsForNewSearch() {
   const helper = search.helper;
   if (!helper) return;
@@ -718,7 +718,7 @@ export function resetFacetsForNewSearch() {
 
   helper.search();
 }
-
+// by filtering, call a search, using the noske llowed ids
 export function onFilteredIdsChange(callback) {
   search.on("render", () => {
     const state = search.helper?.state;
@@ -872,7 +872,8 @@ if (showFilter) {
   });
 }
 
-// Helper function to extract text around highlights
+// Helper function to extract text around highlights // there is an out of the box algolia
+//but we needed custom one because ... I forgot why it was
 function extractSnippetAroundHighlight(text, maxLength = 400) {
   const markIndex = text.indexOf("<mark>");
   if (markIndex === -1) return text.substring(0, maxLength) + "...";
@@ -910,6 +911,8 @@ function extractSnippetAroundHighlight(text, maxLength = 400) {
 }
 // Function to toggle line-clamp-2
 initShowMoreButtons();
+
+// noske related functions
 
 const typesenseClient = typesenseInstantsearchAdapter.typesenseClient;
 export async function getAllFilteredIds() {

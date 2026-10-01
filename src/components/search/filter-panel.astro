@@ -3,7 +3,8 @@ import "instantsearch.css/themes/satellite.css";
 import { Icon } from "astro-icon/components";
 const { noskeSearch = false } = Astro.props;
 ---
-<!-- Refinements Section -->
+<!-- Refinements Section used in the advaced (typsense) and the linguistic (noske-typsense) search-->
+ <!-- in dashboard its a diferent search panel with diy filters usin store (here we use algoli widgets), cause we needed to switch between AND/OR filtering) -->
 <aside
     class="py-2 rounded-lg md:block space-y-3 hidden min-w-0"
     id="refinements-section"
@@ -29,11 +30,11 @@ const { noskeSearch = false } = Astro.props;
                 <li>
                   <strong>Filters across different categories are combined with AND:</strong> selecting the author <i>Bede</i> and the keyword <i>Temple</i> under KEYWORDS 
                   then narrows the results to passages by Bede that also contain the keyword <i>Temple</i>.
-                </li>
-              
-              </ul>
+                </li>              
+              </ul>              
               </p>
-
+              {noskeSearch &&
+              <p class="text-brand-700  font-semibold">To use the filters <span class="uppercase decoration-double underline underline-offset-2">first</span> search for a word or a phrase!</p>}
             <button
               type="button"
               id="filter-info-close"

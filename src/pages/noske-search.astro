@@ -8,10 +8,10 @@ import SearchPanel from "@/components/search/filter-panel.astro";
 
 <Layout title="Linguistic Search">
   <div class="md:w-5/6 mx-auto md:p-6 p-2">
-    <div class="grid grid-cols-[minmax(400px,auto)_1fr]">
-      <div class="inline-flex items-center justify-start mb-4 border border-gray-200 rounded-2xl shadow bg-brand-500/60 p-1">
+    <div class="grid grid-cols-[auto_1fr]">
+      <div class="grid grid-cols-[1fr_1fr] items-center justify-center mb-4 border border-gray-200 rounded-2xl shadow bg-brand-500/60 p-1">
     
-        <NavLink reload href="/advanced-search" class="group relative text-xl md:text-2xl font-semibold p-3 text-brand-200 hover:text-brand-50">
+        <NavLink reload href="/advanced-search" class="justify-self-center group relative text-xl md:text-2xl font-semibold p-3 text-brand-200 hover:text-brand-50">
             Advanced Search
              <span
                   class="absolute left-1/2 top-full z-50 hidden -translate-y-1/2  ml-2 whitespace-nowrap rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-normal text-gray-800 shadow-md group-hover:block"
@@ -75,64 +75,71 @@ import SearchPanel from "@/components/search/filter-panel.astro";
       <div class=" grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-4 text-sm pt-3">
      <!-- Search Modes -->
      <div>
-      <p class="font-semibold text-neutral-800 mb-2 decoration underline underline-offset-4 text-base">Select one of the <span class="font-bold">four</span> search modes available in the drop down menu below:</p>
-       <ul class="pt-3 space-y-2 ml-4 list-decimal">
-         <li>
-           <span class="font-semibold text-brand-700 mb-2">Simple:</span> Search for a <strong>single</strong> word e.g. <code class="bg-white px-2 py-1 rounded text-xs">Jerusalem</code>
-           or
-           <code class="bg-white px-2 py-1 rounded text-xs">.*rusalem</code>
-          <br><span class="text-gray-600 text-xs">shows all occurrences of the word with the exact same spelling or with variations when using wild cards (see further below).</span>
-
-         </li>
-         <li>
-           <span class="font-semibold text-brand-700 mb-2">Phrase:</span> Search for a whole phrase e.g. <code class="bg-white px-2 py-1 rounded text-xs">reliqua pedibus suis</code>
-          <br> <span class="text-gray-600 text-xs">shows all occurrences of the phrase in exactly this order and with the exact same spelling or with variants when using wild cards.</span>
-         </li>
-         <li>
-           <span class="font-semibold text-brand-700 mb-2">Lemma:</span> Search for a <strong>single</strong> lemma e.g. <code class="bg-white px-2 py-1 rounded text-xs">pes</code>
-           <br><span class="text-gray-600 text-xs">shows all forms of the word like 'pes', 'pedibus' etc.</span>
-         </li>
-         <li>
-             <span class="font-semibold text-brand-700 mb-2">Corpus Query Language (CQL): </span>
-             <ul class="space-y-2 ml-4 font-medium list-disc pt-2">
-                 
-                  <li>
-                 Search by word case insensitive: <code class="bg-white px-2 py-1 rounded text-xs">q[lc="operatus"]</code>
-                 <br><span class="text-gray-600 text-xs">finds words "operatus" (lower case) and "Operatus" (upper case).</span>
-                 </li>                            
-               
-                 <li>
-                 Search for several words (OR): <code class="bg-white px-2 py-1 rounded text-xs">q[word="populus|civitatem"]</code>
-                 <br><span class="text-gray-600 text-xs">finds the words"populus" <strong>OR</strong> "civitatem"</span>
-                 </li>
-                 <li>
-                  Search for several words (AND) | Searching with Word Distance
-                  <br><span class="text-gray-600 text-xs">find two words or two lemmata, or a word and a lemma within a certain distance from each other.
-                  <br/>Empty square brackets [ ] stand for ‘any token’. Curly brackets { } are used for repetition of the preceding token.</span>
-                  <ul class="space-y-2 ml-4 list-disc list-inside">
-                      <li>
-                        <code class="bg-white px-2 py-1 rounded text-xs">q[word="rege"][word="Francorum"]</code>
-                        <br><span class="text-gray-600 text-xs">finds "rege" immediately followed by "Francorum"</span>
-                      </li>
-                      <li>
-                          <code class="bg-white px-2 py-1 rounded text-xs">q[word="rege"][][word=".*ilippo"]</code>
-                          <br><span class="text-gray-600 text-xs">finds "rege" exactly 1 word away from words ending with "ilippo" (like "Philippo", "philippo", "Filippo" etc.)</span>
-                      </li>
-                      <li>
-                        <code class="bg-white px-2 py-1 rounded text-xs">q[word="decem"][]&#123;0,15&#125;[word="tribu.*"]</code>
-                        <br><span class="text-gray-600 text-xs">finds the word "decem" within 0 to 15 words away from words starting with "tribu" (like "tribus" or "tribubus") </span>
-                      </li>
-                      <li>
-                        <code class="bg-white px-2 py-1 rounded text-xs">q[lemma="cedo"][]&#123;0,15&#125;[lc="roman.*"]</code>
-                        <br><span class="text-gray-600 text-xs">finds the lemma "cedo" within 0 to 15 words away from words (case-insensitive) starting with "roman" (like "romanus", "Romanus" or "romanorumque")</span>
-                      </li>
-                    </ul>
-                 </li>
-             </ul>
-         </li>
-          
-       </ul>
+       <div>
+        <p class="font-semibold text-neutral-800 mb-2 decoration underline underline-offset-4 text-base">Select one of the <span class="font-bold">four</span> search modes available in the drop down menu below:</p>
+         <ul class="pt-3 space-y-2 ml-4 list-decimal">
+           <li>
+             <span class="font-semibold text-brand-700 mb-2">Simple:</span> Search for a <strong>single</strong> word e.g. <code class="bg-white px-2 py-1 rounded text-xs">Jerusalem</code>
+             or
+             <code class="bg-white px-2 py-1 rounded text-xs">.*rusalem</code>
+            <br><span class="text-gray-600 text-xs">shows all occurrences of the word with the exact same spelling or with variations when using wild cards (see further below).</span>
+           </li>
+           <li>
+             <span class="font-semibold text-brand-700 mb-2">Phrase:</span> Search for a whole phrase e.g. <code class="bg-white px-2 py-1 rounded text-xs">reliqua pedibus suis</code>
+            <br> <span class="text-gray-600 text-xs">shows all occurrences of the phrase in exactly this order and with the exact same spelling or with variants when using wild cards.</span>
+           </li>
+           <li>
+             <span class="font-semibold text-brand-700 mb-2">Lemma:</span> Search for a <strong>single</strong> lemma e.g. <code class="bg-white px-2 py-1 rounded text-xs">pes</code>
+             <br><span class="text-gray-600 text-xs">shows all forms of the word like 'pes', 'pedibus' etc.</span>
+           </li>
+           <li>
+               <span class="font-semibold text-brand-700 mb-2">Corpus Query Language (CQL): </span>
+               <ul class="space-y-2 ml-4 font-medium list-disc pt-2">
+       
+                    <li>
+                   Search by word case insensitive: <code class="bg-white px-2 py-1 rounded text-xs">q[lc="operatus"]</code>
+                   <br><span class="text-gray-600 text-xs">finds words "operatus" (lower case) and "Operatus" (upper case).</span>
+                   </li>
+       
+                   <li>
+                   Search for several words (OR): <code class="bg-white px-2 py-1 rounded text-xs">q[word="populus|civitatem"]</code>
+                   <br><span class="text-gray-600 text-xs">finds the words"populus" <strong>OR</strong> "civitatem"</span>
+                   </li>
+                   <li>
+                    Search for several words (AND) | Searching with Word Distance
+                    <br><span class="text-gray-600 text-xs">find two words or two lemmata, or a word and a lemma within a certain distance from each other.
+                    <br/>Empty square brackets [ ] stand for ‘any token’. Curly brackets { } are used for repetition of the preceding token.</span>
+                    <ul class="space-y-2 ml-4 list-disc list-inside">
+                        <li>
+                          <code class="bg-white px-2 py-1 rounded text-xs">q[word="rege"][word="Francorum"]</code>
+                          <br><span class="text-gray-600 text-xs">finds "rege" immediately followed by "Francorum"</span>
+                        </li>
+                        <li>
+                            <code class="bg-white px-2 py-1 rounded text-xs">q[word="rege"][][word=".*ilippo"]</code>
+                            <br><span class="text-gray-600 text-xs">finds "rege" exactly 1 word away from words ending with "ilippo" (like "Philippo", "philippo", "Filippo" etc.)</span>
+                        </li>
+                        <li>
+                          <code class="bg-white px-2 py-1 rounded text-xs">q[word="decem"][]&#123;0,15&#125;[word="tribu.*"]</code>
+                          <br><span class="text-gray-600 text-xs">finds the word "decem" within 0 to 15 words away from words starting with "tribu" (like "tribus" or "tribubus") </span>
+                        </li>
+                        <li>
+                          <code class="bg-white px-2 py-1 rounded text-xs">q[lemma="cedo"][]&#123;0,15&#125;[lc="roman.*"]</code>
+                          <br><span class="text-gray-600 text-xs">finds the lemma "cedo" within 0 to 15 words away from words (case-insensitive) starting with "roman" (like "romanus", "Romanus" or "romanorumque")</span>
+                        </li>
+                      </ul>
+                   </li>
+               </ul>
+           </li>
+       
+         </ul>
+       </div>
+        <!-- Filtering -->
+          <div>
+          <h3 class="font-semibold text-neutral-800 mb-2 decoration underline underline-offset-4 text-base">Filtering (optional):</h3>
+          <p>You can further refine the results by using the facetted filters <strong>after</strong> executing a phrase search .</p>
+         </div>
      </div>
+     
      <div class="grid content-between justify-start">
        <!-- Wildcards -->
        <div>
@@ -160,6 +167,7 @@ import SearchPanel from "@/components/search/filter-panel.astro";
            </li>
          </ul>
         </div>
+       
         <div class="py-3">
           <h3 class="font-semibold text-neutral-800 decoration underline underline-offset-4">For full guideliness, please refer to:</h3>
          <ul class="space-y-1 py-1 list-disc list-inside pl-3">
@@ -193,7 +201,7 @@ import SearchPanel from "@/components/search/filter-panel.astro";
     <div class="grid grid-cols-[1fr_3fr] gap-4 items-stretch">
       <div class="border border-gray-300 rounded-lg px-2 py-1 flex items-center gap-1 bg-brand-500/70">
         <label for="search-type-select" class="text-white font-semibold text-xl font-mono uppercase">Search Mode: </label>
-        <select id="search-type-select" class="flex-1 text-brand-700 text-lg font-mono font-semibold rounded-lg py-1 px-2 bg-brand-50">
+        <select id="search-type-select" class="flex-1 text-brand-700 text-lg font-mono font-semibold rounded-lg py-1.5 px-2 bg-brand-50">
           <option value="simple">Simple</option>
           <option value="phrase">Phrase</option>
           <option value="lemma">Lemma</option>
@@ -201,11 +209,13 @@ import SearchPanel from "@/components/search/filter-panel.astro";
         </select>
       </div>
       <div class="flex gap-1">
-        <input type="text" id="search-input" class="w-full p-2 border border-gray-300 rounded-lg"/>
-        <button id="search-button" class="button-custom rounded-lg">Search</button>
+        <input type="text" id="search-input" class="w-full p-2 border-4 border-brand-400 rounded-lg  focus-visible:outline-none
+    focus-visible:ring-2
+    focus-visible:ring-sage-900">
+        <button id="search-button" class="bg-brand-400 text-brand-100 text-base font-semibold
+            py-1 px-2 border border-brand-900 hover:bg-brand-600 rounded-sm justify-self-end cursor-pointer uppercase">Search</button>
       </div>
-    </div>
-     <div class="grid md:grid-cols-[1fr_3fr] gap-4">
+    
       <SearchPanel noskeSearch = {true}/>
       <section class="space-y-3">
         <div id="current-refinements" class="hidden"/>

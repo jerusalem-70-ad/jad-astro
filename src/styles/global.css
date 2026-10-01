@@ -16,8 +16,9 @@
   --color-brand-900: #421305;
   --color-brand-950: #2c0d03;
 
-  --color-sage-900: #0b331b;
+  --color-sage-900: #0b331b; /* used in leaflet icon */
 
+  --color-accent: #f85a11;
   --color-neutral-50: #f9f6f1;
   --color-neutral-100: #f1ece4;
   --color-neutral-200: #e8e0d4;
@@ -255,21 +256,22 @@ dialog::backdrop {
 }
 
 .ais-SearchBox-input {
-  @apply w-full text-sm py-1.5 p-2 border border-gray-300 rounded-sm;
-  content: none !important;
+  @apply flex-1 text-sm py-1.5 p-2
+    border border-gray-300 rounded-sm
+    focus-visible:outline-none
+    focus-visible:ring-2
+    focus-visible:ring-brand-400
+    focus-visible:ring-offset-2
+    focus-visible:ring-offset-orange-400;
 }
 
 .ais-SearchBox-form {
   @apply flex gap-1;
 }
 
-.ais-SearchBox-form::before {
-  content: none !important;
-}
-
 .ais-SearchBox-submit,
 .ais-SearchBox-reset {
-  @apply p-2 text-gray-600 rounded-md border border-brand-400 hover:bg-brand-300 transition-colors duration-200;
+  @apply block p-2 text-gray-600 rounded-md border border-brand-400 hover:bg-brand-300 transition-colors duration-200;
 }
 
 /* 1. Remove Algolia’s default arrow (they use borders) */
@@ -283,6 +285,16 @@ dialog::backdrop {
 
 .ais-InfiniteHits-loadMore:disabled {
   @apply hidden;
+}
+
+.ais-SortBy {
+  @apply flex-1;
+}
+
+#sort .ais-SortBy-select {
+  @apply w-full rounded-lg border-0
+    bg-brand-50 px-2 py-1
+    text-lg font-mono font-semibold text-brand-700;
 }
 /* ######################################### */
 /* Noske Search KWIC view adjustments */
