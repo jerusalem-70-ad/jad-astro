@@ -9,6 +9,8 @@ import GraphContainer from "@/components/visualisations/graph-container.svelte"
 import GraphTitle from "@/components/visualisations/graph-title.svelte";
 import { getHeatMapOption } from "@/components/visualisations/helpers.ts";
 
+import row_liturgical_references from "@/content/row/liturgical_references"
+
 let container: HTMLDivElement;
 let chart: echarts.ECharts | null = null;
 
@@ -20,21 +22,11 @@ let heatmapData: {centuries: string[], items: string[], values: [number, number,
 };
 let mode = "absolute";
 
-// computed once: Marx wants only keywords with min 10 occurrences
-const allowedKeywords = (() => {
-  const counts = new Map<string, number>();
-
-  passages.forEach(p => {
-    p.keywords.forEach(k => {
-      counts.set(k, (counts.get(k) ?? 0) + 1);
-    });
-  });
-
-  return Array.from(counts.entries())
-    .filter(([_, count]) => count >= 10)
-    .map(([keyword]) => keyword)
-    .sort();
-})();
+// computed once: order feastes by date (found in the 50kb row json)
+const orderedRefNames = Object.values(row_liturgical_references)
+  .filter(ref => ref.date !== null)
+  .toSorted((a, b) => a.date.localeCompare(b.date))
+  .map(ref => ref.name);  
 
 //prepare data from reactive passages-graph
 $: {
@@ -44,7 +36,7 @@ $: {
       : passages;
 
   const centurySet = new Set<string>(); // Sets to store all the cenutire and keywords
-  const keywordSet = new Set<string>();
+  const litRefSet = new Set<string>();
   const passagesPerCentury = new Map<string, number>(); // Map to store the total passages per century for relative frequency calculation
 
   passagesJson.forEach((p) => { //iterate over passages to fill the Sets
@@ -53,15 +45,15 @@ $: {
       centurySet.add(c);
       passagesPerCentury.set(c, (passagesPerCentury.get(c) ?? 0) + 1);
     });
-    p.keywords.length > 0 ?
-    p.keywords.forEach(k => keywordSet.add(k)) : "";
+    p.liturgical_references.length > 0 ?
+    p.liturgical_references.forEach(ref => litRefSet.add(ref)) : "";
   });
 
   const heatmap = new Map<string, Map<string, {absolute: number, relative:number}>>();
 // e.g. 12 {keyword22, {absolute: 0, relative:0}} initially all keywords in all cenutries are have value 0
   centurySet.forEach(c => {
     heatmap.set(c, new Map());
-    keywordSet.forEach(k => {
+    litRefSet.forEach(k => {
       heatmap.get(c)?.set(k, {absolute: 0, relative: 0});
     });
   });
@@ -70,18 +62,17 @@ $: {
     const centuries = Array.isArray(p.century) ? p.century : [];
 
     centuries.forEach(c => {
-      p.keywords.forEach(k => {
-         if (!allowedKeywords.includes(k)) return; //take only keywords with min 10 occurences
+      p.liturgical_references.forEach(k => {
         const current = heatmap.get(c)?.get(k) ?? {absolute: 0, relative: 0};
         heatmap.get(c)?.set(k, {absolute: current.absolute + 1, relative: current.relative});
       });
     });
   });
   // get the relative frequency by dividing the absolute count by the total passages in that century
-  heatmap.forEach((keywordMap, century) => {
+  heatmap.forEach((litRefMap, century) => {
     const totalPassages = passagesPerCentury.get(century) ?? 1; // avoid division by zero
-    keywordMap.forEach((value, keyword) => {
-      heatmap.get(century)?.set(keyword, {
+    litRefMap.forEach((value, ref) => {
+      heatmap.get(century)?.set(ref, {
         absolute: value.absolute,
         relative: ( value.absolute / totalPassages) * 100 // relative frequency as percentage
       });
@@ -93,13 +84,12 @@ $: {
   const numB = parseInt(b);
   return numA - numB;
 });
-const keywordsArray = allowedKeywords
-  .sort();
+const refsArray = orderedRefNames.filter(name => litRefSet.has(name));
 
   const values: [number, number, number][] = []; // value has [X coordinates, Y coordinates, value to display]
 
   centuriesArray.forEach((c, xIndex) => {
-    keywordsArray.forEach((k, yIndex) => {
+    refsArray.forEach((k, yIndex) => {
       const relative = heatmap.get(c)?.get(k)?.relative ?? 0; // calculated as percent from all passages per centuries
       const absolute = heatmap.get(c)?.get(k)?.absolute ?? 0; // absolute number of passages
       // read mode set by button
@@ -113,7 +103,7 @@ const keywordsArray = allowedKeywords
 
   heatmapData = {
     centuries: centuriesArray,
-    items: keywordsArray,
+    items: refsArray,
     values
   };
 }
@@ -147,7 +137,7 @@ function handleClick(params: any) {
   if (!ref) return;
 
   window.location.href = withBasePath(
-    `/advanced-search?JAD-temp[refinementList][keywords.label][0]=${encodeURIComponent(ref)}`
+    `/advanced-search?JAD-temp[refinementList][liturgical_references.value][0]=${encodeURIComponent(ref)}`
   );
 };
 function changeMode() {
@@ -160,7 +150,7 @@ function changeMode() {
 
 <div class="grid gap-2 p-3">
 <GraphContainer>
-  <GraphTitle title="Keywords Heat Map" 
+  <GraphTitle title="Liturgical Feasts Heat Map" 
   what="Distribution of keywords across centuries."
   how="The color intensity represents frequency. There are two counting modes: absolute shows the 
   absolute number of passages in which each keyword appears; relative shows the percentage of all 

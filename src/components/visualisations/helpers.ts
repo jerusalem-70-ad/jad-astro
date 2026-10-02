@@ -7,7 +7,7 @@ type PieDataItem = {
 };
 type HeatMapData = {
   centuries: string[];
-  keywords: string[];
+  items: string[];
   values: [number, number, number][]; // [xIndex, yIndex, value]
 };
 
@@ -117,8 +117,8 @@ export function getHeatMapOption(heatMapData: HeatMapData): EChartsOption {
       formatter: (params: any) => {
         const [x, y, value] = params.data;
         const century = heatMapData.centuries[y];
-        const keyword = heatMapData.keywords[x];
-        return `${keyword}<br/>${century}: ${value}`;
+        const item = heatMapData.items[x];
+        return `${item}<br/>${century}: ${value}`;
       },
     },
     grid: {
@@ -127,7 +127,7 @@ export function getHeatMapOption(heatMapData: HeatMapData): EChartsOption {
     },
     xAxis: {
       type: "category",
-      data: heatMapData.keywords.map((k) => k.substring(0, 15)),
+      data: heatMapData.items,
       splitArea: { show: true },
       axisLabel: {
         rotate: 60,
@@ -166,7 +166,7 @@ export function getHeatMapOption(heatMapData: HeatMapData): EChartsOption {
     },
     series: [
       {
-        name: "keywords",
+        name: "items",
         type: "heatmap",
         data: heatMapData.values,
         itemStyle: {

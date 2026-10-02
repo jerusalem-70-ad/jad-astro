@@ -8,6 +8,7 @@ import GenreWorkPieChart from "@/components/visualisations/genre-work-piechart.s
 import BiblBookGraph from "@/components/visualisations/bible-books.svelte";
 import LiturgicalGraph from "@/components/visualisations/liturgical-ref.svelte";
 import KeywordsHeatmap from "@/components/visualisations/keywords-heatmap.svelte";
+import LitRefsHeatmap from "@/components/visualisations/liturgical-heatmap.svelte";
 
 import KeywordsPieChart from "@/components/visualisations/keywords-piechart.svelte";
 ---
@@ -20,6 +21,9 @@ import KeywordsPieChart from "@/components/visualisations/keywords-piechart.svel
             </aside>
         </div> 
         <div class="grid grid-cols-[repeat(auto-fit,minmax(1000px,1fr))] overflow-auto w-full mx-auto">
+            <div class="col-span-full">
+                <LitRefsHeatmap client:only="svelte"/>
+            </div>
             <Graph client:only="svelte"/> 
             <GenreWorkPieChart client:only="svelte" />
             <GenrePieChart client:only="svelte" />

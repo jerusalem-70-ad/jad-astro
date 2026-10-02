@@ -658,7 +658,7 @@ search.addWidgets(
                                 : item.attribute === "keywords.label"
                                   ? "Keyword"
                                   : item.attribute ===
-                                      "Liturgical_references.value"
+                                      "liturgical_references.value"
                                     ? "Liturgy"
                                     : item.attribute === "sources.author"
                                       ? "Source"

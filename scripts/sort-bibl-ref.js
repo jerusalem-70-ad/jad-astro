@@ -97,6 +97,7 @@ export const NOVA_VULGATA_ORDER = {
   Sophonia: 43,
   Agg: 44,
   Aggeus: 44,
+  Hag: 44,
   Zach: 45,
   Zacharia: 45,
   Mal: 46,
@@ -165,6 +166,7 @@ export const NOVA_VULGATA_ORDER = {
   Hebr: 67, // Adding Hebr as alias
   Jas: 68,
   James: 68,
+  Jac: 68,
   Pet: 69,
   "1Pet": 69,
   "2Pet": 70,

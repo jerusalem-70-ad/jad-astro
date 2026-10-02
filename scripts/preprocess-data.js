@@ -284,6 +284,20 @@ const passagesPlus = passages
       };
     });
 
+    const litRefs = liturgical_references
+      .filter((ref) =>
+        passage.liturgical_references?.some((pRef) => pRef.id === ref.id),
+      )
+      .map((ref) => {
+        return {
+          id: ref.id,
+          jad_id: ref.jad_id,
+          value: ref.name,
+          description: ref.description,
+          date: ref.date,
+        };
+      });
+
     return {
       id: passage.id,
       jad_id: passage.jad_id,
@@ -298,9 +312,7 @@ const passagesPlus = passages
       biblical_references: passage.biblical_references,
       keywords: passage.keywords.map(({ order, ...rest }) => rest),
       part_of_cluster: passage.part_of_cluster,
-      liturgical_references: passage.liturgical_references.map(
-        ({ order, ...rest }) => rest,
-      ),
+      liturgical_references: litRefs,
       occurrence_found_in: passage.occurrence_found_in.map(
         ({ order, ...rest }) => rest,
       ),
@@ -854,17 +866,6 @@ writeFileSync(
 console.log("clusters.json file written successfully.");
 
 const PassagesLiturgicalEnriched = enrichedPassages.map((p) => {
-  const related_liturgical_refs = liturgical_references
-    .filter((ref) =>
-      p.liturgical_references.some((p_ref) => p_ref.id === ref.id),
-    )
-    .map((ref) => ({
-      id: ref.id,
-      jad_id: ref.jad_id,
-      value: ref.name,
-      description: ref.description,
-    }));
-
   const keywordsMap = new Map();
   keywordsPlusFinal
     .filter((kw) => p.keywords.some((p_kw) => p_kw.id === kw.id))
@@ -890,7 +891,6 @@ const PassagesLiturgicalEnriched = enrichedPassages.map((p) => {
 
   return {
     ...p,
-    liturgical_references: related_liturgical_refs,
     keywords: related_keywords,
   };
 });
