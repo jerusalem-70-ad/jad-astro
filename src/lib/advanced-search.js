@@ -63,38 +63,41 @@ const typesenseInstantsearchAdapter = new TypesenseInstantsearchAdapter({
 const searchClient = typesenseInstantsearchAdapter.searchClient;
 
 // Initialize InstantSearch
+const isNoskePageContext = document.querySelector("#noske-search"); //check if script runs in advanced or noske search
 const search = instantsearch({
   searchClient,
   indexName: project_collection_name,
-  routing: {
-    stateMapping: simple(),
-    createURL: (state) => {
-      const { query, refinementList, page, from, to } = state;
+  routing: isNoskePageContext
+    ? false //disable routing on noske-ts-search
+    : {
+        stateMapping: simple(),
+        createURL: (state) => {
+          const { query, refinementList, page, from, to } = state;
 
-      const queryParam = query ? `JAD-query=${query}` : "";
-      const filters = refinementList
-        ? `filters=${JSON.stringify(refinementList)}`
-        : "";
-      const pageParam = page ? `page=${page}` : "";
-      const fromParam = from ? `from=${from}` : "";
-      const toParam = to ? `to=${to}` : "";
+          const queryParam = query ? `JAD-query=${query}` : "";
+          const filters = refinementList
+            ? `filters=${JSON.stringify(refinementList)}`
+            : "";
+          const pageParam = page ? `page=${page}` : "";
+          const fromParam = from ? `from=${from}` : "";
+          const toParam = to ? `to=${to}` : "";
 
-      return `/?${[queryParam, filters, pageParam, fromParam, toParam]
-        .filter(Boolean)
-        .join("&")}`;
-    },
-    parseURL: (url) => {
-      const urlParams = new URLSearchParams(url);
+          return `/?${[queryParam, filters, pageParam, fromParam, toParam]
+            .filter(Boolean)
+            .join("&")}`;
+        },
+        parseURL: (url) => {
+          const urlParams = new URLSearchParams(url);
 
-      return {
-        query: urlParams.get("JAD-query") || "",
-        refinementList: JSON.parse(urlParams.get("filters") || "{}"),
-        page: parseInt(urlParams.get("page") || "1", 10),
-        from: urlParams.get("from"),
-        to: urlParams.get("to"),
-      };
-    },
-  },
+          return {
+            query: urlParams.get("JAD-query") || "",
+            refinementList: JSON.parse(urlParams.get("filters") || "{}"),
+            page: parseInt(urlParams.get("page") || "1", 10),
+            from: urlParams.get("from"),
+            to: urlParams.get("to"),
+          };
+        },
+      },
 });
 
 // Custom comparator function to sort century arrays for the refinement list 'Century of work'
@@ -311,7 +314,7 @@ const customDateCurrentRefinement = (containerId) => {
   };
 };
 
-// add widgets
+// add widgets (some not used in noske-ts so check if DOM cntainer exist)
 search.addWidgets(
   [
     document.querySelector("#searchbox") &&
@@ -914,7 +917,6 @@ initShowMoreButtons();
 
 // noske related functions
 
-const typesenseClient = typesenseInstantsearchAdapter.typesenseClient;
 export async function getAllFilteredIds() {
   const helper = search.helper;
   if (!helper) return [];

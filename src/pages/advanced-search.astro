@@ -7,7 +7,7 @@ import SearchPanel from "@/components/search/filter-panel.astro";
 ---
 
 <Layout title="Search">
-  <div class="md:w-5/6 mx-auto md:p-6 p-2">
+  <div id="typsense-search" class="md:w-5/6 mx-auto md:p-6 p-2">
     <div class="grid grid-cols-[auto_1fr]">
       <div class="grid grid-cols-[1fr_1fr] items-center justify-center mb-4 border border-gray-200 rounded-2xl shadow bg-brand-500/60 p-1">
           <h1 class="bg-brand-50 text-xl p-3 md:text-3xl font-semibold text-brand-600 rounded-2xl">
@@ -15,7 +15,7 @@ import SearchPanel from "@/components/search/filter-panel.astro";
           </h1>
       
             <NavLink reload
-                href="/noske-search"
+                href="/linguistic-search"
                 class="justify-self-center group relative p-3 text:lg md:text-2xl font-semibold text-brand-200 hover:text-brand-50"
               >
                 Linguistic Search
