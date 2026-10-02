@@ -300,7 +300,8 @@ dialog::backdrop {
 /* Noske Search KWIC view adjustments */
 /* ######################################### */
 
-.button-custom {
+.button-custom,
+.page-btn {
   @apply text-brand-600 hover:bg-brand-400 hover:text-brand-100 text-sm font-medium 
         py-1 px-2 border border-brand-900 rounded-sm;
 }
@@ -310,6 +311,10 @@ dialog::backdrop {
 }
 .kwic {
   @apply font-bold text-brand-500;
+}
+
+.pagination {
+  @apply inline-flex items-center gap-2;
 }
 
 /******************/

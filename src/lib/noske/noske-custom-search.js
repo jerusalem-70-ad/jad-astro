@@ -363,13 +363,13 @@ class CustomNoskeSearch {
     if (this.currentPage > 1) {
       html += `<button class="page-btn" data-page="${
         this.currentPage - 1
-      }">← Previous</button>`;
+      }">❮ Previous</button>`;
     }
     html += `<span class="page-info">Page ${this.currentPage} of ${totalPages}</span>`;
     if (this.currentPage < totalPages) {
       html += `<button class="page-btn" data-page="${
         this.currentPage + 1
-      }">Next →</button>`;
+      }">Next ❯</button>`;
     }
     html += "</div>";
     paginationContainer.innerHTML = html;
