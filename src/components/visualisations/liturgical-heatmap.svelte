@@ -78,6 +78,11 @@ $: {
       });
     });
   });
+  // alternatively count only by the passages with liturgical feasts
+  // if (p.liturgical_references.length > 0) {
+    // passagesPerCentury.set(c, (passagesPerCentury.get(c) ?? 0) + 1);
+    //}
+
 // convert Set to array
   const centuriesArray = Array.from(centurySet).sort((a, b) => {
   const numA = parseInt(a);

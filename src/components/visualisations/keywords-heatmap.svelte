@@ -94,7 +94,6 @@ $: {
   return numA - numB;
 });
 const keywordsArray = allowedKeywords
-  .sort();
 
   const values: [number, number, number][] = []; // value has [X coordinates, Y coordinates, value to display]
 
@@ -163,7 +162,7 @@ const modes = [
   at least 10 occurrences in total."
   how="The color intensity represents frequency. There are two counting modes: absolute shows the 
   absolute number of passages in which each keyword appears; relative shows the percentage of all 
-  passages in the respective century where the keyword is detected (e.g. in the 3th c. there is 1 
+  passages in the respective century where the keyword is detected (e.g. in the 3rd c. there is 1 
  passage related to Antichrist - absolute; this make in relative numbers 14 % of all pasages from that century)."
   questions="When was Anti-Judaism most prominent?"
   why="Allows patterns and trends to be easily identified over time." />
