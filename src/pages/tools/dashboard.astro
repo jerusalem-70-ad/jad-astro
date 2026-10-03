@@ -21,9 +21,6 @@ import KeywordsPieChart from "@/components/visualisations/keywords-piechart.svel
             </aside>
         </div> 
         <div class="grid grid-cols-[repeat(auto-fit,minmax(1000px,1fr))] overflow-auto w-full mx-auto">
-            <div class="col-span-full">
-                <LitRefsHeatmap client:only="svelte"/>
-            </div>
             <Graph client:only="svelte"/> 
             <GenreWorkPieChart client:only="svelte" />
             <GenrePieChart client:only="svelte" />
@@ -32,6 +29,9 @@ import KeywordsPieChart from "@/components/visualisations/keywords-piechart.svel
             <KeywordsPieChart client:only="svelte"/>
             <div class="col-span-full">
                 <KeywordsHeatmap client:only="svelte"/>
+            </div>
+            <div class="col-span-full">
+                <LitRefsHeatmap client:only="svelte"/>
             </div>
         </div>     
     </div>

@@ -140,53 +140,49 @@ function handleClick(params: any) {
     `/advanced-search?JAD-temp[refinementList][liturgical_references.value][0]=${encodeURIComponent(ref)}`
   );
 };
-function changeMode() {
-  if (mode === "absolute") {
-    mode = "relative"
-  }
-  else mode = "absolute";
-}
+const modes = [
+  { value: "absolute", label: "Absolute numbers", hint: "Number of passages per feast." },
+  { value: "relative", label: "% per century", hint: "Percentage of passages per century." }
+];
 </script>
 
 <div class="grid gap-2 p-3">
 <GraphContainer>
   <GraphTitle title="Liturgical Feasts Heat Map" 
-  what="Distribution of keywords across centuries."
-  how="The color intensity represents frequency. There are two counting modes: absolute shows the 
-  absolute number of passages in which each keyword appears; relative shows the percentage of all 
-  passages in the respective century where the keyword is detected. Taken into account are keywords with 
-  at least 10 occurrences in total."
-  questions="When was Anti-Judaism most prominent?"
+  what="Some passages, mainly
+  those from liturgical texts such as sermons, are tied to one particular feast. The heat map shows
+  how many passages relate to each feast. The x-axis lists the feasts in calendar order, the y-axis
+  the centuries. A passage is placed in the century (or centuries) in which its source work was
+  written, and under the feast it was composed for. A passage whose work is dated to two centuries is counted in both."
+  how="The color intensity represents frequency. There are two counting modes: absolute shows the
+  number of passages related to a feast; relative shows the percentage of all passages in the
+  respective century that relate to this feast (e.g. in the 9th c. there are 2 passages related to 
+  Easter - absolute; these make in relative numbers 0,5 % of all pasages from the 9th c.). 
+  "
+  questions="At what moment in the liturgical year?"
   why="Allows patterns and trends to be easily identified over time." />
   <!--  // change the mode between absolute and relative frequency -->
-  <div class="flex justify-end gap-3">
-    <div class="group inline-block relative">
-      <button on:click={changeMode} class="px-2 py-0.5 bg-brand-600/90 text-white font-semibold hover:bg-brand-500 rounded-md shadow-sm disabled:bg-neutral-400
-           disabled:cursor-not-allowed
-           disabled:hover:bg-neutral-400" disabled={mode === "absolute"}>
-        Show absolute numbers
-      </button>       
-        <span class="invisible group-hover:visible rounded-md p-3 text-xs md:text-sm
-         bg-brand-700/90 text-brand-50 w-[100px] z-50 absolute left-0 top-10">
-        Absolute numbers of all passages.
-        </span>
-    </div>
-    <div class="group inline-block relative">
-
-     <button on:click={changeMode} class="px-2 py-0.5 bg-brand-600/90 text-white font-semibold hover:bg-brand-500 rounded-md shadow-sm disabled:bg-neutral-400
-         disabled:cursor-not-allowed
-         disabled:hover:bg-neutral-400" disabled={mode === "relative"}>
-      Show relative numbers
-    </button>
-     <span class="invisible group-hover:visible rounded-md p-3 text-xs md:text-sm
-         bg-brand-700/90 text-brand-50 w-[100px] z-50 absolute left-0 top-10">
-    Percentage of passages per century.
-        </span>
-    </div>
+  <div class="flex justify-end">
+  <div class="inline-flex rounded-md shadow-sm" role="group" aria-label="Counting mode">
+    {#each modes as m}
+      <button
+        type="button"
+        on:click={() => (mode = m.value)}
+        aria-pressed={mode === m.value}
+        title={m.hint}
+        class="px-3 py-1 font-semibold first:rounded-l-md last:rounded-r-md
+          {mode === m.value
+            ? 'bg-brand-700 text-white'
+            : 'bg-brand-600/60 text-white hover:bg-brand-500'}"
+      >
+        {m.label}
+      </button>
+    {/each}
   </div>
+</div>
   <div
     bind:this={container}
-    class="w-full h-[900px]"
+    class="w-full h-225"
   ></div>
   </GraphContainer>
 </div>

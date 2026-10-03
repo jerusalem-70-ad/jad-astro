@@ -122,8 +122,11 @@ export function getHeatMapOption(heatMapData: HeatMapData): EChartsOption {
       },
     },
     grid: {
-      top: 60,
-      bottom: 160, // leave space for visualMap
+      top: 70,
+      bottom: 160,
+      left: 20,
+      right: 60,
+      containLabel: true,
     },
     xAxis: {
       type: "category",

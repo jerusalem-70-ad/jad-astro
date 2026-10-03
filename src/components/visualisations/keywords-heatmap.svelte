@@ -104,7 +104,7 @@ const keywordsArray = allowedKeywords
       const absolute = heatmap.get(c)?.get(k)?.absolute ?? 0; // absolute number of passages
       // read mode set by button
       if (mode === "relative") {
-      values.push([yIndex, xIndex, parseFloat(relative.toFixed(1))]);}
+      values.push([yIndex, xIndex, parseFloat(relative.toFixed(0))]);}
       else {
         values.push([yIndex, xIndex, absolute]);
       }
@@ -150,50 +150,42 @@ function handleClick(params: any) {
     `/advanced-search?JAD-temp[refinementList][keywords.label][0]=${encodeURIComponent(ref)}`
   );
 };
-function changeMode() {
-  if (mode === "absolute") {
-    mode = "relative"
-  }
-  else mode = "absolute";
-}
+const modes = [
+  { value: "absolute", label: "Absolute numbers", hint: "Number of passages per keyword." },
+  { value: "relative", label: "% per century", hint: "Percentage of passages per century." }
+];
 </script>
 
 <div class="grid gap-2 p-3">
 <GraphContainer>
   <GraphTitle title="Keywords Heat Map" 
-  what="Distribution of keywords across centuries."
+  what="Distribution of keywords across centuries. Taken into account are keywords with 
+  at least 10 occurrences in total."
   how="The color intensity represents frequency. There are two counting modes: absolute shows the 
   absolute number of passages in which each keyword appears; relative shows the percentage of all 
-  passages in the respective century where the keyword is detected. Taken into account are keywords with 
-  at least 10 occurrences in total."
+  passages in the respective century where the keyword is detected (e.g. in the 3th c. there is 1 
+ passage related to Antichrist - absolute; this make in relative numbers 14 % of all pasages from that century)."
   questions="When was Anti-Judaism most prominent?"
   why="Allows patterns and trends to be easily identified over time." />
   <!--  // change the mode between absolute and relative frequency -->
-  <div class="flex justify-end gap-3">
-    <div class="group inline-block relative">
-      <button on:click={changeMode} class="px-2 py-0.5 bg-brand-600/90 text-white font-semibold hover:bg-brand-500 rounded-md shadow-sm disabled:bg-neutral-400
-           disabled:cursor-not-allowed
-           disabled:hover:bg-neutral-400" disabled={mode === "absolute"}>
-        Show absolute numbers
-      </button>       
-        <span class="invisible group-hover:visible rounded-md p-3 text-xs md:text-sm
-         bg-brand-700/90 text-brand-50 w-[100px] z-50 absolute left-0 top-10">
-        Absolute numbers of all passages.
-        </span>
-    </div>
-    <div class="group inline-block relative">
-
-     <button on:click={changeMode} class="px-2 py-0.5 bg-brand-600/90 text-white font-semibold hover:bg-brand-500 rounded-md shadow-sm disabled:bg-neutral-400
-         disabled:cursor-not-allowed
-         disabled:hover:bg-neutral-400" disabled={mode === "relative"}>
-      Show relative numbers
-    </button>
-     <span class="invisible group-hover:visible rounded-md p-3 text-xs md:text-sm
-         bg-brand-700/90 text-brand-50 w-[100px] z-50 absolute left-0 top-10">
-    Percentage of passages per century.
-        </span>
-    </div>
+ <div class="flex justify-end">
+  <div class="inline-flex rounded-md shadow-sm" role="group" aria-label="Counting mode">
+    {#each modes as m}
+      <button
+        type="button"
+        on:click={() => (mode = m.value)}
+        aria-pressed={mode === m.value}
+        title={m.hint}
+        class="px-3 py-1 font-semibold first:rounded-l-md last:rounded-r-md
+          {mode === m.value
+            ? 'bg-brand-700 text-white'
+            : 'bg-brand-600/60 text-white hover:bg-brand-500'}"
+      >
+        {m.label}
+      </button>
+    {/each}
   </div>
+</div>
   <div
     bind:this={container}
     class="w-full h-[900px]"

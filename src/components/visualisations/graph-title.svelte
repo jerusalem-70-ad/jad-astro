@@ -18,7 +18,7 @@ let {title, what, how, why, questions} : { title: string, what?: string, how?: s
         </span>
         <span class="sr-only">Definition des Begriffes</span>
         <span class="invisible group-hover:visible rounded-md p-3 text-sm md:text-base 
-         bg-brand-900/90 text-brand-50 w-[300px] z-50 absolute left-8 top-0">
+         bg-brand-900/90 text-brand-50 w-100 z-50 absolute left-8 top-0">
         {#if what || why || how || questions}
         <dl class="grid grid-cols-[1fr_5fr]">
             {#if what}
