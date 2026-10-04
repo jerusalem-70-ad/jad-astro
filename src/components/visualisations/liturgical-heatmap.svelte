@@ -9,7 +9,7 @@ import GraphContainer from "@/components/visualisations/graph-container.svelte"
 import GraphTitle from "@/components/visualisations/graph-title.svelte";
 import { getHeatMapOption } from "@/components/visualisations/helpers.ts";
 
-import row_liturgical_references from "@/content/row/liturgical_references"
+import row_liturgical_references from "@/content/row/liturgical_references.json"
 
 let container: HTMLDivElement;
 let chart: echarts.ECharts | null = null;
