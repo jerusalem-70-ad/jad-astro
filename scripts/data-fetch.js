@@ -22,6 +22,7 @@ const fileNames = [
   "liturgical_references.json",
   "ms_occurrences.json",
   "sources_occurrences.json",
+  "bible.json",
 ];
 
 // async function to fetch the data from the url
