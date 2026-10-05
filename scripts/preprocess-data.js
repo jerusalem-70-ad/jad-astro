@@ -946,3 +946,26 @@ writeFileSync(
   JSON.stringify(passageListObject, null, 2),
   { encoding: "utf-8" },
 );
+
+// svelte version of passages for the biblical commentaries graph
+// need passage jad_id (for link), work title + author, bible_comm
+
+const passagesForBiblComm = passagesPlusFinal
+  .filter((p) => p.commented_bible_lvl0.length) //take only passages from bib commentaries
+  .map((p) => {
+    const workAut = p.work[0].author
+      ? `${p.work[0].author.map((a) => a.name).join(", ")}, ${p.work[0].title}`
+      : p.work[0].title;
+    return {
+      jad_id: p.jad_id,
+      workTitle: workAut,
+      bible_comm_lvl0: p.commented_bible_lvl0[0] || "",
+      bible_comm_lvl1: p.commented_bible_lvl1[0]?.split("|")[1] || "",
+    };
+  });
+writeFileSync(
+  join(folderPath, "passagesForBiblComm.json"),
+  JSON.stringify(passagesForBiblComm, null, 2),
+  { encoding: "utf-8" },
+);
+console.log("passages for biblical commentaries written successfully");
