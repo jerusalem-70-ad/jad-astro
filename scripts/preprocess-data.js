@@ -947,7 +947,7 @@ writeFileSync(
   { encoding: "utf-8" },
 );
 
-// svelte version of passages for the biblical commentaries graph
+// slim version of passages for the biblical commentaries graph
 // need passage jad_id (for link), work title + author, bible_comm
 
 const passagesForBiblComm = passagesPlusFinal

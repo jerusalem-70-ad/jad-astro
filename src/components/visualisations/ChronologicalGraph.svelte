@@ -26,9 +26,10 @@ let tooltipEl: SVGCircleElement | null = null;
 
 let activeFilterIds: Set<string> | null = null;
 
-let allNodes: number = 0
+let allNodes = graphData.nodes
+let allFilteredNodes: number = 0
 let totalPassages: number = graphData.nodes.length
-
+let falseDatePassages : number = 0
     // state for nodes when clicked to introduce a freeze state
 let lockedNode = null;
 
@@ -410,8 +411,8 @@ let downTime = 0;
   activeFilterIds = ids;
 
   console.log("Graph received ids:", ids);
-  allNodes = ids.size
-
+  allFilteredNodes = graphData.nodes.filter(n => ids.has(n.jad_id)).length //for 'Showing ..' text
+  falseDatePassages = activeFilterIds.size - allFilteredNodes
   highlightNodesByIds(ids);
 });
 
@@ -428,7 +429,8 @@ of the selected passage. Combine the filters to make a selection of passages."
 why="Provides a bird's-eye view of the entire data set."
 questions="How widely used was passage X?"
 />
-<div class="text-center p-2 text-gray-600 text-sm font-medium">Showing {allNodes} passages from total {totalPassages} passages</div>
+<div class="text-center p-2 text-gray-600 text-sm font-medium">Showing {allFilteredNodes} from {totalPassages} passages
+   {falseDatePassages > 0 ? `[for ${falseDatePassages} passages no date to plot]` : ""}</div>
  
   <div id="graph-container" bind:this={container}></div>
   </GraphContainer>
