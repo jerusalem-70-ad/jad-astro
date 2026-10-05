@@ -12,7 +12,7 @@ import {getPieChartOption} from "@/components/visualisations/helpers.ts"
 let container: HTMLDivElement; 
 let chart: echarts.ECharts | null = null;
 let pieData: { name: string; value: number }[] = [];
-
+let passageCount = 0
 
 // prepare keywords Map from all passages
 const keywordCounts = new Map();
@@ -26,15 +26,16 @@ passages.forEach((p) => {
 // filter out keywords with less than 10 (A. Marx wish)
 
 const filteredKeywordCounts = new Map(
-[...keywordCounts].filter(([key, count]) => count >= 10)
+  [...keywordCounts].filter(([key, count]) => count >= 10)
 );
 //prepare data reactively using sorted filteredIds
 $: {
   const passagesJson =
-    $filteredIds && $filteredIds.size > 0
-      ? passages.filter(p => $filteredIds.has(p.jad_id))
-      : passages;
-
+  $filteredIds && $filteredIds.size > 0
+  ? passages.filter(p => $filteredIds.has(p.jad_id))
+  : passages;
+  passageCount = passagesJson.length
+  
   const counts = new Map<string, number>();
 
   passagesJson.forEach((p) => {
@@ -75,7 +76,7 @@ onMount(() => {
 });
 
 $: if (chart) {
-  chart.setOption(getPieChartOption(pieData, "instances"));
+  chart.setOption(getPieChartOption(pieData, "keywords", passageCount));
 }
 
 

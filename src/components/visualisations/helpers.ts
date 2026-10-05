@@ -11,23 +11,25 @@ type HeatMapData = {
   values: [number, number, number][]; // [xIndex, yIndex, value]
 };
 
-type PieChartValueType = "passages" | "works" | "instances";
+type PieChartValueType = "passages" | "works" | "references" | "keywords";
 
 export function getPieChartOption(
   pieData: PieDataItem[],
   valueType: PieChartValueType = "passages",
+  allFilteredPassages: number = 0,
 ): EChartsOption {
   const total = pieData.reduce((sum, item) => sum + item.value, 0);
-
+  const categories = pieData.length;
   return {
     title: {
-      subtext: `Showing ${total} ${
-        valueType === "works"
-          ? "Works"
-          : valueType === "instances"
-            ? "Instances"
-            : "Passages"
-      }`,
+      subtext:
+        valueType === "keywords"
+          ? `Showing ${categories} keywords || total filtered passages: ${allFilteredPassages}`
+          : valueType === "works"
+            ? `Showing ${categories} genres from ${total} works || total filtered passages: ${allFilteredPassages}`
+            : valueType === "references"
+              ? `Showing ${categories} references with ${total} instances || total filtered passages: ${allFilteredPassages}`
+              : `Showing ${categories} categories || total filtered passages: ${allFilteredPassages}`,
       left: "center",
       textStyle: { fontSize: 14 },
     },
@@ -107,11 +109,19 @@ export function getPieChartOption(
   };
 }
 
-export function getHeatMapOption(heatMapData: HeatMapData): EChartsOption {
+export function getHeatMapOption(
+  heatMapData: HeatMapData,
+  allFilteredPassages: number = 0,
+): EChartsOption {
   const values = Array.isArray(heatMapData.values) ? heatMapData.values : [];
   const maxValue = Math.max(...values.map((v) => v[2]));
-
+  const total = heatMapData.items.length;
   return {
+    title: {
+      subtext: `Showing ${total} items || total filtered passages: ${allFilteredPassages}`,
+      left: "left",
+      textStyle: { fontSize: 14 },
+    },
     tooltip: {
       position: "top",
       formatter: (params: any) => {

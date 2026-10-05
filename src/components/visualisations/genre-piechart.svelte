@@ -12,14 +12,15 @@ import {getPieChartOption} from "@/components/visualisations/helpers.ts"
 let container: HTMLDivElement; 
 let chart: echarts.ECharts | null = null;
 let pieData: { name: string; value: number }[] = [];
-
+let passageCount = 0;
+ 
 //prepare data reactively using sotered filteredIds
 $: {
   const passagesJson =
     $filteredIds && $filteredIds.size > 0
       ? passages.filter(p => $filteredIds.has(p.jad_id))
       : passages;
-
+passageCount = passagesJson.length
   const counts = new Map<string, number>();
 
   passagesJson.forEach((p) => {
@@ -59,7 +60,7 @@ onMount(() => {
 });
 
 $: if (chart) {
-  chart.setOption(getPieChartOption(pieData));
+  chart.setOption(getPieChartOption(pieData, "passages", passageCount));
 }
 
 

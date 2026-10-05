@@ -18,7 +18,6 @@ import { initializeLayout } from "@/lib/graph/initializeLayout";
 import { createSimulation } from "@/lib/graph/simulation";
 import { renderGraph, updateGraph } from "@/lib/graph/render";
 import {getLineageSet} from "@/lib/graph/lineage"
-
 let container: HTMLDivElement;
 let prepared;
 let graph;
@@ -26,6 +25,9 @@ let tooltip;
 let tooltipEl: SVGCircleElement | null = null;
 
 let activeFilterIds: Set<string> | null = null;
+
+let allNodes: number = 0
+let totalPassages: number = graphData.nodes.length
 
     // state for nodes when clicked to introduce a freeze state
 let lockedNode = null;
@@ -408,6 +410,7 @@ let downTime = 0;
   activeFilterIds = ids;
 
   console.log("Graph received ids:", ids);
+  allNodes = ids.size
 
   highlightNodesByIds(ids);
 });
@@ -425,6 +428,7 @@ of the selected passage. Combine the filters to make a selection of passages."
 why="Provides a bird's-eye view of the entire data set."
 questions="How widely used was passage X?"
 />
+<div class="text-center p-2 text-gray-600 text-sm font-medium">Showing {allNodes} passages from total {totalPassages} passages</div>
  
   <div id="graph-container" bind:this={container}></div>
   </GraphContainer>

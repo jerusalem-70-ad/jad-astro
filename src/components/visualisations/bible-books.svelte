@@ -12,6 +12,7 @@ import {getPieChartOption} from "@/components/visualisations/helpers.ts"
 let container: HTMLDivElement; 
 let chart: echarts.ECharts | null = null;
 let pieData: { name: string; value: number }[] = [];
+let passageCount = 0;
 
     // Prepare chartdata from passages slim version.json
  $: {
@@ -19,8 +20,9 @@ let pieData: { name: string; value: number }[] = [];
     $filteredIds && $filteredIds.size > 0
       ? passages.filter(p => $filteredIds.has(p.jad_id))
       : passages;
-
-    const booksCounts = new Map();
+      
+      const booksCounts = new Map();
+      passageCount = passagesJson.length
 
     passagesJson.forEach((passage) => {
     const books = [...new Set(passage.biblical_ref_lvl0)];
@@ -41,7 +43,10 @@ let pieData: { name: string; value: number }[] = [];
    
     onMount(() => {
     chart = echarts.init(container);
-    chart.setOption(getPieChartOption(pieData));
+    chart.setOption(getPieChartOption([]));
+
+     const resize = () => chart?.resize();
+  window.addEventListener("resize", resize);
 
     chart.on("click", (params: any) => {
       if (params.data) {
@@ -62,7 +67,8 @@ let pieData: { name: string; value: number }[] = [];
 
   // Update chart when data changes
   $: if (chart) {
-  chart.setOption(getPieChartOption(pieData));
+    chart.setOption(getPieChartOption(pieData, "references", passageCount));
+
 }
 
 </script>

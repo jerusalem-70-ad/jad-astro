@@ -19,6 +19,7 @@ let heatmapData: {centuries: string[], items: string[], values: [number, number,
   values: []
 };
 let mode = "absolute";
+let passageCount = 0
 
 // computed once: Marx wants only keywords with min 10 occurrences
 const allowedKeywords = (() => {
@@ -42,7 +43,7 @@ $: {
     $filteredIds && $filteredIds.size > 0
       ? passages.filter(p => $filteredIds.has(p.jad_id))
       : passages;
-
+passageCount = passagesJson.length
   const centurySet = new Set<string>(); // Sets to store all the cenutire and keywords
   const keywordSet = new Set<string>();
   const passagesPerCentury = new Map<string, number>(); // Map to store the total passages per century for relative frequency calculation
@@ -135,7 +136,7 @@ onMount(() => {
 // get updates 
 
 $: if (chart) {
-  chart.setOption(getHeatMapOption(heatmapData), true);
+  chart.setOption(getHeatMapOption(heatmapData, passageCount), true);
 }
 
 function handleClick(params: any) {

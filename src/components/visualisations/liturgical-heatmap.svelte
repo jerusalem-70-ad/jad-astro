@@ -13,7 +13,7 @@ import row_liturgical_references from "@/content/row/liturgical_references.json"
 
 let container: HTMLDivElement;
 let chart: echarts.ECharts | null = null;
-
+let passageCount = 0
 // final structured data for chart
 let heatmapData: {centuries: string[], items: string[], values: [number, number, number][]} = {
   centuries:[],
@@ -34,7 +34,7 @@ $: {
     $filteredIds && $filteredIds.size > 0
       ? passages.filter(p => $filteredIds.has(p.jad_id))
       : passages;
-
+passageCount = passagesJson.length
   const centurySet = new Set<string>(); // Sets to store all the cenutire and keywords
   const litRefSet = new Set<string>();
   const passagesPerCentury = new Map<string, number>(); // Map to store the total passages per century for relative frequency calculation
@@ -131,7 +131,7 @@ onMount(() => {
 // get updates 
 
 $: if (chart) {
-  chart.setOption(getHeatMapOption(heatmapData), true);
+  chart.setOption(getHeatMapOption(heatmapData, passageCount), true);
 }
 
 function handleClick(params: any) {
@@ -164,7 +164,7 @@ const modes = [
   respective century that relate to this feast (e.g. in the 9th c. there are 2 passages related to 
   Easter - absolute; these make in relative numbers 0,5 % of all pasages from the 9th c.). 
   "
-  questions="At what moment in the liturgical year?"
+  questions="At what moment in the liturgical year | For what liturgical occasion were most passages written?"
   why="Allows patterns and trends to be easily identified over time." />
   <!--  // change the mode between absolute and relative frequency -->
   <div class="flex justify-end">

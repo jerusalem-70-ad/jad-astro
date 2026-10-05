@@ -11,7 +11,7 @@ import {getPieChartOption} from "@/components/visualisations/helpers.ts"
 let container: HTMLDivElement; 
 let chart: echarts.ECharts | null = null;
 let pieData: { name: string; value: number }[] = [];
-
+let passageCount = 0
     // Prepare chartdata check if filteredIDs else use passages
 $: {
   const passagesJson =
@@ -19,7 +19,7 @@ $: {
       ? passages.filter(p => $filteredIds.has(p.jad_id))
       : passages;
     const liturgicalCounts = new Map();
-
+passageCount = passagesJson.length
     passagesJson.forEach((passage) => {
     const refs = [...new Set((passage.liturgical_references ?? []))];
 
@@ -55,7 +55,7 @@ onMount(() => {
 });
 
 $: if (chart) {
-  chart.setOption(getPieChartOption(pieData));
+  chart.setOption(getPieChartOption(pieData, "references", passageCount));
 }
 
 

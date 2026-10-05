@@ -12,7 +12,7 @@ import {getPieChartOption} from "@/components/visualisations/helpers.ts"
 let container: HTMLDivElement; 
 let chart: echarts.ECharts | null = null;
 let pieData: { name: string; value: number }[] = [];
-
+let passageCount = 0;
 
 //prepare data reactively using sorted filteredIds
 $: {
@@ -20,9 +20,10 @@ $: {
     $filteredIds && $filteredIds.size > 0
       ? passages.filter(p => $filteredIds.has(p.jad_id))
       : passages;
-
+//count all passages for 'Showing'
+passageCount = passagesJson.length
   // prepare works Map from all passages
-
+console.log(passagesJson.length)
 // need first to group by work-title
 const worksMap = new Map();
 
@@ -76,7 +77,7 @@ window.addEventListener("resize", resize);
 });
 
 $: if (chart) {
-  chart.setOption(getPieChartOption(pieData, "works"));
+  chart.setOption(getPieChartOption(pieData, "works", passageCount));
 }
 
 
