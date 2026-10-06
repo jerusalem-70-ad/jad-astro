@@ -40,6 +40,21 @@ const institutional_contexts = Object.values(
 const folderPath = join(process.cwd(), "src", "content", "data");
 mkdirSync(folderPath, { recursive: true });
 
+// function to write the files
+const writeJson = (fileName, data) => {
+  try {
+    writeFileSync(
+      join(folderPath, `${fileName}.json`),
+      JSON.stringify(data, null, 2),
+      { encoding: "utf-8" },
+    );
+    console.log(`Wrote ${data.length} items to ${fileName}.json`);
+  } catch (error) {
+    console.error(`Could not write ${fileName}.json`);
+    throw error;
+  }
+};
+
 const institutionalContextsClean = institutional_contexts
   .filter((context) => context.name)
   .map(({ order, ...rest }) => rest)
@@ -53,12 +68,7 @@ const institutionalContextsClean = institutional_contexts
     };
   });
 
-writeFileSync(
-  join(folderPath, "institutional_context.json"),
-  JSON.stringify(institutionalContextsClean, null, 2),
-  { encoding: "utf-8" },
-);
-console.log("institutional_context.json file written successfully.");
+writeJson("institutional_context", institutionalContextsClean);
 
 // enrich places with geonames_url, jad_id, lat, long from places.json
 // used in authors.json and manuscripts.json
@@ -947,7 +957,7 @@ writeFileSync(
   { encoding: "utf-8" },
 );
 
-// slim version of passages for the biblical commentaries graph
+// slim version of passages for the biblical commentaries table (biblical-commentaries.svelte)
 // need passage jad_id (for link), work title + author, bible_comm
 
 const passagesForBiblComm = passagesPlusFinal
@@ -963,9 +973,28 @@ const passagesForBiblComm = passagesPlusFinal
       bible_comm_lvl1: p.commented_bible_lvl1[0]?.split("|")[1] || "",
     };
   });
-writeFileSync(
-  join(folderPath, "passagesForBiblComm.json"),
-  JSON.stringify(passagesForBiblComm, null, 2),
-  { encoding: "utf-8" },
-);
-console.log("passages for biblical commentaries written successfully");
+writeJson("passagesForBiblComm", passagesForBiblComm);
+
+// slim version of passages for the biblical refs graph (biblical-refs.svelte)
+// need passage jad_id (for link), work title + author, bible_refs, date
+
+const passagesForBiblRefs = passagesPlusFinal
+  .filter((p) => p.biblical_ref_lvl1.length && p.work[0].date.length)
+  .map((p) => {
+    const workAut = p.work[0].author
+      ? `${p.work[0].author.map((a) => a.name).join(", ")}, ${p.work[0].title}`
+      : p.work[0].title;
+    const date = p.work[0].date.map((d) => {
+      return {
+        notBefore: d.not_before,
+        notAfter: d.not_after,
+      };
+    });
+    return {
+      jad_id: p.jad_id,
+      workTitle: workAut,
+      date: date,
+      biblRefs: p.biblical_ref_lvl1,
+    };
+  });
+writeJson("passagesForBiblRefs", passagesForBiblRefs);

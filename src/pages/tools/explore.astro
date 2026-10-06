@@ -6,6 +6,7 @@ import BibleBooks from "@/components/visualisations/bible-books.astro";
 import LiturgicalRefs from "@/components/visualisations/liturgical-ref.astro";
 import NetworkAll from "@/components/visualisations/network-all.astro";
 import BibleCommentaries from "@/components/visualisations/bible-commentaries.svelte";
+import BibleRefs from "@/components/visualisations/bible-refs.svelte";
 import passagesForBibleComm from "@/content/data/passagesForBiblComm.json"
 ---
 
@@ -23,6 +24,7 @@ import passagesForBibleComm from "@/content/data/passagesForBiblComm.json"
         montes, nascetur ridiculus mus. Phasellus efficitur at tortor eu imperdiet. Donec aliquam 
         iaculis tortor, in sagittis ante pellentesque gravida. </p>
       <BibleCommentaries client:load {passagesForBibleComm}/>
+      <BibleRefs client:load {passagesForBibleComm}/>
       <GenreWorkPiechart/>
       <BibleBooks/>
       <BiblGraph/>

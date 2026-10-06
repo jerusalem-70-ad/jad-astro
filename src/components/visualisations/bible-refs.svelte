@@ -40,13 +40,14 @@
 </script>
 <div class="flex flex-col min-w-0 gap-3 lg:p-10 p-3 border rounded-lg bg-brand-50 shadow-2xl">
   <div class="text-brand-700 min-w-3/4">
-    <h2 class="text-2xl font-semibold mb-4 text-brand-950">Bible Commentaries</h2>
-    <p> There are {passagesForBibleComm.length} passages in the database that comment on a book of the Bible.
-  Select a book from the menu to see its passages. Each row is a commentary,
-  and each column is a chapter of the selected book.
+    <h2 class="text-2xl font-semibold mb-4 text-brand-950">Bible References</h2>
+    <p> Biblical references (or citations) are found in most of the passages in the database.
+  To find out how often and at what period a particular Bible book is used select a bible book 
+  from the menu.
     </p>
-    <p> An <strong>X</strong> marks a passage commenting on that chapter. Click it to open the passage's
-  detail page. If a commentary has several passages on the same chapter, there are several X's.
+    <p> The passages are plotted as nodes respective to their date of coposition (y-axis) and the 
+        biblical reference they include (x-axis). Clicking on a node will take you to the detail view
+        page of the passage.
     </p>
   </div>
   <div class="flex flex-col gap-4 items-start min-w-0">
