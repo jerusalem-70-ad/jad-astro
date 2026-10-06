@@ -163,7 +163,7 @@
     map = L.map(mapEl).setView(initialView, initialZoom);
 
     L.tileLayer(
-      "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+      "https://tile.openstreetmap.org/{z}/{x}/{y}{r}.png",
       {
         attribution:
           '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
