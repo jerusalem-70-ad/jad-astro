@@ -451,8 +451,8 @@ search.addWidgets(
         ${highlightHTML}
       </p>
       <button 
-        class="show-more-btn justify-self-end text-brand-600 hover:bg-brand-400 hover:text-brand-100 text-sm font-medium m-1 
-        py-1 px-2 border border-brand-900 rounded-sm">
+        class="show-more-btn justify-self-end text-brand-600 hover:bg-brand-400 hover:text-white hover:border-brand-400 text-sm font-medium m-1 
+        py-1 px-2 border border-brand-900 rounded-sm focus-within:bg-brand-400 focus-visible:text-white focus-visible:border-white">
         Show more
       </button> 
       <div class="work-details">

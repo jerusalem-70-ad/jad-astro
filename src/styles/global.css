@@ -180,6 +180,25 @@ dialog::backdrop {
   @apply h-full;
 }
 
+.ais-ClearRefinements-button,
+.ais-RefinementList-checkbox,
+.ais-SearchBox-form .ais-SearchBox-input,
+.ais-RefinementList .ais-RefinementList-showMore {
+  @apply focus-visible:outline-none
+    focus-visible:ring-2
+    focus-visible:ring-brand-400
+    focus-visible:ring-offset-2
+    focus-visible:ring-offset-orange-400;
+}
+
+.ais-Panel .ais-Panel-collapseButton,
+.ais-Panel-header {
+  @apply focus-visible:outline-none
+    focus-visible:ring-4
+    focus-visible:ring-inset
+    focus-visible:ring-orange-400;
+}
+
 .ais-CurrentRefinements
 
 /* Refinement item */
@@ -253,11 +272,11 @@ dialog::backdrop {
 }
 
 .ais-RefinementList-searchBox .ais-SearchBox-input {
-  @apply w-full text-sm py-1.5 p-2 border border-gray-300 rounded-sm;
+  @apply w-full items-stretch text-sm py-1.5 p-2 border border-gray-300 rounded-sm;
 }
 
 .ais-SearchBox-input {
-  @apply flex-1 text-sm py-1.5 p-2
+  @apply flex-1 text-sm py-1.5 p-2 min-w-0
     border border-gray-300 rounded-sm
     focus-visible:outline-none
     focus-visible:ring-2
@@ -267,12 +286,12 @@ dialog::backdrop {
 }
 
 .ais-SearchBox-form {
-  @apply flex gap-1;
+  @apply flex gap-1 max-w-full;
 }
 
 .ais-SearchBox-submit,
 .ais-SearchBox-reset {
-  @apply block p-2 text-gray-600 rounded-md border border-brand-400 hover:bg-brand-300 transition-colors duration-200;
+  @apply block shrink-0 p-2 text-gray-600 rounded-md border border-brand-400 hover:bg-brand-300 transition-colors duration-200;
 }
 
 /* 1. Remove Algolia’s default arrow (they use borders) */

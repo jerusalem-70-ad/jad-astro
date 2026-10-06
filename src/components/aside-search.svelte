@@ -252,7 +252,7 @@ let dialog: HTMLDialogElement;
           
           <div class="px-3 py-2 border border-neutral-300 rounded m-2 bg-white">
           <h3 class="text-base text-brand-800 px-2 py-1 font-semibold ">Search for works</h3>
-          <div bind:this={refinementsWorks} id="refinementsWorks" class="px-1"></div>
+          <div bind:this={refinementsWorks} id="refinementsWorks" ></div>
         </div>
       </section>
       <section>
