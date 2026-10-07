@@ -341,7 +341,7 @@ export function extractBookAbbreviation(referenceValue) {
   }
 }
 
-function parseChapterVerse(referenceValue, bookAbbrev) {
+export function parseChapterVerse(referenceValue, bookAbbrev) {
   const chapterVerse = referenceValue.substring(bookAbbrev.length).trim();
   const cleaned = chapterVerse.replace(/^[.,\s]+/, "");
 
