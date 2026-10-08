@@ -20,11 +20,30 @@ import ToolsCard from "@/components/ui/ToolCard.astro";
                     titleCard="Visualisation Dashboard"
                     href="/tools/dashboard"
                     icon="layout-dashboard"
-                    what="Explore the corpus through interactive charts and network."
+                    what="Explore the corpus through interactive timelines, graphs, heatmaps, and distribution charts all connected to one filter panel."
                     why="Reveal patterns, trends, and relationships that may be difficult to identify in tabular data."
-                    how="Apply filters and interact with timelines, graphs, heatmaps, and distribution charts."
+                    how="Apply filters from the side panel and explore the interactive visualisations. 
+                    Hover and click for details or download the visualisation."
                     questions="How do passages relate to one another over time? Which themes, references, or genres dominate the corpus? How do keywords change across centuries?"
                 />
+                 <ToolsCard
+                    titleCard="Biblical References Explorer"
+                    href="/tools/biblical-refs"
+                    icon="chart-scatter"
+                    what="An interactive scatter plot showing which passages cite a chosen chapter of the Bible."
+                    why="See at a glance which verses were cited most, in which centuries, and in which kinds of texts. Patterns that are hard to spot in a list, such as a verse that becomes popular in a particular period or genre, become visible."
+                    how="Select a biblical book, then a chapter."
+                    questions="Which verses of a chapter attract the most citations? Do certain genres cite a book more than others? How does the use of a passage change over the centuries?"
+                />
+               <ToolsCard
+                    titleCard="Biblical Commentaries Explorer"
+                    href="/tools/biblical-commentaries"
+                    icon="table"
+                    what="A table showing which commentaries discuss which chapters of a given Bible book."
+                    why="Seeing all passages side by side reveals which chapters attracted the most attention, and which were largely ignored."
+                    how="Choose a Bible book from the menu. Each row is a commentary, each column a chapter, and each X links to the passage."
+                    questions="Which commentaries engage with Isaiah 60? Which chapters of Luke were commented on most? Which commentaries cover a book only partially?"
+                    />
                 <ToolsCard
                     titleCard="Text Comparison"
                     href="/tools/text-comparisons"

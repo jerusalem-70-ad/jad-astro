@@ -133,7 +133,7 @@ export function getHeatMapOption(
     },
     grid: {
       top: 70,
-      bottom: 160,
+      bottom: 70,
       left: 20,
       right: 60,
       containLabel: true,

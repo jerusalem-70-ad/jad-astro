@@ -1,0 +1,66 @@
+---
+import BibleRefs from "@/components/visualisations/bible-refs.svelte"
+import passagesForBibleRefs from "@/content/data/passagesForBiblRefs.json"
+import PageLayout from "@/layouts/page-layout.astro";
+import CheckItem from "@/components/ui/check-list-item.astro"
+
+---
+ <PageLayout title="Biblical Refs Scatter Chart">
+  <div class="m-auto w-full 3xl:px-10 py-8">
+    <div class="lg:max-w-11/12 lg:px-0 m-auto grid gap-5 md:py-8 py-2">
+      <h1 class="text-4xl font-semibold text-brand-800">
+        Biblical References Scatter Chart
+      </h1>
+     
+      <div class="md:grid grid-cols-[1fr_auto] gap-4 text-brand-900 min-w-3/4">
+      <details class="self-start bg-white shadow border border-neutral-300 rounded-md">
+			<summary class="px-5 py-3 bg-brand-500/80 text-white font-semibold text-lg md:text-xl 
+            cursor-pointer">About this chart</summary>
+            <ul class="px-5 py-2 list-inside  list-disc space-y-1">
+                <li>
+                    Biblical references (citations) occur in {passagesForBibleRefs.length} passages
+                    in the database. This interactive scatter plot shows <span class="font-semibold">
+                        which passages cite a chosen chapter
+                     of the Bible</span>. Each dot is a passage, placed by the verse it
+                    cites (horizontal axis) and the date of the work in which it occurs
+                    (vertical axis). 
+                </li>
+                <li>
+                    The horizontal axis does not show the whole chapter. It covers only the
+                    <span class="decoration underline underline-offset-2">range of verses</span> from the first to the last verse cited in the database, so
+                    verses at the beginning or end of the chapter are not displayed if no
+                    passage cites them. Verses inside that range that are never cited simply
+                    stay empty.
+                </li>
+                <li>
+                    Works are <span class="decoration underline underline-offset-2">dated to a range</span>, not to a single year, so each dot is placed at
+                    a random year within that range. The exact dating is shown on hover.
+                </li>
+
+                <li>
+                    Dots are colored by genre. To keep the chart readable, only the 
+                    { } <span class="decoration underline underline-offset-2">ten most
+                    frequent genres</span> get their own color. Passages belonging to less frequent
+                    genres (for instance letters or poetry) are grouped together as "Other" and
+                    shown in gray.
+                </li>
+            </ul>
+        </details>      
+       
+        <details class="min-w-125 self-start bg-white shadow border border-neutral-300 rounded-md">
+			<summary class="px-5 py-3 bg-brand-500/80 text-white font-semibold text-lg md:text-xl 
+            cursor-pointer">How to use</summary>
+            <ul class="px-5 py-2 list-inside space-y-1">
+            <CheckItem>Select a biblical book, then a chapter.</CheckItem>
+            <CheckItem>The legend lists the genres that occur in your selection.</CheckItem>
+            <CheckItem>Click a genre in the legend to hide or show its passages.</CheckItem>
+            <CheckItem>Hover over a dot for details, and click it to open the passage.</CheckItem>
+            <CheckItem>Use the mouse wheel to zoom.</CheckItem>
+        </ul>
+    </details>
+        
+        </div>
+      <BibleRefs client:load {passagesForBibleRefs}/>
+    </div>
+  </div>
+</PageLayout>

@@ -46,7 +46,7 @@
   and each column is a chapter of the selected book.
     </p>
     <p> An <strong>X</strong> marks a passage commenting on that chapter. Click it to open the passage's
-  detail page. If a commentary has several passages on the same chapter, you'll see several X's.
+  detail page. If a commentary has several passages on the same chapter, there are several X's.
     </p>
   </div>
   <div class="flex flex-col gap-4 items-start min-w-0">

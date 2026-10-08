@@ -30,6 +30,8 @@ export const NOVA_VULGATA_ORDER = {
   "2 Reg": 12,
   "3 Reg": 13,
   "4 Reg": 14,
+  "1 Chr": 13,
+  "2 Chr": 14,
   Par: 15,
   "1Par": 15,
   "2Par": 16,
@@ -45,6 +47,7 @@ export const NOVA_VULGATA_ORDER = {
   Judith: 20,
   Jud: 20,
   Esth: 21,
+  Est: 21,
   Esther: 21,
   Job: 22,
   Ps: 23,
@@ -94,6 +97,7 @@ export const NOVA_VULGATA_ORDER = {
   Sophonia: 43,
   Agg: 44,
   Aggeus: 44,
+  Hag: 44,
   Zach: 45,
   Zacharia: 45,
   Mal: 46,
@@ -113,6 +117,7 @@ export const NOVA_VULGATA_ORDER = {
   Mt: 49,
   Matthew: 49,
   Mc: 50,
+  Mk: 50,
   Mark: 50,
   Lc: 51,
   Luke: 51,
@@ -161,6 +166,7 @@ export const NOVA_VULGATA_ORDER = {
   Hebr: 67, // Adding Hebr as alias
   Jas: 68,
   James: 68,
+  Jac: 68,
   Pet: 69,
   "1Pet": 69,
   "2Pet": 70,
@@ -171,6 +177,7 @@ export const NOVA_VULGATA_ORDER = {
   "2Jn": 72,
   "3Jn": 73,
   "1 Jn": 71,
+  "1 John": 71,
   "2 Jn": 72,
   "3 Jn": 73, // With spaces
   Jude: 74,
@@ -308,7 +315,7 @@ export function extractBookAbbreviation(referenceValue) {
   }
 }
 
-function parseChapterVerse(referenceValue, bookAbbrev) {
+export function parseChapterVerse(referenceValue, bookAbbrev) {
   const chapterVerse = referenceValue.substring(bookAbbrev.length).trim();
   const cleaned = chapterVerse.replace(/^[.,\s]+/, "");
 

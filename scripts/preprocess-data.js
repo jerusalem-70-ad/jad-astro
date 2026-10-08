@@ -40,6 +40,21 @@ const institutional_contexts = Object.values(
 const folderPath = join(process.cwd(), "src", "content", "data");
 mkdirSync(folderPath, { recursive: true });
 
+// function to write the files
+const writeJson = (fileName, data) => {
+  try {
+    writeFileSync(
+      join(folderPath, `${fileName}.json`),
+      JSON.stringify(data, null, 2),
+      { encoding: "utf-8" },
+    );
+    console.log(`Wrote ${data.length} items to ${fileName}.json`);
+  } catch (error) {
+    console.error(`Could not write ${fileName}.json`);
+    throw error;
+  }
+};
+
 const institutionalContextsClean = institutional_contexts
   .filter((context) => context.name)
   .map(({ order, ...rest }) => rest)
@@ -53,12 +68,7 @@ const institutionalContextsClean = institutional_contexts
     };
   });
 
-writeFileSync(
-  join(folderPath, "institutional_context.json"),
-  JSON.stringify(institutionalContextsClean, null, 2),
-  { encoding: "utf-8" },
-);
-console.log("institutional_context.json file written successfully.");
+writeJson("institutional_context", institutionalContextsClean);
 
 // enrich places with geonames_url, jad_id, lat, long from places.json
 // used in authors.json and manuscripts.json
@@ -76,10 +86,8 @@ authors.forEach((aut) => {
 });
 
 // Write as JSON file
-writeFileSync(
-  join(folderPath, "authors_map.json"),
-  JSON.stringify(authorMapObject, null, 2),
-);
+
+writeJson("authors_map", authorMapObject);
 
 // enrich authors with places and transform dates
 //helper function to remove leading zeros from date ranges and month days
@@ -143,13 +151,7 @@ const authorsPlus = authors
 
 const updatedauthors = addPrevNextToItems(authorsPlus, "jad_id", "name");
 
-writeFileSync(
-  join(folderPath, "authors.json"),
-  JSON.stringify(updatedauthors, null, 2),
-  { encoding: "utf-8" },
-);
-
-console.log("authors.json file enriched successfully.");
+writeJson("authors", updatedauthors);
 
 // sort biblical references according to nova vulgarta order
 const biblicalRefSorted = {};
@@ -322,6 +324,7 @@ const passagesPlus = passages
       source_passage: passage.source_passage,
       text_paragraph: normalizeText(passage.text_paragraph), // normalize whitespace
       mss_occurrences: mssSorted,
+      bibl_refs: passage.biblical_references,
       biblical_ref_lvl0: lvl0,
       biblical_ref_lvl1: lvl1,
       edition_link: passage.edition_link || "",
@@ -465,13 +468,7 @@ const worksPlus = works
   });
 const worksEnriched = addPrevNextToItems(worksPlus, "jad_id", "title");
 
-writeFileSync(
-  join(folderPath, "works.json"),
-  JSON.stringify(worksEnriched, null, 2),
-  { encoding: "utf-8" },
-);
-
-console.log("works.json file enriched successfully.");
+writeJson("works", worksEnriched);
 
 // enrich passages with data from worksPlus (author name, dates)
 const passagesPlusWorks = passagesPlus.map((p) => {
@@ -553,11 +550,7 @@ const passagesForGraphs = passagesPlusWorks.map((p) => {
   };
 });
 
-writeFileSync(
-  join(folderPath, "passagesForGraphs.json"),
-  JSON.stringify(passagesForGraphs, null, 2),
-  { encoding: "utf-8" },
-);
+writeJson("passagesForGraphs", passagesForGraphs);
 
 // enrich passages with data from passagesPlus and worksPlus for the source_passages
 const passagesPlusPlus = passagesPlusWorks.map((p) => {
@@ -631,11 +624,7 @@ enrichedPassages.forEach((passage) => {
     });
 });
 
-writeFileSync(
-  join(folderPath, "passage-graph.json"),
-  JSON.stringify(graphData, null, 2),
-  { encoding: "utf-8" },
-);
+writeJson("passage-graph", graphData);
 
 // add passages to biblical references
 const biblicalRefWithPassages = Object.values(biblicalRefSorted).map((ref) => {
@@ -673,14 +662,7 @@ const biblicalRefPlusFinal = addPrevNextToItems(
   "jad_id",
   "value",
 );
-
-writeFileSync(
-  join(folderPath, "biblical_references.json"),
-  JSON.stringify(biblicalRefPlusFinal, null, 2),
-  { encoding: "utf-8" },
-);
-
-console.log("biblical_references.json file enriched successfully.");
+writeJson("biblical_references", biblicalRefPlusFinal);
 
 // enrich manuscripts with data from passagesPlus and worksPlus
 const manuscriptPlusPlus = manuscriptsPlus.map((ms) => {
@@ -740,13 +722,7 @@ const mssPlusFinal = addPrevNextToItems(
   "name[0].value",
 );
 
-writeFileSync(
-  join(folderPath, "manuscripts.json"),
-  JSON.stringify(mssPlusFinal, null, 2),
-  { encoding: "utf-8" },
-);
-
-console.log("manuscripts.json file enriched successfully.");
+writeJson("manuscripts", mssPlusFinal);
 
 const keywords = Object.values(loadJSON("keywords.json"));
 const keywordsPlus = keywords
@@ -779,13 +755,8 @@ const keywordsPlus = keywords
     };
   });
 const keywordsPlusFinal = addPrevNextToItems(keywordsPlus, "jad_id", "name");
-writeFileSync(
-  join(folderPath, "keywords.json"),
-  JSON.stringify(keywordsPlusFinal, null, 2),
-  { encoding: "utf-8" },
-);
 
-console.log("keywords.json file enriched successfully.");
+writeJson("keywords", keywordsPlusFinal);
 
 const liturgicalRefClean = liturgical_references
   .filter((ref) => ref.name)
@@ -820,12 +791,8 @@ const liturgicalPlusFinal = addPrevNextToItems(
   "jad_id",
   "name",
 );
-writeFileSync(
-  join(folderPath, "liturgical_references.json"),
-  JSON.stringify(liturgicalPlusFinal, null, 2),
-  { encoding: "utf-8" },
-);
-console.log("liturgical_references.json file written successfully.");
+
+writeJson("liturgical_references", liturgicalPlusFinal);
 
 const clustersClean = clusters
   .filter((cluster) => cluster.name)
@@ -858,12 +825,8 @@ const clustersPlus = clustersClean.map((cluster) => {
 });
 
 const clustersPlusFinal = addPrevNextToItems(clustersPlus, "jad_id", "name");
-writeFileSync(
-  join(folderPath, "clusters.json"),
-  JSON.stringify(clustersPlusFinal, null, 2),
-  { encoding: "utf-8" },
-);
-console.log("clusters.json file written successfully.");
+
+writeJson("clusters", clustersPlusFinal);
 
 const PassagesLiturgicalEnriched = enrichedPassages.map((p) => {
   const keywordsMap = new Map();
@@ -912,19 +875,14 @@ const PassagesClusterEnriched = PassagesLiturgicalEnriched.map((p) => {
   };
 });
 const passagesPlusFinal = addPrevNextToItems(
+  //remove bibl_refs
   PassagesClusterEnriched,
   "jad_id",
   "name",
-);
+).map(({ bibl_refs, ...rest }) => rest);
 
-writeFileSync(
-  join(folderPath, "passages.json"),
-  JSON.stringify(passagesPlusFinal, null, 2),
-  { encoding: "utf-8" },
-);
-console.log("passages.json file enriched successfully.");
+writeJson("passages", passagesPlusFinal);
 
-console.log("Generrating passage list");
 const passageList = new Map();
 passagesPlusFinal.forEach((p) => {
   const title = p.work[0]?.title || "";
@@ -941,13 +899,9 @@ passagesPlusFinal.forEach((p) => {
   });
 });
 const passageListObject = Object.fromEntries(passageList);
-writeFileSync(
-  join(folderPath, "passage_list.json"),
-  JSON.stringify(passageListObject, null, 2),
-  { encoding: "utf-8" },
-);
 
-// slim version of passages for the biblical commentaries graph
+writeJson("passage_list", passageListObject);
+// slim version of passages for the biblical commentaries table (biblical-commentaries.svelte)
 // need passage jad_id (for link), work title + author, bible_comm
 
 const passagesForBiblComm = passagesPlusFinal
@@ -963,9 +917,41 @@ const passagesForBiblComm = passagesPlusFinal
       bible_comm_lvl1: p.commented_bible_lvl1[0]?.split("|")[1] || "",
     };
   });
-writeFileSync(
-  join(folderPath, "passagesForBiblComm.json"),
-  JSON.stringify(passagesForBiblComm, null, 2),
-  { encoding: "utf-8" },
-);
-console.log("passages for biblical commentaries written successfully");
+writeJson("passagesForBiblComm", passagesForBiblComm);
+
+// slim version of passages for the biblical refs graph (biblical-refs.svelte)
+// need passage jad_id (for link), work title + author, bible_refs, date
+
+const genreMap = new Map(); // Map to store genre with value = how many passages has it
+// we take only the 10 top frequent genres for legend in the visualisation
+for (const p of passagesPlusWorks) {
+  genreMap.set(p.work[0].genre, (genreMap.get(p.work[0].genre) ?? 0) + 1);
+}
+
+const top10genres = [...genreMap.entries()]
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 10);
+const passagesForBiblRefs = passagesPlusWorks
+  .filter((p) => p.biblical_references.length && p.work[0].date.length)
+  .map((p) => {
+    const workAut = p.work[0].author
+      ? `${p.work[0].author.map((a) => a.name).join(", ")}, ${p.work[0].title}`
+      : p.work[0].title;
+    const date = p.work[0].date.map((d) => {
+      return {
+        notBefore: d.not_before,
+        notAfter: d.not_after,
+      };
+    });
+    const genre = top10genres.some((genre) => genre[0] === p.work[0].genre)
+      ? p.work[0].genre
+      : "minorGenre";
+    return {
+      jad_id: p.jad_id,
+      workTitle: workAut,
+      date: date,
+      biblRefs: p.bibl_refs.map((ref) => ref.value),
+      genre: genre,
+    };
+  });
+writeJson("passagesForBiblRefs", passagesForBiblRefs);
