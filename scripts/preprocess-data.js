@@ -468,7 +468,7 @@ const worksPlus = works
   });
 const worksEnriched = addPrevNextToItems(worksPlus, "jad_id", "title");
 
-writeJson("works", works);
+writeJson("works", worksEnriched);
 
 // enrich passages with data from worksPlus (author name, dates)
 const passagesPlusWorks = passagesPlus.map((p) => {
@@ -922,6 +922,15 @@ writeJson("passagesForBiblComm", passagesForBiblComm);
 // slim version of passages for the biblical refs graph (biblical-refs.svelte)
 // need passage jad_id (for link), work title + author, bible_refs, date
 
+const genreMap = new Map(); // Map to store genre with value = how many passages has it
+// we take only the 10 top frequent genres for legend in the visualisation
+for (const p of passagesPlusWorks) {
+  genreMap.set(p.work[0].genre, (genreMap.get(p.work[0].genre) ?? 0) + 1);
+}
+
+const top10genres = [...genreMap.entries()]
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 10);
 const passagesForBiblRefs = passagesPlusWorks
   .filter((p) => p.biblical_references.length && p.work[0].date.length)
   .map((p) => {
@@ -934,11 +943,15 @@ const passagesForBiblRefs = passagesPlusWorks
         notAfter: d.not_after,
       };
     });
+    const genre = top10genres.some((genre) => genre[0] === p.work[0].genre)
+      ? p.work[0].genre
+      : "minorGenre";
     return {
       jad_id: p.jad_id,
       workTitle: workAut,
       date: date,
       biblRefs: p.bibl_refs.map((ref) => ref.value),
+      genre: genre,
     };
   });
 writeJson("passagesForBiblRefs", passagesForBiblRefs);

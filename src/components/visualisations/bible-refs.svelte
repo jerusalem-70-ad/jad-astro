@@ -32,12 +32,29 @@ let chart: echarts.ECharts | null = null;
 // key = jad_id, value = a year between notBefore and notAfter
 const yearByWork = new Map<string, number>();
 
+const genres = new Set<string>(); //in the preprocess we took only the top 10 genres, 
+// if p has another it ended up with genre: minorGenre
+
 for (const p of passagesForBibleRefs) {
   const { notBefore, notAfter } = p.date[0];
   const year = Math.round(notBefore + Math.random() * (notAfter - notBefore));
   yearByWork.set(p.jad_id, year);
+  if (p.genre != "minorGenre") genres.add(p.genre)
 }
+// palette for the top 10 genres
+const PALETTE = [
+  "#4e79a7", "#f28e2b", "#e15759", "#76b7b2", "#59a14f",
+  "#edc948", "#b07aa1", "#ff9da7", "#9c755f", "#17becf",
+];
+const MINOR_COLOR = "#bdbdbd"; // gray for "minorGenre"
 
+// Set -> sorted array, so each genre always gets the same color
+const genreList = [...genres].sort((a, b) => a.localeCompare(b));
+
+// genre -> color
+const colorByGenre = new Map<string, string>(
+  genreList.map((g, i) => [g, PALETTE[i]])
+);
 
   // 1a. use the Nova vulgara order (imported) to sort the set-> array
   const rank = (book: string): number =>
@@ -100,10 +117,11 @@ const points = $derived.by(() => {
         grouped.set(key, {
           jad_id: p.jad_id, verse, verseNum, year, count: 1,
           title: p.workTitle, notBefore, notAfter,
+          genre: p.genre, 
         });
       }
     }
-  }
+  }  
 
   return [...grouped.values()].map((v) => ({
     value: [v.verseNum, v.year], // x = verse, y = year
@@ -113,7 +131,29 @@ const points = $derived.by(() => {
     title: v.title,
     notBefore: v.notBefore,
     notAfter: v.notAfter,
+    genre: v.genre,
   }));
+});
+const genreCounts = $derived.by(() => {
+  const m = new Map<string, number>();
+  for (const pt of points) {
+    // genres without a color are counted together as "Other"
+    const key = colorByGenre.has(pt.genre) ? pt.genre : "Other";
+    m.set(key, (m.get(key) ?? 0) + 1);
+  }
+  return m;
+});
+const visibleGenres = $derived(genreList.filter((g) => genreCounts.has(g)));
+const hasOther = $derived(genreCounts.has("Other"));
+
+// helper: one series definition per genre
+const makeSeries = (name: string, color: string, data: any[]) => ({
+  name,
+  type: "scatter",
+  cursor: "pointer",
+  data,
+  itemStyle: { color, opacity: 0.8 },
+  symbolSize: (_value: any, params: any) => 8 + params.data.count * 4,
 });
 
 // derived: the chart option
@@ -123,7 +163,8 @@ const option = $derived({
             const d = params.data;
             return `<strong>(#${d.jad_id.split("__")[1]}) ${d.title}</strong>
             <br/>Bible citation: ${selectedBook} ${selectedChapter},${d.verse}
-            <br/>Date: ${d.notBefore}–${d.notAfter}`;
+            <br/>Date: ${d.notBefore}–${d.notAfter}
+            </br>Genre: ${d.genre == "minorGenre" ? "Other" : d.genre}`;
         },
     },
     title: {
@@ -132,12 +173,21 @@ const option = $derived({
       left: "center",
       textStyle: { fontSize: 20, color: "#581908"},
     },
+     legend: {
+        type: "scroll",
+        bottom: 10,
+        data: [...visibleGenres, ...(hasOther ? ["Other"] : [])],
+        formatter: (name: string) => `${name} (${genreCounts.get(name) ?? 0})`,
+    },
     xAxis: { type: "value", 
-            name: "Verse", 
-            interval: 1,            // no 0.5 steps
-    axisLabel: {
-        formatter: (v: number) => String(Math.round(v)),
-        },
+        name: "Verse", 
+        interval: 1,            // no 0.5 steps
+        // show range from first to last occurrence with a bit on the side
+        min: (range: { min: number }) => Math.floor(range.min) - 0.2,
+        max: (range: { max: number }) => Math.ceil(range.max) + 0.2,
+        axisLabel: {
+            formatter: (v: number) => String(Math.round(v)),
+            },
         },
     yAxis: { type: "value", name: "Year", min: 100, max: yMax  ,  
         interval: 100,
@@ -145,13 +195,7 @@ const option = $derived({
         max: Math.ceil(yMax / 100) * 100,   // e.g. 1487 -> 1500
         axisLabel: { formatter: (v: number) => String(Math.round(v)) },
         },
-     grid: {
-      top: 80,
-      bottom: 160,
-      left: 20,
-      right: 60,
-      containLabel: true,
-    },
+     grid: { left: 60, right: 60, top: 70, bottom: 80 },
      toolbox: {
       show: true,
       orient: "vertical",
@@ -169,14 +213,17 @@ const option = $derived({
         },
       },
     },
-  series: [
-    {
-      type: "scatter",
-      cursor: "pointer",
-      data: points,
-      symbolSize: (_value, params) => 8 + params.data.count * 4, // data[2] is the count
-    },
+    series: [
+        // the 10 main genres, in color
+    ...visibleGenres.map((g) =>
+      makeSeries(g, colorByGenre.get(g)!, points.filter((pt) => pt.genre === g))
+    ),
+    // everything else, in gray
+    ...(hasOther
+      ? [makeSeries("Other", MINOR_COLOR, points.filter((pt) => !colorByGenre.has(pt.genre)))]
+      : []),
   ],
+   
   dataZoom: [
     // mouse
     { type: "inside", xAxisIndex: 0, filterMode: "none" },
@@ -213,18 +260,8 @@ onMount(() => {
   });
 
 </script>
-<div class="flex flex-col min-w-0 gap-3 lg:p-10 p-3 border rounded-lg bg-brand-50 shadow-2xl">
-  <div class="text-brand-700 min-w-3/4">
-    <h2 class="text-2xl font-semibold mb-4 text-brand-950">Bible References</h2>
-    <p> Biblical references (or citations) are found in {passagesForBibleRefs.length} passages in the database.
-  To find out how often and at what period a particular Bible book chapter is used select a bible 
-  book and then a chapter from the menu.
-    </p>
-    <p> The passages are plotted as nodes respective to their date of coposition (y-axis) and the 
-        biblical reference they include (x-axis). Clicking on a node will take you to the detail view
-        page of the passage.
-    </p>
-  </div>
+<div class="flex flex-col min-w-0 gap-3 lg:p-10 p-3 border rounded-lg bg-white shadow-2xl">
+  
   <div class="flex flex-col gap-4 items-start min-w-0">
     <div class="border border-gray-300 rounded-lg pl-2 pr-1 py-1 flex items-center gap-2 bg-brand-500/70">
       <label for="bible-select"

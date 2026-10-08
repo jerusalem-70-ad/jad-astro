@@ -240,9 +240,6 @@ export const worksTableConfig = {
         genre: work.genre,
         ms_transmission: work.manuscripts.map((ms) => ms.name).join(" | "),
         related_passages: totalPassages,
-        institutional_context: (work.institutional_context || [])
-          .map((context) => context.value)
-          .join(" | "),
         tpq: work.date[0]?.not_before || "",
         taq: work.date[0]?.not_after || "",
       };
