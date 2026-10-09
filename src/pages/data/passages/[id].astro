@@ -61,7 +61,7 @@ const steps = [1, 2, 3];
 <PageLayout title=`passage #${passage.id.toString()}`>
   <div id="main-container" class="grid grid-cols-1 md:grid-cols-[16rem_1fr] md:gap-2">
     <div class="hidden md:block">
-      <AsideSearch client:only="svelte"  />
+      <AsideSearch client:only="svelte" transition:persist />
     </div>
     <Article
       
