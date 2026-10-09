@@ -3,6 +3,7 @@ import BibleCommentaries from "@/components/visualisations/bible-commentaries.sv
 import passagesForBibleComm from "@/content/data/passagesForBiblComm.json"
 import PageLayout from "@/layouts/page-layout.astro";
 import CheckItem from "@/components/ui/check-list-item.astro"
+import { Icon } from "astro-icon/components";
 
 ---
  <PageLayout title="Biblical Refs Scatter Chart">
@@ -13,9 +14,13 @@ import CheckItem from "@/components/ui/check-list-item.astro"
       </h1>
      
       <div class="md:grid grid-cols-[1fr_auto] gap-4 text-brand-900 min-w-3/4">
-      <details class="self-start bg-white shadow border border-neutral-300 rounded-md">
+      <details class="group self-start bg-white shadow border border-neutral-300 rounded-md">
 			<summary class="px-5 py-3 bg-brand-500/80 text-white font-semibold text-lg md:text-xl 
-            cursor-pointer">About this chart</summary>
+            cursor-pointer list-none"><Icon
+				class="transition-transform duration-200 group-open:rotate-90 inline-flex size-6"
+				aria-hidden="true"
+				name="lucide:circle-chevron-right"
+			/> About this chart</summary>
             <ul class="px-5 py-2 list-inside list-disc space-y-1">
                 <li>
                     There are {passagesForBibleComm.length} passages in the database that
@@ -39,9 +44,14 @@ import CheckItem from "@/components/ui/check-list-item.astro"
             </ul>
         </details>      
        
-        <details class="min-w-125 self-start bg-white shadow border border-neutral-300 rounded-md">
+        <details class="group min-w-125 self-start bg-white shadow border border-neutral-300 rounded-md">
 			<summary class="px-5 py-3 bg-brand-500/80 text-white font-semibold text-lg md:text-xl 
-            cursor-pointer">How to use</summary>
+            cursor-pointer list-none">
+            <Icon
+				class="transition-transform duration-200 group-open:rotate-90 inline-flex size-6"
+				aria-hidden="true"
+				name="lucide:circle-chevron-right"
+			/> How to use</summary>
             <ul class="px-5 py-2 list-inside space-y-1">
             <CheckItem>Select a biblical book from the menu.</CheckItem>
             <CheckItem>Hover over an X to show the passage number.</CheckItem>

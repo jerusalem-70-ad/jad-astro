@@ -9,22 +9,25 @@ import CheckListItem from "@/components/ui/check-list-item.astro"
 		<h1 class="text-2xl font-semibold text-brand-700">Frequently Asked Questions</h1>
       <details open class="p-3 md:px-10 pb-5 bg-white shadow border border-neutral-300 rounded-md">
 			<summary class="pt-5 pb-1 font-semibold text-lg md:text-xl cursor-pointer">What does the website offer?</summary>
-			<p>
-				The website provides access to the research data collected by the project 
-				 {" "}<strong><em>Medieval Reception of the Roman Conquest of Jerusalem</em></strong>. 
-				Users can explore{" "}
-				<NavLink href="/data/passages">passages</NavLink>,{" "}
-				<NavLink href="/data/works">works</NavLink>,{" "}
-				<NavLink href="/data/authors">authors</NavLink>,{" "}
-				<NavLink href="/data/manuscripts">manuscripts</NavLink>,{" "}
-				<NavLink href="/data/keywords">keywords</NavLink>,{" "}
-				<NavLink href="/data/clusters">thematic clusters</NavLink>,{" "}
-				<NavLink href="/data/biblical-refs">biblical references</NavLink>, and{" "}
-				<NavLink href="/data/liturgical-refs">liturgical references</NavLink> through searchable and filterable data tables. 
-				Each record includes a detailed view page with additional information and links 
-				to related entities, allowing users to trace connections across the corpus and 
-				investigate the transmission and reception of texts.
-			</p>
+			<div>
+				<p>
+					The website provides access to the research data collected by the project
+					 {" "}<strong><em>Medieval Reception of the Roman Conquest of Jerusalem</em></strong>.
+					Users can explore{" "}
+					<NavLink href="/data/passages">passages</NavLink>,{" "}
+					<NavLink href="/data/works">works</NavLink>,{" "}
+					<NavLink href="/data/authors">authors</NavLink>,{" "}
+					<NavLink href="/data/manuscripts">manuscripts</NavLink>,{" "}
+					<NavLink href="/data/keywords">keywords</NavLink>,{" "}
+					<NavLink href="/data/clusters">thematic clusters</NavLink>,{" "}
+					<NavLink href="/data/biblical-refs">biblical references</NavLink>, and{" "}
+					<NavLink href="/data/liturgical-refs">liturgical references</NavLink> through searchable and filterable data tables.
+					Each record includes a detailed view page with additional information and links
+					to related entities, allowing users to trace connections across the corpus and
+					investigate the transmission and reception of texts.
+				</p>
+				<p>To assist the analysis we built a series of visualisations, listed in the <NavLink href="/tools">tools</NavLink> section.</p>
+			</div>
 		</details>
 
 		<details class="px-5 md:px-10 pb-5 bg-white shadow border border-neutral-300 rounded-md">
@@ -69,6 +72,13 @@ import CheckListItem from "@/components/ui/check-list-item.astro"
 					</CheckListItem>
 					<CheckListItem>						
 						Investigate AI-assisted similarity suggestions through the <NavLink href="/tools/ai-graph">similarity graph interface</NavLink>.
+					</CheckListItem>
+					<CheckListItem>
+						If you are interested in exploring biblical quotations in the passages check the <NavLink href="/tools/biblical-refs">scatter chart</NavLink>.
+					</CheckListItem>
+					<CheckListItem>
+						In the <NavLink href="/tools/biblical-commentaries">Biblical Commentaries table</NavLink> you can search for works that comment on 
+						a specific Bible book and see which Bible verses were most commented.
 					</CheckListItem>
 				</ul>
 
