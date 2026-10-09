@@ -6,9 +6,10 @@
     searchBox,
     infiniteHits,
     refinementList,
+    stats
   } from "instantsearch.js/es/widgets";
 
-  import authorLookupMap from "@/content/data/authors_map.json";
+  import authorMap from "@/content/data/authors_map.json";
   import { withBasePath } from "@/lib/withBasePath";
 // svelte store to write the selected Jad id for the graph db to read and trigger the similarity search
   import { selectedJadId } from '@/stores/jad_store.ts';
@@ -18,12 +19,18 @@
   
   export let enableGraph = false; 
   export let comparison = false; 
+
+  const authorLookupMap: Record<string, string> = authorMap
+
   // set elements for the search,bind them later for reactivity
-  let container;
-  let searchbox;
-let refinementsAuthors;
-let refinementsWorks;
+  let container:HTMLElement;
+  let searchbox:HTMLElement;
+let refinementsAuthors:HTMLElement;
+let refinementsWorks:HTMLElement;
+let statsContainer:HTMLElement;
+
 let hits;
+let resultsNumber: number;
 
 let dialog: HTMLDialogElement;
 
@@ -35,7 +42,7 @@ let dialog: HTMLDialogElement;
           nodes: [
             {
               host: "typesense.acdh-dev.oeaw.ac.at",
-              port: "443",
+              port: 443,
               protocol: "https",
             },
           ],
@@ -61,6 +68,25 @@ let dialog: HTMLDialogElement;
       searchBox({
         container: searchbox,
         placeholder: "",
+      }),
+
+      stats({
+        container: statsContainer,
+         templates: {
+        text(data, { html }) {
+          let count = "";
+
+          if (data.hasManyResults) {
+            count += `${data.nbHits} passages`;
+          } else if (data.hasOneResult) {
+            count += `1 passage`;
+          } else {
+            count += `no passage`;
+          }
+
+          return html`<span>${count}</span>`;
+        },
+      },
       }),
 
     refinementList({
@@ -96,7 +122,7 @@ let dialog: HTMLDialogElement;
         list: "text-sm text-neutral-700 m-1",
         showMore:
           "w-full text-sm text-brand-700 p-1 border border-brand-700 rounded mt-2 bg-orange-100 hover:bg-brand-700 hover:text-white transition",
-        disableShowMore: "hidden",
+        disabledShowMore: "hidden",
         searchableInput:
           "w-full bg-white text-sm text-brand-700 p-1 border border-neutral-300 rounded",
         searchableSubmit: "bg-white",
@@ -119,7 +145,7 @@ let dialog: HTMLDialogElement;
         count: "hidden",
         showMore:
           "w-full text-sm text-brand-700 p-1 border border-brand-700 rounded mt-2 bg-orange-100 hover:bg-brand-700 hover:text-white transition",
-        disableShowMore: "hidden",
+        disabledShowMore: "hidden",
         searchableInput:
           "w-full bg-white text-sm text-brand-700 p-1 border border-neutral-300 rounded",
         searchableSubmit: "bg-white",
@@ -256,7 +282,7 @@ let dialog: HTMLDialogElement;
         </div>
       </section>
       <section>
-        <h3 class="text-lg font-bold text-brand-800 text-center pt-2 font-mono text-shadow-brand-200 text-shadow-sm">Passages</h3>
+        <h3 class="text-lg font-bold text-brand-800 text-center pt-2 font-mono text-shadow-brand-200 text-shadow-sm" bind:this={statsContainer}></h3>
         <div bind:this={hits} id="hits" class="px-4 overflow-y-auto"></div>
       </section>
     </aside>
