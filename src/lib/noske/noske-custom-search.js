@@ -213,13 +213,14 @@ class CustomNoskeSearch {
         chapterUri?.split("passages/")[1]?.replace(".html", "") ?? "#";
       results.push({ jad_id, leftText, kwicText, rightText });
       html += `
-        <div class="result-item">
+        <div class="result-item space-y-2">
+          <div class="ts-jad_id " data-id="${jad_id}"></div>       
           <div class="result-text">
             ${leftText ? `<span class="left-context">${leftText}</span>` : ""}
             <span class="kwic">${kwicText}</span>
             ${rightText ? `<span class="right-context">${rightText}</span>` : ""}
           </div> 
-          <div class="ts-details mt-4" data-id="${jad_id}"></div>       
+          <div class="ts-details text-sm" data-id="${jad_id}"></div>       
         </div>
       `;
     });
@@ -230,6 +231,25 @@ class CustomNoskeSearch {
     html += "</div>";
     resultsContainer.innerHTML = html;
 
+    resultsContainer.querySelectorAll(".ts-jad_id").forEach((div) => {
+      const jad_id = div.getAttribute("data-id");
+      const passage = passageMap.get(jad_id);
+
+      if (!passage) return;
+
+      const url = withBasePath(`/data/passages/${passage.jad_id}`);
+
+      div.insertAdjacentHTML(
+        "afterbegin",
+        ` 
+         <h3 class="font-semibold text-base md:text-lg text-brand-800">
+          <a href="${url}" class="underline">
+            (#${passage.id}) 
+          </a>
+        </h3>`,
+      );
+    });
+
     resultsContainer.querySelectorAll(".ts-details").forEach((div) => {
       const jad_id = div.getAttribute("data-id");
 
@@ -238,21 +258,20 @@ class CustomNoskeSearch {
       if (!passage) return;
 
       const url = withBasePath(`/data/passages/${passage.jad_id}`);
-
-      div.innerHTML = `
-      <div class="flex justify-between">
-        <dl class="grid grid-cols-2 gap-x-4">
-          <dt class="font-semibold">Author:</dt>
-          <dd>${passage.work?.[0]?.author ?? ""}</dd>
-
+      const title = passage.work[0].title ?? "";
+      const position = ` (${passage.position_in_work})` ?? "";
+      div.insertAdjacentHTML(
+        "beforeend",
+        ` 
+       
+      <div class="md:flex justify-between gap-1 space-y-1">
+        <dl class="grid grid-cols-2 gap-x-4 ">
           <dt class="font-semibold">Title:</dt>
-          <dd>${passage.work?.[0]?.title ?? ""}</dd>
+          <dd>${title}${position}</dd>
 
-          <dt class="font-semibold">Position in Work:</dt>
-          <dd>${passage.position_in_work ?? ""}</dd>
-
-          <dt class="font-semibold">Passage ID:</dt>
-          <dd>${passage.id}</dd>
+          <dt class="font-semibold">Author:</dt>
+          <dd>${passage.work?.[0]?.author ?? ""}</dd>    
+         
         </dl>
         
         <div class="flex items-end">
@@ -264,11 +283,12 @@ class CustomNoskeSearch {
         </a>
         </div>
       </div>
-      <details>
-      <summary class="cursor-pointer">See original spelling (text might be normalized to facilitate lemmatizing).</summary>
+      <details class="pt-2">
+      <summary class="cursor-pointer list-none"><span class="button-custom">See original spelling</span></summary>
       <div class="p-3 text-sm text-brand-800">${passage.text_paragraph}</div>
       </details>
-    `;
+    `,
+      );
     });
     resultsContainer
       .querySelector("#download-csv")

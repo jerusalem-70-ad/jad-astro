@@ -182,13 +182,16 @@ dialog::backdrop {
 
 .ais-ClearRefinements-button,
 .ais-RefinementList-checkbox,
-.ais-SearchBox-form .ais-SearchBox-input,
+.ais-SearchBox-input,
 .ais-RefinementList .ais-RefinementList-showMore {
   @apply focus-visible:outline-none
     focus-visible:ring-2
     focus-visible:ring-brand-400
     focus-visible:ring-offset-2
     focus-visible:ring-offset-orange-400;
+}
+#searchbox .ais-SearchBox-input {
+  @apply border-4 rounded-lg border-brand-300;
 }
 
 .ais-Panel .ais-Panel-collapseButton,
@@ -279,12 +282,11 @@ dialog::backdrop {
   @apply flex-1 text-sm py-1.5 p-2 min-w-0
     border border-gray-300 rounded-sm
     focus-visible:outline-none
-    focus-visible:ring-2
-    focus-visible:ring-brand-400
+    focus-visible:ring-4
+    focus-visible:ring-red-800
     focus-visible:ring-offset-2
-    focus-visible:ring-offset-orange-400;
+    focus-visible:ring-offset-white;
 }
-
 .ais-SearchBox-form {
   @apply flex gap-1 max-w-full;
 }
@@ -312,9 +314,11 @@ dialog::backdrop {
 }
 
 #sort .ais-SortBy-select {
-  @apply w-full rounded-lg border-0
+  @apply w-full max-h-7 rounded-lg border-0
     bg-brand-50 px-2 py-1
-    text-lg font-mono font-semibold text-brand-700;
+    text-lg font-mono font-semibold text-brand-700
+    focus-visible:ring-4
+    focus-visible:ring-orange-400;
 }
 /* ######################################### */
 /* Noske Search KWIC view adjustments */

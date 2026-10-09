@@ -452,7 +452,7 @@ search.addWidgets(
       </p>
       <button 
         class="show-more-btn justify-self-end text-brand-600 hover:bg-brand-400 hover:text-white hover:border-brand-400 text-sm font-medium m-1 
-        py-1 px-2 border border-brand-900 rounded-sm focus-within:bg-brand-400 focus-visible:text-white focus-visible:border-white">
+        py-1 px-2 border border-brand-900 rounded-sm focus-visible:bg-brand-400 focus-visible:text-white focus-visible:border-white">
         Show more
       </button> 
       <div class="work-details">
@@ -751,12 +751,12 @@ setTimeout(() => {
   wrapper.className =
     "hits-per-page-control inline-block text-sm border-l pl-3 text-sm";
   wrapper.innerHTML = `
-    <label class="text-sm">Results per page:</label>
+    <label class="text-sm hidden md:block">Results per page:
     <select id="hits-per-page-select" class="border bg-white rounded px-2 py-1 text-sm">
       <option value="10">10</option>
       <option value="25">25</option>
       <option value="50">50</option>
-    </select>
+    </select></label>
   `;
 
   statsContainer.appendChild(wrapper);

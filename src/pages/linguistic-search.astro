@@ -24,7 +24,7 @@ import SearchPanel from "@/components/search/filter-panel.astro";
         Linguistic Search
       </h1>
     </div>
-  <p class="p-3 text-brand-800 font-normal 2xl:text-base text-sm">The <strong>linguistic search</strong> allows you to search for specific lemmas, phrases, or more complex linguistic patterns using Simple, Phrase, Lemma, and CQL search modes. 
+  <p class="p-3 text-brand-800 font-normal 2xl:text-base text-sm hidden md:block">The <strong>linguistic search</strong> allows you to search for specific lemmas, phrases, or more complex linguistic patterns using Simple, Phrase, Lemma, and CQL search modes. 
         </p>
     </div>
   <div class="bg-white border border-gray-300 rounded-xl p-4 shadow-sm ">  
@@ -198,7 +198,7 @@ import SearchPanel from "@/components/search/filter-panel.astro";
      </div>
     </div>
     </details>
-    <div class="grid grid-cols-[1fr_3fr] gap-4 items-stretch">
+    <div class="space-y-2 md:grid grid-cols-[1fr_3fr] gap-4 items-stretch">
       <div class="border border-gray-300 rounded-lg px-2 py-1 flex items-center gap-1 bg-brand-500/70">
         <label for="search-type-select" class="text-white font-semibold text-xl font-mono uppercase">Search Mode: </label>
         <select id="search-type-select" class="flex-1 text-brand-700 text-lg font-mono font-semibold rounded-lg py-1.5 px-2 bg-brand-50">
