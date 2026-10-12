@@ -55,6 +55,7 @@ const writeJson = (fileName, data) => {
   }
 };
 
+//outdate - institutionla context not used anymore
 const institutionalContextsClean = institutional_contexts
   .filter((context) => context.name)
   .map(({ order, ...rest }) => rest)
@@ -356,13 +357,24 @@ const worksPlus = works
     const related__passages = passages
       .filter((p) => p.work.some((w) => w.id === work.id))
       .map((p) => {
+        // enrich liturgical refs with date, store as objejct for tabulator to sort with valueMap
+        const liturgical = liturgical_references
+          .filter((ref) => p.liturgical_references.some((r) => r.id === ref.id))
+          .map((ref) => {
+            return {
+              value: ref.name,
+              date: ref.date,
+            };
+          });
         return {
           id: p.id,
           jad_id: p.jad_id,
           passage: p.passage,
-          position_in_work: p.position_in_work || "without attribution",
+          position_in_work: p.position_in_work,
+          liturgical_references: liturgical,
           text_paragraph: p.text_paragraph,
-          occurrence_found_in: p.occurrence_found_in,
+          occurrence_found_in: p.text_taken_from.map((r) => r.value),
+          sort_position: calculateSortPosition(p.position_in_work),
         };
       });
     if (related__passages && related__passages.length > 0) {
@@ -379,6 +391,7 @@ const worksPlus = works
           id: passage.id,
           jad_id: passage.jad_id,
           passage: passage.passage,
+          liturgical_references: passage.liturgical_references,
           page: passage.text_paragraph?.match(/ p\. (\d+\w?)/)?.[1] || "",
           occurrence_found_in:
             passage.occurrence_found_in.map((occ) => occ.value) || [],
@@ -460,7 +473,8 @@ const worksPlus = works
       link_digital_editions: work.link_digital_editions || "",
       edition: edition || "",
       other_editions: work.other_editions || "",
-      related__passages: processedPassages, // Use the processed passages here
+      //related__passages: processedPassages, // Use the processed passages here
+      related__passages: related__passages, // Use the processed passages here
       view_label: work.view_label || "",
       next: work.next || {},
       prev: work.prev || {},

@@ -228,9 +228,6 @@ export const authorsTableConfig = {
 export const worksTableConfig = {
   transformData: (works) => {
     return works.map((work) => {
-      const totalPassages = work.related__passages
-        .map((positionObj) => positionObj.passages.length)
-        .reduce((total, count) => total + count, 0);
       return {
         id: work.id || "",
         jad_id: work.jad_id || "",
@@ -239,7 +236,7 @@ export const worksTableConfig = {
         alt_name: work.author[0].alt_name || "",
         genre: work.genre,
         ms_transmission: work.manuscripts.map((ms) => ms.name).join(" | "),
-        related_passages: totalPassages,
+        related_passages: work.related__passages.length,
         tpq: work.date[0]?.not_before || "",
         taq: work.date[0]?.not_after || "",
       };
@@ -307,6 +304,97 @@ export const worksTableConfig = {
   // Row click configuration for work-mss-transmission table
   getRowClickConfig: {
     urlPattern: "/data/works/{id}",
+    idField: "jad_id",
+    target: "_self",
+  },
+};
+
+//helper to sort liturgical feasts
+// "1099-08-13" -> 10990813, or null if the date is missing or invalid
+function dateToNumber(dateString) {
+  const [year, month, day] = String(dateString).split("-").map(Number);
+  if (!year || !month || !day) return null;
+  return year * 10000 + month * 100 + day;
+}
+
+const NO_DATE = 99999999; // bigger than any real date, so these rows sort last
+
+// table with related passage in detail view page of a WORK
+export const workTableConfig = {
+  transformData: (passages) => {
+    return passages.map((p) => {
+      const refs = p.liturgical_references || [];
+
+      // Convert every date to a number, drop invalid ones, keep the earliest
+      const numbers = refs
+        .map((r) => dateToNumber(r.date))
+        .filter((n) => n !== null);
+
+      const titleNumber = `(#${p.jad_id.split("__")[1]}) ${p.passage}`;
+
+      return {
+        id: p.id || "",
+        jad_id: p.jad_id || "",
+        title: titleNumber,
+        position: p.position_in_work,
+        liturgicalText: refs.map((r) => r.value).join(", "), // text shown in the cell
+        liturgicalDate: numbers.length ? Math.min(...numbers) : NO_DATE, // used for 2nd initial sort
+        source: p.occurrence_found_in,
+        key: p.sort_position, // 1st initial sort
+      };
+    });
+  },
+
+  getColumns() {
+    const columns = [
+      {
+        title: "Key",
+        field: "key",
+        sorter: "number",
+        visible: false,
+      },
+      {
+        title: "Position",
+        field: "position",
+        responsive: 1,
+        widthGrow: 1,
+        minWidth: 80,
+      },
+      {
+        title: "Passage",
+        field: "title",
+        minWidth: 150,
+        widthGrow: 3,
+        responsive: 1,
+      },
+      {
+        title: "lit sort",
+        field: "liturgicalDate",
+        sorter: "number",
+        visible: false,
+      },
+      {
+        title: "Liturgical Feast",
+        field: "liturgicalText",
+        minWidth: 150,
+        widthGrow: 2,
+        responsive: 2,
+      },
+
+      {
+        title: "Source",
+        field: "source",
+        minWidth: 150,
+        widthGrow: 2,
+        responsive: 2,
+      },
+    ];
+
+    return addHeaderFilters(columns);
+  },
+  // Row click configuration for work-mss-transmission table
+  getRowClickConfig: {
+    urlPattern: "/data/passages/{id}",
     idField: "jad_id",
     target: "_self",
   },

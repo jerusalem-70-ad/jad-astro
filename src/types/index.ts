@@ -206,17 +206,14 @@ export interface WorkFull extends Work {
 }
 
 interface RelPassage {
-  position_in_work: string;
-  sort_position?: number;
-  passages: PassageRef[];
-}
-
-interface PassageRef {
   id: number;
   jad_id: string;
-  passage: string;
-  page?: string;
+  passage: string | null;
+  position_in_work: string | null;
+  liturgical_references: { value: string; date: string }[];
+  text_paragraph: string | null;
   occurrence_found_in: string[];
+  sort_position?: number;
 }
 
 // Value-only interface (used for multiple fields)

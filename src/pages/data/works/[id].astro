@@ -6,6 +6,9 @@ import NavLink from "@/components/nav-link.astro";
 import { Icon } from "astro-icon/components";
 import type { WorkFull } from "@/types";
 
+import TabulatorTable from "@/components/tabulator-table.svelte";
+import { workTableConfig } from "@/lib/tabulator/tabulator-table-configs.js";
+
 export async function getStaticPaths() {
     const paths = Object.values(works).map((work) => ({
         params: { id: work.jad_id },
@@ -17,6 +20,11 @@ const { data: work } = Astro.props;
 
 const edition = work.edition ?? "";
 const edition_html = edition.replace(/\*(.*?)\*/g, "<em>$1</em>")
+
+// Transform data and prepare columns for Tabulator Table
+const tableData = workTableConfig.transformData(work.related__passages ?? []);
+const columns = workTableConfig.getColumns();
+const rowClickConfig = workTableConfig.getRowClickConfig;
 
 ---
 
@@ -114,7 +122,7 @@ const edition_html = edition.replace(/\*(.*?)\*/g, "<em>$1</em>")
                         " (?)"
                 }
             </dd>
-            <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
+            <!-- <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
                 Passages:
             </dt>
             <dd class="pl-5">
@@ -159,7 +167,26 @@ const edition_html = edition.replace(/\*(.*?)\*/g, "<em>$1</em>")
                 ) : 
                     "N/A"
                 }
-            </dd>
+            </dd> -->
         </dl>
+        
+
+         {tableData.length > 0 && (
+            <TabulatorTable
+            client:only="svelte"
+            data={tableData}
+            columns={columns}
+            tableId="passages-table"
+            options={{
+                paginationSize: 25,
+                responsiveLayout: "collapse",
+                 initialSort: [
+                    { column: "key", dir: "asc" },            // sort by position in work key
+                    { column: "liturgicalDate", dir: "asc" }, // secondary sort by liturgical date
+                ],
+            }}
+            downloadTitle="jad_related_passages"
+            rowClickConfig={rowClickConfig}
+            /> )}
     </Article>
 </PageLayout>

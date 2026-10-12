@@ -23,9 +23,7 @@ export default function mainTei(w: WorkFull) {
   if (author && title) {
     titleAuthor = `${author}: ${title}`;
   }
-  const setIdPass = new Set(
-    w.related__passages.flatMap((p) => p.passages.map((p) => p.jad_id)),
-  );
+  const setIdPass = new Set(w.related__passages.map((p) => p.jad_id));
   // collect from related passages for the standOff indices:
   const relatedPassages = passages.filter((p) => setIdPass.has(p.jad_id));
   const liturgicalRefs = relatedPassages.flatMap(
