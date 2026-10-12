@@ -138,9 +138,9 @@ const edition_html = edition.replace(/\*(.*?)\*/g, "<em>$1</em>")
                                     <span class="italic">
                                         {passage.passage}
                                     </span>
-                                    { passage.page && (
+                                    {passage.page && (
                                         <span class="text-xs">
-                                            (p. {passage.page})
+                                            {" "}(p. {passage.page})
                                         </span>
                                     )}
                                 </NavLink>
