@@ -277,6 +277,13 @@ export function calculateSortPosition(positionInWork) {
     return 300000 + sundayNum * 1000;
   }
 
+  // Pattern 5: Littera (e.g., "Littera P", "Littera S")
+  const litteraMatch = position.match(/^Littera\s+([A-Za-z])/);
+  if (litteraMatch) {
+    const [, letter] = litteraMatch;
+    return 400000 + letter.toUpperCase().charCodeAt(0);
+  }
+
   //const sermoMatch = position.match(/\bSermo\s+(\d+)\b/i);
   if (parsMatch && sermoMatch) {
     const parsName = parsMatch[1].toLowerCase();
@@ -292,6 +299,7 @@ export function calculateSortPosition(positionInWork) {
   if (
     position.startsWith("Praefatio") ||
     position.startsWith("Prefatio") ||
+    position.startsWith("Table of contents") ||
     position.startsWith("Prologue")
   ) {
     return 1;

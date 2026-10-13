@@ -262,13 +262,21 @@ export function calculateSortPosition(positionInWork) {
     return 200000 + parsRank * 1000 + sermonNum;
   }
 
-  // Pattern 5: Praefatio/Prefatio
+  // Pattern 5: Praefatio/Prefatio and Table of content
   if (
     position.startsWith("Praefatio") ||
     position.startsWith("Prefatio") ||
-    position.startsWith("Prologue")
+    position.startsWith("Prologue") ||
+    position.startsWith("Table of contents")
   ) {
     return 1;
+  }
+
+  // Pattern 6: Littera (e.g., "Littera P", "Littera S")
+  const litteraMatch = position.match(/^Littera\s+([A-Za-z])/);
+  if (litteraMatch) {
+    const [, letter] = litteraMatch;
+    return 400000 + letter.toUpperCase().charCodeAt(0);
   }
 
   // Fallback: Unknown patterns go to 900,000+ range
