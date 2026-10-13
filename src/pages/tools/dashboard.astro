@@ -3,7 +3,6 @@ import SearchPanel from "@/components/search/search-panel.svelte"
 import PageLayout from "@/layouts/page-layout.astro"
 import Graph from "@/components/visualisations/ChronologicalGraph.svelte"
 import Dialog from "@/components/visualisations/dialog-card.svelte"
-import GenrePieChart from "@/components/visualisations/genre-piechart.svelte";
 import GenreWorkPieChart from "@/components/visualisations/genre-work-piechart.svelte";
 import BiblBookGraph from "@/components/visualisations/bible-books.svelte";
 import LiturgicalGraph from "@/components/visualisations/liturgical-ref.svelte";
@@ -23,7 +22,6 @@ import KeywordsPieChart from "@/components/visualisations/keywords-piechart.svel
         <div class="grid grid-cols-[repeat(auto-fit,minmax(1000px,1fr))] overflow-auto w-full mx-auto">
             <Graph client:only="svelte"/> 
             <GenreWorkPieChart client:only="svelte" />
-            <GenrePieChart client:only="svelte" />
             <BiblBookGraph client:only="svelte"/>
             <LiturgicalGraph client:only="svelte"/>
             <KeywordsPieChart client:only="svelte"/>

@@ -969,3 +969,21 @@ const passagesForBiblRefs = passagesPlusWorks
     };
   });
 writeJson("passagesForBiblRefs", passagesForBiblRefs);
+
+//abgespeckte works.json for piechart genres accross works
+const worksForChart = worksPlus.map((w) => {
+  return {
+    jad_id: w.jad_id,
+    genre: w.genre,
+  };
+});
+
+writeJson("worksForChart", worksForChart);
+//abgespeckte passages.json for piecharts in explore/patterns
+const passagesForCharts = passagesPlusFinal.map((p) => {
+  return {
+    liturgical_references: p.liturgical_references.map((ref) => ref.value),
+    biblical_ref_lvl0: p.biblical_ref_lvl0,
+  };
+});
+writeJson("passagesForCharts", passagesForCharts);

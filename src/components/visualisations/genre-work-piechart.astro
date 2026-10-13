@@ -1,4 +1,8 @@
 
+---
+import NavLink from "@/components/nav-link.astro";
+
+---
 <div class="lg:grid grid-cols-[1fr_4fr] gap-3 lg:p-10 p-3 border rounded-lg bg-brand-50 shadow-2xl">
   <div class="text-brand-700 prose">
     <h2 class="text-2xl font-semibold mb-4 text-brand-950">Genre Distribution accross Works</h2>
@@ -8,6 +12,7 @@
     <p>Selecting a segment in the pie chart acts as an interactive filter: 
         clicking on a genre takes you directly to the advanced search results, where all 
         passages belonging to the chosen genre are displayed.</p>
+    <p><strong>Hint</strong>: check this pie chart in the <NavLink href="/tools/dashboard">dashboard</NavLink> to apply filters.</p>
   </div>
     <div
         id="genre-work-piechart"
@@ -20,7 +25,7 @@
 <script>
   import * as echarts from "echarts";
   import { withBasePath } from "@/lib/withBasePath";
-  import works from "@/content/data/works.json";
+  import works from "@/content/data/worksForChart.json";
 
   document.addEventListener("astro:page-load", () => {
     const chartElement = document.getElementById("genre-work-piechart");

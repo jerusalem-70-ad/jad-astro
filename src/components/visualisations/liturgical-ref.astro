@@ -16,7 +16,7 @@
 <script>
   import * as echarts from "echarts";
   import { withBasePath } from "@/lib/withBasePath";
-  import passages from "@/content/data/passages.json";
+  import passages from "@/content/data/passagesForCharts.json";
 
   document.addEventListener("astro:page-load", () => {
     const chartElement = document.getElementById("liturgical-piechart");
@@ -30,7 +30,7 @@
 const liturgicalCounts = new Map();
 
 passages.forEach((passage) => {
-  const refs = [...new Set((passage.liturgical_references ?? []).map(r => r.value))];
+  const refs = [...new Set((passage.liturgical_references ?? []))];
 
   if (refs.length === 0) return;
 
