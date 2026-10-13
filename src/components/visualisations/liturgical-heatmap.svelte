@@ -23,10 +23,18 @@ let heatmapData: {centuries: string[], items: string[], values: [number, number,
 let mode = "absolute";
 
 // computed once: order feastes by date (found in the 50kb row json)
+const YEAR_START = "12-03"; // start from Advent "MM-DD"
+
+// Dates from 12-25 onward go in group 0 (first), everything else in group 1.
+const sortKey = (date) => {
+  const monthDay = date.slice(5); // "1099-08-13" -> "08-13"
+  return monthDay >= YEAR_START ? `0-${monthDay}` : `1-${monthDay}`;
+};
+
 const orderedRefNames = Object.values(row_liturgical_references)
-  .filter(ref => ref.date !== null)
-  .toSorted((a, b) => a.date.localeCompare(b.date))
-  .map(ref => ref.name);  
+  .filter((ref) => ref.date !== null)
+  .toSorted((a, b) => sortKey(a.date).localeCompare(sortKey(b.date)))
+  .map((ref) => ref.name);
 
 //prepare data from reactive passages-graph
 $: {
