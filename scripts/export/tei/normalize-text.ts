@@ -1,7 +1,5 @@
 export default function normalizeText(text: string) {
   const normalizeText = text
-    .replace(/ae/g, "e")
-    .replace(/oe/g, "e")
     .replace(/j/g, "i")
     .replace(/y/g, "i")
     .replace(/v/g, "u")
