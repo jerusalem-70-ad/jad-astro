@@ -31,7 +31,11 @@ export function getPieChartOption(
               ? `Showing ${categories} references with ${total} instances || total filtered passages: ${allFilteredPassages}`
               : `Showing ${categories} categories || total filtered passages: ${allFilteredPassages}`,
       left: "center",
-      textStyle: { fontSize: 14 },
+      subtextStyle: {
+        fontSize: 16,
+        color: "#364153",
+        fontWeight: 500,
+      },
     },
     tooltip: {
       trigger: "item",

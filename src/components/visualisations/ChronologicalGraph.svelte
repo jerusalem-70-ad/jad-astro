@@ -429,7 +429,7 @@ of the selected passage. Combine the filters to make a selection of passages."
 why="Provides a bird's-eye view of the entire data set."
 questions="How widely used was passage X?"
 />
-<div class="text-center p-2 text-gray-600 text-sm font-medium">Showing {allFilteredNodes} from {totalPassages} passages
+<div class="text-center p-2 text-gray-700 text-base leading-none font-medium">Showing {allFilteredNodes} from {totalPassages} passages
    {falseDatePassages > 0 ? `[for ${falseDatePassages} passages no date to plot]` : ""}</div>
  
   <div id="graph-container" bind:this={container}></div>
