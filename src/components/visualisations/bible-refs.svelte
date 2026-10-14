@@ -183,15 +183,15 @@ const option = $derived({
         name: "Verse", 
         interval: 1,            // no 0.5 steps
         // show range from first to last occurrence with a bit on the side
-        min: (range: { min: number }) => Math.floor(range.min) - 0.2,
-        max: (range: { max: number }) => Math.ceil(range.max) + 0.2,
+        min: (range: { min: number }) => Math.floor(range.min) - 1,   // add one so the dot dont come on the timeline y axis     
+        max: (range: { max: number }) => Math.ceil(range.max) + 0.1, // add space after actual grid
         axisLabel: {
             formatter: (v: number) => String(Math.round(v)),
             },
         },
-    yAxis: { type: "value", name: "Year", min: 100, max: yMax  ,  
+    yAxis: { type: "value", name: "Year", min: yMin, max: yMax  ,  
         interval: 100,
-        min: 100,
+        min: Math.floor(yMin/100) * 100,
         max: Math.ceil(yMax / 100) * 100,   // e.g. 1487 -> 1500
         axisLabel: { formatter: (v: number) => String(Math.round(v)) },
         },
