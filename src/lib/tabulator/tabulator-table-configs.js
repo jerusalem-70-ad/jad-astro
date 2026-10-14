@@ -339,7 +339,7 @@ export const workTableConfig = {
         position: p.position_in_work,
         liturgicalText: refs.map((r) => r.value).join(", "), // text shown in the cell
         liturgicalDate: numbers.length ? Math.min(...numbers) : NO_DATE, // used for 2nd initial sort
-        source: p.occurrence_found_in,
+        source: p.text_taken_from,
         key: p.sort_position, // 1st initial sort
       };
     });

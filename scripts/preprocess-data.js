@@ -374,6 +374,7 @@ const worksPlus = works
           liturgical_references: liturgical,
           text_paragraph: p.text_paragraph,
           occurrence_found_in: p.text_taken_from.map((r) => r.value),
+          text_taken_from: p.text_taken_from.map((r) => r.value),
           sort_position: calculateSortPosition(p.position_in_work),
         };
       });

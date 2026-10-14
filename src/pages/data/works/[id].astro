@@ -98,12 +98,12 @@ const rowClickConfig = workTableConfig.getRowClickConfig;
                 )
                 }
                 {work.link_digital_editions &&
-                (<NavLink href={work?.link_digital_editions}>
-                    (Facsimile{" "}
+                <span>  (<NavLink href={work?.link_digital_editions}>
+                   Facsimile{" "}
                                   <Icon
                                     name="lucide:external-link"
                                     class="size-4 inline-flex"
-                                  />)</NavLink>)}
+                                  /></NavLink>)</span>}
             </dd>
             
            
