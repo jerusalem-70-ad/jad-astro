@@ -156,6 +156,9 @@ const makeSeries = (name: string, color: string, data: any[]) => ({
   symbolSize: (_value: any, params: any) => 8 + params.data.count * 4,
 });
 
+const xMin = $derived(points.length ? Math.floor(Math.min(...points.map((p) => p.value[0]))) - 1 : 0); // add one so the dot dont come on the timeline y axis   
+const xMax = $derived(points.length ? Math.ceil(Math.max(...points.map((p) => p.value[0])))  : 1 ); // add space after actual grid
+
 // derived: the chart option
 const option = $derived({
     tooltip: {
@@ -183,13 +186,13 @@ const option = $derived({
         name: "Verse", 
         interval: 1,            // no 0.5 steps
         // show range from first to last occurrence with a bit on the side
-        min: (range: { min: number }) => Math.floor(range.min) - 1,   // add one so the dot dont come on the timeline y axis     
-        max: (range: { max: number }) => Math.ceil(range.max) + 0.1, // add space after actual grid
+        min: xMin,   
+        max: xMax, 
         axisLabel: {
             formatter: (v: number) => String(Math.round(v)),
             },
         },
-    yAxis: { type: "value", name: "Year", min: yMin, max: yMax  ,  
+    yAxis: { type: "value", name: "Year",   
         interval: 100,
         min: Math.floor(yMin/100) * 100,
         max: Math.ceil(yMax / 100) * 100,   // e.g. 1487 -> 1500
@@ -226,7 +229,7 @@ const option = $derived({
    
   dataZoom: [
     // mouse
-    { type: "inside", xAxisIndex: 0, filterMode: "none" },
+    { type: "inside", xAxisIndex: 0, filterMode: "none", minValueSpan: 5 },
     { type: "inside", yAxisIndex: 0, filterMode: "none" },
 
    
@@ -243,6 +246,21 @@ onMount(() => {
       );
     }
   });
+  chart.on("datazoom", () => {
+  const dz = chart!.getOption().dataZoom[0]; // index 0 = the x-axis zoom
+  const start = Math.round(dz.startValue);
+  const end = Math.max(Math.round(dz.endValue), start + 1); // keep at least 1 verse visible
+
+  // Only dispatch if something changed, otherwise we'd loop forever
+  if (start !== dz.startValue || end !== dz.endValue) {
+    chart!.dispatchAction({
+      type: "dataZoom",
+      dataZoomIndex: 0,
+      startValue: start,
+      endValue: end,
+    });
+  }
+});
 
     const ro = new ResizeObserver(() => chart?.resize());
     ro.observe(container);
@@ -250,7 +268,7 @@ onMount(() => {
     return () => {
       ro.disconnect();
       chart?.dispose();
-      chart = undefined;
+      chart = null;
     };
 });
 
