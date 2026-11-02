@@ -115,6 +115,9 @@ export const NOVA_VULGATA_ORDER = {
   "1 Macc": 47,
   "2 Macc": 48, // With spaces
 
+  "1 Esdr": 48.1,
+  "2 Esdr": 48.2,
+
   // New Testament
   Mt: 49,
   Matthew: 49,
@@ -259,6 +262,17 @@ export function calculateSortPosition(positionInWork) {
     autumnalis: 4,
   };
 
+  //const sermoMatch = position.match(/\bSermo\s+(\d+)\b/i);
+  if (parsMatch && sermoMatch) {
+    const parsName = parsMatch[1].toLowerCase();
+    const parsRank = PARS_ORDER[parsName] ?? 9; // fallback for unknown pars
+    const sermonNum = parseInt(sermoMatch[1], 10);
+
+    // Pars/Sermo: 200,000+ range
+    // each pars gets 1,000 sermon slots
+    return 200000 + parsRank * 1000 + sermonNum;
+  }
+
   // Pattern 4b: X Sunday, Sermo 2
   const sundayMatch = position.match(/\b([IVXLCDM]+)\s+Sunday\b/i);
   const sermoMatch = position.match(/\bSermo\s+(\d+)\b/i);
@@ -284,17 +298,6 @@ export function calculateSortPosition(positionInWork) {
   if (litteraMatch) {
     const [, letter] = litteraMatch;
     return 400000 + letter.toUpperCase().charCodeAt(0);
-  }
-
-  //const sermoMatch = position.match(/\bSermo\s+(\d+)\b/i);
-  if (parsMatch && sermoMatch) {
-    const parsName = parsMatch[1].toLowerCase();
-    const parsRank = PARS_ORDER[parsName] ?? 9; // fallback for unknown pars
-    const sermonNum = parseInt(sermoMatch[1], 10);
-
-    // Pars/Sermo: 200,000+ range
-    // each pars gets 1,000 sermon slots
-    return 200000 + parsRank * 1000 + sermonNum;
   }
 
   // Pattern 5: Praefatio/Prefatio

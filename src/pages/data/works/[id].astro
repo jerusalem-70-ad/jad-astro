@@ -43,7 +43,7 @@ const rowClickConfig = workTableConfig.getRowClickConfig;
                 class="border border-brand-800 rounded-md py-2 px-4 bg-brand-600 text-brand-100 hover:bg-brand-100 hover:text-brand-800 transition"
                 id="download-tei">TEI</NavLink>             
                 
-             </div>
+     </div>
         <dl class="grid grid-cols-[1fr_5fr] text-sm md:leading-7 md:text-base">
             <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">Author:</dt>
             <dd class="pl-5">
@@ -177,12 +177,11 @@ const rowClickConfig = workTableConfig.getRowClickConfig;
             data={tableData}
             columns={columns}
             tableId="passages-table"
-            options={{
+            options={{                
                 paginationSize: 25,
                 responsiveLayout: "collapse",
                  initialSort: [
                     { column: "key", dir: "asc" },            // sort by position in work key
-                    { column: "liturgicalDate", dir: "asc" }, // secondary sort by liturgical date
                 ],
             }}
             downloadTitle="jad_related_passages"

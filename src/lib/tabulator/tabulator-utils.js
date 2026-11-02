@@ -6,6 +6,13 @@ export function scrollableCellFormatter(cell) {
   return `<div style="max-height: 100px; overflow-y: auto; overflow-x: hidden">${value}</div>`;
 }
 
+export function scrollableXCellFormatter(cell) {
+  const value = cell.getValue();
+  if (!value) return "";
+
+  return `<div style="max-height: 100px; overflow: auto">${value}</div>`;
+}
+
 // custom filter for tabulator to search in both name and alt_name fields
 export function customNameFilter(headerValue, rowValue, rowData) {
   if (!headerValue) return true;
@@ -99,12 +106,14 @@ export function dateRangeFilter(
   });
 }
 
-export function sortByKey(value, data, type, params, component) {
-  if (!Array.isArray(value)) return "";
-  // Sort by the 'key' property (ascending)
-  const sorted = [...value].sort((a, b) => (a.key ?? 0) - (b.key ?? 0));
-  // Extract the 'value' property and join with separator
-  return sorted.map((ref) => ref.value).join(params.separator || "; ");
+// Sorts rows by their hidden "key" field instead of the Position text
+export function sortByKey(a, b, aRow, bRow) {
+  return aRow.getData().key - bRow.getData().key;
+}
+
+// Sorts rows by their hidden "liturgicalDate" number instead of the feast text
+export function sortByLiturgicalDate(a, b, aRow, bRow) {
+  return aRow.getData().liturgicalDate - bRow.getData().liturgicalDate;
 }
 
 // function to filter numeric not_before and not_After date in separate columns (TPQ and TAQ)

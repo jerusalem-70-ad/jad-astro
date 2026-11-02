@@ -10,8 +10,11 @@
     dateRangeFilter,
     customNameFilter,
     scrollableCellFormatter,
+    scrollableXCellFormatter,
     filterTPQ,
-    filterTAQ
+    filterTAQ,
+    sortByKey,
+    sortByLiturgicalDate
   } from "@/lib/tabulator/tabulator-utils.js";
 
   /* ---------- props ---------- */
@@ -62,6 +65,7 @@ export let rowClickConfig = null;
           ...column,
           headerFilterFunc: customNameFilter,
         };
+     
       case "related_passages":
         return {
           ...column,
@@ -78,7 +82,21 @@ export let rowClickConfig = null;
         return {
           ...column,
           headerFilterFunc: filterTAQ,
-        }
+        };
+       case "position":
+        return {
+          ...column,
+          sorter: sortByKey,
+        };
+      case "liturgicalText":
+        return { ...column, sorter: sortByLiturgicalDate };
+
+      case "mss_occurrences":
+      case "keywords": 
+      return {
+        ...column,
+        formatter:scrollableXCellFormatter
+      }
       default:
         return column;
     }
@@ -87,10 +105,11 @@ export let rowClickConfig = null;
   const defaultOptions = {
     layout: "fitColumns",
     headerFilterLiveFilterDelay: 600,
-    responsiveLayout: "hide",   
+    responsiveLayout: "hide",   // hide what no longer fit
     pagination: true,
     movableColumns: true,
     resizableRows: true,
+    resizableColumnFit:true,
   };
 
   /* ---------- helpers ---------- */
@@ -298,7 +317,7 @@ export let rowClickConfig = null;
   }
 </script>
 
-<div class="text-sm w-full">
+<div class="text-sm w-full min-w-0 max-w-full">
   <div class="grid gap-2 md:flex my-4 md:justify-between items-start md:items-center mb-2">
     <div class="text-brand-600 text-base">
       Showing <span id="counter1"></span> from total of
@@ -322,6 +341,6 @@ export let rowClickConfig = null;
   <div
     bind:this={tableEl}
     id={tableId}
-    style="min-height: 100px; width: 100%;"
+    style="min-height: 100px; width: 100%; max-width: 100%;"
   ></div>
 </div>

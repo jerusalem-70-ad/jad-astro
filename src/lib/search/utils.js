@@ -114,6 +114,9 @@ export const NOVA_VULGATA_ORDER = {
   "1 Macc": 47,
   "2 Macc": 48, // With spaces
 
+  "1 Esdr": 48.1,
+  "2 Esdr": 48.2,
+
   // New Testament
   Mt: 49,
   Matthew: 49,

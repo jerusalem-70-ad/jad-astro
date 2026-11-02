@@ -21,6 +21,19 @@ export const passagesTableConfig = {
             }
           })
           .join("; ") || "";
+      const keywordItem = (k) => {
+        const subs = (k.subkeywords.map((sb) => sb.label) || [])
+          .filter(Boolean)
+          .join(", ");
+        return `<li><em>${k.label}</em>${subs ? `: ${subs}` : ""}</li>`;
+      };
+
+      const keyW = passage.keywords.length
+        ? `<ul>${passage.keywords.map(keywordItem).join("")}</ul>`
+        : "";
+      const mss =
+        passage.mss_occurrences.length &&
+        `<ul>${passage.mss_occurrences.map((o) => `<li>${o.manuscript}</li>`).join("")}</ul>`;
       return {
         jad_id: passage.jad_id || "",
         id: passage.id || "",
@@ -31,17 +44,8 @@ export const passagesTableConfig = {
         ms_jad_ids: passage.mss_occurrences?.map((occ) => occ.jad_id) || [],
         work: passage.work[0]?.title || "",
         work_position: work_position || "",
-        mss_occurrences: passage.mss_occurrences
-          .map((ms) => ms.manuscript)
-          .join(" | "),
-        keywords: passage.keywords
-          .map((kw) => {
-            const subkeywords = kw.subkeywords
-              ? kw.subkeywords.map((sk) => sk.label)
-              : [];
-            return [kw.label, ...subkeywords].filter(Boolean).join(": ") || "";
-          })
-          .join(" / "),
+        mss_occurrences: mss,
+        keywords: keyW,
         genre: passage.work[0]?.genre || "",
         tpq: passage.work[0].date[0]?.not_before || "",
         taq: passage.work[0].date[0]?.not_after || "",
@@ -81,14 +85,15 @@ export const passagesTableConfig = {
         responsive: 1,
         widthGrow: 2,
         minWidth: 200,
+        formatter: "textarea",
       },
       {
         title: "Genre",
         resizable: true,
         field: "genre",
         responsive: 2,
-        widthGrow: 2,
-        minWidth: 150,
+        widthGrow: 1,
+        minWidth: 100,
       },
       {
         title: "Manuscript",
@@ -97,6 +102,7 @@ export const passagesTableConfig = {
         widthGrow: 2,
         responsive: 4,
         minWidth: 200,
+        formatter: "textarea",
       },
       {
         title: "Keywords",
@@ -385,7 +391,7 @@ export const workTableConfig = {
         title: "Source",
         field: "source",
         minWidth: 150,
-        widthGrow: 2,
+        widthGrow: 1,
         responsive: 2,
       },
     ];
