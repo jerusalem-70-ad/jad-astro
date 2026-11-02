@@ -254,6 +254,7 @@ export function calculateSortPosition(positionInWork) {
 
   // Pattern 4a: Pars ... Sermo (e.g., "Sermo 2")
   const parsMatch = position.match(/\bPars\s+(\w+)/i);
+  const sermoMatch = position.match(/\bSermo\s+(\d+)\b/i);
   const PARS_ORDER = {
     hiemalis: 1,
     verna: 2,
@@ -275,7 +276,6 @@ export function calculateSortPosition(positionInWork) {
 
   // Pattern 4b: X Sunday, Sermo 2
   const sundayMatch = position.match(/\b([IVXLCDM]+)\s+Sunday\b/i);
-  const sermoMatch = position.match(/\bSermo\s+(\d+)\b/i);
 
   if (sundayMatch && sermoMatch) {
     const sundayNum = romanToInt(sundayMatch[1]);
