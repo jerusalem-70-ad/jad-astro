@@ -15,6 +15,16 @@ const rowClickConfig = keywordsTableConfig.getRowClickConfig;
 
 <PageLayout title="keywords">
   <TableHead title="Keywords">
+    <details name="extraPanel">
+      <summary
+      class="rounded-md py-2 px-4 bg-brand-400 text-brand-100 hover:bg-brand-700 hover:text-brand-50 transition cursor-pointer mb-4 select-none"
+      >
+      Keywords by Passage Count
+    </summary>
+    <Chart keywords = {keywords}/>
+
+     
+    </details>
     <TabulatorTable
       client:only="svelte"
       data={tableData}
@@ -28,7 +38,6 @@ const rowClickConfig = keywordsTableConfig.getRowClickConfig;
       rowClickConfig={rowClickConfig}
     />
   </TableHead>
-  <Chart />
 </PageLayout>
 
 

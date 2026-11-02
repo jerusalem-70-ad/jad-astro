@@ -351,3 +351,11 @@ export interface Keyword {
   prev: Navigation;
   next: Navigation;
 }
+
+export interface PassageForBiblRefs {
+  jad_id: string;
+  workTitle: string;
+  date: { notBefore: number; notAfter: number }[];
+  biblRefs: string[];
+  genre: string;
+}

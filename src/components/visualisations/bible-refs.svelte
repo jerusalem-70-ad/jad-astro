@@ -5,8 +5,10 @@
   import * as echarts from "echarts";
 import { onMount } from "svelte";
 
+import type {PassageForBiblRefs} from "@/types/index"
 
-  let { passagesForBibleRefs } = $props();
+
+  let { passagesForBibleRefs } : {passagesForBibleRefs: PassageForBiblRefs[] } = $props();
   let container: HTMLDivElement; 
 let chart: echarts.ECharts | null = null;
 
