@@ -122,52 +122,7 @@ const rowClickConfig = workTableConfig.getRowClickConfig;
                         " (?)"
                 }
             </dd>
-            <!-- <dt class="font-semibold text-brand-900 border-r border-neutral-300 pr-5">
-                Passages:
-            </dt>
-            <dd class="pl-5">
-                {work.related__passages.length > 0 ? (
-                    <ul>
-                    {work.related__passages.map(rel_passages => (
-                        <li class="mb-4">
-                        <span class="font-semibold text-brand-900">{rel_passages.position_in_work}</span>
-                        <ul class="ml-5 list-disc">
-                          {rel_passages.passages
-                            .sort((a, b) => {
-                                const pageA = a.page ? parseInt(a.page) : Infinity;
-                                const pageB = b.page ? parseInt(b.page) : Infinity;
-                                return pageA - pageB;
-                                })
-                          .map((passage) => (
-                            <li class="mb-2">
-                                <NavLink href={`/data/passages/${passage.jad_id}`}>
-                                    #{passage.jad_id.substring(16)}
-                                    {" "}
-                                    <span class="italic">
-                                        {passage.passage}
-                                    </span>
-                                    {passage.page && (
-                                        <span class="text-xs">
-                                            {" "}(p. {passage.page})
-                                        </span>
-                                    )}
-                                </NavLink>
-                                <span> </span>
-                                <span class="text-xs">
-                                    Source:
-                                    {passage.occurrence_found_in.length > 0 ? ` ${passage.occurrence_found_in}` : " N/A"}
-                                </span>
-                            </li>
-                          ))}
-                        </ul>
-                        </li>
-                    ))}
-                    </ul>
-                            
-                ) : 
-                    "N/A"
-                }
-            </dd> -->
+      
         </dl>
         
 
@@ -181,7 +136,8 @@ const rowClickConfig = workTableConfig.getRowClickConfig;
                 paginationSize: 25,
                 responsiveLayout: "collapse",
                  initialSort: [
-                    { column: "key", dir: "asc" },            // sort by position in work key
+                     { column: "key", dir: "asc" },            // sort by position in work key
+                    { column: "liturgicalDate", dir: "asc" },
                 ],
             }}
             downloadTitle="jad_related_passages"

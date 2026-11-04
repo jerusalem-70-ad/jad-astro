@@ -26,7 +26,7 @@ let mode = "absolute";
 const YEAR_START = "12-03"; // start from Advent "MM-DD"
 
 // Dates from 12-25 onward go in group 0 (first), everything else in group 1.
-const sortKey = (date) => {
+const sortKey = (date: string) => {
   const monthDay = date.slice(5); // "1099-08-13" -> "08-13"
   return monthDay >= YEAR_START ? `0-${monthDay}` : `1-${monthDay}`;
 };

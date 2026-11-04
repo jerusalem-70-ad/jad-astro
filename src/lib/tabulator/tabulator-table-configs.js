@@ -316,11 +316,21 @@ export const worksTableConfig = {
 };
 
 //helper to sort liturgical feasts
-// "1099-08-13" -> 10990813, or null if the date is missing or invalid
-function dateToNumber(dateString) {
+// First day of the liturgical year as month*100 + day (Nov 27 -> 1127).
+// Advent can start as early as Nov 27.
+const YEAR_START = 1127;
+
+// "1099-08-13" -> 10813, "1099-12-25" -> 1225, or null if missing or invalid.
+// Dates from Nov 27 onward get a small number (group 0),
+// earlier dates get 10000 added (group 1), so they sort after.
+// The year is ignored on purpose: the liturgical year repeats every year.
+function liturgicalNumber(dateString) {
   const [year, month, day] = String(dateString).split("-").map(Number);
   if (!year || !month || !day) return null;
-  return year * 10000 + month * 100 + day;
+
+  const monthDay = month * 100 + day; // 12-25 -> 1225
+  const group = monthDay >= YEAR_START ? 0 : 1;
+  return group * 10000 + monthDay;
 }
 
 const NO_DATE = 99999999; // bigger than any real date, so these rows sort last
@@ -333,7 +343,7 @@ export const workTableConfig = {
 
       // Convert every date to a number, drop invalid ones, keep the earliest
       const numbers = refs
-        .map((r) => dateToNumber(r.date))
+        .map((r) => liturgicalNumber(r.date))
         .filter((n) => n !== null);
 
       const titleNumber = `(#${p.jad_id.split("__")[1]}) ${p.passage}`;
@@ -344,9 +354,9 @@ export const workTableConfig = {
         title: titleNumber,
         position: p.position_in_work,
         liturgicalText: refs.map((r) => r.value).join(", "), // text shown in the cell
-        liturgicalDate: numbers.length ? Math.min(...numbers) : NO_DATE, // used for 2nd initial sort
+        liturgicalDate: numbers.length ? Math.min(...numbers) : NO_DATE, // used to sort liturgicalText
         source: p.text_taken_from,
-        key: p.sort_position, // 1st initial sort
+        key: p.sort_position, //  initial sort
       };
     });
   },
