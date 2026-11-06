@@ -14,6 +14,8 @@ let chart: echarts.ECharts | null = null;
 let pieData: { name: string; value: number }[] = [];
 let passageCount = 0;
 
+export let mode: "card" | "featured" = "featured";
+
 //prepare data reactively using sorted filteredIds
 $: {
   const passagesJson =
@@ -82,9 +84,11 @@ $: if (chart) {
 
 
 </script>
-<div class="grid gap-2 p-3">
- <GraphContainer>
-  <GraphTitle title="Genre Distribution accross Works" 
+
+
+
+    <GraphContainer>
+       <GraphTitle {mode} title="Genre Distribution accross Works" 
   what = "Pie chart for the 
   distribution of genres across works."
   how = "Use the filters to make a selection of passages. The chart shows the genres of the works for 
@@ -93,10 +97,6 @@ $: if (chart) {
   questions = "What genres had the works written in Paris in the 12th c.? What genre have works 
   where a particular keyword occurs?"
   />
-  <div
-        id="genre-piechart" bind:this={container}
-        class="w-full h-[900px]"
-    >
-  </div>
-  </GraphContainer>
-</div>
+      <div bind:this={container} class={mode === "featured" ? "w-full h-225": "h-40 w-full"}></div>
+    </GraphContainer>
+ 

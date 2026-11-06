@@ -418,7 +418,6 @@ let downTime = 0;
 
 });
 </script>
-<div class="grid gap-2 p-3 ">
 <GraphContainer>
 <GraphTitle title="Chronological graph" 
 what = "Displays all passages in chronological order. Node size reflects the level of connectedness, 
@@ -434,4 +433,3 @@ questions="How widely used was passage X?"
  
   <div id="graph-container" bind:this={container}></div>
   </GraphContainer>
-</div>

@@ -35,3 +35,6 @@ export const defaultFilters: Filters = {
 };
 
 export const filters = writable<Filters>(structuredClone(defaultFilters));
+
+//in dashboard we show only one visualization in the center, the other as cards on the right
+export const selectedViz = writable<string>("timeline");

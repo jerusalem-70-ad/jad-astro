@@ -85,6 +85,10 @@
     if (jadId) fetchSimilarity();
   });
 </script>
+ <div
+    class="mx-auto my-3 grid w-[calc(100%-1.5rem)] min-w-0 grid-rows-[auto_1fr] rounded-md border border-neutral-300 bg-white p-3"
+  >
+<h1 class="border-b-2 border-neutral-300 px-6 py-6 text-2xl font-bold text-brand-800">AI-generated text similarity search</h1>
 <div class="mx-auto w-full grid gap-2 p-4">
     <section class="bg-neutral-50 border border-neutral-200 rounded-md p-4 text-sm text-neutral-800">
         <details class="group">
@@ -276,4 +280,5 @@
     </div>
     {/if}
   </div>
+</div>
 </div>

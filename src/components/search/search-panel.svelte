@@ -267,13 +267,10 @@ $: updateSearch($filters);
 </script>
 
 <div class="space-y-2">
-  <div class="flex gap-2 justify-center items-center py-2 text-lg font-bold border border-neutral-200 shadow-xs rounded-md p-2 bg-brand-400 text-white">
-
-    <h2>Filters</h2>
-    <button id="filter-info" onclick={handleDialog}>
+  <button id="filter-info" onclick={handleDialog} class="flex w-full cursor-help gap-2 justify-center items-center py-2 text-lg font-bold border border-neutral-200 shadow-xs rounded-md p-2 bg-brand-400 text-white">
+    <h2>How to</h2>
       <Info class="font-light cursor-pointer"></Info>
-    </button>
-  </div>
+  </button>
   <dialog bind:this={dialog} onclick={handleBackdropClick} class="border border-brand-600 rounded-md max-w-1/2">
     <h1 class="font-semibold text-lg bg-brand-600/90 text-white p-5 prose">How to use the filters?</h1>
      <div class="prose p-5">
@@ -301,22 +298,7 @@ $: updateSearch($filters);
         </button>
       </div>
     </dialog>
-   {#if activeFilters.length}
-   <div class="text-xs border border-neutral-200 shadow-xs rounded-md p-2 bg-brand-400 text-white">
-    <h2 class="text-base font-semibold ">Current filters:</h2>
-    <ul class="space-y-1">
-      {#each activeFilters as [field, values]}
-        <li class="bg-white text-brand-900 rounded-md px-1 py-0.5">
-          <strong>{field}:</strong> {values.join(" || ")}
-        </li>
-      {/each}
-    </ul>   
-  </div>
-  <button id="reset-filters" 
-   class="cursor-pointer w-full bg-brand-600 hover:bg-brand-500 text-white font-bold border border-neutral-200 shadow-xs rounded-md p-1.5"
-   onclick={resetFilters}>Reset</button>
-{/if}
-
+ 
 
    <div class="space-y-4">
     <FilterListId

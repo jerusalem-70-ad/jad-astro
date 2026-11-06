@@ -1,82 +1,59 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import type { Snippet } from 'svelte';
+  import type { Snippet } from "svelte";
 
   let {
-    title = "JAD",
+    title = "",
     aside,
-    main,
-    children
+    main
   }: {
     title?: string;
     aside?: Snippet;
     main?: Snippet;
-    children?: Snippet;
-  } = $props();  
+  } = $props();
 
-   let showAside = $state(false); 
-   let mobile = $state(false);
-
-  function checkScreen() {
-    mobile = window.innerWidth < 768;
-
-    // open by default on desktop
-    if (!mobile) {
-      showAside = true;
-    }
-  }
-
-  onMount(() => {
-    checkScreen();
-    window.addEventListener("resize", checkScreen);
-
-    return () => {
-      window.removeEventListener("resize", checkScreen);
-    };
-  });
+  let showAside = $state(true);
 </script>
 
 <div
-  class="grid transition-all duration-300"
-  class:grid-cols-1={mobile}
-  class:grid-cols-[16rem_1fr]={!mobile && showAside}
-  class:grid-cols-[3rem_1fr]={!mobile && !showAside}
+  class="grid transition-all duration-300 {showAside ? 'grid-cols-[16rem_1fr]' : 'grid-cols-[3rem_1fr]'} gap-2 items-start"
 >
-  <div class="grid content-start gap-2">
+  <!-- Left column: toggle button + filter panel -->
+  <div class="grid content-start gap-0.5">
     <button
-      onclick={() => (showAside = !showAside)}  
-      class="self-start flex justify-between gap-2 mt-3 m-3 font-semibold text-lg 
-             bg-brand-650 text-white px-3 py-2 rounded-md 
-             hover:bg-brand-500 transition"
-      class:w-10={!showAside && !mobile}
-      class:grid={!showAside}
-      class:pr-5={!showAside}
+      type="button"
+      onclick={() => (showAside = !showAside)}
+      aria-expanded={showAside}
+      aria-controls="filter-aside"
+      aria-label={showAside ? "Hide filters" : "Show filters"}
+      class="m-3 mt-3 flex cursor-pointer items-center gap-2 self-start rounded-md bg-brand-650 px-3 py-2
+             text-lg font-semibold text-white transition hover:bg-brand-500
+             {showAside ? 'justify-between' : 'w-10 flex-col justify-center'}"
     >
       {#if showAside}
-        <span>Hide search</span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <span>FILTER</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
       {:else}
-      {#if mobile}
-        <span>Filter</span>
-     
-      {:else}
-       <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
         </svg>
-        <span class="[writing-mode:vertical-rl] rotate-180 whitespace-nowrap leading-none">Show search</span>        
-      {/if}
+        <span class="rotate-180 leading-none whitespace-nowrap [writing-mode:vertical-rl]">FILTER</span>
       {/if}
     </button>
 
-    {#if showAside}
+    <!-- Hidden with CSS, NOT {#if}: the search panel must stay mounted
+         because it runs the Typesense query that feeds the charts. -->
+    <div
+      id="filter-aside"
+      class="sticky top-25 max-h-[calc(100vh-7rem)]  px-3 {showAside ? '' : 'hidden'}"
+    >
       {@render aside?.()}
-    {/if}
+    </div>
   </div>
 
-  <div class="w-[calc(100%-1.5rem)] my-3 mx-auto p-3 bg-white md:border border-neutral-300 rounded-md grid grid-rows-[auto_auto_1fr_auto]">
-    <h1 class="font-bold text-brand-800 text-lg md:text-2xl px-6 py-6 border-neutral-300 border-b-2">{title}</h1>
+  <!-- Main area: min-w-0 lets this grid item shrink instead of overflowing -->
+ 
+    
     {@render main?.()}
-  </div>
 </div>
