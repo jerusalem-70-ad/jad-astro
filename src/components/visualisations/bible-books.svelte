@@ -13,7 +13,7 @@ let container: HTMLDivElement;
 let chart: echarts.ECharts | null = null;
 let pieData: { name: string; value: number }[] = [];
 let passageCount = 0;
-
+ export let mode: "card" | "featured" = "featured";
     // Prepare chartdata from passages slim version.json
  $: {
     const passagesJson =
@@ -43,7 +43,17 @@ let passageCount = 0;
    
     onMount(() => {
     chart = echarts.init(container);
-    chart.setOption(getPieChartOption([]));
+    chart.setOption(getPieChartOption([], "references", 0, mode));
+
+     if (mode === "featured") {
+      chart.on("click", (params: any) => {
+        if (params.data) {
+          window.location.href = withBasePath(
+          `/advanced-search?JAD-temp[hierarchicalMenu][biblical_ref_lvl0][0]=${params.data.name}`
+        );
+        }
+      });
+    }
 
      const resize = () => chart?.resize();
   window.addEventListener("resize", resize);
@@ -56,38 +66,35 @@ let passageCount = 0;
       }
     });
 
-    const resizeHandler = () => chart?.resize();
-    window.addEventListener("resize", resizeHandler);
+    const ro = new ResizeObserver(() => chart?.resize());
+    ro.observe(container);
 
     return () => {
-      window.removeEventListener("resize", resizeHandler);
+      ro.disconnect();
       chart?.dispose();
     };
   });
 
-  // Update chart when data changes
   $: if (chart) {
-    chart.setOption(getPieChartOption(pieData, "references", passageCount));
-
-}
+    chart.setOption(getPieChartOption(pieData, "references", passageCount, mode));
+  }
 
 </script>
-<div class="grid gap-2 p-3">
-<GraphContainer>
-<GraphTitle title="Bible books references" 
-what="Pie chart for distribution of bible references accross works."
-how = "Explore how frequently individual books of the Bible are cited across the passages. 
-NB: Multiple references to the same biblical book within a single passage are counted as one. 
-NB: One passage can have references to multiple Bible books. 
-Hence using filter 'Biblical references = Lk' will show passages with Lk references, 
-and the number of references to other books found as well in these passages."
-questions="Which bible books are cited most in Sermons / in particular work? Which bible books 
-cites a particular author?"/>
+<div class="bg-white border rounded-md shadow-sm p-4">
+
+  <GraphTitle {mode} title="Biblical references" 
+  what="Pie chart for distribution of bible references accross works."
+  how = "Explore how frequently individual books of the Bible are cited across the passages. 
+  NB: Multiple references to the same biblical book within a single passage are counted as one. 
+  NB: One passage can have references to multiple Bible books. 
+  Hence using filter 'Biblical references = Lk' will show passages with Lk references, 
+  and the number of references to other books found as well in these passages."
+  questions="Which bible books are cited most in Sermons / in particular work? Which bible books 
+  cites a particular author?"/>
  
   <div
         id="bible-piechart" bind:this={container}
-        class="w-full h-[900px]"
+        class={mode === "featured" ? "w-full h-225": "h-40 w-full"}
     >
   </div>
- </GraphContainer>
 </div>

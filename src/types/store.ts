@@ -1,3 +1,5 @@
+import { writable } from "svelte/store";
+
 export type FilterOperator = "AND" | "OR";
 
 export interface Filters {
@@ -10,6 +12,7 @@ export interface Filters {
   lit_ref: string[];
   bibl_ref: string[];
   manuscripts: string[];
+  rec_id: string[];
 
   query: string;
 
@@ -25,3 +28,14 @@ export interface Filters {
     manuscripts: FilterOperator;
   };
 }
+
+export type ListKey = {
+  [K in keyof Filters]: Filters[K] extends string[] ? K : never;
+}[keyof Filters];
+
+export type OperatorKey = keyof Filters["operators"];
+import type { Graph } from "@/types/index";
+
+export const selectedJadId = writable<string | null>(null);
+export const filteredIds = writable<Set<string>>(new Set());
+export const dataPassagesGraph = writable<Graph>({ nodes: [], links: [] });

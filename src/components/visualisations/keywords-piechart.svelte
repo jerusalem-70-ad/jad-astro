@@ -8,6 +8,7 @@ import { filteredIds } from "@/stores/jad_store.ts";
 import GraphContainer from "@/components/visualisations/graph-container.svelte"
 import GraphTitle from "@/components/visualisations/graph-title.svelte"
 import {getPieChartOption} from "@/components/visualisations/helpers.ts"
+ export let mode: "card" | "featured" = "featured";
 
 let container: HTMLDivElement; 
 let chart: echarts.ECharts | null = null;
@@ -56,18 +57,21 @@ $: {
 
 onMount(() => {
   chart = echarts.init(container);
-  chart.setOption(getPieChartOption([]));
-  
+ chart.setOption(getPieChartOption([], "keywords", 0, mode));
+  // clickable pies only as feature
+ if (mode === "featured") {
+      chart.on("click", (params: any) => {
+        if (params.data) {
+          window.location.href = withBasePath(
+          `/advanced-search?JAD-temp[hierarchicalMenu][biblical_ref_lvl0][0]=${params.data.name}`
+        );
+        }
+      });
+    }
+
   const resize = () => chart?.resize();
   window.addEventListener("resize", resize);
   
-  chart.on("click", (params: any) => {
-    if (params.data) {
-      window.location.href = withBasePath(
-        `/advanced-search?JAD-temp[refinementList][keywords.label][0]=${params.data.name}`
-      );
-    }
-  });
 
    return () => {
     window.removeEventListener("resize", resize);
@@ -76,15 +80,15 @@ onMount(() => {
 });
 
 $: if (chart) {
-  chart.setOption(getPieChartOption(pieData, "keywords", passageCount));
+  chart.setOption(getPieChartOption(pieData, "keywords", passageCount, mode));
 }
 
 
 
 </script>
-<div class="grid gap-2 p-3 ">
-  <GraphContainer>
-    <GraphTitle title="Keywords accross Passages" 
+<div class="bg-white border rounded-md shadow-sm p-4">
+
+    <GraphTitle {mode} title="Keywords accross Passages" 
     what = "This pie chart visualizes the 
     distribution of keywords across all recorded passages 
             in the database."
@@ -96,7 +100,7 @@ $: if (chart) {
       <div
         id="keywords-piechart"
         bind:this={container}
-        class="w-full h-[900px]"
+        class={mode === "featured" ? "w-full h-225": "h-40 w-full"}
+
       ></div>
-  </GraphContainer>  
 </div>

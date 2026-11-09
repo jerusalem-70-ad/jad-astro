@@ -2,7 +2,7 @@
 import FilterList from "@/components/search/filter.svelte";
 import FilterListId from "@/components/search/filter-id.svelte";
 import FilterConnectedness from "@/components/search/filter-connectedness.svelte";
-import { filters, defaultFilters } from "@/stores/jad_store.js";
+import { filters } from "@/stores/jad_store.js";
 
 import {
   runSearch,
@@ -13,6 +13,19 @@ import {
 
 import Info from '@lucide/svelte/icons/info';
 import X from '@lucide/svelte/icons/x';
+
+import type { Filters, ListKey, OperatorKey } from "@/types/store";
+
+type FacetCount = { value: string; count: number };
+type FacetResponse =
+  | { facet_counts?: { field_name: string; counts: FacetCount[] }[] }
+  | null
+  | undefined;
+
+type CountMap = Record<string, number>;
+
+// Cast once, in one place, instead of at every use
+const FIELDS = Object.keys(FIELD_MAP) as ListKey[];
 
 let dialog: HTMLDialogElement;
 
@@ -32,9 +45,7 @@ let dialog: HTMLDialogElement;
     }
   }
 
-function resetFilters() {
-  filters.set(structuredClone(defaultFilters));
-}
+
 interface FacetItem {
   name: string;
   count: number;
@@ -51,27 +62,21 @@ let allLitRef: FacetItem[] = [];
 let allBiblRef: FacetItem[] = [];
 let allManuscripts: FacetItem[] = [];
 
-let authorCounts = {};
-let workCounts = {};
-let genreCounts = {};
-let keywordCounts = {};
-let placeCounts = {};
-let centuryCounts = {};
-let litRefCounts = {};
-let biblRefCounts = {};
-let manuscriptCounts = {};
+let authorCounts: CountMap = {};
+let workCounts: CountMap = {};
+let genreCounts: CountMap = {};
+let keywordCounts: CountMap = {};
+let placeCounts: CountMap = {};
+let centuryCounts: CountMap = {};
+let litRefCounts: CountMap = {};
+let biblRefCounts: CountMap = {};
+let manuscriptCounts: CountMap = {};
 
 let searchToken = 0;
 
- $: activeFilters = Object.entries($filters)
-    .filter(([key, value]) =>
-      key !== "operators" &&
-      key !== "query" &&
-      Array.isArray(value) &&
-      value.length > 0
-    );
+ 
 // async function to start typsense query
-async function updateSearch(currentFilters) {
+async function updateSearch(currentFilters : Filters) {
 
   const token = ++searchToken;
 
@@ -81,34 +86,22 @@ async function updateSearch(currentFilters) {
   if (token !== searchToken || !res) return;
 
   // facet responses
- const facetResponses = {};
+ const facetResponses: Partial<Record<ListKey, FacetResponse>> = {};
 
 // default: use main response
-for (const field of Object.keys(FIELD_MAP)) {
+for (const field of FIELDS) {
   facetResponses[field] = res;
 }
 
 // build only the queries we actually need
-const facetPromises = Object.keys(FIELD_MAP)
-  .filter(field => {
-    const operator =
-      currentFilters.operators?.[field] ?? "OR";
-
-    return (
-      operator === "OR" &&
-      (currentFilters[field]?.length ?? 0) > 0
-    );
+const facetPromises = FIELDS
+  .filter((field) => {
+    const operator = currentFilters.operators[field as OperatorKey] ?? "OR";
+    return operator === "OR" && currentFilters[field]?.length > 0;
   })
-  .map(async field => {
-
-    const facetResult = await searchTypesense(
-      removeFilter(currentFilters, field)
-    );
-
-    return {
-      field,
-      response: facetResult?.response ?? res
-    };
+  .map(async (field) => {
+    const facetResult = await searchTypesense(removeFilter(currentFilters, field));
+    return { field, response: facetResult?.response ?? res };
   });
 
 const facetResults = await Promise.all(facetPromises);
@@ -119,30 +112,17 @@ for (const { field, response } of facetResults) {
 
   if (token !== searchToken) return;
 
-  function getFacet(response, name) {
-    const facets = response?.facet_counts ?? [];
+  function getFacet(response: FacetResponse, name: string): FacetCount[] {
+  return response?.facet_counts?.find((f) => f.field_name === name)?.counts ?? [];
+}
 
-    return (
-      facets.find(f => f.field_name === name)?.counts
-      ?? []
-    );
-  }
+function mapFacet(response: FacetResponse, name: string): FacetItem[] {
+  return getFacet(response, name).map((c) => ({ name: c.value, count: c.count }));
+}
 
-  function mapFacet(response, name) {
-    return getFacet(response, name).map(c => ({
-      name: c.value,
-      count: c.count
-    }));
-  }
-
-  function facetCountsFrom(response, name) {
-    return Object.fromEntries(
-      getFacet(response, name).map(c => [
-        c.value,
-        c.count
-      ])
-    );
-  }
+function facetCountsFrom(response: FacetResponse, name: string): CountMap {
+  return Object.fromEntries(getFacet(response, name).map((c) => [c.value, c.count]));
+}
 
   // ---------- MASTER LISTS ----------
 
@@ -269,7 +249,7 @@ $: updateSearch($filters);
 <div class="space-y-2">
   <button id="filter-info" onclick={handleDialog} class="flex w-full cursor-help gap-2 justify-center items-center py-2 text-lg font-bold border border-neutral-200 shadow-xs rounded-md p-2 bg-brand-400 text-white">
     <h2>How to</h2>
-      <Info class="font-light cursor-pointer"></Info>
+      <Info></Info>
   </button>
   <dialog bind:this={dialog} onclick={handleBackdropClick} class="border border-brand-600 rounded-md max-w-1/2">
     <h1 class="font-semibold text-lg bg-brand-600/90 text-white p-5 prose">How to use the filters?</h1>

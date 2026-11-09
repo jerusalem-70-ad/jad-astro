@@ -1,63 +1,98 @@
-// helpers.ts
 import type { EChartsOption } from "echarts";
 
-type PieDataItem = {
-  name: string;
-  value: number;
-};
 type HeatMapData = {
   centuries: string[];
   items: string[];
   values: [number, number, number][]; // [xIndex, yIndex, value]
 };
 
+type PieDataItem = { name: string; value: number };
 type PieChartValueType = "passages" | "works" | "references" | "keywords";
+export type PieMode = "card" | "featured";
+
+// The "Showing N genres from M works" text, now shared by the chart title (featured)
+// and the Svelte card markup (card), so both always say the same thing.
+export function getPieSummary(
+  pieData: PieDataItem[],
+  valueType: PieChartValueType = "passages",
+): string {
+  const total = pieData.reduce((sum, item) => sum + item.value, 0);
+  const categories = pieData.length;
+
+  switch (valueType) {
+    case "keywords":
+      return `Showing ${categories} keywords`;
+    case "works":
+      return `Showing ${categories} genres from ${total} works`;
+    case "references":
+      return `Showing ${categories} references with ${total} instances`;
+    default:
+      return `Showing ${categories} categories`;
+  }
+}
 
 export function getPieChartOption(
   pieData: PieDataItem[],
   valueType: PieChartValueType = "passages",
   allFilteredPassages: number = 0,
+  mode: PieMode = "featured",
 ): EChartsOption {
-  const total = pieData.reduce((sum, item) => sum + item.value, 0);
-  const categories = pieData.length;
+  // Used by both modes
+  const tooltipFormatter = (params: any) =>
+    `<strong>${params.data.name}</strong><br/>
+     <span>${valueType === "works" ? "Works" : "Passages"}: ${params.data.value}</span>
+     <span> (${params.percent}%)</span>`;
+
+  // ---------- CARD MODE: just the pie, tooltip on hover ----------
+  if (mode === "card") {
+    return {
+      tooltip: {
+        trigger: "item",
+        textStyle: { fontSize: 12 },
+        formatter: tooltipFormatter,
+        appendToBody: true, // render outside the small card, so it is not clipped
+        position: "left", // the cards are on the right edge, so open to the left
+      },
+      series: [
+        {
+          type: "pie",
+          radius: "85%",
+          center: ["50%", "50%"],
+          data: pieData,
+          label: { show: false },
+          labelLine: { show: false },
+          emphasis: {
+            label: { show: false },
+            itemStyle: { shadowBlur: 6, shadowColor: "rgba(0, 0, 0, 0.4)" },
+          },
+        },
+      ],
+      animation: false,
+    };
+  }
+
+  // ---------- FEATURED MODE: full options legend toolbox etc ----------
   return {
     title: {
-      subtext:
-        valueType === "keywords"
-          ? `Showing ${categories} keywords || total filtered passages: ${allFilteredPassages}`
-          : valueType === "works"
-            ? `Showing ${categories} genres from ${total} works || total filtered passages: ${allFilteredPassages}`
-            : valueType === "references"
-              ? `Showing ${categories} references with ${total} instances || total filtered passages: ${allFilteredPassages}`
-              : `Showing ${categories} categories || total filtered passages: ${allFilteredPassages}`,
+      subtext: `${getPieSummary(pieData, valueType)} || total filtered passages: ${allFilteredPassages}`,
       left: "center",
-      subtextStyle: {
-        fontSize: 16,
-        color: "#364153",
-        fontWeight: 500,
-      },
+      subtextStyle: { fontSize: 16, color: "#364153", fontWeight: 500 },
     },
     tooltip: {
       trigger: "item",
       textStyle: { fontSize: 12 },
-      formatter: function (params: any) {
-        return `<strong>${params.data.name}</strong><br/>
-                        <span>${valueType === "works" ? "Works" : "Passages"}: ${params.data.value}</span>
-                        <span> (${params.percent}%)</span>`;
-      },
+      formatter: tooltipFormatter,
     },
-
     legend: {
       orient: "horizontal",
       type: "scroll",
       right: 10,
       top: "bottom",
-      formatter: function (name: string) {
+      formatter: (name: string) => {
         const item = pieData.find((d) => d.name === name);
         return item ? `${name} (${item.value})` : name;
       },
     },
-
     series: [
       {
         type: "pie",
@@ -72,27 +107,16 @@ export function getPieChartOption(
         },
       },
     ],
-
     media: [
       {
         query: { maxWidth: 600 },
         option: {
-          legend: {
-            orient: "horizontal",
-            left: "center",
-            top: "bottom",
-          },
-          series: [
-            {
-              radius: "50%",
-            },
-          ],
+          legend: { orient: "horizontal", left: "center", top: "bottom" },
+          series: [{ radius: "50%" }],
         },
       },
     ],
-
     animation: false,
-
     toolbox: {
       show: true,
       orient: "vertical",

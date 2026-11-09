@@ -8,6 +8,7 @@ import GraphContainer from "@/components/visualisations/graph-container.svelte"
 import GraphTitle from "@/components/visualisations/graph-title.svelte";
 import {getPieChartOption} from "@/components/visualisations/helpers.ts"
 
+export let mode: "card" | "featured" = "featured";
 let container: HTMLDivElement; 
 let chart: echarts.ECharts | null = null;
 let pieData: { name: string; value: number }[] = [];
@@ -35,18 +36,20 @@ passageCount = passagesJson.length
 
 onMount(() => {
   chart = echarts.init(container);
-  chart.setOption(getPieChartOption([]));
-  
-  const resize = () => chart?.resize();
-  window.addEventListener("resize", resize);
-  
- chart.on("click", function (params: any) {
+  chart.setOption(getPieChartOption([], "references", 0, mode));
+
+   if (mode === "featured") {
+      chart.on("click", (params: any) => {
         if (params.data) {
-            window.location.href = withBasePath(
+          window.location.href = withBasePath(
             `/advanced-search?JAD-temp[refinementList][liturgical_references.value][0]=${params.data.name}`
             );
         }
-        });
+      });
+    }
+  const resize = () => chart?.resize();
+  window.addEventListener("resize", resize);
+  
 
    return () => {
     window.removeEventListener("resize", resize);
@@ -55,7 +58,7 @@ onMount(() => {
 });
 
 $: if (chart) {
-  chart.setOption(getPieChartOption(pieData, "references", passageCount));
+  chart.setOption(getPieChartOption(pieData, "references", passageCount, mode));
 }
 
 
@@ -63,9 +66,9 @@ $: if (chart) {
 
 </script>
 
-<div class="grid gap-2 p-3 ">
-<GraphContainer>
-<GraphTitle title="Liturgical references" what = "Explore the distribution of passages accross the liturgical year."
+<div class="bg-white border rounded-md shadow-sm p-4">
+
+  <GraphTitle {mode} title="Liturgical references" what = "Explore the distribution of passages accross the liturgical year."
 how="Multiple references to the same liturgical occassion within a single passage are counted as one.
 Select a segment to see the results in the advanced search."
 why="Search for patterns and dependencies between liturgical occasions and keywords / authors / places ... "
@@ -73,8 +76,8 @@ questions="When was a particular theme (e.g. keyword 'Martyrdom') discussed?"/>
    
     <div
         id="liturgical-piechart" bind:this={container}
-        class="w-full h-[900px]"
+        class={mode === "featured" ? "w-full h-225": "h-40 w-full"}
+
     >
   </div>
-  </GraphContainer>
 </div>

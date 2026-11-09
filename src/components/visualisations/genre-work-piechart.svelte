@@ -5,7 +5,6 @@ import { onMount } from "svelte";
   import { withBasePath } from "@/lib/withBasePath";
   import passages from "@/content/data/passagesForGraphs.json";
 import { filteredIds } from "@/stores/jad_store.ts";
-import GraphContainer from "@/components/visualisations/graph-container.svelte"
 import GraphTitle from "@/components/visualisations/graph-title.svelte"
 import {getPieChartOption} from "@/components/visualisations/helpers.ts"
 
@@ -54,40 +53,38 @@ pieData = Array.from(genreCounts, ([name, value]) => ({
 // console.log("genreCounts", genreCounts);
 // console.log("pieData", pieData);
 }
-
 onMount(() => {
-  chart = echarts.init(container);
+    chart = echarts.init(container);
+    chart.setOption(getPieChartOption([], "works", 0, mode));
 
-chart.setOption(getPieChartOption([]));
-  
+    // Only in featured mode. In a card the click should bubble up to the
+    // <button> in VizArea, which promotes the card to the center.
+    if (mode === "featured") {
+      chart.on("click", (params: any) => {
+        if (params.data) {
+          window.location.href = withBasePath(
+            `/advanced-search?JAD-temp[refinementList][work.genre][0]=${params.data.name}`
+          );
+        }
+      });
+    }
 
-chart.on("click", (params: any) => {
-  if (params.data) {
-    window.location.href = withBasePath(
-      `/advanced-search?JAD-temp[refinementList][work.genre][0]=${params.data.name}`
-    );
+    const ro = new ResizeObserver(() => chart?.resize());
+    ro.observe(container);
+
+    return () => {
+      ro.disconnect();
+      chart?.dispose();
+    };
+  });
+
+  $: if (chart) {
+    chart.setOption(getPieChartOption(pieData, "works", passageCount, mode));
   }
-});
-
-const resize = () => chart?.resize();
-window.addEventListener("resize", resize);
-
-   return () => {
-    window.removeEventListener("resize", resize);
-    chart?.dispose();
-  };
-});
-
-$: if (chart) {
-  chart.setOption(getPieChartOption(pieData, "works", passageCount));
-}
-
-
 </script>
 
 
-
-    <GraphContainer>
+   <div class="bg-white border rounded-md shadow-sm p-4">
        <GraphTitle {mode} title="Genre Distribution accross Works" 
   what = "Pie chart for the 
   distribution of genres across works."
@@ -98,5 +95,4 @@ $: if (chart) {
   where a particular keyword occurs?"
   />
       <div bind:this={container} class={mode === "featured" ? "w-full h-225": "h-40 w-full"}></div>
-    </GraphContainer>
- 
+   </div>

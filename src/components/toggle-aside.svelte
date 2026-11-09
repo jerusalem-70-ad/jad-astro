@@ -4,11 +4,12 @@
   let {
     title = "",
     aside,
-    main
+    main, children
   }: {
     title?: string;
     aside?: Snippet;
     main?: Snippet;
+    children? : Snippet
   } = $props();
 
   let showAside = $state(true);
@@ -18,7 +19,7 @@
   class="grid transition-all duration-300 {showAside ? 'grid-cols-[16rem_1fr]' : 'grid-cols-[3rem_1fr]'} gap-2 items-start"
 >
   <!-- Left column: toggle button + filter panel -->
-  <div class="grid content-start gap-0.5">
+  <div class="sticky top-25 grid content-start gap-0.5">
     <button
       type="button"
       onclick={() => (showAside = !showAside)}
@@ -35,10 +36,12 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
         </svg>
       {:else}
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-        <span class="rotate-180 leading-none whitespace-nowrap [writing-mode:vertical-rl]">FILTER</span>
+        <div class="h-[calc(100vh-9rem)]">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+          <span class="rotate-180 leading-none whitespace-nowrap [writing-mode:vertical-rl]">FILTER</span>
+        </div>
       {/if}
     </button>
 
@@ -46,7 +49,7 @@
          because it runs the Typesense query that feeds the charts. -->
     <div
       id="filter-aside"
-      class="sticky top-25 max-h-[calc(100vh-7rem)]  px-3 {showAside ? '' : 'hidden'}"
+      class="sticky top-25 max-h-[calc(100vh-9rem)] overflow-y-auto px-3 {showAside ? '' : 'hidden'}"
     >
       {@render aside?.()}
     </div>

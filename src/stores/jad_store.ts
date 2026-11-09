@@ -1,11 +1,14 @@
 import { writable } from "svelte/store";
 import type { Filters } from "@/types/store";
 
-export const selectedJadId = writable(null);
+import type { GraphNode, GraphLink } from "@/types/index";
 
-export const filteredIds = writable(new Set());
-
-export const dataPassagesGraph = writable({
+export const selectedJadId = writable<string | null>(null);
+export const filteredIds = writable<Set<string>>(new Set());
+export const dataPassagesGraph = writable<{
+  nodes: GraphNode[];
+  links: GraphLink[];
+}>({
   nodes: [],
   links: [],
 });
@@ -20,6 +23,7 @@ export const defaultFilters: Filters = {
   lit_ref: [],
   bibl_ref: [],
   manuscripts: [],
+  rec_id: [],
   query: "",
   operators: {
     authors: "OR",
