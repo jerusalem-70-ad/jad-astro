@@ -15,6 +15,8 @@ import type { LayoutNode } from "@/lib/graph/initializeLayout";
   import { renderGraph, updateGraph } from "@/lib/graph/render";
   import { getLineageSet } from "@/lib/graph/lineage";
 
+import ChartNetwork from "@lucide/svelte/icons/chart-network";
+
   export let mode: "card" | "featured" = "featured";
 
   // JSON imports are typed from their content, so tell TS what they really are
@@ -269,6 +271,7 @@ svg.on("dblclick", (event: MouseEvent) => {
   <div class="bg-white border rounded-md shadow-sm p-4">
     <GraphTitle {mode} title="Chronological graph" what="..." how="..." why="..." questions="..." />
     <p class="text-xs text-neutral-600">Showing {allFilteredNodes} from {totalPassages} passages</p>
+      <ChartNetwork class="m-auto h-24 w-24 text-brand-650" aria-hidden="true" />
   </div>
 {:else}
   <div class="max-h-[calc(100vh-12rem)] overflow-y-auto rounded-md border bg-white p-4 shadow-sm">

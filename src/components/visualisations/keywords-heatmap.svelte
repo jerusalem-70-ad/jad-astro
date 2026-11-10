@@ -6,7 +6,6 @@ import { filteredIds } from "@/stores/jad_store.ts";
 
 import { withBasePath } from "@/lib/withBasePath";
 import GraphContainer from "@/components/visualisations/graph-container.svelte"
-import GraphTitle from "@/components/visualisations/graph-title.svelte";
 import { getHeatMapOption } from "@/components/visualisations/helpers.ts";
 
 let container: HTMLDivElement;
@@ -122,13 +121,20 @@ const keywordsArray = allowedKeywords
 onMount(() => {
   chart = echarts.init(container);
 
-  const resizeHandler = () => chart?.resize();
-  window.addEventListener("resize", resizeHandler);
 
   chart.on("click", handleClick);
+  // Re-fit the chart whenever the container's size changes
+  // (aside toggled, window resized, layout shifted...)
+  let frame: number;
+  const observer = new ResizeObserver(() => {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => chart?.resize());
+  });
+  observer.observe(container);
 
   return () => {
-    window.removeEventListener("resize", resizeHandler);
+    cancelAnimationFrame(frame);
+    observer.disconnect();
     chart?.dispose();
   };
 });
@@ -150,45 +156,9 @@ function handleClick(params: any) {
     `/advanced-search?JAD-temp[refinementList][keywords.label][0]=${encodeURIComponent(ref)}`
   );
 };
-const modes = [
-  { value: "absolute", label: "Absolute numbers", hint: "Number of passages per keyword." },
-  { value: "relative", label: "% per century", hint: "Percentage of passages per century." }
-];
+
 </script>
 
-<div class="grid gap-2 p-3">
-<GraphContainer>
-  <GraphTitle title="Keywords Heat Map" 
-  what="Distribution of keywords across centuries. Taken into account are keywords with 
-  at least 10 occurrences in total."
-  how="The color intensity represents frequency. There are two counting modes: absolute shows the 
-  absolute number of passages in which each keyword appears; relative shows the percentage of all 
-  passages in the respective century where the keyword is detected (e.g. in the 3rd c. there is 1 
- passage related to Antichrist - absolute; this make in relative numbers 14 % of all pasages from that century)."
-  questions="When was Anti-Judaism most prominent?"
-  why="Allows patterns and trends to be easily identified over time." />
-  <!--  // change the mode between absolute and relative frequency -->
- <div class="flex justify-end">
-  <div class="inline-flex rounded-md shadow-sm" role="group" aria-label="Counting mode">
-    {#each modes as m}
-      <button
-        type="button"
-        on:click={() => (mode = m.value)}
-        aria-pressed={mode === m.value}
-        title={m.hint}
-        class="px-3 py-1 font-semibold first:rounded-l-md last:rounded-r-md
-          {mode === m.value
-            ? 'bg-brand-700 text-white'
-            : 'bg-brand-600/60 text-white hover:bg-brand-500'}"
-      >
-        {m.label}
-      </button>
-    {/each}
-  </div>
-</div>
-  <div
-    bind:this={container}
-    class="w-full h-[900px]"
-  ></div>
-  </GraphContainer>
+<div class="relative bg-white border rounded-md shadow-sm w-full min-w-0 h-225 overflow-hidden">
+  <div bind:this={container} class="absolute inset-0"></div>
 </div>

@@ -1,0 +1,33 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<div class="grid-cols-[3fr_1fr] gap-4 text-neutral-800 min-w-3/4 md:grid text-sm">
+  <details class="group self-start rounded-md border border-neutral-300 bg-white shadow">
+    <summary
+      class="flex items-center gap-2 cursor-pointer list-none bg-brand-400/80 px-5 py-3 text-lg font-semibold text-white md:text-xl"
+    >
+      <Icon
+        class="inline-flex size-6 transition-transform duration-200 group-open:rotate-90"
+        aria-hidden="true"
+        name="lucide:circle-chevron-right"
+      /> <span>About this chart</span>
+    </summary>
+
+   <slot name="about"/>
+  </details>
+
+  <details class="group min-w-125 self-start rounded-md border border-neutral-300 bg-white shadow">
+    <summary
+      class="flex items-center gap-2 cursor-pointer list-none bg-brand-400/80 px-5 py-3 text-lg font-semibold text-white md:text-xl"
+    >
+      <Icon
+        class="inline-flex size-6 transition-transform duration-200 group-open:rotate-90"
+        aria-hidden="true"
+        name="lucide:circle-chevron-right"
+      /> <span>How to use</span>
+    </summary>
+
+    <slot name="howTo"/>
+  </details>
+</div>

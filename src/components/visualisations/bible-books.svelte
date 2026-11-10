@@ -6,7 +6,6 @@ import { onMount} from "svelte";
   import {NOVA_VULGATA_ORDER} from "@/lib/search/utils.js";
 import { filteredIds } from "@/stores/jad_store.ts";
 import GraphTitle from "@/components/visualisations/graph-title.svelte";
-import GraphContainer from "@/components/visualisations/graph-container.svelte"
 import {getPieChartOption} from "@/components/visualisations/helpers.ts"
 
 let container: HTMLDivElement; 
@@ -58,13 +57,7 @@ let passageCount = 0;
      const resize = () => chart?.resize();
   window.addEventListener("resize", resize);
 
-    chart.on("click", (params: any) => {
-      if (params.data) {
-       window.location.href = withBasePath(
-          `/advanced-search?JAD-temp[hierarchicalMenu][biblical_ref_lvl0][0]=${params.data.name}`
-        );
-      }
-    });
+  
 
     const ro = new ResizeObserver(() => chart?.resize());
     ro.observe(container);

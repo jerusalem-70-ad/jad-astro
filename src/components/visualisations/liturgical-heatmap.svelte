@@ -5,8 +5,6 @@ import passages from "@/content/data/passagesForGraphs.json";
 import { filteredIds } from "@/stores/jad_store.ts";
 
 import { withBasePath } from "@/lib/withBasePath";
-import GraphContainer from "@/components/visualisations/graph-container.svelte"
-import GraphTitle from "@/components/visualisations/graph-title.svelte";
 import { getHeatMapOption } from "@/components/visualisations/helpers.ts";
 
 import row_liturgical_references from "@/content/row/liturgical_references.json"
@@ -125,17 +123,23 @@ const refsArray = orderedRefNames.filter(name => litRefSet.has(name));
 onMount(() => {
   chart = echarts.init(container);
 
-  const resizeHandler = () => chart?.resize();
-  window.addEventListener("resize", resizeHandler);
 
   chart.on("click", handleClick);
+  // Re-fit the chart whenever the container's size changes
+  // (aside toggled, window resized, layout shifted...)
+  let frame: number;
+  const observer = new ResizeObserver(() => {
+    cancelAnimationFrame(frame);
+    frame = requestAnimationFrame(() => chart?.resize());
+  });
+  observer.observe(container);
 
   return () => {
-    window.removeEventListener("resize", resizeHandler);
+    cancelAnimationFrame(frame);
+    observer.disconnect();
     chart?.dispose();
   };
 });
-
 // get updates 
 
 $: if (chart) {
@@ -153,49 +157,8 @@ function handleClick(params: any) {
     `/advanced-search?JAD-temp[refinementList][liturgical_references.value][0]=${encodeURIComponent(ref)}`
   );
 };
-const modes = [
-  { value: "absolute", label: "Absolute numbers", hint: "Number of passages per feast." },
-  { value: "relative", label: "% per century", hint: "Percentage of passages per century." }
-];
 </script>
 
-<div class="grid gap-2 p-3">
-<GraphContainer>
-  <GraphTitle title="Liturgical Feasts Heat Map" 
-  what="Some passages, mainly
-  those from liturgical texts such as sermons, are tied to one particular feast. The heat map shows
-  how many passages relate to each feast. The x-axis lists the feasts in calendar order, the y-axis
-  the centuries. A passage is placed in the century (or centuries) in which its source work was
-  written, and under the feast it was composed for. A passage whose work is dated to two centuries is counted in both."
-  how="The color intensity represents frequency. There are two counting modes: absolute shows the
-  number of passages related to a feast; relative shows the percentage of all passages in the
-  respective century that relate to this feast (e.g. in the 9th c. there are 2 passages related to 
-  Easter - absolute; these make in relative numbers 0,5 % of all pasages from the 9th c.). 
-  "
-  questions="At what moment in the liturgical year | For what liturgical occasion were most passages written?"
-  why="Allows patterns and trends to be easily identified over time." />
-  <!--  // change the mode between absolute and relative frequency -->
-  <div class="flex justify-end">
-  <div class="inline-flex rounded-md shadow-sm" role="group" aria-label="Counting mode">
-    {#each modes as m}
-      <button
-        type="button"
-        on:click={() => (mode = m.value)}
-        aria-pressed={mode === m.value}
-        title={m.hint}
-        class="px-3 py-1 font-semibold first:rounded-l-md last:rounded-r-md
-          {mode === m.value
-            ? 'bg-brand-700 text-white'
-            : 'bg-brand-600/60 text-white hover:bg-brand-500'}"
-      >
-        {m.label}
-      </button>
-    {/each}
-  </div>
-</div>
-  <div
-    bind:this={container}
-    class="w-full h-225"
-  ></div>
-  </GraphContainer>
+<div class="relative bg-white border rounded-md shadow-sm w-full min-w-0 h-225 overflow-hidden">
+  <div bind:this={container} class="absolute inset-0"></div>
 </div>

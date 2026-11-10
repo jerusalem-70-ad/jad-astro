@@ -147,7 +147,7 @@ export function getHeatMapOption(
   return {
     title: {
       subtext: `Showing ${total} items || total filtered passages: ${allFilteredPassages}`,
-      left: "left",
+      left: "20",
       textStyle: { fontSize: 14 },
     },
     tooltip: {
@@ -163,7 +163,7 @@ export function getHeatMapOption(
       top: 70,
       bottom: 70,
       left: 20,
-      right: 60,
+      right: 40,
       containLabel: true,
     },
     xAxis: {
