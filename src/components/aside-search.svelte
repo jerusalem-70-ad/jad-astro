@@ -153,7 +153,7 @@ let dialog: HTMLDialogElement;
     }),
 
       infiniteHits({
-        container: container.querySelector("#hits"),
+        container: container.querySelector("#hits") ?? "#hits",
         templates: {
           item(hit, { html }) {
              const title = hit.position_in_work
@@ -205,13 +205,20 @@ let dialog: HTMLDialogElement;
 
     //  only active when graph mode is on
     if (enableGraph) {
-       container.addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-id]");
-      if (!btn) return;
+      container.addEventListener("click", (e: MouseEvent) => {
+        const target = e.target;
+        if (!(target instanceof Element)) return;
 
-      selectedJadId.set(btn.dataset.id);
-      console.log("Selected Jad ID for graph:", btn.dataset.id);
-    });}
+        const btn = target.closest("[data-id]");
+        if (!(btn instanceof HTMLElement)) return;
+
+        const jadId = btn.dataset.id;
+        if (!jadId) return;
+
+        selectedJadId.set(jadId);
+        console.log("Selected Jad ID for graph:", jadId);
+      });
+    }
   }
   onMount(() => {
     initSearch();
@@ -234,12 +241,11 @@ let dialog: HTMLDialogElement;
   }
 </script>
 
-<div id="aside-search-container" bind:this={container} class="w-11/12 mx-auto md:w-64 h-full">
-    <aside
+    <aside bind:this={container} 
       class="min-h-full bg-white border-r border-brand-200"
       >
       <div class="flex gap-2 justify-center items-center py-2">
-        <h2 class="text-xl font-bold text-brand-800 text-center pt-2 font-mono">Quick Search</h2>
+        <h2 class="text-xl font-bold text-brand-800 text-center pt-2 font-mono">How To</h2>
             <button id="filter-info" onclick={handleDialog}>
               <Info class="text-brand-800 font-light cursor-pointer"></Info>
             </button>
@@ -286,4 +292,3 @@ let dialog: HTMLDialogElement;
         <div bind:this={hits} id="hits" class="px-4 overflow-y-auto"></div>
       </section>
     </aside>
-  </div>

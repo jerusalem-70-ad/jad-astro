@@ -1,12 +1,12 @@
 ---
 import PageLayout from "@/layouts/page-layout.astro"
 import Dialog from "@/components/visualisations/dialog-card.svelte"
-import ToggleAside from '@/components/toggle-aside.svelte';
+import ToggleAside from '@/components/toggle-aside.astro';
 import SearchPanel from "@/components/search/search-panel.svelte"
 import VizArea from "@/components/visualisations/viz-area.svelte"
 ---
 <PageLayout title="Dashboard">
-    <ToggleAside client:only="svelte" >
+    <ToggleAside>
         <SearchPanel slot="aside" client:only="svelte" />
         <VizArea slot="main" client:only="svelte" />    
     </ToggleAside>
