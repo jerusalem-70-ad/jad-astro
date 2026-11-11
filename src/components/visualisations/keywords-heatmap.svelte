@@ -162,23 +162,22 @@ const modes = [
 </script>
 
 <div class="relative bg-white border rounded-md shadow-sm w-full min-w-0 h-225 overflow-hidden">
- <div class="absolute inset-0 grid">
-   <div class="justify-self-end p-2" role="group" aria-label="Counting mode">
-      {#each modes as m}
-        <button
-          type="button"
-          on:click={() => (mode = m.value)}
-          aria-pressed={mode === m.value}
-          title={m.hint}
-          class="px-3 py-1 font-semibold first:rounded-l-md last:rounded-r-md shadow-sm
-            {mode === m.value
-              ? 'bg-brand-700 text-white'
-              : 'bg-brand-600/60 text-white hover:bg-brand-500'}"
-        >
-          {m.label}
-        </button>
-      {/each}
-    </div>
-    <div bind:this={container} class="w-full h-225"></div>
- </div>
+  <div class="justify-self-end p-2" role="group" aria-label="Counting mode">
+     {#each modes as m}
+       <button
+         type="button"
+         on:click={() => (mode = m.value)}
+         aria-pressed={mode === m.value}
+         title={m.hint}
+         class="px-3 py-1 font-semibold first:rounded-l-md last:rounded-r-md shadow-sm
+           {mode === m.value
+             ? 'bg-brand-700 text-white'
+             : 'bg-brand-600/60 text-white hover:bg-brand-500'}"
+       >
+         {m.label}
+       </button>
+     {/each}
+   </div>
+ 
+    <div bind:this={container} class="absolute w-full h-225"></div>
 </div>
