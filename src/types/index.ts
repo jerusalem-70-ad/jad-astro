@@ -267,7 +267,7 @@ export interface Passage {
   keywords: KeywordRef[];
   part_of_cluster: Ref[];
   authority_discourse?: number;
-  liturgical_references: Ref[];
+  liturgical_references: LiturgRef[];
   occurrence_found_in: ValueItem[];
   edition_link?: string | null;
   source_passage: SourcePass[];
@@ -299,6 +299,14 @@ export interface Ref {
   value: string;
   order?: string;
   description?: string;
+}
+
+export interface LiturgRef {
+  id: number;
+  jad_id: string;
+  value: string;
+  description: string;
+  date: string;
 }
 
 export interface KeywordRef {
