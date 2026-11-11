@@ -105,14 +105,6 @@ export const passagesTableConfig = {
         formatter: "textarea",
       },
       {
-        title: "Keywords",
-        resizable: true,
-        field: "keywords",
-        responsive: 3,
-        widthGrow: 2,
-        minWidth: 150,
-      },
-      {
         title: "TPQ",
         headerTooltip: "Terminus post quem",
         resizable: true,
