@@ -305,7 +305,7 @@ export interface LiturgRef {
   id: number;
   jad_id: string;
   value: string;
-  description: string;
+  description: string | null;
   date: string;
 }
 
