@@ -562,6 +562,7 @@ const passagesForGraphs = passagesPlusWorks.map((p) => {
     liturgical_references: p.liturgical_references.map((ref) => ref.value),
     keywords: p.keywords.map((k) => k.value),
     biblical_ref_lvl0: p.biblical_ref_lvl0,
+    cluster: p.part_of_cluster.map((c) => c.value),
   };
 });
 

@@ -482,7 +482,7 @@ search.addWidgets(
       showMore: true,
       showMoreLimit: 50,
       limit: 10,
-      searchablePlaceholder: "e.g. Saint-Cher",
+      searchablePlaceholder: "e.g. Hrabanus",
       // customized template to get the original names using authorLookupMap
       templates: {
         item: (item) => {

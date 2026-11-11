@@ -1,7 +1,7 @@
 import type { EChartsOption } from "echarts";
 
 type HeatMapData = {
-  centuries: string[];
+  references: string[];
   items: string[];
   values: [number, number, number][]; // [xIndex, yIndex, value]
 };
@@ -155,7 +155,7 @@ export function getHeatMapOption(
       position: "top",
       formatter: (params: any) => {
         const [x, y, value] = params.data;
-        const century = heatMapData.centuries[y];
+        const century = heatMapData.references[y];
         const item = heatMapData.items[x];
         return `${item}<br/>${century}: ${value}`;
       },
@@ -178,7 +178,7 @@ export function getHeatMapOption(
     },
     yAxis: {
       type: "category",
-      data: heatMapData.centuries.map((c) => c),
+      data: heatMapData.references.map((c) => c),
       splitArea: { show: true },
       axisLabel: {
         interval: 0, // show all labels

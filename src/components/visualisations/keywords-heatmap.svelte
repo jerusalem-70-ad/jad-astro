@@ -11,8 +11,8 @@ let container: HTMLDivElement;
 let chart: echarts.ECharts | null = null;
 
 // final structured data for chart
-let heatmapData: {centuries: string[], items: string[], values: [number, number, number][]} = {
-  centuries:[],
+let heatmapData: {references: string[], items: string[], values: [number, number, number][]} = {
+  references:[],
   items: [],
   values: []
 };
@@ -110,7 +110,7 @@ const keywordsArray = allowedKeywords
   });
 
   heatmapData = {
-    centuries: centuriesArray,
+    references: centuriesArray,
     items: keywordsArray,
     values
   };
