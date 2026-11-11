@@ -143,7 +143,7 @@ onMount(() => {
 // get updates 
 
 $: if (chart) {
-  chart.setOption(getHeatMapOption(heatmapData, passageCount), true);
+  chart.setOption(getHeatMapOption(heatmapData, "feasts", passageCount), true);
 }
 
 function handleClick(params: any) {
@@ -157,8 +157,30 @@ function handleClick(params: any) {
     `/advanced-search?JAD-temp[refinementList][liturgical_references.value][0]=${encodeURIComponent(ref)}`
   );
 };
+const modes = [
+  { value: "absolute", label: "Absolute numbers", hint: "Number of passages per keyword." },
+  { value: "relative", label: "% per century", hint: "Percentage of passages per century." }
+];
 </script>
 
 <div class="relative bg-white border rounded-md shadow-sm w-full min-w-0 h-225 overflow-hidden">
-  <div bind:this={container} class="absolute inset-0"></div>
+ <div class="absolute inset-0 grid">
+   <div class="justify-self-end p-2" role="group" aria-label="Counting mode">
+      {#each modes as m}
+        <button
+          type="button"
+          on:click={() => (mode = m.value)}
+          aria-pressed={mode === m.value}
+          title={m.hint}
+          class="px-3 py-1 font-semibold first:rounded-l-md last:rounded-r-md shadow-sm
+            {mode === m.value
+              ? 'bg-brand-700 text-white'
+              : 'bg-brand-600/60 text-white hover:bg-brand-500'}"
+        >
+          {m.label}
+        </button>
+      {/each}
+    </div>
+    <div bind:this={container} class="w-full h-225"></div>
+ </div>
 </div>

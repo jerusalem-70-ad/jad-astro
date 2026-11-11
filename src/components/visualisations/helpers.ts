@@ -139,6 +139,7 @@ export function getPieChartOption(
 
 export function getHeatMapOption(
   heatMapData: HeatMapData,
+  valueType: string = "passages",
   allFilteredPassages: number = 0,
 ): EChartsOption {
   const values = Array.isArray(heatMapData.values) ? heatMapData.values : [];
@@ -146,7 +147,7 @@ export function getHeatMapOption(
   const total = heatMapData.items.length;
   return {
     title: {
-      subtext: `Showing ${total} items || total filtered passages: ${allFilteredPassages}`,
+      subtext: `Showing ${total} ${valueType} || total filtered passages: ${allFilteredPassages}`,
       left: "20",
       textStyle: { fontSize: 14 },
     },
