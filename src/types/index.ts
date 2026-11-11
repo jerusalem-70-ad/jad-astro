@@ -21,8 +21,8 @@ export interface GraphNode {
 
 // Link between nodes
 export interface GraphLink {
-  source: string;
-  target: string;
+  source: number;
+  target: number;
   depth?: number;
   type?: string;
 }
