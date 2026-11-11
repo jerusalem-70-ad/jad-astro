@@ -5,7 +5,6 @@ import passages from "@/content/data/passagesForGraphs.json";
 import { filteredIds } from "@/stores/jad_store.ts";
 
 import { withBasePath } from "@/lib/withBasePath";
-import GraphContainer from "@/components/visualisations/graph-container.svelte"
 import { getHeatMapOption } from "@/components/visualisations/helpers.ts";
 
 let container: HTMLDivElement;
