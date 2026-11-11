@@ -1,0 +1,63 @@
+---
+import LiturgicalHeatmap from "@/components/visualisations/liturgical-heatmap.svelte"
+import PageLayout from "@/layouts/page-layout.astro";
+import CheckItem from "@/components/ui/check-list-item.astro"
+import About from "@/components/ui/chart-about.astro"
+import ToggleAside from '@/components/toggle-aside.astro';
+import Article from '@/components/article.astro';
+import SearchPanel from "@/components/search/search-panel.svelte"
+
+
+---
+ <PageLayout title="Keywords Heatmap">
+   <ToggleAside>
+        <SearchPanel slot="aside" client:only="svelte" />
+    <Article wide={true} slot="main" mainTitle="Liturgical Heatmap">
+     <div class="grid gap-2">
+         
+         <About>
+           <ul slot="about" class="px-5 py-2 list-inside list-disc space-y-1">
+            <li>
+                Some passages, mainly those from liturgical texts such as sermons, are <span class="font-semibold">tied to one particular feast</span>. This heat map shows how many
+                passages relate to each feast. Passages that are not linked to a feast are not included.
+            </li>
+            <li>
+                How to read the axes: the x-axis lists the
+                feasts in calendar order. The y-axis is the time axis, with one row per century. Each cell shows
+                how many passages were composed for a feast and come from works written in that century.
+            </li>
+            <li>
+                How the data is counted: works are
+                dated to a range, not to a single year, so a
+                passage whose work is dated to two centuries is counted in both. For this reason, the numbers
+                in the map can add up to more than the total number of passages.
+            </li>
+            <li>
+                Color intensity: the darker the cell, the
+                higher the value. Empty (light) cells mean that no passage for that feast comes from that
+                century.
+            </li>
+            <li>
+               There are two counting modes: <span class="font-semibold">Absolute</span> shows the number 
+               of passages related to a feast. <span class="font-semibold">Percentage per century</span> shows the share 
+               of <span class="font-semibold">all</span> passages from that century that relate to the feast. 
+               Example: in the 4th c. there are only 2 passages relating to a feast: 1 for 'Christmas' 
+               one for 'In epiphania domini' (absolute numbers), which make each 0,7 % of all passages 
+               from the 4th c. (relative numbers). Use the percentage mode to compare centuries fairly,
+                because some centuries have far more passages than others.
+            </li>
+            </ul>
+
+            <ul slot="howTo" class="px-5 py-2 list-inside space-y-1">
+            <CheckItem>Look at the heat map as a whole to spot patterns, for example feasts that are popular in only one century.</CheckItem>
+            <CheckItem>Use the side search panel to narrow the selection, e.g. to a particular place or keyword included in the passage.</CheckItem>
+            <CheckItem>Switch the mode between 'absolute' and 'percentage per century' to compare raw numbers with relative frequency.</CheckItem>
+            <CheckItem>Hover over a cell for details, and click it to open the passages.</CheckItem>
+            </ul>
+         </About>
+         
+          <LiturgicalHeatmap client:load />
+     </div>
+    </Article>
+  </ToggleAside>
+</PageLayout>

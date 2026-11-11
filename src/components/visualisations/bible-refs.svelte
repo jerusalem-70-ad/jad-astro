@@ -164,7 +164,7 @@ const xMax = $derived(points.length ? Math.ceil(Math.max(...points.map((p) => p.
 // derived: the chart option
 const option = $derived({
     tooltip: {
-        formatter: (params) => {
+        formatter: (params: any) => {
             const d = params.data;
             return `<strong>(#${d.jad_id.split("__")[1]}) ${d.title}</strong>
             <br/>Bible citation: ${selectedBook} ${selectedChapter},${d.verse}
@@ -249,7 +249,10 @@ onMount(() => {
     }
   });
   chart.on("datazoom", () => {
-  const dz = chart!.getOption().dataZoom[0]; // index 0 = the x-axis zoom
+  const dz = (chart!.getOption().dataZoom as Array<{
+    startValue: number;
+    endValue: number;
+  }>)[0]; // index 0 = the x-axis zoom
   const start = Math.round(dz.startValue);
   const end = Math.max(Math.round(dz.endValue), start + 1); // keep at least 1 verse visible
 

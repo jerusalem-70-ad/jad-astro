@@ -1,437 +1,285 @@
-<!-- component for the major network visualisation in dashboard
- uses store for communicating filtered jad_id of nodes (coming from thee filters in search panel) -->
-<!-- most of the render and simulation in lib/graph ; here the interaction functions, initialisation with svelte onMount  -->
 <script lang="ts">
-import GraphContainer from "@/components/visualisations/graph-container.svelte"
-import GraphTitle from "@/components/visualisations/graph-title.svelte";
-import { filteredIds, selectedJadId, dataPassagesGraph } from "@/stores/jad_store.ts";
+  import GraphTitle from "@/components/visualisations/graph-title.svelte";
+  import { filteredIds, selectedJadId, dataPassagesGraph } from "@/stores/jad_store.ts";
+  import { onMount } from "svelte";
+  import * as d3 from "d3";
+  import graphData from "@/content/data/passage-graph.json";
+  import type { Graph } from "@/types/index";
+import type { GraphLink, GraphHandles, GraphNode } from "@/types/graph";
+import type { PreparedGraph } from "@/lib/graph/prepareGraph";
+import type { LayoutNode } from "@/lib/graph/initializeLayout";
 
-import { onMount } from "svelte";
-import * as d3 from "d3";
+  import { prepareGraph, getSourceNodeJadId, getTargetNodeJadId } from "@/lib/graph/prepareGraph";
+  import { initializeLayout } from "@/lib/graph/initializeLayout";
+  import { createSimulation } from "@/lib/graph/simulation";
+  import { renderGraph, updateGraph } from "@/lib/graph/render";
+  import { getLineageSet } from "@/lib/graph/lineage";
 
-import graphData from "@/content/data/passage-graph.json";
+import ChartNetwork from "@lucide/svelte/icons/chart-network";
 
-$dataPassagesGraph = graphData;
+  export let mode: "card" | "featured" = "featured";
 
-import { prepareGraph,getSourceNodeJadId, getTargetNodeJadId } from "@/lib/graph/prepareGraph";
-import { initializeLayout } from "@/lib/graph/initializeLayout";
-import { createSimulation } from "@/lib/graph/simulation";
-import { renderGraph, updateGraph } from "@/lib/graph/render";
-import {getLineageSet} from "@/lib/graph/lineage"
-let container: HTMLDivElement;
-let prepared;
-let graph;
-let tooltip;
-let tooltipEl: SVGCircleElement | null = null;
+  // JSON imports are typed from their content, so tell TS what they really are
+const data = graphData as unknown as Graph;   // replaces the RawGraph cast
+$dataPassagesGraph = data;
 
-let activeFilterIds: Set<string> | null = null;
+  let container: HTMLDivElement;
+  let prepared: PreparedGraph | null = null;
+  let graph: GraphHandles | null = null;
+  let tooltip: d3.Selection<HTMLDivElement, unknown, null, undefined> | null = null;
+  let tooltipEl: SVGCircleElement | null = null;
+  let lockedNode: LayoutNode | null = null;
+  let activeFilterIds: Set<string> | null = null;
 
-let allNodes = graphData.nodes
-let allFilteredNodes: number = 0
-let totalPassages: number = graphData.nodes.length
-let falseDatePassages : number = 0
-    // state for nodes when clicked to introduce a freeze state
-let lockedNode = null;
+  const totalPassages = data.nodes.length;
+  let allFilteredNodes = totalPassages; // shows everything when no filter is active
+  let falseDatePassages = 0;
 
-const nodeColor: string = "#6f2009"
-const filteredColor: string ="#86705f"
-const highlightNodeColor : string = "#a92d03"
-const neighborNode : string = "#e5894a"
-const linkColor: string = "#0b331b"
+  const nodeColor = "#6f2009";
+  const filteredColor = "#86705f";
+  const highlightNodeColor = "#a92d03";
+  const neighborNode = "#e5894a";
+  const linkColor = "#0b331b";
 
-// helpers for interaction
-//highlight on mouse over
-function highlightNode(d) {
+  function lineageOf(d: { jad_id: string }): Set<string> {
+    return getLineageSet(d.jad_id, prepared!.ancestorsMap, prepared!.descendantsMap);
+  }
 
-  const allRelatives = getLineageSet(
-    d.jad_id,
-    prepared.ancestorsMap,
-    prepared.descendantsMap
-  );
+  function highlightNode(d: LayoutNode) {
+    if (!graph || !prepared) return;
+    const relatives = lineageOf(d);
 
-  graph.nodeSelection
-    .attr("fill", (n) => {
-      if (n.id === d.id) {
-        return highlightNodeColor;
-      }
-      if (allRelatives.has(n.jad_id)) {
-        return neighborNode;
-      }
-      if (activeFilterIds) {
-        return activeFilterIds.has(n.jad_id)
-          ? filteredColor
-          : "#ccc";
-      }
-      return "#ccc";
-    })
-    .attr("opacity", (n) => {
-      if (
-        n.id === d.id ||
-        allRelatives.has(n.jad_id)
-      ) {
-        return 1;
-      }
-      if (activeFilterIds) {
-        return activeFilterIds.has(n.jad_id)
-          ? 1
-          : 0.15;
-      }
-      return 0.2;
-    })
+    graph.nodeSelection
+      .attr("fill", (n) => {
+        if (n.id === d.id) return highlightNodeColor;
+        if (relatives.has(n.jad_id)) return neighborNode;
+        if (activeFilterIds) return activeFilterIds.has(n.jad_id) ? filteredColor : "#ccc";
+        return "#ccc";
+      })
+      .attr("opacity", (n) => {
+        if (n.id === d.id || relatives.has(n.jad_id)) return 1;
+        if (activeFilterIds) return activeFilterIds.has(n.jad_id) ? 1 : 0.15;
+        return 0.2;
+      });
 
-  graph.linkSelection
-    .attr("stroke", (l) => {
+    const inLineage = (l: GraphLink) =>
+      relatives.has(getSourceNodeJadId(l)) && relatives.has(getTargetNodeJadId(l));
 
-      const s = getSourceNodeJadId(l);
-      const t = getTargetNodeJadId(l);
+    graph.linkSelection
+      .attr("stroke", (l) => (inLineage(l) ? linkColor : "#ccc"))
+      .attr("stroke-opacity", (l) => (inLineage(l) ? 1 : 0.2));
 
-      return (
-        allRelatives.has(s) &&
-        allRelatives.has(t)
-      )
-        ? linkColor
-        : "#ccc";
-    })
-    .attr("stroke-opacity", (l) => {
-
-      const s = getSourceNodeJadId(l);
-      const t = getTargetNodeJadId(l);
-
-      return (
-        allRelatives.has(s) &&
-        allRelatives.has(t)
-      )
-        ? 1
-        : 0.2;
-    });
     graph.labelSelection
-      .attr("opacity", n => allRelatives.has(n.jad_id) ? 1 : 0)
-        .each(function(n){
-        if (allRelatives.has(n.jad_id)) this.parentNode.appendChild(this);
-        });
-}
+      .attr("opacity", (n) => (relatives.has(n.jad_id) ? 1 : 0))
+      .each(function (n) {
+        if (relatives.has(n.jad_id)) this.parentNode?.appendChild(this);
+      });
+  }
 
-// need to get the position based on node
-function updateTooltipPosition() {
-  if (!tooltipEl) return;
+  function updateTooltipPosition() {
+    if (!tooltipEl || !tooltip) return;
+    const rect = tooltipEl.getBoundingClientRect();
+    tooltip
+      .style("left", rect.x + rect.width / 2 + 5 + "px")
+      .style("top", rect.y + "px");
+  }
 
-  const rect = tooltipEl.getBoundingClientRect();
-
-  tooltip
-    .style("left", rect.x + rect.width / 2 + 5 + "px")
-    .style("top", rect.y + "px");
-}
-
-// show tooltip on hover, click, neighbours and links remain
-function showNodeTooltip(d, el) {
-const neighbors = getLineageSet(
-  d.jad_id,
-  prepared.ancestorsMap,
-  prepared.descendantsMap
-);
-  tooltip
-    .style("visibility", "visible")
-    .html(`
+  function showNodeTooltip(d: LayoutNode, el: SVGCircleElement) {
+    if (!tooltip || !prepared) return;
+    const neighbors = lineageOf(d);
+    tooltip.style("visibility", "visible").html(`
       <strong>#${d.id} ${d.name ?? ""}</strong><br/>
       <span>Year: ${d.dateNotBefore} - ${d.dateNotAfter}</span><br/>
       <span>Immediately related passages: ${d.degree || 0}</span><br/>
-      <span>All related passages: ${neighbors.size -1 || 0}</span>
-
+      <span>All related passages: ${neighbors.size - 1 || 0}</span>
     `);
-
-  tooltipEl = el;
-
-  updateTooltipPosition();
-
-  highlightNode(d);
-}
-
-function showNodeDetails(d, el) {
-    tooltip
-.style("visibility", "hidden");
-  highlightNode(d);
-
- const neighbors = getLineageSet(
-  d.jad_id,
-  prepared.ancestorsMap,
-  prepared.descendantsMap
-);
-
-  graph.labelSelection
-  .attr("opacity", n => {
-    const isNeighbor = neighbors.has(n.jad_id);
-    const isSelf = n.jad_id === d.jad_id;
-    return (isNeighbor || isSelf) ? 1 : 0;
-  })
-  .each(function(n){
-    if (neighbors.has(n.jad_id) || n.jad_id === d.jad_id) {
-      this.parentNode.appendChild(this);
-    }
-  });
-}
-
-function highlightNodesByIds(ids: Set<string>) {
-
-  graph.nodeSelection
-    .attr("fill", d => ids.has(d.jad_id) ? highlightNodeColor : nodeColor)
-    .attr("opacity", d => ids.has(d.jad_id) ? 1 : 0.15);
-// highlight only links which have both source and target in the ids set
-  graph.linkSelection
-    .attr("stroke", l =>
-      ids.has(getTargetNodeJadId(l)) && ids.has(getSourceNodeJadId(l))
-        ? linkColor
-        : "#ccc"
-    )
-    .attr("stroke-opacity", l =>
-      ids.has(getTargetNodeJadId(l)) && ids.has(getSourceNodeJadId(l))
-        ? 0.5
-        : 0.1
-    );
-}
-
-function resetHighlight(){
- 
-  graph.nodeSelection
-    .attr("fill", nodeColor)
-    .attr("opacity",1)
-    
-  graph.linkSelection
-    .attr("stroke", linkColor)
-    .attr("stroke-opacity",1);
-  if (activeFilterIds) {
-    highlightNodesByIds(activeFilterIds);
-  }
-}
-
-onMount(() => {
-  // --------------------
-  // graph preparation
-  // --------------------
-
-  prepared = prepareGraph(graphData);
-
-  // --------------------
-  // dimensions
-  // --------------------
-
-  const width = container.clientWidth;
-const height = width;
-  // --------------------
-  // scales
-  // --------------------
-
-  const rScale = d3.scaleSqrt()
-    .domain([0, d3.max(prepared.nodes, d => d.degree) ?? 0])
-    .range([4, 14]);
-
-  const yScale = d3.scaleLinear()
-    .domain([50, 1600])
-    .range([height - 5, 0]);
-
-  
-
-  // --------------------
-  // initialize layout
-  // --------------------
-
-  initializeLayout(
-    prepared.nodes,
-    width,
-    yScale
-  );
-
-  // --------------------
-  // create svg
-  // --------------------
-
-  const svg = d3
-    .select(container)
-    .append("svg")
-    .attr("viewBox", `0 0 ${width} ${height}`)
-    .style("width", "100%")
-    .style("height", "auto");
-
-  // --------------------
-  // render graph
-  // --------------------
-
-  graph = renderGraph({
-    svg,
-    nodes: prepared.nodes,
-    links: graphData.links,
-    width,
-    yScale,
-    rScale,
-    nodeColor: "#6f2009"
-  });
-
-  const zoom = d3
-  .zoom()
-  .scaleExtent([0.5, 8])
-  .on("zoom", (event) => {
-
-    graph.canvas.attr(
-    "transform",
-    `translate(40,0) ${event.transform}`
-);
-    const newY =
-      event.transform.rescaleY(yScale);
-
-    graph.leftAxisGroup.call(
-  d3.axisRight(newY).ticks(10).tickFormat(d3.format("d"))
-);
-
-graph.rightAxisGroup.call(
-  d3.axisLeft(newY).ticks(10).tickFormat(d3.format("d"))
-);
-  });
-
-svg.call(zoom as any);
-
-  // draw the tooltip
-  tooltip = d3
-  .select(container)
-  .append("div")
-  .style("position", "fixed")
-  .style("background", "white")
-  .style("border", "1px solid #999")
-  .style("padding", "4px 6px")
-  .style("font-size", "12px")
-  .style("pointer-events", "none")
-  .style("visibility", "hidden");
-
-  // interactions:
-  // on hover highlight node + related, show node's tooltip and relateds labels
-graph.nodeSelection
-  .on("mouseenter", function(event, d) {
-    // allow tooltip only for locked node and its relatives
-    if (lockedNode) {
-      const allowedNodes = Array.from(
-        getLineageSet(
-          lockedNode.jad_id,
-          prepared.ancestorsMap,
-          prepared.descendantsMap
-        )
-      );
-      if (allowedNodes.includes(d.jad_id)) {
-        showNodeTooltip(d, this);
-      
-      } 
-      return; // stop here when locked
-    } else {
-    showNodeTooltip(d, this);}
-  })
-  .on("mouseleave", () => {
-    if (lockedNode) {
-       showNodeDetails(lockedNode, this);;
-    }   // when locked return to locked nodes details and relatives
-else {
-      resetHighlight();
-      tooltip.style("visibility", "hidden");
-      graph.labelSelection.attr("opacity", 0);
-    }
-    
-  });
-let downTime = 0;
-
-// on click - 
-  graph.nodeSelection
-  .on("pointerdown", (event) => {
-    event.stopPropagation();
-    downTime = Date.now();
-  })
-  .on("pointerup", function(event, d) {
-  event.stopPropagation();
-
-  if (Date.now() - downTime < 200) {
-    if (!lockedNode) {
-      // first click → lock
-      lockedNode = d;
-      showNodeDetails(d, this);
-      //showNodeTooltip(d, this)
-
-    } else if (lockedNode.jad_id === d.jad_id) {
-      // second click on SAME node → open dialog
-      selectedJadId.set(d.jad_id);
-
-    } else {
-      // clicked a DIFFERENT node → switch lock
-      lockedNode = d;
-      showNodeDetails(d, this);
-    }
+    tooltipEl = el;
+    updateTooltipPosition();
+    highlightNode(d);
   }
 
-  // reset on click outside node
-  svg.on("pointerdown", () => {
-  lockedNode = null;   //  unlock
+  function showNodeDetails(d: LayoutNode) {
+    if (!graph || !prepared) return;
+    tooltip?.style("visibility", "hidden");
+    highlightNode(d); // this already shows the labels of the lineage
+  }
 
-  resetHighlight();
-  tooltip.style("visibility", "hidden");
-  graph.labelSelection.attr("opacity", 0);
-});
-});
-  
-  // --------------------
-  // simulation
-  // --------------------
+  function highlightNodesByIds(ids: Set<string>) {
+    if (!graph) return;
+    graph.nodeSelection
+      .attr("fill", (d) => (ids.has(d.jad_id) ? highlightNodeColor : nodeColor))
+      .attr("opacity", (d) => (ids.has(d.jad_id) ? 1 : 0.15));
 
-  const simulation = createSimulation(
-    prepared.nodes,
-    width,
-    yScale,
-    rScale
-  );
+    const bothIn = (l: GraphLink) =>
+      ids.has(getTargetNodeJadId(l)) && ids.has(getSourceNodeJadId(l));
 
-  simulation.on("tick", () => {
-    updateGraph({
-      ...graph,
-      nodes: prepared.nodes,
-      links: graphData.links,
-      nodeById: prepared.nodeById,
-      
+    graph.linkSelection
+      .attr("stroke", (l) => (bothIn(l) ? linkColor : "#ccc"))
+      .attr("stroke-opacity", (l) => (bothIn(l) ? 0.5 : 0.1));
+  }
+
+  function resetHighlight() {
+    if (!graph) return;
+    graph.nodeSelection.attr("fill", nodeColor).attr("opacity", 1);
+    graph.linkSelection.attr("stroke", linkColor).attr("stroke-opacity", 1);
+    if (activeFilterIds) highlightNodesByIds(activeFilterIds);
+  }
+
+  onMount(() => {
+    // The count in the title is needed in BOTH modes, so subscribe first
+    const unsubscribe = filteredIds.subscribe((ids) => {
+      if (!ids || ids.size === 0 || ids.size === totalPassages) {
+        activeFilterIds = null;
+        allFilteredNodes = totalPassages;
+        falseDatePassages = 0;
+        if (graph) resetHighlight();
+        return;
+      }
+      activeFilterIds = ids;
+      allFilteredNodes = data.nodes.filter((n) => ids.has(n.jad_id)).length;
+      falseDatePassages = ids.size - allFilteredNodes;
+      highlightNodesByIds(ids);
     });
-     updateTooltipPosition();
+
+    // Card: only title and count. No d3, no simulation.
+    if (mode === "card") return unsubscribe;
+
+    // ---------- featured: build the graph ----------
+    prepared = prepareGraph(data);
+    const width = container.clientWidth;
+    const height = width;
+
+    const rScale = d3
+      .scaleSqrt()
+      .domain([0, d3.max(prepared.nodes, (d) => d.degree ?? 0) ?? 0])
+      .range([4, 14]);
+
+    const yScale = d3.scaleLinear().domain([50, 1600]).range([height - 5, 0]);
+
+    initializeLayout(prepared.nodes, width, yScale);
+    const layoutNodes = initializeLayout(prepared.nodes, width, yScale);
+    const layoutById = new Map(layoutNodes.map((n) => [n.jad_id, n]));
+
+    const svg = d3
+      .select(container)
+      .append("svg")
+      .attr("viewBox", `0 0 ${width} ${height}`)
+      .style("width", "100%")
+      .style("height", "auto");
+
+
+  graph = renderGraph({ svg, nodes: layoutNodes, links: data.links, width, yScale, rScale, nodeColor });
+
+
+    const zoom = d3
+      .zoom<SVGSVGElement, unknown>()
+      .scaleExtent([0.5, 8])
+      .on("zoom", (event: d3.D3ZoomEvent<SVGSVGElement, unknown>) => {
+        graph!.canvas.attr("transform", `translate(40,0) ${event.transform}`);
+        const newY = event.transform.rescaleY(yScale);
+        graph!.leftAxisGroup.call(d3.axisRight(newY).ticks(10).tickFormat(d3.format("d")));
+        graph!.rightAxisGroup.call(d3.axisLeft(newY).ticks(10).tickFormat(d3.format("d")));
+      });
+    svg.call(zoom);
+
+    tooltip = d3
+      .select(container)
+      .append("div")
+      .style("position", "fixed")
+      .style("background", "white")
+      .style("border", "1px solid #999")
+      .style("padding", "4px 6px")
+      .style("font-size", "12px")
+      .style("pointer-events", "none")
+      .style("visibility", "hidden");
+
+    // `function` (not an arrow) so that `this` is the DOM element
+    graph.nodeSelection
+      .on("mouseenter", function (_event, d) {
+        if (lockedNode) {
+          if (lineageOf(lockedNode).has(d.jad_id)) showNodeTooltip(d, this);
+          return;
+        }
+        showNodeTooltip(d, this);
+      })
+      .on("mouseleave", () => {
+        if (lockedNode) {
+          showNodeDetails(lockedNode);
+        } else {
+          resetHighlight();
+          tooltip?.style("visibility", "hidden");
+          graph?.labelSelection.attr("opacity", 0);
+        }
+      });
+
+    let downTime = 0;
+    graph.nodeSelection
+      .on("pointerdown", (event: PointerEvent) => {
+        event.stopPropagation();
+        downTime = Date.now();
+      })
+      .on("pointerup", (event: PointerEvent, d) => {
+        event.stopPropagation();
+        if (Date.now() - downTime >= 200) return; // a drag, not a click
+        if (lockedNode && lockedNode.jad_id === d.jad_id) {
+          selectedJadId.set(d.jad_id); // second click on the same node: open the dialog
+        } else {
+          lockedNode = d; // first click, or a different node: lock it
+          showNodeDetails(d);
+        }
+      });
+
+svg.call(zoom);
+svg.on("dblclick.zoom", null); // d3-zoom zooms in on double-click by default, so turn that off
+
+// Double-click on the background: unlock
+svg.on("dblclick", (event: MouseEvent) => {
+  // Ignore double-clicks on nodes. The second click on a node opens the dialog,
+  if ((event.target as Element).closest("circle")) return;
+
+  lockedNode = null;
+  resetHighlight();
+  tooltip?.style("visibility", "hidden");
+  graph?.labelSelection.attr("opacity", 0);
+});
+
+
+    const simulation = createSimulation(layoutNodes, width, yScale, rScale);
+    simulation.on("tick", () => {
+      updateGraph({
+        ...graph!,
+        nodes: layoutNodes,
+        links: data.links,
+        nodeById: layoutById,
+      });
+      updateTooltipPosition();
+    });
+
+    // Apply a filter that was already active before the graph existed
+    if (activeFilterIds) highlightNodesByIds(activeFilterIds);
+
+    return () => {
+      unsubscribe();
+      simulation.stop();
+      svg.remove();
+      tooltip?.remove();
+    };
   });
-
-  // connect to store
-
-  const unsubscribe = filteredIds.subscribe((ids) => {
-  if (
-    !ids ||
-    ids.size === 0 ||
-    ids.size === prepared.nodes.length
-  ) {
-    activeFilterIds = null;
-
-    //resetHighlight(graph);
-
-    return;
-  }
-
-  activeFilterIds = ids;
-
-  console.log("Graph received ids:", ids);
-  allFilteredNodes = graphData.nodes.filter(n => ids.has(n.jad_id)).length //for 'Showing ..' text
-  falseDatePassages = activeFilterIds.size - allFilteredNodes
-  highlightNodesByIds(ids);
-});
-
-});
 </script>
-<div class="grid gap-2 p-3 ">
-<GraphContainer>
-<GraphTitle title="Chronological graph" 
-what = "Displays all passages in chronological order. Node size reflects the level of connectedness, 
-while links indicate source relationships and derivative passages."
-how="Hover over a particular passage to highlight 
-its relations. Single click to freeze the graph. A second click brings you to the dialog for the detailed view page 
-of the selected passage. Combine the filters to make a selection of passages."
-why="Provides a bird's-eye view of the entire data set."
-questions="How widely used was passage X?"
-/>
-<div class="text-center p-2 text-gray-700 text-base leading-none font-medium">Showing {allFilteredNodes} from {totalPassages} passages
-   {falseDatePassages > 0 ? `[for ${falseDatePassages} passages no date to plot]` : ""}</div>
- 
-  <div id="graph-container" bind:this={container}></div>
-  </GraphContainer>
-</div>
+
+{#if mode === "card"}
+  <div class="bg-white border rounded-md shadow-sm p-4">
+    <GraphTitle {mode} title="Chronological graph" what="..." how="..." why="..." questions="..." />
+    <p class="text-xs text-neutral-600">Showing {allFilteredNodes} from {totalPassages} passages</p>
+      <ChartNetwork class="m-auto h-24 w-24 text-brand-650" aria-hidden="true" />
+  </div>
+{:else}
+  <div class="max-h-[calc(100vh-12rem)] overflow-y-auto rounded-md border bg-white p-4 shadow-sm">
+    <GraphTitle {mode} title="Chronological graph" what="..." how="..." why="..." questions="..." />
+    <div class="p-2 text-center text-base leading-none font-medium text-gray-700">
+      Showing {allFilteredNodes} from {totalPassages} passages
+      {falseDatePassages > 0 ? `[for ${falseDatePassages} passages no date to plot]` : ""}
+    </div>
+    <div id="graph-container" bind:this={container}></div>
+  </div>
+{/if}

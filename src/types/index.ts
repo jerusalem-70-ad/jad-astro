@@ -1,5 +1,6 @@
 // Node types for the transmission graph
 export type NodeType = "current" | "ancestor" | "descendant" | "regular";
+import type { PreparedNode } from "@/lib/graph/prepareGraph";
 
 // Basic node information
 export interface GraphNode {
@@ -13,14 +14,15 @@ export interface GraphNode {
   jad_id: string;
   depth: number;
   nodeType: string;
+  degree?: number;
   x: number;
   y?: number;
 }
 
 // Link between nodes
 export interface GraphLink {
-  source: number;
-  target: number;
+  source: string;
+  target: string;
   depth?: number;
   type?: string;
 }

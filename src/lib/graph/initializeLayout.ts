@@ -6,13 +6,17 @@ export type LayoutNode = PreparedNode & {
   y: number;
   x: number;
   targetY: number;
+  vy: number;
 };
 export function initializeLayout(
-  nodes: LayoutNode[],
+  nodes: PreparedNode[],
   width: number,
   yScale: ScaleLinear<number, number>,
-) {
-  nodes.forEach((d) => {
+): LayoutNode[] {
+  // The one cast: the loop below gives every node its x, y and targetY
+  const layoutNodes = nodes as LayoutNode[];
+
+  layoutNodes.forEach((d) => {
     const y1 = yScale(d.dateNotBefore ?? TIMELINE_MIN_YEAR);
     const y2 = yScale(d.dateNotAfter ?? TIMELINE_MAX_YEAR);
 
@@ -21,7 +25,9 @@ export function initializeLayout(
 
     d.x = Math.random() * width;
     d.y = minY + Math.random() * (maxY - minY);
-
     d.targetY = yScale(d.targetYear);
+    d.vy = 0;
   });
+
+  return layoutNodes;
 }

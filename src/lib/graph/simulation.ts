@@ -4,27 +4,18 @@ import type { LayoutNode } from "./initializeLayout";
 import type { ScaleLinear } from "d3";
 
 export function createSimulation(
-  nodes: Array<LayoutNode & { vy: number }>,
+  nodes: LayoutNode[],
   width: number,
   yScale: ScaleLinear<number, number>,
-
   rScale: ScaleLinear<number, number>,
 ) {
   return d3
-    .forceSimulation<LayoutNode & { vy: number }>(nodes)
-    .force(
-      "x",
-      d3.forceX<LayoutNode & { vy: number }>(width / 2).strength(0.01),
-    )
-    .force(
-      "y",
-      d3.forceY<LayoutNode & { vy: number }>((d) => d.targetY).strength(0.05),
-    )
+    .forceSimulation<LayoutNode>(nodes)
+    .force("x", d3.forceX<LayoutNode>(width / 2).strength(0.01))
+    .force("y", d3.forceY<LayoutNode>((d) => d.targetY).strength(0.05))
     .force("yBound", forceYBounded(nodes, yScale))
     .force(
       "collide",
-      d3
-        .forceCollide<LayoutNode & { vy: number }>((d) => rScale(d.degree) + 1)
-        .iterations(2),
+      d3.forceCollide<LayoutNode>((d) => rScale(d.degree) + 1).iterations(2),
     );
 }

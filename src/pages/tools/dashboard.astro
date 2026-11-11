@@ -1,37 +1,14 @@
 ---
-import SearchPanel from "@/components/search/search-panel.svelte"
 import PageLayout from "@/layouts/page-layout.astro"
-import Graph from "@/components/visualisations/ChronologicalGraph.svelte"
 import Dialog from "@/components/visualisations/dialog-card.svelte"
-import GenreWorkPieChart from "@/components/visualisations/genre-work-piechart.svelte";
-import BiblBookGraph from "@/components/visualisations/bible-books.svelte";
-import LiturgicalGraph from "@/components/visualisations/liturgical-ref.svelte";
-import KeywordsHeatmap from "@/components/visualisations/keywords-heatmap.svelte";
-import LitRefsHeatmap from "@/components/visualisations/liturgical-heatmap.svelte";
-
-import KeywordsPieChart from "@/components/visualisations/keywords-piechart.svelte";
+import ToggleAside from '@/components/toggle-aside.astro';
+import SearchPanel from "@/components/search/search-panel.svelte"
+import VizArea from "@/components/visualisations/viz-area.svelte"
 ---
 <PageLayout title="Dashboard">
-    <div class="flex h-screen w-full"> 
-        <div class="h-screen bg-brand-200/10 border-r w-80 p-3">
-            <aside class="sticky top-25 self-start">
-                <SearchPanel client:only="svelte">
-                    </SearchPanel>
-            </aside>
-        </div> 
-        <div class="grid grid-cols-[repeat(auto-fit,minmax(1000px,1fr))] overflow-auto w-full mx-auto">
-            <Graph client:only="svelte"/> 
-            <GenreWorkPieChart client:only="svelte" />
-            <BiblBookGraph client:only="svelte"/>
-            <LiturgicalGraph client:only="svelte"/>
-            <KeywordsPieChart client:only="svelte"/>
-            <div class="col-span-full">
-                <KeywordsHeatmap client:only="svelte"/>
-            </div>
-            <div class="col-span-full">
-                <LitRefsHeatmap client:only="svelte"/>
-            </div>
-        </div>     
-    </div>
-    <Dialog client:only="svelte"/>       
+    <ToggleAside>
+        <SearchPanel slot="aside" client:only="svelte" />
+        <VizArea slot="main" client:only="svelte" />    
+    </ToggleAside>
+    <Dialog client:only="svelte"/> 
 </PageLayout>

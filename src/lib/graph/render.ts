@@ -7,38 +7,13 @@ import type { Graph } from "@/types";
 import type { PreparedNode } from "./prepareGraph";
 
 interface UpdateGraphArgs {
-  nodeSelection: d3.Selection<
-    SVGCircleElement,
-    LayoutNode,
-    SVGGElement,
-    unknown
-  >;
-
-  linkSelection: d3.Selection<
-    SVGPathElement,
-    Graph["links"][number],
-    SVGGElement,
-    unknown
-  >;
-
-  labelSelection: d3.Selection<
-    SVGTextElement,
-    LayoutNode,
-    SVGGElement,
-    unknown
-  >;
-
-  yAxisGroup: d3.Selection<SVGGElement, unknown, null, undefined>;
-
+  nodeSelection: d3.Selection<SVGCircleElement, LayoutNode, any, any>;
+  linkSelection: d3.Selection<SVGPathElement, Graph["links"][number], any, any>;
+  labelSelection: d3.Selection<SVGTextElement, LayoutNode, any, any>;
   nodes: LayoutNode[];
-
   links: Graph["links"];
-
-  nodeById: Map<string, PreparedNode & { y: number }>;
-
-  yAxis: d3.Axis<number>;
+  nodeById: Map<string, LayoutNode>;
 }
-
 export function renderGraph({
   svg,
   nodes,

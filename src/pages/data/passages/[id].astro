@@ -8,6 +8,7 @@ import type { Passage } from "@/types";
 import ChronologicalTree from "@/components/visualisations/chronological-tree.astro";
 import {addItalics} from "@/lib/utils.js";
 import AsideSearch from "@/components/aside-search.svelte";
+import ToggleAside from "@/components/toggle-aside.astro"
 
 export async function getStaticPaths() {
   const paths = Object.values(passages).map((passage) => ({
@@ -59,12 +60,12 @@ const steps = [1, 2, 3];
 ---
 
 <PageLayout title=`passage #${passage.id.toString()}`>
-  <div id="main-container" class="grid grid-cols-1 md:grid-cols-[16rem_1fr] md:gap-2">
-    <div class="hidden md:block">
-      <AsideSearch client:only="svelte" transition:persist />
-    </div>
+  <ToggleAside title="SEARCH">
+  
+      <AsideSearch slot="aside" client:only="svelte" transition:persist />
+  
     <Article
-      
+      slot="main" wide={true}
       prevLink={`/data/passages/${passage.prev.id}`}
       nextLink={`/data/passages/${passage.next.id}`}
       mainTitle=`Passage #${passage.id}: ${passage.passage} `
@@ -661,7 +662,7 @@ const steps = [1, 2, 3];
         )}
       </div>
     </Article>
-  </div>
+  </ToggleAside>
 </PageLayout>
 
 <script>

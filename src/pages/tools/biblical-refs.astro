@@ -3,26 +3,18 @@ import BibleRefs from "@/components/visualisations/bible-refs.svelte"
 import passagesForBibleRefs from "@/content/data/passagesForBiblRefs.json"
 import PageLayout from "@/layouts/page-layout.astro";
 import CheckItem from "@/components/ui/check-list-item.astro"
-import { Icon } from "astro-icon/components";
+import About from "@/components/ui/chart-about.astro"
+import Article from '@/components/article.astro';
 
 
 ---
  <PageLayout title="Biblical Refs Scatter Chart">
-  <div class="m-auto w-full 3xl:px-10 py-8">
-    <div class="lg:max-w-11/12 lg:px-0 m-auto grid gap-5 md:py-8 py-2">
-      <h1 class="text-4xl font-semibold text-brand-800">
-        Biblical References Scatter Chart
-      </h1>
-     
-      <div class="md:grid grid-cols-[1fr_auto] gap-4 text-brand-900 min-w-3/4">
-     <details class="group self-start bg-white shadow border border-neutral-300 rounded-md">
-			<summary class="px-5 py-3 bg-brand-500/80 text-white font-semibold text-lg md:text-xl 
-            cursor-pointer list-none"><Icon
-				class="transition-transform duration-200 group-open:rotate-90 inline-flex size-6"
-				aria-hidden="true"
-				name="lucide:circle-chevron-right"
-			/> About this chart</summary>
-            <ul class="px-5 py-2 list-inside  list-disc space-y-1">
+    <Article wide={true} mainTitle="Biblical References Scatter Chart">
+     <div class="grid gap-2">
+
+ 
+     <About>
+        <ul slot="about" class="px-5 py-2 list-inside  list-disc space-y-1">
                 <li>
                     Biblical references (citations) occur in {passagesForBibleRefs.length} passages
                     in the database. This interactive scatter plot shows <span class="font-semibold">
@@ -50,28 +42,17 @@ import { Icon } from "astro-icon/components";
                     genres (for instance letters or poetry) are grouped together as "Other" and
                     shown in gray.
                 </li>
-            </ul>
-        </details>      
-       
-        <details class="group min-w-125 self-start bg-white shadow border border-neutral-300 rounded-md">
-			<summary class="px-5 py-3 bg-brand-500/80 text-white font-semibold text-lg md:text-xl 
-            cursor-pointer list-none">
-            <Icon
-				class="transition-transform duration-200 group-open:rotate-90 inline-flex size-6"
-				aria-hidden="true"
-				name="lucide:circle-chevron-right"
-			/> How to use</summary>
-            <ul class="px-5 py-2 list-inside space-y-1">
+        </ul>
+        <ul slot="howTo" class="px-5 py-2 list-inside space-y-1">
             <CheckItem>Select a biblical book, then a chapter.</CheckItem>
             <CheckItem>The legend lists the genres that occur in your selection.</CheckItem>
             <CheckItem>Click a genre in the legend to hide or show its passages.</CheckItem>
             <CheckItem>Hover over a dot for details, and click it to open the passage.</CheckItem>
             <CheckItem>Use the mouse wheel to zoom.</CheckItem>
         </ul>
-    </details>
-        
-        </div>
+     </About>
+     
       <BibleRefs client:load {passagesForBibleRefs}/>
     </div>
-  </div>
+</Article>
 </PageLayout>

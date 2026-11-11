@@ -1,0 +1,74 @@
+---
+const { title = "FILTER" } = Astro.props;
+---
+
+<!-- "group/aside" is a NAMED group, so it won't clash with any
+     "group" classes used inside the slot content. -->
+<div
+  data-toggle-aside
+  data-open="true"
+  class="group/aside grid grid-cols-[16rem_1fr] items-start gap-2 transition-all duration-300
+         data-[open=false]:grid-cols-[3rem_1fr]"
+>
+  <!-- Left column: toggle button + filter panel -->
+  <div class="sticky top-25 grid content-start gap-0.5">
+    <button
+      type="button"
+      data-toggle-button
+      aria-expanded="true"
+      aria-controls="filter-aside"
+      aria-label="Hide filters"
+      class="m-3 mt-3 flex cursor-pointer items-center justify-between gap-2 self-start rounded-md
+             bg-brand-650 px-3 py-2 text-lg font-semibold text-white transition hover:bg-brand-500
+             group-data-[open=false]/aside:w-10 group-data-[open=false]/aside:flex-col
+             group-data-[open=false]/aside:justify-center"
+    >
+      <!-- Shown when OPEN -->
+      <span class="contents group-data-[open=false]/aside:hidden">
+        <span>{title}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </span>
+
+      <!-- Shown when CLOSED -->
+      <div class="hidden h-[calc(100vh-9rem)] group-data-[open=false]/aside:block">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+        <span class="rotate-180 leading-none whitespace-nowrap [writing-mode:vertical-rl]">{title}</span>
+      </div>
+    </button>
+
+   
+    <div
+      id="filter-aside"
+      class="sticky top-25 max-h-[calc(100vh-9rem)] overflow-y-auto px-3
+             group-data-[open=false]/aside:hidden"
+    >
+      <slot name="aside" />
+    </div>
+  </div>
+
+  <!-- min-w-0 lets this grid item shrink instead of overflowing -->
+  <div class="min-w-0">
+    <slot name="main" />
+  </div>
+</div>
+
+<script>
+    document.addEventListener("astro:page-load", () => {
+  document.querySelectorAll("[data-toggle-aside]").forEach((root) => {
+    const button = root.querySelector("[data-toggle-button]");
+    if(!button) return
+    button.addEventListener("click", () => {
+      const isOpen = root.getAttribute("data-open") !== "false";
+      const nextOpen = !isOpen;
+
+      root.setAttribute("data-open", String(nextOpen));
+      button.setAttribute("aria-expanded", String(nextOpen));
+      button.setAttribute("aria-label", nextOpen ? "Hide filters" : "Show filters");
+    });
+  });
+})
+</script>

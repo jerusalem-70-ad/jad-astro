@@ -2,10 +2,10 @@
 import PageLayout from '@/layouts/page-layout.astro';
 import GraphDb from '@/components/graph-db.svelte'
 import AsideSearch from '@/components/aside-search.svelte';
-import ToggleAside from '@/components/toggle-aside.svelte';
+import ToggleAside from '@/components/toggle-aside.astro';
 ---
 <PageLayout title="AI Graph">
-    <ToggleAside client:only="svelte" title="AI-generated text similarity search">
+    <ToggleAside title="SEARCH Passage ID">
         <AsideSearch slot="aside" client:only="svelte" enableGraph={true} />
         <GraphDb slot="main" client:only="svelte" />
     </ToggleAside>
