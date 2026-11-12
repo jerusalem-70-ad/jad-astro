@@ -61,6 +61,7 @@ let allCentury: FacetItem[] = [];
 let allLitRef: FacetItem[] = [];
 let allBiblRef: FacetItem[] = [];
 let allManuscripts: FacetItem[] = [];
+let allClusters: FacetItem[] = [];
 
 let authorCounts: CountMap = {};
 let workCounts: CountMap = {};
@@ -71,6 +72,7 @@ let centuryCounts: CountMap = {};
 let litRefCounts: CountMap = {};
 let biblRefCounts: CountMap = {};
 let manuscriptCounts: CountMap = {};
+let clusterCounts: CountMap = {};
 
 let searchToken = 0;
 
@@ -155,6 +157,13 @@ function facetCountsFrom(response: FacetResponse, name: string): CountMap {
     ).sort((a, b) => b.count - a.count);
   }
 
+    if (allClusters.length === 0) {
+    allClusters = mapFacet(
+      res,
+      "cluster"
+    ).sort((a, b) => b.count - a.count);
+  }
+
   if (allPlace.length === 0) {
     allPlace = mapFacet(
       res,
@@ -210,6 +219,11 @@ function facetCountsFrom(response: FacetResponse, name: string): CountMap {
   keywordCounts = facetCountsFrom(
     facetResponses.keywords,
     "keywords"
+  );
+
+  clusterCounts = facetCountsFrom(
+    facetResponses.clusters,
+    "cluster"
   );
 
   placeCounts = facetCountsFrom(
@@ -313,6 +327,13 @@ $: updateSearch($filters);
           items={allKeywords}
           field="keywords"
           counts={keywordCounts}
+      />
+       <FilterList
+          title="Clusters"
+          items={allClusters}
+          field="clusters"
+          counts={clusterCounts}
+          help="Passages are thematically analysed and grouped in clusters."
       />
       <FilterList
           title="Place"

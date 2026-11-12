@@ -13,6 +13,7 @@ export interface Filters {
   bibl_ref: string[];
   manuscripts: string[];
   rec_id: string[];
+  clusters: string[];
 
   query: string;
 
@@ -26,6 +27,7 @@ export interface Filters {
     lit_ref: FilterOperator;
     bibl_ref: FilterOperator;
     manuscripts: FilterOperator;
+    clusters: FilterOperator;
   };
 }
 

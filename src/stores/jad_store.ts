@@ -24,6 +24,7 @@ export const defaultFilters: Filters = {
   bibl_ref: [],
   manuscripts: [],
   rec_id: [],
+  clusters: [],
   query: "",
   operators: {
     authors: "OR",
@@ -35,6 +36,7 @@ export const defaultFilters: Filters = {
     lit_ref: "OR",
     bibl_ref: "OR",
     manuscripts: "OR",
+    clusters: "OR",
   },
 };
 

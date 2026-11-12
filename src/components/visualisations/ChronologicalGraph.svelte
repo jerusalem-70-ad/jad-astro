@@ -269,13 +269,27 @@ svg.on("dblclick", (event: MouseEvent) => {
 
 {#if mode === "card"}
   <div class="bg-white border rounded-md shadow-sm p-4">
-    <GraphTitle {mode} title="Chronological graph" what="..." how="..." why="..." questions="..." />
+    <GraphTitle {mode} title="Chronological graph" 
+    what = "Displays all passages in chronological order. Node size reflects the level of connectedness, 
+while links indicate source relationships and derivative passages."
+how="Hover over a particular passage to highlight 
+its relations. Single click to freeze the graph. A second click brings you to the dialog for the detailed view page 
+of the selected passage. Combine the filters to make a selection of passages."
+why="Provides a bird's-eye view of the entire data set."
+questions="How widely used was passage X?" />
     <p class="text-xs text-neutral-600">Showing {allFilteredNodes} from {totalPassages} passages</p>
       <ChartNetwork class="m-auto h-24 w-24 text-brand-650" aria-hidden="true" />
   </div>
 {:else}
   <div class="max-h-[calc(100vh-12rem)] overflow-y-auto rounded-md border bg-white p-4 shadow-sm">
-    <GraphTitle {mode} title="Chronological graph" what="..." how="..." why="..." questions="..." />
+    <GraphTitle {mode} title="Chronological graph" 
+    what = "Displays all passages in chronological order. Node size reflects the level of connectedness, 
+while links indicate source relationships and derivative passages."
+how="Hover over a particular passage to highlight 
+its relations. Single click to freeze the graph. A second click brings you to the dialog for the detailed view page 
+of the selected passage. Combine the filters to make a selection of passages."
+why="Provides a bird's-eye view of the entire data set."
+questions="How widely used was passage X?" />
     <div class="p-2 text-center text-base leading-none font-medium text-gray-700">
       Showing {allFilteredNodes} from {totalPassages} passages
       {falseDatePassages > 0 ? `[for ${falseDatePassages} passages no date to plot]` : ""}

@@ -27,12 +27,13 @@ const id = title.toLowerCase().replace(/\W+/g, '-')
 <div class="text-xs border border-neutral-200 shadow-xs bg-brand-700/10 rounded-md p-2">
   <details class="group">
     <summary class="flex justify-between gap-2 font-semibold cursor-pointer uppercase">
+    <div class="flex items-center gap-2">     
       <h3 class="font-semibold">{title}</h3>
   {#if help}
       <button
         popovertarget="{id}-popover"
         style="anchor-name: --{id}"
-        class="rounded-md border border-neutral-300 px-1 py-0.5 cursor-help"
+        class="rounded-md border border-neutral-300 px-1 py-0.5 cursor-help uppercase"
       >
         Info
       </button>
@@ -60,6 +61,7 @@ const id = title.toLowerCase().replace(/\W+/g, '-')
           d="M19 9l-7 7-7-7"
         />
       </svg>
+      </div>
     </summary>
 
     <div class="mt-3 px-1">

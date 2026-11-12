@@ -12,6 +12,7 @@ export const FIELD_MAP = {
   works: "work.title",
   genres: "work.genre",
   keywords: "keywords",
+  clusters: "cluster",
   place: "work.author.place.value",
   century: "work.date.century",
   lit_ref: "liturgical_references",
@@ -20,7 +21,7 @@ export const FIELD_MAP = {
 };
 
 const FACET_FIELDS =
-  "connectedness, rec_id, work.author.name, work.title, work.genre, keywords, work.author.place.value, work.date.century, biblical_ref_lvl0, liturgical_references, manuscripts";
+  "connectedness, rec_id, work.author.name, work.title, work.genre, keywords, cluster, work.author.place.value, work.date.century, biblical_ref_lvl0, liturgical_references, manuscripts";
 
 /**
  * Main search used for results + graph updates

@@ -221,9 +221,9 @@ async function generate() {
         // normalized values for filtering
         author_search: authors.map((name) => normalizeAuthor(name)),
         author: authors.map((name) => normalizeAuthor(name)).join(","),
-        cluster: value.part_of_cluster.map((c) => c.value) || "",
+        cluster: value.part_of_cluster.map((c) => c.value) || [],
         liturgical_references:
-          value.liturgical_references.map((ref) => ref.value) || "",
+          value.liturgical_references.map((ref) => ref.value) || [],
         biblical_ref_lvl0: value.biblical_ref_lvl0 || [],
         biblical_ref_lvl1: value.biblical_ref_lvl1 || [],
         comm_bible_lvl1: value.commented_bible_lvl1,
