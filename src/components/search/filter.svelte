@@ -5,6 +5,10 @@ export let title: string;
 export let items: { name: string}[];
 export let counts: Record<string, number> = {};
 export let field: string;   // which filter field to update
+export let operatorMode: boolean = true; 
+export let help: string = ""; 
+
+const id = title.toLowerCase().replace(/\W+/g, '-')
 
 let query = "";
 let visibleCount = 5;
@@ -63,9 +67,29 @@ function showLess() {
 </script>
 
 <div class="text-xs border border-neutral-200 shadow-xs bg-brand-700/10 rounded-md p-2">
-<details>
+<details class="group">
   <summary class="flex justify-between gap-2 font-semibold cursor-pointer uppercase">
-    <h3 class="font-semibold ">{title}</h3>  
+    <div class="flex items-center gap-2">
+      <h3 class="font-semibold ">{title}</h3>
+     {#if help}
+      <button
+        popovertarget="{id}-popover"
+        style="anchor-name: --{id}"
+        class="rounded-md border border-neutral-300 px-1 py-0.5 cursor-help uppercase"
+      >
+        Info
+      </button>
+
+      <div
+        popover
+        id="{id}-popover"
+        style="position-anchor: --{id}"
+        class="[position-area:bottom_span-right] rounded-md border border-neutral-200 bg-white p-2 shadow-md normal-case"
+      >
+        {help}
+      </div>
+    {/if}
+    </div>  
     <svg
         class="w-4 h-4 text-neutral-500 group-open:rotate-180 transition-transform"
         fill="none"
@@ -133,6 +157,7 @@ function showLess() {
         </button>
       {/if}
    </div>
+   {#if operatorMode}
   <div class="flex gap-1 justify-end place-items-center">
     <span>Searching mode:</span>
     <button
@@ -158,6 +183,8 @@ function showLess() {
     AND
   </button>
   </div>
+  {/if}
   </div>
 </details>
 </div>
+

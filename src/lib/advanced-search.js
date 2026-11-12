@@ -538,7 +538,7 @@ search.addWidgets(
 
     refinementListManuscript({
       container: "#refinement-list-manuscript",
-      attribute: "manuscripts.manuscript",
+      attribute: "manuscripts",
       searchable: true,
       showMore: true,
       showMoreLimit: 50,
@@ -548,7 +548,7 @@ search.addWidgets(
 
     refinementListClusters({
       container: "#refinement-list-clusters",
-      attribute: "cluster.value",
+      attribute: "cluster",
       searchable: true,
       showMore: true,
       showMoreLimit: 50,
@@ -558,7 +558,7 @@ search.addWidgets(
 
     refinementListKeywords({
       container: "#refinement-list-keywords",
-      attribute: "keywords.label",
+      attribute: "keywords",
       searchable: true,
       showMore: true,
       showMoreLimit: 50,
@@ -567,7 +567,7 @@ search.addWidgets(
     }),
     refinementListliturgical({
       container: "#refinement-list-liturgical",
-      attribute: "liturgical_references.value",
+      attribute: "liturgical_references",
       searchable: true,
       showMore: true,
       showMoreLimit: 50,
@@ -646,23 +646,19 @@ search.addWidgets(
                       ? "Work"
                       : item.attribute === "work.genre"
                         ? "Genre"
-                        : item.attribute === "manuscripts.value"
+                        : item.attribute === "manuscripts"
                           ? "Manuscript"
                           : item.attribute === "work.date.century"
                             ? "Century"
-                            : item.attribute ===
-                                "work.institutional_context.value"
-                              ? "Institution"
-                              : item.attribute === "cluster.value"
-                                ? "Cluster"
-                                : item.attribute === "keywords.label"
-                                  ? "Keyword"
-                                  : item.attribute ===
-                                      "liturgical_references.value"
-                                    ? "Liturgy"
-                                    : item.attribute === "sources.author"
-                                      ? "Source"
-                                      : item.attribute,
+                            : item.attribute === "cluster"
+                              ? "Cluster"
+                              : item.attribute === "keywords"
+                                ? "Keyword"
+                                : item.attribute === "liturgical_references"
+                                  ? "Liturgy"
+                                  : item.attribute === "sources.author"
+                                    ? "Source"
+                                    : item.attribute,
           }));
         },
       }),

@@ -3,6 +3,9 @@
 
   export let title: string;
   export let field: string = "connectedness";
+  export let help: string = ""; 
+
+const id = title.toLowerCase().replace(/\W+/g, '-')
 
   const min = 0;
   const max = 30;
@@ -22,10 +25,27 @@
 </script>
 
 <div class="text-xs border border-neutral-200 shadow-xs bg-brand-700/10 rounded-md p-2">
-  <details>
+  <details class="group">
     <summary class="flex justify-between gap-2 font-semibold cursor-pointer uppercase">
       <h3 class="font-semibold">{title}</h3>
+  {#if help}
+      <button
+        popovertarget="{id}-popover"
+        style="anchor-name: --{id}"
+        class="rounded-md border border-neutral-300 px-1 py-0.5 cursor-help"
+      >
+        Info
+      </button>
 
+      <div
+        popover
+        id="{id}-popover"
+        style="position-anchor: --{id}"
+        class="[position-area:bottom_span-right] rounded-md border border-neutral-200 bg-white p-2 shadow-md normal-case"
+      >
+        {help}
+      </div>
+    {/if}
       <svg
         class="w-4 h-4 text-neutral-500 transition-transform"
         fill="none"

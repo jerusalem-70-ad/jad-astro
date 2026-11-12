@@ -151,7 +151,7 @@ function facetCountsFrom(response: FacetResponse, name: string): CountMap {
   if (allKeywords.length === 0) {
     allKeywords = mapFacet(
       res,
-      "keywords.label"
+      "keywords"
     ).sort((a, b) => b.count - a.count);
   }
 
@@ -172,7 +172,7 @@ function facetCountsFrom(response: FacetResponse, name: string): CountMap {
   if (allLitRef.length === 0) {
     allLitRef = mapFacet(
       res,
-      "liturgical_references.value"
+      "liturgical_references"
     ).sort((a, b) => b.count - a.count);
   }
 
@@ -186,7 +186,7 @@ function facetCountsFrom(response: FacetResponse, name: string): CountMap {
   if (allManuscripts.length === 0) {
     allManuscripts = mapFacet(
       res,
-      "manuscripts.manuscript"
+      "manuscripts"
     ).sort((a, b) => b.count - a.count);
   }
 
@@ -209,7 +209,7 @@ function facetCountsFrom(response: FacetResponse, name: string): CountMap {
 
   keywordCounts = facetCountsFrom(
     facetResponses.keywords,
-    "keywords.label"
+    "keywords"
   );
 
   placeCounts = facetCountsFrom(
@@ -224,7 +224,7 @@ function facetCountsFrom(response: FacetResponse, name: string): CountMap {
 
   litRefCounts = facetCountsFrom(
     facetResponses.lit_ref,
-    "liturgical_references.value"
+    "liturgical_references"
   );
 
   biblRefCounts = facetCountsFrom(
@@ -234,7 +234,7 @@ function facetCountsFrom(response: FacetResponse, name: string): CountMap {
 
   manuscriptCounts = facetCountsFrom(
     facetResponses.manuscripts,
-    "manuscripts.manuscript"
+    "manuscripts"
   );
 }
 
@@ -284,19 +284,20 @@ $: updateSearch($filters);
     <FilterListId
       title="Passage ID"
       field="rec_id"
-      
        />
      <FilterList
       title="Authors"
       field="authors"
       items={allAuthors}
       counts={authorCounts}
+      operatorMode={false}
        />
      
        <FilterList
       title="Works"
       field="works"
       items={allWorks}
+      operatorMode={false}
       counts={workCounts}
        />
       <FilterList
@@ -304,6 +305,8 @@ $: updateSearch($filters);
           field="genres"
           items={allGenres}
           counts={genreCounts}
+      operatorMode={false}
+
       />
       <FilterList
           title="Keywords"
@@ -315,13 +318,17 @@ $: updateSearch($filters);
           title="Place"
           items={allPlace}
           field="place"
+      operatorMode={false}
           counts={placeCounts}
+      help="Place where the work was written."
+
       />
       <FilterList
           title="Century"
           items={allCentury}
           field="century"
           counts={centuryCounts}
+        help="Century when the work was written."
      
       />
       <FilterList
@@ -329,22 +336,30 @@ $: updateSearch($filters);
           items={allLitRef}
           field="lit_ref"
           counts={litRefCounts}
+        help="References to liturgical feasts detected in the passages."
+
       />
       <FilterList
           title="Biblical References"
           items={allBiblRef}
           field="bibl_ref"
           counts={biblRefCounts}
+        help="References to Biblical texts detected in the passages."
+
       />
       <FilterList
           title="Manuscripts"
           items={allManuscripts}
           field="manuscripts"
           counts={manuscriptCounts}
+          help="Manuscripts containing the passages."
+
       />
       <FilterConnectedness
         title="Connectedness"
-        field="connectedness"/>
+        field="connectedness"
+        help="Number of related passages (i.e. sources or derivates)."
+        />
    </div>
   
 </div>

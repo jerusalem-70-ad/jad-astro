@@ -113,7 +113,7 @@ async function generate() {
       { name: "author", type: "string", sort: true, facet: true },
       { name: "full_text", type: "string", sort: true },
       { name: "search_text", type: "string", sort: true },
-      { name: "manuscripts", type: "object[]", facet: true, optional: true },
+      { name: "manuscripts", type: "string[]", facet: true, optional: true },
       {
         name: "work",
         type: "object[]",
@@ -136,7 +136,7 @@ async function generate() {
 
       {
         name: "liturgical_references",
-        type: "object[]",
+        type: "string[]",
         facet: true,
         optional: true,
       },
@@ -165,8 +165,8 @@ async function generate() {
         optional: true,
       },
 
-      { name: "cluster", type: "object[]", facet: true, optional: true },
-      { name: "keywords", type: "object[]", facet: true, optional: true },
+      { name: "cluster", type: "string[]", facet: true, optional: true },
+      { name: "keywords", type: "string[]", facet: true, optional: true },
       // get dates as separate numbers for filtering 'from -to' in the frontend
       { name: "work_date_not_before", type: "int32", facet: true, sort: true },
       { name: "work_date_not_after", type: "int32", facet: true, sort: true },
@@ -215,19 +215,22 @@ async function generate() {
         search_text: `${normalizeText(value.passage ?? "")} ${normalizeText(
           value.text_paragraph ?? "",
         )}`,
-        manuscripts: value.mss_occurrences || [],
+        manuscripts: value.mss_occurrences.map((mss) => mss.manuscript) || [],
         work: value.work || [],
         position_in_work: value.position_in_work || "",
         // normalized values for filtering
         author_search: authors.map((name) => normalizeAuthor(name)),
         author: authors.map((name) => normalizeAuthor(name)).join(","),
-        cluster: value.part_of_cluster || [],
-        liturgical_references: value.liturgical_references || [],
+        cluster: value.part_of_cluster.map((c) => c.value) || "",
+        liturgical_references:
+          value.liturgical_references.map((ref) => ref.value) || "",
         biblical_ref_lvl0: value.biblical_ref_lvl0 || [],
         biblical_ref_lvl1: value.biblical_ref_lvl1 || [],
         comm_bible_lvl1: value.commented_bible_lvl1,
         comm_bible_lvl0: value.commented_bible_lvl0,
-        keywords: value.keywords.map((k) => k.subkeywords) || [],
+        keywords:
+          value.keywords.flatMap((k) => k.subkeywords.map((sk) => sk.label)) ||
+          [],
         work_date_not_before: workDate.not_before || 70,
         work_date_not_after: workDate.not_after || 1600,
         connectedness: value.transmission_graph?.graph?.nodes?.length - 1 || 0,
