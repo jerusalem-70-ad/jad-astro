@@ -155,8 +155,8 @@ function handleClick(params: any) {
   if (!keyword || !cluster) return;
 
  const uriparams = new URLSearchParams();
-uriparams.set("JAD-temp[refinementList][keywords.label][0]", keyword);
-uriparams.set("JAD-temp[refinementList][cluster.value][0]", cluster);
+uriparams.set("JAD-temp[refinementList][keywords][0]", keyword);
+uriparams.set("JAD-temp[refinementList][cluster][0]", cluster);
 
 window.location.href = withBasePath(`/advanced-search?${uriparams.toString()}`);
 };

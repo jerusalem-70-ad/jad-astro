@@ -147,13 +147,18 @@ $: if (chart) {
 function handleClick(params: any) {
   if (!params.value) return;
 
-  const [refIndex] = params.value;
-  const ref = heatmapData.items[refIndex];
-  if (!ref) return;
+  const [keywordIndex, centuryIndex] = params.value;
 
-  window.location.href = withBasePath(
-    `/advanced-search?JAD-temp[refinementList][keywords.label][0]=${encodeURIComponent(ref)}`
-  );
+  const keyword = heatmapData.items[keywordIndex];
+  const century = heatmapData.references[centuryIndex];
+
+  if (!keyword || !century) return;
+
+ const uriparams = new URLSearchParams();
+uriparams.set("JAD-temp[refinementList][keywords][0]", keyword);
+uriparams.set("JAD-temp[refinementList][work.date.century][0]", century);
+
+window.location.href = withBasePath(`/advanced-search?${uriparams.toString()}`);
 };
 const modes = [
   { value: "absolute", label: "Absolute numbers", hint: "Number of passages per keyword." },

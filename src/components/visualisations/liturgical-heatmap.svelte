@@ -154,7 +154,7 @@ function handleClick(params: any) {
   if (!ref) return;
 
   window.location.href = withBasePath(
-    `/advanced-search?JAD-temp[refinementList][liturgical_references.value][0]=${encodeURIComponent(ref)}`
+    `/advanced-search?JAD-temp[refinementList][liturgical_references][0]=${encodeURIComponent(ref)}`
   );
 };
 const modes = [

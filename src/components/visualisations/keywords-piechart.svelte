@@ -62,7 +62,7 @@ onMount(() => {
       chart.on("click", (params: any) => {
         if (params.data) {
           window.location.href = withBasePath(
-          `/advanced-search?JAD-temp[hierarchicalMenu][biblical_ref_lvl0][0]=${params.data.name}`
+          `/advanced-search?JAD-temp[refinementList][keywords][0]=${params.data.name}`
         );
         }
       });
