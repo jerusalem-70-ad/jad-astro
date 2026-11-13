@@ -3,7 +3,7 @@ import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import imafoLogo from "../../public/assets/images/imafo_logo_kurz.png";
 import fwfLogo from "../../public/assets/images/fwf-logo.png";
-import acdhLogo from "../../public/assets/images/acdh-ch-logo-light.svg";
+import acdhLogo from "../../public/assets/images/logo-acdh-black.svg";
 import oeawlogo from "../../public/assets/images/oeaw-logo.png";
 import NavLink from "./nav-link.astro";
 ---
@@ -19,7 +19,7 @@ import NavLink from "./nav-link.astro";
       <span class="text-sm font-medium">Contact:</span>
     </div>
 
-    <div class="mx-auto grid md:flex gap-4">
+    <div class="mx-auto grid-cols-3 md:flex gap-4">
       <div class="md:grid grid-cols-[2fr_3fr] gap-4 m-2">
         <div class="grid">
           <a
@@ -59,7 +59,7 @@ import NavLink from "./nav-link.astro";
       </div>
       <div class="flex gap-4 items-start">
         <a
-          class="hidden md:inline-flex mt-4"
+          class="hidden md:inline-flex mt-4 h-1/2"
           href="https://www.oeaw.ac.at/acdh/"
         >
           <Image src={acdhLogo} alt="" />
@@ -92,13 +92,16 @@ import NavLink from "./nav-link.astro";
         </p>
       </div>
 
-      <a href="https://www.fwf.ac.at/forschungsradar/10.55776/ESP678">
-        <Image
-          src={fwfLogo}
-          alt="Österreichischer Wissenschaftsfonds"
-          class="h-auto w-60 m-auto py-10"
-        />
-      </a>
+      <div class="space-y-0.5">
+        <a href="https://www.fwf.ac.at/forschungsradar/10.55776/ESP678">
+          <Image
+            src={fwfLogo}
+            alt="Österreichischer Wissenschaftsfonds"
+            class="w-60 m-auto py-10"
+          />
+        </a>
+        <p class="text-sm"><NavLink href="https://www.fwf.ac.at/forschungsradar/10.55776/ESP678">Grant-DOI 10.55776/ESP678</NavLink></p>
+      </div>
     </div>
   </div>
   <div class="bg-brand-800 text-brand-50 py-2 text-center">
