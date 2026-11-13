@@ -30,7 +30,9 @@
     {/key}
   </div>
 
-  <div class="sticky top-25 space-y-2 pr-3 py-3">
+  <div class="sticky top-25 space-y-2 pr-3 py-2">
+  <h2 class="min-h-12 font-semibold p-1 rounded-lg border border-brand-200 border-l-4 border-l-brand-400
+         bg-white px-3 py-2 text-base shadow-sm text-center text-brand-800">Select visualisation:</h2>
     {#each cards as card (card.id)}
       <button
         type="button"

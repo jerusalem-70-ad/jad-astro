@@ -1,5 +1,5 @@
 import { writable } from "svelte/store";
-import type { Filters } from "@/types/store";
+import type { Filters, OperatorKey } from "@/types/store";
 
 import type { GraphNode, GraphLink } from "@/types/index";
 
@@ -38,9 +38,29 @@ export const defaultFilters: Filters = {
     manuscripts: "OR",
     clusters: "OR",
   },
+  excludes: {
+    authors: false,
+    works: false,
+    genres: false,
+    keywords: false,
+    place: false,
+    century: false,
+    lit_ref: false,
+    bibl_ref: false,
+    manuscripts: false,
+    clusters: false,
+  },
 };
 
 export const filters = writable<Filters>(structuredClone(defaultFilters));
+
+// Helper so components don't have to touch the store shape directly
+export function setExclude(key: OperatorKey, value: boolean) {
+  filters.update((f) => ({
+    ...f,
+    excludes: { ...f.excludes, [key]: value },
+  }));
+}
 
 //in dashboard we show only one visualization in the center, the other as cards on the right
 export const selectedViz = writable<string>("timeline");

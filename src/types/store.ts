@@ -2,6 +2,19 @@ import { writable } from "svelte/store";
 
 export type FilterOperator = "AND" | "OR";
 
+// The fields that can have an operator / exclude flag
+export type OperatorKey =
+  | "authors"
+  | "works"
+  | "genres"
+  | "keywords"
+  | "place"
+  | "century"
+  | "lit_ref"
+  | "bibl_ref"
+  | "manuscripts"
+  | "clusters";
+
 export interface Filters {
   authors: string[];
   works: string[];
@@ -17,25 +30,15 @@ export interface Filters {
 
   query: string;
 
-  operators: {
-    authors: FilterOperator;
-    works: FilterOperator;
-    genres: FilterOperator;
-    keywords: FilterOperator;
-    place: FilterOperator;
-    century: FilterOperator;
-    lit_ref: FilterOperator;
-    bibl_ref: FilterOperator;
-    manuscripts: FilterOperator;
-    clusters: FilterOperator;
-  };
-}
+  operators: Record<OperatorKey, FilterOperator>;
 
+  // true = "NOT any of these values" for that field
+  excludes: Record<OperatorKey, boolean>;
+}
 export type ListKey = {
   [K in keyof Filters]: Filters[K] extends string[] ? K : never;
 }[keyof Filters];
 
-export type OperatorKey = keyof Filters["operators"];
 import type { Graph } from "@/types/index";
 
 export const selectedJadId = writable<string | null>(null);

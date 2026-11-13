@@ -4,12 +4,7 @@ import FilterListId from "@/components/search/filter-id.svelte";
 import FilterConnectedness from "@/components/search/filter-connectedness.svelte";
 import { filters } from "@/stores/jad_store.js";
 
-import {
-  runSearch,
-  searchTypesense,
-  removeFilter,
-  FIELD_MAP
-} from "@/lib/search/typsense-search.js";
+import { runSearch, fetchOwnFacets } from "@/lib/search/typsense-search.js";
 
 import Info from '@lucide/svelte/icons/info';
 import X from '@lucide/svelte/icons/x';
@@ -25,25 +20,6 @@ type FacetResponse =
 type CountMap = Record<string, number>;
 
 // Cast once, in one place, instead of at every use
-const FIELDS = Object.keys(FIELD_MAP) as ListKey[];
-
-let dialog: HTMLDialogElement;
-
-// handle dialog
-   
-
-  function handleDialog() {
-    dialog.showModal();
-  }
-
-  function closeDialog() {
-    dialog.close();
-  }
-  function handleBackdropClick(event: MouseEvent) {
-    if (event.target === dialog) {
-      dialog.close();
-    }
-  }
 
 
 interface FacetItem {
@@ -76,6 +52,20 @@ let clusterCounts: CountMap = {};
 
 let searchToken = 0;
 
+
+//helpers
+
+function getFacet(response: FacetResponse, name: string): FacetCount[] {
+  return response?.facet_counts?.find((f) => f.field_name === name)?.counts ?? [];
+}
+
+// Master list: filled once, then kept as it is
+function master(current: FacetItem[], response: FacetResponse, name: string): FacetItem[] {
+  if (current.length > 0) return current;
+  return getFacet(response, name)
+    .map((c) => ({ name: c.value, count: c.count }))
+    .sort((a, b) => b.count - a.count);
+}
  
 // async function to start typsense query
 async function updateSearch(currentFilters : Filters) {
@@ -87,211 +77,99 @@ async function updateSearch(currentFilters : Filters) {
 
   if (token !== searchToken || !res) return;
 
-  // facet responses
- const facetResponses: Partial<Record<ListKey, FacetResponse>> = {};
-
-// default: use main response
-for (const field of FIELDS) {
-  facetResponses[field] = res;
-}
-
-// build only the queries we actually need
-const facetPromises = FIELDS
-  .filter((field) => {
-    const operator = currentFilters.operators[field as OperatorKey] ?? "OR";
-    return operator === "OR" && currentFilters[field]?.length > 0;
-  })
-  .map(async (field) => {
-    const facetResult = await searchTypesense(removeFilter(currentFilters, field));
-    return { field, response: facetResult?.response ?? res };
-  });
-
-const facetResults = await Promise.all(facetPromises);
-
-for (const { field, response } of facetResults) {
-  facetResponses[field] = response;
-}
-
+// 2) extra facet queries, only for OR / NOT fields that have selected values
+  const own = await fetchOwnFacets(currentFilters);
   if (token !== searchToken) return;
 
-  function getFacet(response: FacetResponse, name: string): FacetCount[] {
-  return response?.facet_counts?.find((f) => f.field_name === name)?.counts ?? [];
-}
+ // Own facets if this field has them, otherwise the main response
+  const countsFor = (key: ListKey, name: string): CountMap =>
+    Object.fromEntries(
+      (own[key] ?? getFacet(res, name)).map((c) => [c.value, c.count])
+    );
 
-function mapFacet(response: FacetResponse, name: string): FacetItem[] {
-  return getFacet(response, name).map((c) => ({ name: c.value, count: c.count }));
-}
-
-function facetCountsFrom(response: FacetResponse, name: string): CountMap {
-  return Object.fromEntries(getFacet(response, name).map((c) => [c.value, c.count]));
-}
-
-  // ---------- MASTER LISTS ----------
-
-   
-  if (allAuthors.length === 0) {
-    allAuthors = mapFacet(
-      res,
-      "work.author.name"
-    ).sort((a, b) => b.count - a.count);
-  }
-
-  if (allWorks.length === 0) {
-    allWorks = mapFacet(
-      res,
-      "work.title"
-    ).sort((a, b) => b.count - a.count);
-  }
-
-  if (allGenres.length === 0) {
-    allGenres = mapFacet(
-      res,
-      "work.genre"
-    ).sort((a, b) => b.count - a.count);
-  }
-
-  if (allKeywords.length === 0) {
-    allKeywords = mapFacet(
-      res,
-      "keywords"
-    ).sort((a, b) => b.count - a.count);
-  }
-
-    if (allClusters.length === 0) {
-    allClusters = mapFacet(
-      res,
-      "cluster"
-    ).sort((a, b) => b.count - a.count);
-  }
-
-  if (allPlace.length === 0) {
-    allPlace = mapFacet(
-      res,
-      "work.author.place.value"
-    ).sort((a, b) => b.count - a.count);
-  }
-
-  if (allCentury.length === 0) {
-    allCentury = mapFacet(
-      res,
-      "work.date.century"
-    ).sort((a, b) => b.count - a.count);
-  }
-
-  if (allLitRef.length === 0) {
-    allLitRef = mapFacet(
-      res,
-      "liturgical_references"
-    ).sort((a, b) => b.count - a.count);
-  }
-
-  if (allBiblRef.length === 0) {
-    allBiblRef = mapFacet(
-      res,
-      "biblical_ref_lvl0"
-    ).sort((a, b) => b.count - a.count);
-  }
-
-  if (allManuscripts.length === 0) {
-    allManuscripts = mapFacet(
-      res,
-      "manuscripts"
-    ).sort((a, b) => b.count - a.count);
-  }
+ // ---------- MASTER LISTS ----------
+  allAuthors     = master(allAuthors, res, "work.author.name");
+  allWorks       = master(allWorks, res, "work.title");
+  allGenres      = master(allGenres, res, "work.genre");
+  allKeywords    = master(allKeywords, res, "keywords");
+  allClusters    = master(allClusters, res, "cluster");
+  allPlace       = master(allPlace, res, "work.author.place.value");
+  allCentury     = master(allCentury, res, "work.date.century");
+  allLitRef      = master(allLitRef, res, "liturgical_references");
+  allBiblRef     = master(allBiblRef, res, "biblical_ref_lvl0");
+  allManuscripts = master(allManuscripts, res, "manuscripts");
 
   // ---------- DYNAMIC COUNTS ----------
-
-  authorCounts = facetCountsFrom(
-    facetResponses.authors,
-    "work.author.name"
-  ); 
-
-  workCounts = facetCountsFrom(
-    facetResponses.works,
-    "work.title"
-  );
-
-  genreCounts = facetCountsFrom(
-    facetResponses.genres,
-    "work.genre"
-  );
-
-  keywordCounts = facetCountsFrom(
-    facetResponses.keywords,
-    "keywords"
-  );
-
-  clusterCounts = facetCountsFrom(
-    facetResponses.clusters,
-    "cluster"
-  );
-
-  placeCounts = facetCountsFrom(
-    facetResponses.place,
-    "work.author.place.value"
-  );
-
-  centuryCounts = facetCountsFrom(
-    facetResponses.century,
-    "work.date.century"
-  );
-
-  litRefCounts = facetCountsFrom(
-    facetResponses.lit_ref,
-    "liturgical_references"
-  );
-
-  biblRefCounts = facetCountsFrom(
-    facetResponses.bibl_ref,
-    "biblical_ref_lvl0"
-  );
-
-  manuscriptCounts = facetCountsFrom(
-    facetResponses.manuscripts,
-    "manuscripts"
-  );
+  authorCounts     = countsFor("authors", "work.author.name");
+  workCounts       = countsFor("works", "work.title");
+  genreCounts      = countsFor("genres", "work.genre");
+  keywordCounts    = countsFor("keywords", "keywords");
+  clusterCounts    = countsFor("clusters", "cluster");
+  placeCounts      = countsFor("place", "work.author.place.value");
+  centuryCounts    = countsFor("century", "work.date.century");
+  litRefCounts     = countsFor("lit_ref", "liturgical_references");
+  biblRefCounts    = countsFor("bibl_ref", "biblical_ref_lvl0");
+  manuscriptCounts = countsFor("manuscripts", "manuscripts");
 }
 
-
-// whenever filters change (we get then from store, where the filter components write)
-// start a new typsense query
+// whenever filters change (store), start a new Typesense query
 $: updateSearch($filters);
-
-
 </script>
-
 <div class="space-y-2">
-  <button id="filter-info" onclick={handleDialog} class="flex w-full cursor-help gap-2 justify-center items-center py-2 text-lg font-bold border border-neutral-200 shadow-xs rounded-md p-2 bg-brand-400 text-white">
-    <h2>How to</h2>
-      <Info></Info>
-  </button>
-  <dialog bind:this={dialog} onclick={handleBackdropClick} class="border border-brand-600 rounded-md max-w-1/2">
-    <h1 class="font-semibold text-lg bg-brand-600/90 text-white p-5 prose">How to use the filters?</h1>
-     <div class="prose p-5">
-      <p>Use the filters in the <strong>aside panel</strong> to refine the corpus and display only the passages matching your criteria.</p>  
-      <ul class="list-disc">
-        <li><strong>Combine filters</strong> to narrow your results.</li>
-        <li>In each filter panel you can select the <strong>search mode</strong> using the buttons:</li>
+ <!-- Replaces the old <button id="filter-info"> and the whole <dialog> -->
+
+<button
+  id="filter-info"
+  type="button"
+  popovertarget="filter-info-popover"
+  class="flex w-full cursor-help gap-2 justify-center items-center py-2 text-lg font-bold border border-neutral-200 shadow-xs rounded-md p-2 bg-brand-400 text-white [anchor-name:--filter-info]"
+>
+  <h2>How to</h2>
+  <Info></Info>
+</button>
+
+<div
+  popover
+  id="filter-info-popover"
+  class="m-0 mt-1 inset-auto w-xl max-w-[90vw] max-h-[80vh] overflow-y-auto rounded-md border border-brand-600 bg-white p-0 shadow-lg
+         [position-anchor:--filter-info] [position-area:bottom_span-right] [position-try-fallbacks:flip-block,flip-inline]"
+>
+  <h1 class="font-semibold text-lg bg-brand-600/90 text-white p-5 prose">How to use the filters?</h1>
+
+  <div class="prose p-5">
+    <p>Use the filters in the <strong>aside panel</strong> to refine the corpus and display only the passages matching your criteria.</p>
+
+    <ul class="list-disc">
+      <li><strong>Combine filters</strong> to narrow your results.</li>
+      <li>
+        Most filter panels let you select the <strong>search mode</strong> using the buttons:
         <ul>
-          <li><strong>OR</strong> - displays results matching one or more of the selected filter values.</li>
-          <li><strong>AND</strong> - displays results matching all selected filter values.</li>
+          <li><strong>OR</strong> - displays results matching <strong>at least one</strong> of the selected filter values.</li>
+          <li><strong>AND</strong> - displays results matching <strong>all</strong> selected filter values.</li>
+          <li><strong>NOT</strong> - displays results <strong>excluding</strong> all selected filter values.</li>
         </ul>
-        <p>Example: Under <strong>KEYWORDS</strong>, selecting <i>Anti-Judaism</i> and <i>Typology</i> with <strong>AND</strong> displays passages containing both keywords. 
-          Using <strong>OR</strong> displays passages containing either <i>Anti-Judaism</i> or <i>Typology</i>.</p>
-      </ul>      
-        <p>
-          The visualisations update instantly as filters are applied.
-        </p>          
-        <button
-          type="button"
-          onclick={closeDialog}
-          aria-label="Close"
-          class="inline-flex items-center font-semibold mt-4 cursor-pointer rounded-md bg-brand-600/90 px-4 py-2 text-lg text-white hover:bg-brand-500"
-        >
-          Close <X></X>
-        </button>
-      </div>
-    </dialog>
+      </li>
+    </ul>
+
+    <p>
+      Example: Under <strong>KEYWORDS</strong>, selecting <i>Anti-Judaism</i> and <i>Typology</i> with <strong>AND</strong> displays passages containing both keywords.
+      Using <strong>OR</strong> displays passages containing either <i>Anti-Judaism</i> or <i>Typology</i> or both.
+      Using <strong>NOT</strong> displays passages containing neither of the keywords.
+    </p>
+
+    <p>The visualisations update instantly as filters are applied.</p>
+
+    <button
+      type="button"
+      popovertarget="filter-info-popover"
+      popovertargetaction="hide"
+      aria-label="Close"
+      class="inline-flex items-center font-semibold mt-4 cursor-pointer rounded-md bg-brand-600/90 px-4 py-2 text-lg text-white hover:bg-brand-500"
+    >
+      Close <X></X>
+    </button>
+  </div>
+</div>
  
 
    <div class="space-y-4">

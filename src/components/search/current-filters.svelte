@@ -1,15 +1,12 @@
 <script lang="ts">
   import { filters, defaultFilters } from "@/stores/jad_store.js";
-  import type { Filters } from "@/types/store";
+  import type { Filters, OperatorKey } from "@/types/store";
 
-  // Keys of Filters whose value is a string[] (authors, works, ..., rec_id).
-  // "query" (string) and "operators" (object) are excluded automatically.
   type ListKey = {
     [K in keyof Filters]: Filters[K] extends string[] ? K : never;
   }[keyof Filters];
 
-  // Keys that have an AND/OR operator (rec_id has none)
-  type OperatorKey = keyof Filters["operators"];
+  type Mode = "OR" | "AND" | "NOT";
 
   // Record<ListKey, string> forces a label for EVERY list filter.
   // If you add a filter to the store, TypeScript flags this object until you add a label.
@@ -23,7 +20,8 @@
     lit_ref: "Liturgical references",
     bibl_ref: "Biblical references",
     manuscripts: "Manuscripts",
-    rec_id: "Passage ID"
+    rec_id: "Passage ID", 
+    clusters: "Cluster"
   };
 
   // Fixed display order
@@ -34,10 +32,22 @@
       (key) => [key, $filters[key]] as const
     )
   );
+// Type guard: true if this field has an operator/exclude flag (rec_id has none)
+  function hasMode(field: ListKey): field is ListKey & OperatorKey {
+    return field in $filters.operators;
+  }
 
-  function operatorFor(field: ListKey): string {
-    // rec_id is not in operators, so the cast is needed and the fallback applies
-    return $filters.operators[field as OperatorKey] ?? "OR";
+  function modeFor(field: ListKey): Mode {
+    if (!hasMode(field)) return "OR";
+    if ($filters.excludes[field]) return "NOT";
+    return $filters.operators[field] ?? "OR";
+  }
+
+  // Word shown between values. "NOT a OR b" reads as NOT (a OR b),
+  // which is exactly what Typesense's `field:!=[a,b]` means.
+  function separatorFor(field: ListKey): "OR" | "AND" {
+    const mode = modeFor(field);
+    return mode === "NOT" ? "OR" : mode;
   }
 
   function resetFilters() {
@@ -73,15 +83,24 @@
             {LABELS[field]}
           </strong>
 
-          {#each values as value, i (value)}
-            {#if i > 0}
-              <span class="text-[10px] font-bold text-brand-350">{operatorFor(field)}</span>
-            {/if}
-            <span
-              class="inline-flex items-center gap-1 rounded-full border border-brand-300/60 bg-brand-100 py-0.5 pr-1 pl-2.5
-                     font-medium text-brand-800"
-            >
-              {value}
+           {#if modeFor(field) === "NOT"}
+    <span class="rounded bg-red-600 px-1.5 py-0.5 text-[10px] font-bold text-white">
+      NOT
+    </span>
+  {/if}
+
+  {#each values as value, i (value)}
+    {#if i > 0}
+      <span class="text-[10px] font-bold text-brand-350">{separatorFor(field)}</span>
+    {/if}
+    <span
+      class={`inline-flex items-center gap-1 rounded-full border py-0.5 pr-1 pl-2.5 font-medium ${
+        modeFor(field) === "NOT"
+          ? "border-red-300 bg-red-50 text-red-800 line-through"
+          : "border-brand-300/60 bg-brand-100 text-brand-800"
+      }`}
+    >
+              {value.charAt(0).toUpperCase() + value.slice(1)}
               <button
                 type="button"
                 onclick={() => removeValue(field, value)}

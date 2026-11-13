@@ -1,10 +1,11 @@
 <script lang="ts">
 import { filters } from "@/stores/jad_store.ts";
+import type { OperatorKey } from "@/types/store";
 
 export let title: string;
 export let items: { name: string}[];
 export let counts: Record<string, number> = {};
-export let field: string;   // which filter field to update
+export let field: OperatorKey;   // which filter field to update
 export let operatorMode: boolean = true; 
 export let help: string = ""; 
 
@@ -12,22 +13,63 @@ const id = title.toLowerCase().replace(/\W+/g, '-')
 
 let query = "";
 let visibleCount = 5;
+
+const getFilterValues = (filtersState: Record<string, any>, key: string) =>
+  ((filtersState[key] ?? []) as string[]);
+
 $: currentFilters = $filters;
-$: operator = currentFilters.operators?.[field] ?? "OR";
 $: filteredItems = items
-  .filter(a =>
-    a.name.toLowerCase().includes(query.toLowerCase()) ||
-    (currentFilters[field] ?? []).includes(a.name.toLowerCase())
+  .filter(
+    (a) =>
+      a.name.toLowerCase().includes(query.toLowerCase()) ||
+      selected.includes(a.name.toLowerCase())
   )
   .sort((a, b) => {
-    const countA = counts[a.name] ?? 0;
-    const countB = counts[b.name] ?? 0;
+    // 1) selected items first, so they never fall behind "Show more"
+    const selA = selected.includes(a.name.toLowerCase()) ? 1 : 0;
+    const selB = selected.includes(b.name.toLowerCase()) ? 1 : 0;
+    if (selA !== selB) return selB - selA;
 
-    return countB - countA;
+    // 2) then by count, highest first
+    return (counts[b.name] ?? 0) - (counts[a.name] ?? 0);
   });
 
 $: visibleItems = filteredItems.slice(0, visibleCount);
-$: selected = currentFilters[field] ?? [];
+$: selected = getFilterValues(currentFilters as Record<string, any>, field);
+
+
+  $: operator = currentFilters.operators?.[field as OperatorKey] ?? "OR";
+  $: excluded = currentFilters.excludes?.[field as OperatorKey] ?? false;
+
+  // One value that describes the whole control: "OR" | "AND" | "NOT"
+  $: mode = excluded ? "NOT" : operator;
+
+
+type Mode = "OR" | "AND" | "NOT";
+
+  // NOT is always available, OR/AND only when operatorMode is true
+  $: visibleModes = (operatorMode ? ["OR", "AND", "NOT"] : ["NOT"]) as Mode[];
+
+
+  function setMode(next: Mode) {
+    const key = field as OperatorKey;
+
+    filters.update((f) => {
+       if (next === "NOT") {
+        return {
+          ...f,
+          excludes: { ...f.excludes, [key]: !f.excludes[key] },
+        };
+      }
+
+      // Clicking OR/AND sets the operator AND turns NOT off, in ONE update
+      return {
+        ...f,
+        operators: { ...f.operators, [key]: next },
+        excludes: { ...f.excludes, [key]: false },
+      };
+    });
+  }
 
 function toggle(name: string) {
 
@@ -45,15 +87,6 @@ function toggle(name: string) {
 });
 }
 
-function setOperator(value: "AND" | "OR") {
-  filters.update(f => ({
-    ...f,
-    operators: {
-      ...f.operators,
-      [field]: value
-    }
-  }));
-}
 
 function showMore() {
   visibleCount += 5;
@@ -122,7 +155,7 @@ function showLess() {
               (counts[item.name] ?? 0) === 0 &&
               !selected.includes(item.name.toLowerCase())
             }
-            checked={(currentFilters[field] ?? []).includes(
+            checked={getFilterValues(currentFilters as Record<string, any>, field).includes(
                 item.name.toLowerCase()
               )}
             on:change={() => toggle(item.name)}
@@ -157,33 +190,23 @@ function showLess() {
         </button>
       {/if}
    </div>
-   {#if operatorMode}
   <div class="flex gap-1 justify-end place-items-center">
-    <span>Searching mode:</span>
+  <span>{operatorMode ? "Searching mode:" : "Filter:"}</span>
+  {#each visibleModes as m}
     <button
-    type="button"
-    class={`px-2 py-1 rounded text-xs border cursor-pointer ${
-      operator === "OR"
-        ? "bg-brand-600 text-white border-brand-600"
-        : "bg-white border-neutral-300"
-    }`}
-    on:click={() => setOperator("OR")}
-  >
-    OR
-  </button>
-  <button
-    type="button"
-    class={`px-2 py-1 rounded text-xs border cursor-pointer ${
-      operator === "AND"
-        ? "bg-brand-600 text-white border-brand-600"
-        : "bg-white border-neutral-300"
-    }`}
-    on:click={() => setOperator("AND")}
-  >
-    AND
-  </button>
-  </div>
-  {/if}
+      type="button"
+      aria-pressed={mode === m}
+      class={`px-2 py-1 rounded text-xs border cursor-pointer ${
+        mode === m
+          ? "bg-brand-600 text-white border-brand-600"
+          : "bg-white border-neutral-300"
+      }`}
+      on:click={() => setMode(m)}
+    >
+      {m}
+    </button>
+  {/each}
+</div>
   </div>
 </details>
 </div>
