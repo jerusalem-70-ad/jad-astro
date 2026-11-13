@@ -1,5 +1,7 @@
 <script lang="ts">
   import GraphTitle from "@/components/visualisations/graph-title.svelte";
+import GraphContainer from "@/components/visualisations/graph-container.svelte";
+
   import { filteredIds, selectedJadId, dataPassagesGraph } from "@/stores/jad_store.ts";
   import { onMount } from "svelte";
   import * as d3 from "d3";
@@ -268,7 +270,7 @@ svg.on("dblclick", (event: MouseEvent) => {
 </script>
 
 {#if mode === "card"}
-  <div class="bg-white border rounded-md shadow-sm p-4">
+  <GraphContainer {mode}>
     <GraphTitle {mode} title="Chronological graph" 
     what = "Displays all passages in chronological order. Node size reflects the level of connectedness, 
 while links indicate source relationships and derivative passages."
@@ -279,7 +281,7 @@ why="Provides a bird's-eye view of the entire data set."
 questions="How widely used was passage X?" />
     <p class="text-xs text-neutral-600">Showing {allFilteredNodes} from {totalPassages} passages</p>
       <ChartNetwork class="m-auto h-24 w-24 text-brand-650" aria-hidden="true" />
-  </div>
+  </GraphContainer>
 {:else}
   <div class="max-h-[calc(100vh-12rem)] overflow-y-auto rounded-md border bg-white p-4 shadow-sm">
     <GraphTitle {mode} title="Chronological graph" 

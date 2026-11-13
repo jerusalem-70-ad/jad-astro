@@ -5,6 +5,8 @@ import {onMount} from "svelte";
   import passages from "@/content/data/passagesForGraphs.json";
 import { filteredIds } from "@/stores/jad_store.ts";
 import GraphTitle from "@/components/visualisations/graph-title.svelte";
+import GraphContainer from "@/components/visualisations/graph-container.svelte";
+
 import {getPieChartOption} from "@/components/visualisations/helpers.ts"
 
 export let mode: "card" | "featured" = "featured";
@@ -37,7 +39,7 @@ onMount(() => {
   chart = echarts.init(container);
   chart.setOption(getPieChartOption([], "references", 0, mode));
 
-   if (mode === "featured") {
+   //if (mode === "featured") {
       chart.on("click", (params: any) => {
         if (params.data) {
           window.location.href = withBasePath(
@@ -45,7 +47,7 @@ onMount(() => {
             );
         }
       });
-    }
+  //  }
   const resize = () => chart?.resize();
   window.addEventListener("resize", resize);
   
@@ -65,7 +67,7 @@ $: if (chart) {
 
 </script>
 
-<div class="bg-white border rounded-md shadow-sm p-4">
+<GraphContainer {mode}>
 
   <GraphTitle {mode} title="Liturgical references" what = "Explore the distribution of passages accross the liturgical year."
 how="Multiple references to the same liturgical occassion within a single passage are counted as one.
@@ -79,4 +81,4 @@ questions="When was a particular theme (e.g. keyword 'Martyrdom') discussed?"/>
 
     >
   </div>
-</div>
+</GraphContainer>

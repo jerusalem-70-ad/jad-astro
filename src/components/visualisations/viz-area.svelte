@@ -6,14 +6,16 @@
   import BiblBookGraph from "@/components/visualisations/bible-books.svelte";
   import LiturgicalGraph from "@/components/visualisations/liturgical-ref.svelte";
   import KeywordsPieChart from "@/components/visualisations/keywords-piechart.svelte";
+  import TabulatorDashboard from "@/components/tabulator-dashboard.svelte"
 
   // The order here is the order of the cards
   const VIZ = [
     { id: "timeline", title: "Timeline", component: Graph },
+    { id: "table", title: "Passages", component: TabulatorDashboard },
     { id: "genres", title: "Genres", component: GenreWorkPieChart },
     { id: "bible", title: "Biblical books", component: BiblBookGraph },
     { id: "liturgy", title: "Liturgical references", component: LiturgicalGraph },
-    { id: "keywords", title: "Keywords", component: KeywordsPieChart }
+    { id: "keywords", title: "Keywords", component: KeywordsPieChart },
   ];
 
   let featured = $derived(VIZ.find((v) => v.id === $selectedViz) ?? VIZ[0]);

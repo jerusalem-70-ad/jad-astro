@@ -142,6 +142,73 @@ export const passagesTableConfig = {
   },
 };
 
+export const passagesDashboardConfig = {
+  transformData: (passages) => {
+    return passages.map((passage) => {
+      return {
+        jad_id: passage.jad_id || "",
+        id: passage.id || "",
+        passage: passage.passage || "",
+        title: passage.title || "",
+        date: passage.date,
+        genre: passage.genre || "",
+      };
+    });
+  },
+
+  getColumns: () => {
+    const columns = [
+      {
+        title: "ID",
+        resizable: true,
+        field: "id",
+        width: 80,
+        headerFilter: "input",
+      },
+      {
+        title: "Passage",
+        field: "passage",
+        responsive: 1,
+        widthGrow: 3,
+        minWidth: 200,
+      },
+      {
+        title: "Title",
+        field: "title", //using custom filter to check also alt_name
+        resizable: true,
+        responsive: 1,
+        widthGrow: 2,
+        minWidth: 200,
+        formatter: "textarea",
+      },
+      {
+        title: "Genre",
+        resizable: true,
+        field: "genre",
+        responsive: 2,
+        widthGrow: 1,
+        minWidth: 100,
+      },
+      {
+        title: "Date",
+        resizable: true,
+        field: "date",
+        responsive: 1,
+        widthGrow: 1,
+        minWidth: 100,
+      },
+    ];
+
+    return addHeaderFilters(columns);
+  },
+  // Row click configuration for passages table
+  getRowClickConfig: {
+    urlPattern: "/data/passages/{id}",
+    idField: "jad_id",
+    target: "_self",
+  },
+};
+
 // Configuration for Tabulator tables in authors
 export const authorsTableConfig = {
   transformData: (authors) => {

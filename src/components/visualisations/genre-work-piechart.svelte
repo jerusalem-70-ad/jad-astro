@@ -7,6 +7,8 @@ import { onMount } from "svelte";
 import { filteredIds } from "@/stores/jad_store.ts";
 import GraphTitle from "@/components/visualisations/graph-title.svelte"
 import {getPieChartOption} from "@/components/visualisations/helpers.ts"
+import GraphContainer from "@/components/visualisations/graph-container.svelte";
+
 
 let container: HTMLDivElement; 
 let chart: echarts.ECharts | null = null;
@@ -59,7 +61,7 @@ onMount(() => {
 
     // Only in featured mode. In a card the click should bubble up to the
     // <button> in VizArea, which promotes the card to the center.
-    if (mode === "featured") {
+    // if (mode === "featured") {
       chart.on("click", (params: any) => {
         if (params.data) {
           window.location.href = withBasePath(
@@ -67,7 +69,7 @@ onMount(() => {
           );
         }
       });
-    }
+   // }
 
     const ro = new ResizeObserver(() => chart?.resize());
     ro.observe(container);
@@ -84,7 +86,7 @@ onMount(() => {
 </script>
 
 
-   <div class="bg-white border rounded-md shadow-sm p-4">
+    <GraphContainer {mode}>
        <GraphTitle {mode} title="Genre Distribution accross Works" 
   what = "Pie chart for the 
   distribution of genres across works."
@@ -95,4 +97,4 @@ onMount(() => {
   where a particular keyword occurs?"
   />
       <div bind:this={container} class={mode === "featured" ? "w-full h-225": "h-40 w-full"}></div>
-   </div>
+   </GraphContainer>

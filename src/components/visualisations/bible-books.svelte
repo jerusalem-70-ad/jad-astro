@@ -6,6 +6,7 @@ import { onMount} from "svelte";
   import {NOVA_VULGATA_ORDER} from "@/lib/search/utils.js";
 import { filteredIds } from "@/stores/jad_store.ts";
 import GraphTitle from "@/components/visualisations/graph-title.svelte";
+import GraphContainer from "@/components/visualisations/graph-container.svelte";
 import {getPieChartOption} from "@/components/visualisations/helpers.ts"
 
 let container: HTMLDivElement; 
@@ -44,7 +45,7 @@ let passageCount = 0;
     chart = echarts.init(container);
     chart.setOption(getPieChartOption([], "references", 0, mode));
 
-     if (mode === "featured") {
+     //if (mode === "featured") {
       chart.on("click", (params: any) => {
         if (params.data) {
           window.location.href = withBasePath(
@@ -52,7 +53,7 @@ let passageCount = 0;
         );
         }
       });
-    }
+    //}
 
      const resize = () => chart?.resize();
   window.addEventListener("resize", resize);
@@ -73,7 +74,8 @@ let passageCount = 0;
   }
 
 </script>
-<div class="bg-white border rounded-md shadow-sm p-4">
+   <GraphContainer {mode}>
+
 
   <GraphTitle {mode} title="Biblical references" 
   what="Pie chart for distribution of bible references accross works."
@@ -90,4 +92,4 @@ let passageCount = 0;
         class={mode === "featured" ? "w-full h-225": "h-40 w-full"}
     >
   </div>
-</div>
+</GraphContainer>

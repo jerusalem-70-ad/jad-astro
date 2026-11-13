@@ -6,6 +6,8 @@ import { onMount } from "svelte";
 import passages from "@/content/data/passagesForGraphs.json";
 import { filteredIds } from "@/stores/jad_store.ts";
 import GraphTitle from "@/components/visualisations/graph-title.svelte"
+import GraphContainer from "@/components/visualisations/graph-container.svelte";
+
 import {getPieChartOption} from "@/components/visualisations/helpers.ts"
  export let mode: "card" | "featured" = "featured";
 
@@ -58,7 +60,7 @@ onMount(() => {
   chart = echarts.init(container);
  chart.setOption(getPieChartOption([], "keywords", 0, mode));
   // clickable pies only as feature
- if (mode === "featured") {
+ //if (mode === "featured") {
       chart.on("click", (params: any) => {
         if (params.data) {
           window.location.href = withBasePath(
@@ -66,7 +68,7 @@ onMount(() => {
         );
         }
       });
-    }
+  //  }
 
   const resize = () => chart?.resize();
   window.addEventListener("resize", resize);
@@ -85,9 +87,9 @@ $: if (chart) {
 
 
 </script>
-<div class="bg-white border rounded-md shadow-sm p-4">
+<GraphContainer {mode}>
 
-    <GraphTitle {mode} title="Keywords accross Passages" 
+    <GraphTitle {mode} title="Keywords" 
     what = "This pie chart visualizes the 
     distribution of keywords across all recorded passages 
             in the database."
@@ -102,4 +104,4 @@ $: if (chart) {
         class={mode === "featured" ? "w-full h-225": "h-40 w-full"}
 
       ></div>
-</div>
+</GraphContainer>
