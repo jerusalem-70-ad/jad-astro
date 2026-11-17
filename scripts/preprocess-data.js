@@ -968,6 +968,7 @@ const passagesForBiblRefs = passagesPlusWorks
       date: date,
       biblRefs: p.bibl_refs.map((ref) => ref.value),
       genre: genre,
+      cluster: p.part_of_cluster.map((c) => c.value),
     };
   });
 writeJson("passagesForBiblRefs", passagesForBiblRefs);
