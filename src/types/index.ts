@@ -368,4 +368,5 @@ export interface PassageForBiblRefs {
   date: { notBefore: number; notAfter: number }[];
   biblRefs: string[];
   genre: string;
+  cluster: string[];
 }

@@ -1,5 +1,5 @@
 ---
-import BibleRefs from "@/components/visualisations/bible-refs.svelte"
+import BibleRefsExplorer from "@/components/visualisations/bibl-refs/bibl-ref-explorer.svelte"
 import passagesForBibleRefs from "@/content/data/passagesForBiblRefs.json"
 import PageLayout from "@/layouts/page-layout.astro";
 import CheckItem from "@/components/ui/check-list-item.astro"
@@ -8,8 +8,8 @@ import Article from '@/components/article.astro';
 
 
 ---
- <PageLayout title="Biblical Refs Scatter Chart">
-    <Article wide={true} mainTitle="Biblical References Scatter Chart">
+ <PageLayout title="Biblical Refs Scatter Charts">
+    <Article wide={true} mainTitle="Biblical References Scatter Charts">
      <div class="grid gap-2">
 
  
@@ -17,21 +17,23 @@ import Article from '@/components/article.astro';
         <ul slot="about" class="px-5 py-2 list-inside  list-disc space-y-1">
                 <li>
                     Biblical references (citations) occur in {passagesForBibleRefs.length} passages
-                    in the database. This interactive scatter plot shows <span class="font-semibold">
+                    in the database. These interactive scatter plots show <span class="font-semibold">
                         which passages cite a chosen chapter
-                     of the Bible</span>. Each dot is a passage, placed by the verse it
-                    cites (horizontal axis) and the date of the work in which it occurs
-                    (vertical axis). 
+                     of the Bible</span>. Each dot is a passage, placed on the horizontal axis by the verse it
+                    cites and on the vertical axis by 1) the date of the work in which it 
+                    occurs <strong>or</strong> 2) the cluster to which it is defined.
                 </li>
                 <li>
                     The horizontal axis does not show the whole chapter. It covers only the
-                    <span class="decoration underline underline-offset-2"> range of verses</span> from the first to the last verse cited in the database, so
+                    <span class="decoration underline underline-offset-2"> range of verses
+                        </span> from the first to the last verse cited in the database, so
                     verses at the beginning or end of the chapter are not displayed if no
-                    passage cites them. Verses inside that range that are never cited simply
+                    passage cites them. Verses inside that range that are never cited 
                     stay empty.
                 </li>
                 <li>
-                    Works are <span class="decoration underline underline-offset-2">dated to a range</span>, not to a single year, so each dot is placed at
+                    Works are <span class="decoration underline underline-offset-2">dated to a 
+                        range</span>, not to a single year, so each dot is placed at
                     a random year within that range. The exact dating is shown on hover.
                 </li>
 
@@ -45,6 +47,7 @@ import Article from '@/components/article.astro';
         </ul>
         <ul slot="howTo" class="px-5 py-2 list-inside space-y-1">
             <CheckItem>Select a biblical book, then a chapter.</CheckItem>
+            <CheckItem>Switch between the two plots using the button on the right.</CheckItem>
             <CheckItem>The legend lists the genres that occur in your selection.</CheckItem>
             <CheckItem>Click a genre in the legend to hide or show its passages.</CheckItem>
             <CheckItem>Hover over a dot for details, and click it to open the passage.</CheckItem>
@@ -52,7 +55,7 @@ import Article from '@/components/article.astro';
         </ul>
      </About>
      
-      <BibleRefs client:load {passagesForBibleRefs}/>
+      <BibleRefsExplorer client:load {passagesForBibleRefs}/>
     </div>
 </Article>
 </PageLayout>
